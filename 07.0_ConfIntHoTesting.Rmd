@@ -1,0 +1,41 @@
+# Chapter 7: Confidence intervals and Hypothesis testing {#ch.hotest}
+
+## Learning Objectives for Chapter
+
+
+Statistical inference consists of making statements about population characteristics based on information obtained from samples.
+
+I would like to present a general idea that in order to answer interesting practical questions we need to estimate parameters or other unknown and unknowable quantities, and the we need to determine how confident we are about the estimated values.
+
+This way, there is no implied difference in the concept of making an CI for the mean of a population, of for the proportion of the population that has a particular trait, or for predicting future values of random variables.
+
+## Theme: compare A and B
+
+A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is this when whe have more than one pair of parameters, two population means is when we have just two parameters, and a single population is when one of the parameters is known. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
+
+## Confidence intervals
+Explain why we prefer a 95% CI in the middle instead on both ends of a distribution.
+What happens if the distribution is bimodal? Show an example. This counterintuitive example is useful to weed out misconceptions and focus on the real purpose and feasibility of a CI.
+
+
+Example of a published incorrect interpretation of a confidence interval:
+
+"Owing to variation, we know the sample point estimate is not the true population value. Consequently, we add to it a statment indicating how far the point estimate is likely to be from the true value. One way is to supplement the point estimate by interval estimate. We can say, for example, that from the sample evidence we are confident that the number of farmers in Boone County who sprayed was between 345 and 736. By "confident" we mean that the probability is 95 chances in 100 that the interval from 345 to 736 contains the true but unknown number of farmers in Boone County who sprayed."
+
+Correct interptretation of the confidence interval found in another page in the same statistics book:
+
+"When we make a 95% confidence interval statement, the population mean $\mu$ has a fixed but unknown  value. The uncertainty attached to a confidence interval for $\mu$ comes from the variability in the sampling process. We do not know whether the confidence interval constructed from the data from any particular sample includes $\mu$ or not. We do know that in the long run 95% of the intervals will include $\mu$, and similarly, 95% of the statements that "$\mu$ lies between the lower and the upper limit"" will be correct"
+
+Snedecor and Cochran 1989. Statistical Methods. Iowa State University Press, Ames IA.
+
+The main difference that makes the first statement incorrect and the second one correct is that the second statement does not specify the values for the extremes of the confidence interval. Those values will be changing from sample sample. Thus, the probability statement refers to a confidence interval that changes from sample sample, not to a single specific confidence interval. In other words, when we make hundred statement the extremes of the confidence interval change from one statement to the next. In 100 statements we expect to be correct 95 times, but all 100 statements will be different. Notice that the 95% correct rate is expected and may not be realized in any specific set of statements or samples.
+
+Include simulation or figure with known population parameters. Show 100 Ci's and how they distribute around the known mean. Include a comparison that shows the effect of sample size on the width of the CI's but not on the % correct. This is by design: the width is reduced to maintain the rate of correct statements.
+
+
+## Confidence interval and test of one mean
+
+## Exercises and Solutions
+
+## Homework
+

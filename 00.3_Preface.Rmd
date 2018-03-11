@@ -1,0 +1,7 @@
+# Preface {#ch.preface}
+
+This section should have a brief explanation of the organization of the book. Name and briefly describe the main sections (lectures, Plant Sciences Lab, Animal Sciences labs, Code chunks)
+
+
+
+see [first example in R chapter](#ch.statsR.ex01) as a reference for this topic on example 01.

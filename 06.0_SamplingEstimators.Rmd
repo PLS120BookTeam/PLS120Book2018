@@ -1,0 +1,33 @@
+# Chapter 6: Sampling and Sampling Distributions {#ch.sampling}
+
+## Learning Objectives for Chapter
+
+## Elements of sampling theory
+
+Population, sample, sampling unit, frame, etc.
+See Cochran 1977 and T
+Sampling with and without replacement.
+Types of sampling. Simple random sampling with equal probability allows the use of symmetry as the basis for calculation of probabilities.
+
+Definition of bias. Estimators, not samples, can be biased.
+Biasedness is a property of estimators not of samples or of an estimate in specific.
+
+Statistics deals with sampling where the probability of any unit being included in the sample is greater than zero (e.g., no units are categorically excluded) and known. This is the only way one can calculate the statistical properties of estimators, particularly their variance and bias.
+
+## Parameters, estimators, statistics and estimates
+
+There are several concepts here and unfortunately, they have not been given uniform and systematic names. We will propose some names to be used consistently for clarity
+
+Parameter: population characteristic that is constant for a given population.
+Random variable: a function that associates a value to each member of the population; or, the observed value of a characteristic of a randomly selected (equal probabilities) member of the population.
+Statistic: a function of the values observed in a sample.
+Estimator: a statistic that is used to estimate a parameter.
+Estimate: the value of a statistic for a given sample.
+
+
+Example: a sample of 3 values is drawn from the standard normal distribution. Those values are `r (xs <- rnorm(3))`. the sample average or simply "average" is a statistic that consists of averaging all observed values `r mean(xs)` and the sample variance is `r var(xs)`
+
+## Exercises and Solutions
+
+## Homework
+

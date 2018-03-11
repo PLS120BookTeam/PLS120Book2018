@@ -1,0 +1,65 @@
+# Analysis of Variance {#ch.anova}
+
+## Learning Objectives for Chapter
+
+
+ANOVA intuition. Present students with a series of groups of objects and ask them to guess if they think they are subsets of the some large group of whether any group seems to come from a different population.
+
+Exercise: All objects in each of the squares below were randomly selected from a single larger set called  *parent* set. The set of objects in any square is called a *group*. Does it look like all groups have the same parent set?
+
+```{r anova.intuition1, fig.cap="Does it look like all groups come from the same parent population?"}
+
+# Code to generate 4 groups from two populations.
+
+library(randomcoloR)
+
+par(mfrow = c(2,2))
+
+for (i in 1:4) {
+  plot(rep(1:3, 3), 
+         rep(1:3, each = 3),
+         pch = 21,
+         cex = 4,
+       xlim = c(-1, 5), 
+       ylim = c(0.5, 3.5),
+       bg = randomColor(count = 9, 
+                        hue = c(rep("orange", 3), "yellow")[i], 
+                        luminosity = c(rep("light", 3), "bright")[i]), 
+       axes = FALSE,
+       xlab = paste("GROUP", i, sep = " "), 
+       ylab = "")
+  }
+
+```
+
+Is the answer the same for the next figure?
+
+```{r anova.intuition2, fig.cap="Does it look like all groups come from the same parent population?"}
+
+# Code to generate 4 groups from a single population.
+
+par(mfrow = c(2,2))
+
+for (i in 1:4) {
+  plot(rep(1:3, 3), 
+         rep(1:3, each = 3),
+         pch = 21,
+         cex = 4,
+       xlim = c(-1, 5), 
+       ylim = c(0.5, 3.5),
+       bg = randomColor(count = 9, 
+                        hue = "orange", 
+                        luminosity = "light"), 
+       axes = FALSE,
+       xlab = paste("GROUP", i, sep = " "), 
+       ylab = "")
+  }
+
+
+```
+
+
+## Exercises and Solutions
+
+## Homework
+

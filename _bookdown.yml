@@ -1,0 +1,21 @@
+book_filename: "PLS120Book2018"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
+repo: https://github.com/emilioalaca/PLS120Book2018
+output_dir: docs
+rmd_files: ["00.1_FrontMatter.Rmd", 
+            "00.2_Contents.Rmd", 
+            "00.3_Preface.Rmd", 
+            "01.0_Intro2Stats.Rmd", 
+            "02.0_Rcomputation.Rmd", 
+            "03.0_MathSymbols.Rmd", 
+            "04.0_DataExploration.Rmd", 
+            "05.0_Probability.Rmd", 
+            "06.0_SamplingEstimators.Rmd", 
+            "07.0_ConfIntHoTesting.Rmd", 
+            "08.0_TwoPops.Rmd"
+            ]
+clean: [packages.bib, bookdown.bbl]
+new_session: yes

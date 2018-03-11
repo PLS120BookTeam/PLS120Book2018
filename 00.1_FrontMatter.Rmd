@@ -1,0 +1,21 @@
+---
+title: "PLS 120. Introduction to Applied Statistics"
+author: "Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie, Zullo"
+date: "2018-02-16"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: emilioalaca/bookdown-start
+url: 'http\://the book url goes here ******'
+description: "Course materials for PLS 120. University of California, Davis"
+---
+
+
+
+# Front Matter {#ch.front}
+
+This section should have a cover, copyright, UCD logo, etc.
+
+Probably will take 3-4 pages.

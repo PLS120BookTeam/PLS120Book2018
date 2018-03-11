@@ -1,0 +1,32 @@
+# Chapter 3:  Required Math Skills and Symbols {#ch.math}
+
+## Learning Objectives for Chapter
+
+## Summation
+## Deviations, sums of squares, sums of absolute deviations
+
+The difference between an observation and the mean is called a "deviation" or "error."
+
+
+
+## Geometry of sums of squares
+## Optimization
+
+One way to "guess" or estimate the mean of a distribution that can be sampled directly is to take the average. The average minimizes the sum of the squared deviations of the obervations. Minimization of sums of squares is the most common method we will use to make estimates, but it is not the onlly method. Other method is to minimize the sum of the absolute deviations. The median of a set of observations is the value that minimizes the absolute deviations. "Absolute" means that all deviations are made positive.
+
+Show an interactive graph where the values SS and SAD are shown as functions of the guessed mean. With and without outliers.
+
+In many cases, the optimal value can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For more advanced statistical methods, there are no equations available, so numerical computations are used to approximated the optimal estimates.
+
+Show pseudocode for an algorithm to find out what number I am thinking of or to numerically approximate a root of a polynomial
+
+Say what a polynomial is.
+
+## Complete list and definition of symbols used in the book
+
+
+
+## Exercises and Solutions
+
+## Homework
+

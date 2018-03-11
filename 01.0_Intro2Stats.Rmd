@@ -1,0 +1,100 @@
+# Chapter 1: Introduction to Applied Statistics {#ch.intro}
+
+In the end, statistics is a discipline that formalizes methods to operate in an uncertain world. It gives us a set of tools that we can use to get a clearer and quantitative assessment of what a situation really is and what night happen in the future if we take a certain course of action.
+
+Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, 
+https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271
+
+
+
+~~TODO~~
+Add an example and a class exercise that shows the idea of uncertainty and the effets of action on the uncertainty. Students play darts. The target is secret. Guess the target. Study the distribution of the distance to the center. Study the distriution of the distance to the target. Study effects of changing the target. See that it does not change each individual throw in a predictable manner, but it changes the distribution in a predictable manner. See how bets on different areas of the board change as we change the target. See how bets change as we observe more throwd of an individual known to be aiming always at the same unknown target. Discuss the fact that the target is unknown to us but not to the person throwing.
+
+Reveal individual variation by polling class for number of personal communication devices, number of social media services used, number of tweets sent in the last 2 days.  the main point is to show students that the the concept of randomness is  not completely well-defined.  
+
+consider the number of tweets so that each student in the class is sent in the last couple of days.  for a person interested in the population of students perhaps the variation from student to student can be considered to be random and have some sort of statistical distribution for random errors, however for each student the number of tweets that they made is a known quantity and it is not considered to be an error in in anyway not even in a statistical way. presumably they know exactly why they sent each tweet and the number of tweets for a particular day.
+ ~~~~
+## Learning Objectives for this course
+
+1. Identify questions and problems that can be addressed by using statistical methods.
+1. Propose basic statistical methods to test hypotheses.
+1. Given a problem that can be addressed with statistics, define the response variable, predictor or explanatory variables, parameters and their hypothesized relationship.
+1. Write down linear models for simple experimental designs.
+1. Calculate or propose appropriate distributions for specific random variables.
+1. Classify random variables according to type.
+1. Calculate the probability of various events for simple random experiments where parameters of distributions are known, such as flipping coins, rolling dice, selecting subsets from a population, drawing cards from a deck.
+1. Test simple hypotheses such as equality of means, independence of variables and goodness of fit.
+1. State the effects of sample size on the variance of estimates of population means.
+
+## Book organization and overview
+
+
+Explain how the different chapters and concepts go together and why they are in the specific order presented.
+
+Include a schematic or figure that unifies the materials in all chapters.
+
+
+## Use and misuse of statistics
+
+Theme: There are compelling arguments indicating that statistics has been misunderstood and misused. There is a dominating culture of users of statistics who do not understand the exact original meaning of the methods and who misuse them. This has resulted in a culture where statistics is considered obscure and where the two main approaches (bayesiand and frequentist) are pitted against each other.
+
+Explain the misunderstanding and misuse of P
+
+
+https://www.nature.com/news/scientific-method-statistical-errors-1.14700
+
+End section with a positive note that by truly understanding we will see that statistical methods become much more understandable.
+
+A common path is to learn math, learn how math is used as part of the foundation of statistical methods to obtain desired estimates, and then develop an understanding of the methods through the math. We will avoid this path and use the following reasoning.
+
+1. Identify problem.
+2. Define what will consitute a useful solution.
+3. Determine quantities that need to be estimated for solution.
+4. Find a method to estimate such quantities.
+5. State solution.
+6. Implement solution.
+
+Math and calculations will be necessary, particularly in step 4. We do not need to know the exact details of the calculation in order to understand the process to an acceptable degree.
+
+In many real applications, step 4 involves massive computations with complicated software that can only be fully understood from computation al math science. We do not need to study computational math. We just need to understand the concepts behind the computation (e.g. it can give me the optimal estimate for the quantity I do not know, where "optimal" means that the sum of squared deviations are minimized).
+
+Some computation is rather simple and we may look into it to get a better concept of what computation does.
+
+~~TODO~~
+Include an analogy like, but better than:
+Problem: I need to get to Woodland Courthouse at 8 am on Mo.
+Useful solution: Me at courthouse anytime between 7 & 8 am.
+Quantities to be estimated: transportation method or NA
+Method: could be select method that is fastest or
+could be bike, car, ride from friend, cab or bus
+Solution: take Yolobus at 6:15
+Implement: get up early and go!
+
+
+## Exercises and Solutions
+
+## Homework
+
+Include survey questions to be completed online in Canvas site.
+Why are you taking this course?
+What are your goals for taking this course?
+How will you determine if you reach your goal?
+What are your fears/expectations about the course?
+How will you approach the challenges of the course?
+For example, what will you do when you are not able to complete an exercise?
+
+From CEE:
+Name
+Class rank: Freshman____ Soph____ Junior____  Senior____ Graduate/Post-Bacc____
+What do you want to be called in class?
+Major
+Email address you check regularly:
+What classes in this subject and/or department have you taken? What are some of your academic or career goals?
+How do you think this class might apply to your academic or career goals?
+How many units are you taking this quarter?
+Why are you taking this class? (e.g., required for my major, chose it as an elective, etc.) 
+What would you like to learn in this class?
+What do you think you will find challenging with this course material?
+How do you learn best?
+What should this class NOT be like?
+Anything else that you would like to tell me?

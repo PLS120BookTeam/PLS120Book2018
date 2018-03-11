@@ -1,0 +1,23 @@
+# Chapter 4: Data Manipulation, Exploration and Summaries {#ch.data}
+
+## Learning Objectives for Chapter
+
+## Data curation
+
+input
+output
+formatting
+variable types
+naming variables
+
+
+
+
+## Numerical  and graphical summaries
+
+## Data description vs. Estimation vs. Inference
+
+
+## Exercises and Solutions
+
+## Homework

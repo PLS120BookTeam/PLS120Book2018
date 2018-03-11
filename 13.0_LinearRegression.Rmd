@@ -1,0 +1,9 @@
+# Linear Regression {#ch.linreg}
+
+## Learning Objectives for Chapter
+
+
+
+## Exercises and Solutions
+
+## Homework

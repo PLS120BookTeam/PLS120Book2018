@@ -1,0 +1,25 @@
+# Treatment Structures and Comparisons {#ch.trtstr}
+
+## Learning Objectives for Chapter
+
+Design factorial treatment combinations to answer a research question.
+Create linear combinations of means that address practical real-world questions.
+Transform real-world question into a null hypothesis about means.
+Test hypotheses involving more than one and more than 2 means.
+Interpret result of ANOVA with factorial treatments.
+Interpret graph of a factorial experiment, including description of L, Q and C trends.
+Given a set of treatments, formulate and tests useful contrasts.
+Determine if a linear combination of means is a contrast.
+Estimate the variance of a linear combination of means.
+Make confidence intervals for linear combination of estimated means.
+
+## Pairwise Comparisons
+## Factorials
+## Control vs. Treatments
+## Linear, Quadratic and Cubic Trends
+## Contrasts
+## Linear Combinations
+
+## Exercises and Solutions
+
+## Homework

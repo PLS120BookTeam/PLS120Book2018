@@ -1,0 +1,14 @@
+# Chi-square: Contingency Tables and Goodness of Fit {#ch.chisq}
+
+## Learning Objectives for Chapter
+
+1. Define independence between random variables.
+1. Identify problems that can be addressed as goodness of fit or independence tests.
+1. Define degrees of freedom for the $\chi^2$ distribution.
+1. Test for independence of categorical random variables.
+1. Test the goodness of fit of theoretical distributions to data.
+1. Look up quantiles and probabilities for the $\chi^2$ distribution.
+
+## Exercises and Solutions
+
+## Homework
