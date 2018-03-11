@@ -2,6 +2,11 @@
 
 ## Learning Objectives for Chapter
 
+1. Pair symbols with corresponding concepts or definitions.
+1. Express sums using summation symbol and expand sums defined with the summation symbol.
+1. Calculate sum of squared deviations for a set of numbers.
+1. 
+
 ## Summation
 ## Deviations, sums of squares, sums of absolute deviations
 
