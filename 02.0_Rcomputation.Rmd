@@ -58,7 +58,7 @@ plot(cars)
 ```
 
 
-## Exercises and Solutions
 
+## Homework Problems
 
-## Homework
+## Lab Project

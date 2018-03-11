@@ -26,7 +26,7 @@ consider the number of tweets so that each student in the class is sent in the l
 1. Test simple hypotheses such as equality of means, independence of variables and goodness of fit.
 1. State the effects of sample size on the variance of estimates of population means.
 
-## Book organization and overview
+## Book Organization and Overview
 
 
 Explain how the different chapters and concepts go together and why they are in the specific order presented.
@@ -34,7 +34,7 @@ Explain how the different chapters and concepts go together and why they are in 
 Include a schematic or figure that unifies the materials in all chapters.
 
 
-## Use and misuse of statistics
+## Use and Mmisuse of Statistics
 
 Theme: There are compelling arguments indicating that statistics has been misunderstood and misused. There is a dominating culture of users of statistics who do not understand the exact original meaning of the methods and who misuse them. This has resulted in a culture where statistics is considered obscure and where the two main approaches (bayesiand and frequentist) are pitted against each other.
 
@@ -73,7 +73,35 @@ Implement: get up early and go!
 
 ## Exercises and Solutions
 
-## Homework
+
+## Homework Problems
+
+Include survey questions to be completed online in Canvas site.
+Why are you taking this course?
+What are your goals for taking this course?
+How will you determine if you reach your goal?
+What are your fears/expectations about the course?
+How will you approach the challenges of the course?
+For example, what will you do when you are not able to complete an exercise?
+
+From CEE:
+Name
+Class rank: Freshman____ Soph____ Junior____  Senior____ Graduate/Post-Bacc____
+What do you want to be called in class?
+Major
+Email address you check regularly:
+What classes in this subject and/or department have you taken? What are some of your academic or career goals?
+How do you think this class might apply to your academic or career goals?
+How many units are you taking this quarter?
+Why are you taking this class? (e.g., required for my major, chose it as an elective, etc.) 
+What would you like to learn in this class?
+What do you think you will find challenging with this course material?
+How do you learn best?
+What should this class NOT be like?
+Anything else that you would like to tell me?
+
+## Lab Project
+
 
 Include survey questions to be completed online in Canvas site.
 Why are you taking this course?

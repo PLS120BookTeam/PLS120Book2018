@@ -9,6 +9,10 @@
 1. Test the goodness of fit of theoretical distributions to data.
 1. Look up quantiles and probabilities for the $\chi^2$ distribution.
 
+## Origin of the $\chi^2$ distribution
+
 ## Exercises and Solutions
 
-## Homework
+## Homework Problems
+
+## Lab Project
