@@ -11,8 +11,8 @@ github-repo: emilioalaca/bookdown-start
 url: 'http\://the book url goes here ******'
 description: "Course materials for PLS 120. University of California, Davis"
 ---
-##TEST EDIT JENNIFER BRAZEAL
 
+## now it is a test re-edit by emilioL
 
 # Front Matter {#ch.front}
 
