@@ -14,8 +14,6 @@ description: "Course materials for PLS 120. University of California, Davis"
 ##TEST EDIT JENNIFER BRAZEAL for Jennifers test branch
 
 
-## now it is a test re-edit by emilioL
-
 # Front Matter {#ch.front}
 
 This section should have a cover, copyright, UCD logo, etc.
