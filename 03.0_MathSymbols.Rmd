@@ -10,6 +10,13 @@ The difference between an observation and the mean is called a "deviation" or "e
 
 
 ## Geometry of sums of squares
+
+Remember the Pythagorean theorem? In a right triangle the square of the hypothenuse equals the sum of teh squares of the sides. This can be extended to a polyhedron with right angles everywhere. The square of a diagonal in 3D is the sum of the three sides of the polyhedron. This square is also the sum of the square of the bottom hypothenuse and the vertical side suared. ** Add figure with labels** 
+
+Imagine that we have a sample with 3 observations. Make a box where the lenght of each side is one of the observations and then consider the 3D diagonal. The sum of squares of the deviations is equal to the lenth of the diagonal
+
+The total sum of s
+
 ## Optimization
 
 One way to "guess" or estimate the mean of a distribution that can be sampled directly is to take the average. The average minimizes the sum of the squared deviations of the obervations. Minimization of sums of squares is the most common method we will use to make estimates, but it is not the onlly method. Other method is to minimize the sum of the absolute deviations. The median of a set of observations is the value that minimizes the absolute deviations. "Absolute" means that all deviations are made positive.
