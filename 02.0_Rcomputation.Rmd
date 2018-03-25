@@ -2,6 +2,12 @@
 
 ## Learning Objectives for Chapter
 
+1. Identify the parameters of the Uniform distribution
+2. Calculate the expected value of the random variable in the Uniform distribution, given its parameters.
+3. Explain what the pdf of the Uniform distribution shows (y axis, X axis)
+4. Draw a sketch of the sum of 2 uniform distributions.
+5. Give an example of a random variable that might be modelled using the Uniform distribution.  
+
 ## R and RStudio {#sect.RnRStudio}
 
 Use material from lab 1.
