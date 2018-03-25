@@ -2,6 +2,13 @@
 
 ## Learning Objectives for Chapter
 
+Jen's
+1. Calculate the mean, sd, var, and the 5 number summary for a set of numbers. 
+2. Create a histogram of a data set and explain what the histogram shows (what is on the Y axis, X axis).
+3. Create a boxplot of a data set and explain the different parts.  
+4. Decide if a data set is normally distributed or not based on the histogram and boxplot of the data set.  
+5. Describe what a sample average tells you in the context of (1) data description, (2) data estimation, and (3) inference.  
+
 ## Data curation
 
 input
