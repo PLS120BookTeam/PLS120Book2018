@@ -15,6 +15,17 @@ Constant, Random variable and Random number. PSAES ch. 6
 
 See probability_cheatsheet.pdf
 
+Jen's:
+1. Define "parameter""
+2. Calculate the probability of:
+ - 1 of 2 mutually exlusive events occurring (either/or)
+ - two events occuring that are independent
+ - the probability of one event occuring, given that another event has already occurred.  
+3. Define "independence" in the context of probability events.  
+4. Write out a sample space, given a set of conditions.  
+5. Give an example of a random variable that can be modelled using a discrete distribution, and one using a continuous distribution.  
+6. Emilio: would we have already covered central limit theorem, when you talked about the sum of uniform distributions (i think chp 2?), and if not, should we introduce it in this chapter, as the basis of p value and CI statistics, since we are contrasting frequentist with Bayesian stats?
+
 ### Variables and parameters
 The terms "variable" and "parameter"" should be defined and used carefully. People frequently and incorrectly use the term "parameter" to refer to variables. This makes things more confusing.
 
