@@ -2,6 +2,13 @@
 
 ## Learning Objectives for Chapter
 
+Jen's:
+1. State the null and alternative hypotheses for ANOVA
+2. Describe how variance is partitioned in a simple one-way ANOVA 
+3. State the assumptions of ANOVA, and be able to interpret a residual plot as a diagnostic test of assumptions
+3. Calculate an F ratio for ANOVA
+4. State if you would expect to see a larger or smaller F ratio if there was a strong effect of groups, and describe why.
+5. Sketch what three sampling distributions might look like if the results of an ANOVA test were not significant.  Sketch what it might look like if the results were significant.  
 
 ANOVA intuition. Present students with a series of groups of objects and ask them to guess if they think they are subsets of the some large group of whether any group seems to come from a different population.
 
