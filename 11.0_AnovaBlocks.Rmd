@@ -2,7 +2,12 @@
 
 ## Learning Objectives for Chapter
 
-
+Jen's:
+1. Explain how variance is partitioned in an ANOVA with blocks design.
+2. Describe how you would determine if the blocked design added value over a crd. 
+3. Given an example scenario, describe how you would allocate treatments for a RCBD
+4. Calculate F ratios for the groups and blocks.  
+5. State null and alternative hypotheses for the RCBD.  
 
 ## Exercises and Solutions
 
