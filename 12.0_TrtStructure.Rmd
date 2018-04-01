@@ -1,6 +1,13 @@
 # Treatment Structures and Comparisons {#ch.trtstr}
 
 ## Learning Objectives for Chapter
+Jen's:
+1. Identify the treatment in a factorial experiment
+2. State the null and alternative hypotheses of a factorial experiment.
+3. Define "main effect" and "interaction"
+4.  Given a graph of factorial experiment results, determine if there are main effects and/or interaction effects. 
+5. Calculate PLSD confidence intervals for a pairwise comparison of means and determine if two means are significantly different based on the CIs. 
+
 
 Design factorial treatment combinations to answer a research question.
 Create linear combinations of means that address practical real-world questions.
