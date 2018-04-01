@@ -2,6 +2,15 @@
 
 ## Learning Objectives for Chapter
 
+Jen's:
+1. Explain why we need to sample populations
+2. Define "population"
+3. Define "parameter" and "random variable" and discuss their relationship to one another
+3. Define statistical bias and give a few examples of situations that may lead to a biased estimator
+4. Sketch an example sampling distribution (r = 10) for observations drawn from a normally distributed population, and sketch the corresponding normal pdf, using your sampling distribution to estimate its parameters.
+  - List the differences and similarities between the two sketches.
+  - Explain why the normal pdf representing the population from which the samples were drawn might not look like the normal pdf you drew. 
+
 ## Elements of sampling theory
 
 Population, sample, sampling unit, frame, etc.
