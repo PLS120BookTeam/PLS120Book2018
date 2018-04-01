@@ -2,6 +2,20 @@
 
 ## Learning Objectives for Chapter
 
+Jen's: 
+1. Decide if a paired t test, independent t test (unequal variances), or independent t test (equal variances) is appropriate for a given study design.
+2. Explain the purpose of the F test for equal variances
+3. Calculate a t value for two sample datasets.
+4. State the null hypothesis and alternative hypothesis for a two sample t test.  
+5. Give an example of a situation when you might perform a one-tailed test, and state the statistical null and alternative hypotheses.
+6. After performing a two sample t test, sketch the t distribution, with the following parts labeled: 
+  - the critical t value
+  - the test statistic
+  - the p value area under the curve.
+  - the alpha level area under the curve. 
+  - where the CI bounds would lie on the X axis (approximately)
+7. Correctly interpret the results of a given t test in terms of the decision made regarding the statistical hypotheses, and the implications for the original scientific hypothesis. 
+
 
 ## Exercises and Solutions
 
