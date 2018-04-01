@@ -2,6 +2,12 @@
 
 ## Learning Objectives for Chapter
 
+1. State the null and alternative hypotheses for a linear regression
+2. Describe how variance is partitioned in a linear regression.  
+3. Calculate the slope and intercept for a regression model and their CIs, and interpret what the values mean in real, biological terms.  
+4. Calculate the coefficient of determination and state what the value means.  
+6. Construct an ANOVA table for a regression.  
+7. Describe how ANOVA and regression analyses are related in terms of variance partitioning and the F test.  
 
 
 ## Exercises and Solutions
