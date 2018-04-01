@@ -2,6 +2,13 @@
 
 ## Learning Objectives for Chapter
 
+Jen's:
+1. Calculate a confidence interval from a sample dataset, using the normal distribution and the t distribution.
+2. Describe how sample size and alpha effect the CI. 
+3. Explain how to correctly interpret a CI in your own words.
+4. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
+5. Decide if the mean of a population is equal to a hypothetical mean, given a particular alpha level, a sample xbar, and sample variance.
+
 
 Statistical inference consists of making statements about population characteristics based on information obtained from samples.
 
