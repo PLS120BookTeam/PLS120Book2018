@@ -2,7 +2,11 @@
 
 ## Learning Objectives for Chapter
 
-
+Jen's:
+1. List sources of possible error in an estimator for a variable of interest. 
+2. List ways that you could reduce or eliminate sampling bias
+3. Identify the experimental unit of a given study design.
+4. Explain the advantages of subsampling
 
 ## Exercises and Solutions
 
