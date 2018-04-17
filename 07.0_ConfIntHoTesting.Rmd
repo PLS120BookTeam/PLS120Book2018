@@ -35,6 +35,10 @@ Include simulation or figure with known population parameters. Show 100 Ci's and
 
 ## Confidence interval and test of one mean
 
+## What is the meaning of the p-value?
+
+http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
+
 ## Exercises and Solutions
 
 ## Homework

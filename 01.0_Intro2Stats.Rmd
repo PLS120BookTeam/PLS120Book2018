@@ -1,21 +1,14 @@
 # Chapter 1: Introduction to Applied Statistics {#ch.intro}
 
-In the end, statistics is a discipline that formalizes methods to operate in an uncertain world. It gives us a set of tools that we can use to get a clearer and quantitative assessment of what a situation really is and what night happen in the future if we take a certain course of action.
+## Learning Objectives
 
-Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, 
-https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271
+1. Define statistics and its use.
+1. List the topics covered in this book.
+1. Distinguish between formal statistical calculations and intuitive solutions.
+1. List the goals for the course.
 
 
-
-~~TODO~~
-Add an example and a class exercise that shows the idea of uncertainty and the effets of action on the uncertainty. Students play darts. The target is secret. Guess the target. Study the distribution of the distance to the center. Study the distriution of the distance to the target. Study effects of changing the target. See that it does not change each individual throw in a predictable manner, but it changes the distribution in a predictable manner. See how bets on different areas of the board change as we change the target. See how bets change as we observe more throwd of an individual known to be aiming always at the same unknown target. Discuss the fact that the target is unknown to us but not to the person throwing.
-
-Reveal individual variation by polling class for number of personal communication devices, number of social media services used, number of tweets sent in the last 2 days.  the main point is to show students that the the concept of randomness is  not completely well-defined.  
-
-consider the number of tweets so that each student in the class is sent in the last couple of days.  for a person interested in the population of students perhaps the variation from student to student can be considered to be random and have some sort of statistical distribution for random errors, however for each student the number of tweets that they made is a known quantity and it is not considered to be an error in in anyway not even in a statistical way. presumably they know exactly why they sent each tweet and the number of tweets for a particular day.
- ~~~~
-## Learning Objectives for this course
-
+## Course Goals
 1. Identify questions and problems that can be addressed by using statistical methods.
 1. Propose basic statistical methods to test hypotheses.
 1. Given a problem that can be addressed with statistics, define the response variable, predictor or explanatory variables, parameters and their hypothesized relationship.
@@ -26,15 +19,67 @@ consider the number of tweets so that each student in the class is sent in the l
 1. Test simple hypotheses such as equality of means, independence of variables and goodness of fit.
 1. State the effects of sample size on the variance of estimates of population means.
 
+## Definition of Statistics
+
+**Statistics** is frequently defined as a branch of mathematics that deals with the collection, analysis, interpretation, presentation and organization of data. One of the key aspects of statistics is that it formalizes methods to operate in an uncertain world. It gives us a set of tools to get clear quantitative assessments of situations, and to make estimates and predictions with the corresponding estimates of uncertainty.
+
+For example, the "situation" is to determine if milk productivity in terms of kg/ha of farm is increasing or decreasing in Califormia. A sample of farms is selected and milk production and farm area are measured over two years. Based on the measurements, an estimate of the difference between years is calculated, as well as an interval that represents the uncertainty of teh estimate.
+
+## Learning Statistics
+
+Learning statistics can be challenging but also fun. The math involved in introductory statistics is very basic and for the most part involves only addition and multiplication. You can use statistics to make better decisions about your life.
+You should use statistical knowledge to properly interpret pseudoinformation presented in advertisements and the media.
+
+Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, 
+https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271
+
+Although humans do have an innnate ability to assess contingencies and likelihood of certain events, our intuitive ability is far from perfect. In fact, it has been shown that humans tend to be particularly bad at estimating probabilities in certain situations. Kahneman and Tversky refer to the probabilities people guess without using calculations and the theory of probability as "subjective" probability.
+
+*** Add basic concepts from David Kahneman Amos Tversky 1972 *** 
+
+Statistical methods allow us to remove some of the biases introduced by human intuition. Many of the errors Kahneman and Tversky's subjects made would have been prevented if those subjects used statistical calculations instead of their intuition.For example, K&T posed the following question to high school students: All families of six children in a city were surveyed. In 72 families the exact order of births of boys and girls was GBGBBG.
+What is your estimate of the number of families surveyed in which the exact order of births was BGBBBB? What do you think? The median (add cross reference to definition of median in Ch04) estimate that students gave was 30. If the probability of G and B are the same, then both sequences have equal probability.
+
+In another series of experiments, K&T asked students to estimate sampling distributions for various processes, for example, the number of boys and girls born each day. They concluded that:
+
+"The notion that sampling variance decreases in proportion to sample size is apparently not part of man’s repertoire of intuitions."
+
+This is very interesting and challenging, because the fact that variance of sample averages decreases with sample size is the most important concept for this course!
+
+Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you canno trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although at some point, we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error.
+
+## Going to the movies: PBS program on statistics
+
+http://www.pbs.org/wgbh/nova/physics/prediction-numbers.html
+
+
+
+
+## Exercise
+
+Goal: Do many random experiments and estimations. Identify the elements involved in making estimates and sources of variation.
+
+This exercise is actually a game. The team that guesses the secret target most accuratel wins the game. Students will form two teams. Each team will designate a pitcher or thrower. Pitchers will proceed to the front game area and get the projectiles (these projectiles can be darts or small chalk or sand bags). A horizontal line with marks and labels every 2 inches is drawn for each pitcher on the board. The referee gives each pitcher a different position as their target. Those numbers remain unknown to everyone else. Each pitcher throws the projectile at the designated position in the line three times, and the referee marks each hit on the horizontal line. Vertical positions are ignored. Each team collectively guesses the target point for their pitcher. Guesses are plotted against number of pitches on the board. Five to 6 rounds of throws and guesses are conducted. The team that is closest to their pitcher's true target wins. After the award ceremony, the following questions are asked for discussion:
+
+1. What factors determined the winner?
+1. Was one of the pitchers better? In what way?
+1. Which values varied between throws and whih ones were constant?
+1. What would a team's guess if their pitcher did a large number of throws?
+1. What is the frequency of different distances from the true target?
+1. Why do distances from the target vary among throws? What does random mean?
+
+
 ## Book Organization and Overview
 
+This book has 14 chapters dealing with introductory statistical methods and concepts. The first section comprises chpaters 1-3 provide essential but minimal tools necessary to be able to read and understand the rest of the book.
 
-Explain how the different chapters and concepts go together and why they are in the specific order presented.
+This first chapter introduces statistics and the rest of the book. It gives a general introduction to the need for formal methods that yield repeatable quantitative results to deal with uncertainty in an optimal manner. Chapter 2 is an introduction to the tool that we use for doing statistcs: R and RStudio. R is the program that actually does all the computations; essentially, it is a programming language for statistics. RStudio is an integrated development environment (IDE) that handles the creation and debugging of code, as well as the input and output. Chapter 2 is necessary because this book is written using RStudio and code for R. There are examples, exercises and explanations that use R in the rest of the chapters. Chapter 3 presents the required math skills and symbols that are used in the rest of the book.
+
 
 Include a schematic or figure that unifies the materials in all chapters.
 
 
-## Use and Mmisuse of Statistics
+## Use and Misuse of Statistics
 
 Theme: There are compelling arguments indicating that statistics has been misunderstood and misused. There is a dominating culture of users of statistics who do not understand the exact original meaning of the methods and who misuse them. This has resulted in a culture where statistics is considered obscure and where the two main approaches (bayesiand and frequentist) are pitted against each other.
 
@@ -43,11 +88,11 @@ Explain the misunderstanding and misuse of P
 
 https://www.nature.com/news/scientific-method-statistical-errors-1.14700
 
-End section with a positive note that by truly understanding we will see that statistical methods become much more understandable.
+End section with a positive note that by truly understanding we will see that statistical methods become 
 
 A common path is to learn math, learn how math is used as part of the foundation of statistical methods to obtain desired estimates, and then develop an understanding of the methods through the math. We will avoid this path and use the following reasoning.
 
-1. Identify problem.
+1. Identify and define the problem or question.
 2. Define what will consitute a useful solution.
 3. Determine quantities that need to be estimated for solution.
 4. Find a method to estimate such quantities.
