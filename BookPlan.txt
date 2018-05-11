@@ -1,0 +1,64 @@
+PLS 120 book plan
+
+=== Funding ====
+
+Find funding. TRC. Other organizations? Plant Sciences?
+
+Update 11 May 2018 ====================
+EAL asked CEE center fro educational excellence and they said to apply in the future after participating in activities and consultations. Consulted with CEE expert and attended one workshop or two. Will follow up with more workhops and a new attempt to application for funds.
+
+EAL secured $2000 from own state account and obtained promise of matching $1500 by department. Match will be used in application to CEE.
+
+
+=== Topics ====
+
+What should we add/remove to the current book?
+No need to give instructions to install R.
+Remove tally for frequency table (make into R code).
+Remove stem and leaf.
+Expand concepts of sampling distribution in first page Ch. 04
+
+Look for examples, figures, explanations we already used in lectures and labs to be used as the basis for the new content of the book. In general we will follow the topics in the SG book, but we will rewrite everything, make it colorful, add lots of figures and diagrams to explain concepts visually, and add our own explanations.
+
+Update 11 May 2018 ====================
+EAL merged and edited all learning objectives, which constitute a list of topics to cover in each chapter.
+
+=== Format ====
+
+Lecture chapters all up front and Lab Manual separate.
+Integrate R and lecture? Yes. Follow format Statistical Rethinking and Kéry’s books.
+
+Update 11 May 2018 ====================
+Lab sections were added to each chapter on the basis of the consultant's recommendation. Not all chapters will have labs. Chapter-lab pairs to be specified, but should be obvious.
+
+=== Labs ====
+
+Use Plant Science labs as in Canvas
+Translate Plant Science labs to Animal Science data posted in Canvas
+
+Lab translation assignments (start anytime)
+Cale 1 & 2
+Stephanie 3 & 4
+Emilio 5, 6 & 7
+Jennifer 8 & 9
+
+
+=== Collaboration ====
+
+Who does what? TBD
+
+How do we collaborate?
+We can use a tool like the following:
+GitHub
+RStudio server
+Jupyter
+
+Emilio will research the options.
+
+We will have a structure for the whole book and manual available at all times.
+We will work together by chapter, but nonlinear work will be possible at any time.
+Work by section, topic or “function” (e.g. formulas vs code)? TBD
+
+Update 11 May 2018 ====================
+We are using GitHub and it seems to be working.
+We have a master brach that each can fork, work on and submit back with a pull request. Once we have pull requests from all, EAL will solve conflicts and merge to master, and the process will be repeated.
