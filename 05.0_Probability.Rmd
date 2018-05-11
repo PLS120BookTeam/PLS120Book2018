@@ -2,13 +2,20 @@
 
 ## Learning Objectives for Chapter
 
-Define random variables and their distributions.
-Determine if a process is random or deterministic and give examples of both.
-Determine the probability mass function of a given random experiment.
-List multiple causes that determine the outcome of a random experiment.
-Classify a list of quantities as values of random variables or parameters.
-Write down Bayes rule and define each of its components.
-Apply Bayes rule to minimize error rate in classification of a plant as annual or perennial.
+
+1. Define random variables and their distributions.
+1. Determine if a process is random or deterministic and give examples of both.
+1. Determine the probability mass function of a given random experiment.
+1. List multiple causes that determine the outcome of a random experiment.
+1. Classify a list of quantities as values of random variables or parameters.
+1. Write down Bayes rule and define each of its components.
+1. Apply Bayes rule to minimize error rate in classification of a plant as annual or perennial.
+1. List the most important distributions in elementary statistics.
+1. Plot and describe the main features of the statistical distributions.
+1. Give examples of processes that generate random variables with the most important distributions.
+1. State the central limit theorem and show its effects with a simulation.
+1. State the relationship among normal, Student's t, $\Chi^2$ and F distributions.
+
 
 Concept of probability.
 Concept of randomness.
@@ -287,4 +294,10 @@ Consider the number of tweets so that each student in the class has sent in the 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
 

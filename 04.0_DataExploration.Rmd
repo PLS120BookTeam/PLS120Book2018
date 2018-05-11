@@ -2,6 +2,15 @@
 
 ## Learning Objectives for Chapter
 
+1. Distinguish between population parameters and sampling statistics.
+1. List, define and calculate measures of central tendency for data and populations.
+1. List, define and calculate measures of dispeDefine and calculate the five-number summary for populations and samples.
+1. Explain organization of one- and two-way data using subscripts.
+1. Make histograms for sample data.
+1. Calculate the 5-number summary and make a box and whisker plot with all elements labeled.
+1. Calculate the coefficient of variation and describe its weaknesses.
+
+
 ## Data curation
 
 input
@@ -21,3 +30,11 @@ naming variables
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+
+

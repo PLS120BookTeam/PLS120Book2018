@@ -2,6 +2,16 @@
 
 ## Learning Objectives for Chapter
 
+1. Identify population, sample and observation.
+1. Describe and use a method to obtain random samples with equal probabilities.
+1. Describe and implement stratified random sampling.
+1. Explain the difference between sampling with and without replacement.
+1. Write and use equations for estimators of population mean and variance.
+1. Distinguish between estimators and definitions of parameters.
+1. Define and calculate bias of an estimator of a parameter.
+1. When should a Student's t distribution be used over a normal distribution for samples?
+
+
 ## Elements of sampling theory
 
 Population, sample, sampling unit, frame, etc.
@@ -30,4 +40,10 @@ Example: a sample of 3 values is drawn from the standard normal distribution. Th
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
 

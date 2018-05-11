@@ -2,8 +2,23 @@
 
 ## Learning Objectives for Chapter
 
+List examples of uses for simple linear regression (SLR).
+Write the model and assumptions for simple linear regression.
+Make confidence intervals for the SLR parameters.
+Compare SLR and ANOVA for CRD.
+List strategies to increase the precision of slope estimates.
+Determine is a problem requires an estimate for the expected value or for a single observation.
+Calculate and interpret the ANOVA table for SLR.
+Discuss the difference between estimating parameters and making predictions in SLR.
 
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+

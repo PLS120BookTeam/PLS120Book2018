@@ -2,8 +2,22 @@
 
 ## Learning Objectives for Chapter
 
+Determine when it is advantageous to use blocking of experimental units.
+Design simple experiments where experimental units are blocked.
+Compare the effects of analyzing data with and without blocks.
+Assign treatments to experimental units to form a Randomized Complete Block Design.
+Perform the ANOVA for a Randomized Complete Block Design.
+Interpret the results of the RCBD ANOVA and answer the relevant research questions.
+Identify RCBD experiments based on a description of how treatments were assigned to experimental units.
 
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+

@@ -2,6 +2,18 @@
 
 ## Learning Objectives for Chapter
 
+1. Write down the model for ANOVA and label its components.
+1. Define experimental unit and determine number of experimental units in a given example.
+1. State the typical assumptions for ANOVA.
+1. Perform tests of ANOVA assumptions.
+1. When is an ANOVA more appropriate than a T-test for hypothesis testing?
+How does the calculation of experimental error change with and without subsamples?
+Computational:
+Run an ANOVA, report the calculated F-value, report the p-value and state your hypothesis decision.    
+Run a T-test and report the calculated t-value.  Compare this value to the F-value; what is the relationship?
+Compare the calculated experimental error with and without subsamples in R.  
+
+
 
 ANOVA intuition. Present students with a series of groups of objects and ask them to guess if they think they are subsets of the some large group of whether any group seems to come from a different population.
 
@@ -62,4 +74,10 @@ for (i in 1:4) {
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
 
