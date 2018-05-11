@@ -11,14 +11,21 @@ Jen's:
 
 Design factorial treatment combinations to answer a research question.
 Create linear combinations of means that address practical real-world questions.
+Define statistical interaction and explain it graphically.
 Transform real-world question into a null hypothesis about means.
 Test hypotheses involving more than one and more than 2 means.
 Interpret result of ANOVA with factorial treatments.
 Interpret graph of a factorial experiment, including description of L, Q and C trends.
 Given a set of treatments, formulate and tests useful contrasts.
 Determine if a linear combination of means is a contrast.
+Create contrasts to estimate the value and variance of interactions.
 Estimate the variance of a linear combination of means.
 Make confidence intervals for linear combination of estimated means.
+Calculate and use the Least Significant Difference (LSD) to test for differences among treatments.
+Apply the Protected LSD and explai how it ameliorates the inflation of alpha?
+Create linear combinations of estimated treatment means.
+Create contrasts to answer research questions such as effects of treatments, linear and quadratic effects of continuous treatment variables.
+
 
 ## Pairwise Comparisons
 ## Factorials
@@ -30,3 +37,11 @@ Make confidence intervals for linear combination of estimated means.
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+
+

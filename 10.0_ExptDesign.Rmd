@@ -2,12 +2,67 @@
 
 ## Learning Objectives for Chapter
 
-Jen's:
 1. List sources of possible error in an estimator for a variable of interest. 
-2. List ways that you could reduce or eliminate sampling bias
-3. Identify the experimental unit of a given study design.
-4. Explain the advantages of subsampling
+1. List ways that you could reduce or eliminate sampling bias
+1. Identify the experimental unit of a given study design.
+1. Explain the advantages of subsampling
+1. Define experimental unit and identify them in given experiments.
+1. Distinguish between **observational studies** and **manipulative** experiments.
+1. Design experiments to get data to answer given research questions.
+1. Pose research questions that can be addressed with statistical tests.
+1. Distinguish between experimental design in its narrow sense and treatment structure.
+1. Design factorial treatments using two factors.
+1. Identify and use design feature to avoid confounding and to reduce error.
+
+"An experiment is characterized by the treatments and experimental units to be used, the way treatments are assigned to units, and the responses that are measured." (Gary W. Oehlert, 2010)
+
+Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments were not assigned independently of other characteristics of experimental units. For example, consider the comparison of susceptibility to the common cold between people who exercise regularly and sedentary people. Any difference detected cannot be attributed to exercise, because it may be that colds and exercise are unrelated but have a common cause. It may be that people who have to work more indoors exposed to contagion also have less time to exercise. Work indoors causes both more colds and less time to exercise. Changing the level of exercise will not change the incidence of colds unless it reduces the time indoors exposed to contagion.
+
+## Experimental design and Treatment Structure
+
+Experimental design in the narrow sense refers to the arrangement of experimental units and the manner in which treatments are assigned to experimental units. Experimental design determines the sources of errors and the apportioning of variance to typically uninteresting sources such as blocks.
+
+Treatment design refers to the structure that may be present in the treatments, such as factorial, series of doses and controls. The treatment structure determines what comparisons are typically most useful.
+
+Typically, experimental design and treatment structure fully determine the most complex model that may be necessary to analyze the data. The model determines the propoer analysis. However, in some cases the proper analysis also depends on the specific assumptions that can be made and on the questions to be
+answered.
+
+## Elements of Experimental Design
+
+Oehlert (2010) provides the following definitions which are presented here with sligh tmodification and additions:
+
+*Treatments* are the different procedures we want to compare. These could be different kinds or amounts of fertilizer in agronomy, different long-distance rate structures in marketing, or different temperatures in a reactor vessel in chemical engineering.
+
+*Experimental units* are the things to which we apply the treatments. These could be plots of land receiving fertilizer, groups of customers receiving different rate structures, or batches of feedstock processing at different temperatures.
+
+*Responses* are outcomes that we observe after applying a treatment to an experimental unit. That is, the response is what we measure to judge what happened in the experiment; we often have more than one response. Responses for the above examples might be nitrogen content or biomass of corn plants, profit by customer group, or yield and quality of the product per ton of raw material.
+
+*Randomization* is the use of a known, understood probabilistic mechanism for the assignment of treatments to units. Other aspects of an experiment can also be randomized: for example, the order in which units are evaluated for their responses.
+
+*Experimental Error* is the random variation present in all experimental results. Different experimental units will give different responses to the same treatment, and it is often true that applying the same treatment over and over again to the same unit will result in different responses in different trials. Experimental error does not refer to conducting the wrong experiment or dropping test tubes.
+
+*Measurement units* (or response units) are the actual objects on which the response is measured. These may differ from the experimental units. For example, consider the effect of different fertilizers on the nitrogen content of corn plants. Different field plots are the experimental units, but the measurement units might be a subset of the corn plants on the field plot, or a sample of leaves, stalks, and roots from the field plot. Measurement units are also known as *subsamples* and they are characterized by sharing a common experimentla unit error component.
+
+*Blinding* occurs when the evaluators of a response do not know which treatment was given to which unit. Blinding helps prevent bias in the evaluation, even unconscious bias from well-intentioned evaluators. Double blinding occurs when both the evaluators of the response and the (human subject) experimental units do not know the assignment of treatments to units. Blinding the subjects can also prevent bias, because subject responses can change when subjects have expectations for certain treatments.
+
+*Controlled experiment* has several different uses in design. An experiment is controlled because we as experimenters assign treatments to experimental units. Otherwise, we would have an observational study. Control also refer to the selection of experimental material that is homogeneous to reduce unexplained variation or error.
+
+*Control Treatments*. A control treatment is a “standard” treatment that is used as a baseline or basis of comparison for the other treatments. This control treatment might be the treatment in common use, or it might be a null treatment (no treatment at all). For example, a study of new pain killing drugs could use a standard pain killer as a control treatment, or a study on the efficacy of fertilizer could give some fields no fertilizer at all. This would control for average soil fertility or weather conditions.
+
+*Placebo* is a null treatment that is used when the act of applying a treatment— any treatment—has an effect. Placebos are often used with human subjects, because people often respond to any treatment: for example, reduction in headache pain when given a sugar pill. Blinding is important when placebos are used with human subjects. Placebos are also useful for nonhuman subjects. The apparatus for spraying a field with a pesticide may compact the soil. Thus we drive the apparatus over the field, without actually spraying, as a placebo treatment. This use of the word "placebo" is unusual in agriculture. Usually we call these "controls" and have different types of control treatments. For the example of spraying, we could have a "placebo" control with the driving of the equipment, and a "naive" control without it. The important point is to correclty interpret the meaning of the differences between any two treatments. The difference between spray and placebo is the effect of the spray compound
+
+*Factors* combine to form treatments. For example, the baking treatment for a cake involves a given time at a given temperature. The treatment is the combination of time and temperature, but we can vary the time and temperature separately. Thus we speak of a time factor and a temperature factor. Individual settings for each factor are called *levels* of the factor.
+
+*Confounding* occurs when the effect of one factor or treatment cannot be distinguished from that of another factor or treatment. The two factors or treatments are said to be confounded. Except in very special circumstances, confounding should be avoided. Consider planting corn variety A in Minnesota and corn variety B in Iowa. In this experiment, we cannot distinguish location effects from variety effects—the variety factor and the location factor are confounded.
+
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+

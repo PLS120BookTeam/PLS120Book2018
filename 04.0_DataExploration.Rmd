@@ -2,12 +2,16 @@
 
 ## Learning Objectives for Chapter
 
-Jen's
-1. Calculate the mean, sd, var, and the 5 number summary for a set of numbers. 
-2. Create a histogram of a data set and explain what the histogram shows (what is on the Y axis, X axis).
-3. Create a boxplot of a data set and explain the different parts.  
-4. Decide if a data set is normally distributed or not based on the histogram and boxplot of the data set.  
-5. Describe what a sample average tells you in the context of (1) data description, (2) data estimation, and (3) inference.  
+1. Distinguish between population parameters and sampling statistics.
+1. List, define and calculate measures of central tendency for data and populations.
+1. List, define and calculate measures of dispersion for data and populations.
+1. Explain organization of one- and two-way data using subscripts.
+1. Make histograms for sample data, explain histogram parts and interpret it.
+1. Calculate the 5-number summary and make a box and whisker plot with all elements labeled.
+1. Asses the normality of data using the histogram and boxplot.  
+1. Calculate the coefficient of variation and describe its weaknesses.
+The next one has to be explained more:
+1. Describe what a sample average tells you in the context of (1) data description, (2) data estimation, and (3) inference.  
 
 ## Data curation
 
@@ -28,3 +32,11 @@ naming variables
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+
+

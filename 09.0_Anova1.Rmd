@@ -2,13 +2,17 @@
 
 ## Learning Objectives for Chapter
 
-Jen's:
-1. State the null and alternative hypotheses for ANOVA
-2. Describe how variance is partitioned in a simple one-way ANOVA 
-3. State the assumptions of ANOVA, and be able to interpret a residual plot as a diagnostic test of assumptions
-3. Calculate an F ratio for ANOVA
-4. State if you would expect to see a larger or smaller F ratio if there was a strong effect of groups, and describe why.
-5. Sketch what three sampling distributions might look like if the results of an ANOVA test were not significant.  Sketch what it might look like if the results were significant.  
+1. Write down the model for ANOVA and label its components.
+1. Define experimental unit and determine number of experimental units in a given example.
+1. State the typical assumptions for ANOVA.
+1. Perform tests of ANOVA assumptions.
+1. State the null and alternative hypotheses for ANOVA.
+1. Describe how variance is partitioned in a simple one-way ANOVA .
+1. When is an ANOVA more appropriate than a T-test for hypothesis testing?
+1. How does the calculation of experimental error change with and without subsamples?
+1. Run an ANOVA, report the calculated F-value, report the p-value and state your hypothesis decision.    
+Run a T-test and report the calculated t-value.  Compare this value to the F-value; what is the relationship?
+Compare the calculated experimental error with and without subsamples in R.  
 
 ANOVA intuition. Present students with a series of groups of objects and ask them to guess if they think they are subsets of the some large group of whether any group seems to come from a different population.
 
@@ -69,4 +73,10 @@ for (i in 1:4) {
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
 

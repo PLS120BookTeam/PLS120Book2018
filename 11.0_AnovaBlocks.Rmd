@@ -2,13 +2,24 @@
 
 ## Learning Objectives for Chapter
 
-Jen's:
+1. Given an example scenario, describe how you would allocate treatments for a RCBD
+1. Calculate F ratios for the groups and blocks.  
+1. State null and alternative hypotheses for the RCBD.  
+1. Determine when it is advantageous to use blocking of experimental units.
+1. Design simple experiments where experimental units are blocked.
+1. Compare the effects of analyzing data with and without blocks.
+1. Perform the ANOVA for a Randomized Complete Block Design.
 1. Explain how variance is partitioned in an ANOVA with blocks design.
-2. Describe how you would determine if the blocked design added value over a crd. 
-3. Given an example scenario, describe how you would allocate treatments for a RCBD
-4. Calculate F ratios for the groups and blocks.  
-5. State null and alternative hypotheses for the RCBD.  
+1. Interpret the results of the RCBD ANOVA and answer the relevant research questions.
+1. Identify RCBD experiments based on a description of how treatments were assigned to experimental units.
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+
