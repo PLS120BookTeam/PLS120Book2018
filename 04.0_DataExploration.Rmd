@@ -4,12 +4,14 @@
 
 1. Distinguish between population parameters and sampling statistics.
 1. List, define and calculate measures of central tendency for data and populations.
-1. List, define and calculate measures of dispeDefine and calculate the five-number summary for populations and samples.
+1. List, define and calculate measures of dispersion for data and populations.
 1. Explain organization of one- and two-way data using subscripts.
-1. Make histograms for sample data.
+1. Make histograms for sample data, explain histogram parts and interpret it.
 1. Calculate the 5-number summary and make a box and whisker plot with all elements labeled.
+1. Asses the normality of data using the histogram and boxplot.  
 1. Calculate the coefficient of variation and describe its weaknesses.
-
+The next one has to be explained more:
+1. Describe what a sample average tells you in the context of (1) data description, (2) data estimation, and (3) inference.  
 
 ## Data curation
 

@@ -2,6 +2,10 @@
 
 ## Learning Objectives for Chapter
 
+1. List sources of possible error in an estimator for a variable of interest. 
+1. List ways that you could reduce or eliminate sampling bias
+1. Identify the experimental unit of a given study design.
+1. Explain the advantages of subsampling
 1. Define experimental unit and identify them in given experiments.
 1. Distinguish between **observational studies** and **manipulative** experiments.
 1. Design experiments to get data to answer given research questions.

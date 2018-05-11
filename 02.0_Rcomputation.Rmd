@@ -2,6 +2,7 @@
 
 ## Learning Objectives for Chapter
 
+
 1. Install R and RStudio.
 1. Find information about objects and functions in R.
 1. Create and use R scripts and projects in RStudio.
@@ -12,6 +13,12 @@
 1. Create simple plots and export them.
 1. Customize global and project options.
 1. Identify, list and describe function of each pane.
+1. Describe the efects of the parameters of the Uniform distribution
+1. Calculate the expected value of a random variable with Uniform distribution.
+1. Explain what the pdf of the Uniform distribution shows (y axis, X axis)
+1. Draw a sketch of the sum of 2 uniform distributions.
+1. Give an example of a random variable that might be modelled using the Uniform distribution.  
+
 
 ## R and RStudio {#sect.RnRStudio}
 

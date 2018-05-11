@@ -2,16 +2,17 @@
 
 ## Learning Objectives for Chapter
 
+=======
+1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
 1. State null and alternative hypotheses in words and equations.
 1. Calculate and explain the meaning of level of significance in words and with a graph.
 1. Calculate power of a test and explain it with a graph.
-1. Calculate and define confidence intervals.
+1. Calculate and interpret confidence intervals.
+1. Describe how sample size and alpha effect the CI. 
 1. Perform a simulation to check the correctness of a CI.
 1. Explain the difference between a one-tailed and two-tailed test and determine when each one is applicable.
 1. Recreate and explain a table showing the outcomes of statistical tests and the types of errors.
-
-
-
+1. Test if the mean of a population is equal to a hypothetical mean when variance is known and unknown.
 
 Statistical inference consists of making statements about population characteristics based on information obtained from samples.
 

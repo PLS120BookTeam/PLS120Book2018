@@ -3,10 +3,17 @@
 ## Learning Objectives for Chapter
 
 1. Compare two population means based on two samples.
+1. State the null and alternative hypothesis for a two sample t-test.  
 1. Determine if samples are paired or unpaired ("independent") when comparing two means.
-1. Describe the three cases for comparing two populations means and determine when each one applies.
-1. Perform a test of homogeneity of variance using samples from two populations.
-
+1. Describe the three cases for comparing two populations means and determine when each one applies for a problem.
+1. Perform an F-test of homogeneity of variance using samples from two populations.
+1. After performing a two sample t test, sketch the t distribution, with the following parts labeled: 
+  - the critical t value
+  - the test statistic
+  - the p value area under the curve.
+  - the alpha level area under the curve. 
+  - where the CI bounds would lie on the X axis (approximately)
+1. Interpret the results of a t-test in terms of the original scientific question. 
 
 ## Exercises and Solutions
 

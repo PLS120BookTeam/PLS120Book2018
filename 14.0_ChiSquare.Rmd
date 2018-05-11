@@ -2,6 +2,12 @@
 
 ## Learning Objectives for Chapter
 
+Jen's:
+1. Construct a contingency table and calculate its degrees of freedom.
+2. State if a larger or smaller chi square value indicates stronger dependency between variables in a test of independence.
+3. Describe the theory behind how we calculate the expected values in a test of independence.
+
+
 1. Define independence between random variables.
 1. Identify problems that can be addressed as goodness of fit or independence tests.
 1. Define degrees of freedom for the $\chi^2$ distribution.

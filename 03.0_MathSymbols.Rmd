@@ -7,6 +7,14 @@
 1. Calculate sum of squared deviations for a set of numbers.
 1. 
 
+Jen's 
+*I found this chapter hard, because I'm not sure of it's main objectives yet.  Broadly, is it just the concepts behind SS, and optimization?
+
+1. Explain in your own words what the sum of squares of a set of numbers describes.  
+2. Identify the symbols that correspond to standard deviation, variance, population mean, and sample average.  
+3. List the different strategies we can use to find the optimal value for an unknown variable.
+
+
 ## Summation
 ## Deviations, sums of squares, sums of absolute deviations
 
@@ -17,7 +25,6 @@ The difference between an observation and the mean is called a "deviation" or "e
 ## Geometry of sums of squares
 
 Remember the Pythagorean theorem? In a right triangle the square of the hypothenuse equals the sum of teh squares of the sides. This can be extended to a polyhedron with right angles everywhere. The square of a diagonal in 3D is the sum of the three sides of the polyhedron. This square is also the sum of the square of the bottom hypothenuse and the vertical side suared. ** Add figure with labels** 
-
 Imagine that we have a sample with 3 observations. Make a box where the lenght of each side is one of the observations and then consider the 3D diagonal. The sum of squares of the deviations is equal to the lenth of the diagonal.
 
 The total sum of s
