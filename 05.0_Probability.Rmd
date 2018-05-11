@@ -2,23 +2,40 @@
 
 ## Learning Objectives for Chapter
 
-Define random variables and their distributions.
-Determine the probability mass function of a given random experiment.
-List multiple causes that determine the outcome of a random experiment.
-Classify a list of quantities as values of random variables or parameters.
-Write down Bayes rule and define each of its components.
-Apply Bayes rule to minimize error rate in classification of a plant as annual or perennial.
+
+1. Define random variables and their distributions.
+1. Determine if a process is random or deterministic and give examples of both.
+1. Given a random experiment like rolling a die, write down the smaple space.
+1. Determine the probability mass function of a given random experiment.
+1. List multiple causes that determine the outcome of a random experiment.
+1. Define "parameter."
+1. Classify a list of quantities as values of random variables or parameters.
+1. Define "independence" in the context of probability events and determine if two events are independent.
+1. Explain what conditional probability is with a diagram and with formulas.
+1. Calculate the probability of:
+ - 1 of 2 mutually exlusive events occurring (either/or)
+ - two events occuring that are independent
+ - the probability of one event occuring, given that another event has already occurred.  
+1. Write down Bayes rule and define each of its components.
+1. Apply Bayes rule to minimize error rate in classification of a plant as annual or perennial.
+1. List the most important distributions in elementary statistics.
+1. Plot and describe the main features of the statistical distributions.
+1. Give examples of processes that generate random variables with the most important distributions.
+1. State the central limit theorem and show its effects with a simulation.
+1. State the relationship among normal, Student's t, $\Chi^2$ and F distributions.
+
 
 Concept of probability.
-Concept of randomnesss.
+Concept of randomness.
 Constant, Random variable and Random number. PSAES ch. 6
 
-See probability_cheatsheet.pdf
+See probability_cheat sheet.pdf
 
 ### Variables and parameters
+
 The terms "variable" and "parameter"" should be defined and used carefully. People frequently and incorrectly use the term "parameter" to refer to variables. This makes things more confusing.
 
-Do not confuse moments with parameters. However, we may have to simplify at this point. The $\chi^2$, t and F distributions can be used as good example of the difference between moments and parameters. The parameters are degrees of freedom, whereas some of their moments are determined by but different from the degrees of freedom.
+Do not confuse "moments"" with parameters. However, we may have to simplify at this point. The $\chi^2$, t and F distributions can be used as good example of the difference between moments and parameters. The parameters are degrees of freedom, whereas some of their moments are determined by but different from the degrees of freedom.
 
 Parameters are constants that determine the statistical distribution of random variables and thus, characterize populations. Usually, *parameters* cannot be measured directly and they cannot be known with certainty unless the whole population is known. A *variable* may take a different value for reach member of the population and could be measured directly and with certainty, within the precision of the measuring instrument. The value of the parameter is not necessarily represented in the population values of the variable.
 
@@ -32,13 +49,9 @@ Distributions of functions of random variables.
 Mean, variance, covariance vs. parameters of distributions. Examples: Normal and Student's t.
 
 See Appendix A of KNN book.
-See IntroductoryStatistics with R.
+See Introductory Statistics with R.
 
-The following text was in sweave.
-Needs to be translated into markdown.
-
-%@@@@@@@@@@@@@@@ CHAPTER @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-\chapter{Probability}
+## Probability
 
 We need to have the concept of probability in order to be able to express and quantify uncertainty. The significance and confidence levels used in statistical statements are measures of probability, and they must be assigned or calculated in a manner that is consistent with the theory of probability.
 
@@ -276,9 +289,24 @@ The frequentist approach does not consider the relative merit of all possible hy
 
 \end{document}
 
+## What does "random" mean?
+
+Processes or experiments that have outcomes can be random or deterministic. When the outcome of a process is not known beforehand, we will say that the process and the resulting outcomes are random. For example, the number that will be selected in a roulette is random. The day of the week tomorrow is deterministic. "A random experiment is an experiment whose outcome is uncertain. Examples include throwing a pair of dice, tossing a coin, counting the number of defectives in a sample from a lot of manufactured items, and observing the time to failure of a tube in a heat exchanger, or a seal in a pump, or a bus section in an electrostatic precipitator." (Shaefer and Theodore, 2007).
+
+Although we will use this definition of "random," the word "random" is used with several related but different meanings. For example, sequences of values that cannot be compressed and expressed using less memory without loss of information are also called "random," but that is not the meaning we will use in this book.
+
+We frequently encounter explanations of events where a part of the event is said to be caused by certain factors and the rest is *"just due to random chance."* This phrase can lead to misunderstanding and should be considered thoroughly. Randomness does not mean that the process could have resulted in a different outcome if **all conditions were exaclty the same**. Randomness or "just chance" is used to refer to the effects of all of the variables that affected the outcome but that we did not measure or consider. 
+
+Consider the number of tweets so that each student in the class has sent in the last couple of days.  for a person interested in the population of students perhaps the variation from student to student can be considered to be random and have some sort of statistical distribution for random errors, however for each student the number of tweets that they made is a known quantity and it is not considered to be an error in in anyway not even in a statistical way. presumably they know exactly why they sent each tweet and the number of tweets for a particular day.
 
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
 

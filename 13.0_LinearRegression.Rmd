@@ -2,8 +2,26 @@
 
 ## Learning Objectives for Chapter
 
-
+1. State the null and alternative hypotheses for a linear regression
+1. Describe how variance is partitioned in a linear regression.  
+1. Calculate the slope and intercept for a regression model and their CIs, and interpret what the values mean in real, biological terms.  
+1. Calculate the coefficient of determination and state what the value means.  
+1. Describe how ANOVA and regression analyses are related in terms of variance partitioning and the F test.  
+1. List examples of uses for simple linear regression (SLR).
+1. Write the model and assumptions for simple linear regression.
+1. Make confidence intervals for the SLR parameters.
+1. List strategies to increase the precision of slope estimates.
+1. Determine is a problem requires an estimate for the expected value or for a single observation.
+1. Calculate and interpret the ANOVA table for SLR.
+1. Discuss the difference between estimating parameters and making predictions in SLR.
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+

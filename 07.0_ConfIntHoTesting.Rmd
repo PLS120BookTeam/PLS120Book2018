@@ -2,6 +2,17 @@
 
 ## Learning Objectives for Chapter
 
+=======
+1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
+1. State null and alternative hypotheses in words and equations.
+1. Calculate and explain the meaning of level of significance in words and with a graph.
+1. Calculate power of a test and explain it with a graph.
+1. Calculate and interpret confidence intervals.
+1. Describe how sample size and alpha effect the CI. 
+1. Perform a simulation to check the correctness of a CI.
+1. Explain the difference between a one-tailed and two-tailed test and determine when each one is applicable.
+1. Recreate and explain a table showing the outcomes of statistical tests and the types of errors.
+1. Test if the mean of a population is equal to a hypothetical mean when variance is known and unknown.
 
 Statistical inference consists of making statements about population characteristics based on information obtained from samples.
 
@@ -11,7 +22,7 @@ This way, there is no implied difference in the concept of making an CI for the 
 
 ## Theme: compare A and B
 
-A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is this when whe have more than one pair of parameters, two population means is when we have just two parameters, and a single population is when one of the parameters is known. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
+A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is used when whe have more than one pair of parameters, compariosin of two population means is used when we have just two parameters, and a single population test is used when one of the values is a known number. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
 
 ## Confidence intervals
 Explain why we prefer a 95% CI in the middle instead on both ends of a distribution.
@@ -35,7 +46,17 @@ Include simulation or figure with known population parameters. Show 100 Ci's and
 
 ## Confidence interval and test of one mean
 
+## What is the meaning of the p-value?
+
+http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
+
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
 
