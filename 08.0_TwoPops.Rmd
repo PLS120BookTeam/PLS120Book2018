@@ -2,7 +2,19 @@
 
 ## Learning Objectives for Chapter
 
+1. Compare two population means based on two samples.
+1. Determine if samples are paired or unpaired ("independent") when comparing two means.
+1. Describe the three cases for comparing two populations means and determine when each one applies.
+1. Perform a test of homogeneity of variance using samples from two populations.
+
 
 ## Exercises and Solutions
 
 ## Homework
+
+## Laboratory Exercises
+
+### Plant Sciences
+
+### Animal Sciences
+

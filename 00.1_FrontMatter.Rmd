@@ -11,8 +11,13 @@ github-repo: emilioalaca/bookdown-start
 url: 'http\://the book url goes here ******'
 description: "Course materials for PLS 120. University of California, Davis"
 ---
+<<<<<<< HEAD
+## now it is a test re-edit by emilioL
+||||||| merged common ancestors
+=======
 ##TEST EDIT JENNIFER BRAZEAL for Jennifers test branch
 
+>>>>>>> 6755559a2bf876e78f6153ea3abc9a1faf75d252
 
 ## now it is a test re-edit by emilioL
 
