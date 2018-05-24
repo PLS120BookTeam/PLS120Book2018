@@ -21,8 +21,6 @@
 
 ## Laboratory Exercises
 
-lab exercise
-
 ### Plant Sciences
 
 **Submit BOTH files for your lab report using the appropriate Canvas tool**
@@ -68,8 +66,7 @@ alpha <- 0.05
 # The probability is multiplied by 2 because the test is two-tailed.
 ```
 
-ANSWER 1.
-Write the interpretation and conclusion from the test here:
+ANSWER. Write the interpretation and conclusion from the test here:
 
 
 
@@ -149,31 +146,27 @@ ANSWER. Interpret the result of the test of hypothesis here:
 
 For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers!  In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
 
-#### A
-A researcher is interested in whether the presence of natural enemies significantly reduces herbivory from the invasive pest soybean aphid (Aphis glycines). She randomly chooses 36 individual soybean plants in 4 fields to measure. As a proxy for herbivory, she counts the number of soybean aphids on each plant. She then encloses half of the plants with a mesh exclusion cage, through which aphids can pass but large predatory insects cannot. After two weeks, she counts aphids on all 36 plants again, and determines the net change in aphid abundance under each treatment.
+#### A. A researcher is interested in whether the presence of natural enemies significantly reduces herbivory from the invasive pest soybean aphid (Aphis glycines). She randomly chooses 36 individual soybean plants in 4 fields to measure. As a proxy for herbivory, she counts the number of soybean aphids on each plant. She then encloses half of the plants with a mesh exclusion cage, through which aphids can pass but large predatory insects cannot. After two weeks, she counts aphids on all 36 plants again, and determines the net change in aphid abundance under each treatment.
 
 Answer here:
 
 
 
-#### B
-A master gardener wants to know whether his decision to use organic compost instead of synthetic fertilizer is going to change the yield of his broccoli. To test this, he applies a consistent amount of fertilizer or compost to the soil in each of six plots in a random design (3 receive compost, 3 receive fertilizer). He then plants the same variety of broccoli in all plots and measures the average yield (grams of broccoli head per plant) at harvest for each treatment.
-
-Answer here:
-
-
-
-
-#### C
-You have developed a new cultivar of habanero chili (Capsicum chinense) that you have named "Screaming Siren". You are curious if the chilies produced at your breeding facility differ in spice from a colleague's farm in New Mexico. Both you and your colleague gather a sample of 10 random chilies and send the chilies to a lab to have their capsaicin, the compound in chilies that cause their piquancy, concentration measured. 
+#### B. A master gardener wants to know whether his decision to use organic compost instead of synthetic fertilizer is going to change the yield of his broccoli. To test this, he applies a consistent amount of fertilizer or compost to the soil in each of six plots in a random design (3 receive compost, 3 receive fertilizer). He then plants the same variety of broccoli in all plots and measures the average yield (grams of broccoli head per plant) at harvest for each treatment.
 
 Answer here:
 
 
 
 
-#### D
-A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the patients had their blood triglyceride level measured.
+#### C. You have developed a new cultivar of habanero chili (Capsicum chinense) that you have named "Screaming Siren". You are curious if the chilies produced at your breeding facility differ in spice from a colleague's farm in New Mexico. Both you and your colleague gather a sample of 10 random chilies and send the chilies to a lab to have their capsaicin, the compound in chilies that cause their piquancy, concentration measured. 
+
+Answer here:
+
+
+
+
+#### D. A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the patients had their blood triglyceride level measured.
 
 
 Answer here:
@@ -181,10 +174,190 @@ Answer here:
 
 
 
-#### E
+#### E. A researcher is interested in determining the difference in plant species composition after seeding with native perennial seeds. Before seeding they sample quadrats within the field at random to determine the initial plant species composition. At the end of the second growing season they sample quadrats within the field at random to determine the new plant species composition.
 
-A researcher is interested in determining the difference in plant species composition after seeding with native perennial seeds. Before seeding they sample quadrats within the field at random to determine the initial plant species composition. At the end of the second growing season they sample quadrats within the field at random to determine the new plant species composition.
+Answer here:
+
+
 
 
 ### Animal Sciences
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area.
+
+
+```{r}
+### Part 1 [25 points]
+
+Milk production (lb), milk composition and body weights of UCD lactating dairy cows was collected in August of 2000.  The cows are classified in two groups, Herd1 and Herd2, based on their genotype.
+
+Does the variance of milk production differ between the two herds (Herd1 vs. Herd2)? Perform a test of hypothesis at the 5% level (α=.05) using the F-statistic. Look up the critical F value in Table A.7 and by using the qf(p = 0.05, df1 = , df2 = ) function.
+
+Complete the calculations "by hand", using only basic R functions like var(). Then, use the var.test () R function to test for difference of variances.
+
+
+library(readxl)
+MilkData <- read.csv("C:/MilkEx5_data.csv")
+
+herd1 <- subset(MilkData, HERD == 1)
+milkherd1 <- herd1$TOTmilk
+herd2 <- subset(MilkData, HERD == 2)
+milkherd2 <- herd2$TOTmilk
+
+## Test for the difference of variances "by hand"
+
+#calculate the variance for each treatment (Herd1 and Herd2)
+(var1 <- var(milkherd1))
+(var2 <- var(milkherd2))
+
+#calculate the F-value for our treatments (the larger variance will always be the numerator)
+(Fcalc <- var1 / var2)
+
+#number of samples in each treatment
+(r1 <- length(milkherd1))
+(r2 <- length(milkherd2))
+
+#degrees of freedom: number of samples - 1
+(df1 <- r1 - 1)
+(df2 <- r2 - 1)
+
+alpha <- 0.05
+
+#calculate the critical F-value (for our given alpha and degrees of freedom)
+(Ftable <- qf(alpha, df1, df2, lower.tail = FALSE))
+
+#Calculate the p-value of our treatment variances being equal (the probability is multiplied by 2 because the test is two-tailed)
+# complete the code to get the observed significance
+(p.of.Fcalc <- 2 * pf(Fcalc, df1, df2, lower.tail = FALSE)) 
+
+
+##R function that does the complete test
+var.test(milkherd1, milkherd2) 
+```
+
+ANSWER 1.
+Write the interpretation and conclusion from the test here:
+
+
+
+
+```{r}
+### Part 2 [30 points]
+
+Calculate the 95% confidence interval for the difference between the milk production of dairy cows between the two herds. *Ignore the possibility of using the z-approximation due to the large sample size and use the t distribution.*
+
+a. Based on the results of the test of equality of variances, determine what case (SG pg. 88) applies and estimate the variance of the difference between averages. Then compute the confidence interval.
+
+b. Perform a t-test of the null hypothesis that milk production does not differ between diary cows from Herd1 and Herd2. Perform all calculations "by hand" and compare to the results from using the t.test() function.
+
+
+```{r}
+#Calculate the pooled variance of Herd1 and Herd2
+(var12 <- (df1 * var1 + df2 * var2) / (df1 + df2))
+
+#Calculate the difference in variances between Herd1 and Herd2
+varDbar <- var12 / r1 + var12/ r2
+
+#calculate the t-value for our treatments (Herd1 and Herd2)
+(tcalc <- (mean(milkherd2) - mean(milkherd1)) / sqrt(varDbar))
+
+#calculate the critical t-value (for our given alpha and degrees of freedom)
+(ttable <- qt(alpha / 2, df = df1 + df2, lower.tail = FALSE)) # test is two-tailed
+
+#calculate the bounds of the critical intervals for the difference between our two treatments
+(CI.lo <- (mean(milkherd1) - mean(milkherd2)) - ttable * sqrt(varDbar))
+(CI.hi <- (mean(milkherd1) - mean(milkherd2)) + ttable * sqrt(varDbar))
+
+
+(t.test.herd <- t.test(milkherd1, milkherd2, alternative = "two.sided", paired = FALSE, var.equal = TRUE)) # complete code
+
+```
+
+ANSWER. State the extremes of the confidence interval and interpret the result of the test of hypothesis here:
+
+
+
+
+
+
+
+### Part 3 [30 points]
+
+Milk production was measured in the morning (AM) and again in the evening (PM).  Perform a test to determine if there is a difference in milk production between the AM and PM. (Note that this is a paired t-test since the same sample of cows is being milk at two separate times).
+
+
+```{r}
+milkAM <- MilkData$AMmilk
+
+milkPM <- MilkData$PMmilk
+
+# repeat the test using "hand" calculations as in part 2 above. Add lines of code below.
+
+#difference between the means of milk treatments (AM vs PM)
+d <- milkPM - milkAM
+
+#difference between the variances of milk treatments
+var.d <- var(d)
+
+#standard error of the difference between milk treatments 
+se.d.bar <- sqrt(var.d /   )
+
+dfs <- 
+
+#calculated t-value for the difference between milk treatments
+t.calc.d <- (mean(d) - 0) / se.d.bar
+
+#critical t-value (for a given alpha and degrees of freedom)
+ttable <- qt(alpha / 2, df =     , lower.tail = FALSE)
+
+
+#complete missing code for t-test between milking times (AM vs PM)
+(t.test.time <- t.test(milkPM, milkAM, alternative = "greater", paired = TRUE)) 
+```
+
+ANSWER. Interpret the result of the test of hypothesis here:
+
+
+
+### Part 4: Paired or independent? [15 points]
+
+For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers!  In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
+
+#### A. A researcher is interested in whether a high protein diet for dairy cows will significantly increase the protein content in milk.  36 dairy cows are randomly chosen in 4 fields to measure and the protein content of their milk is measured.  Half of the cows are chosen to receive a high protein diet and half recieve the standard diet.  After two weeks, protein content of milk production is measured again, and the change in protein content is calculated for each treatment.
+
+Answer here:
+
+
+
+#### B. A researcher wants to know whether using organic diary feed will change the milk production of his cows.  To test this, organic feed and non-organic feed is given to six cows of the same breed in a random design (3 receive organic feed, 3 receive non-organic feed) and dairy production is measured for each treatment.  
+
+
+Answer here:
+
+
+
+
+#### C. You have developed a new breed of dairy cows that you have named "Cowabunga".  You are curious if the milk produced from these cows at your facility in Davis differ in lactose content from a colleagues farm in Fresno.  Both you and your colleague gather a sample of 10 random cows and send the milk to a lab to have their lactose content measured.  
+
+Answer here:
+
+
+
+
+#### D. A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3) on blood triglyceride level in diary cows.  You wish to know if the ingredients differ in effect on blood triglycerides.  Forty cows had their blood triglyceride levels measured before the experiment began.  The forty cows were divided into two treatment groups of twenty cows.  One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the cows had their blood triglyceride level measured.  
+
+Answer here:
+
+
+
+
+#### E. A research is interested in determining the difference in bacteria species composition in the rumen of a cow after changing the grazing location from one year to the next.  At the first grazing location they sample gut bacteria within a herd at random to determine the initial rumen bacteria composition.  At the end of the year at the second grazing location they sample rumen bacteria within the herd at random to determine the new bacteria species composition.  
+
+Answer here:
+
+
+
+
 
