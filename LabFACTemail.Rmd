@@ -1,59 +1,10 @@
-# Treatment Structures and Comparisons {#ch.trtstr}
 
-## Learning Objectives for Chapter {#LearnObj12}
-1. Identify the treatment in a factorial experiment
-1. State the null and alternative hypotheses of a factorial experiment.
-1. Define and compare simple and main effects in a factorial.
-1. Given a graph of factorial experiment results, determine if there are main effects and/or interaction effects. 
-1. Calculate PLSD confidence intervals for a pairwise comparison of means and determine if two means are significantly different based on the CIs. 
-1. Design factorial treatment combinations to answer a research question.
-1. Transform a real-world question into a null hypothesis about means.
-1. Create linear combinations of means that address practical real-world questions.
-1. Define statistical interaction and explain it graphically.
-1. Test hypotheses involving more than one and more than 2 means.
-1. Interpret result of ANOVA with factorial treatments.
-1. Interpret a graph of a factorial experiment, including description of L, Q and C trends.
-1. Given a set of treatments, formulate and test useful contrasts.
-1. Determine if a linear combination of means is a contrast.
-1. Create contrasts to estimate the value and variance of interactions.
-1. Estimate the variance of a linear combination of means.
-1. Make confidence intervals for linear combination of estimated means.
-1. Calculate and use the Least Significant Difference (LSD) to test for differences among treatments.
-1. Apply the Protected LSD and explai how it ameliorates the inflation of alpha?
-1. Create linear combinations of estimated treatment means.
-1. Create contrasts to answer research questions such as effects of treatments, linear and quadratic effects of continuous treatment variables.
-
-
-## Pairwise Comparisons {#PairComp}
-
-## Factorials {#Factorials}
-
-## Control vs. Treatments {#CtlTrt}
-
-## Linear, Quadratic and Cubic Trends {LCQtrends}
-
-## Contrasts {#Contrasts}
-
-## Linear Combinations {#LinCombo}
-
-## Exercises and Solutions {#ExSol12}
-
-## Homework {#Hwk12}
-
-## Laboratory Exercises
-
-### Plant Sciences {#Lab12PLS}
-
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
-
-```
 ---
 title: "Lab07 Factorial ANOVA and LSD"
 author: "YourFirstName YourLastName"
 date: "enter date here"
 output: html_document
 ---
-```
 
 ```{r setup, include=FALSE}
 
@@ -89,9 +40,9 @@ In this exercise we analyze the data resulting from an experiment at the UC Davi
 Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in blocks 1, 2 and 3 to show block effects. Blocks were defined areas that were more or less homogeneous in soil and plant properties and that were contiguous. We will assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as logMass = log(logMass + 0.2) to achieve normality and equality of variances.
 
 
-#### Part 1. Factorial ANOVA using R functions [ points]
+### Part 1. Factorial ANOVA using R functions [ points]
 
-##### 1a. Random assignment of treatments to plots
+#### 1a. Random assignment of treatments to plots
 
 In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block (in today’s lab, the treatments will have 2 replicate plots in each block). The random assignment of treatments to plots within blocks can be done using the *sample()* R function.
 
@@ -130,7 +81,7 @@ treat$Treatment <- paste(
 
 ```
 
-##### 1.b Add columns with factor levels to the data
+#### 1.b Add columns with factor levels to the data
 
 ```{r}
 # Read and understand the code in this part but do not type or modify anything.
@@ -193,7 +144,7 @@ seedF$NStreat <- factor(paste(seedF$nitro, seedF$seeding, sep = ""))
 ```
 
 
-##### 1.c Perform a test of the Ho that all treatment means are equal.
+#### 1.c Perform a test of the Ho that all treatment means are equal.
 
 For this part you need to test the null hypotheses that:
 - there are no interactions between nitrogen and seeding,
@@ -240,7 +191,7 @@ c) Do we reject or fail to reject the following null hypothesis for the RCBDF mo
 Ho: There is no interaction between nitrogen and seeding affecting medusahead seed mass?
 
 
-#### Part 2. Factorial ANOVA detailed calculations [ points]
+### Part 2. Factorial ANOVA detailed calculations [ points]
 
 Create a new column in the data for each of the following:
 - overall average
@@ -348,7 +299,7 @@ pander(anova(rcbdF.mod))
 ```
 
 
-#### Part 3. Multiple comparison of means using Fisher's PLSD [ points]
+### Part 3. Multiple comparison of means using Fisher's PLSD [ points]
 
 Fisher’s Protected Least Significant Difference is the LSD that is applied only if the overall F test is significant. In this section you need to calculate the Least Significant differences for nitro, seeding and nitro x seeding levels. For each one, construct a table that shows the means that are NOT significantly different connected by a common letter.
 
@@ -405,11 +356,5 @@ a) Do treatments “n:s” and “N:s” differ?
 b) Do treatments “n:s” and “N:E” differ? 
 
 c) Do treatments “n:s” and “n:E’ differ? 
-
-
-
-
-
-### Animal Sciences {#Lab12ANS}
 
 

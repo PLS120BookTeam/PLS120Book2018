@@ -1,0 +1,268 @@
+---
+title: "Lab06 RCBD Anova"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+#### Instructions
+
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab06email.html).
+
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
+
+### Introduction
+
+In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. These are based on the **same experiment used in Lab 05**, but now we use the information that the plots were actually in spatial blocks, and we will use the average of each treatment in each block. The data and description of the experimental setup have been simplified to facilitate understanding. For the purpose of this lab we will consider that the experiment was designed as a Randomized Complete **Block** Design in which each of 12 treatments were applied randomly to a plot in each of 3 blocks. (Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in block 1, 2 and 3 to show block effects). Blocks were defined areas that were more or less homogeneous in soil and plant properties and that were contiguous. We will assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as logMass = log(logMass + 0.2) to achieve normality and equality of variances.
+
+Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas).
+
+
+### Part 1. Inspection and summary of data [15 points]
+
+Read in the data. 1a) Create a table where all observation are displayed by treatment (rows) and block (columns), and include the marginal treatment and block averages. 
+1b) Make boxplots for the logMass by Treatment and by block. 
+
+```{r}
+
+# install.packages(c("tables", "pander","lsmeans"))
+library(tables)
+library(pander)
+library(lsmeans)
+
+seedB <- read.csv(file = "Lab06SeedMassData.txt", header = TRUE)
+str(seedB) # The response variable is already log transformed.
+
+
+boxplot(logMass ~ , seedB) # make boxplots for the logMass by treatment
+boxplot(logMass ~ , seedB) # make boxplots for the logMass by block
+
+
+# read help about function tabular()
+
+pander(tabular((Treatment + 1) * logMass * mean ~ (block + 1), data = seedB))
+
+```
+
+
+Question: 1c) What trends appear in the treatments? 1d) Discuss the apparent effects of competition between medusahead and other seeded and unseeded species. 1e) What treatment seems to be best to suppress the spread of this weed? 1f) Explain what does function tabular() do here.
+
+
+Answer 1c)
+
+
+Answer 1d)
+
+
+Answer 1e)
+
+
+Answer 1f)
+
+
+
+
+
+
+
+### Part 2. Analyze data ignoring blocking design [25 points]
+
+Modify the code you used in Lab 05 to conduct an ANOVA of the present data ignoring the blocking design. For this part you have to assume that plots were assigned to treatments completely randomly, instead of making sure that each treatment was in each block. 
+2a) Report the ANOVA table and the Least Significant Difference (LSD). The LSD is the minimum difference between two treatment averages for treatment means to be considered statistically different. 
+2b) Report a table with the sorted treatment averages and the corresponding standard errors. The table created has confidence intervals for each treatment mean. 
+2c) Find the relevant equations in the textbook and calculate the CI for the first treatment "by hand" using equations from the book.
+
+
+```{r}
+# conduct an ANOVA test on logMass by treatment.
+crd.mod <- lm(formula = logMass ~ , data = seedB)
+
+anova()
+
+# read help about function lsmeans()
+
+crd.mod.means <- summary(lsmeans(crd.mod, ~Treatment))
+
+pander(crd.mod.means[order(crd.mod.means$lsmean),])
+
+str(summary(crd.mod))
+crd.mod.mse <- summary(crd.mod)$sigma ^ 2 ## sigma is the residual standard error
+
+(dfe <- )## df of the residual or “within” error)
+
+(t.crit <- qt(p = 0.975, df = dfe)) ## Use alpha = 0.05
+
+(crd.mod.lsd <- t.crit * sqrt(2 * crd.mod.mse / 3)) ## hint: how many replicates for each treatment? Different from last week
+
+
+
+```
+
+
+Question: 2d) Are the trends observed in part 1 significant? 2e) Based on the LSD, did seeding have an effect when water and nitrogen were added? 2f) Explain where the numbers in the calculation of the LSD come from and why the calculation of the LSD has the MSE multiplied by two and divided by 3. 2g) Explain the output of this code **lsmeans(crd.mod, ~Treatment)** .
+
+
+Answer 2d)
+
+
+Answer 2e)
+
+
+Answer 2f)
+
+
+Answer 2g)
+
+
+
+
+
+
+
+
+
+
+### Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points]
+
+
+Now consider that the experiment was actually a RCBD. 
+3a) Use basic functions to partition the total sum of squares of logMass into treatments, blocks and residual or error. 
+3b) Start by creating a column with the treatment averages for each observation. 
+3c) Then, add columns for total deviation of observation from the overall average, deviation of treatment average from the overall average, and deviation of observation from treatment average. 
+3d) Calculate the corresponding degrees of freedom and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. 
+3e) Make it into a data frame and then print it nicely with pander().
+3f) Calculate the F test and the critical F to test the Ho: mean seed production is the same in all treatments. Interpret the results.
+
+
+```{r}
+# Treatment and block means
+
+# Complete code below
+logMass.Trt.avgs <- aggregate(logMass ~ , data = seedB, FUN =  )
+
+names(logMass.Trt.avgs)[2] <- "Trt.AvgLogMass"
+
+# Complete code below
+logMass.block.avgs <- aggregate(logMass ~ , data = seedB, FUN = )
+
+names(logMass.block.avgs)[2] <- "blk.AvgLogMass"
+
+
+# Preparation of table
+
+seedB <- merge(seedB, logMass.Trt.avgs, by = "Treatment", all = TRUE)
+
+seedB <- merge(seedB, logMass.block.avgs, by = "block", all = TRUE)
+
+seedB$block.fx <- seedB$blk.AvgLogMass - mean(seedB$logMass) # effects from blocks
+
+seedB$Trt.fx <- seedB$Trt.AvgLogMass - mean(seedB$logMass) # effects from treatment
+
+seedB$res <- seedB$logMass - seedB$block.fx - seedB$Trt.fx - mean(seedB$logMass) # residuals or “within treatment”
+
+
+# Sums of squares
+
+(ss.Tot <- sum((seedB$logMass - mean(seedB$logMass)) ^ 2))
+
+(ss.block <- sum())
+
+(ss.Trt <- sum())
+
+(ss.Res <- sum())
+
+
+# Degrees of freedom
+
+(df.Trt <-  )
+
+(df.block <- ) 
+
+(df.Tot <- )
+
+(df.Res <- )
+
+
+# Mean squares and Fcalc
+
+ms.Trt <- ss.Trt / df.Trt
+
+ms.block <- ss.block / df.block
+
+ms.Res <- ss.Res / df.Res
+
+
+(Fcalc.Trt <-  )
+
+(Fcalc.block <- )
+
+
+(Fcrit.Trt <- qf(p = 0.95, df1 = , df2 = df.Res))
+
+(Fcrit.block <- qf(p = 0.95, df1 = df.block, df2 = df.Res))
+
+
+# Compare Fcalc with Fcrit
+
+
+```
+
+
+Question: 3g) Are there differences among treatments? 3h) Report the test statistic, your decision rule and your conclusion.
+
+
+Answer 3g)
+
+
+
+Answer 3h)
+
+
+
+
+
+
+### Part 4. ANOVA for RCBD using R functions.[25 points]
+
+4a) Use the R functions aov() and anova() to obtain the same tests of the null hypothesis that all means are equal. 
+4b) Report the results of using each function and compare to the results from Part 2. 
+4c) Explain what is different and why. Discuss the effect of accounting for block differences.
+
+
+
+
+```{r}
+# read help about function aov(), anova(), oneway.test()
+
+
+summary(aov(formula = logMass ~ , data = seedB))
+rcbd.mod <- lm(formula = logMass ~ , data = seedB)
+anova(rcbd.mod)
+
+
+
+
+```
+
+
+Question: Interpret results and compare with the results of using a CRD model.
+Answer:
+
+
+
+

@@ -1,41 +1,10 @@
 ---
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# ANOVA with Blocks {#ch.rcbd}
-
-## Learning Objectives for Chapter
-
-1. Given an example scenario, describe how you would allocate treatments for a RCBD
-1. Calculate F ratios for the groups and blocks.  
-1. State null and alternative hypotheses for the RCBD.  
-1. Determine when it is advantageous to use blocking of experimental units.
-1. Design simple experiments where experimental units are blocked.
-1. Compare the effects of analyzing data with and without blocks.
-1. Perform the ANOVA for a Randomized Complete Block Design.
-1. Explain how variance is partitioned in an ANOVA with blocks design.
-1. Interpret the results of the RCBD ANOVA and answer the relevant research questions.
-1. Identify RCBD experiments based on a description of how treatments were assigned to experimental units.
-
-## Exercises and Solutions
-
-## Homework
-
-## Laboratory Exercises
-
-### Plant Sciences {#LabCh11PLS}
-
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
-
-```
----
 title: "Lab06 RCBD Anova"
 author: "YourFirstName YourLastName"
 date: "enter date here"
 output: html_document
 ---
-```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -47,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For this lab you will modify and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
 
-This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between ` ```{r} ` and ` ``` `. These areas are highlighted with a light grey color. Text outside those bookends will be interpreted as simple text, not code. Experiment by running each line and modifying it you get the desired result. Keep the lines that work and move on. At any time you can see if your document "knits" or not by clicking on the Knit to HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab06email.html).
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between ```` ```{r} ```` and ```` ``` ````. These areas are highlighted with a light grey color. Text outside those bookends will be interpreted as simple text, not code. Experiment by running each line and modifying it you get the desired result. Keep the lines that work and move on. At any time you can see if your document "knits" or not by clicking on the Knit to HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab06email.html).
 
 **Submit BOTH files for your lab report using the appropriate Canvas tool**
 
@@ -112,8 +81,6 @@ WNS Block3 -0.527897010482484
 "
 )
 
-seedB$Treatment <- factor(as.character(seedB$Treatment), levels = c("wns", "wnE", "wnS", "wNs", "wNE", "wNS", "Wns", "WnE", "WnS", "WNs", "WNE", "WNS"))
-
 # If the data were available in a .csv file in the working directory,
 # it could be read in with the following line.
 
@@ -141,7 +108,7 @@ Discuss the effects of competition by seeded (S) and unseeded (s) species on med
 
 What treatments seem best to reduce seed production in medusahead?
 
-Explain what the `tabular()` function did here.
+Explain what the ````tabular()```` function did here.
 
 
 #### Part 2. Analyze data ignoring the blocking design [25 points]
@@ -216,33 +183,33 @@ Now consider that the experiment was actually an RCBD and analyze it accordingly
 
 First, use basic functions to partition the total sum of squares of logMass into treatments, blocks and residual or error.
 
-Recall that the model for the RCBD partitions each observation into overall mean, treatment effect, block effect and random error:
+Recall that the model for the RCBD partitions each observation into overall mean, treatment effect, block effect and residual:
 
-$$Y_{ij} = \mu_{..} + \tau_{i.} + B_{.j} + \epsilon_{ij} \\ \epsilon_{ij} \sim N(0, \ \sigma)$$
+$$Y_{ij} = \mu_{..} + \tau_i + B_j + \epsilon_ij$$
 
 Because we do not know the values of the parameters (mean, treatment effects, block effects), we use estimates obtained with the following equations:
 
-$$Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_{i.} + \hat{B}_{.j} + \hat{\epsilon}_{ij}$$
+$$Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_i + \hat{B}_j + \hat{\epsilon}_{ij}$$
 
 where the overall average estimates the overall mean (recall that the "hat" stands for "estimated"),
 
-$$\hat{\mu}_{..} = \bar{Y}_{..} = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \frac{Y_{ij}}{r \ k}$$
+$$\hat{\mu}_{..} = \bar{Y}_{..} = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \frac{Y_{ij}}{rk}$$
 
-the difference between each treatment average and the overall average estimates the treatment effect $\tau_{i.}$,
+the difference between each treatment average and the overall average estimates the treatment effect $\tau_i$,
 
-$$\hat{\tau}_{i.} = \hat{\mu}_{i.} - \hat{\mu}_{..} = \left(\displaystyle\sum_{j=1}^{r}\frac{Y_{ij}}r\right)-\bar{Y}_{..} = \bar{Y}_{i.}-\bar{Y}_{..}$$
+$$\hat{\tau}_i = \hat{\mu}_{i.} - \hat{\mu}_{..} = \left(\displaystyle\sum_{j=1}^{r}\frac{Y_{ij}}r\right)-\bar{Y}_{..} = \bar{Y}_{i.}-\bar{Y}_{..}$$
 
 the difference between each block average and the overall average estimates the block effect $B_j$,
 
-$$\hat{B}_{.j} = \hat{\mu}_{.j} - \hat{\mu}_{..} = \left(\displaystyle\sum_{i=1}^{k}\frac{Y_{ij}} k \right)-\bar{Y}_{ij}$$
+$$\hat{B}_j = \hat{\mu}_{.j} - \hat{\mu}_{..} = \left(\displaystyle\sum_{i=1}^{k}\frac{Y_{ij}} k \right)-\bar{Y}_{ij}$$
 
 and the estimated random error $\epsilon$ is calculated by difference
 
-$$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
+$$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_i - \hat{B}_j$$
 
 The sums of squares are calculated by creating columns for $\hat{B}_j$, $\hat{\tau}_i$, and $\hat{\epsilon}_{ij}$ and then summing the squares of the values in each column.
 
-Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate()` function creates a column wiht as many values as treatments. Then, the `merge()` function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
+Start by creating a column with the treatment averages corresponding to each observation. First, the ````aggregate()```` function creates a column wiht as many values as treatments. Then, the ````merge()```` function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
 
 ```{r}
 
@@ -336,7 +303,7 @@ Report the test statistic, your decision rule and your conclusion.
 
 #### Part 4. ANOVA for RCBD using R functions.[25 points]
 
-In this section we repeat the previosu analysis using the R functions `aov()` and `anova()` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
+In this section we repeat the previosu analysis using the R functions ````aov()```` and ````anova()```` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
 
 
 ```{r}

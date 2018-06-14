@@ -7,10 +7,25 @@ documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
+output:
+   html_document:
+    fig_width: 6
+    fig_height: 4
+    fig_caption: true
+
 github-repo: emilioalaca/bookdown-start
 url: 'http\://the book url goes here ******'
 description: "Course materials for PLS 120. University of California, Davis"
 ---
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+library(pander)
+```
+
+
 
 # Front Matter {#ch.front}
 

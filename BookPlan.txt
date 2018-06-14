@@ -5,7 +5,7 @@ PLS 120 book plan
 Find funding. TRC. Other organizations? Plant Sciences?
 
 Update 11 May 2018 ====================
-EAL asked CEE center fro educational excellence and they said to apply in the future after participating in activities and consultations. Consulted with CEE expert and attended one workshop or two. Will follow up with more workhops and a new attempt to application for funds.
+EAL asked CEE center for educational excellence and they said to apply in the future after participating in activities and consultations. Consulted with CEE expert and attended one workshop or two. Will follow up with more workhops and a new attempt to application for funds.
 
 EAL secured $2000 from own state account and obtained promise of matching $1500 by department. Match will be used in application to CEE.
 
@@ -62,3 +62,19 @@ Work by section, topic or “function” (e.g. formulas vs code)? TBD
 Update 11 May 2018 ====================
 We are using GitHub and it seems to be working.
 We have a master brach that each can fork, work on and submit back with a pull request. Once we have pull requests from all, EAL will solve conflicts and merge to master, and the process will be repeated.
+
+Notes 7 June 2018 ====================
+
+The numbering of labs has to be resolved. The original lab order number might become confusing because it differs from the number of the chapter where lab is included.
+
+Remember to add {#...} to each location that we want to cross-reference.
+
+Data should be included in the R code read.table() to avoid the need for external files.
+
+Use write.csv and read.csv to show the use of .csv files for data input.
+
+Remember to run spell check in all files.
+
+Transition from lmmeans to emmeans.
+
+When referring to concepts, functions or equations that are the focus of other sections in the book, add a cross reference or the text "(**insert cross-reference**)" as a place holder.

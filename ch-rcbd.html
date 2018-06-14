@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Applied Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#ch.rcbd"><i class="fa fa-check"></i><b>1</b> ANOVA with Blocks</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#learning-objectives-for-chapter"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives for Chapter</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#exercises-and-solutions"><i class="fa fa-check"></i><b>1.2</b> Exercises and Solutions</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#homework"><i class="fa fa-check"></i><b>1.3</b> Homework</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#laboratory-exercises"><i class="fa fa-check"></i><b>1.4</b> Laboratory Exercises</a><ul>
+<li class="chapter" data-level="1.4.1" data-path=""><a href="#LabCh11PLS"><i class="fa fa-check"></i><b>1.4.1</b> Plant Sciences</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="ch.rcbd" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> ANOVA with Blocks</h1>
+<div id="learning-objectives-for-chapter" class="section level2">
+<h2><span class="header-section-number">1.1</span> Learning Objectives for Chapter</h2>
+<ol style="list-style-type: decimal">
+<li>Given an example scenario, describe how you would allocate treatments for a RCBD</li>
+<li>Calculate F ratios for the groups and blocks.<br />
+</li>
+<li>State null and alternative hypotheses for the RCBD.<br />
+</li>
+<li>Determine when it is advantageous to use blocking of experimental units.</li>
+<li>Design simple experiments where experimental units are blocked.</li>
+<li>Compare the effects of analyzing data with and without blocks.</li>
+<li>Perform the ANOVA for a Randomized Complete Block Design.</li>
+<li>Explain how variance is partitioned in an ANOVA with blocks design.</li>
+<li>Interpret the results of the RCBD ANOVA and answer the relevant research questions.</li>
+<li>Identify RCBD experiments based on a description of how treatments were assigned to experimental units.</li>
+</ol>
+</div>
+<div id="exercises-and-solutions" class="section level2">
+<h2><span class="header-section-number">1.2</span> Exercises and Solutions</h2>
+</div>
+<div id="homework" class="section level2">
+<h2><span class="header-section-number">1.3</span> Homework</h2>
+</div>
+<div id="laboratory-exercises" class="section level2">
+<h2><span class="header-section-number">1.4</span> Laboratory Exercises</h2>
+<div id="LabCh11PLS" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Plant Sciences</h3>
+<p>Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.</p>
+<pre><code>---
+title: &quot;Lab06 RCBD Anova&quot;
+author: &quot;YourFirstName YourLastName&quot;
+date: &quot;enter date here&quot;
+output: html_document
+---</code></pre>
+<div id="instructions" class="section level4">
+<h4><span class="header-section-number">1.4.1.1</span> Instructions</h4>
+<p>For this lab you will modify and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of “email.” Do not add spaces to the file name.</p>
+<p>This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code <strong>ONLY</strong> in the areas between <code>```{r}</code> and <code>```</code>. These areas are highlighted with a light grey color. Text outside those bookends will be interpreted as simple text, not code. Experiment by running each line and modifying it you get the desired result. Keep the lines that work and move on. At any time you can see if your document “knits” or not by clicking on the Knit to HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab06email.html).</p>
+<p><strong>Submit BOTH files for your lab report using the appropriate Canvas tool</strong></p>
+<p>For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers <strong>below</strong> the corresponding grey area.</p>
+<p>In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. These are based on the <strong>same experiment used in Lab 05</strong>, but now we use the information that the plots were actually in spatial blocks, and we will use the average of each treatment in each block. The data and description of the experimental setup have been simplified to facilitate understanding. For the purpose of this lab we will consider that the experiment was designed as a Randomized Complete <strong>Block</strong> Design (RCBD) in which each of 12 treatments were applied randomly to a plot in each of 3 blocks. (Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in block 1, 2 and 3 to show block effects). Blocks were defined as contiguous areas that were more or less homogeneous in soil and plant properties prior to the experiment. Assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as logMass = log(logMass + 0.2) to achieve normality and equality of variances.</p>
+<p>Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas). This resulted in a factorial set of treatments, but we ignore this for now. Factorial treatments is a topic for a later chapter.</p>
+<p>This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.</p>
+</div>
+<div id="part-1.-read-in-inspect-and-summarize-data-15-points" class="section level4">
+<h4><span class="header-section-number">1.4.1.2</span> Part 1. Read in, inspect and summarize data [15 points]</h4>
+<p>Read in the data. Create a table where all observations are displayed by treatment (rows) and block (columns), and include the marginal treatment and block averages. Make boxplots for the logMass by treatment and by block.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(c(&quot;tables&quot;, &quot;pander&quot;,&quot;emmeans&quot;))</span>
+
+<span class="kw">library</span>(tables)</code></pre></div>
+<pre><code>## Loading required package: Hmisc</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: Formula</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Hmisc&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     format.pval, units</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
+<span class="kw">library</span>(emmeans)
+
+seedB &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span>
+<span class="st">Treatment block logMass</span>
+<span class="st">wnE Block1 -0.210836005431437</span>
+<span class="st">wNE Block1 1.55288938986704</span>
+<span class="st">WnE Block1 0.055235139345024</span>
+<span class="st">WNE Block1 0.835167804254832</span>
+<span class="st">wns Block1 1.24627323200302</span>
+<span class="st">wnS Block1 0.540066519204629</span>
+<span class="st">wNs Block1 1.57199447282598</span>
+<span class="st">wNS Block1 1.23870355136554</span>
+<span class="st">Wns Block1 0.986995928669204</span>
+<span class="st">WnS Block1 -0.170749893385349</span>
+<span class="st">WNs Block1 0.664136397253749</span>
+<span class="st">WNS Block1 0.736888706368722</span>
+<span class="st">wnE Block2 0.041449411568171</span>
+<span class="st">wNE Block2 1.428708818124</span>
+<span class="st">WnE Block2 0.319992367391131</span>
+<span class="st">WNE Block2 1.03098409320956</span>
+<span class="st">wns Block2 0.643797294741899</span>
+<span class="st">wnS Block2 -0.511211922892043</span>
+<span class="st">wNs Block2 1.84080033644501</span>
+<span class="st">wNS Block2 0.813650468511317</span>
+<span class="st">Wns Block2 1.69986757761409</span>
+<span class="st">WnS Block2 -0.154140967169852</span>
+<span class="st">WNs Block2 1.423732115253</span>
+<span class="st">WNS Block2 0.2968644855256</span>
+<span class="st">wnE Block3 -0.655926955677754</span>
+<span class="st">wNE Block3 -0.27934035269992</span>
+<span class="st">WnE Block3 -0.5542030003591</span>
+<span class="st">WNE Block3 -1.12888399571028</span>
+<span class="st">wns Block3 0.45627765803375</span>
+<span class="st">wnS Block3 -1.04875645623447</span>
+<span class="st">wNs Block3 0.49759250163951</span>
+<span class="st">wNS Block3 -0.097792008066854</span>
+<span class="st">Wns Block3 -0.513584856362292</span>
+<span class="st">WnS Block3 -1.36796547632004</span>
+<span class="st">WNs Block3 1.02290365359422</span>
+<span class="st">WNS Block3 -0.527897010482484</span>
+<span class="st">&quot;</span>
+)
+
+seedB<span class="op">$</span>Treatment &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">as.character</span>(seedB<span class="op">$</span>Treatment), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;wns&quot;</span>, <span class="st">&quot;wnE&quot;</span>, <span class="st">&quot;wnS&quot;</span>, <span class="st">&quot;wNs&quot;</span>, <span class="st">&quot;wNE&quot;</span>, <span class="st">&quot;wNS&quot;</span>, <span class="st">&quot;Wns&quot;</span>, <span class="st">&quot;WnE&quot;</span>, <span class="st">&quot;WnS&quot;</span>, <span class="st">&quot;WNs&quot;</span>, <span class="st">&quot;WNE&quot;</span>, <span class="st">&quot;WNS&quot;</span>))
+
+<span class="co"># If the data were available in a .csv file in the working directory,</span>
+<span class="co"># it could be read in with the following line.</span>
+
+<span class="co"># seedB &lt;- read.csv(file = &quot;Lab06SeedMassData.txt&quot;, header = TRUE)</span>
+
+<span class="kw">str</span>(seedB) <span class="co"># The response variable is already log transformed.</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    36 obs. of  3 variables:
+##  $ Treatment: Factor w/ 12 levels &quot;wns&quot;,&quot;wnE&quot;,&quot;wnS&quot;,..: 2 5 8 11 1 3 4 6 7 9 ...
+##  $ block    : Factor w/ 3 levels &quot;Block1&quot;,&quot;Block2&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ logMass  : num  -0.2108 1.5529 0.0552 0.8352 1.2463 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(logMass <span class="op">~</span><span class="st"> </span>Treatment, seedB) <span class="co"># make boxplots for the logMass by treatment</span></code></pre></div>
+<p><img src="11.0_AnovaBlocks_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(logMass <span class="op">~</span><span class="st"> </span>block, seedB) <span class="co"># make boxplots for the logMass by block</span></code></pre></div>
+<p><img src="11.0_AnovaBlocks_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read help about function tabular()</span>
+
+<span class="kw">pander</span>(<span class="kw">tabular</span>((Treatment <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>logMass <span class="op">*</span><span class="st"> </span>mean <span class="op">~</span><span class="st"> </span>(block <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">data =</span> seedB))</code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="11%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><br />
+Treatment</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">block<br />
+Block1</th>
+<th align="center"><br />
+Block2</th>
+<th align="center"><br />
+Block3</th>
+<th align="center"><br />
+All</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><em>wns</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">1.24627</td>
+<td align="center">0.64380</td>
+<td align="center">0.45628</td>
+<td align="center">0.78212</td>
+</tr>
+<tr class="even">
+<td align="center"><em>wnE</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">-0.21084</td>
+<td align="center">0.04145</td>
+<td align="center">-0.65593</td>
+<td align="center">-0.27510</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>wnS</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.54007</td>
+<td align="center">-0.51121</td>
+<td align="center">-1.04876</td>
+<td align="center">-0.33997</td>
+</tr>
+<tr class="even">
+<td align="center"><em>wNs</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">1.57199</td>
+<td align="center">1.84080</td>
+<td align="center">0.49759</td>
+<td align="center">1.30346</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>wNE</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">1.55289</td>
+<td align="center">1.42871</td>
+<td align="center">-0.27934</td>
+<td align="center">0.90075</td>
+</tr>
+<tr class="even">
+<td align="center"><em>wNS</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">1.23870</td>
+<td align="center">0.81365</td>
+<td align="center">-0.09779</td>
+<td align="center">0.65152</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>Wns</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.98700</td>
+<td align="center">1.69987</td>
+<td align="center">-0.51358</td>
+<td align="center">0.72443</td>
+</tr>
+<tr class="even">
+<td align="center"><em>WnE</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.05524</td>
+<td align="center">0.31999</td>
+<td align="center">-0.55420</td>
+<td align="center">-0.05966</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>WnS</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">-0.17075</td>
+<td align="center">-0.15414</td>
+<td align="center">-1.36797</td>
+<td align="center">-0.56429</td>
+</tr>
+<tr class="even">
+<td align="center"><em>WNs</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.66414</td>
+<td align="center">1.42373</td>
+<td align="center">1.02290</td>
+<td align="center">1.03692</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>WNE</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.83517</td>
+<td align="center">1.03098</td>
+<td align="center">-1.12888</td>
+<td align="center">0.24576</td>
+</tr>
+<tr class="even">
+<td align="center"><em>WNS</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.73689</td>
+<td align="center">0.29686</td>
+<td align="center">-0.52790</td>
+<td align="center">0.16862</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>All</em></td>
+<td align="center"><em>logMass</em></td>
+<td align="center"><em>mean</em></td>
+<td align="center">0.75390</td>
+<td align="center">0.73954</td>
+<td align="center">-0.34980</td>
+<td align="center">0.38121</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+<br />
+<strong>ANSWER THE FOLLOWING QUESTIONS:</strong></p>
+<p>Based on the boxplots, what trends appear in the treatments? Does it look like water addition, N addition or type of competitors affects medusahead seed production? Look for patterns and describe them.</p>
+<p>Discuss the effects of competition by seeded (S) and unseeded (s) species on medusahead seed production.</p>
+<p>What treatments seem best to reduce seed production in medusahead?</p>
+<p>Explain what the <code>tabular()</code> function did here.</p>
+</div>
+<div id="part-2.-analyze-data-ignoring-the-blocking-design-25-points" class="section level4">
+<h4><span class="header-section-number">1.4.1.3</span> Part 2. Analyze data ignoring the blocking design [25 points]</h4>
+<p>Modify the code you used in the CRD lab to conduct an ANOVA of the present data ignoring the blocking design. For this part you have to assume that plots were assigned to treatments completely randomly, instead of making sure that each treatment was in each block.</p>
+<p><br />
+<br />
+<strong>ANSWER THE FOLLOWING QUESTIONS:</strong></p>
+<p>Report the ANOVA table and the Least Significant Difference (LSD). The LSD is the minimum difference between two treatment averages for the corresponding treatment means to be considered statistically different.</p>
+<p>Report a table with the sorted treatment averages and the corresponding standard errors. The table created has confidence intervals for each treatment mean.</p>
+<p>Find the relevant equations in the textbook and calculate the CI for the first treatment “by hand” using equations from the book. Show the calculations in R code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Conduct an ANOVA test on logMass by treatment.</span>
+
+crd.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> logMass <span class="op">~</span><span class="st"> </span>Treatment, <span class="dt">data =</span> seedB)
+
+<span class="kw">pander</span>(<span class="kw">anova</span>(crd.mod))</code></pre></div>
+<table style="width:83%;">
+<caption>Analysis of Variance Table</caption>
+<colgroup>
+<col width="22%" />
+<col width="6%" />
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Df</th>
+<th align="center">Sum Sq</th>
+<th align="center">Mean Sq</th>
+<th align="center">F value</th>
+<th align="center">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Treatment</strong></td>
+<td align="center">11</td>
+<td align="center">12.01</td>
+<td align="center">1.092</td>
+<td align="center">1.896</td>
+<td align="center">0.09213</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Residuals</strong></td>
+<td align="center">24</td>
+<td align="center">13.83</td>
+<td align="center">0.5761</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read help about function lsmeans()</span>
+
+crd.mod.means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(crd.mod, <span class="st">&quot;Treatment&quot;</span>)
+
+<span class="kw">str</span>(<span class="kw">summary</span>(crd.mod.means))</code></pre></div>
+<pre><code>## Classes &#39;summary_emm&#39; and &#39;data.frame&#39;:  12 obs. of  6 variables:
+##  $ Treatment: Factor w/ 12 levels &quot;wns&quot;,&quot;wnE&quot;,&quot;wnS&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ emmean   : num  0.782 -0.275 -0.34 1.303 0.901 ...
+##  $ SE       : num  0.438 0.438 0.438 0.438 0.438 ...
+##  $ df       : num  24 24 24 24 24 24 24 24 24 24 ...
+##  $ lower.CL : num  -0.12233 -1.17955 -1.24441 0.39902 -0.00369 ...
+##  $ upper.CL : num  1.687 0.629 0.564 2.208 1.805 ...
+##  - attr(*, &quot;estName&quot;)= chr &quot;emmean&quot;
+##  - attr(*, &quot;clNames&quot;)= chr  &quot;lower.CL&quot; &quot;upper.CL&quot;
+##  - attr(*, &quot;pri.vars&quot;)= chr &quot;Treatment&quot;
+##  - attr(*, &quot;mesg&quot;)= chr &quot;Confidence level used: 0.95&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(
+   <span class="kw">summary</span>(crd.mod.means)[
+      <span class="kw">order</span>(<span class="kw">summary</span>(crd.mod.means)<span class="op">$</span>emmean),
+      ]
+)</code></pre></div>
+<table style="width:97%;">
+<colgroup>
+<col width="12%" />
+<col width="16%" />
+<col width="15%" />
+<col width="12%" />
+<col width="6%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Treatment</th>
+<th align="center">emmean</th>
+<th align="center">SE</th>
+<th align="center">df</th>
+<th align="center">lower.CL</th>
+<th align="center">upper.CL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>9</strong></td>
+<td align="center">WnS</td>
+<td align="center">-0.5643</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-1.469</td>
+<td align="center">0.3402</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">wnS</td>
+<td align="center">-0.34</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-1.244</td>
+<td align="center">0.5645</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">wnE</td>
+<td align="center">-0.2751</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-1.18</td>
+<td align="center">0.6293</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>8</strong></td>
+<td align="center">WnE</td>
+<td align="center">-0.05966</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.9641</td>
+<td align="center">0.8448</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>12</strong></td>
+<td align="center">WNS</td>
+<td align="center">0.1686</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.7358</td>
+<td align="center">1.073</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>11</strong></td>
+<td align="center">WNE</td>
+<td align="center">0.2458</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.6587</td>
+<td align="center">1.15</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>6</strong></td>
+<td align="center">wNS</td>
+<td align="center">0.6515</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.2529</td>
+<td align="center">1.556</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>7</strong></td>
+<td align="center">Wns</td>
+<td align="center">0.7244</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.18</td>
+<td align="center">1.629</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">wns</td>
+<td align="center">0.7821</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.1223</td>
+<td align="center">1.687</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>5</strong></td>
+<td align="center">wNE</td>
+<td align="center">0.9008</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">-0.003689</td>
+<td align="center">1.805</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>10</strong></td>
+<td align="center">WNs</td>
+<td align="center">1.037</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">0.1325</td>
+<td align="center">1.941</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">wNs</td>
+<td align="center">1.303</td>
+<td align="center">0.4382</td>
+<td align="center">24</td>
+<td align="center">0.399</td>
+<td align="center">2.208</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(crd.mod) <span class="co"># Look at what is inside the model object.</span></code></pre></div>
+<pre><code>## List of 13
+##  $ coefficients : Named num [1:12] 0.782 -1.057 -1.122 0.521 0.119 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:12] &quot;(Intercept)&quot; &quot;TreatmentwnE&quot; &quot;TreatmentwnS&quot; &quot;TreatmentwNs&quot; ...
+##  $ residuals    : Named num [1:36] 0.0643 0.6521 0.1149 0.5894 0.4642 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:36] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ effects      : Named num [1:36] -2.287 -1.187 -1.418 1.432 0.862 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:36] &quot;(Intercept)&quot; &quot;TreatmentwnE&quot; &quot;TreatmentwnS&quot; &quot;TreatmentwNs&quot; ...
+##  $ rank         : int 12
+##  $ fitted.values: Named num [1:36] -0.2751 0.9008 -0.0597 0.2458 0.7821 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:36] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ assign       : int [1:12] 0 1 1 1 1 1 1 1 1 1 ...
+##  $ qr           :List of 5
+##   ..$ qr   : num [1:36, 1:12] -6 0.167 0.167 0.167 0.167 ...
+##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. ..$ : chr [1:36] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##   .. .. ..$ : chr [1:12] &quot;(Intercept)&quot; &quot;TreatmentwnE&quot; &quot;TreatmentwnS&quot; &quot;TreatmentwNs&quot; ...
+##   .. ..- attr(*, &quot;assign&quot;)= int [1:12] 0 1 1 1 1 1 1 1 1 1 ...
+##   .. ..- attr(*, &quot;contrasts&quot;)=List of 1
+##   .. .. ..$ Treatment: chr &quot;contr.treatment&quot;
+##   ..$ qraux: num [1:12] 1.17 1.13 1.05 1.05 1.12 ...
+##   ..$ pivot: int [1:12] 1 2 3 4 5 6 7 8 9 10 ...
+##   ..$ tol  : num 1e-07
+##   ..$ rank : int 12
+##   ..- attr(*, &quot;class&quot;)= chr &quot;qr&quot;
+##  $ df.residual  : int 24
+##  $ contrasts    :List of 1
+##   ..$ Treatment: chr &quot;contr.treatment&quot;
+##  $ xlevels      :List of 1
+##   ..$ Treatment: chr [1:12] &quot;wns&quot; &quot;wnE&quot; &quot;wnS&quot; &quot;wNs&quot; ...
+##  $ call         : language lm(formula = logMass ~ Treatment, data = seedB)
+##  $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language logMass ~ Treatment
+##   .. ..- attr(*, &quot;variables&quot;)= language list(logMass, Treatment)
+##   .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+##   .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. .. ..$ : chr [1:2] &quot;logMass&quot; &quot;Treatment&quot;
+##   .. .. .. ..$ : chr &quot;Treatment&quot;
+##   .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;Treatment&quot;
+##   .. ..- attr(*, &quot;order&quot;)= int 1
+##   .. ..- attr(*, &quot;intercept&quot;)= int 1
+##   .. ..- attr(*, &quot;response&quot;)= int 1
+##   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. ..- attr(*, &quot;predvars&quot;)= language list(logMass, Treatment)
+##   .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;factor&quot;
+##   .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;logMass&quot; &quot;Treatment&quot;
+##  $ model        :&#39;data.frame&#39;:   36 obs. of  2 variables:
+##   ..$ logMass  : num [1:36] -0.2108 1.5529 0.0552 0.8352 1.2463 ...
+##   ..$ Treatment: Factor w/ 12 levels &quot;wns&quot;,&quot;wnE&quot;,&quot;wnS&quot;,..: 2 5 8 11 1 3 4 6 7 9 ...
+##   ..- attr(*, &quot;terms&quot;)=Classes &#39;terms&#39;, &#39;formula&#39;  language logMass ~ Treatment
+##   .. .. ..- attr(*, &quot;variables&quot;)= language list(logMass, Treatment)
+##   .. .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+##   .. .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. .. .. ..$ : chr [1:2] &quot;logMass&quot; &quot;Treatment&quot;
+##   .. .. .. .. ..$ : chr &quot;Treatment&quot;
+##   .. .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;Treatment&quot;
+##   .. .. ..- attr(*, &quot;order&quot;)= int 1
+##   .. .. ..- attr(*, &quot;intercept&quot;)= int 1
+##   .. .. ..- attr(*, &quot;response&quot;)= int 1
+##   .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. .. ..- attr(*, &quot;predvars&quot;)= language list(logMass, Treatment)
+##   .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;factor&quot;
+##   .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;logMass&quot; &quot;Treatment&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This will let us know what we can extract from the model.</span>
+
+<span class="co"># Extract sigma, the residual standard error.</span>
+crd.mod.mse &lt;-<span class="st"> </span><span class="kw">summary</span>(crd.mod)<span class="op">$</span>sigma <span class="op">^</span><span class="st"> </span><span class="dv">2</span>
+
+<span class="co"># Extract the df for the residuals.</span>
+(dfe &lt;-<span class="st"> </span>crd.mod<span class="op">$</span>df.residual) <span class="co"># df of the residual or “within” error)</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate the critical t value for the LSD.</span>
+(t.crit &lt;-<span class="st"> </span><span class="kw">qt</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">df =</span> dfe)) <span class="co"># Use alpha = 0.05</span></code></pre></div>
+<pre><code>## [1] 2.063899</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate the LSD. Note that the MSE is divided by the number of reps.</span>
+<span class="co"># If the number of reps were different for some treatments, we</span>
+<span class="co"># would have to use a formula that accounts for this.</span>
+(crd.mod.lsd &lt;-<span class="st"> </span>t.crit <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>crd.mod.mse <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)) ## hint: how many replicates for each treatment? This is different from the previous lab.</code></pre></div>
+<pre><code>## [1] 1.279073</code></pre>
+<p><br />
+<br />
+<strong>ANSWER THE FOLLOWING QUESTIONS:</strong></p>
+<p>Are the trends observed in Part 1 significant?</p>
+<p>Based on the LSD, did seeding (S vs. s) have a significant effect when water and nitrogen were added?</p>
+<p>Explain where the numbers in the calculation of the LSD come from and why the calculation of the LSD has the MSE multiplied by two and divided by 3.</p>
+<p>Describe the meaning of the columns in the output from this code <strong>emmeans(crd.mod, “Treatment”)</strong> .</p>
+</div>
+<div id="part-3.-rcbd-sum-of-squares-and-degrees-of-freedom-35-points" class="section level4">
+<h4><span class="header-section-number">1.4.1.4</span> Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points]</h4>
+<p>Now consider that the experiment was actually an RCBD and analyze it accordingly.</p>
+<p>First, use basic functions to partition the total sum of squares of logMass into treatments, blocks and residual or error.</p>
+<p>Recall that the model for the RCBD partitions each observation into overall mean, treatment effect, block effect and random error:</p>
+<p><span class="math display">\[Y_{ij} = \mu_{..} + \tau_{i.} + B_{.j} + \epsilon_{ij} \\ \epsilon_{ij} \sim N(0, \ \sigma)\]</span></p>
+<p>Because we do not know the values of the parameters (mean, treatment effects, block effects), we use estimates obtained with the following equations:</p>
+<p><span class="math display">\[Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_{i.} + \hat{B}_{.j} + \hat{\epsilon}_{ij}\]</span></p>
+<p>where the overall average estimates the overall mean (recall that the “hat” stands for “estimated”),</p>
+<p><span class="math display">\[\hat{\mu}_{..} = \bar{Y}_{..} = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \frac{Y_{ij}}{r \ k}\]</span></p>
+<p>the difference between each treatment average and the overall average estimates the treatment effect <span class="math inline">\(\tau_{i.}\)</span>,</p>
+<p><span class="math display">\[\hat{\tau}_{i.} = \hat{\mu}_{i.} - \hat{\mu}_{..} = \left(\displaystyle\sum_{j=1}^{r}\frac{Y_{ij}}r\right)-\bar{Y}_{..} = \bar{Y}_{i.}-\bar{Y}_{..}\]</span></p>
+<p>the difference between each block average and the overall average estimates the block effect <span class="math inline">\(B_j\)</span>,</p>
+<p><span class="math display">\[\hat{B}_{.j} = \hat{\mu}_{.j} - \hat{\mu}_{..} = \left(\displaystyle\sum_{i=1}^{k}\frac{Y_{ij}} k \right)-\bar{Y}_{ij}\]</span></p>
+<p>and the estimated random error <span class="math inline">\(\epsilon\)</span> is calculated by difference</p>
+<p><span class="math display">\[\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}\]</span></p>
+<p>The sums of squares are calculated by creating columns for <span class="math inline">\(\hat{B}_j\)</span>, <span class="math inline">\(\hat{\tau}_i\)</span>, and <span class="math inline">\(\hat{\epsilon}_{ij}\)</span> and then summing the squares of the values in each column.</p>
+<p>Start by creating a column with the treatment averages corresponding to each observation. First, the <code>aggregate()</code> function creates a column wiht as many values as treatments. Then, the <code>merge()</code> function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate treatment averages using aggregate()</span>
+logMass.Trt.avgs &lt;-<span class="st"> </span><span class="kw">aggregate</span>(logMass <span class="op">~</span><span class="st"> </span>Treatment, <span class="dt">data =</span> seedB, <span class="dt">FUN =</span> mean)
+
+<span class="kw">names</span>(logMass.Trt.avgs)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Trt.AvgLogMass&quot;</span>
+
+<span class="co"># Create a column for treatment averages in data frame</span>
+seedB &lt;-<span class="st"> </span><span class="kw">merge</span>(seedB, logMass.Trt.avgs, <span class="dt">by =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="dt">all =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>The process is repeated for block averages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate block averages using aggregate()</span>
+logMass.block.avgs &lt;-<span class="st"> </span><span class="kw">aggregate</span>(logMass <span class="op">~</span><span class="st"> </span>block, <span class="dt">data =</span> seedB, <span class="dt">FUN =</span> mean)
+
+<span class="kw">names</span>(logMass.block.avgs)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;blk.AvgLogMass&quot;</span>
+
+<span class="co"># Create a column for block averages in data frame</span>
+seedB &lt;-<span class="st"> </span><span class="kw">merge</span>(seedB, logMass.block.avgs, <span class="dt">by =</span> <span class="st">&quot;block&quot;</span>, <span class="dt">all =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Then, we add columns for total deviation of observation from the overall average <span class="math inline">\(Y_{ij} - \bar{Y}_{..}\)</span>, deviation of treatment average from overall average (or treatment effect <span class="math inline">\(\hat{\tau}_i = \hat{\mu}_{.i} - \hat{\mu}_{..}\)</span>), deviation of block average from overall average (block effect <span class="math inline">\(\hat{B}_j = \hat{\mu}_{.j} - \hat{\mu}_{..}\)</span>) and deviation of observation from treatment average.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seedB<span class="op">$</span>total.fx &lt;-<span class="st"> </span>seedB<span class="op">$</span>logMass <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(seedB<span class="op">$</span>logMass) <span class="co"># total deviation from average</span>
+
+seedB<span class="op">$</span>block.fx &lt;-<span class="st"> </span>seedB<span class="op">$</span>blk.AvgLogMass <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(seedB<span class="op">$</span>logMass) <span class="co"># block effects</span>
+
+seedB<span class="op">$</span>Trt.fx &lt;-<span class="st"> </span>seedB<span class="op">$</span>Trt.AvgLogMass <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(seedB<span class="op">$</span>logMass) <span class="co"># treatment effects</span>
+
+seedB<span class="op">$</span>res &lt;-<span class="st"> </span>seedB<span class="op">$</span>logMass <span class="op">-</span><span class="st"> </span>seedB<span class="op">$</span>block.fx <span class="op">-</span><span class="st"> </span>seedB<span class="op">$</span>Trt.fx <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(seedB<span class="op">$</span>logMass) <span class="co"># residuals</span>
+
+seedB <span class="co"># See how table has each observations partitioned into components.</span></code></pre></div>
+<pre><code>##     block Treatment     logMass Trt.AvgLogMass blk.AvgLogMass    total.fx
+## 1  Block1       wnE -0.21083601     -0.2751045      0.7538971 -0.59204942
+## 2  Block1       WnS -0.17074989     -0.5642854      0.7538971 -0.55196331
+## 3  Block1       wnS  0.54006652     -0.3399673      0.7538971  0.15885310
+## 4  Block1       wNE  1.55288939      0.9007526      0.7538971  1.17167597
+## 5  Block1       WNs  0.66413640      1.0369241      0.7538971  0.28292298
+## 6  Block1       wNs  1.57199447      1.3034624      0.7538971  1.19078106
+## 7  Block1       WnE  0.05523514     -0.0596585      0.7538971 -0.32597828
+## 8  Block1       Wns  0.98699593      0.7244262      0.7538971  0.60578251
+## 9  Block1       wNS  1.23870355      0.6515207      0.7538971  0.85749013
+## 10 Block1       WNE  0.83516780      0.2457560      0.7538971  0.45395439
+## 11 Block1       wns  1.24627323      0.7821161      0.7538971  0.86505981
+## 12 Block1       WNS  0.73688871      0.1686187      0.7538971  0.35567529
+## 13 Block2       wnE  0.04144941     -0.2751045      0.7395412 -0.33976401
+## 14 Block2       WnE  0.31999237     -0.0596585      0.7395412 -0.06122105
+## 15 Block2       Wns  1.69986758      0.7244262      0.7395412  1.31865416
+## 16 Block2       WNE  1.03098409      0.2457560      0.7395412  0.64977068
+## 17 Block2       WnS -0.15414097     -0.5642854      0.7395412 -0.53535438
+## 18 Block2       wnS -0.51121192     -0.3399673      0.7395412 -0.89242534
+## 19 Block2       wns  0.64379729      0.7821161      0.7395412  0.26258388
+## 20 Block2       WNs  1.42373212      1.0369241      0.7395412  1.04251870
+## 21 Block2       wNs  1.84080034      1.3034624      0.7395412  1.45958692
+## 22 Block2       WNS  0.29686449      0.1686187      0.7395412 -0.08434893
+## 23 Block2       wNE  1.42870882      0.9007526      0.7395412  1.04749540
+## 24 Block2       wNS  0.81365047      0.6515207      0.7395412  0.43243705
+## 25 Block3       wNS -0.09779201      0.6515207     -0.3497980 -0.47900543
+## 26 Block3       wNs  0.49759250      1.3034624     -0.3497980  0.11637908
+## 27 Block3       wnE -0.65592696     -0.2751045     -0.3497980 -1.03714037
+## 28 Block3       WNs  1.02290365      1.0369241     -0.3497980  0.64169024
+## 29 Block3       WnS -1.36796548     -0.5642854     -0.3497980 -1.74917889
+## 30 Block3       Wns -0.51358486      0.7244262     -0.3497980 -0.89479827
+## 31 Block3       wNE -0.27934035      0.9007526     -0.3497980 -0.66055377
+## 32 Block3       wns  0.45627766      0.7821161     -0.3497980  0.07506424
+## 33 Block3       WNE -1.12888400      0.2457560     -0.3497980 -1.51009741
+## 34 Block3       wnS -1.04875646     -0.3399673     -0.3497980 -1.42996987
+## 35 Block3       WNS -0.52789701      0.1686187     -0.3497980 -0.90911043
+## 36 Block3       WnE -0.55420300     -0.0596585     -0.3497980 -0.93541642
+##      block.fx     Trt.fx         res
+## 1   0.3726837 -0.6563179 -0.30841518
+## 2   0.3726837 -0.9454989  0.02085187
+## 3   0.3726837 -0.7211807  0.50735012
+## 4   0.3726837  0.5195392  0.27945309
+## 5   0.3726837  0.6557106 -0.74547134
+## 6   0.3726837  0.9222490 -0.10415165
+## 7   0.3726837 -0.4408719 -0.25779005
+## 8   0.3726837  0.3432128 -0.11011397
+## 9   0.3726837  0.2703073  0.21449919
+## 10  0.3726837 -0.1354575  0.21672815
+## 11  0.3726837  0.4009026  0.09147348
+## 12  0.3726837 -0.2125947  0.19558629
+## 13  0.3583278 -0.6563179 -0.04177383
+## 14  0.3583278 -0.4408719  0.02132311
+## 15  0.3583278  0.3432128  0.61711361
+## 16  0.3583278 -0.1354575  0.42690037
+## 17  0.3583278 -0.9454989  0.05181672
+## 18  0.3583278 -0.7211807 -0.52957239
+## 19  0.3583278  0.4009026 -0.49664652
+## 20  0.3583278  0.6557106  0.02848030
+## 21  0.3583278  0.9222490  0.17901014
+## 22  0.3583278 -0.2125947 -0.23008200
+## 23  0.3583278  0.5195392  0.16962844
+## 24  0.3583278  0.2703073 -0.19619796
+## 25 -0.7310114  0.2703073 -0.01830124
+## 26 -0.7310114  0.9222490 -0.07485849
+## 27 -0.7310114 -0.6563179  0.35018900
+## 28 -0.7310114  0.6557106  0.71699104
+## 29 -0.7310114 -0.9454989 -0.07266859
+## 30 -0.7310114  0.3432128 -0.50699963
+## 31 -0.7310114  0.5195392 -0.44908153
+## 32 -0.7310114  0.4009026  0.40517304
+## 33 -0.7310114 -0.1354575 -0.64362852
+## 34 -0.7310114 -0.7211807  0.02222227
+## 35 -0.7310114 -0.2125947  0.03449570
+## 36 -0.7310114 -0.4408719  0.23646694</code></pre>
+<p>Finally, we calculate the corresponding sums of squares and degrees of freedom, and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. The anova table is transformed into a data frame and printed nicely with pander(). Calculate the F test and the critical F to test the null hypothesis (Ho) that mean seed production is the same in all treatments. Interpret the results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sums of squares</span>
+
+<span class="kw">paste</span>(<span class="st">&quot;Total Sum of Squares = &quot;</span>, (ss.Tot &lt;-<span class="st"> </span><span class="kw">sum</span>(seedB<span class="op">$</span>total.fx <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
+<pre><code>## [1] &quot;Total Sum of Squares =  25.840866888969&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Sum of Squares of Blocks = &quot;</span>, (ss.block &lt;-<span class="st"> </span><span class="kw">sum</span>(seedB<span class="op">$</span>block.fx <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
+<pre><code>## [1] &quot;Sum of Squares of Blocks =  9.62003567079587&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Sum of Squares of Treatments = &quot;</span>, (ss.Trt &lt;-<span class="st"> </span><span class="kw">sum</span>(seedB<span class="op">$</span>Trt.fx <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
+<pre><code>## [1] &quot;Sum of Squares of Treatments =  12.014222550334&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Sum of Squares of Residuals = &quot;</span>, (ss.Res &lt;-<span class="st"> </span><span class="kw">sum</span>(seedB<span class="op">$</span>res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
+<pre><code>## [1] &quot;Sum of Squares of Residuals =  4.20660866783908&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Degrees of freedom</span>
+
+<span class="kw">paste</span>(<span class="st">&quot;Treatment df = &quot;</span>, (df.Trt &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">levels</span>(seedB<span class="op">$</span>Treatment)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;Treatment df =  11&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Block df = &quot;</span>, (df.block &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">levels</span>(seedB<span class="op">$</span>block)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;Block df =  2&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Total df = &quot;</span>, (df.Tot &lt;-<span class="st"> </span><span class="kw">length</span>(seedB<span class="op">$</span>logMass) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;Total df =  35&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Residual or error df = &quot;</span>, (df.Res &lt;-<span class="st"> </span>df.Tot <span class="op">-</span><span class="st"> </span>df.Trt <span class="op">-</span><span class="st"> </span>df.block))</code></pre></div>
+<pre><code>## [1] &quot;Residual or error df =  22&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mean squares and Fcalc</span>
+
+ms.Trt &lt;-<span class="st"> </span>ss.Trt <span class="op">/</span><span class="st"> </span>df.Trt
+
+ms.block &lt;-<span class="st"> </span>ss.block <span class="op">/</span><span class="st"> </span>df.block
+
+ms.Res &lt;-<span class="st"> </span>ss.Res <span class="op">/</span><span class="st"> </span>df.Res
+
+(Fcalc.Trt &lt;-<span class="st"> </span>ms.Trt <span class="op">/</span><span class="st"> </span>ms.Res)</code></pre></div>
+<pre><code>## [1] 5.71207</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Fcalc.block &lt;-<span class="st"> </span>ms.block <span class="op">/</span><span class="st"> </span>ms.Res)</code></pre></div>
+<pre><code>## [1] 25.15575</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Fcrit.Trt &lt;-<span class="st"> </span><span class="kw">qf</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">df1 =</span> df.Trt, <span class="dt">df2 =</span> df.Res))</code></pre></div>
+<pre><code>## [1] 2.258518</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Fcrit.block &lt;-<span class="st"> </span><span class="kw">qf</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">df1 =</span> df.block, <span class="dt">df2 =</span> df.Res))</code></pre></div>
+<pre><code>## [1] 3.443357</code></pre>
+<p><br />
+<br />
+<strong>ANSWER THE FOLLOWING QUESTIONS:</strong></p>
+<p>Can you conclude that there are differences among treatments? Why? Report the test statistic, your decision rule and your conclusion.</p>
+</div>
+<div id="part-4.-anova-for-rcbd-using-r-functions.25-points" class="section level4">
+<h4><span class="header-section-number">1.4.1.5</span> Part 4. ANOVA for RCBD using R functions.[25 points]</h4>
+<p>In this section we repeat the previosu analysis using the R functions <code>aov()</code> and <code>anova()</code> to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># read help about function aov(), anova(), oneway.test()</span>
+
+<span class="kw">summary</span>(<span class="kw">aov</span>(<span class="dt">formula =</span> logMass <span class="op">~</span><span class="st"> </span>block <span class="op">+</span><span class="st"> </span>Treatment, <span class="dt">data =</span> seedB))</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## block        2  9.620   4.810  25.156 2.07e-06 ***
+## Treatment   11 12.014   1.092   5.712 0.000263 ***
+## Residuals   22  4.207   0.191                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rcbd.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> logMass <span class="op">~</span><span class="st">  </span>block <span class="op">+</span><span class="st"> </span>Treatment, <span class="dt">data =</span> seedB)
+<span class="kw">anova</span>(rcbd.mod)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: logMass
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## block      2  9.6200  4.8100 25.1557 2.067e-06 ***
+## Treatment 11 12.0142  1.0922  5.7121 0.0002627 ***
+## Residuals 22  4.2066  0.1912                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br />
+<br />
+<strong>ANSWER THE FOLLOWING QUESTIONS:</strong></p>
+<p>How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences amonf treatments.</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

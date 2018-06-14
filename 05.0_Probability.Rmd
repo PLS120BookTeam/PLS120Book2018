@@ -302,6 +302,28 @@ Consider the number of tweets so that each student in the class has sent in the 
 
 ## Exercises and Solutions
 
+### Exercise 1
+
+Objectives:
+
+Models are approximations of reality.
+Models are based on specific knowledge or assumptions.
+One model assumes that a parameter is constant, but in reality the parameters can change.
+More complicated models can accomodate changin parameters.
+
+Assume that the electric motor of a water pump has a constant probability of failing in any time interval, and that on average the failure rate is once every 10,000 hours and independent of preious or future failures after repairs. 
+What distribution can be used to model the number of failures in any given 1000 hour interval?
+
+What is the probability that the motor will fail exactly once in 1000 hours?
+
+What is the probability that it will fail at least once in 1000 hours?
+
+Do you think the assumptions about the pump are realistic? How would you modify the assumptions to work towards a better model?
+
+Given the potential deficiencies of the model based on the original assumptions, what errors do you expect to see as the pump get older and more time passes since the last repair?
+
+
+
 ## Homework
 
 ## Laboratory Exercises
