@@ -5,7 +5,7 @@
 
 1. Define random variables and their distributions.
 1. Determine if a process is random or deterministic and give examples of both.
-1. Given a random experiment like rolling a die, write down the smaple space.
+1. Given a random experiment like rolling a die, write down the sample space.
 1. Determine the probability mass function of a given random experiment.
 1. List multiple causes that determine the outcome of a random experiment.
 1. Define "parameter."

@@ -242,7 +242,7 @@ $$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
 
 The sums of squares are calculated by creating columns for $\hat{B}_j$, $\hat{\tau}_i$, and $\hat{\epsilon}_{ij}$ and then summing the squares of the values in each column.
 
-Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate()` function creates a column wiht as many values as treatments. Then, the `merge()` function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
+Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate()` function creates a column wiht as many values as treatments. Then, the `merge` function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
 
 ```{r}
 

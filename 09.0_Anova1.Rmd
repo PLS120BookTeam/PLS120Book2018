@@ -122,7 +122,7 @@ In the first R chunk we read in the data.
 
 # seed <- read.csv(file = "Lab05SeedMassData.txt", header = TRUE)
 
-seed <- read.table(header = TRUE, text = " 
+seed <- read.table(header = TRUE, text = "
 id block Treatment seedMass.g
 1 1 WNE 0.8452
 2 1 WNE 1.628599896
@@ -524,7 +524,7 @@ anova(linear.model1)
 
 oneway.test(logSmass ~ Treatment, 
             data = seed, 
-            var.equal = "something here")
+            var.equal = TRUE)
 
 ```
 

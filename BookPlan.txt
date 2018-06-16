@@ -78,3 +78,7 @@ Remember to run spell check in all files.
 Transition from lmmeans to emmeans.
 
 When referring to concepts, functions or equations that are the focus of other sections in the book, add a cross reference or the text "(**insert cross-reference**)" as a place holder.
+
+Notes 14 June 2018 ====================
+
+A backslash "\" alone in a line or at the end of a paragraph messes up the rendering of inline equations in the preceeding paragraph Each equation is preceeded by a line-feed and appears in a new line. Avoid \'s alone or at the end of paragraphs.

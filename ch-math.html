@@ -111,14 +111,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1.5" data-path=""><a href="#math.devs"><i class="fa fa-check"></i><b>1.5</b> Deviations, Errors and Residuals</a><ul>
 <li class="chapter" data-level="1.5.1" data-path=""><a href="#math.simu"><i class="fa fa-check"></i><b>1.5.1</b> Simulation: Population is Known</a></li>
-<li class="chapter" data-level="1.5.2" data-path=""><a href="#ssGeom.math"><i class="fa fa-check"></i><b>1.5.2</b> Geometry of sums of squares (Maybe delete or mark as optional)</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path=""><a href="#math.optim"><i class="fa fa-check"></i><b>1.6</b> Optimization</a></li>
 <li class="chapter" data-level="1.7" data-path=""><a href="#math.symbls"><i class="fa fa-check"></i><b>1.7</b> Symbols and Terms</a></li>
-<li class="chapter" data-level="1.8" data-path=""><a href="#math.hwk"><i class="fa fa-check"></i><b>1.8</b> Homework</a></li>
-<li class="chapter" data-level="1.9" data-path=""><a href="#math.lab"><i class="fa fa-check"></i><b>1.9</b> Laboratory Exercises</a><ul>
-<li class="chapter" data-level="1.9.1" data-path=""><a href="#plant-sciences"><i class="fa fa-check"></i><b>1.9.1</b> Plant Sciences</a></li>
-<li class="chapter" data-level="1.9.2" data-path=""><a href="#animal-sciences"><i class="fa fa-check"></i><b>1.9.2</b> Animal Sciences</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#math.exe"><i class="fa fa-check"></i><b>1.8</b> Exercises and Solutions</a><ul>
+<li class="chapter" data-level="1.8.1" data-path=""><a href="#exercise-1"><i class="fa fa-check"></i><b>1.8.1</b> Exercise 1</a></li>
+<li class="chapter" data-level="1.8.2" data-path=""><a href="#exercise-2"><i class="fa fa-check"></i><b>1.8.2</b> Exercise 2</a></li>
+<li class="chapter" data-level="1.8.3" data-path=""><a href="#exercise-3"><i class="fa fa-check"></i><b>1.8.3</b> Exercise 3</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#math.hwk"><i class="fa fa-check"></i><b>1.9</b> Homework</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#math.lab"><i class="fa fa-check"></i><b>1.10</b> Laboratory Exercises</a><ul>
+<li class="chapter" data-level="1.10.1" data-path=""><a href="#plant-sciences"><i class="fa fa-check"></i><b>1.10.1</b> Plant Sciences</a></li>
+<li class="chapter" data-level="1.10.2" data-path=""><a href="#animal-sciences"><i class="fa fa-check"></i><b>1.10.2</b> Animal Sciences</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -145,16 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!--bookdown:title:start-->
 <div id="ch.math" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Required Math Skills and Symbols</h1>
-<p>In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and sumbols for summation used to represent sums of many numbers generally and succintly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we dive into equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.</p>
-<p>A key point in this chapter is that in statistics we are always using models, and that making those models explicit by writing them down completely is essential to understanding and communicating what we are doing. The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throught the rest of the book.</p>
-<p>A second key concept, related to the first one, is that we rarely, if ever, can know the actual “true” value of parameters, variables or quantities about the real world. We do not know paramter values because we rarely know or even have access to the whole population, which would be necesary to “measure” a parameter like the true mean. Measurements are imperfect because measuring instruments have limited precision, and because they are used by “imperfect” humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.</p>
+<p>In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we dive into equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.</p>
+<p>A key point in this chapter is that in statistics we are always using models, and that making those models explicit by writing them down completely is essential to understanding and communicating what we are doing. The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throughout the rest of the book.</p>
+<p>A second key concept, related to the first one, is that we rarely, if ever, can know the actual “true” value of parameters, variables or quantities about the real world. We do not know parameter values because we rarely know or even have access to the whole population, which would be necessary to “measure” a parameter like the true mean. Measurements are imperfect because measuring instruments have limited precision, and because they are used by “imperfect” humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.</p>
 <p>In reading this chapter, focus on the symbols and concepts. In addition to, and better before doing the exercises, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend writing down the equations as they are read, and then trying to reproduce them from memory and a description of the calculation (e.g. sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate the attention to the symbols and details of each equation, and will reveal those aspects that are were not yet clear to the reader.</p>
 <div id="math.obj" class="section level2">
 <h2><span class="header-section-number">1.1</span> Learning Objectives for Chapter</h2>
 <ol style="list-style-type: decimal">
 <li>Identify and write down simple statistical models.</li>
 <li>Read and interpret mathematical equations.</li>
-<li>Identify random and fixed components of statistial models.</li>
+<li>Identify random and fixed components of statistical models.</li>
 <li>Pair symbols with corresponding concepts or definitions.</li>
 <li>Express sums using summation symbol and expand sums defined with the summation symbol.</li>
 <li>Calculate sum of squared deviations for a set of numbers.</li>
@@ -166,13 +170,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="math.sum" class="section level2">
 <h2><span class="header-section-number">1.2</span> Data Columns and Summation</h2>
-<p>Summations, the sum of several numbers that are organized with subscripts, is used all the time in statistics. In order to be able to read equations and understand the concepts in them, you have to be familiar with summations. The greek letter capital sigma <span class="math inline">\(\Sigma\)</span> is used to represent summation. For example, <span class="math inline">\(\sum_{i=1}^{4} Y_i\)</span> represents the sum <span class="math inline">\(Y_1 + Y_2 + Y_3 + Y_4\)</span>. Sometimes, for simplicity, when we want to sum over all possible values of the subscript i from <span class="math inline">\(i = 1\)</span> to the maximum but unspecified value of <span class="math inline">\(i = k\)</span>, we write <span class="math inline">\(\sum_{i=1}^k Y_i\)</span>, meaning “sum of all values of <span class="math inline">\(Y_i\)</span>.”</p>
+<p>Summations, the sum of several numbers that are organized with subscripts, is used all the time in statistics. In order to be able to read equations and understand the concepts in them, you have to be familiar with summations. The Greek letter capital sigma <span class="math inline">\(\Sigma\)</span> is used to represent summation. For example, <span class="math inline">\(\sum_{i=1}^{4} Y_i\)</span> represents the sum <span class="math inline">\(Y_1 + Y_2 + Y_3 + Y_4\)</span>. Sometimes, for simplicity, when we want to sum over all possible values of the subscript i from <span class="math inline">\(i = 1\)</span> to the maximum but unspecified value of <span class="math inline">\(i = k\)</span>, we write <span class="math inline">\(\sum_{i=1}^k Y_i\)</span>, meaning “sum of all values of <span class="math inline">\(Y_i\)</span>.”</p>
 <p>We can write a symbol for all the <span class="math inline">\(Y_i\)</span> to avoid having to write each one of them. All the values of <span class="math inline">\(Y\)</span> in the correct order constitute a <em>vector</em> of values. We use bold letters to refer to vectors. Suppose we have a vector with the numbers 7, 5, 9 and 6. We write this as:</p>
 <span class="math display" id="eq:math01">\[\begin{equation}
 \mathbf{Y} = \begin{pmatrix} Y_1 &amp; Y_2 &amp; Y_3 &amp; Y_4 \end{pmatrix} = \begin{pmatrix} 7 &amp; 5 &amp; 9 &amp; 6 \end{pmatrix} = \left( Y_i \right) \quad i = 1, \dots, 4
 \tag{1.1}
 \end{equation}\]</span>
-<p>where it is impied that <span class="math inline">\(Y_1 = 7\)</span>, <span class="math inline">\(Y_2 = 5\)</span>, <span class="math inline">\(Y_3 = 9\)</span> and <span class="math inline">\(Y_4 = 6\)</span>. There are no calculations or concepts here other than the fact that vectors are sets of numbers with order, and that we can refer to them with symbols. In R we can define the vector and give it values using the <code>c</code> function, which stands for “combine.”</p>
+<p>where it is implied that <span class="math inline">\(Y_1 = 7\)</span>, <span class="math inline">\(Y_2 = 5\)</span>, <span class="math inline">\(Y_3 = 9\)</span> and <span class="math inline">\(Y_4 = 6\)</span>. There are no calculations or concepts here other than the fact that vectors are sets of numbers with order, and that we can refer to them with symbols. In R we can define the vector and give it values using the <code>c</code> function, which stands for “combine.”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">6</span>)
 <span class="kw">print</span>(Y)</code></pre></div>
 <pre><code>## [1] 7 5 9 6</code></pre>
@@ -249,7 +253,7 @@ Y_1 + Y_2 + Y_2 + Y_3 + Y_3 + Y_4 \\ \\ &amp;=
 </div>
 <div id="math.2Dtbl" class="section level2">
 <h2><span class="header-section-number">1.3</span> Two-dimensional Data Tables and Summation</h2>
-The vectors <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> used above are 1-dimensional; they are single columns of numbers. Frequently, data is organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its “address” in the table given by the row and column numbers, always in that order. The subscript <span class="math inline">\(i\)</span> refers to rows and <span class="math inline">\(j\)</span> refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for fields and columns for crops. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 62 does <strong>not</strong> mean 6 times 10 plus 2 times 1, but simply the sixh row and second column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if <span class="math inline">\(Y_{162}\)</span> is row 1 column 62 or row 16 column 2 we use <span class="math inline">\(Y_{1,62}\)</span> or <span class="math inline">\(Y_{16,2}\)</span>. The comma is ommitted when each subscript is never greater than 9.<br />
+<p>The vectors <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> used above are 1-dimensional; they are single columns of numbers. Frequently, data is organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its “address” in the table given by the row and column numbers, always in that order. The subscript <span class="math inline">\(i\)</span> refers to rows and <span class="math inline">\(j\)</span> refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for fields and columns for crops. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 62 does <strong>not</strong> mean 6 times 10 plus 2 times 1, but simply the sixth row and second column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if <span class="math inline">\(Y_{162}\)</span> is row 1 column 62 or row 16 column 2 we use <span class="math inline">\(Y_{1,62}\)</span> or <span class="math inline">\(Y_{16,2}\)</span>. The comma is omitted when each subscript is never greater than 9.</p>
 <br />
 <br />
 
@@ -306,7 +310,7 @@ Ydata</code></pre></div>
  \end{pmatrix}
 \tag{1.9}
  \end{equation}\]</span>
-<p>If we want to average all values in the table we need to use a double summation to indicate that rathe sum is supposed to proceed over rows and columns. As an exercise to make sure you understand the subscripts, write down the matrix <span class="math inline">\(\mathbf{Y}\)</span> with all subscripts without looking at the book</p>
+<p>If we want to average all values in the table we need to use a double summation to indicate that the sum is supposed to proceed over rows and columns. As an exercise to make sure you understand the subscripts, write down the matrix <span class="math inline">\(\mathbf{Y}\)</span> with all subscripts without looking at the book</p>
 <span class="math display" id="eq:math10">\[\begin{equation} 
 \begin{aligned}
 &amp;\sum_{i=1}^{i=7} \displaystyle\sum_{j=1}^{j=3} \frac{Y_{ij}} {7 \times 3} = 
@@ -327,7 +331,7 @@ Y_{11} + Y_{12} + Y_{13} + Y_{21} + Y_{22} + Y_{23} + Y_{31} + Y_{32} + Y_{33} \
 \end{aligned}
 \tag{1.10}
 \end{equation}\]</span>
-<p>Using R we can calculate the sums and the average very easily. Note that the functions <code>nrow</code> and <code>ncol</code> extract the number of rows and columns of a data frame or matrix. The function <code>mean</code> give the average of the table.</p>
+<p>Using R we can calculate the sums and the average very easily. Note that the functions <code>nrow</code> and <code>ncol</code> extract the number of rows and columns of a data frame or matrix. The function <code>mean</code> yields the average for the whole table.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata) <span class="co"># Works only when all columns are numeric.</span></code></pre></div>
 <pre><code>## [1] 579</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(Ydata) <span class="co"># Ydata has 7 rows</span></code></pre></div>
@@ -359,7 +363,7 @@ Y_{11} + Y_{12} + Y_{13} + Y_{21} + Y_{22} + Y_{23} + Y_{31} + Y_{32} + Y_{33} \
 \end{aligned}
 \tag{1.12}
 \end{equation}\]</span>
-<p>We obtain those averges in R with the following code. Note that when we leave the place for row (or column) number empty, it is interpreted as all rows (or columns).</p>
+<p>We obtain those averages in R with the following code. Note that when we leave the place for row (or column) number empty, it is interpreted as all rows (or columns).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(Ydata[, <span class="st">&quot;corn&quot;</span>]) <span class="co"># Average for corn across fields</span></code></pre></div>
 <pre><code>## [1] 26.85714</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata[, <span class="dv">2</span>])</code></pre></div>
@@ -375,14 +379,12 @@ Y_{11} + Y_{12} + Y_{13} + Y_{21} + Y_{22} + Y_{23} + Y_{31} + Y_{32} + Y_{33} \
 <div id="math.smplMod" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> The simplest model</h3>
 <p>Say that we are interested in studying the milk production per dairy cow in <span class="math inline">\(kg \ day^{-1}\)</span> for all dairy cows in the US today. For example, we want to estimate what proportion of cows produce less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> to gauge the number of cows that could be targets of a program to increase productivity. One way to do this is to create a <em>model</em> for the statistical distribution of milk production, take a sample to estimate the parameters of the model and then use the model with estimated parameters to make the estimation of the proportion of cows for which production is less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> or any other quantity.</p>
-<p>A first attempt to estimate the needed proportion is to <em>model</em> milk production per cow as a normall distributed random variable with unknown mean and variance. Using the letter <span class="math inline">\(Y\)</span> to represent the milk production of a cow we write <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>, which is read “Y is a random variable with normal distribution, with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.” Sometimes we write <span class="math inline">\(\sigma\)</span>, the standard deviation, instead of <span class="math inline">\(\sigma^2\)</span>. Obviously, the standard deviation is the square root of the variance.</p>
-<p>The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(+\infty\)</span>, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, althogh there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal dsitribution is for infinite populations. Yet, these flaws of our model are not important.</p>
-<hr />
+<p>A first attempt to estimate the needed proportion is to <em>model</em> milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter <span class="math inline">\(Y\)</span> to represent the milk production of a cow we write <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>, which is read “Y is a random variable with normal distribution, with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.” Sometimes we write <span class="math inline">\(\sigma\)</span>, the standard deviation, instead of <span class="math inline">\(\sigma^2\)</span>. Obviously, the standard deviation is the square root of the variance.</p>
+<p>The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(+\infty\)</span>, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are not important.</p>
 <blockquote>
 <p>Models are not supposed to be perfect representations of reality, they are supposed to be <strong>useful</strong> representations of reality.</p>
 </blockquote>
-<hr />
-<p>Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the distribution is expected to be below zero. The fact the the numebr of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.</p>
+<p>Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the distribution is expected to be below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.</p>
 <p>The simple model that we are using can also be expressed as follows:</p>
 <span class="math display" id="eq:math13">\[\begin{equation} 
 \begin{aligned}
@@ -391,7 +393,7 @@ Y_i = \mu + \epsilon_i \\[10pt]
 \end{aligned}
 \tag{1.13}
 \end{equation}\]</span>
-<p>where <span class="math inline">\(Y_i\)</span> is the milk produced by cow number<span class="math inline">\(i\)</span>, <span class="math inline">\(\mu\)</span> is the population mean and <span class="math inline">\(\epsilon\)</span> is a random variable with a normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. This is exactly the same model as before, but now we have isolated the deviations of each cow from the mean for the whole population which we call “errors” not because there is anthing wrong, but because we choose not to be interested in why cows differ in milk production per day. In this model, milk production is partitioned into an overall mean and a random “error.”</p>
+<p>where <span class="math inline">\(Y_i\)</span> is the milk produced by cow number<span class="math inline">\(i\)</span>, <span class="math inline">\(\mu\)</span> is the population mean and <span class="math inline">\(\epsilon\)</span> is a random variable with a normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. This is exactly the same model as before, but now we have isolated the deviations of each cow from the mean for the whole population which we call “errors” not because there is anything wrong, but because we choose not to be interested in why cows differ in milk production per day. In this model, milk production is partitioned into an overall mean and a random “error.”</p>
 <p>The equation <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span> is actually a simplified version of <span class="math inline">\(\epsilon_i \sim iid \quad N(0, \sigma^2) \quad \forall i\)</span>, which means that the errors for all observations have independent and identical normal distributions with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. Why is it necessary to state this?! Isn’t <span class="math inline">\(\epsilon\)</span> just one random variable? Actually, it does not have to be, so we need to specify how we are modeling the errors. In reality, it is possible for the error for each observation to come from a different distribution, although a model with such complexity would probably not be useful. Errors can also come from distributions that are not independent. The potential differences in error distributions and their correlations are topics for a more advanced course. At this point, you should just keep in mind that in real-world applications of statistics one frequently finds errors that are not normal, have unequal variances, and/or are correlated. The more advanced models necessary to deal with those situations include parts and parameters to deal with lack of normality, heterogeneity of variance and lack of independence.</p>
 <p>In order to use the simple model to estimate the proportion of cows that produce less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> we can get a random sample of r cows and, based on that sample, estimate the mean as</p>
 <span class="math display" id="eq:math14">\[\begin{equation} 
@@ -403,7 +405,7 @@ Y_i = \mu + \epsilon_i \\[10pt]
 \hat{\sigma^2} =\frac{1}{r-1} \sum_{i=1}^{i=r} (Y_i-\hat{\mu})^2
 \tag{1.15}
 \end{equation}\]</span>
-<p>where <span class="math inline">\(e = \hat{\epsilon} = (Y_i-\hat{\mu})\)</span> are the deviations of each cow from the estimated overall mean. These equations are presented with more detail in a later chapter (insert cross reference to chapter 06). Finally, the proportion of cows whose daily milk production is less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> is estimated as the area under the normal distribution curve between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(24 \ kg \ day^{-1}\)</span>. Using the capital letter<span class="math inline">\(P\)</span> to indicate “probability” we can write:</p>
+<p>where <span class="math inline">\(e = \hat{\epsilon} = (Y_i-\hat{\mu})\)</span> are the deviations of each cow from the estimated overall mean. These equations are presented with more detail in a later chapter (@ref(ch.anova)). Finally, the proportion of cows whose daily milk production is less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> is estimated as the area under the normal distribution curve between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(24 \ kg \ day^{-1}\)</span>. Using the capital letter<span class="math inline">\(P\)</span> to indicate “probability” we can write:</p>
 <span class="math display" id="eq:math16">\[\begin{equation} 
 \begin{aligned}
 &amp;\hat{P}(Y \le 24 \ kg \ day^{-1}) = area \ under \ curve = \int_{-\infty}^{24} f(Y) \ \mathrm{d}Y \\[20pt]
@@ -411,37 +413,270 @@ Y_i = \mu + \epsilon_i \\[10pt]
 \end{aligned}
 \tag{1.16}
 \end{equation}\]</span>
-<p>Suppose that the estimated mean and variance were <span class="math inline">\(28.3 \ kg \ day^{-1}\)</span> and <span class="math inline">\(25 \ kg^2 \ day^{-2}\)</span>. USDA reported an average production of <span class="math inline">\(28.3 \ kg \ day^{-1}\)</span> of milk per milking cow in 2016 (<a href="https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf" class="uri">https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf</a>) . The variance was not reported, so we use a fictitious number. The area ander the curve would be calculated in R as follows (note how the code is written in several lines and indented for better readability):</p>
+<p>Suppose that the estimated mean and variance were <span class="math inline">\(28.3 \ kg \ day^{-1}\)</span> and <span class="math inline">\(25 \ kg^2 \ day^{-2}\)</span>. USDA reported an average production of <span class="math inline">\(28.3 \ kg \ day^{-1}\)</span> of milk per milking cow in 2016 (<a href="https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf" class="uri">https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf</a>). The variance was not reported, so we use a fictitious number: <span class="math inline">\(\hat\sigma^2 = 25\)</span>. The area under the curve (figure @ref(fig:prop.lt.mean)) would be calculated in R as follows (note how the code is written in several lines and indented for better readability):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(           <span class="co"># function that calculates areas unde the normal</span>
    <span class="dt">q =</span> <span class="dv">24</span>,       <span class="co"># quantile desired, max. milk production in set</span>
    <span class="dt">mean =</span> <span class="fl">28.3</span>,    <span class="co"># mean of the normal distribution</span>
    <span class="dt">sd =</span> <span class="dv">5</span>        <span class="co"># standard distribution of the normal distribution</span>
 )</code></pre></div>
 <pre><code>## [1] 0.1948945</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
-<img src="03.0_MathSymbols_files/figure-html/unnamed-chunk-11-1.png" alt="Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample." width="672" />
+<div class="figure">
+<img src="03.0_MathSymbols_files/figure-html/prop.lt.mean-1.png" alt="Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample." width="672" />
 <p class="caption">
-Figure 1.1: Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample.
+(#fig:prop.lt.mean)Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample.
 </p>
 </div>
-<p>We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the “fixed” or non-random parts, and the error is the “random” component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider subsampling, this course will only deal with models that have a single random component and we use the greek letter <span class="math inline">\(\epsilon\)</span> for it.</p>
+<p>We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the “fixed” or non-random parts, and the error is the “random” component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter <span class="math inline">\(\epsilon\)</span> for it.</p>
 <p><span class="math display">\[ data = Systematic \ Structure + Random \ Variation \\[10pt]
 = Fixed \ Component + Random \ Component \\[10pt]
 = Fixed \ Component + Structured \ Random + White \ Noise\]</span></p>
 <p>Models that partition the random component into structured and unstructured (white noise) random parts are beyond the scope of this book.</p>
+<table class="kable_wrapper">
+<caption>
+(#tab:math.tab01)Milk production per lactating dairy cow in the US, by state in 2016. Based on USDA reports.
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left">State</th>
+<th align="right">kg.cow.day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Alabama</td>
+<td align="right">16.3</td>
+</tr>
+<tr class="even">
+<td align="left">Alaska</td>
+<td align="right">14.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Arizona</td>
+<td align="right">30.4</td>
+</tr>
+<tr class="even">
+<td align="left">Arkansas</td>
+<td align="right">16.4</td>
+</tr>
+<tr class="odd">
+<td align="left">California</td>
+<td align="right">28.5</td>
+</tr>
+<tr class="even">
+<td align="left">Colorado</td>
+<td align="right">32.3</td>
+</tr>
+<tr class="odd">
+<td align="left">Connecticut</td>
+<td align="right">26.7</td>
+</tr>
+<tr class="even">
+<td align="left">Delaware</td>
+<td align="right">23.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Florida</td>
+<td align="right">25.3</td>
+</tr>
+<tr class="even">
+<td align="left">Georgia</td>
+<td align="right">27.1</td>
+</tr>
+<tr class="odd">
+<td align="left">Hawaii</td>
+<td align="right">18.1</td>
+</tr>
+<tr class="even">
+<td align="left">Idaho</td>
+<td align="right">30.6</td>
+</tr>
+<tr class="odd">
+<td align="left">Illinois</td>
+<td align="right">25.2</td>
+</tr>
+<tr class="even">
+<td align="left">Indiana</td>
+<td align="right">28.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Iowa</td>
+<td align="right">29.4</td>
+</tr>
+<tr class="even">
+<td align="left">Kansas</td>
+<td align="right">28.3</td>
+</tr>
+<tr class="odd">
+<td align="left">Kentucky</td>
+<td align="right">22.5</td>
+</tr>
+<tr class="even">
+<td align="left">Louisiana</td>
+<td align="right">17.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Maine</td>
+<td align="right">26.1</td>
+</tr>
+<tr class="even">
+<td align="left">Maryland</td>
+<td align="right">24.8</td>
+</tr>
+<tr class="odd">
+<td align="left">Massachusetts</td>
+<td align="right">22.3</td>
+</tr>
+<tr class="even">
+<td align="left">Michigan</td>
+<td align="right">32.3</td>
+</tr>
+<tr class="odd">
+<td align="left">Minnesota</td>
+<td align="right">26.1</td>
+</tr>
+<tr class="even">
+<td align="left">Mississippi</td>
+<td align="right">17.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Missouri</td>
+<td align="right">19.4</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left">State</th>
+<th align="right">kg.cow.day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Montana</td>
+<td align="right">26.2</td>
+</tr>
+<tr class="even">
+<td align="left">Nebraska</td>
+<td align="right">29.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nevada</td>
+<td align="right">27.3</td>
+</tr>
+<tr class="even">
+<td align="left">NewHampshire</td>
+<td align="right">25.2</td>
+</tr>
+<tr class="odd">
+<td align="left">NewJersey</td>
+<td align="right">21.7</td>
+</tr>
+<tr class="even">
+<td align="left">NewMexico</td>
+<td align="right">30.4</td>
+</tr>
+<tr class="odd">
+<td align="left">NewYork</td>
+<td align="right">29.6</td>
+</tr>
+<tr class="even">
+<td align="left">NorthCarolina</td>
+<td align="right">26.1</td>
+</tr>
+<tr class="odd">
+<td align="left">NorthDakota</td>
+<td align="right">26.8</td>
+</tr>
+<tr class="even">
+<td align="left">Ohio</td>
+<td align="right">25.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Oklahoma</td>
+<td align="right">23.2</td>
+</tr>
+<tr class="even">
+<td align="left">Oregon</td>
+<td align="right">25.8</td>
+</tr>
+<tr class="odd">
+<td align="left">Pennsylvania</td>
+<td align="right">25.4</td>
+</tr>
+<tr class="even">
+<td align="left">RhodeIsland</td>
+<td align="right">21.7</td>
+</tr>
+<tr class="odd">
+<td align="left">SouthCarolina</td>
+<td align="right">20.7</td>
+</tr>
+<tr class="even">
+<td align="left">SouthDakota</td>
+<td align="right">27.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Tennessee</td>
+<td align="right">20.6</td>
+</tr>
+<tr class="even">
+<td align="left">Texas</td>
+<td align="right">28.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Utah</td>
+<td align="right">28.3</td>
+</tr>
+<tr class="even">
+<td align="left">Vermont</td>
+<td align="right">26.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Virginia</td>
+<td align="right">23.8</td>
+</tr>
+<tr class="even">
+<td align="left">Washington</td>
+<td align="right">29.9</td>
+</tr>
+<tr class="odd">
+<td align="left">WestVirginia</td>
+<td align="right">18.5</td>
+</tr>
+<tr class="even">
+<td align="left">Wisconsin</td>
+<td align="right">29.3</td>
+</tr>
+<tr class="odd">
+<td align="left">Wyoming</td>
+<td align="right">29.0</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="math.bttrMod" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> A slightly more complex model</h3>
-<p>The model used above and stated in equation <a href="#eq:math13">(1.13)</a> can be improved in many ways. For example, we may guess that a lot the variance in productivity can be between states, due to different levels of investment and development of the industry in different states. By adding a part to account for state in the fixed part of the model we can have much better predictions of the proportion of cows below <span class="math inline">\(15 \ kg \ day^{-1}\)</span> for each state. The model would look like this:</p>
-<span class="math display" id="eq:math17">\[\begin{equation}
+<p>The model used above and stated in equation <a href="#eq:math13">(1.13)</a> can be improved in many ways. For example, we may guess that a lot the variance in productivity can be between states, due to different levels of investment and development of the industry in different states. By adding a part to account for differences among states in the fixed part of the model we can have much better predictions of the proportion of cows below <span class="math inline">\(15 \ kg \ day^{-1}\)</span> for each state. The model would look like this:</p>
+<p><span class="math display" id="eq:math17">\[\begin{equation}
 \begin{aligned}
 Y_{ij} &amp;= \mu_{i.} + \epsilon_{ij} \\[10pt]
 &amp;=  \mu_{..} + \tau_{i.} + \epsilon_{ij} \\[10pt]
 \epsilon &amp;\sim N(0, \sigma^2)
 \end{aligned}
 \tag{1.17}
-\end{equation}\]</span>
-<p>where <span class="math inline">\(\mu_{i.}\)</span> is the mean for state <span class="math inline">\(i\)</span> and <span class="math inline">\(\tau_{i.}\)</span> is called the “effect” of state <span class="math inline">\(i\)</span>. In general, when we have observations that are grouped lie cows in states, we can view the model as allowing a separate mean for each group or as each group having an effect on the mean. Both views are equivalent and their relationship is given by the fact that the efect is defined as the difference between each group mean and the overall mean: <span class="math inline">\(\tau_{i.} = \mu_{i.} - \mu_{..}\)</span>. The “dots” in the subscript are used as place-holders for the subscript and to indicate that the average (or sum) has been done over all values of that subscript.</p>
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu_{i.}\)</span> is the mean for state <span class="math inline">\(i\)</span> and <span class="math inline">\(\tau_{i.}\)</span> is called the “effect” of state <span class="math inline">\(i\)</span>. In general, when we have observations that are grouped like cows in states, we can view the model as allowing a separate mean for each group or as each group having an effect on the mean. Both views are equivalent and their relationship is given by the fact that the effect is defined as the difference between each group mean and the overall mean: <span class="math inline">\(\tau_{i.} = \mu_{i.} - \mu_{..}\)</span>. The “dots” in the subscript are used as place-holders for the subscript and to indicate that the average (or sum) has been done over all values of that subscript. Because the number of cows differs among states, the overall mean in this model has to be estimated as the average of the state averages, where each state receives equal weight: <span class="math inline">\(\hat{\mu}_{..} = \sum_{i=1}^{50} \hat{\mu}_{i.} / 50\)</span>. This estimated overall mean is 25.1123929 $  kg  day^{-1}.$</p>
 </div>
 </div>
 <div id="math.devs" class="section level2">
@@ -455,27 +690,48 @@ Y_{ij} &amp;= \mu_{i.} + \epsilon_{ij} \\[10pt]
 \end{aligned}
 \tag{1.18}
 \end{equation}\]</span>
-<p>The symbol <span class="math inline">\(\hat{Y}_{ij}\)</span> is read “Y hat sub i j” and it represents the value that would be expected for that observation if the experiment were repeated many, many times. Intuitively, it is the best guess that you have for the value that would be observed if a new measurement were done for <span class="math inline">\(Y_{ij}\)</span>, based on data and model. Keep in mind that the subscripts depend on the organization of the data. For the simple model we only need one subscript because there are no goups.</p>
-<p>Unfortunatley, the terms <em>error</em>, <em>deviation</em> and <em>residual</em> are frequently used interchangeably, but the good news is that the meaning can be easily derived from the context. <strong>Errors</strong> <span class="math inline">\(\epsilon\)</span> are usually unobservable and unknown, unless we create them in a computer simulation (see <a href="#math.simu">Simulation</a> section). The main reason for this is that all measurements include some sort of random component that we cannot control, and that we usually do not know all the values in the population of interest.</p>
+<p>The symbol <span class="math inline">\(\hat{Y}_{ij}\)</span> is read “Y hat sub i j” and it represents the value that would be expected for that observation if the experiment were repeated many, many times. Intuitively, it is the best guess that you have for the value that would be observed if a new measurement were done for <span class="math inline">\(Y_{ij}\)</span>, based on data and model. Keep in mind that the subscripts depend on the organization of the data. For the simple model we only need one subscript because there are no groups.</p>
+<p>Unfortunately, the terms <em>error</em>, <em>deviation</em> and <em>residual</em> are frequently used interchangeably, but the good news is that the meaning can be easily derived from the context. <strong>Errors</strong> <span class="math inline">\(\epsilon\)</span> are usually not observable and unknown, unless we create them in a computer simulation (see <a href="#math.simu">Simulation</a> section). The main reason for this is that all measurements include some sort of random component that we cannot control, and that we usually do not know all the values in the population of interest; we only have a sample.</p>
 <p>Usually, population parameters are unknown and have to be estimated using samples, which is a main focus in statistics. With a model and a sample we can estimate parameter values, such as <span class="math inline">\(\hat{\mu}\)</span> and then by the difference we can estimate the errors. Estimated errors are called <strong>residuals</strong> in part because they are the parts of the observations that remain after all other parts accounted for by the model are subtracted. The total <strong>deviation</strong> is the difference between the value observed <span class="math inline">\(Y_{ij}\)</span> and the overall mean <span class="math inline">\(\mu_{..}\)</span>, typically estimated with the overall average <span class="math inline">\(\bar{Y}_{..}\)</span>.</p>
-<p>In the two models above (equations <a href="#eq:math13">(1.13)</a> and <a href="#eq:math17">(1.17)</a> the equations to calculate the residuals are different, because observations are modeled differently. For the simple model, the best guess or estimate that we have for the production of a randomly selected cow (observation) is the overall average:</p>
+<p>In the two models above (equations <a href="#eq:math13">(1.13)</a> and <a href="#eq:math17">(1.17)</a> the equations to calculate the residuals are different, because observations are modeled differently. For the simple model, the best guess or estimate that we have for the production of a randomly selected cow (observation) is the overall average given in equation <a href="#eq:math19">(1.19)</a>. Because we are considering all cows <strong>not</strong> grouped by state, the overall average is equal to the weighted average of state averages, or more simply, the average of all cows, regardless of state:</p>
 <span class="math display" id="eq:math19">\[\begin{equation}
 \hat{Y}_i = \hat{\mu} = \bar{Y}_. \\[10pt]
 e = \hat{\epsilon} = Y_i - \hat{Y}_i  = Y_i - \hat{\mu} = Y_i - \bar{Y}_. \\[10pt]
-= Observation - Fixed Component
+= Observation - Fixed \ Component
 \tag{1.19}
 \end{equation}\]</span>
 <p>In this case of the simplest model, the error is equal to the total deviation, because the model does not have any other fixed component beyond the overall mean.</p>
-<p>For the better model in equation <a href="#eq:math17">(1.17)</a>, the fixed part of the model includes both an overall mean and a state effect <span class="math inline">\(\tau_{i.}\)</span> where <span class="math inline">\(i\)</span> is the subscript that specifies what state is being considered. The estimation for any given observation includes both components. Thus, the residual is the observed value <span class="math inline">\(Y_{ij}\)</span> minus the estimated overall mean <span class="math inline">\(\bar{Y}_{..}\)</span> minus the estimated state effect <span class="math inline">\(\hat{\tau}_{i.}\)</span>.</p>
+<p>For the better model in equation <a href="#eq:math17">(1.17)</a>, the fixed part of the model includes both an overall mean and a state effect <span class="math inline">\(\tau_{i.}\)</span> where <span class="math inline">\(i\)</span> is the subscript that specifies what state is being considered. The estimation for any given observation includes both components. Thus, the residual is the observed value <span class="math inline">\(Y_{ij}\)</span> minus the estimated overall mean <span class="math inline">\(\hat{\mu}_{..}\)</span> minus the estimated state effect <span class="math inline">\(\hat{\tau}_{i.}\)</span>.</p>
 <span class="math display" id="eq:math20">\[\begin{equation}
 \hat{Y}_{ij} = \hat{\mu}_{i.} = \bar{Y}_{i.} = \hat{\mu} + \hat{\tau}_{i.} = \bar{Y}_{..} + \hat{\tau}_{i.}\\[10pt]
 e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \bar{Y}_{..} - \hat{\tau}_{i.}. \\[10pt]
 \tag{1.20}
 \end{equation}\]</span>
-<p>Keep in mind that the effect of state will be a negative number for those states that have mean milk production that is lower than the average for the whole country. We can use the values reported by USDA (2017) to determine the state effect for all states (@ref(tab:math.tab01))</p>
+<p>Keep in mind that the effect of state will be a negative number for those states that have mean milk production that is lower than the average of all states. We can use the values reported by USDA (2017) to determine the state effects for all states.</p>
+<p>The dataframe <code>milk</code> has the data, including the state name, average number of milking cows in 2016 (in thousands), total milk production per year (in millions of kg) and average production per cow (in kg per day). First, we calculate the overall average to estimate <span class="math inline">\(\mu\)</span>. Then, the effect of each state is obtained by subtracting the overal mean from the average for each state. (Residuals cannot be calculated because the data reported is at the state level, not for individual cows.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(milk)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    50 obs. of  4 variables:
+##  $ State     : Factor w/ 50 levels &quot;Alabama&quot;,&quot;Alaska&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Kcows     : num  7 0.3 196 6 1762 ...
+##  $ tot.Mkg   : num  41.73 1.59 2171.8 35.83 18356.43 ...
+##  $ kg.cow.day: num  16.3 14.5 30.4 16.4 28.5 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(mu.hat &lt;-<span class="st"> </span><span class="kw">mean</span>(milk<span class="op">$</span>kg.cow.day))</code></pre></div>
+<pre><code>## [1] 25.11239</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk<span class="op">$</span>state.effect &lt;-<span class="st"> </span>milk<span class="op">$</span>kg.cow.d <span class="op">-</span><span class="st"> </span>mu.hat
+
+knitr<span class="op">::</span><span class="kw">kable</span>(
+   <span class="kw">list</span>(
+      milk[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>, <span class="kw">c</span>(<span class="st">&quot;State&quot;</span>, <span class="st">&quot;state.effect&quot;</span>)], 
+      milk[<span class="dv">26</span><span class="op">:</span><span class="dv">50</span>, <span class="kw">c</span>(<span class="st">&quot;State&quot;</span>, <span class="st">&quot;state.effect&quot;</span>)]
+   ),
+   <span class="dt">booktabs =</span> <span class="ot">TRUE</span>, 
+   <span class="dt">row.names =</span> <span class="ot">FALSE</span>, 
+   <span class="dt">digits =</span> <span class="dv">1</span>,
+   <span class="dt">caption =</span> <span class="st">&#39;Effect of state on average milk production per cow per day.&#39;</span>
+)</code></pre></div>
 <table class="kable_wrapper">
 <caption>
-(#tab:math.tab01)Milk production per lactating dairy cow in the US, by state in 2016. Based on USDA reports.
+<span id="tab:unnamed-chunk-11">Table 1.1: </span>Effect of state on average milk production per cow per day.
 </caption>
 <tbody>
 <tr>
@@ -484,109 +740,109 @@ e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \
 <thead>
 <tr class="header">
 <th align="left">State</th>
-<th align="right">kg.d</th>
+<th align="right">state.effect</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">Alabama</td>
-<td align="right">16.33306</td>
+<td align="right">-8.8</td>
 </tr>
 <tr class="even">
 <td align="left">Alaska</td>
-<td align="right">14.49880</td>
+<td align="right">-10.6</td>
 </tr>
 <tr class="odd">
 <td align="left">Arizona</td>
-<td align="right">30.35838</td>
+<td align="right">5.2</td>
 </tr>
 <tr class="even">
 <td align="left">Arkansas</td>
-<td align="right">16.36288</td>
+<td align="right">-8.7</td>
 </tr>
 <tr class="odd">
 <td align="left">California</td>
-<td align="right">28.54277</td>
+<td align="right">3.4</td>
 </tr>
 <tr class="even">
 <td align="left">Colorado</td>
-<td align="right">32.28584</td>
+<td align="right">7.2</td>
 </tr>
 <tr class="odd">
 <td align="left">Connecticut</td>
-<td align="right">26.68615</td>
+<td align="right">1.6</td>
 </tr>
 <tr class="even">
 <td align="left">Delaware</td>
-<td align="right">23.73593</td>
+<td align="right">-1.4</td>
 </tr>
 <tr class="odd">
 <td align="left">Florida</td>
-<td align="right">25.28933</td>
+<td align="right">0.2</td>
 </tr>
 <tr class="even">
 <td align="left">Georgia</td>
-<td align="right">27.07388</td>
+<td align="right">2.0</td>
 </tr>
 <tr class="odd">
 <td align="left">Hawaii</td>
-<td align="right">18.07162</td>
+<td align="right">-7.0</td>
 </tr>
 <tr class="even">
 <td align="left">Idaho</td>
-<td align="right">30.62929</td>
+<td align="right">5.5</td>
 </tr>
 <tr class="odd">
 <td align="left">Illinois</td>
-<td align="right">25.15885</td>
+<td align="right">0.0</td>
 </tr>
 <tr class="even">
 <td align="left">Indiana</td>
-<td align="right">28.03574</td>
+<td align="right">2.9</td>
 </tr>
 <tr class="odd">
 <td align="left">Iowa</td>
-<td align="right">29.37042</td>
+<td align="right">4.3</td>
 </tr>
 <tr class="even">
 <td align="left">Kansas</td>
-<td align="right">28.33524</td>
+<td align="right">3.2</td>
 </tr>
 <tr class="odd">
 <td align="left">Kentucky</td>
-<td align="right">22.45469</td>
+<td align="right">-2.7</td>
 </tr>
 <tr class="even">
 <td align="left">Louisiana</td>
-<td align="right">17.50121</td>
+<td align="right">-7.6</td>
 </tr>
 <tr class="odd">
 <td align="left">Maine</td>
-<td align="right">26.09710</td>
+<td align="right">1.0</td>
 </tr>
 <tr class="even">
 <td align="left">Maryland</td>
-<td align="right">24.75123</td>
+<td align="right">-0.4</td>
 </tr>
 <tr class="odd">
 <td align="left">Massachusetts</td>
-<td align="right">22.26580</td>
+<td align="right">-2.8</td>
 </tr>
 <tr class="even">
 <td align="left">Michigan</td>
-<td align="right">32.25726</td>
+<td align="right">7.1</td>
 </tr>
 <tr class="odd">
 <td align="left">Minnesota</td>
-<td align="right">26.05609</td>
+<td align="right">0.9</td>
 </tr>
 <tr class="even">
 <td align="left">Mississippi</td>
-<td align="right">17.89515</td>
+<td align="right">-7.2</td>
 </tr>
 <tr class="odd">
 <td align="left">Missouri</td>
-<td align="right">19.38890</td>
+<td align="right">-5.7</td>
 </tr>
 </tbody>
 </table>
@@ -596,109 +852,109 @@ e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \
 <thead>
 <tr class="header">
 <th align="left">State</th>
-<th align="right">kg.d</th>
+<th align="right">state.effect</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">Montana</td>
-<td align="right">26.18533</td>
+<td align="right">1.1</td>
 </tr>
 <tr class="even">
 <td align="left">Nebraska</td>
-<td align="right">28.97648</td>
+<td align="right">3.9</td>
 </tr>
 <tr class="odd">
 <td align="left">Nevada</td>
-<td align="right">27.33982</td>
+<td align="right">2.2</td>
 </tr>
 <tr class="even">
 <td align="left">NewHampshire</td>
-<td align="right">25.20980</td>
+<td align="right">0.1</td>
 </tr>
 <tr class="odd">
 <td align="left">NewJersey</td>
-<td align="right">21.65935</td>
+<td align="right">-3.5</td>
 </tr>
 <tr class="even">
 <td align="left">NewMexico</td>
-<td align="right">30.42052</td>
+<td align="right">5.3</td>
 </tr>
 <tr class="odd">
 <td align="left">NewYork</td>
-<td align="right">29.59535</td>
+<td align="right">4.5</td>
 </tr>
 <tr class="even">
 <td align="left">NorthCarolina</td>
-<td align="right">26.06976</td>
+<td align="right">1.0</td>
 </tr>
 <tr class="odd">
 <td align="left">NorthDakota</td>
-<td align="right">26.79675</td>
+<td align="right">1.7</td>
 </tr>
 <tr class="even">
 <td align="left">Ohio</td>
-<td align="right">25.94176</td>
+<td align="right">0.8</td>
 </tr>
 <tr class="odd">
 <td align="left">Oklahoma</td>
-<td align="right">23.24257</td>
+<td align="right">-1.9</td>
 </tr>
 <tr class="even">
 <td align="left">Oregon</td>
-<td align="right">25.77896</td>
+<td align="right">0.7</td>
 </tr>
 <tr class="odd">
 <td align="left">Pennsylvania</td>
-<td align="right">25.41857</td>
+<td align="right">0.3</td>
 </tr>
 <tr class="even">
 <td align="left">RhodeIsland</td>
-<td align="right">21.74758</td>
+<td align="right">-3.4</td>
 </tr>
 <tr class="odd">
 <td align="left">SouthCarolina</td>
-<td align="right">20.71240</td>
+<td align="right">-4.4</td>
 </tr>
 <tr class="even">
 <td align="left">SouthDakota</td>
-<td align="right">27.51256</td>
+<td align="right">2.4</td>
 </tr>
 <tr class="odd">
 <td align="left">Tennessee</td>
-<td align="right">20.59310</td>
+<td align="right">-4.5</td>
 </tr>
 <tr class="even">
 <td align="left">Texas</td>
-<td align="right">28.18487</td>
+<td align="right">3.1</td>
 </tr>
 <tr class="odd">
 <td align="left">Utah</td>
-<td align="right">28.29920</td>
+<td align="right">3.2</td>
 </tr>
 <tr class="even">
 <td align="left">Vermont</td>
-<td align="right">26.03993</td>
+<td align="right">0.9</td>
 </tr>
 <tr class="odd">
 <td align="left">Virginia</td>
-<td align="right">23.79061</td>
+<td align="right">-1.3</td>
 </tr>
 <tr class="even">
 <td align="left">Washington</td>
-<td align="right">29.94207</td>
+<td align="right">4.8</td>
 </tr>
 <tr class="odd">
 <td align="left">WestVirginia</td>
-<td align="right">18.50284</td>
+<td align="right">-6.6</td>
 </tr>
 <tr class="even">
 <td align="left">Wisconsin</td>
-<td align="right">29.26852</td>
+<td align="right">4.2</td>
 </tr>
 <tr class="odd">
 <td align="left">Wyoming</td>
-<td align="right">28.95535</td>
+<td align="right">3.8</td>
 </tr>
 </tbody>
 </table>
@@ -708,41 +964,293 @@ e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \
 </table>
 <div id="math.simu" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Simulation: Population is Known</h3>
+<p>A simulation consists of making up a model with known parameters and generatign data by taking random samples from the theoretical distribution specified in the model. Then, the data are analyzed as if the model were not known and results compared to the known model values. This is an empirical method to check if the method of analysis leads to good estimates. By repeating the random sampling many times, we can get simulated distributions of the estimated parameters.</p>
+<p>Here, we simply use a simulation to show how sample results and estimated quantities are different from the real values. We cannot do this with real data because we tpically do not know the true parameter values.</p>
+<p>The simulation will create data analogous to the US milk production data. For simplicity, we will use a sample of 100 cows per state. Thus, the weighted and unweighted averages will be the same. We will use the same values as above for state means. Note that here we use the averages reported by USDA as if they were the known means for each state. Because the variance within each state is not known, we use <span class="math inline">\(\sigma = 4\)</span> for all states. The model used to generate data is:</p>
+<span class="math display" id="eq:math21">\[\begin{equation}
+Y_{ij} = \mu_{i.} + \epsilon_{ij} = \mu_{..} + \tau_{i.} + \epsilon_{ij} \\
+\epsilon_{ij} \sim N(0, \ \sigma = 4) 
+\tag{1.21}
+\end{equation}\]</span>
+<p>For each state, we simulate 100 observations by generating 100 random draws from a normal distribution with mean 0 standard deviation 4 and to each we add the state average. Figure @ref(fig:resdl.vs.error) shows that residuals are not equal to the true errors, but they are related.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk.sim.dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">State =</span> <span class="kw">rep</span>(milk<span class="op">$</span>State, <span class="dv">100</span>), 
+                           <span class="dt">state.mean =</span> <span class="kw">rep</span>(milk<span class="op">$</span>kg.cow.day, <span class="dv">100</span>),
+                           <span class="dt">epsilon =</span> <span class="kw">rnorm</span>(<span class="dv">5000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">4</span>))
+
+milk.sim.dat<span class="op">$</span>Y &lt;-<span class="st"> </span><span class="kw">with</span>(milk.sim.dat, state.mean <span class="op">+</span><span class="st"> </span>epsilon)
+
+state.avg &lt;-<span class="st"> </span><span class="kw">aggregate</span>(Y <span class="op">~</span><span class="st"> </span>State, 
+                       <span class="dt">data =</span> milk.sim.dat,
+                       <span class="dt">FUN =</span> mean)
+
+<span class="kw">names</span>(state.avg)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;state.average&quot;</span>
+
+milk.sim.dat &lt;-<span class="st"> </span><span class="kw">merge</span>(milk.sim.dat, state.avg, <span class="dt">by =</span> <span class="st">&quot;State&quot;</span>, <span class="dt">all =</span> <span class="ot">TRUE</span>)
+
+milk.sim.dat<span class="op">$</span>residual =<span class="st"> </span><span class="kw">with</span>(milk.sim.dat, Y <span class="op">-</span><span class="st"> </span>state.average)
+
+<span class="kw">str</span>(milk.sim.dat)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    5000 obs. of  6 variables:
+##  $ State        : Factor w/ 50 levels &quot;Alabama&quot;,&quot;Alaska&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ state.mean   : num  16.3 16.3 16.3 16.3 16.3 ...
+##  $ epsilon      : num  -2.16 -4.86 -1.38 -6.27 -5.76 ...
+##  $ Y            : num  14.2 11.5 15 10.1 10.6 ...
+##  $ state.average: num  16 16 16 16 16 ...
+##  $ residual     : num  -1.87 -4.57 -1.09 -5.98 -5.47 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(residual <span class="op">~</span><span class="st"> </span>epsilon, milk.sim.dat, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</code></pre></div>
+<div class="figure">
+<img src="03.0_MathSymbols_files/figure-html/resdl.vs.error-1.png" alt="Plot of estimated error or residuals vs. the true errors based on a simulation. The true errors come from a normal distribution, whereas the residuals were estimated as the difference between each observation and the corresponding group average. The green line is Y = X." width="672" />
+<p class="caption">
+(#fig:resdl.vs.error)Plot of estimated error or residuals vs. the true errors based on a simulation. The true errors come from a normal distribution, whereas the residuals were estimated as the difference between each observation and the corresponding group average. The green line is Y = X.
+</p>
 </div>
-<div id="ssGeom.math" class="section level3">
-<h3><span class="header-section-number">1.5.2</span> Geometry of sums of squares (Maybe delete or mark as optional)</h3>
-<p>Remember the Pythagorean theorem? In a right triangle the square of the hypothenuse equals the sum of the squares of the sides. This can be extended to a polyhedron with right angles everywhere. The square of a diagonal in 3D is the sum of the three sides of the polyhedron. This square is also the sum of the square of the bottom hypothenuse and the vertical side squared. ** Add figure with labels** Imagine that we have a sample with 3 observations. Make a box where the lenght of each side is one of the observations and then consider the 3D diagonal. The sum of squares of the deviations is equal to the length of the diagonal.</p>
-<p>The total sum of squares …</p>
 </div>
 </div>
 <div id="math.optim" class="section level2">
 <h2><span class="header-section-number">1.6</span> Optimization</h2>
-<p>One way to “guess” or estimate the mean of a distribution that can be sampled directly is to take the average. The average minimizes the sum of the squared deviations of the obervations. Minimization of sums of squares is the most common method we will use to make estimates, but it is not the onlly method. Other method is to minimize the sum of the absolute deviations. The median of a set of observations is the value that minimizes the absolute deviations. “Absolute” means that all deviations are made positive.</p>
-<p>Show an interactive graph where the values SS and SAD are shown as functions of the guessed mean. With and without outliers.</p>
-<p>In many cases, the optimal value can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For more advanced statistical methods, there are no equations available, so numerical computations are used to approximated the optimal estimates.</p>
-<p>Show pseudocode (set of ligical instructions in natural language) for an algorithm to find out what number I am thinking of just by asking if it is larger than a value that you choose for each question (or to numerically approximate a root of a polynomial).</p>
+<p>One way to “guess” or estimate the mean of a distribution that can be sampled directly is to take the average. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares is the most common method we will use to make estimates, but it is not the only method. Other method is to minimize the sum of the absolute deviations. The median of a set of observations is the value that minimizes the absolute deviations. “Absolute” means that all deviations are made positive.</p>
+<p><strong>Show an interactive graph where the values SS and SAD are shown as functions of the guessed mean. With and without outliers.</strong></p>
+<p>In many cases, the optimal value can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For more advanced statistical methods, there are no equations available, so numerical computations are used to approximate the optimal estimates.</p>
 <p>Say what a polynomial is.</p>
 </div>
 <div id="math.symbls" class="section level2">
 <h2><span class="header-section-number">1.7</span> Symbols and Terms</h2>
-<p>Observation Expectation Variance Mean Average Sample Variance Model White noise Random <span class="math inline">\(Y_i\)</span> <span class="math inline">\(Y_{ij}\)</span> <span class="math inline">\(Y_{ijh}\)</span> <span class="math inline">\(\epsilon\)</span> <span class="math inline">\(\bar{Y}_{i.}\)</span> <span class="math inline">\(\hat{Y}_{ij}\)</span> <span class="math inline">\(\hat{\mu}\)</span> <span class="math inline">\(\bar{Y}_{i.}\)</span> <span class="math inline">\(\hat{\tau}_{i.}\)</span> <span class="math inline">\(\tau_{i.}\)</span> <span class="math inline">\(\bar{Y}_{..}\)</span> <span class="math inline">\(\hat{Y}_i\)</span> <span class="math inline">\(\mu_{i.}\)</span> <span class="math inline">\(\hat{\sigma^2}\)</span> <span class="math inline">\(\sigma^2\)</span> <span class="math inline">\(\sigma\)</span> <span class="math inline">\(N(0, \sigma^2)\)</span> <span class="math inline">\(\sim\)</span> <span class="math inline">\(f(Y) = \frac{1}{{\hat{\sigma} \sqrt{2\pi}}} \  \mathrm{exp} \left( { - \left( {x - \hat{\mu} } \right) ^ 2 / {2\hat{\sigma}^2}} \right)\)</span> <span class="math inline">\(\sum_{i=1}^{i=4} Y_i\)</span> <span class="math inline">\(\sum\)</span> <span class="math display">\[
-\]</span> <span class="math display">\[
-\]</span> <span class="math display">\[
-\]</span> <span class="math display">\[
-\]</span> <span class="math display">\[
-\]</span> <span class="math display">\[
-\]</span> ## Exercises and Solutions {#math.exe}</p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="81%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term or symbol</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Observation</td>
+<td>Result of measuring one or several variables in one unit of experimental material. For example, the milk production of one cow in a day.</td>
+</tr>
+<tr class="even">
+<td>Expectation</td>
+<td>The mean of a random variable. For example the expectation of number of dots when rolling a cubic die is 3.5.</td>
+</tr>
+<tr class="odd">
+<td>Variance</td>
+<td>The expected value of the squared total deviation of a random variable. For a die the variance is 2.9166667</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>Expectation</td>
+</tr>
+<tr class="odd">
+<td>Average</td>
+<td>Sum of sample values divided by sample size. For example, the average of a sample of 4 rolls of a die {5, 5, 5, 4} is (5 + 5 + 5 + 4)/4 = 4.75. The average is usually used to estimate the mean.</td>
+</tr>
+<tr class="even">
+<td>Sample Variance</td>
+<td>Estimated variance based on a sample. Average of the square deviations from observation to average, but divided by sample size minus the number of other parameters estimated. In the simplest case, the only estimated parameter is the mean so the divisor is n-1.</td>
+</tr>
+<tr class="odd">
+<td>Model</td>
+<td>Sets of equations that describe the components of each observation.</td>
+</tr>
+<tr class="even">
+<td>White noise</td>
+<td>Random variation with unstructured normal distribution. Independent errors with normal distribution and equal variance.</td>
+</tr>
+<tr class="odd">
+<td>Random</td>
+<td>Describes a process or experiment whose result is not known with certainty beforehand.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Y_i\)</span></td>
+<td>Value taken by the <em>ith</em> instance of the variable Y. One observation of Y.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Y_{ij}\)</span></td>
+<td>Y sub i j; value taken by the <em>jth</em> instance of the variable Y in the <em>ith</em> group. One observation of Y when there are groups in one dimension. Value of variable Y in row <em>i</em> and column <em>j</em>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat{Y}_{ij}\)</span></td>
+<td>Y hat sub i j; estimated expected value of Y for row i and column j.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Y_{ijh}\)</span></td>
+<td>Y sub i j h. Value taken by the <em>hth</em> instance of the variable Y in the <em>ijth</em> group . One observation of Y when there are groups in two dimensions. Value of variable Y in row <em>i</em>, column <em>j</em> and page <em>h</em>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\epsilon\)</span></td>
+<td>Epsilon. Random error component of a model. Usually modelled itself as having a normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\bar{Y}_{i.}\)</span></td>
+<td>Y bar sub i dot; average of all Y values in group i.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{Y}_{..}\)</span></td>
+<td>Y bar dot dot; average of all values.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hat{\mu}\)</span></td>
+<td>Mu hat; estimated mean.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat{\tau}_{i.}\)</span></td>
+<td>Tau hat sub i; estimated effect of treatment i.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\tau_{i.}\)</span></td>
+<td>Tau sub i; effect of treatment i.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mu_{i.}\)</span></td>
+<td>Mu sub i; mean for group (usually treatment) i.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hat{\sigma^2}\)</span></td>
+<td>Sigma squared hat; estimated variance of something, usually variance of epsilon.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>Sigma squared; variance of something, usually variance of epsilon.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma\)</span></td>
+<td>Sigma, standard deviation; square root of variance.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(N(0, \sigma^2)\)</span></td>
+<td>Normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sim\)</span></td>
+<td>In R formulas: “is modeled as”; in math equations: “is distributed as.”</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sum_{i=1}^{i=4} Y_i\)</span></td>
+<td>Sum of Y sub i for i equal 1 to 4;</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sum\)</span></td>
+<td>Capital Sigma, summation symbol</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="math.exe" class="section level2">
+<h2><span class="header-section-number">1.8</span> Exercises and Solutions</h2>
+<div id="exercise-1" class="section level3">
+<h3><span class="header-section-number">1.8.1</span> Exercise 1</h3>
+<p>Write pseudo-code (set of logical instructions in natural language) for an algorithm to find out what integer between 0 and 1000 I am thinking of just by asking if it is larger than a value that you choose for each question (or to numerically approximate a root of a polynomial).</p>
+<p><strong>Solution:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Set max = 1000</li>
+<li>Set min = 0</li>
+<li>Set mid = (max + min)/2</li>
+<li>Ask if number is greater than mid</li>
+<li>if YES, set min = mid and go to step 3 if NO ask if number is equal to mid</li>
+<li>if YES stop if NO set max = mid and go to step 3</li>
+</ol>
+</div>
+<div id="exercise-2" class="section level3">
+<h3><span class="header-section-number">1.8.2</span> Exercise 2</h3>
+<p>Expand the following summations with symbols, then with numbers and calculate it using the data in the table:</p>
+<p><span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})\]</span> <span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2\]</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+i
+</th>
+<th style="text-align:right;">
+Y_i
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>i</th>
+<th><span class="math inline">\(Y_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Solution:</strong></p>
+<p><span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..}) = (Y_1 - \bar{Y}_{..}) + (Y_2 - \bar{Y}_{..}) + (Y_3 - \bar{Y}_{..}) + (Y_4 - \bar{Y}_{..})\\[15pt]
+= (6 - 4) + (2 - 4) + (3 - 4) + (5 - 4) = 0\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2 = (Y_1 - \bar{Y}_{..})^2 + (Y_2 - \bar{Y}_{..})^2 + (Y_3 - \bar{Y}_{..})^2 + (Y_4 - \bar{Y}_{..})^2\\[15pt]
+= (6 - 4)^2 + (2 - 4)^2 + (3 - 4)^2 + (5 - 4)^2 = 4 + 4 + 1 + 1 = 10\]</span></p>
+</div>
+<div id="exercise-3" class="section level3">
+<h3><span class="header-section-number">1.8.3</span> Exercise 3</h3>
+<p>The following table has values for <span class="math inline">\(Y_{ij}\)</span>. States are in the rows, and each row has columns for different cows sampled from each state. What is the sample size r for all states? What is the value of k? Write down the equation with summation and symbols and then with numbers for Alabama’s average.</p>
+</div>
 </div>
 <div id="math.hwk" class="section level2">
-<h2><span class="header-section-number">1.8</span> Homework</h2>
+<h2><span class="header-section-number">1.9</span> Homework</h2>
 </div>
 <div id="math.lab" class="section level2">
-<h2><span class="header-section-number">1.9</span> Laboratory Exercises</h2>
+<h2><span class="header-section-number">1.10</span> Laboratory Exercises</h2>
 <div id="plant-sciences" class="section level3">
-<h3><span class="header-section-number">1.9.1</span> Plant Sciences</h3>
+<h3><span class="header-section-number">1.10.1</span> Plant Sciences</h3>
 </div>
 <div id="animal-sciences" class="section level3">
-<h3><span class="header-section-number">1.9.2</span> Animal Sciences</h3>
+<h3><span class="header-section-number">1.10.2</span> Animal Sciences</h3>
 </div>
 </div>
 </div>
