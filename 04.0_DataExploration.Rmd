@@ -35,8 +35,707 @@ naming variables
 
 ## Laboratory Exercises
 
-### Plant Sciences
+### Plant Sciences Lab
 
-### Animal Sciences
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+
+---
+title: "Lab01: Data Exploration and Summaries"
+author: "YourFirstName YourLastName"
+date: "today's date here"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+### Instructions
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab01email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. A completed example follows.
+
+###Example Question with Answer
+
+Create a vector with 5 random numbers from the standard normal distribution. Call it "x." Calculate the average and variance of the values in x. Create a second 5-number vector using the same procedure. Call it "y." Calculate the sum of the elements in y. Make a nicely formatted table showing x and y as columns. Calculate x + y and then sum(x) + sum(y). Discuss the difference between the last two calculations.
+
+```{r}
+
+library(pander) # to do nice tables
+
+x = rnorm(5)
+
+mean(x)
+
+var(x)
+
+y = rnorm(5)
+
+sum(y)
+
+pander(data.frame(x = x, y = y))
+
+x + y
+
+sum(x) + sum(y)
+
+```
+The x + y and sum(x) + sum(y) are totally different. The former results in a vector of five numbers, each number being the sum of the corresponding elements in x and y. The latter results in a single number that is the sum of the 5 numbers in x plus the 5 numbers in y. (Full credit!)
+
+
+### Part 1.  [10 points]
+
+Load the iris data that comes with R into a data frame called myiris, and get its structure. Use help() to learn what the iris data are about. When were the data first published? Hint: you need help. [5 points]
+
+
+```{r iris.info, echo = TRUE, include = TRUE}
+
+myiris <- iris # put iris data into dataframe object or container called myiris
+
+str(myiris)
+
+myiris <- read.table(header = TRUE, text = "
+Sepal.Length	Sepal.Width	Petal.Length	Petal.Width	Species
+5.1	3.5	1.4	0.2	setosa
+4.9	3	1.4	0.2	setosa
+4.7	3.2	1.3	0.2	setosa
+4.6	3.1	1.5	0.2	setosa
+5	3.6	1.4	0.2	setosa
+5.4	3.9	1.7	0.4	setosa
+4.6	3.4	1.4	0.3	setosa
+5	3.4	1.5	0.2	setosa
+4.4	2.9	1.4	0.2	setosa
+4.9	3.1	1.5	0.1	setosa
+5.4	3.7	1.5	0.2	setosa
+4.8	3.4	1.6	0.2	setosa
+4.8	3	1.4	0.1	setosa
+4.3	3	1.1	0.1	setosa
+5.8	4	1.2	0.2	setosa
+5.7	4.4	1.5	0.4	setosa
+5.4	3.9	1.3	0.4	setosa
+5.1	3.5	1.4	0.3	setosa
+5.7	3.8	1.7	0.3	setosa
+5.1	3.8	1.5	0.3	setosa
+5.4	3.4	1.7	0.2	setosa
+5.1	3.7	1.5	0.4	setosa
+4.6	3.6	1	0.2	setosa
+5.1	3.3	1.7	0.5	setosa
+4.8	3.4	1.9	0.2	setosa
+5	3	1.6	0.2	setosa
+5	3.4	1.6	0.4	setosa
+5.2	3.5	1.5	0.2	setosa
+5.2	3.4	1.4	0.2	setosa
+4.7	3.2	1.6	0.2	setosa
+4.8	3.1	1.6	0.2	setosa
+5.4	3.4	1.5	0.4	setosa
+5.2	4.1	1.5	0.1	setosa
+5.5	4.2	1.4	0.2	setosa
+4.9	3.1	1.5	0.2	setosa
+5	3.2	1.2	0.2	setosa
+5.5	3.5	1.3	0.2	setosa
+4.9	3.6	1.4	0.1	setosa
+4.4	3	1.3	0.2	setosa
+5.1	3.4	1.5	0.2	setosa
+5	3.5	1.3	0.3	setosa
+4.5	2.3	1.3	0.3	setosa
+4.4	3.2	1.3	0.2	setosa
+5	3.5	1.6	0.6	setosa
+5.1	3.8	1.9	0.4	setosa
+4.8	3	1.4	0.3	setosa
+5.1	3.8	1.6	0.2	setosa
+4.6	3.2	1.4	0.2	setosa
+5.3	3.7	1.5	0.2	setosa
+5	3.3	1.4	0.2	setosa
+7	3.2	4.7	1.4	versicolor
+6.4	3.2	4.5	1.5	versicolor
+6.9	3.1	4.9	1.5	versicolor
+5.5	2.3	4	1.3	versicolor
+6.5	2.8	4.6	1.5	versicolor
+5.7	2.8	4.5	1.3	versicolor
+6.3	3.3	4.7	1.6	versicolor
+4.9	2.4	3.3	1	versicolor
+6.6	2.9	4.6	1.3	versicolor
+5.2	2.7	3.9	1.4	versicolor
+5	2	3.5	1	versicolor
+5.9	3	4.2	1.5	versicolor
+6	2.2	4	1	versicolor
+6.1	2.9	4.7	1.4	versicolor
+5.6	2.9	3.6	1.3	versicolor
+6.7	3.1	4.4	1.4	versicolor
+5.6	3	4.5	1.5	versicolor
+5.8	2.7	4.1	1	versicolor
+6.2	2.2	4.5	1.5	versicolor
+5.6	2.5	3.9	1.1	versicolor
+5.9	3.2	4.8	1.8	versicolor
+6.1	2.8	4	1.3	versicolor
+6.3	2.5	4.9	1.5	versicolor
+6.1	2.8	4.7	1.2	versicolor
+6.4	2.9	4.3	1.3	versicolor
+6.6	3	4.4	1.4	versicolor
+6.8	2.8	4.8	1.4	versicolor
+6.7	3	5	1.7	versicolor
+6	2.9	4.5	1.5	versicolor
+5.7	2.6	3.5	1	versicolor
+5.5	2.4	3.8	1.1	versicolor
+5.5	2.4	3.7	1	versicolor
+5.8	2.7	3.9	1.2	versicolor
+6	2.7	5.1	1.6	versicolor
+5.4	3	4.5	1.5	versicolor
+6	3.4	4.5	1.6	versicolor
+6.7	3.1	4.7	1.5	versicolor
+6.3	2.3	4.4	1.3	versicolor
+5.6	3	4.1	1.3	versicolor
+5.5	2.5	4	1.3	versicolor
+5.5	2.6	4.4	1.2	versicolor
+6.1	3	4.6	1.4	versicolor
+5.8	2.6	4	1.2	versicolor
+5	2.3	3.3	1	versicolor
+5.6	2.7	4.2	1.3	versicolor
+5.7	3	4.2	1.2	versicolor
+5.7	2.9	4.2	1.3	versicolor
+6.2	2.9	4.3	1.3	versicolor
+5.1	2.5	3	1.1	versicolor
+5.7	2.8	4.1	1.3	versicolor
+6.3	3.3	6	2.5	virginica
+5.8	2.7	5.1	1.9	virginica
+7.1	3	5.9	2.1	virginica
+6.3	2.9	5.6	1.8	virginica
+6.5	3	5.8	2.2	virginica
+7.6	3	6.6	2.1	virginica
+4.9	2.5	4.5	1.7	virginica
+7.3	2.9	6.3	1.8	virginica
+6.7	2.5	5.8	1.8	virginica
+7.2	3.6	6.1	2.5	virginica
+6.5	3.2	5.1	2	virginica
+6.4	2.7	5.3	1.9	virginica
+6.8	3	5.5	2.1	virginica
+5.7	2.5	5	2	virginica
+5.8	2.8	5.1	2.4	virginica
+6.4	3.2	5.3	2.3	virginica
+6.5	3	5.5	1.8	virginica
+7.7	3.8	6.7	2.2	virginica
+7.7	2.6	6.9	2.3	virginica
+6	2.2	5	1.5	virginica
+6.9	3.2	5.7	2.3	virginica
+5.6	2.8	4.9	2	virginica
+7.7	2.8	6.7	2	virginica
+6.3	2.7	4.9	1.8	virginica
+6.7	3.3	5.7	2.1	virginica
+7.2	3.2	6	1.8	virginica
+6.2	2.8	4.8	1.8	virginica
+6.1	3	4.9	1.8	virginica
+6.4	2.8	5.6	2.1	virginica
+7.2	3	5.8	1.6	virginica
+7.4	2.8	6.1	1.9	virginica
+7.9	3.8	6.4	2	virginica
+6.4	2.8	5.6	2.2	virginica
+6.3	2.8	5.1	1.5	virginica
+6.1	2.6	5.6	1.4	virginica
+7.7	3	6.1	2.3	virginica
+6.3	3.4	5.6	2.4	virginica
+6.4	3.1	5.5	1.8	virginica
+6	3	4.8	1.8	virginica
+6.9	3.1	5.4	2.1	virginica
+6.7	3.1	5.6	2.4	virginica
+6.9	3.1	5.1	2.3	virginica
+5.8	2.7	5.1	1.9	virginica
+6.8	3.2	5.9	2.3	virginica
+6.7	3.3	5.7	2.5	virginica
+6.7	3	5.2	2.3	virginica
+6.3	2.5	5	1.9	virginica
+6.5	3	5.2	2	virginica
+6.2	3.4	5.4	2.3	virginica
+5.9	3	5.1	1.8	virginica
+")
+
+## add code to ask for information about dataframe object iris
+
+
+help(iris)
+
+```
+
+When were the data first published? Your answer here:.
+
+
+### Part 2.  [15 points]
+
+Do a web search and explain the use of the coefficient of variation and one of its main disadvantages. Hint: what happens when your mean is zero or close to zero? [15 points]
+
+Your answer here: 
+
+
+
+### Part 3.  [15 points]
+
+Make a data frame and a nicely formatted table containing the following statistics: mean, median, range, minimum, maximum, standard deviation, coefficient of variation and sample size for each of the measurements (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) in myiris data. What variable has the most variation relative to the average? [15 points]
+
+```{r summary.table, echo=FALSE}
+
+mymeans <- sapply(X = myiris[ , 1:4], FUN = mean) # put means in a column
+
+mymedians <- sapply(X = myiris[, 1:4], FUN = median)
+
+# add formula to get the column with minima here
+
+mymins <- sapply(X = myiris[, 1:4], FUN = min)
+
+mymaxs <- sapply(X = myiris[, 1:4], FUN = max)
+
+myranges <- mymaxs - mymins
+
+# add formula to get standard deviation here
+
+mysds <- sapply(X = myiris[, 1:4], FUN = sd)
+
+mycvs <- mysds / mymeans # calculate coeff. of variation
+
+myNs <- sapply(X = myiris[, 1:4], FUN = length) # calculate sample size
+
+# Put all columns together into a data frame object called "Table1"
+
+Table1 <- data.frame(Mean = mymeans, 
+                     Median = mymedians, 
+                     Min = mymins, 
+                     Max = mymaxs, 
+                     Range = myranges, 
+                     SD = mysds, 
+                     CV = mycvs, 
+                     N = myNs)
+
+pander(Table1) # use pander to create a nicely formatted table.
+
+
+```
+
+What variable has the most variation relative to the average? Your answer here:
+
+
+### Part 4.  [15 points]
+
+Make and print a nicely formatted frequency table for the sepal length of the flowers. Calculate the number of classes (bins) using the formula in the LabO1 instructive. Make a histogram using your calculations "by-hand" and then a new histogram using the hist() function. [15 points]
+
+```{r iris.hist, echo = TRUE, include = TRUE}
+
+(sample.size <- length(myiris$Sepal.Length))
+
+(nbins <- max(8, (1 + log(sample.size, 2))))
+
+myiris$bin <- cut(myiris$Sepal.Length, breaks = nbins) # create column with bin
+
+(freq.table <- as.data.frame(xtabs( ~myiris$bin))) # creates frequency table
+
+pander(freq.table) # format the table a little better
+
+plot(freq.table) # make histogram "by hand"
+
+hist(myiris$Sepal.Length) # by default it uses Sturges rule for bins.
+
+```
+
+
+### Part 5.  [15 points]
+
+Create two box and whisker plots for the sepal length. Label at least three of the elements in the plot. Create a new box and whisker plot with a *range* argument value of 0.5. [15 points]
+
+```{r iris.box, echo = TRUE, include = TRUE}
+
+boxplot(myiris$Sepal.Length) # enter the data frame name, $ and the variable name to designate the data used by boxplot
+
+text(x = 0.6, y = 5.8, labels = "Median")
+
+# Add two more labels at the correct locations by completing the code.
+# Use the x and y arguments to specify where the labels go.
+
+text(x = 0.6, y = 7.85, labels = "Upper")
+
+text(x = 0.6, y = 4.4, labels = "Lower")
+
+
+```
+
+### Part 6.  [10 points]
+
+What does the fivenum() function do? [5 points]
+
+Your answer here: 
+
+### Part 7.  [10 points]
+
+What function allows you to **combine** numbers to make numeric vectors? Use the function to make a vector with the numbers 1, 3, 4, 9 and call it "sa.vector." [5 points]
+
+```{r iris.c, echo = TRUE, include = TRUE}
+
+
+
+
+```
+
+What function allows you to **combine** numbers to make numeric vectors? Your answer here: 
+
+###Part 8.  [10 points]
+
+Knit this file into html. [10 points]
+
+##----------------END PLANT SCIENCES LAB-----------------###
+
+### Animal Sciences Lab
+
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+
+---
+title: "Lab01: Data Exploration and Summaries"
+author: "YourFirstName YourLastName"
+date: "today's date here"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+### Instructions
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab01email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. A completed example follows.
+
+###Example Question with Answer
+
+Create a vector with 5 random numbers from the standard normal distribution. Call it "x." Calculate the average and variance of the values in x. Create a second 5-number vector using the same procedure. Call it "y." Calculate the sum of the elements in y. Make a nicely formatted table showing x and y as columns. Calculate x + y and then sum(x) + sum(y). Discuss the difference between the last two calculations.
+
+```{r}
+
+library(pander) # to do nice tables
+
+x = rnorm(5)
+
+mean(x)
+
+var(x)
+
+y = rnorm(5)
+
+sum(y)
+
+pander(data.frame(x = x, y = y))
+
+x + y
+
+sum(x) + sum(y)
+
+```
+The x + y and sum(x) + sum(y) are totally different. The former results in a vector of five numbers, each number being the sum of the corresponding elements in x and y. The latter results in a single number that is the sum of the 5 numbers in x plus the 5 numbers in y. (Full credit!)
+
+
+### Part 1.  [10 points]
+
+Load the Heifer data into a data frame called myheifer, and get its structure. Use help() to learn about the structure function. The heifer data is a report from all heifers born in 2005. [5 points]
+
+
+```{r}
+
+myheifer <- read.table('Lab01HeiferData.csv', header=TRUE, sep=',') # put heifer data into dataframe object or container called myheifer
+
+str(myheifer)
+
+#Just reapting the data import process but instead of reading a CSV file, you can directly enter the data in text format
+myheifer <- read.table(header = TRUE, text = "
+Birth_weight	Wean_weight	Yearling_weight
+81	660	902
+63	455	690
+72	416	866
+71	434	730
+81	534	812
+86	520	788
+76	575	852
+82	625	946
+74	630	1040
+94	510	780
+88	470	668
+88	604	916
+79	456	622
+94	462	714
+82	682	925
+64	424	698
+70	520	776
+70	428	654
+70	450	680
+80	483	756
+66	512	814
+52	570	740
+80	648	872
+78	485	790
+70	534	764
+82	450	710
+79	416	698
+86	514	816
+82	412	700
+70	434	672
+86	520	738
+58	444	800
+87	514	868
+81	498	800
+82	596	986
+82	488	800
+67	472	722
+62	469	714
+72	658	910
+79	638	948
+80	592	894
+91	610	970
+82	640	886
+78	554	854
+74	528	808
+81	572	826
+82	570	870
+97	536	792
+84	562	882
+52	441	664
+72	656	838
+78	566	890
+86	548	868
+66	656	922
+54	493	788
+78	474	686
+76	431	682
+75	620	948
+77	660	970
+78	450	834
+91	630	976
+81	638	924
+68	546	840
+75	570	740
+86	592	730
+72	564	992
+112	602	878
+84	518	864
+58	402	806
+64	542	870
+85	495	780
+71	504	704
+78	590	880
+82	475	724
+82	493	684
+74	512	698
+72	490	696
+68	477	698
+42	398	646
+81	598	906
+76	596	922
+72	530	818
+72	584	794
+74	524	864
+68	516	800
+56	458	702
+82	594	896
+70	516	866
+88	532	846
+95	434	874
+76	474	788
+74	526	782
+88	522	784
+58	552	788
+68	572	818
+61	530	824
+74	532	866
+79	602	932
+88	614	952
+84	425	712
+61	514	746
+90	522	1010
+78	582	900
+78	564	764
+54	520	802
+85	518	946
+92	546	842
+78	427	698
+68	478	670
+71	554	762
+76	530	868
+84	544	850
+84	524	800
+76	475	812
+51	452	734
+65	540	642
+70	534	712
+78	684	1000
+44	519	836
+72	612	918
+62	580	950
+96	704	1066
+74	542	916
+78	582	864
+72	506	930
+84	479	834
+83	458	772
+76	506	844
+91	506	844
+73	548	804
+82	472	776
+84	506	756
+92	426	794
+80	520	976
+68	488	778
+83	432	616
+61	344	604
+62	486	784
+92	624	924
+84	600	806
+85	576	730
+67	444	654
+78	616	912
+94	634	922
+78	514	784
+82	616	928
+92	578	868
+84	499	724
+84	560	840
+80	536	802
+")
+
+## add code to ask for information about the str function 
+
+
+help(str)
+
+```
+
+What do the heifer data describe? Your answer here:
+
+
+### Part 2.  [15 points]
+
+Do a web search and explain the use of the coefficient of variation and one of its main disadvantages. Hint: what happens when your mean is zero or close to zero? [15 points]
+
+Your answer here: 
+
+
+
+### Part 3.  [15 points]
+
+Make a data frame and a nicely formatted table containing the following statistics: mean, median, range, minimum, maximum, standard deviation, coefficient of variation and sample size for each of the measurements (Birth_weight, Wean_weight, Yearling_weight) in myheifer data. What variable has the most variation relative to the average? [15 points]
+
+```{r summary.table, echo=FALSE}
+
+
+mymeans <- sapply(X = myheifer[, 1:3], FUN = mean) # put means in a column
+
+mymedians <- sapply(X = myheifer[, 1:3], FUN = median)
+
+# add formula to get the column with minima here
+
+mymins <- sapply(X = myheifer[, 1:3], FUN = min)
+
+mymaxs <- sapply(X = myheifer[, 1:3], FUN = max)
+
+myranges <- mymaxs - mymins
+
+# add formula to get standard deviation here
+
+mysds <- sapply(X = myheifer[, 1:3], FUN = sd)
+
+mycvs <- mysds / mymeans # calculate coeff. of variation
+
+myNs <- sapply(X = myheifer[, 1:3], FUN = length) # calculate sample size
+
+# Put all columns together into a data frame object called "Table1"
+
+Table1 <- data.frame(Mean = mymeans, 
+                     Median = mymedians, 
+                     Min = mymins, 
+                     Max = mymaxs, 
+                     Range = myranges, 
+                     SD = mysds, 
+                     CV = mycvs, 
+                     N = myNs)
+
+pander(Table1) # use pander to create a nicely formatted table.
+
+
+```
+
+What variable has the most variation relative to the average? Your answer here:
+
+
+### Part 4.  [15 points]
+
+Make and print a nicely formatted frequency table for the birth weight of the heifers. Calculate the number of classes (bins) using the formula in the LabO1 instructive. Make a histogram using your calculations "by-hand" and then a new histogram using the hist() function. [15 points]
+
+```{r myheifer.hist, echo = TRUE, include = TRUE}
+
+(sample.size <- length(myheifer$Birth_weight))
+
+(nbins <- max(8, (1 + log(sample.size, 2))))
+
+myheifer$bin <- cut(myheifer$Birth_weight, breaks = nbins) # create column with bin
+
+(freq.table <- as.data.frame(xtabs( ~myheifer$bin))) # creates frequency table
+
+pander(freq.table) # format the table a little better
+
+plot(freq.table) # make histogram "by hand"
+
+hist(myheifer$Birth_weight) # by default it uses Sturges rule for bins.
+
+```
+
+
+### Part 5.  [15 points]
+
+Create two box and whisker plots for the heifer birth weight. Label at least three of the elements in the plot. Create a new box and whisker plot with a *range* argument value of 0.5. [15 points]
+
+```{r myheifer.box, echo = TRUE, include = TRUE}
+
+boxplot(myheifer$Birth_weight) # enter the data frame name, $ and the variable name to designate the data used by boxplot
+
+text(x = 0.6, y = 79, labels = "Median")
+
+# Add two more labels at the correct locations by completing the code.
+# Use the x and y arguments to specify where the labels go.
+
+text(x = 0.6, y = 98, labels = "Upper")
+
+text(x = 0.6, y = 52, labels = "Lower")
+
+
+```
+
+### Part 6.  [10 points]
+
+What does the fivenum() function do? [5 points]
+
+Your answer here: 
+
+### Part 7.  [10 points]
+
+What function allows you to **combine** numbers to make numeric vectors? Use the function to make a vector with the numbers 1, 3, 4, 9 and call it "sa.vector." [5 points]
+
+```{r myheifer.c, echo = TRUE, include = TRUE}
+
+
+
+
+```
+
+What function allows you to **combine** numbers to make numeric vectors? Your answer here: 
+
+###Part 8.  [10 points]
+
+Knit this file into html. [10 points]
+
 
 
