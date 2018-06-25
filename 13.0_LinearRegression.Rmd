@@ -1,3 +1,11 @@
+---
+editor_options:
+  chunk_output_type: console
+output:
+  pdf_document: default
+  html_document: default
+---
+
 # Linear Regression {#ch.linreg}
 
 ## Learning Objectives for Chapter
@@ -19,9 +27,427 @@
 
 ## Homework
 
-## Laboratory Exercises
+## Laboratory Exercises {#LabCh13PLS}
 
-### Plant Sciences
+
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+
+```
+---
+title: "Lab13 Simple Linear Regression"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+### Plant Sciences 
+
+
+In simple linear regression (SLR) we study the relationship between a *predictor, explanatory, or independent* variable (X, horizontal axis) and a *response or dependent* variable (Y, vertical axis). Different goals may be achieved with SLR. We may be interested in determining how much Y changes as X changes, or we may be interested in estimating the value of Y for values of X that were not observed. All goals require that we estimate parameters of a linear function for a straight line that best fits the data, which is represented by the linear model:
+
+$$Y_{i} = \beta_{0} + \beta_{1}X_{i} + \epsilon_{i} \\ \epsilon_{i} \sim N(0, \ \sigma)$$
+Best fit is achieved by minimizing the sum of squares of residuals or vertical distances between observations and the line of fit. The estimated parameters are the *slope* ($\beta_{1}$) tangent of the angle between the line and the horizontal, and the *intercept* ($\beta_{0}$), the height of the line when X = 0. Numerically, the *slope* is the rate of change that occurs between the Y (dependent) variable and the X (predictor) variable, or in other words, how the values of Y change with each unit change in the X variable. The *intercept* is the value the Y variable takes when the X variable is equal to 0.  
+
+In this exercise we use the clover.txt data set used in lab02. These data represent the mass of clover plants grown for different periods at three different temperatures. Temperatures are in the first column coded as 1 for 5-15 C, 2 for 10-20 C and 3 for 15-25 C. The second column contains the number of days of growth and the last column contains the log of the plant mass in grams (g). Column names are in the first row of the file, so we specify header = TRUE in the line of code to read the data. Data are placed in a data frame named “clover.
+
+
+The relationship between plant size (Y, log transformed) and plant age (X, in days) is modeled as a straight line whose slope is the relative growth rate (RGR) of the plants. Relative growth rate is the amount of growth per unit time and per unit size of the plant. Relative growth rate is to plant size as interest rate is to a debt.
+
+
+FOR THIS LAB WE IGNORE THE TEMPERATURE GROUPS.
+RGR means relative growth rate and is estimated by the slope of the regression.
+
+
+### Part 1. Plot of data and estimation of parameters. [25 points]
+
+1A) Make a scatterplot of plant size vs. age, ignoring the temperature groups. 
+1B) Obtain estimates for the slope and intercept and interpret the results in terms of plant growth. 
+
+
+```{r}
+
+clover <- read.csv("Lab13clover.txt", header = TRUE)
+str(clover)
+
+
+plot(lnwt ~ days, data = clover)
+
+
+slr1 <- lm(formula = lnwt ~ days, data = clover)
+summary(slr1)
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+1B) What are the estimates for the slope and intercept? Interpret the results in terms of plant growth. 
+
+
+### Part 2. Test of null hypothesis and R-square. [30 points]
+
+
+Test the null hypothesis that RGR = 0 by performing an ANOVA for regression. Do the calculations "by hand" and then repeat using R functions.
+
+
+```{r}
+
+coef(slr1) # Use help(coef) to understand what this function does
+
+intcpt <- coef(slr1)[1] # extract estimated intercept, or "a" as it is called in the SG textbook
+
+slope <- coef(slr1)[2] # Code needed here. Extract the estimated slope or b, just like we did with the intercept. 
+  
+  
+lnwt.hat <- intcpt + slope * clover$days # creates a vector of estimated or predicted lnwt’s for each of the measured days using the regression model coefficients
+
+
+errors <- clover$lnwt - lnwt.hat # creates a vector of the differences between the sample lnwt measurements and the predicted weights from the model, i.e., these are the “residuals”
+
+
+(TotalSS <- sum((clover$lnwt - mean(clover$lnwt)) ^ 2)) # total sums of squares
+
+(SSErrors <- sum(errors ^ 2)) # Code needed here. Type in the vector of the residuals to calculate residual sum of squares
+
+(SSReg <- TotalSS - SSErrors) # regression sums of squares
+
+
+n <- length(clover$lnwt) # Code needed here. Complete the code with the column that contains the observations
+
+(dfe <- n - length(coef(slr1))) # df of the residuals
+
+(dfTotal <- n-1) # Complete the code to calculate the total df
+
+(dfReg <- 1) # Complete the code to calculate the df of the regression
+
+
+(MSReg <- SSReg / dfReg)
+
+(MSE <- SSErrors / dfe) # Complete the code to calculate the MSE 
+
+
+(Fcalc <- MSReg / MSE) # Calculated F statistic from the data 
+
+(Fcritical <- qf(0.95, dfReg, dfe)) # Complete the function arguments with the degrees of freedom for the numerator and the denominator to get the F critical value.
+
+
+anova(slr1) # check your previous “by hand” calculation against the anova table.
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+2A) Do you reject the Ho: $\beta_{1}$ = 0? Why? What does this mean in terms of plant growth, in non-technical terms.
+
+
+2B) What proportion of the variance of lnwt is explained by days, the predictor?
+
+
+
+### Part 3. Make a 95% confidence interval for the RGR or slope. [25 points]
+
+
+First, do the calculations by hand, using the formulas from the textbook 179-180. Then use R functions.
+
+
+```{r}
+
+
+# Hint: check your answers with the anova table. It should be the same if your calculations are correct
+
+
+(tcritical.slr1 <- qt(0.975, dfe)) # Code needed here.  Enter the probability for a 2-tailed test with alpha = 0.05
+
+
+SSX <- sum((clover$days - mean(clover$days)) ^ 2) # get sum of square of X
+
+
+(se.beta <- sqrt(SSErrors / (dfe * SSX))) # calculate the s.e. for beta
+
+
+beta.lo <- slope - tcritical.slr1 * se.beta # lower CI boundary.  
+
+
+beta.hi <- slope + tcritical.slr1 * se.beta # Code needed here. Complete the formula for the the upper CI boundary
+
+
+c(beta.lo, beta.hi) # Display the lower and upper CI extremes 
+
+confint(slr1)[2,] # easier way to get the CI using the function from R
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+3A) What is the 95% confidence interval for the relative growth rate (RGR) of the plants?
+
+
+
+### Part 4. Make a 95% confidence interval for mean plant size at a given age. [20 points]
+
+
+Assume that you are interested in using the fitted regression model (the line) to estimate the mean mass of plants when they are 33 days old. Use the regression equation to make the estimate and then calculate the standard error of the estimate to make a confidence interval for it. Do detailed calculations first and then use R functions.
+
+You will first calculate the predicted mean of Y for 33 days and its standard error and make a confidence interval for it. Then you will calculate the standard error for a predicted individual Y and compare it.
+
+```{r}
+
+
+(lnwt.hat.33 <- intcpt + slope * 33) # In other words, Y = a + bX, where Y, or the predicted value, is the weight of plants at 33 days.  
+
+
+(mass.hat.33 <- exp(lnwt.hat.33))  # Since the response variable is log transformed, here we need to do a back transformation.
+
+#Calculate the standard error of the predicted mean of Y:
+se.lnwt.33.m <- sqrt(MSE * (1 / n + (33 - mean(clover$days)) ^ 2 / SSX)) # SG book pg. 192 and pg. d205 No. 6
+
+
+# Complete the code to calculate the upper and lower CI for the mass of plants at 33 days:
+(CI.lnwt.up <- lnwt.hat.33 + tcritical.slr1 * se.lnwt.33.m)
+
+(CI.lnwt.lo <- lnwt.hat.33 - tcritical.slr1 * se.lnwt.33.m)
+
+
+pred.data <- data.frame(lnwt = NA, group = NA, days = 33) # Here we create a data frame that we will use to “predict” or estimate lnwt in the next line.  Only the value for days is included since that is the X, independent, or predictor variable.
+
+
+(ci.r <- predict(slr1, newdata = pred.data, interval = "confidence")) # this line uses predict() to predict or estimate lnwt and its CI, as we did by hand above.
+
+# The interval = “confidence” argument makes the function return a confidence interval for the estimated log of plant mass.
+
+
+exp(ci.r) # Complete the code to do a back transformation on the predicted values.
+
+
+# Calculate the standard error of the predicted individual Y:
+se.lnwt.33.ind <- sqrt(MSE * (1 + 1 / n + (33 - mean(clover$days)) ^ 2 / SSX)) # SG book pg. 205 No. 7
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+4a) Explain why we need to use exp().
+
+
+4b) Report the upper and lower extremes of the CI for the predicted mean of Y
+
+
+4c) Is the standard error estimate for a predicted mean of Y or a predicted individual Y based on the model bigger? Why?
+
+
 
 ### Animal Sciences
+
+
+The same instructions for completion and submission of work used in previous labs applies here. Refer to previous labs for the details.
+
+
+In simple linear regression (SLR) we study the relationship between a *predictor, explanatory or independent* variable (X, horizontal axis) and a *response or dependent* variable (Y, vertical axis). Different goals may be achieved with SLR. We may be interested in determining how much Y changes as X changes, or we may be interested in estimating the value of Y for values of X that were not observed. All goals require that we estimate parameters of a linear function for a straight line that best fits the data:
+
+$$Y_{i} = \beta_{0} + \beta_{1}X_{i} + \epsilon_{i} \\ \epsilon_{i} \sim N(0, \ \sigma)$$
+
+Best fit is achieved by minimizing the sum of squares of residuals or vertical distances between observations and the line of fit. The estimated parameters are the *slope* ($\beta_{1}$) tangent of the angle between the line and the horizontal, and the *intercept* ($\beta_{0}$), the height of the line when X = 0. Numerically, the *slope* is the rate of change that occurs between the Y (dependent) variable and the X (predictor) variable, or in other words, how the values of Y change with each unit change in the X variable. The *intercept* is the value the Y variable takes when the X variable is equal to 0.  
+
+In this exercise we will examine the relationship between body weight and heart weight in cats. This data was originally published in a short paper by R.A. Fisher in 1947 (see paper in CANVAS). R.A. Fisher was a British Statistician that developed the foundations for modern statistical theory. 
+
+Data for the exercise consists of body weight (Bwt) in kilograms and heart weight (Hwt) in grams of 144 cats. We will examine the relationship
+between heart weight and body weight in cats.
+
+
+### Part 1. Plot of data and estimation of parameters. [25 points]
+
+1A) Make a scatterplot of body weight vs. heart weight. 
+1B) Obtain estimates for the slope and intercept and interpret the results in terms of heart weight. 
+
+
+```{r}
+cats <- read.csv("Lab13Cats.csv")
+str(cats)
+
+plot(Bwt_Kg ~ Hwt_g, data = cats)
+
+slr1 <- lm(formula = Bwt_Kg ~ Hwt_g, data = cats)
+summary(slr1)
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+1B) What are the estimates for the slope and intercept? Interpret the results in terms of heart weight and its relationship to body weight. 
+
+
+
+### Part 2. Test of null hypothesis and R-square. [30 points]
+
+Test the null hypothesis that there is no relationship between body weight and heart weight (i.e., $\beta_{1}$ = 0) by performing an ANOVA for regression. Do the calculations "by hand" and then repeat using R functions.
+
+
+2A) Do you reject the Ho: $\beta_{1}$ = 0? Why? What does this mean in terms of the relationship between body and heart weight, in non-technical terms
+2B) What proportion of the variance of heart weight is explained by body weight, the predictor?
+
+
+```{r}
+
+coef(slr1) # Use help(coef) to understand what this function does
+
+intcpt <- coef(slr1)[1] # extract estimated intercept, or "a" as it is called in the SG textbook
+
+slope <- coef(slr1)[2]# Code needed here. Extract the estimated slope or b, just like we did with the intercept. 
+  
+  
+Hwt.hat <- intcpt + slope * cats$Bwt # creates a vector of estimated or predicted heart weights for each of the measured days using the regression model coefficients
+
+
+errors <- cats$Hwt - Hwt.hat # creates a vector of the differences between the sample heart weight measurements and the predicted weights from the model, i.e., these are the “residuals”
+
+
+(TotalSS <- sum((cats$Hwt - mean(cats$Hwt)) ^ 2)) # total sums of squares
+
+(SSErrors <- sum(errors ^ 2)) # Code needed here. Type in the vector of the residuals to calculate residual sum of squares
+
+(SSReg <- TotalSS - SSErrors) # regression sums of squares
+
+
+n <- length(cats$Hwt) # Code needed here. Complete the code with the column that contains the observations
+
+(dfe <- n - length(coef(slr1))) # df of the residuals
+
+(dfTotal <- n-1) # Complete the code to calculate the total df
+
+(dfReg <- 1) # Complete the code to calculate the df of the regression
+
+
+(MSReg <- SSReg / dfReg)
+
+(MSE <- SSErrors / dfe) # Complete the code to calculate the MSE 
+
+(Fcalc <- MSReg / MSE) # Calculated F statistic from the data 
+
+(Fcritical <- qf(0.95, dfReg, dfe)) # Complete the function arguments with the degrees of freedom for the numerator and the denominator to get the F critical value.
+
+
+anova(slr1) # check your previous “by hand” calculation against the anova table.
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+2A) Do you reject the Ho: $\beta_{1}$ = 0? Why? What does this mean in terms of the relationship between body weight and heart weight, in non-technical terms
+
+
+
+2B) What proportion of the variance of heart weight is explained by body weight, the predictor?
+
+
+
+### Part 3. Make a 95% confidence interval for the estimation of the slope. [25 points]
+
+
+First, do the calculations by hand, using the formulas from the textbook 179-180. Then use R functions.
+
+
+```{r}
+
+
+# Hint: check your answers with the anova table. It should be the same if your calculations are correct
+
+
+(tcritical.slr1 <- qt(0.975 , dfe)) # Code needed here.  Enter the probability for a 2-tailed test with alpha = 0.05
+
+
+SSX <- sum((cats$Bwt - mean(cats$Bwt)) ^ 2) # get sum of square of X
+
+
+(se.beta <- sqrt(SSErrors / (dfe * SSX))) # calculate the s.e. for beta
+
+
+beta.lo <- slope - tcritical.slr1 * se.beta # lower CI boundary.  
+
+
+beta.hi <- slope + tcritical.slr1 * se.beta # Code needed here. Complete the formula for the the upper CI boundary
+
+
+c(beta.lo, beta.hi) # Display the lower and upper CI extremes 
+
+confint(slr1)[2,] # easier way to get the CI using the function from R
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+3A) What is the 95% confidence interval for the relationship between body weight and heart weight?
+
+
+
+### Part 4. Make a 95% confidence interval for mean heart weight at a given body weight. [20 points]
+
+
+Assume that you are interested in using the fitted regression model (the line) to estimate the mean heart weight of cats when they are 2.9 kg. Use the regression equation to make the estimate and then calculate the standard error of the estimate to make a confidence interval for it. Do detailed calculations first and then use R functions.
+
+You will first calculate the predicted mean of Y for 2.9 kg. and its standard error and make a confidence interval for it. Then you will calculate the standard error for a predicted individual Y and compare it.
+
+```{r}
+
+
+(Hwt.hat.2.9 <- intcpt + slope * 2.9) # In other words, Y = a + bX, where Y, or the predicted value, is the weight of plants at 33 days.  
+
+
+(g.hat.2.9 <- exp(Hwt.hat.2.9))  # Since the response variable is log transformed, here we need to do a back transformation.
+
+#Calculate the standard error of the predicted mean of Y:
+se.Hwt.2.9.m <- sqrt(MSE * (1 / n + (2.9 - mean(cats$Bwt_Kg)) ^ 2 / SSX)) # SG book pg. 192 and pg. d205 No. 6
+
+
+# Complete the code to calculate the upper and lower CI for the heart weight of cats when they are 2.9 kg:
+(CI.Hwt.up <- Hwt.hat.2.9 + tcritical.slr1 * se.Hwt.2.9.m)
+
+(CI.Hwt.lo <- Hwt.hat.2.9 - tcritical.slr1 * se.Hwt.2.9.m)
+
+
+pred.data <- data.frame(Hwt_g = g.hat.2.9, Bwt_kg = 2.9) # Here we create a data frame that we will use to “predict” or estimate heart weight in the next line.  Only the value for body weight is included since that is the X, independent, or predictor variable.
+
+
+(ci.r <- predict(slr1, newdata = pred.data, interval = "confidence")) # this line uses predict() to predict or estimate heart weight and its CI, as we did by hand above.
+
+# The interval = “confidence” argument makes the function return a confidence interval for the estimated log of plant mass.
+
+exp(ci.r) # Complete the code to do a back transformation on the predicted values.
+
+
+# Calculate the standard error of the predicted individual Y:
+se.Hwt.33.ind <- sqrt(MSE * (1 + 1 / n + (2.9 - mean(cats$Bwt_Kg)) ^ 2 / SSX)) # SG book pg. 205 No. 7
+
+
+````
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+4A) Explain why we need to use exp().
+
+
+
+4B) Report the upper and lower extremes of the CI for the predicted mean of Y
+ 
+
+
+4C) Is the standard error estimate for a predicted mean of Y or a predicted individual Y based on the model bigger? Why?
+
+
+
+
+
+
+
+
 

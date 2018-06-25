@@ -21,4 +21,319 @@ Jen's:
 
 ## Homework Problems
 
-## Lab Project
+## Laboratory Exercises  {#LabCh14PLS}
+
+```
+---
+title: "Lab14 Chi Square: Contingency Tables"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+### Plant Sciences
+
+We can use the $\chi^{2}$ distribution to test for a relationship between two categorical variables.  This type of test is called a *test of independence*. We specifically test the null hypothesis that there is statistical independence between the two categorical variables. We will be working on a dataset published by @PierantozziPierluigi2012PaCI.  They were interested in the effect of olive plant cultivar type on the number of seeds produced per olive fruit.  Olive fruit can contain 1, 2, or no seeds. The common case is 1 seed, though rarely they will contain two seeds, and some may contain no seeds at all due to embryo death. In 2007, they collected 1,072 olives from different cultivar plants in Central Italy, noting the number of seeds each fruit contained. 
+
+To perform this test of independence, we will (1) create a contingency table, (2) calculate the frequencies we would expect to observe if cultivar type and number of seeds are independent, (3) calculate a $\chi^{2}$ test statistic that contains information about the deviation of our observations from what is expected under $H_{0}$ , and finally (4) compare the $\chi^{2}$ test statistic against the critical $\chi^{2}$ value to decide if we reject or fail to reject $H_{0}$
+
+###Part 1 Create contingency table
+
+The first step in performing a test of independence is to build a *contingency table* with j rows and k columns. One variable is classed into j factor levels in the rows, and the second variable is classed into k factor levels in the columns.  The frequencies of each combination of attributes between the two variables fill the table and are used to calculate the marginal totals for each attribute.
+
+1A) Read in the olive data set as a csv file
+1B) Create a contingency table using the table() function.  
+1C) Calculate the marginal totals of each attribute type of each of the two variables.  
+
+```{r}
+olives <- read.csv("olives.csv")
+
+##use table() to calculate the frequencies of each cultivar/No.seeds combination in the data. 
+(olivect <- table(olives))
+
+#marginal totals:
+
+(cultSums <- rowSums(olivect))
+(seedSums <- colSums(olivect))
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+1D) State the null and alternative hypotheses.
+
+
+###Part 2: Expected Frequencies
+
+We have a table of our observed frequencies, but how do we calculate what we would have expected if No.Seeds is independent of cultivar type? Under the $H_{0}$, we would expect the joint probability of each cell in our contingency table to be based on the probability of two independent "events" (represented by the row and column categories) happening together. The probability of two independent events occuring simultaneously is simply the multiplication of the probabilities of each independent event. For example, if $H_{0}$ is true, the probability that an olive fruit randomly sampled from this population of olive plants is both an Ascolana Tenera cultivar **and** contains 2 seeds is equal to the probability of being an Ascolana Tenera cultivar type multiplied by the probability of having 2 seeds.  We estimate these probabilities using the marginal totals we calculated above divided by the total number of plants we sampled.
+
+2A) Calculate the marginal probabilities of each variable attribute. 
+2B) Using the marginal probabilities from 2A, create a table of expected joint probabilities for each combination of cultivar type and number of seeds.  
+2C) Using the joint probabilities from 2B, calculate the expected frequencies of each combination of cultivar type and number of seeds.  
+
+```{r}
+
+#First, calculate the total number of olive fruits used in this study:
+
+(total <- sum(cultSums)) #or
+total <- nrow(olives)
+
+#2A:
+#Calculate the marginal probabilities of being a particular cultivar type:
+
+(cultp <- cultSums/total)
+
+#Calculate the marginal probabilities of having a certain number of seeds:
+
+(seedp <- seedSums/total)
+
+#2B:
+#Fill a table with the calculated joint probabilities for each combination of cultivar and number of seeds:
+
+##Copy the dimensions of the cont. table to a new table.  We will do this by simply copying the original contingency table, then replacing the original observed frequencies with joint probabilities:
+
+jprobs <- as.matrix(olivect)
+
+#Fill the "Ascolana Tenera" cultivar row with joint probabilities by multiplying the marginal "Ascolana Tenera" probability by all the marginal  probabilities from seedp.  Since the probabilities from seedp are in the same order as the jprobs columns, this will work fine:
+
+jprobs["Ascolana Tenera", ] <- cultp["Ascolana Tenera"] * seedp
+
+#Do the same for the other four cultivar types:
+
+jprobs["Carolea", ] <- cultp["Carolea"] * seedp
+jprobs["Leccino", ] <- cultp["Leccino"] * seedp
+jprobs["Picholine", ] <- cultp["Picholine"] * seedp
+
+#2C:
+#Calculate the expected frequencies based on the joint probabilities under the null hypothesis multiplied by the total number of fruits sampled.  
+
+(oliveExp <- jprobs * total)
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+2D) Explain in your own words how we use probability theory to calculate expected frequencies if number of seeds was independent of cultivar type.
+
+###Part 3 Calculate $\chi^{2}$
+
+The $\chi^{2}$ values are calculated from the square of the differences between the observed and expected frequencies, weighted by the expected frequencies.  
+
+3A) Use the following formula to calculate the $\chi^{2}$ test statistic for our contigency table:
+
+
+$$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$$
+
+
+```{r}
+
+#Calculate chi square values for each cell:
+
+(chisqtable <- (olivect - oliveExp)^2 / oliveExp)
+
+(chisq <- sum(chisqtable))
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+3B) Looking at the chisqtable table object that holds individual $\chi^{2}$ values, are there any cultivar/No.Seeds combinations that stand out as particularly different from what we would have expected under $H_{0}$? How did you determine this?  
+3C) What was the direction of difference between the observed and expected frequencies in the the cells you named for 3B? Based on this observation, if it is desirable to have more seeds per olive because this yields a larger fruit with a higher pulp/pit ratio [@PierantozziPierluigi2012PaCI], what cultivar(s) would you recommend to olive farmers to maximize profits? 
+
+
+###Part4 Results
+
+4A) Calculate the degrees of freedom
+4B) Calculate the critical $\chi^{2}$ value
+4C) Obtain the p value
+4D) Use a built in R function to do a test of independence
+
+```{r}
+
+#Calculate the degrees of freedom
+j <- nrow(olivect); k  = ncol(olivect)
+df <- (j-1)*(k-1)
+
+#Calculate the critical value
+(crit <- qchisq(0.95, df))
+
+#Is our test statistic equal to or greater than our critical value?
+chisq >= crit
+
+#You could also simply get the p value to use as your decision rule:
+(pvalue <- pchisq(chisq, df, lower.tail = F))
+
+
+#We just performed a test of independence by hand, but R actually has a single function that will do it all at once for you:
+chisq.test(olivect)
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+4E) Write a conclusion. Include the test statistic, p value, whether or not you reject the null hypothesis, and a statement or two about what you would recommend to olive producers based on these results.  
+
+
+
+
+###Animal Sciences
+
+
+We can use the $\chi^{2}$ distribution to test for a relationship between two categorical variables.  This type of test is called a *test of independence*. We specifically test the null hypothesis that there is statistical independence between the two categorical variables.  A sample of 111 mice was divided into three groups, 57 that received a standard dose of pathogenic bacteria followed by antiserum, 58 that received the same dose of bacteria, followed by an experimental treatment, and a control group of 54 that received the bacteria, but no treatment. After sufficient time had elapsed for an incubation period and for the disease to run its course, 45 dead mice and 124 survivors were counted. Of those that died, 13 had received bacteria and antiserum, 7 had received the experimental treatment, while 25 had received bacteria only. A question of interest is if the antiserum had in any way protected the mice so that there were proportionally
+more survivors in that group. 
+
+To perform this test of independence, we will (1) create a contingency table, (2) calculate the frequencies we would expect to observe if cultivar type and number of seeds are independent, (3) calculate a $\chi^{2}$ test statistic that contains information about the deviation of our observations from what is expected under $H_{0}$ , and finally (4) compare the $\chi^{2}$ test statistic against the critical $\chi^{2}$ value to decide if we reject or fail to reject $H_{0}$
+
+###Part 1 Create contingency table
+
+The first step in performing a test of independence is to build a *contingency table* with j rows and k columns. One variable is classed into j factor levels in the rows, and the second variable is classed into k factor levels in the columns.  The frequencies of each combination of attributes between the two variables fill the table and are used to calculate the marginal totals for each attribute.
+
+1A) Read in the mice data set as a csv file
+1B) Create a contingency table using the table() function.  
+1C) Calculate the marginal totals of each attribute type of each of the two variables.  
+
+```{r}
+mice <- read.csv("mice.csv")
+
+##use table() to calculate the frequencies of each treatment/result combination in the data. 
+(micect <- table(mice))
+
+#marginal totals:
+
+(treatSums <- rowSums(micect))
+(survSums <- colSums(micect))
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+1D) State the null and alternative hypotheses.
+
+
+###Part 2: Expected Frequencies
+
+We have a table of our observed frequencies, but how do we calculate what we would have expected if the survival of mice is independent of treatment? Under the $H_{0}$, we would expect the joint probability of each cell in our contingency table to be based on the probability of two independent "events" (represented by the row and column categories) happening together. The probability of two independent events occuring simultaneously is simply the multiplication of the probabilities of each independent event. For example, if $H_{0}$ is true, the probability that a mice randomly sampled from this population of olive plants would receive the control treatment **and** remain alive is equal to the probability of receiving the control treatment multiplied by the probability of remaining alive.  We estimate these probabilities using the marginal totals we calculated above, divided by the total number of mice we sampled.
+
+2A) Calculate the marginal probabilities of each variable attribute. 
+2B) Using the marginal probabilities from 2A, create a table of expected joint probabilities for each combination of treatment type and survival outcome.  
+2C) Using the joint probabilities from 2B, calculate the expected frequencies of each combination of treatment type and survival outcome.  
+
+```{r}
+
+#First, calculate the total number of mice used in this study:
+
+(total <- sum(treatSums)) #or
+total <- nrow(mice)
+
+#2A:
+#Calculate the marginal probabilities of getting a particular treatment:
+
+(treatp <- treatSums/total)
+
+#Calculate the marginal probabilities of surviving or not:
+
+(survp <- survSums/total)
+
+#2B:
+#Fill a table with the calculated joint probabilities for each combination of treatment type and survival outcome:
+
+##Copy the dimensions of the cont. table to a new table.  We will do this by simply copying the original contingency table, then replacing the original observed frequencies with joint probabilities:
+
+jprobs <- as.matrix(micect)
+
+#Fill the "antiserum" treatment row with joint probabilities by multiplying the marginal "antiserum" probability by all the marginal  probabilities from survp.  Since the probabilities from survp are in the same order as the jprobs columns, this will work fine:
+
+jprobs["antiserum", ] <- treatp["antiserum"] * survp
+
+#Do the same for the other treatment type:
+
+jprobs["experimental", ] <- treatp["experimental"] * survp
+
+jprobs["control", ] <- treatp["control"] * survp
+
+
+#2C:
+#Calculate the expected frequencies based on the joint probabilities under the null hypothesis multiplied by the total number of mice sampled.  
+
+(miceExp <- jprobs * total)
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+2D) Explain in your own words how we use probability theory to calculate expected frequencies if survival outcome was independent of treatment type.
+
+###Part 3 Calculate $\chi^{2}$
+
+The $\chi^{2}$ values are calculated from the square of the differences between the observed and expected frequencies, weighted by the expected frequencies.  
+
+3A) Use the following formula to calculate the $\chi^{2}$ test statistic for our contigency table:
+
+
+$$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$$
+
+
+```{r}
+
+#Calculate chi square values for each cell:
+
+(chisqtable <- (micect - miceExp)^2 / miceExp)
+
+(chisq <- sum(chisqtable))
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+3B) Looking at the chisqtable table object that holds individual $\chi^{2}$ values, are there any treatment/survival outcome combinations that stand out as particularly different from what we would have expected under $H_{0}$? How did you determine this?  
+3C) What was the direction of difference between the observed and expected frequencies in the the cells you named for 3B? Based on this observation, what treatment type would you recommend to control the pathogenic bacteria? 
+
+
+###Part4 Results
+
+4A) Calculate the degrees of freedom
+4B) Calculate the critical $\chi^{2}$ value
+4C) Obtain the p value
+4D) Use a built in R function to do a test of independence
+
+```{r}
+
+#Calculate the degrees of freedom
+j <- nrow(micect); k  = ncol(micect)
+df <- (j-1)*(k-1)
+
+#Calculate the critical value
+(crit <- qchisq(0.95, df))
+
+#Is our test statistic equal to or greater than our critical value?
+chisq >= crit
+
+#You could also simply get the p value to use as your decision rule:
+(pvalue <- pchisq(chisq, df, lower.tail = F))
+
+
+#We just performed a test of independence by hand, but R actually has a single function that will do it all at once for you:
+chisq.test(micect)
+
+
+```
+
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+4E) Write a conclusion. Include the test statistic, p value, whether or not you reject the null hypothesis, and a statement or two about what recommendations you would make based your results.  
+
+
+
+
+
