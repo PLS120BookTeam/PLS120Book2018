@@ -1,4 +1,4 @@
-# Chapter 2: Statistics with R {#ch.statsR}
+# Statistics with R {#chStatsR}
 
 ## Learning Objectives for Chapter
 
@@ -7,6 +7,7 @@
 1. Find information about objects and functions in R.
 1. Create and use R scripts and projects in RStudio.
 1. Read data into R from csv files and line input.
+1. Data curation: validate and properly organize and manipulate data.
 1. Perform simple assignments and calculations.
 1. Use vectorized operations.
 1. Create, study and use data frames.
@@ -16,19 +17,23 @@
 1. Describe the efects of the parameters of the Uniform distribution
 1. Calculate the expected value of a random variable with Uniform distribution.
 1. Explain what the pdf of the Uniform distribution shows (y axis, X axis)
-1. Draw a sketch of the sum of 2 uniform distributions.
+1. Draw a sketch of the sum of 2 Uniform distributions.
 1. Give an example of a random variable that might be modelled using the Uniform distribution.  
 
 
-## R and RStudio {#sect.RnRStudio}
+## R and RStudio {#RnRStudio}
 
-W. N. Venables, D. M. Smith and the R Core Team (2016) state: "R is an integrated suite of software facilities for data manipulation, calculation and graphical display." They specifically leave out the word "statistics" to emphasize that R is actually an "environment" or fully planned coherent system for programming. RStudio furthers this idea and provides an IDE or integrated development system for programming in R and other languages. In fact, this book and all the figures and interactive examples and simulations were completely programmed, compiled and deployed using R in the RStudio IDE. The only way to get a good idea of what R and Rstudio can do is to use them with a curious and exploratory approach.
+W. N. Venables, D. M. Smith and the R Core Team [@R-base] state: "R is an integrated suite of software facilities for data manipulation, calculation and graphical display." They specifically leave out the word "statistics" to emphasize that R is actually an "environment" or fully planned coherent system for programming. RStudio furthers this idea and provides an IDE or integrated development environment for programming in R and other languages. In fact, this book and all the figures and interactive examples and simulations were completely programmed, compiled and deployed using R in the RStudio IDE. The only way to get a good idea of what R and Rstudio can do is to use them with a curious and exploratory approach.
 
 ">" on the left of each line in the Terminal is called the cursor and it indicates that R is ready to receive a command. When the cursos changes to "+" it means that you have submitted a partial command and R indicates it is waiting for you to finish the command.
 
 Use material from lab 1.
 
-"<-" and "=" mean the same thing. They assign the value on the right into the object on the left: object.name <- operation. The "=" sign is also used to give values to the arguments of functions.
+"<-" and "=" mean the same thing. They assign the value on the right into the object on the left: object.name <- operation. The "=" sign is also used to give values to the arguments of functions, where "<-" does nto work. For example, to make an object called "my.random.numbers" with 5 random numbers from a normal distribution with mean 3 and standard deviation 2 we write:
+
+`my.random.numbers <- rnorm(n = 3, mean = 3, sd = 2)`
+
+We can read this as object `my.random.numbers' *gets* ...
 
 ## Functions
 
@@ -60,6 +65,8 @@ There is a large community of R users all over the world. This community provide
 
 ## Data and data frames
 
+See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>.
+
 One of the most common way to have data in R is using objects called data frames. These are table-like structures with rows and columns like a spreadsheet. Each column can have only one type of data, but different columns can have different data types. Data and objects in general in R can be of various types, called "modes." Whenever we enter data into R and do not specify the type, R will assign it the data type that does not lose any information. For example, if we enter A, 1, 3, 4, t, i, 7.5, into a column of a data frame, R will make a column of type character, because that is the only mode that can contain letters and numbers, but the numbers are stored as characters. The mode of objects can be changed, with restrictions.
 
 Point to R resources and cheatsheets.
@@ -74,7 +81,205 @@ Should we use Rcmdr?
 
 Explain structure of R Studio, topology of scripts, markdown files, directory, etc.
 
-## Examples {#ch.statsR.ex01}
+## Introduction to R and RStudio
+
+### Installing R and RStudio
+R is the current state-of-the-art Open Source software for statistical analysis and reproducible research. Reproducible research requires that scientific articles be published with the data and the code so anyone can very the results. When working on your computer, you can download and install R from <a href="https://cran.r-project.org" target="new">here</a>.
+
+We will use a friendly user interface to work with R: RStudio. When working on your computer, you can download and install RStudio <a href="https://www.rstudio.com/products/rstudio/download3/" target="new">here</a>. RStudio is actually an IDE (Interactive Development Environment) that is also free Open Source. Take a look at the intro video <a href="https://www.rstudio.com/products/rstudio/" target="new">here</a>.
+
+Both installers have instructions to guide you. If you run into problems, bring your computer to office hours and we will help you.
+
+R consists of a programming environment with a "line" interface that interprets and runs the code and produces results. Results are not sent to permanent files or output unless you specifically ask for it. This is a main point in the philosophy of R that differs dramatically from SAS. R force you to specify what you want to see or produce in specific.
+
+We will use the "knitr" package to produce the lab reports. You have to install and the load knitr. Start RStudio and type *options(repos = c(CRAN = "http://cran.rstudio.com"))* <ENTER> to specify where your computer will find the packages. Then, type *install.packages(knitr)* <ENTER>. You can also click on the Packages tab, then click on Install at the upper left and type "knitr" in the space provided. Then, click on the Install button.
+
+The reports are actually written in Markdown, so we need to install *rmarkdown*. As an exercise, repeat the procedure above to install this package. For an intro video about rmarkdown, go <a href="http://rmarkdown.rstudio.com/lesson-1.html" target="new">here</a>. The installation instructions, as well as more links for R Markdown are also found on that page.
+
+Load the packages by using the library() function:
+
+library(rmarkdown)
+
+library(knitr)
+
+**Do not worry about the details of markdown and knitr!** You will be given all code you need to use in the course, and most reports will be formatted for you so you can learn reproducible research, but you will not have to be an expert in programming or markdown!
+
+###Exploring RStudio###
+
+RStudio have 4 panes in the window. The arrangement of the panes and tabs can be customized in the Preferences of RStudio. These windows and many other features of RStudio are explained <a href="https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-part-1/" target="new">here</a>. Make sure to watch the video as part of your homework and send questions to your instructors.
+
+Once you have installed the necessary packages, you can render this Rmd file and produce the html file that can be viewed in any browser. **For full credit you will submit both the Rmd and html files you complete.**
+
+###R Basics###
+For the basic features of R Programming we will use *"A (very) short introduction to R"* <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf" target="new"> found here</a>.
+In the lab we will create a lab report based on some sections of this document.
+
+First, insert your flash drive and set the working directory to be in your drive. This way you will have all of your files with you in your drive. Files that you save to the lab computers are wiped every night. The following script chunk allows you to manually select your working directory by selecting a file within it. 
+
+```{r setworkd, echo=TRUE}
+getwd() # First, find out what the current working directory is
+# All file are saved to your working directory
+# Note the use of the hash symbol to create comments within R scripts
+# In order to set the working directory "by hand" you need to know the path used by the operating system for your drive. It is probably something like "E:/". Select a file within your flash drive when prompted.
+
+# copy the rest of this line to the console and run it: setwd(dirname(file.choose()))
+
+getwd() # Check that you actually set the desired working directory
+```
+
+##Data Exloration and Summary##
+
+###Create a dataframe and table###
+To create a data frame we use the data.frame() function. In this example we create a data frame named "mydata." This data frame has 2 columns (Y1 and Y2) and 3 rows.
+
+```{r createdf, echo=TRUE}
+mydata <- data.frame(Y1 = c("treatment 1", "treatment 2", "treatment 3"), Y2 = c(35, 23, 30)) # Create data frame with 2 columns and 3 rows
+mydata # see the contents of the data frame
+str(mydata) # see the structure of the data frame
+class(mydata) # see the class of the data frame
+library(pander) # we need to install pander first
+pander(mydata, caption = "Table showing my data.")
+```
+
+###Summary Statistics###
+Summary statistics are classified as measures of central tendency and measures of dispersion. Mean, and median are measures of central tendency. Variance, standard deviation, range minimum and maximum are measures of dispersion. For positive random variables, the coefficient of variation is a measure of variation relative to the mean.
+
+We use the *clover.txt* data set provided in the first assignment. These data represent the mass of clover plants grown for different periods at three different temperatures. Temperatures are in the first column coded as 1 for 5-15 C, 2 for 10-20 C and 3 for 15-25 C. The second column contains the number of days of growth and the last column contains the log of the plant mass in g. Column names are in the first row of the file, so we specify *header = TRUE* in the line of code to read the data. Data are placed in a data frame named "clover.
+
+```{r summarystats1, echo = TRUE}
+clover <- read.csv("../PLS120Fall2016/LabFiles/Lab01clover.txt", header = TRUE) # read in data.
+help(clover) # Read about the nature of the data set.
+(avg.lnwt <- mean(clover$lnwt)) # obtain the average lnwtance; note the use of $ to select parts of an object and the outer parentheses to display the result.
+(med.lnwt <- median(clover$lnwt)) # median or 50th percentile
+quantile(clover$lnwt, 0.5) # 50th percentile is the same as the median
+(var.lnwt <- var(clover$lnwt)) # variance
+(std.lnwt <- sd(clover$lnwt)) # standard deviation
+sum(clover$lnwt)/length(clover$lnwt) # manual calculation of average
+sum( (clover$lnwt - avg.lnwt) ^ 2 ) / (length(clover$lnwt) - 1)
+(rng.lnwt <- range(clover$lnwt)) # output is a vector of lenght 2
+min(clover$lnwt) # minimum braking lnwtance
+max(clover$lnwt) # maximum braking lnwtance
+(cv.lnwt <- std.lnwt / avg.lnwt) # coefficient of variation
+
+```
+The **coefficient of variation** is the standard deviation in units of the average. A value greater than 1 is high and indicates that there is a large amount of variation unexplained. Values below 0.30 are very low and indicate that there is little unexplained variation. For laboratory or controlled field experiments the CV should be below 0.5, whereas for observational studies an acceptable CV can be up to 1.0.
+
+
+###Frequency Table and Histogram###
+We can create a frequency table by dividing the range of lnwt into bins according to a general guideline: number of bins = 1 + 3.3 log(sample size). For this we use the cut() function. Then we create the frequency table using the xtabs() function and plot the histogram. All of this is done automatically by R using the hist() function. We will worry about making the graphs look pretty later on.
+
+```{r freqhist, echo = TRUE, include = TRUE}
+(sample.size <- length(clover$lnwt))
+(nbins <- max(8, (1 + log(sample.size, 2)))) # we round down for bins
+clover$bin <- cut(clover$lnwt, breaks = nbins) # create column with bin
+(freq.table <- as.data.frame(xtabs( ~clover$bin))) # creates frequency table
+pander(freq.table) # format the table a little better
+plot(freq.table, xlim = c()) # make histogram "by hand"
+hist(clover$lnwt) # by default it uses Sturges rule for bins.
+```
+
+Note that by adding parenthesis outside the whole expression we make the new object and display it at the same time.The function as.data.frame transforms the output of xtabs() into a table that is easy to understand.
+
+The histogram can be used to visually assess the type of distribution the data may exhibit.
+
+Data can be easily summarized by using the summary() function of R. This function will produce results that take into account the type of variable in the object it operates on.
+
+```{r summaryfunc, echo = TRUE, include = TRUE}
+summary(clover$lnwt) # summary of a numeric variable or vector
+class(clover$lnwt) # a numeriv vector contains real numbers
+summary(clover$bin) # this is a charcater variable coded as a factor
+class(clover$bin)
+summary(clover) # gives the summary for all variables
+# What kind of result or object does summary() produce?
+class(summary(clover)) # This is functional programming; nested functions
+mode(summary(clover))
+str(summary(clover)) # See the inside of an object!!
+summary(clover)[1,1] # get the first element of the table
+summary(clover)[1,] # get the first row of the summary table
+summary(clover)[,1] #  get the first column of the summary table
+```
+
+The function str() is really important to see what objects are composed of and to use parts of those objects. Any part of an object can be referenced and modified using its "address."
+
+
+###Box-and-Whisker Plot and 5-Number Summary
+Data can be summarized using a boxplot and or the 5-number summary. These contain information about the average, median, first quartile, third quartile, range and outliers. The *range* argument determines how far the plot whiskers extend out from the box. If range is positive, the whiskers extend to the most extreme data point which is no more than *range* times the interquartile range (IQR) from the box. Data points that fall outside the whiskers are plotted and can be interpreted as "outliers" or values more extreme than expected. Outliers are so only on the basis of some preconceived expectation, usually a more or less normal distribution. A range value of zero causes the whiskers to extend to the data extremes, so no outliers are shown.
+
+```{r boxplot1, echo = TRUE, include = TRUE}
+myrange.factor = 1.5 # save number in a named object for later use
+boxplot(clover$lnwt, range = myrange.factor)
+text(x = 0.70, y = median(clover$lnwt), label = "Median")
+text(x = 0.65, y = quantile(clover$lnwt, 0.75), label = "3rd quartile or 75% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.75), label = "Upper Hinge")
+text(x = 0.65, y = quantile(clover$lnwt, 0.25), label = "1st quartile or 25% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.25), label = "Lower Hinge")
+
+# To get the location of the top "fence" we need to identify the datapoint that is closest to but no greater than the upper hinge plus 1.5 * interquartile range.
+(iqrange <- IQR(clover$lnwt)) # Calculate the interquartile range
+(uplimit <- quantile(clover$lnwt, 0.75) + myrange.factor * iqrange)
+(rows.where.lt.uplimit <- which(clover$lnwt <= uplimit)) # gives row numbers of those that are less than uplimit
+clover$lnwt[rows.where.lt.uplimit] # gives lnwt in those rows
+(up.fence <- max(clover$lnwt[rows.where.lt.uplimit])) # gives the value we seek
+(outl <- clover$lnwt[clover$lnwt > up.fence]) # No outliers!
+text(x = 0.65, y = up.fence, label = "Upper Fence")
+
+help(boxplot) # get more information about the boxplot.
+```
+
+If we choose a smaller value for the *range* argument of boxplot we can make some values appear like outliers. Note that 1.5 is a commonly accepted value for range. Just to see how the plots behave with a different range, we copy the code above and re-run it after changing the range value.
+
+```{r boxplot2, echo = TRUE, include = TRUE}
+myrange.factor = 0.5
+boxplot(clover$lnwt, range = myrange.factor)
+text(x = 0.70, y = median(clover$lnwt), label = "Median")
+text(x = 0.65, y = quantile(clover$lnwt, 0.75), label = "3rd quartile or 75% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.75), label = "Upper Hinge")
+text(x = 0.65, y = quantile(clover$lnwt, 0.25), label = "1st quartile or 25% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.25), label = "Lower Hinge")
+
+# To get the location of the top "fence" we need to identify the datapoint that is closest to but no greater than the upper hinge plus 1.5 * interquartile range.
+(iqrange <- IQR(clover$lnwt)) # Calculate the interquartile range
+(uplimit <- quantile(clover$lnwt, 0.75) + myrange.factor * iqrange)
+(rows.where.lt.uplimit <- which(clover$lnwt <= uplimit)) # gives row numbers of those that are less than uplimit
+clover$lnwt[rows.where.lt.uplimit] # gives lnwt in those rows
+(up.fence <- max(clover$lnwt[rows.where.lt.uplimit])) # gives the value we seek
+(outl <- clover$lnwt[clover$lnwt > up.fence]) # We have outliers!
+text(x = 0.65, y = up.fence, label = "Upper Fence")
+```
+
+The values for the five-number summary can be obtained directly with the fivenum() function:
+```{r fiven, echo = TRUE, include = TRUE}
+pander(cbind(c("min", "lower hinge", "median", "upper hinge", "max"), fivenum(clover$lnwt)))
+
+```
+
+###Analyses by Groups###
+
+The clover data has groups defined by the temperature treatments. Because the group numbers are just lables, we need to transform them into what is called "factor" class in R. This way, we can apply functions that obtain summaries and figures for each group. In the case of the clover, we expect that plants to grow faster at higher temperature; let's see what the data say.
+
+```{r grouped, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
+clover$temp <- factor(clover$temp)
+summary(clover)
+str(clover)
+boxplot(lnwt ~ temp, data = clover, notch = TRUE) # boxplots by treatment
+help(by) # by produces a list with an element for each value of the grouping variable.
+pander(sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summary))
+(fiven.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = fivenum))
+
+
+```
+
+
+
+
+
+
+
+= =======================================================================
+
+
+
+## Examples {#chStatsREx01}
 
 Provide and example of a simulation to determine the distribution of the sum of two independent uniform distributions. The definition of independence is found in Section \@ref(ch.Prob.indep) . Show analytic and simulation solutions. Show that analytic solution is general. Simulation may depend on the specific values selected to simulate.
 
@@ -88,19 +293,23 @@ Probability density function of the Uniform distribution U(a, b).
 
 We write
 
-$$x \sim U(a, b) \quad \text{where} \quad \quad a< b \quad$$ (\#eq:unif.pdf)
+\begin{equation}
+x \sim U(a, b) \quad \text{where} \quad \quad a< b
+(\#eq:unif2pdf)
+\end{equation}
+
 to state that the continuous random variable $x$ has a uniform distribution between a and b. This means that the probability of obtaining a value of x in an interval $[x_1, x_2]$ within [a,b] is constant and equal to $(x_2-x_1)/(b-a)$ \@ref(fig:unif.dist.fig)
 
-Note that the uniform distribution U(0, 1) is the distribution of the random numbers generated by the function RAND() in Excel. For more details on this distribution, see [Uniform Distribution] (https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)#Minimum-variance_unbiased_estimator).
+Note that the uniform distribution U(0, 1) is the distribution of the random numbers generated by the function RAND() in Excel. For more details on this distribution, see [Uniform Distribution] (https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)).
 
-$$\begin{equation}
+\begin{equation}
 f(x) =
   \begin{cases}
     \frac{1}{b-a}       & \quad \text{if } a \leq x \leq b \\
     0                   & \quad \text{otherwise }
   \end{cases}
-    (\#eq:unif.pdf)
-\end{equation}$$
+    (\#eq:unif-pdf)
+\end{equation}
 
 
 (ref:fig.unif.dist) Probability density function for the uniform distribution that has a support between any two values of the x-axis is the area under the line between those values.

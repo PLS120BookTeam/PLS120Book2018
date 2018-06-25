@@ -1,0 +1,281 @@
+---
+title: "Lab05 Anova"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(pander)
+```
+
+
+#### Instructions
+
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab01email.html).
+
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
+
+
+### Introduction
+
+
+In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. The data and description of the experimental setup have been simplified to facilitate understanding. For the purpose of this lab we will consider that the experiment was designed as a Completely Randomized Design in which 12 treatments were applied randomly to 13 plots each. We will also assume that the variances of the errors or residuals are the same in all treatments. One medusahead plant was grown in each plot and its total seed production was recorded at maturity (seedMass.g).
+
+
+Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas).
+
+
+
+
+### Part 1. Inspection and summary of data [25 points]
+
+
+Get a histogram of the data. Make a graph showing boxplots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. Create a new column called logSmass that contains the log of seed mass after adding 0.3 to the mass. We add 0.3 to avoid problems with the zeroes, because log(0) is not defined. Plot histograms and boxplots of the new variable. Inspect the boxplots and determine if there appear to be any effects of treatments on the seed production of the invasive exotic weed. Create a table of averages and standard errors by treatment.
+
+
+
+
+```{r}
+
+
+seed <- read.csv(file = "Lab05SeedMassData.txt", header = TRUE)
+
+# Look at the data
+str(seed) # Note the column that has our dependent variable
+
+boxplot(seedMass.g ~ Treatment, seed)
+
+
+# Obtain a histogram of the data for seed mass
+hist(seed$    ) # Distribution is too far from Normal
+
+
+seed$logSmass <- log(seed$seedMass.g + 0.3)
+
+# obtain a histogram of the transformed data by adding the column name
+hist(seed$    )  # complete the variable name to get the histogram
+
+boxplot(logSmass ~ Treatment, 
+        data = seed, 
+        ylab = 'log Seed mass (g)')
+
+
+# read help about aggregate. TYPE CODE BELOW:
+
+
+
+smeans <- aggregate(seedMass.g ~ Treatment, 
+                    data = seed, 
+                    FUN = mean)
+
+smedians <- aggregate(seedMass.g ~ Treatment, 
+                      data = seed, 
+                      FUN = median)
+
+# Use the aggregate function to get the standard error of the average for each treatment. Note that the function applied gets the standard deviation and divides by the square root of the sample size to get the standard error.
+
+sserrors <- aggregate(seedMass.g ~ Treatment, 
+                      data = seed, 
+                      FUN = function(x) sd(x)/sqrt(length(x)))
+
+
+table.seed.mass <- cbind(smeans, sserrors, smedians)[, c(1, 2, 4, 6)]
+
+names(table.seed.mass) <- c("Treatment", "Mean", "SE", "Median")
+
+library(pander)
+
+pander(table.seed.mass)
+
+
+```
+
+
+ANSWER: Inspect the boxplot. What treatments appear to differ? What would you expect to see? Do the data appear to support your expectations? Explain what cbind() does. Explain what aggregate() does.
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points]
+
+
+Use basic functions to partition the total sum of squares of logSmass into treatments and residual or error. Start by creating a column with the treatment averages for each observation. Then, add columns for total deviation of observation from the overall average, deviation of treatment average from the overall average, and deviation of observation from treatment average. Calculate the corresponding degrees of freedom and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. Make it into a data frame and then print it nicely with pander(). Calculate the F test and the critical F to test the Ho: mean seed production is the same in all treatments. Interpret the results.
+
+
+```{r}
+
+slog.means <- aggregate(logSmass ~ Treatment, 
+                        data = seed, 
+                        FUN = mean)
+
+names(slog.means)[2] <- "AvgLogMass"
+
+slog.means
+
+seed <- merge(seed, 
+              slog.means, 
+              by = "Treatment", 
+              all = TRUE)
+
+head(seed)
+
+ssTot <- sum((seed$logSmass - mean(seed$logSmass)) ^ 2) # Total sum of squares: total deviation of observations from the overall average
+
+ssTrt <- sum((seed$AvgLogMass - mean(seed$logSmass)) ^ 2) # Treatment sum of squares: deviation of treatment average from the overall average
+
+ssRes <- sum((seed$logSmass - seed$AvgLogMass) ^ 2) # Residual sum of squares: deviation of observations from treatment average
+
+# calculate the degrees of freedom by completing the code below
+
+df.Trt <- length(levels(seed$Treatment)) - 1
+dfe <- length(____) - length(____)
+df.Tot <-   df.Trt +  
+
+# Now calculate the means squares
+
+MSTrt <- ssTrt / df.Trt
+MSE <-    # complete this code considering that the MSE is the mean square of the residuals
+
+# Complete code below to calculate your F ratio and F critical value. 
+(Fcalc <-     )
+
+(Fcrit <- qf(0.05, 
+             df1 =  , 
+             df2 = , 
+             lower.tail = FALSE))
+
+
+ 
+```
+
+
+ANSWER: Are there differences among treatments? Report the F statistic and result. State your conclusions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Part 3. ANOVA using R functions.[20 points]
+
+
+Use the R functions aov() and anova() to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the previous results. The purpose of this part is for you to become familiar with different R functions that accomplish the same task. Read the help about the function oneway.test() and use it, making sure that all arguments have proper values. Pay particular attention to the assumption of equal variances. Note that this function allows you to do the test even when variances are not equal, but we assume that the variances are equal.
+
+
+```{r}
+# read help about function aov(), anova(), oneway.test()
+
+
+summary(aov(formula = logSmass ~ Treatment, 
+            data = seed))
+
+linear.model1 <- lm(formula = logSmass ~ Treatment, 
+                    data = seed)
+
+anova(linear.model1)
+
+oneway.test(logSmass ~ Treatment, 
+data = seed, 
+var.equal = "something here")
+
+
+
+
+```
+
+
+ANSWER: Do the results differ among functions? Compare to the results from Part 2.
+
+
+
+
+
+
+
+
+### Part 4. Confidence intervals for treatment means [25 points]
+
+Create 95% confidence intervals for all the treatment means, back-transform to see mass in g by exponentiating and subtracting 0.3, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
+
+
+```{r}
+
+
+ci.data <- data.frame(Treatment = levels(seed$Treatment))
+
+ci.data <- cbind(ci.data, predict(linear.model1, 
+                                  newdata = ci.data, 
+                                  interval = "confidence")) 
+
+str(ci.data)
+
+# Complete the code below to do the back transformation of the CI's and make a table with them
+
+ci.data.bt <- ci.data[,2:4] # Note that we will be doing a back-transformation on 3 columns from the ci.data table: the estimated mean values for each of 12 treatments, the lower 95% CIs, and the upper 95% CIs
+
+library(plotrix)
+plotCI(ci.data.bt$fit, 
+       uiw = ci.data.bt$upr - ci.data.bt$fit, 
+       liw = ci.data.bt$fit - ci.data.bt$lwr, 
+       ylab = "Seed Mass (g)")
+
+
+```
+
+
+ANSWER. 
+(1) Can you conclude that any of the treatments are effective at managing medusahead seed production, if your threshold for control is under 2g. In other words, do any treatments result in an expected seed mass production that is significantly different from 2g or more? result in an expected production of medusa head seed mass of 2  
+(2) Explain how the line to add the CI's to the ci.data works (i.e., explain the cbind() function).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

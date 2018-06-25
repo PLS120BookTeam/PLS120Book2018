@@ -1,4 +1,4 @@
-# Chapter 6: Sampling and Sampling Distributions {#ch.sampling}
+# Chapter 6: Sampling and Sampling Distributions {#chSampling}
 
 ## Learning Objectives for Chapter
 
@@ -29,6 +29,13 @@ Biasedness is a property of estimators not of samples or of an estimate in speci
 
 Statistics deals with sampling where the probability of any unit being included in the sample is greater than zero (e.g., no units are categorically excluded) and known. This is the only way one can calculate the statistical properties of estimators, particularly their variance and bias.
 
+## Section stressing importance of defining what is being estimated
+Tale of two places in Kazakhstan
+Elephant being measured by blind men.
+What is your height? Now? And now?
+What is the average yield of wheat in CA? Now? In March? In April?
+What is the average weight of cattle in Texas now? And now?
+
 ## Parameters, estimators, statistics and estimates
 
 There are several concepts here and unfortunately, they have not been given uniform and systematic names. We will propose some names to be used consistently for clarity
@@ -41,6 +48,30 @@ Estimate: the value of a statistic for a given sample.
 
 
 Example: a sample of 3 values is drawn from the standard normal distribution. Those values are `r (xs <- rnorm(3))`. the sample average or simply "average" is a statistic that consists of averaging all observed values `r mean(xs)` and the sample variance is `r var(xs)`
+
+## Estimation vs. inference and prediction
+
+Recall the use of the binomial or Poisson distributions to calculate probabilities of events. In those cases we used models whose parameters were known to calculate exact probabilities for certain events of interest. For example, we calculated the probability that at least 5 seeds germinate in a sample of 10 seeds. If the germination actually follows the distribution used, then the probability calculated is correct and known with certainty. We could say that before we put a set of seeds to germinate, that we "predit that 5 seeds will germinate with a probability equal to xx." We make what is called a PREDICTION for the results of a random experiment (germinating the seeds). If we repeat the experiment a large number of times, we should be able to corroborate that the number of times 5 seeds germinate divide by the number of experiments is xx.
+
+**A PREDICTION is a statement about the value that a random variable will take in a (future) random experiment.**
+
+The situation above is very different from a situation in which we do not know the parameter $p$ or probability of success of the binomial distribution. In this case we need to ESTIMATE the parameter in orer to be able to make any predictions. Parameters can be estimated by using data. For example, we could test 1000 seeds and calculate the proportion that germinate. This estimate is called $\hat{p}$. Now this estimate $\hat{p}$ of $p$ is itself a random variable and it has a variance and expected values that can be estimated.
+
+** An ESTIMATION is a statement about the current unknown value of a parameter or function of parameters.**
+
+In traditional frequentist statistics, ESTIMATION is the process of obtaining estimates for paramte values, whereas INFERENCE refers to making probabilistic statements about parameters or functions of parameters.
+
+**TERMINOLOGY WARNING!** Different authors use the same terms to refer to different things. Authors are free to use language in any way they see fit. Unfortunately, this means that the reader has to be adaptive and understand how each author uses the terms. We emphasize the knowledge of the list of concepts and the concepts themselves, without being adamant about our usage.
+
+Leaving names aside, some of the various types of statements we can make are:
+
+1. Predict the outcome of a random experiment or the value of random variable.
+2. Estimate the unknown value of a parameter.
+3. Make a confidence interval for the parameter.
+
+For statement 1 we need to know the parameters (or their estimates) and the distribution of the random variable. For statement 2 we only need to estimate the parameter using some estimator. For statement 3 we need to have the estimate and the sampling variance of the estimator. An example will make this clearer.
+
+Suppose that we are interested in the square of people's height. This quantitiy is used in the calculation of the Body Mass Index. Further suppose that height follows a normal distribution with mean $\mu$ and variance $\sigma^2$. ****TO BE COMPLETED**** 
 
 ## Exercises and Solutions
 

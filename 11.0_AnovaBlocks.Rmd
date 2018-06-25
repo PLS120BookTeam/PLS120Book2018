@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # ANOVA with Blocks {#ch.rcbd}
 
 ## Learning Objectives for Chapter
@@ -19,7 +24,708 @@
 
 ## Laboratory Exercises
 
-### Plant Sciences
+### Plant Sciences {#LabCh11PLS}
 
-### Animal Sciences
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
 
+```
+---
+title: "Lab06 RCBD Anova"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+#### Instructions
+
+For this lab you will modify and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between ` ```{r} ` and ` ``` `. These areas are highlighted with a light grey color. Text outside those bookends will be interpreted as simple text, not code. Experiment by running each line and modifying it you get the desired result. Keep the lines that work and move on. At any time you can see if your document "knits" or not by clicking on the Knit to HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab06email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
+
+In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. These are based on the **same experiment used in Lab 05**, but now we use the information that the plots were actually in spatial blocks, and we will use the average of each treatment in each block. The data and description of the experimental setup have been simplified to facilitate understanding. For the purpose of this lab we will consider that the experiment was designed as a Randomized Complete **Block** Design (RCBD) in which each of 12 treatments were applied randomly to a plot in each of 3 blocks. (Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in block 1, 2 and 3 to show block effects). Blocks were defined as contiguous areas that were more or less homogeneous in soil and plant properties prior to the experiment. Assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as logMass = log(seedMass + 0.3) to achieve normality and equality of variances.
+
+Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas). This resulted in a factorial set of treatments, but we ignore this for now. Factorial treatments is a topic for a later chapter.
+
+This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.
+
+#### Part 1. Read in, inspect and summarize data [15 points]
+
+Read in the data. Create a table where all observations are displayed by treatment (rows) and block (columns), and include the marginal treatment and block averages. Make boxplots for the logMass by treatment and by block. 
+
+```{r}
+
+# install.packages(c("tables", "pander","emmeans"))
+
+library(tables)
+library(pander)
+library(emmeans)
+
+seedB <- read.table(header = TRUE, text = "
+Treatment block logMass
+wnE Block1 -0.210836005431437
+wNE Block1 1.55288938986704
+WnE Block1 0.055235139345024
+WNE Block1 0.835167804254832
+wns Block1 1.24627323200302
+wnS Block1 0.540066519204629
+wNs Block1 1.57199447282598
+wNS Block1 1.23870355136554
+Wns Block1 0.986995928669204
+WnS Block1 -0.170749893385349
+WNs Block1 0.664136397253749
+WNS Block1 0.736888706368722
+wnE Block2 0.041449411568171
+wNE Block2 1.428708818124
+WnE Block2 0.319992367391131
+WNE Block2 1.03098409320956
+wns Block2 0.643797294741899
+wnS Block2 -0.511211922892043
+wNs Block2 1.84080033644501
+wNS Block2 0.813650468511317
+Wns Block2 1.69986757761409
+WnS Block2 -0.154140967169852
+WNs Block2 1.423732115253
+WNS Block2 0.2968644855256
+wnE Block3 -0.655926955677754
+wNE Block3 -0.27934035269992
+WnE Block3 -0.5542030003591
+WNE Block3 -1.12888399571028
+wns Block3 0.45627765803375
+wnS Block3 -1.04875645623447
+wNs Block3 0.49759250163951
+wNS Block3 -0.097792008066854
+Wns Block3 -0.513584856362292
+WnS Block3 -1.36796547632004
+WNs Block3 1.02290365359422
+WNS Block3 -0.527897010482484
+"
+)
+
+seedB$Treatment <- factor(as.character(seedB$Treatment), levels = c("wns", "wnE", "wnS", "wNs", "wNE", "wNS", "Wns", "WnE", "WnS", "WNs", "WNE", "WNS"))
+
+# If the data were available in a .csv file in the working directory,
+# it could be read in with the following line.
+
+# seedB <- read.csv(file = "Lab06SeedMassData.txt", header = TRUE)
+
+str(seedB) # The response variable is already log transformed.
+
+boxplot(logMass ~ Treatment, seedB) # make boxplots for the logMass by treatment
+
+boxplot(logMass ~ block, seedB) # make boxplots for the logMass by block
+
+# Read help about function tabular()
+
+pander(tabular((Treatment + 1) * logMass * mean ~ (block + 1), data = seedB))
+
+```
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Based on the boxplots, what trends appear in the treatments? Does it look like water addition, N addition or type of competitors affects medusahead seed production? Look for patterns and describe them.
+
+Discuss the effects of competition by seeded (S) and unseeded (s) species on medusahead seed production.
+
+What treatments seem best to reduce seed production in medusahead?
+
+Explain what the `tabular()` function did here.
+
+
+#### Part 2. Analyze data ignoring the blocking design [25 points]
+
+Modify the code you used in the CRD lab to conduct an ANOVA of the present data ignoring the blocking design. For this part you have to assume that plots were assigned to treatments completely randomly, instead of making sure that each treatment was in each block.
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Report the ANOVA table and the Least Significant Difference (LSD). The LSD is the minimum difference between two treatment averages for the corresponding treatment means to be considered statistically different.
+
+Report a table with the sorted treatment averages and the corresponding standard errors. The table created has confidence intervals for each treatment mean.
+
+Find the relevant equations in the textbook and calculate the CI for the first treatment "by hand" using equations from the book. Show the calculations in R code.
+
+
+```{r}
+
+# Conduct an ANOVA test on logMass by treatment.
+
+crd.mod <- lm(formula = logMass ~ Treatment, data = seedB)
+
+pander(anova(crd.mod))
+
+# Read help about function lsmeans()
+
+crd.mod.means <- emmeans(crd.mod, "Treatment")
+
+str(summary(crd.mod.means))
+
+pander(
+   summary(crd.mod.means)[
+      order(summary(crd.mod.means)$emmean),
+      ]
+)
+
+```
+
+In the first part of the chunk above we use the `lm` function to tell R what model we want to fit and what data to use for it; `lm' stands for *linear model*. The model is given in the `formula` argument. The formula `logProt ~ Treatment` means "model the variable logProt with an overall mean and a Treatment effect" and is equivalent to $Y_{ij} = \mu_{i.} + \epsilon_{ij} = \mu_{..} + \tau_{i.} + \epsilon_{ij}$. In this case i goes from 1 to 12 because there are 12 treatments, and the range of j is 1 to 3, because there are 3 blocks per treatment.
+
+```{r}
+
+str(crd.mod) # Look at what is inside the model object.
+# This will let us know what we can extract from the model.
+
+```
+
+The output showing the structure of the fitted model can be confusing and overwhelming at first, but it turns out to be simple once we know what to look for. The model is a list of lists. Each `$` is the beginning of a list, where the `$` is followed by the name of that list. There are various levels of lists nested. At the top, we see `List of 13` which means that `crd.mod` is a list with 13 elements. The first element is called `coefficient` and is a named numeric vector with 1 row and 12 columns (1 per treatment). The second element is the vector of residuals which contains one residual for each of the 287 observations. We will calculate those residual "by hand" below, but we could cross check them with the ones already calculated by R and saved in the model object.
+
+If we use `summary(crd.mod)` we obtain a different object that contains the standard deviation of the residuals already calculated and included with the name `sigma`. To see the structure of summary(crd.mod) run the code `str(summary(crd.mod))` and find `$sigma` in the output (not shown here). Below, we extract this standard deviation from the summary and square it to obtain the MSE. The result is saved in the object called `crd.mod.mse`.
+
+The LSD is the minimum difference necessary between two treatment averages for the means to be considered "significantly" different. Recall that the difference between two averages is a random variable that comes from a linear combination of two other random variables that are independent. The variance of the difference is the sum of the variances of the averages. The variance of each average is the variance of the error divided by the number of observations used to calculate the average, in this case n is 3, one per block. Since we assume that both variances are equal, we multiply the result time 2.
+
+
+```{r}
+
+# Extract sigma, the residual standard deviation
+crd.mod.mse <- summary(crd.mod)$sigma ^ 2
+
+# Extract the df for the residuals.
+(dfe <- crd.mod$df.residual) # df of the residual or “within” error)
+
+# Calculate the critical t value for the LSD.
+(t.crit <- qt(p = 0.975, df = dfe)) # Use alpha = 0.05
+
+reps <- length(seedB$logMass)/length(levels(seedB$Treatment))
+
+# Calculate the LSD. Note that the MSE is divided by the number of reps.
+# If the number of reps were different for some treatments, we
+# would have to use a formula that accounts for this.
+(crd.mod.lsd <- t.crit * sqrt(2 * crd.mod.mse / reps)) ## hint: how many replicates for each treatment? This is different from the previous lab.
+
+```
+
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Are the trends observed in Part 1 significant?
+
+Based on the LSD, did seeding (S vs. s) have a significant effect when water and nitrogen were added?
+
+Explain where the numbers in the calculation of the LSD come from and why the calculation of the LSD has the MSE multiplied by two and divided by 3.
+
+Describe the meaning of the columns in the output from this code **emmeans(crd.mod, "Treatment")** .
+
+#### Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points]
+
+Now consider that the experiment was actually an RCBD and analyze it accordingly.
+
+First, use basic functions to partition the total sum of squares of logMass into treatments, blocks and residual or error.
+
+Recall that the model for the RCBD partitions each observation into overall mean, treatment effect, block effect and random error:
+
+$$Y_{ij} = \mu_{..} + \tau_{i.} + B_{.j} + \epsilon_{ij} \\ \epsilon_{ij} \sim N(0, \ \sigma)$$
+
+Because we do not know the values of the parameters (mean, treatment effects, block effects), we use estimates obtained with the following equations:
+
+$$Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_{i.} + \hat{B}_{.j} + \hat{\epsilon}_{ij}$$
+
+where the overall average estimates the overall mean (recall that the "hat" stands for "estimated"),
+
+$$\hat{\mu}_{..} = \bar{Y}_{..} = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \frac{Y_{ij}}{r \ k}$$
+
+the difference between each treatment average and the overall average estimates the treatment effect $\tau_{i.}$,
+
+$$\hat{\tau}_{i.} = \hat{\mu}_{i.} - \hat{\mu}_{..} = \left(\displaystyle\sum_{j=1}^{r}\frac{Y_{ij}}r\right)-\bar{Y}_{..} = \bar{Y}_{i.}-\bar{Y}_{..}$$
+
+the difference between each block average and the overall average estimates the block effect $B_j$,
+
+$$\hat{B}_{.j} = \hat{\mu}_{.j} - \hat{\mu}_{..} = \left(\displaystyle\sum_{i=1}^{k}\frac{Y_{ij}} k \right)-\bar{Y}_{ij}$$
+
+and the estimated random error $\epsilon$ is calculated by difference
+
+$$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
+
+The sums of squares are calculated by creating columns for $\hat{B}_j$, $\hat{\tau}_i$, and $\hat{\epsilon}_{ij}$ and then summing the squares of the values in each column.
+
+Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate()` function creates a column wiht as many values as treatments. Then, the `merge` function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
+
+```{r}
+
+# Calculate treatment averages using aggregate()
+logMass.Trt.avgs <- aggregate(logMass ~ Treatment, data = seedB, FUN = mean)
+
+names(logMass.Trt.avgs)[2] <- "Trt.AvgLogMass"
+
+# Create a column for treatment averages in data frame
+seedB <- merge(seedB, logMass.Trt.avgs, by = "Treatment", all = TRUE)
+
+```
+
+The process is repeated for block averages:
+
+```{r}
+
+# Calculate block averages using aggregate()
+logMass.block.avgs <- aggregate(logMass ~ block, data = seedB, FUN = mean)
+
+names(logMass.block.avgs)[2] <- "blk.AvgLogMass"
+
+# Create a column for block averages in data frame
+seedB <- merge(seedB, logMass.block.avgs, by = "block", all = TRUE)
+```
+
+Then, we add columns for total deviation of observation from the overall average $Y_{ij} - \bar{Y}_{..}$, deviation of treatment average from overall average (or treatment effect $\hat{\tau}_i = \hat{\mu}_{.i} - \hat{\mu}_{..}$), deviation of block average from overall average (block effect $\hat{B}_j = \hat{\mu}_{.j} - \hat{\mu}_{..}$) and deviation of observation from treatment average.
+
+```{r}
+
+seedB$total.fx <- seedB$logMass - mean(seedB$logMass) # total deviation from average
+
+seedB$block.fx <- seedB$blk.AvgLogMass - mean(seedB$logMass) # block effects
+
+seedB$Trt.fx <- seedB$Trt.AvgLogMass - mean(seedB$logMass) # treatment effects
+
+seedB$res <- seedB$logMass - seedB$block.fx - seedB$Trt.fx - mean(seedB$logMass) # residuals
+
+seedB # See how table has each observations partitioned into components.
+
+```
+
+Finally, we calculate the corresponding sums of squares and degrees of freedom, and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. The anova table is transformed into a data frame and printed  nicely with pander(). Calculate the F test and the critical F to test the null hypothesis (Ho) that mean seed production is the same in all treatments. Interpret the results.
+
+```{r}
+
+# Sums of squares
+
+paste("Total Sum of Squares = ", (ss.Tot <- sum(seedB$total.fx ^ 2)))
+
+paste("Sum of Squares of Blocks = ", (ss.block <- sum(seedB$block.fx ^ 2)))
+
+paste("Sum of Squares of Treatments = ", (ss.Trt <- sum(seedB$Trt.fx ^ 2)))
+
+paste("Sum of Squares of Residuals = ", (ss.Res <- sum(seedB$res ^ 2)))
+
+# Degrees of freedom
+
+paste("Treatment df = ", (df.Trt <- length(levels(seedB$Treatment)) - 1))
+
+paste("Block df = ", (df.block <- length(levels(seedB$block)) - 1))
+
+paste("Total df = ", (df.Tot <- length(seedB$logMass) - 1))
+
+paste("Residual or error df = ", (df.Res <- df.Tot - df.Trt - df.block))
+
+# Mean squares and Fcalc
+
+ms.Trt <- ss.Trt / df.Trt
+
+ms.block <- ss.block / df.block
+
+ms.Res <- ss.Res / df.Res
+
+(Fcalc.Trt <- ms.Trt / ms.Res)
+
+(Fcalc.block <- ms.block / ms.Res)
+
+(Fcrit.Trt <- qf(p = 0.95, df1 = df.Trt, df2 = df.Res))
+
+(Fcrit.block <- qf(p = 0.95, df1 = df.block, df2 = df.Res))
+
+```
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Can you conclude that there are differences among treatments? Why?
+Report the test statistic, your decision rule and your conclusion.
+
+
+#### Part 4. ANOVA for RCBD using R functions.[25 points]
+
+In this section we repeat the previosu analysis using the R functions `aov()` and `anova()` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
+
+
+```{r}
+# read help about function aov(), anova(), oneway.test()
+
+summary(aov(formula = logMass ~ block + Treatment, data = seedB))
+rcbd.mod <- lm(formula = logMass ~  block + Treatment, data = seedB)
+anova(rcbd.mod)
+
+```
+
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences amonf treatments.
+
+
+
+
+
+### Animal Science {#LabCh11ANS}
+
+
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+
+```
+---
+title: "Lab06 RCBD Anova"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+#### Instructions
+
+For this lab you will modify and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between ` ```{r} ` and ` ``` `. These areas are highlighted with a light grey color. Text outside those bookends will be interpreted as simple text, not code. Experiment by running each line and modifying it you get the desired result. Keep the lines that work and move on. At any time you can see if your document "knits" or not by clicking on the Knit to HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab06email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
+
+In this exercise we analyze the milk protein data modified from the `Milk` R dataset. Cows start producing milk when the calf is born, and the amount and composition of milk changes dramatically during the lactation period, which can last up to 20 weeks. This study looks at the change in milk protein concentration over four 5-week periods for cows fed three different diets: barley, lupines or a mix of barley and lupines. The data were modified to have a slightly non-normal distribution and they were aggregated into periods of lactation. Then, data were log transformed as logProt = log(protein - 2.64) to achieve normality and equality of variances. These data are based on the **same experiment used in Lab05**, but now we add the information that cows were actually in blocks, and we will use the average of each treatment in each block. For the purpose of this lab we will consider that the experiment was designed as a Randomized Complete **Block** Design (RCBD) in which each of 12 treatments were applied randomly to a cow in each of 3 blocks. (Simulated block effects of 0.10, 0.20, and -0.30 were added to logProt observations in blocks 1, 2 and 3). Cows were blocked by body weight. Assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average protein concentration over 4-45 weeks.
+
+Treatments were combinations of a diet and lactation period. Diets were barley, lupin and a combination of barley and lupin. Lactation periods were weeks (A) 1-5, (B) 6-10, (C) 11-15 and (D) 15-19. This resulted in a factorial set of treatments, but we ignore this for now. Factorial treatments is a topic for a later chapter. Some cows did not have lactation periods that lasted 19 weeks, so the number of cows in period D is smaller than in other periods.
+
+This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.
+
+#### Part 1. Read in, inspect and summarize data [15 points]
+
+Read in the data. Create a table where all observations are displayed by treatment (rows) and block (columns), and include the marginal treatment and block averages. Make boxplots for the logProt by treatment and by block. 
+
+```{r}
+
+# install.packages(c("tables", "pander","emmeans"))
+
+library(tables)
+library(pander)
+library(emmeans)
+
+milk.protB <- read.table(header = TRUE, text = "
+Treatment block logProt
+bar+lupA B1 -0.0731037100734435
+bar+lupB B1 -0.196101868349928
+bar+lupC B1 -0.210267730933958
+bar+lupD B1 -0.167489223975411
+barleyA B1 0.0128826235040475
+barleyB B1 -0.0370084934237159
+barleyC B1 -0.0685472328542999
+barleyD B1 0.0227519412374128
+lupinsA B1 -0.262581988917979
+lupinsB B1 -0.3916169129234
+lupinsC B1 -0.547148905195592
+lupinsD B1 -0.332935697972448
+bar+lupA B2 -0.0984822162913345
+bar+lupB B2 -0.210935792405121
+bar+lupC B2 -0.0567371580442165
+bar+lupD B2 0.0464364858012666
+barleyA B2 0.0936734288425749
+barleyB B2 -0.0243478396788622
+barleyC B2 -0.104679084777041
+barleyD B2 0.162878012463507
+lupinsA B2 -0.0727764949797924
+lupinsB B2 -0.363116935987831
+lupinsC B2 -0.270329731838754
+lupinsD B2 -0.467562992079467
+bar+lupA B3 -0.469422318296023
+bar+lupB B3 -0.52042415658816
+bar+lupC B3 -0.776426735627286
+bar+lupD B3 -0.599824055104792
+barleyA B3 -0.376865498106334
+barleyB B3 -0.558778120822771
+barleyC B3 -0.498434059657074
+barleyD B3 -0.448554872471514
+lupinsA B3 -0.52988950832947
+lupinsB B3 -0.684172163381795
+lupinsC B3 -0.845858171586139
+lupinsD B3 -0.99810334235182
+"
+)
+
+# If the data were available in a .csv file in the working directory,
+# it could be read in with the following line.
+
+# milk.protB <- read.csv(file = "Lab06MilkProteinData.csv", header = TRUE)
+
+
+```
+
+Now we inspect the structure of the data frame with `str` and create boxplots for the data as a function of treatment and block. Keep in mind that the data are transformed. In order to see the actual protein concentration, values have to be backtransformed by exponentiating and then adding 2.64.
+
+```{r}
+
+str(milk.protB) # The response variable is already log transformed.
+
+boxplot(logProt ~ Treatment, milk.protB) # make boxplots for the logProt by treatment
+
+boxplot(logProt ~ block, milk.protB) # make boxplots for the logProt by block
+
+# Read help about function "tabular"
+
+pander(tabular((Treatment + 1) * logProt * mean ~ (block + 1), data = milk.protB))
+
+```
+
+The `tabular` function calculates the averages by treatment and block (in these data there is only one observations per treatment and block) and then prepares a table that is displayed neatly by `pander`.
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Based on the boxplots, what trends appear in the treatments? Does it look like any of the diets affects millk composition? Is the effect of diet the same over lactation periods? Look for patterns and describe them.
+
+Discuss the effects of diet, and the addition of lupin in particular on milk composition temporal patterns.
+
+What combination of diet and period seems to yield milk wiht the greatest concentration of protein in milk?
+
+Explain what the `tabular` function did.
+
+
+#### Part 2. Analyze data ignoring the blocking design [25 points]
+
+Modify the code you used in the CRD lab to conduct an ANOVA of the present data ignoring the blocking design. For this part you have to assume that plots were assigned to treatments completely randomly, instead of making sure that each treatment was in each block.
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Report the ANOVA table and the Least Significant Difference (LSD). The LSD is the minimum difference between two treatment averages for the corresponding treatment means to be considered statistically different.
+
+Report a table with the sorted treatment averages and the corresponding standard errors. The table created has confidence intervals for each treatment mean.
+
+Find the relevant equations in the textbook and calculate the CI for the first treatment "by hand" using equations from the book. Show the calculations in R code.
+
+
+```{r}
+
+# Conduct an ANOVA test on logProt by treatment.
+
+crd.mod <- lm(formula = logProt ~ Treatment, data = milk.protB)
+
+pander(anova(crd.mod))
+
+# Read help about function "lsmeans"
+
+crd.mod.means <- emmeans(crd.mod, "Treatment")
+
+str(summary(crd.mod.means)) # Look for the emmeans to plot them in
+#                             increasing order
+
+pander(
+   summary(crd.mod.means)[
+      order(summary(crd.mod.means)$emmean),
+      ]
+)
+
+```
+
+
+In the first part of the chunk above we used the `lm` function to tell R what model we want to fit and what data to use for it; `lm' stands for *linear model*. The model is given in the `formula` argument. The formula `logProt ~ Treatment` means "model the variable logProt with an overall mean and a Treatment effect" and is equivalent to $Y_{ij} = \mu_{i.} + \epsilon_{ij} = \mu_{..} + \tau_{i.} + \epsilon_{ij}$. In this case i goes from 1 to 12 because there are 12 treatments, and the range of j is 1-3 because there are 3 blocks.
+
+
+```{r}
+
+str(crd.mod) # Look at what is inside the model object.
+# This will let us know what we can extract from the model.
+
+# Extract sigma, the residual standard error.
+crd.mod.mse <- summary(crd.mod)$sigma ^ 2
+
+# Extract the df for the residuals.
+(dfe <- crd.mod$df.residual) # df of the residual or “within” error)
+
+# Calculate the critical t value for the LSD.
+(t.crit <- qt(p = 0.975, df = dfe)) # Use alpha = 0.05
+
+# Calculate the LSD. Note that the MSE is divided by the number of reps.
+# If the number of reps were different for some treatments, we
+# would have to use a formula that accounts for this.
+(crd.mod.lsd <- t.crit * sqrt(2 * crd.mod.mse / 3)) ## hint: how many replicates for each treatment? This is different from the previous lab.
+
+```
+
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Are the trends observed in Part 1 significant?
+
+Based on the LSD, was the composition of milk in the last period affected by diet?
+
+Explain where the numbers in the calculation of the LSD come from and why the calculation of the LSD has the MSE multiplied by 2 and divided by 3.
+
+Describe the meaning of the columns in the output from this code `emmeans(crd.mod, "Treatment")` .
+
+#### Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points]
+
+Now consider that the experiment was actually an RCBD and analyze it accordingly.
+
+First, use basic functions to partition the total sum of squares of logProt into treatments, blocks and residual or error.
+
+Recall that the model for the RCBD partitions each observation into overall mean, treatment effect, block effect and random error:
+
+$$Y_{ij} = \mu_{..} + \tau_{i.} + B_{.j} + \epsilon_{ij} \\ \epsilon_{ij} \sim N(0, \ \sigma)$$
+
+Because we do not know the values of the parameters (mean, treatment effects, block effects), we use estimates obtained with the following equations:
+
+$$Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_{i.} + \hat{B}_{.j} + \hat{\epsilon}_{ij}$$
+
+where the overall average estimates the overall mean (recall that the "hat" stands for "estimated"),
+
+$$\hat{\mu}_{..} = \bar{Y}_{..} = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \frac{Y_{ij}}{r \ k}$$
+
+the difference between each treatment average and the overall average estimates the treatment effect $\tau_{i.}$,
+
+$$\hat{\tau}_{i.} = \hat{\mu}_{i.} - \hat{\mu}_{..} = \left(\displaystyle\sum_{j=1}^{r}\frac{Y_{ij}}r\right)-\bar{Y}_{..} = \bar{Y}_{i.}-\bar{Y}_{..}$$
+
+the difference between each block average and the overall average estimates the block effect $B_j$,
+
+$$\hat{B}_{.j} = \hat{\mu}_{.j} - \hat{\mu}_{..} = \left(\displaystyle\sum_{i=1}^{k}\frac{Y_{ij}} k \right)-\bar{Y}_{ij}$$
+
+and the estimated random error $\epsilon$ is calculated by difference
+
+$$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
+
+The sums of squares are calculated by creating columns for $\hat{B}_j$, $\hat{\tau}_i$, and $\hat{\epsilon}_{ij}$ and then summing the squares of the values in each column.
+
+Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate` function creates a column with as many values as treatments. Then, the `merge` function puts the correspoding treatment average in each of the observations in the complete data table. The `all = TRUE` argument ensures that each treatment average is repeated over all observations in that treatment.
+
+```{r}
+
+# Calculate treatment averages using aggregate()
+logProt.Trt.avgs <- aggregate(logProt ~ Treatment, data = milk.protB, FUN = mean)
+
+names(logProt.Trt.avgs)[2] <- "Trt.AvgLogProt"
+
+# Create a column for treatment averages in data frame
+milk.protB <- merge(milk.protB, logProt.Trt.avgs, by = "Treatment", all = TRUE)
+
+```
+
+The process is repeated for block averages:
+
+```{r}
+
+# Calculate block averages using aggregate()
+logProt.block.avgs <- aggregate(logProt ~ block, data = milk.protB, FUN = mean)
+
+names(logProt.block.avgs)[2] <- "blk.AvgLogProt"
+
+# Create a column for block averages in data frame
+milk.protB <- merge(milk.protB, logProt.block.avgs, by = "block", all = TRUE)
+```
+
+Then, we add columns for total deviation of observation from the overall average $Y_{ij} - \bar{Y}_{..}$, deviation of treatment average from overall average (or treatment effect $\hat{\tau}_i = \hat{\mu}_{.i} - \hat{\mu}_{..}$), deviation of block average from overall average (block effect $\hat{B}_j = \hat{\mu}_{.j} - \hat{\mu}_{..}$) and deviation of observation from treatment average.
+
+```{r}
+
+milk.protB$total.fx <- milk.protB$logProt - mean(milk.protB$logProt) # total deviation from average
+
+milk.protB$block.fx <- milk.protB$blk.AvgLogProt - mean(milk.protB$logProt) # block effects
+
+milk.protB$Trt.fx <- milk.protB$Trt.AvgLogProt - mean(milk.protB$logProt) # treatment effects
+
+milk.protB$res <- milk.protB$logProt - milk.protB$block.fx - milk.protB$Trt.fx - mean(milk.protB$logProt) # residuals
+
+milk.protB # See how table has each observations partitioned into components.
+
+```
+
+Finally, we calculate the corresponding sums of squares and degrees of freedom, and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. The anova table is transformed into a data frame and printed nicely with `pander`. Calculate the F test and the critical F to test the null hypothesis (Ho) that protein content is the same in all treatments. Interpret the results.
+
+```{r}
+
+# Sums of squares
+
+paste("Total Sum of Squares = ", (ss.Tot <- sum(milk.protB$total.fx ^ 2)))
+
+paste("Sum of Squares of Blocks = ", (ss.block <- sum(milk.protB$block.fx ^ 2)))
+
+paste("Sum of Squares of Treatments = ", (ss.Trt <- sum(milk.protB$Trt.fx ^ 2)))
+
+paste("Sum of Squares of Residuals = ", (ss.Res <- sum(milk.protB$res ^ 2)))
+
+# Degrees of freedom
+
+paste("Treatment df = ", (df.Trt <- length(levels(milk.protB$Treatment)) - 1))
+
+paste("Block df = ", (df.block <- length(levels(milk.protB$block)) - 1))
+
+paste("Total df = ", (df.Tot <- length(milk.protB$logProt) - 1))
+
+paste("Residual or error df = ", (df.Res <- df.Tot - df.Trt - df.block))
+
+# Mean squares and Fcalc
+
+ms.Trt <- ss.Trt / df.Trt
+
+ms.block <- ss.block / df.block
+
+ms.Res <- ss.Res / df.Res
+
+(Fcalc.Trt <- ms.Trt / ms.Res)
+
+(Fcalc.block <- ms.block / ms.Res)
+
+(Fcrit.Trt <- qf(p = 0.95, df1 = df.Trt, df2 = df.Res))
+
+(Fcrit.block <- qf(p = 0.95, df1 = df.block, df2 = df.Res))
+
+```
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Can you conclude that there are differences among treatments? Why?
+Report the test statistic, your decision rule and your conclusion.
+
+
+#### Part 4. ANOVA for RCBD using R functions.[25 points]
+
+In this section we repeat the previosu analysis using the R functions `aov` and `anova` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
+
+
+```{r}
+# read help about function aov(), anova(), oneway.test()
+
+summary(aov(formula = logProt ~ block + Treatment, data = milk.protB))
+
+rcbd.mod <- lm(formula = logProt ~  block + Treatment, data = milk.protB)
+
+anova(rcbd.mod)
+
+```
+
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences amonf treatments.

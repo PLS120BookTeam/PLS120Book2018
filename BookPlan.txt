@@ -1,0 +1,149 @@
+PLS 120 book plan
+
+=== Funding ====
+
+Find funding. TRC. Other organizations? Plant Sciences?
+
+Update 11 May 2018 ====================
+EAL asked CEE center for educational excellence and they said to apply in the future after participating in activities and consultations. Consulted with CEE expert and attended one workshop or two. Will follow up with more workhops and a new attempt to application for funds.
+
+EAL secured $2000 from own state account and obtained promise of matching $1500 by department. Match will be used in application to CEE.
+
+
+=== Topics ====
+
+What should we add/remove to the current book?
+No need to give instructions to install R.
+Remove tally for frequency table (make into R code).
+Remove stem and leaf.
+Expand concepts of sampling distribution in first page Ch. 04
+
+Look for examples, figures, explanations we already used in lectures and labs to be used as the basis for the new content of the book. In general we will follow the topics in the SG book, but we will rewrite everything, make it colorful, add lots of figures and diagrams to explain concepts visually, and add our own explanations.
+
+Update 11 May 2018 ====================
+EAL merged and edited all learning objectives, which constitute a list of topics to cover in each chapter.
+
+=== Format ====
+
+Lecture chapters all up front and Lab Manual separate.
+Integrate R and lecture? Yes. Follow format Statistical Rethinking and Kéry’s books.
+
+Update 11 May 2018 ====================
+Lab sections were added to each chapter on the basis of the consultant's recommendation. Not all chapters will have labs. Chapter-lab pairs to be specified, but should be obvious.
+
+=== Labs ====
+
+Use Plant Science labs as in Canvas
+Translate Plant Science labs to Animal Science data posted in Canvas
+
+Lab translation assignments (start anytime)
+Cale 1 & 2
+Stephanie 3 & 4
+Emilio 5, 6 & 7
+Jennifer 8 & 9
+
+
+=== Collaboration ====
+
+Who does what? TBD
+
+How do we collaborate?
+We can use a tool like the following:
+GitHub
+RStudio server
+Jupyter
+
+Emilio will research the options.
+
+We will have a structure for the whole book and manual available at all times.
+We will work together by chapter, but nonlinear work will be possible at any time.
+Work by section, topic or “function” (e.g. formulas vs code)? TBD
+
+Update 11 May 2018 ====================
+We are using GitHub and it seems to be working.
+We have a master brach that each can fork, work on and submit back with a pull request. Once we have pull requests from all, EAL will solve conflicts and merge to master, and the process will be repeated.
+
+Notes 7 June 2018 ====================
+
+The numbering of labs has to be resolved. The original lab order number might become confusing because it differs from the number of the chapter where lab is included.
+
+Remember to add {#...} to each location that we want to cross-reference.
+
+Data should be included in the R code read.table() to avoid the need for external files.
+
+Use write.csv and read.csv to show the use of .csv files for data input.
+
+Remember to run spell check in all files.
+
+Transition from lmmeans to emmeans.
+
+DO NOT USE PERIODS OR UNDERSCORES IN KEYWORDS or ID's FOR CROSS-REFERENCES.
+
+When referring to concepts, functions or equations that are the focus of other sections in the book, add a cross reference or the text "(**insert cross-reference**)" as a place holder or add a complete cross reference and anchor.
+
+Cross references------------------------------------
+
+Equation labels must start with the prefix eq: in bookdown. All labels in bookdown must only contain alphanumeric characters, :, -, and/or /. Equation references work best for LaTeX/PDF output, and they are not well supported in Word output or e-books. For HTML output, bookdown can only number the equations with labels. Please make sure equations without labels are not numbered by either using the equation* environment or adding \nonumber or \notag to your equations. The same rules apply to other math environments, such as eqnarray, gather, align, and so on (e.g., you can use the align* environment).
+
+Headings:
+The anchor is created by adding {id} at the end of headings. Cross reference it with [text displayed as link](#id). Headings can also be cross referenced with [text displayed as link][Section heading text or title].
+
+Equations:
+Anchor by adding (#eq:id) in the last line of \begin{equation}, right before \end{equation}. Cross reference it with \@ref(eq:id)
+
+Figures:
+Add fig.cap="Figure caption text" to named r chunks. The id or label of the figure is the chunk  preceeded by fig:. For example, a chunk named peter that has a  fig.cap = will create a figure with label or id fig:peter. Cross reference it with \@ref(fig:peter).
+
+Tables:
+Add a caption to a kable().The table will be produced and an id generated as for figures. The id will be tab:chunkName. Cross reference it with \@ref(tab:chunkName)
+
+If you want to cross-reference figures or tables generated from a code chunk, please make sure the chunk label only contains alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-). If you need to use formatting in captions, you need to use text references.
+
+
+
+----------------------------------------------------
+
+
+Notes 14 June 2018 ====================
+
+A backslash "\" alone in a line or at the end of a paragraph messes up the rendering of inline equations in the preceeding paragraph Each equation is preceeded by a line-feed and appears in a new line. Avoid \'s alone or at the end of paragraphs.
+
+To add blank lines or vertical space, use <br> alone in a line
+
+Make hyperlinks open in a new browser page by using:
+
+<a href="hyperlink" target="_blank">Text displayed for link</a>
+
+To add a reference and cite it get the BibTex style citation and add it to the file book.bib. Make sure that the citation has a key name right after "@Type{"
+
+For example, in
+@Manual{R-base,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2018},
+    url = {https://www.R-project.org/},
+
+the key name for the citation above is R-base.
+
+Most works that are online or that can be found with Mendeley or the like, already have button or link to get the bibTex formatted citation that we can paste direcly into the book.bib file.
+
+In the text add the reference in parentheses by typing [@R-base] or w/out parentheses as @R-base. See 03.0_MathSymbols
+
+Notes 20 June 2018 ====================
+
+Software for LaTeX in Mac is MacTex. http://www.tug.org/mactex/
+
+References for data curation:
+
+FAIR data:
+https://www.nature.com/articles/sdata201618
+https://www.force11.org/group/fairgroup/fairprinciples
+
+For tidy data, Data carpentry has some good guidelines:
+http://www.datacarpentry.org/semester-biology/materials/tidy-data/
+
+New England Collaborative Data Management Curriculum has extensive material and lesson plans on data management:
+https://library.umassmed.edu/necdmc/modules
+

@@ -1,4 +1,9 @@
-# Analysis of Variance {#ch.anova}
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Analysis of Variance {#chAnova}
 
 ## Learning Objectives for Chapter
 
@@ -76,7 +81,1152 @@ for (i in 1:4) {
 
 ## Laboratory Exercises
 
-### Plant Sciences
+### Plant Sciences {#LabCh09PLS}
 
-### Animal Sciences
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+
+```
+---
+title: "Lab05 CRD Anova"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(pander)
+library(ggplot2)
+
+```
+
+#### Instructions
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab01email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
+
+In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. The data and description of the experimental setup have been simplified to facilitate understanding. For the purpose of this lab we will consider that the experiment was designed as a Completely Randomized Design in which 12 treatments were applied randomly to 13 plots each. We will also assume that the variances of the errors or residuals are the same in all treatments. One medusahead plant was grown in each plot and its total seed production was recorded at maturity (seedMass.g).
+
+Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas). Based on previous experience and plant biology, we expect medusahead seed production to be lowest without water or fertilizer and when exposed to competition by native perennial grasses.
+
+This exercise has four parts. First, we read in and explore the data with some descriptive statistics. We will use a transformation to normalize the distribution of the response variable. Second, each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. The ANOVA table and tests are done with the resulting values of SS and dfe. Third, we repeat the analysis using pre-existing R functions to do the ANOVA tables and tests direclty. Finally, we calculate confidence intervals for treatment means an back-transform them to be able to interpret results in the original units of grams of seed produced per plant.
+
+#### Part 1. Inspection and summary of data [25 points]
+
+Get a histogram of the data. Make a graph showing boxplots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. Create a new column called logSmass that contains the log of seed mass after adding 0.3 to the mass. We add 0.3 to avoid problems with the zeroes, because log(0) is not defined. Plot histograms and boxplots of the new variable. Inspect the boxplots and determine if there appear to be any effects of treatments on the seed production of the invasive exotic weed. Create a table of averages and standard errors by treatment.
+
+In the first R chunk we read in the data.
+```{r}
+
+# seed <- read.csv(file = "Lab05SeedMassData.txt", header = TRUE)
+
+seed <- read.table(header = TRUE, text = "
+id block Treatment seedMass.g
+1 1 WNE 0.8452
+2 1 WNE 1.628599896
+3 1 WNE 1.71330012
+5 1 WNE 0.605599925
+63 2 WNE 1.478700073
+64 2 WNE 1.655799925
+65 2 WNE 3.579000285
+66 2 WNE 2.52810012
+67 2 WNE 0.676500068
+119 3 WNE 0.84060003
+120 3 WNE 0.455200004
+121 3 WNE 0.642700076
+122 3 WNE 0
+6 1 wNE 2.39799978
+7 1 wNE 3.630199812
+8 1 wNE 3.19679986
+9 1 wNE 1.579800105
+10 1 wNE 2.524800075
+73 2 wNE 1.628599875
+74 2 wNE 5.239899819
+75 2 wNE 2.374499816
+76 2 wNE 2.957700192
+128 3 wNE 0.39629997
+129 3 wNE 1.11970005
+130 3 wNE 2.129599824
+131 3 wNE 1.958600049
+13 1 wnE 0.049800007
+14 1 wnE 0.46560003
+15 1 wnE 0.358300019
+68 2 wnE 0.616600044
+69 2 wnE 1.018299904
+70 2 wnE 0.402999948
+71 2 wnE 0.600599976
+72 2 wnE 0.420299968
+132 3 wnE 1.267800064
+133 3 wnE 0.722599913
+134 3 wnE 0.6414
+135 3 wnE 1.559600013
+136 3 wnE 0.301799972
+16 1 WnE 0.49499996
+17 1 WnE 0.42920001
+18 1 WnE 0.52509996
+19 1 WnE 0.314599977
+78 2 WnE 1.070900032
+79 2 WnE 0.523999944
+80 2 WnE 0.879599924
+81 2 WnE 1.015500081
+123 3 WnE 0.745699944
+124 3 WnE 0.804199928
+125 3 WnE 0.633399966
+126 3 WnE 0.965900001
+127 3 WnE 1.932200036
+20 1 wnS 0.3136
+21 1 wnS 0.43789998
+22 1 wnS 0.326600029
+23 1 wnS 2.688000014
+24 1 wnS 0.438300029
+83 2 wnS 0.184299984
+85 2 wnS 0.3579
+86 2 wnS 0.2591
+152 3 wnS 0.299800035
+153 3 wnS 0.713900075
+154 3 wnS 0.384100024
+155 3 wnS 0.67930006
+156 3 wnS 0.631599974
+25 1 WNS 2.424700152
+26 1 WNS 0.5808
+27 1 WNS 0.584400068
+28 1 WNS 0.67930005
+91 2 WNS 0.7138
+92 2 WNS 0.057500004
+93 2 WNS 0.18880002
+94 2 WNS 2.87149987
+95 2 WNS 0.408300021
+147 3 WNS 0.62479995
+148 3 WNS 0.471400036
+150 3 WNS 1.432499985
+151 3 WNS 1.666099926
+30 1 wNS 0.81229995
+31 1 wNS 3.78009968
+32 1 wNS 2.014800174
+33 1 wNS 1.697400132
+34 1 wNS 1.161500076
+87 2 wNS 0.997699956
+88 2 wNS 2.960099866
+89 2 wNS 1.23570003
+90 2 wNS 1.034799964
+138 3 wNS 1.05819988
+139 3 wNS 2.100399994
+140 3 wNS 1.347200127
+141 3 wNS 2.373300001
+35 1 WnS 0.455399956
+36 1 WnS 0.258800003
+38 1 WnS 0.30340002
+39 1 WnS 0.2277
+96 2 WnS 0.28540002
+97 2 WnS 0.915400058
+98 2 WnS 0.3118
+99 2 WnS 0.35759997
+142 3 WnS 0.209499996
+143 3 WnS 0.355199988
+144 3 WnS 0.479600032
+145 3 WnS 0.195100021
+146 3 WnS 0.455800025
+40 1 WNs 2.977100165
+41 1 WNs 0
+42 1 WNs 0
+43 1 WNs 0.93639996
+105 2 WNs 0.717100059
+106 2 WNs 2.6535999
+107 2 WNs 4.149200016
+108 2 WNs 5.559399812
+109 2 WNs 2.09089998
+167 3 WNs 6.93320061
+168 3 WNs 4.72049974
+169 3 WNs 8.660299999
+171 3 WNs 2.437699887
+44 1 Wns 0.650700024
+45 1 Wns 0.93370002
+46 1 Wns 2.126800006
+47 1 Wns 1.311599922
+48 1 Wns 2.114299946
+115 2 Wns 2.113199912
+116 2 Wns 7.767500208
+117 2 Wns 3.437700174
+118 2 Wns 2.931799789
+172 3 Wns 0.635800038
+173 3 Wns 1.607500132
+174 3 Wns 0.947599979
+175 3 Wns 1.075900105
+49 1 wns 1.70000015
+51 1 wns 1.504
+52 1 wns 0.94400004
+53 1 wns 3.488500337
+100 2 wns 2.2786001
+101 2 wns 1.578499845
+102 2 wns 0.764299998
+103 2 wns 0.474700014
+104 2 wns 1.31689998
+157 3 wns 1.770300075
+159 3 wns 2.36320013
+160 3 wns 4.271699849
+161 3 wns 4.158900105
+54 1 wNs 5.17460008
+55 1 wNs 3.88629957
+56 1 wNs 0.592299989
+57 1 wNs 2.063099988
+58 1 wNs 1.889700111
+110 2 wNs 3.202000016
+111 2 wNs 5.395399962
+112 2 wNs 3.959800395
+114 2 wNs 6.27350022
+163 3 wNs 2.42960022
+164 3 wNs 4.8853
+165 3 wNs 1.079000118
+166 3 wNs 4.73389994
+")
+
+seed$Treatment <- factor(as.character(seed$Treatment), levels = c("wns", "wnE", "wnS", "wNs", "wNE", "wNS", "Wns", "WnE", "WnS", "WNs", "WNE", "WNS")) # Better order for treatments
+
+
+```
+
+The last line of code changes the order of the treatment levels such that treatmens s, E and S appear in that sequence for each combination of water and nitrogen. This order facilitates the detection of patterns of response.
+
+We then look at the structure of the data frame to make sure the data were read correctly, and we make a boxplot and a histogram of the seed mass in grams produced by each plant.
+
+```{r}
+# Look at the data
+
+str(seed) # Note the column that has our dependent variable
+
+boxplot(seedMass.g ~ Treatment, seed)
+
+# Obtain a histogram of the data for seed mass
+
+hist(seed$seedMass.g) # Distribution is too far from Normal
+
+```
+
+Note how the distribution of seed mass is highly skewed with a long right tail. The data model we will use for the ANOVA requires that the *residuals* be normally distributed, not the original data. Therefore, a proper check of normality must be applied on the residuals after removing treatment effects.
+
+The model for a Completely Randomized Design (CRD) is
+
+$$Y_{ij} = \mu_{..} + \tau_i + \epsilon_{ij}$$
+where $Y_{ij}$ is the observation (mass of seeds in g) for treatment i and replicate j, $\mu_{..}$ is the overall mean, $\tau_i$ is the effect of treatment i and $\epsilon_{ij}$ is a random error with identical independent normal distributions for all replicates and treatments, which is written as
+
+$$\epsilon_{ij} \sim iid \quad N(0,\sigma) \quad \forall \quad i, j$$
+
+A histogram of the residuals of the model with treatments can be obtained in one line of code as follows. Note how functions can be nested, and they are calculated from the inside out. 
+
+```{r}
+
+hist(
+   residuals(
+      lm(seedMass.g ~ Treatment,
+         data = seed)
+   )
+)
+
+```
+
+Residuals are slightly skewed. A logarithmic transformation seems to do the trick, yielding residuals that are more normal. Note that we add 1.0 to each observation because some observations are 0, and log(0) is not defined. Moreover, the addition of a fixed quantity to all observations improves the effect of the transformation. In symbols, the transformation is
+
+$$Z_{ij} = \log(Y_{ij} + 1.0)$$
+
+where $Z_{ij}$ is called logSmass in the R environment.
+
+Transformations of original variables can be very useful to meet the assumptions necessary for inference with many models. This is a topic that requires specific treatment, but for now we note that a log transformation seems to work.
+
+```{r}
+
+seed$logSmass <- log(seed$seedMass.g + 1)
+
+hist(
+   residuals(
+      lm(logSmass ~ Treatment,
+         data = seed)
+   )
+)
+
+```
+
+A boxplot of the transformed seed mass by treatment allows us to look for trends in the results.
+
+```{r}
+
+boxplot(logSmass ~ Treatment, 
+        data = seed, 
+        ylab = 'log Seed mass (g)')
+
+```
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Inspect the boxplot. What treatments appear to differ? What would you expect to see based on the hypotheses and previous knowledge? Do the data appear to support your expectations?
+
+\
+\
+The descriptive statistics for these data are augmented by with a table of averages, medians and standard errors for each treatment. Keep in mind that we are working with the transformed variable, so we include back-transformed values that are in units of grams of seed per plant. The back transformation equation is
+
+$$\bar{Y}_i. = \exp(\bar{Z}_i.) - 1.0$$
+
+where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of reponse and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that inference (**insert cross-reference**) means to make statistical statements about populations and their parameters based on samples.
+
+To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a dataframe that has two columns: one for treatment names and the other with the mean `logSmass` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logSmass) and what variable to use as grouping factor (Treatment). These variables are to be found in the dataframe specified by `data = `. Each group will be processed with the function `mean` as specified in `FUN = `. Note that the parentheses are not necessary to refer to the function that calculates the averages.
+
+```{r}
+# Read help about aggregate() function.
+
+smeans <- aggregate(formula = logSmass ~ Treatment, 
+                    data = seed, 
+                    FUN = mean)
+
+smedians <- aggregate(logSmass ~ Treatment, 
+                      data = seed, 
+                      FUN = median)
+
+# Use the aggregate() function to get the standard error of the average for each treatment. Note that the function applied gets the standard deviation and divides by the square root of the sample size to get the standard error.
+
+sserrors <- aggregate(logSmass ~ Treatment, 
+                      data = seed, 
+                      FUN = function(x) sd(x)/sqrt(length(x)))
+
+```
+
+For the calculation of the standard errors (the square root of the variance of each group average) we had to use a custom function defined inside `agregate` and using the `function` function where x is the set of values in each group.
+
+Part 1 is completed by creating a table with the values calculated above and the back-transformed treatment averages. In the first line of code, the separate dataframes created for averages, standard errors and medians are joined as columns with `cbind`, and only columns 1, 2, 4 and 6 are kept. This removes the redundant column for treatments, which is present in each original dataframe. If you want to see the redundant column, see what happens if you remove the `[, c(1, 2, 4, 6)]` part of the code.
+
+```{r}
+
+table.seed.mass <- cbind(smeans, sserrors, smedians)[, c(1, 2, 4, 6)]
+
+names(table.seed.mass) <- c("Treatment", 
+                            "Mean.log", 
+                            "SE.log", 
+                            "Median.log")
+
+table.seed.mass$Mean.g <- exp(table.seed.mass$Mean.log) - 1
+
+pander(table.seed.mass)
+
+```
+
+The same information can be displayed graphically with a bar plot, where the hight of the bars represents seed production for each treatment, with error bars at the top.
+
+```{r}
+
+ggplot(table.seed.mass, 
+       aes(Treatment, Mean.log)) + 
+   geom_col() +  
+   geom_errorbar(
+      aes(
+         ymin = Mean.log - SE.log, 
+         ymax = Mean.log + SE.log), 
+      width = 0.2) + 
+   labs(y = "Log of Seed mass in g  ± s.e.", 
+        x = "Treatment") + 
+   theme_classic()
+
+```
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS**
+
+What does`cbind` do?
+What does `aggregate` do?
+
+
+#### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points]
+
+Now, we use basic functions to partition the total sum of squares of logSmass into treatments and residual or error. The purpose of doing this is for you to undersand the calculations in some detail, without having to actually use a calculator.  Start by creating a column with treatment averages for each observation. This column will have a repeating number for all observations in a treatment. We calculate the total sum of squares as the sum of squares of deviations from each observation to the overall average:
+
+$$total \ deviation = Y_{ij} - \bar{Y}_{..}$$
+$$total \ sum \ of \ squares = TSS = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \ \left(Y_{ij} - \bar{Y}_{..} \right)^2 $$
+
+Treatment sum of squares is the sum of squared deviations from the treatment average to the overall average, for all observations. This deviation is the estimated *treatment effect* $\hat\tau_i$.
+
+$$sum \ of \ squares \ of \ treatments= SST =  \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r}  \hat\tau_i^2  = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \left( \bar{Y}_{i.} - \bar{Y}_{..} \right)^2$$
+
+Calculate the corresponding degrees of freedom and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. Make it into a data frame and then print it nicely with `pander`. Calculate the F test and the critical F to test the Ho: mean seed production is the same in all treatments. Interpret the results.
+
+
+```{r}
+
+names(smeans)[2] <- "AvgLogMass"
+
+seed <- merge(seed, 
+              smeans, 
+              by = "Treatment", 
+              all = TRUE)
+
+head(seed)
+
+# Total sum of squares:
+# total deviation of observations from the overall average
+ssTot <- sum((seed$logSmass - mean(seed$logSmass)) ^ 2)
+
+# Treatment sum of squares:
+# deviation of treatment average from the overall average
+ssTrt <- sum((seed$AvgLogMass - mean(seed$logSmass)) ^ 2)
+
+# Residual sum of squares:
+# deviation of observations from treatment average
+ssRes <- sum((seed$logSmass - seed$AvgLogMass) ^ 2)
+
+# calculate the degrees of freedom by completing the code below
+
+```
+
+
+```{r}
+
+df.Trt <- length(levels(seed$Treatment)) - 1
+
+dfe <- length(seed$AvgLogMass) - df.Trt - 1
+
+df.Tot <- df.Trt + dfe
+
+# Now calculate the means squares
+
+MSTrt <- ssTrt / df.Trt
+
+MSE <- ssRes / dfe
+
+# Calculate the F ratio and F critical value
+
+(Fcalc <- MSTrt / MSE)
+
+(Fcrit <- qf(0.05, 
+             df1 = df.Trt, 
+             df2 = dfe, 
+             lower.tail = FALSE))
+
+
+```
+
+
+ANSWER THE FOLLOWING QUESTIONS:
+
+Are there differences among treatments? Report the F statistic and result. State your conclusions.
+
+
+#### Part 3. ANOVA using R functions.[20 points]
+
+
+Use the R functions `aov` and `anova` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the previous results. The purpose of this part is for you to become familiar with different R functions that accomplish the same task. Read the help about the function `oneway.test` and use it, making sure that all arguments have proper values. Pay particular attention to the assumption of equal variances. Note that this function allows you to do the test even when variances are not equal, but we assume that the variances are equal.
+
+
+```{r}
+
+# read help about function aov(), anova(), oneway.test()
+
+summary(aov(formula = logSmass ~ Treatment, 
+            data = seed))
+
+linear.model1 <- lm(formula = logSmass ~ Treatment, 
+                    data = seed)
+
+anova(linear.model1)
+
+oneway.test(logSmass ~ Treatment, 
+            data = seed, 
+            var.equal = TRUE)
+
+```
+
+
+ANSWER THE FOLLOWING QUESTION:
+
+Do the results differ among functions? Compare to the results from Part 2 and Part 3.
+
+
+#### Part 4. Confidence intervals for treatment means [25 points]
+
+Create 95% confidence intervals for all the treatment means, back-transform to see mass in g by exponentiating and subtracting 0.3, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
+
+
+```{r}
+
+ci.data <- data.frame(Treatment = levels(seed$Treatment))
+
+ci.data <- cbind(ci.data, predict(linear.model1, 
+                                  newdata = ci.data, 
+                                  interval = "confidence")) 
+
+str(ci.data)
+
+# Complete the code below to do the back transformation of the CI's and make a table with them
+
+ci.data.bt <- ci.data[,2:4]
+
+# Note that we will be doing a back-transformation on 3 columns from the ci.data table: the estimated mean values for each of 12 treatments, the lower 95% CIs, and the upper 95% CIs
+
+# Back-transformation code goes here ...
+
+
+library(plotrix)
+plotCI(ci.data.bt$fit, 
+       uiw = ci.data.bt$upr - ci.data.bt$fit, 
+       liw = ci.data.bt$fit - ci.data.bt$lwr, 
+       ylab = "Seed Mass (g)")
+
+
+```
+
+
+ANSWER THE FOLLOWING QUESTIONS.
+
+(1) Can you conclude that any of the treatments are effective at controlling medusahead seed production, if your threshold for control is 2 g? In other words, do any treatments result in an expected seed mass production that is significantly less than 2 g?
+
+
+(2) Explain how the line to add the CI's to the ci.data works (i.e., explain the `cbind` function).
+
+
+
+### Animal Sciences {#LabCh09ANS}
+
+
+Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+
+```
+---
+title: "Lab05 CRD Anova"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(pander)
+library(ggplot2)
+
+```
+
+#### Instructions
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab05email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey areas, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
+
+In this exercise we analyze the data resulting from an experiment that measured the concentration of protein in cow's milk as a function of diet and period of lactation. Period of lactation are sets of 5 weeks starting on the date of the calf's birth, and are labeled A-D. The data are modified from the `Milk` dataset that comes with Base R. For the purpose of this exercise we assume that each row of data comes from a different cow.
+
+This exercise has four parts. First, we read in and explore the data with some descriptive statistics. We check if we need to use a transformation to normalize the distribution of residuals. Second, each observation is partitioned into the components indicated by the ANOVA model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. The ANOVA table and tests are done with the resulting values of SS and dfe. Third, we repeat the analysis using pre-existing R functions to do the ANOVA tables and tests direclty. Finally, we calculate confidence intervals for treatment means an back-transform them to be able to interpret results in the original units of milk protein.
+
+#### Part 1. Inspection and summary of data [25 points]
+
+Get a histogram of the data. Make a graph showing boxplots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. We will create a new column called logProt that contains the log of milk protein content after subtracting 2.64%. Then we will plot histograms and boxplots of the new variable, inspect the boxplots and determine if there appear to be any effects of treatments (lactation period and diet) the concentration of protein in the milk. We create a table of averages and standard errors by treatment.
+
+In the first R chunk we read in the data.
+
+```{r}
+
+# milk.prot <- read.csv(file = "milk.prot.txt", header = TRUE)
+
+milk.prot <- read.table(header = TRUE, text = "
+Treatment Period Diet protein
+bar+lupA A bar+lup 3.16247700898787
+bar+lupA A bar+lup 3.08724498141275
+bar+lupA A bar+lup 3.46609229309978
+bar+lupA A bar+lup 3.6114421162452
+bar+lupA A bar+lup 3.46406702334731
+bar+lupA A bar+lup 3.36414430399419
+bar+lupA A bar+lup 3.45400121050413
+bar+lupA A bar+lup 3.19441594578852
+bar+lupA A bar+lup 3.35326928628574
+bar+lupA A bar+lup 3.22934381716112
+bar+lupA A bar+lup 3.33543175929905
+bar+lupA A bar+lup 3.5461325365186
+bar+lupA A bar+lup 3.33014969744167
+bar+lupA A bar+lup 3.27738459138318
+bar+lupA A bar+lup 3.61608739128879
+bar+lupA A bar+lup 3.57269856794826
+bar+lupA A bar+lup 3.57269856794826
+bar+lupA A bar+lup 3.56377228768805
+bar+lupA A bar+lup 3.62309023649696
+bar+lupA A bar+lup 3.38815934301783
+bar+lupA A bar+lup 3.39003264549302
+bar+lupA A bar+lup 3.69796748620264
+bar+lupA A bar+lup 3.5593358550955
+bar+lupA A bar+lup 3.37515060805783
+bar+lupA A bar+lup 3.93172455189781
+bar+lupA A bar+lup 3.81254081175683
+bar+lupA A bar+lup 3.7723438892983
+bar+lupB B bar+lup 3.24936791495157
+bar+lupB B bar+lup 3.21695450412385
+bar+lupB B bar+lup 3.24071829671401
+bar+lupB B bar+lup 3.26162361847266
+bar+lupB B bar+lup 3.11788028618845
+bar+lupB B bar+lup 3.26338848183654
+bar+lupB B bar+lup 3.1938468686581
+bar+lupB B bar+lup 3.21028616958602
+bar+lupB B bar+lup 3.54647855732033
+bar+lupB B bar+lup 3.25635015740983
+bar+lupB B bar+lup 3.55349802155413
+bar+lupB B bar+lup 3.23045228530264
+bar+lupB B bar+lup 3.60873626268452
+bar+lupB B bar+lup 3.14492519743976
+bar+lupB B bar+lup 3.32176884990615
+bar+lupB B bar+lup 3.39612749347632
+bar+lupB B bar+lup 3.32743600301904
+bar+lupB B bar+lup 3.51427222456755
+bar+lupB B bar+lup 3.57242380725101
+bar+lupB B bar+lup 3.55584721786233
+bar+lupB B bar+lup 3.62356902754425
+bar+lupB B bar+lup 3.37401840989471
+bar+lupB B bar+lup 3.50748741046134
+bar+lupB B bar+lup 3.53256534972504
+bar+lupB B bar+lup 3.71373258501917
+bar+lupB B bar+lup 3.26515687845922
+bar+lupB B bar+lup 3.95140962311483
+bar+lupC C bar+lup 3.21581657493573
+bar+lupC C bar+lup 3.44800859079776
+bar+lupC C bar+lup 3.05291167767717
+bar+lupC C bar+lup 3.01560466016744
+bar+lupC C bar+lup 3.26808563987888
+bar+lupC C bar+lup 3.15847493306766
+bar+lupC C bar+lup 3.44582631217777
+bar+lupC C bar+lup 3.3480301686479
+bar+lupC C bar+lup 3.18789847677067
+bar+lupC C bar+lup 3.6660333640695
+bar+lupC C bar+lup 3.11627883449707
+bar+lupC C bar+lup 3.39059231774347
+bar+lupC C bar+lup 3.6171777865758
+bar+lupC C bar+lup 3.45019523834246
+bar+lupC C bar+lup 3.24868037494299
+bar+lupC C bar+lup 3.45019523834246
+bar+lupC C bar+lup 3.57745198893342
+bar+lupC C bar+lup 3.19668177573324
+bar+lupC C bar+lup 3.16979172595156
+bar+lupC C bar+lup 3.44582631217777
+bar+lupC C bar+lup 3.29211669426641
+bar+lupC C bar+lup 3.78656131482943
+bar+lupC C bar+lup 3.50630722143868
+bar+lupC C bar+lup 3.92757897670371
+bar+lupC C bar+lup 3.35250536604907
+bar+lupC C bar+lup 3.73321160451148
+bar+lupC C bar+lup 3.18831464115259
+bar+lupD D bar+lup 3.12623709074007
+bar+lupD D bar+lup 3.17169459716754
+bar+lupD D bar+lup 3.39124380992673
+bar+lupD D bar+lup 3.53688468513483
+bar+lupD D bar+lup 3.37943092312895
+bar+lupD D bar+lup 3.4375038999136
+bar+lupD D bar+lup 3.37008635578213
+bar+lupD D bar+lup 3.51248690170277
+bar+lupD D bar+lup 3.24861665707967
+bar+lupD D bar+lup 4.19483265796442
+bar+lupD D bar+lup 3.75315138527902
+bar+lupD D bar+lup 3.19021008845822
+bar+lupD D bar+lup 3.00565324979326
+bar+lupD D bar+lup 3.39601046509553
+bar+lupD D bar+lup 3.75315138527902
+bar+lupD D bar+lup 3.74987334137213
+bar+lupD D bar+lup 4.01863236126144
+barleyA A barley 3.21958971793313
+barleyA A barley 3.40301871623453
+barleyA A barley 3.50152934825351
+barleyA A barley 3.2777551240594
+barleyA A barley 3.35527902404323
+barleyA A barley 3.29381369336062
+barleyA A barley 3.45720753257547
+barleyA A barley 3.43583176700737
+barleyA A barley 3.6589813362789
+barleyA A barley 3.46626662788544
+barleyA A barley 3.4093965937507
+barleyA A barley 3.40641429773502
+barleyA A barley 3.78479439947903
+barleyA A barley 3.61572576157793
+barleyA A barley 3.54012447891671
+barleyA A barley 3.74371163446542
+barleyA A barley 3.74371163446542
+barleyA A barley 3.58646003246399
+barleyA A barley 3.77256589988619
+barleyA A barley 3.67901802958386
+barleyA A barley 3.93595317757239
+barleyA A barley 3.93871620603499
+barleyA A barley 3.78233890699106
+barleyA A barley 3.75325288164326
+barleyA A barley 3.62423901528139
+barleyB B barley 3.12248643668717
+barleyB B barley 3.1833831655686
+barleyB B barley 3.19651323869693
+barleyB B barley 3.23890704839903
+barleyB B barley 3.35588423809517
+barleyB B barley 3.2083844872523
+barleyB B barley 3.46802834620995
+barleyB B barley 3.5475869572146
+barleyB B barley 3.55194409350653
+barleyB B barley 3.45800307265941
+barleyB B barley 3.39242637826698
+barleyB B barley 3.32422300702216
+barleyB B barley 3.51335024348643
+barleyB B barley 3.65234582572941
+barleyB B barley 3.58743578295748
+barleyB B barley 3.74903315029059
+barleyB B barley 3.63342772094056
+barleyB B barley 3.32942104357986
+barleyB B barley 3.66011818640367
+barleyB B barley 3.3139200324209
+barleyB B barley 3.56071082643042
+barleyB B barley 3.89886362429008
+barleyB B barley 3.56291349001264
+barleyB B barley 3.70284894926828
+barleyB B barley 3.83694690162881
+barleyC C barley 3.24984772541843
+barleyC C barley 3.02806867166766
+barleyC C barley 2.97722909449215
+barleyC C barley 3.3042385914231
+barleyC C barley 3.26432739051296
+barleyC C barley 3.36964715879539
+barleyC C barley 3.38443727877473
+barleyC C barley 3.14986995607598
+barleyC C barley 3.15828711751181
+barleyC C barley 3.55489711476464
+barleyC C barley 3.61838457145728
+barleyC C barley 3.61605541224996
+barleyC C barley 3.33061250616517
+barleyC C barley 3.40898170288263
+barleyC C barley 3.80163517433127
+barleyC C barley 3.80433586446984
+barleyC C barley 3.23523496727666
+barleyC C barley 3.65870138900657
+barleyC C barley 3.34611225223677
+barleyC C barley 3.75393510087424
+barleyC C barley 3.55269480358039
+barleyC C barley 3.61431159731975
+barleyC C barley 4.05801921547774
+barleyC C barley 4.16070303427735
+barleyC C barley 4.07739981710658
+barleyD D barley 3.34998211701732
+barleyD D barley 3.27810352281012
+barleyD D barley 3.13268376425181
+barleyD D barley 3.62959693702492
+barleyD D barley 3.23145524255033
+barleyD D barley 3.72418401852007
+barleyD D barley 3.41265614968261
+barleyD D barley 3.86239745579332
+barleyD D barley 3.34736464607758
+barleyD D barley 3.54516881896749
+barleyD D barley 3.36520307449937
+barleyD D barley 4.05014583644687
+barleyD D barley 3.82716258843302
+barleyD D barley 3.90530736258486
+barleyD D barley 3.53297348054545
+barleyD D barley 3.71839474054614
+barleyD D barley 4.53054760216554
+lupinsA A lupins 2.95603029280222
+lupinsA A lupins 3.17289912491032
+lupinsA A lupins 3.2108375205081
+lupinsA A lupins 3.14859988098279
+lupinsA A lupins 3.22389375887796
+lupinsA A lupins 3.0897690493546
+lupinsA A lupins 3.26433959404596
+lupinsA A lupins 3.1713575354305
+lupinsA A lupins 3.41003766428486
+lupinsA A lupins 3.34372591926749
+lupinsA A lupins 3.43453941314132
+lupinsA A lupins 3.17909640732043
+lupinsA A lupins 3.60897167260467
+lupinsA A lupins 3.45541156047723
+lupinsA A lupins 3.38611695701222
+lupinsA A lupins 3.44492330687577
+lupinsA A lupins 3.45752182649412
+lupinsA A lupins 3.77937948894192
+lupinsA A lupins 3.99600309156165
+lupinsA A lupins 3.65073736963817
+lupinsA A lupins 3.50724127766915
+lupinsA A lupins 3.39800554938786
+lupinsA A lupins 3.28707199749165
+lupinsA A lupins 3.67088861428483
+lupinsA A lupins 3.31587400920237
+lupinsA A lupins 4.13921452740736
+lupinsA A lupins 4.1993184650446
+lupinsB B lupins 3.05903881648069
+lupinsB B lupins 3.06059630293279
+lupinsB B lupins 2.99635917438271
+lupinsB B lupins 3.11378054556574
+lupinsB B lupins 3.0466904311162
+lupinsB B lupins 2.98641495493623
+lupinsB B lupins 2.90540540400742
+lupinsB B lupins 3.02257855521687
+lupinsB B lupins 3.30836577833734
+lupinsB B lupins 3.1154476250325
+lupinsB B lupins 3.07316897172911
+lupinsB B lupins 3.23128235620088
+lupinsB B lupins 3.26611304512492
+lupinsB B lupins 3.15647431931853
+lupinsB B lupins 3.36971049805063
+lupinsB B lupins 3.50360828445366
+lupinsB B lupins 3.4164069900062
+lupinsB B lupins 3.35029034810974
+lupinsB B lupins 3.43702801495283
+lupinsB B lupins 3.2199479989707
+lupinsB B lupins 3.609408606032
+lupinsB B lupins 4.57193094248879
+lupinsB B lupins 3.51589495753408
+lupinsB B lupins 3.64303555480527
+lupinsB B lupins 3.21433162140314
+lupinsB B lupins 3.73014980454211
+lupinsB B lupins 3.92145079924361
+lupinsC C lupins 3.06590780468262
+lupinsC C lupins 3.02059230996939
+lupinsC C lupins 2.86743593436082
+lupinsC C lupins 2.89494446060554
+lupinsC C lupins 3.04780205976617
+lupinsC C lupins 3.17953007221293
+lupinsC C lupins 3.19286293885429
+lupinsC C lupins 3.22603060060185
+lupinsC C lupins 3.0805972658309
+lupinsC C lupins 3.25624750596647
+lupinsC C lupins 3.33257618780012
+lupinsC C lupins 3.6250333091386
+lupinsC C lupins 3.06799059326193
+lupinsC C lupins 3.21419538670027
+lupinsC C lupins 3.39122240348853
+lupinsC C lupins 3.43364747957442
+lupinsC C lupins 3.22404818913958
+lupinsC C lupins 3.15112175078154
+lupinsC C lupins 2.93863888085488
+lupinsC C lupins 3.40519473867389
+lupinsC C lupins 3.570483577836
+lupinsC C lupins 3.37513185317005
+lupinsC C lupins 3.85341302609114
+lupinsC C lupins 3.26291484346087
+lupinsC C lupins 3.71106031119639
+lupinsC C lupins 3.37970618982359
+lupinsC C lupins 3.26034535288705
+lupinsD D lupins 2.84223981242853
+lupinsD D lupins 2.88396586957888
+lupinsD D lupins 3.06592157327319
+lupinsD D lupins 3.15478932401863
+lupinsD D lupins 3.4110674466176
+lupinsD D lupins 3.27648807200425
+lupinsD D lupins 3.32507280585903
+lupinsD D lupins 3.42603743847819
+lupinsD D lupins 3.19290053993781
+lupinsD D lupins 3.5296744345488
+lupinsD D lupins 3.09821010221529
+lupinsD D lupins 2.97601302622587
+lupinsD D lupins 3.62808203709135
+lupinsD D lupins 3.16417469088188
+lupinsD D lupins 3.2452918380361
+lupinsD D lupins 3.82744489060173
+")
+
+```
+
+We then look at the structure of the data frame to make sure the data were read correctly, and we make a boxplot and a histogram of milk.prot.
+
+```{r}
+
+# Look at the data
+
+str(milk.prot) # Note the column that has our dependent variable
+
+boxplot(protein ~ Treatment, milk.prot)
+
+# Obtain a histogram of the data for milk protein concentration.
+
+hist(milk.prot$protein) # Distribution is slightly skewed
+
+```
+
+Note how the distribution of milk protein is skewed with a slightly long right tail. The data model we will use for the ANOVA requires that the *residuals* be normally distributed, not the original data. Therefore, a proper check of normality must be applied on the residuals after removing treatment effects. R has a functions called `residuals` that extracts the residuals from the linear model object.
+
+The model for a Completely Randomized Design (CRD) is
+
+$$Y_{ij} = \mu_{..} + \tau_i + \epsilon_{ij}$$
+where $Y_{ij}$ is the observation (percent milk protein for a cow in a period) for treatment i and replicate j, $\mu_{..}$ is the overall mean, $\tau_i$ is the effect of treatment i and $\epsilon_{ij}$ is a random error with identical independent normal distributions for all replicates and treatments, which is written as
+
+$$\epsilon_{ij} \sim iid \quad N(0,\sigma) \quad \forall \quad i, j$$
+
+A histogram of the residuals of the model with treatments can be obtained in one line of code as follows. Note how functions can be nested, and they are calculated from the inside out. 
+
+```{r}
+
+hist(
+   residuals(
+      lm(protein ~ Treatment,
+         data = milk.prot)
+   )
+)
+
+```
+
+Residuals are slightly skewed. A logarithmic transformation seems to do the trick, yielding residuals that are more normal. Note that we subtract 2.64 from each observation to improve the effect of the transformation. In symbols, the transformation is
+
+$$Z_{ij} = \log(Y_{ij} - 2.64)$$
+
+where $Z_{ij}$ is called logProt in the R environment.
+
+Transformations of original variables can be very useful to meet the assumptions necessary for inference with many models. This is a topic that requires specific treatment, but for now we note that a log transformation seems to work.
+
+```{r}
+
+milk.prot$logProt <- log(milk.prot$protein - 2.64)
+
+hist(
+   residuals(
+      lm(logProt ~ Treatment,
+         data = milk.prot)
+   )
+)
+
+```
+
+A boxplot of the transformed protein content by treatment allows us to look for trends in the results.
+
+```{r}
+
+boxplot(logProt ~ Treatment, 
+        data = milk.prot, 
+        ylab = 'log protein %')
+
+```
+
+
+\
+**ANSWER THE FOLLOWING QUESTIONS:**
+
+Inspect the boxplot. What treatments appear to differ? What would you expect to see based on the hypotheses and previous knowledge? Do the data appear to support your expectations?
+
+\
+\
+The descriptive statistics for these data are augmented with a table of averages, medians and standard errors for each treatment. Keep in mind that we are working with the transformed variable, so we include back-transformed values that are in units of percent milk protein. The back transformation equation is
+
+$$\bar{Y}_i. = \exp(\bar{Z}_i.) + 2.64$$
+
+where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of reponse and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that [inference](#InferenceEstimation) means to make statistical statements about populations and their parameters based on samples.
+
+To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a dataframe that has two columns: one for treatment names and the other with the mean `logProt` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logProt) and what variable to use as grouping factor (Treatment). These variables are to be found in the dataframe specified by `data = `. Each group will be processed with the functions `mean`, `median` and a function created inside the `aggregate` call to calculate the standard error, as specified in `FUN = ` ardument. Recall that the standard error is the square root of the variance of an average, and that the variance of an average is the variance of the original random variable (logProt) divided by the sample size.
+
+$$V[\bar{X}] = \frac{V[X]}{n}$$
+
+
+```{r}
+# Read help about aggregate() function to understand syntax.
+
+smeans <- aggregate(formula = logProt ~ Treatment, 
+                    data = milk.prot, 
+                    FUN = mean)
+
+smedians <- aggregate(logProt ~ Treatment, 
+                      data = milk.prot, 
+                      FUN = median)
+
+# Use the aggregate() function to get the standard error of the average for each treatment. Note that the function applied gets the standard deviation and divides it by the square root of the sample size to get the standard error.
+
+sserrors <- aggregate(logProt ~ Treatment, 
+                      data = milk.prot, 
+                      FUN = function(x) sd(x)/sqrt(length(x)))
+
+```
+
+For the calculation of the standard errors (the square root of the variance of each group average) we had to use a custom function defined inside `agregate` and using the `function` function where x is the set of values for protein in each treatment group.
+
+Part 1 is completed by creating a table with the values calculated above and the back-transformed treatment averages. In the first line of code, the separate dataframes created for averages, standard errors and medians are joined as columns with `cbind`, and only columns 1, 2, 4 and 6 are kept. This removes the redundant column for treatments, which is present in each original dataframe. If you want to see the redundant column, see what happens if you remove the `[, c(1, 2, 4, 6)]` part of the code.
+
+```{r}
+
+table.milk.prot <- cbind(smeans, sserrors, smedians)[, c(1, 2, 4, 6)]
+
+names(table.milk.prot) <- c("Treatment", 
+                            "Mean.log", 
+                            "SE.log", 
+                            "Median.log")
+
+table.milk.prot$Mean.Prot <- exp(table.milk.prot$Mean.log) + 2.64
+
+pander(table.milk.prot)
+
+```
+
+The same information can be displayed graphically with a bar plot, where the hight of the bars represents milk proteni content for each treatment, with error bars at the top.
+
+```{r}
+
+ggplot(table.milk.prot, 
+       aes(Treatment, Mean.log)) + 
+   geom_col() +  
+   geom_errorbar(
+      aes(
+         ymin = Mean.log - SE.log, 
+         ymax = Mean.log + SE.log), 
+      width = 0.2) + 
+   labs(y = "Log of protein ± s.e.", 
+        x = "Treatment") + 
+   theme_classic()
+
+```
+
+\
+\
+**ANSWER THE FOLLOWING QUESTIONS**
+
+What does`cbind` do?
+What does `aggregate` do?
+
+
+#### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points]
+
+Now, we use basic functions to partition the total sum of squares of logProt into treatments and residual or error. The purpose of doing this is for you to undersand the calculations in some detail, without having to actually use a calculator.  Start by creating a column with treatment averages for each observation. This column will have a repeating number for all observations in a treatment. We calculate the total sum of squares as the sum of squares of deviations from each observation to the overall average:
+
+$$total \ deviation = Y_{ij} - \bar{Y}_{..}$$
+$$total \ sum \ of \ squares = TSS = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \ \left(Y_{ij} - \bar{Y}_{..} \right)^2 $$
+
+Treatment sum of squares is the sum of squared deviations from the treatment average to the overall average, for all observations. This deviation is the estimated *treatment effect* $\hat\tau_i$.
+
+$$sum \ of \ squares \ of \ treatments= SST =  \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r}  \hat\tau_i^2  = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \left( \bar{Y}_{i.} - \bar{Y}_{..} \right)^2$$
+
+We calculate the corresponding degrees of freedom and prepare a complete analysis of variance table with columns for Source, SS, df, and MS. Results are put into a data frame and printed neatly with `pander`. By calculating the F test and the critical F we are able to test the Ho: mean protein content is the same in all treatments.
+
+
+```{r}
+
+names(smeans)[2] <- "AvgLogProt"
+
+milk.prot <- merge(milk.prot, 
+              smeans, 
+              by = "Treatment", 
+              all = TRUE)
+
+head(milk.prot)
+
+# Total sum of squares:
+# total deviation of observations from the overall average
+ssTot <- sum((milk.prot$logProt - mean(milk.prot$logProt)) ^ 2)
+
+# Treatment sum of squares:
+# deviation of treatment average from the overall average
+ssTrt <- sum((milk.prot$AvgLogProt - mean(milk.prot$logProt)) ^ 2)
+
+# Residual sum of squares:
+# deviation of observations from treatment average
+ssRes <- sum((milk.prot$logProt - milk.prot$AvgLogProt) ^ 2)
+
+```
+
+Degrees of freedom are calculates as the total number of independent (different) terms in each sum, minus the number of parameters estimated for each sum. In the case of total sum of square, there are as many different terms are there are observations, because each observation is potentially different. Only the overall mean is estimated with the overall average. For the sum of squares of treatments we have as maby different terms as there are treatments, and we use the overall average as estiamate of the overall mean. Because the total degrees of freedom equal the sum of the components, the residual df can be calculated as the total df (n-1) minus treatment df.
+
+```{r}
+
+df.Trt <- length(levels(milk.prot$Treatment)) - 1
+
+dfe <- length(milk.prot$AvgLogProt) - df.Trt - 1
+
+df.Tot <- df.Trt + dfe
+
+# Now calculate the means squares
+
+(MSTrt <- ssTrt / df.Trt)
+
+(MSE <- ssRes / dfe)
+
+# Calculate the F ratio and F critical value
+
+(Fcalc <- MSTrt / MSE)
+
+(Fcrit <- qf(0.05, 
+             df1 = df.Trt, 
+             df2 = dfe, 
+             lower.tail = FALSE))
+
+
+```
+
+
+ANSWER THE FOLLOWING QUESTIONS:
+
+Are there differences among treatments? State your conclusions.
+
+
+#### Part 3. ANOVA using R functions.[20 points]
+
+
+Use the R functions `aov` and `anova` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the previous results. The purpose of this part is for you to become familiar with different R functions that accomplish the same task. Read the help about the function `oneway.test` and use it, making sure that all arguments have proper values. Pay particular attention to the assumption of equal variances. Note that this function allows you to do the test even when variances are not equal, but we assume that the variances are equal.
+
+
+```{r}
+
+# read help about function aov(), anova(), oneway.test()
+
+summary(aov(formula = logProt ~ Treatment, 
+            data = milk.prot))
+
+linear.model1 <- lm(formula = logProt ~ Treatment, 
+                    data = milk.prot)
+
+anova(linear.model1)
+
+oneway.test(logProt ~ Treatment, 
+            data = milk.prot, 
+            var.equal = TRUE)
+
+```
+
+
+ANSWER THE FOLLOWING QUESTION:
+
+Do the results differ among functions? Compare to the results from Part 2 and Part 3.
+
+
+#### Part 4. Confidence intervals for treatment means [25 points]
+
+Create 95% confidence intervals for all the treatment means, back-transform to see milk protein content by exponentiating and adding 2.64, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
+
+
+```{r}
+
+ci.data <- data.frame(Treatment = levels(milk.prot$Treatment))
+
+ci.data <- cbind(ci.data, predict(linear.model1, 
+                                  newdata = ci.data, 
+                                  interval = "confidence")) 
+
+str(ci.data)
+
+# Complete the code below to do the back transformation of the CI's and make a table with them
+
+ci.data.bt <- exp(ci.data[,2:4]) + 2.64 # All columns are back transformed one at a time
+
+ci.data.bt$Treatment <- ci.data$Treatment # add treatment names back
+
+
+library(plotrix)
+plotCI(ci.data.bt$fit,
+       uiw = ci.data.bt$upr - ci.data.bt$fit, 
+       liw = ci.data.bt$fit - ci.data.bt$lwr, 
+       ylab = "milk.prot", 
+       xlab = "", 
+       axes = FALSE)
+axis(side = 2)
+axis(side = 1, at = seq_along(ci.data.bt$Treatment), labels = ci.data.bt$Treatment)
+
+
+```
+
+The confidence interval graph is built first without axes, then the axes are custom-added so we can have treatment names instead of values in the x-axis.
+
+
+
+ANSWER THE FOLLOWING QUESTIONS.
+
+Can you conclude that any of the treatments are effective to produce a protein content of 3.4% at least in one period? In other words, do any treatments result in an expected protein content that is significantly greater than 3.4%
+
+
+Explain the `cbind` function works.
+
 

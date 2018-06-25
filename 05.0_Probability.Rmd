@@ -1,11 +1,14 @@
-# Chapter 5: Probability in Applied Statistics {#ch.prob}
+# Probability in Applied Statistics {#chProb}
+
+
+
 
 ## Learning Objectives for Chapter
 
 
 1. Define random variables and their distributions.
 1. Determine if a process is random or deterministic and give examples of both.
-1. Given a random experiment like rolling a die, write down the smaple space.
+1. Given a random experiment like rolling a die, write down the sample space.
 1. Determine the probability mass function of a given random experiment.
 1. List multiple causes that determine the outcome of a random experiment.
 1. Define "parameter."
@@ -31,7 +34,7 @@ Constant, Random variable and Random number. PSAES ch. 6
 
 See probability_cheat sheet.pdf
 
-### Variables and parameters
+## Variables and parameters
 
 The terms "variable" and "parameter"" should be defined and used carefully. People frequently and incorrectly use the term "parameter" to refer to variables. This makes things more confusing.
 
@@ -53,23 +56,22 @@ See Introductory Statistics with R.
 
 ## Probability
 
-We need to have the concept of probability in order to be able to express and quantify uncertainty. The significance and confidence levels used in statistical statements are measures of probability, and they must be assigned or calculated in a manner that is consistent with the theory of probability.
+We need to use the concept of probability in order to be able to express and quantify uncertainty. Significance and confidence levels used in statistical statements are measures of probability, and they must be assigned or calculated in a manner that is consistent with the theory of probability. The theory of probability is a branch of mathematics that provides all the tools we need to operate with probabilities. By linking a real-world phenomenon with a probability model, we can use probability theory to derive new practical results that help us in the real world. An example fo this was given in section (#sec:)
 
 In thinking of probability, it is important to differentiate between using the theory of probability to make calculations that are correct, and the application of the theory to assign probabilities to specific real-world outcomes. For example, the probability of obtaining a particular number by rolling a die can be assigned by rolling the die a very large number of times and calculating the proportion of times the number came up. In using the proportion observed in the past to characterize the die in the future, one is implicitly assuming that all conditions will remain the same. This is not always a completely safe assumption, because over time the die may wear out unevenly, and change the probabilities.
 
 Another way to assign probabilities to experimental outcomes is by using the idea of symmetry. In the case of the die we may reason that all sides are the same and there are six sides, therefore each side gets a probability of $\frac{1}{6}$. In the case of flipping a coin, we assign equal probabilities to each side. We intuitively understand that the sum of the probabilities of all outcomes must be one, because one outcome must take place for each experiment.
 
-%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Frequentist and Bayesian probability}
+### Frequentist and Bayesian probability
   You may be surprised to learn that there are two different schools of thought about the application of probabilities to real-world problems: Bayesian and Frequentist or classic. Both are useful and give almost identical results in many situations, but they have deep philosophical differences, and yield different results in important cases. This course deals almost exclusively with the Frequentist approach. Bayesian probability and thinking is introduced to make sure that students keep an open mind and are not blindsided when they encounter applications of Bayesian statistics.
 
   Frequentist probability of an event is the relative frequency of the event approached as the number of experiments or trials conducted in identical conditions increases without bound. The probability of obtaining a head in a coin toss is the number of heads observed divided by the total number of tosses when the number of tosses is very, very large.
 
 
-  In Bayesian statistics, probability is the metric used to quantify certainty. Probability of different events and randomness refer to the information we have, not to the world. A probability of 1 means that we are certain about an event, and a probability of 0 means we are certain it will not happen. Ultimately, there is no randomness in the way the world works. If we could repeat experiments in \emph{exactly} the same conditions, the results would always be the same. The problem is that we cannot measure, let alone control \emph{all} conditions. The focus is in updating the measure of certainty by using data.
+In Bayesian statistics, probability is the metric used to quantify certainty. Probability of different events and randomness refer to the information we have, not to the world. A probability of 1 means that we are certain about an event, and a probability of 0 means we are certain it will not happen. Ultimately, there is no randomness in the way the world works. If we could repeat experiments in \emph{exactly} the same conditions, the results would always be the same. The problem is that we cannot measure, let alone control \emph{all} conditions. The focus is in updating the measure of certainty by using data.
 
-%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Outcomes, sample space and events}
+
+### Outcomes, sample space and events}
   In order to have a minimal basis for working with probabilities and to be able to make statistical statements with properly quantified probabilities we need to define the elements of a \textbf{Probability Model}. Consider the roll of a die as before. The result can be 1 or 2 or 3 or 4 or 5 or 6. The numbers 1-6 are all possible outcomes of the experiment and is called the \textbf{sample space} and represented with the Greek letter capital omega $\Omega$.
 
   \begin{equation}
@@ -116,14 +118,13 @@ Other events that we will use in the examples are:
 
 \includegraphics[width=7.5cm]{figs/Events01.jpg}
 
-%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conditional probability and independence}
+### Conditional probability and independence
 
 Some important definitions of certain events are necessary.
 
-\hangindent=0.7cm \textbf{Probability as long-run relative frequency}: If we can imagine that an experiment or random process can be repeated under identical conditions a very large number of times, the relative frequency observed for a specific event tends to equal the probability of the event as the number of repetitions increases.
+**Probability as long-run relative frequency**: If we can imagine that an experiment or random process can be repeated under identical conditions a very large number of times, the relative frequency observed for a specific event tends to equal the probability of the event as the number of repetitions increases.
 
-\hangindent=0.7cm \textbf{Conditional Probability}: The conditional probability of one event given that another event is known to have happened is defined as the probability of the intersection of the two events divide by the probability of the event know to have happened.
+**Conditional Probability**: The conditional probability of one event given that another event is known to have happened is defined as the probability of the intersection of the two events divide by the probability of the event know to have happened.
 
 \begin{equation}
  P \left( E_1|E_2 \right) =P \left(  E_1 \cap E_2 \right) / P \left( E_2 \right)
@@ -141,12 +142,13 @@ P \left(  E_2 \right) = P \left( \{1,6\} \right) = \frac{2}{6}
 
 Therefore,  $P(E_1|E_2) = \frac{\frac{1}{6}}{\frac{2}{6}} = \frac{1}{2}$\\
 
-\hangindent=0.7cm \textbf{Independent events}: We say that two events are independent if the probability of observing both events simultaneously is the product of the probabilities of each event separately. More intuitively, if two events are independent, by knowing one of them you gain no information about the other one. In other words, one event does not affect the probability of the other one.\\
+**Independent events**: We say that two events are independent if the probability of observing both events simultaneously is the product of the probabilities of each event separately. More intuitively, if two events are independent, by knowing one of them you gain no information about the other one. In other words, one event does not affect the probability of the other one.
 
 Do not confuse independent event with the concepts or terms dependent and independent variables that we will use later in the course.
 
-For example, annual grasses have roots that are smaller than perennial grasses, and therefore, it is easier to uproot them. The problem is that young perennial plants also have small roots.  Suppose that it is estimated that about 10\% of the perennial grasses in a field are young, and 50\% of all the grass plants in the field are perennial. All annual grasses can be uprooted easily. The experiment we conduct is to uproot a randomly selected plant and determine if it was easy. In order to determine the probability, imagine that there are 1000 plants and that we uproot them all one at a time. We will find that in 550 cases the uprooting was easy: the 500 annual plants and the 50 young perennial plants were easy to uproot. The situation is represented in the following table.\\
-\\
+For example, annual grasses have roots that are smaller than perennial grasses, and therefore, it is easier to uproot them. The problem is that young perennial plants also have small roots.  Suppose that it is estimated that about 10\% of the perennial grasses in a field are young, and 50\% of all the grass plants in the field are perennial. All annual grasses can be uprooted easily. The experiment we conduct is to uproot a randomly selected plant and determine if it was easy. In order to determine the probability, imagine that there are 1000 plants and that we uproot them all one at a time. We will find that in 550 cases the uprooting was easy: the 500 annual plants and the 50 young perennial plants were easy to uproot. The situation is represented in the following table.
+
+
 \begin{center}
   \begin{tabular}{llr}
   \hline
@@ -161,7 +163,7 @@ For example, annual grasses have roots that are smaller than perennial grasses, 
 \end{center}
 
 
-If the uprooting is easy, the probability that the plant is perennial is 50/550, whereas when the uprooting is hard the probability of perennial is 450/450. Therefore, these events are not independent. By determining if the plant is hard to uproot we can greatly increase our certainty about its lifespan.  However, as we will see later, the meaning of the information obtained depends on other pieces of information (hint: the prior probability). Let's write the probabilities suing equations:\\
+If the uprooting is easy, the probability that the plant is perennial is 50/550, whereas when the uprooting is hard the probability of perennial is 450/450. Therefore, these events are not independent. By determining if the plant is hard to uproot we can greatly increase our certainty about its lifespan.  However, as we will see later, the meaning of the information obtained depends on other pieces of information (hint: the prior probability). Let's write the probabilities suing equations:
 
 \begin{equation}
   P(annual) = 500/1000 \text{,    }P(perennial = 500/1000) \text{,    }
@@ -183,15 +185,13 @@ One the product of the probabilities of each event is not equal to the probabili
 
 Note that in this example of perennial and annual plants there is an obvious biophysical mechanism linking the events to each other: annual plants have smaller roots than most perennial plants, and therefore they are easier to uproot than most perennial plants. Annual roots are smaller because they are needed for and can grow during just one season. A lot of science and statistics deals with detecting lack of independence and finding out the mechanisms that are behind the lack of independence. Keep in mind that lack of independence does not mean that there is cause-and-effect relationship among events. Playing basketball will not make kids taller, at least not taller than they can become by any other type of systematic exercise and good diet.
 
-%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bayesian and Frequentist approaches}
+## Bayesian and Frequentist approaches
 
-%oooooooooooooooo SubSection oooooooooooooooooooooooooooooooooooooooooooooooooo
-\subsection{Were you selected at random?}
- Chris Westbury (Bayes For Beginners, accessed 8 June 2015,\\
+### Were you selected at random?
+ Chris Westbury (Bayes For Beginners, accessed 8 June 2015,
 https://www.ualberta.ca/~chrisw/BayesForBeginners.pdf) wrote:
 ``A particular disorder has a base rate occurrence of 1/1000 people. A test to detect this disease has a false positive rate of 5\% that is, 5\% of the time that it says a person has the disease, it is mistaken. Assume that the false negative rate is 0\% the test correctly diagnoses every person who does have the disease. What is the chance that a randomly selected person with a positive result actually has the disease?
-When this question was posed to Harvard University medical students, about half said that the answer was 95\%, presumably because the test has a 5\% false positive rate. The average response was 56\%. Only 16\% gave the correct answer, which can be computed with Bayes Rule in the following manner:''\\
+When this question was posed to Harvard University medical students, about half said that the answer was 95\%, presumably because the test has a 5\% false positive rate. The average response was 56\%. Only 16\% gave the correct answer, which can be computed with Bayes Rule in the following manner:''
 
 \begin{equation}
   P(\text{Disease}) = 0.001\text{  probability of a random person being sick}
@@ -239,41 +239,41 @@ The probability of getting a true positive is the probability of being sick and 
 
 
 
-% ADD VISUAL REPRESENTATION OF TOTAL AND CONDITIONAL PROBABILITIES.
+% ADD VISUAL REPRESENTATION OF TOTAL AND CONDITIONAL PROBABILITIES. See Notability files.
 % USE A 2X3 TABLE.
 
 <<prob01, echo=FALSE, results='asis'>>=
 tbl01 <- data.frame(Test = c("+", "-", "+", "-"), Disease = c("Yes", "Yes", "No", "No"), n = c(10, 0, 500, 9490))
 @
 
-% ADD EXAMPLES OF CONDITIONAL PROBABILITY USING NORMAL DISTRIBUTION AFTER
-% LECTURE ON NORMAL DISTRIBUTION.
+% ADD EXAMPLES OF CONDITIONAL PROBABILITY USING NORMAL DISTRIBUTION AFTER LECTURE ON NORMAL DISTRIBUTION.
 
 "Although the test is highly accurate, it in fact gives a correct positive result just 2\% of the time. How can this be? The answer (and the importance of Bayes Rule in diagnostic situations) lies in the highly skewed base rates of the disease. Since so few people actually have the disease, the probability of a true positive test result is very small. It is swamped by the probability of a false positive result, which is fifty times larger than the probability of a true positive result.
 
-You can concretely understand how the false positive rate swamps the true positive rate by considering a population of 10,000 people who are given the test. Just 1/1000th or 10 of those people will actually have the disease and therefore a true positive test result. However, 5\% of the remaining 9990 people, or 500 people (499.5), will have a false positive test result. So the probability that a person has the disease given that they have a positive test result is 10/510, or 2\%."\\
+You can concretely understand how the false positive rate swamps the true positive rate by considering a population of 10,000 people who are given the test. Just 1/1000th or 10 of those people will actually have the disease and therefore a true positive test result. However, 5\% of the remaining 9990 people, or 500 people (499.5), will have a false positive test result. So the probability that a person has the disease given that they have a positive test result is 10/510, or 2\%."
 
 The key phrase in the statement of the problem is "randomly selected person." It is important to understand that a person was randomly selected and then administered the test. Alternatively, as Westbury explains at the end, one can think of the whole population being tested. If the person is not randomly selected from the whole population, then the calculation is not correct. The base rate used has to be based on the population from which the person was selected. It is reasonable to think that if the person was selected as a result of a consultation with a doctor, her base rate is probably greater than the base rate for the whole population. The reason for having a test matters in assessing the probability of having a disease based on the test results. A Bayesian approach to inference is particularly useful here and it is explained in the next subsection.
 
-\subsection{Bayesian approach}
+### Bayesian approach
 
-The previous example of assessing the probability of having a disease based on imperfect test results is an example of Bayesian statistics. The probability is estimated using Bayes Rule directly. In abstract form, Bayes Rule states:\\
-\\
+The previous example of assessing the probability of having a disease based on imperfect test results is an example of Bayesian statistics. The probability is estimated using Bayes Rule directly. In abstract form, Bayes Rule states:
+
 
 \begin{equation}
 P(A|B) = \frac{P(A) * P(B|A)}{P(B)}
 \end{equation}\\
-\\
+
+
 Recall that the vertical bar is read as "given," "given that," or "conditional on."
-In Bayesian statistics, the rule is applied with special meaning for each component of the equation. A is the event whose probability or degree of certainty we want to determine. B is the event observed or data. In the case of the disease example above, A is "person has the disease" and B is "person tested positive." The probability of having the disease P(A) is the knowledge \emph{prior} to taking the test, the probability that any randomly selected person has the disease. Note that this is prior knowledge and it may or may not be available. In the example the information is available based on previous studies: $P(A) = P(Disease) = 0.001$. Because it is the knowledge available before obtaining new data, the probability is known as \emph{prior probability} or simply \emph{prior}. P(B) is the total probability of getting a positive test result. The total probability can be calculated using the law of total probability as applied in equation~\ref{eq:tot_prob_exmpl1}.\\
+In Bayesian statistics, the rule is applied with special meaning for each component of the equation. A is the event whose probability or degree of certainty we want to determine. B is the event observed or data. In the case of the disease example above, A is "person has the disease" and B is "person tested positive." The probability of having the disease P(A) is the knowledge \emph{prior} to taking the test, the probability that any randomly selected person has the disease. Note that this is prior knowledge and it may or may not be available. In the example the information is available based on previous studies: $P(A) = P(Disease) = 0.001$. Because it is the knowledge available before obtaining new data, the probability is known as \emph{prior probability} or simply \emph{prior}. P(B) is the total probability of getting a positive test result. The total probability can be calculated using the law of total probability as applied in equation~\ref{eq:tot_prob_exmpl1}.
+
 
 \begin{equation} \label{eq:total-probability_discrete}
 P(A) = \displaystyle\sum_{i=1}^{n} P(A|B_i) P(B_i)
 \end{equation}\\
-\\
+
+
 Where $B_i \text{ with } i=\{1,\dots,n\}$ is a set of mutually exclusive ("pairwise disjoint") events that whose union is the entire sample space. For example, $B_1$ is "test is positive" and $B_2$ is "test is negative." Assuming that testing results either in positive or negative (i.e. there are no inconclusive results) there is no option left out and the whole sample space is covered. The partition is exhaustive.
-
-
 
 In summary, the Bayesian approach updates our level of certainty about a hypothesis or unobserved event by combining prior knowledge with data. The data are taken as true and the probability of the hypothesis conditional on the data is calculated using Bayes rule.
 
@@ -282,12 +282,11 @@ In summary, the Bayesian approach updates our level of certainty about a hypothe
 % DEVELOP EXAMPLE FOR CLASSIFICATION OF SEEDS
 
 
-%oooooooooooooooo SubSection oooooooooooooooooooooooooooooooooooooooooooooooooo
-\subsection{Frequentist approach}
+### Frequentist approach
 
 The frequentist approach does not consider the relative merit of all possible hypothesis but it estimates the probability of observing the data when the hypothesis is true. If the probability is very low, it rejects the hypothesis. It is very important to remember that the frequentist approach DOES NOT estimate the probability of the hypothesis being true or false. It only estimated the conditional probability for the data given the null hypothesis.
 
-\end{document}
+
 
 ## What does "random" mean?
 
@@ -300,7 +299,56 @@ We frequently encounter explanations of events where a part of the event is said
 Consider the number of tweets so that each student in the class has sent in the last couple of days.  for a person interested in the population of students perhaps the variation from student to student can be considered to be random and have some sort of statistical distribution for random errors, however for each student the number of tweets that they made is a known quantity and it is not considered to be an error in in anyway not even in a statistical way. presumably they know exactly why they sent each tweet and the number of tweets for a particular day.
 
 
+
+## Basic Statistical Distributions
+
+See lecture "Distributions Oct 6, 2017.pdf"
+
+### Bernoulli Distribution
+
+### Discrete Uniform Distribution
+
+### Continuous Uniform Distribution
+
+### Binomial Distribution
+
+See "BernoulliBinomial.mp4""
+
+### Poisson Distribution
+
+### Normal Distribution
+
+### $\chi^2$ Distribution
+
+### Student's t Distribution
+
+### F Distribution
+
+
+
 ## Exercises and Solutions
+
+### Exercise 1
+
+Objectives:
+
+Models are approximations of reality.
+Models are based on specific knowledge or assumptions.
+One model assumes that a parameter is constant, but in reality the parameters can change.
+More complicated models can accomodate changing parameters.
+
+Assume that the electric motor of a water pump has a constant probability of failing in any time interval, and that on average the failure rate is once every 10,000 hours and independent of preious or future failures after repairs. 
+What distribution can be used to model the number of failures in any given 1000 hour interval?
+
+What is the probability that the motor will fail exactly once in 1000 hours?
+
+What is the probability that it will fail at least once in 1000 hours?
+
+Do you think the assumptions about the pump are realistic? How would you modify the assumptions to work towards a better model?
+
+Given the potential deficiencies of the model based on the original assumptions, what errors do you expect to see as the pump get older and more time passes since the last repair?
+
+
 
 ## Homework
 

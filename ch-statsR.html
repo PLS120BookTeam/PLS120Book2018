@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PLS 120. Introduction to Applied Statistics</title>
+  <meta name="description" content="Course materials for PLS 120. University of California, Davis">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="PLS 120. Introduction to Applied Statistics" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://the book url goes here ******" />
+  
+  <meta property="og:description" content="Course materials for PLS 120. University of California, Davis" />
+  <meta name="github-repo" content="emilioalaca/bookdown-start" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PLS 120. Introduction to Applied Statistics" />
+  
+  <meta name="twitter:description" content="Course materials for PLS 120. University of California, Davis" />
+  
+
+<meta name="author" content="Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie, Zullo">
+
+
+<meta name="date" content="2018-02-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Applied Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#ch.statsR"><i class="fa fa-check"></i><b>1</b> Statistics with R</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#learning-objectives-for-chapter"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives for Chapter</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#sect.RnRStudio"><i class="fa fa-check"></i><b>1.2</b> R and RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#help"><i class="fa fa-check"></i><b>1.4</b> Help</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#data-and-data-frames"><i class="fa fa-check"></i><b>1.5</b> Data and data frames</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#ch.statsR.ex01"><i class="fa fa-check"></i><b>1.6</b> Examples</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#exercises-and-solutions"><i class="fa fa-check"></i><b>1.7</b> Exercises and Solutions</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#homework-problems"><i class="fa fa-check"></i><b>1.8</b> Homework Problems</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#laboratory-exercises"><i class="fa fa-check"></i><b>1.9</b> Laboratory Exercises</a><ul>
+<li class="chapter" data-level="1.9.1" data-path=""><a href="#plant-sciences"><i class="fa fa-check"></i><b>1.9.1</b> Plant Sciences</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#animal-sciences"><i class="fa fa-check"></i>Animal Sciences</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PLS 120. Introduction to Applied Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">PLS 120. Introduction to Applied Statistics</h1>
+<h4 class="author"><em>Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie, Zullo</em></h4>
+<h4 class="date"><em>2018-02-16</em></h4>
+</div>
+<div id="ch.statsR" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Statistics with R</h1>
+<div id="learning-objectives-for-chapter" class="section level2">
+<h2><span class="header-section-number">1.1</span> Learning Objectives for Chapter</h2>
+<ol style="list-style-type: decimal">
+<li>Install R and RStudio.</li>
+<li>Find information about objects and functions in R.</li>
+<li>Create and use R scripts and projects in RStudio.</li>
+<li>Read data into R from csv files and line input.</li>
+<li>Data curation: validate and properly organize and manipulate data.</li>
+<li>Perform simple assignments and calculations.</li>
+<li>Use vectorized operations.</li>
+<li>Create, study and use data frames.</li>
+<li>Create simple plots and export them.</li>
+<li>Customize global and project options.</li>
+<li>Identify, list and describe function of each pane.</li>
+<li>Describe the efects of the parameters of the Uniform distribution</li>
+<li>Calculate the expected value of a random variable with Uniform distribution.</li>
+<li>Explain what the pdf of the Uniform distribution shows (y axis, X axis)</li>
+<li>Draw a sketch of the sum of 2 uniform distributions.</li>
+<li>Give an example of a random variable that might be modelled using the Uniform distribution.</li>
+</ol>
+</div>
+<div id="sect.RnRStudio" class="section level2">
+<h2><span class="header-section-number">1.2</span> R and RStudio</h2>
+<p>W. N. Venables, D. M. Smith and the R Core Team <span class="citation">(R Core Team <a href="#ref-R-base">2018</a>)</span> state: “R is an integrated suite of software facilities for data manipulation, calculation and graphical display.” They specifically leave out the word “statistics” to emphasize that R is actually an “environment” or fully planned coherent system for programming. RStudio furthers this idea and provides an IDE or integrated development system for programming in R and other languages. In fact, this book and all the figures and interactive examples and simulations were completely programmed, compiled and deployed using R in the RStudio IDE. The only way to get a good idea of what R and Rstudio can do is to use them with a curious and exploratory approach.</p>
+<p>“&gt;” on the left of each line in the Terminal is called the cursor and it indicates that R is ready to receive a command. When the cursos changes to “+” it means that you have submitted a partial command and R indicates it is waiting for you to finish the command.</p>
+<p>Use material from lab 1.</p>
+<p>“&lt;-” and “=” mean the same thing. They assign the value on the right into the object on the left: object.name &lt;- operation. The “=” sign is also used to give values to the arguments of functions, where “&lt;-” does nto work. For example, to make an object called “my.random.numbers” with 5 random numbers from a normal distribution with mean 3 and standard deviation 2 we write:</p>
+<p><code>my.random.numbers &lt;- rnorm(n = 3, mean = 3, sd = 2)</code></p>
+<p>We can read this as object `my.random.numbers’ <em>gets</em> …</p>
+</div>
+<div id="functions" class="section level2">
+<h2><span class="header-section-number">1.3</span> Functions</h2>
+<p>Functions take arguments, perform operations on them and return results. For example, in mean(x = c(8, 4, 6)), mean() is the function and the argument called x receives the value c(8, 4, 6), which is a vector made up of the numbers 8, 4, and 6 in that order. The function returns a result that is the number 6.</p>
+<p>Users interact with R mostly using functions. R and R packages provide thousands of functions, and each user can create new custom fuctions. Suppose we want to make a plot of a polynomial of order 3 for many different values of the parameters. We define a function that calculates the values of the polynomial and plots them all in one step.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotPoly &lt;-<span class="st"> </span><span class="cf">function</span>(b0, b1, b2, b3, xmin, xmax){ <span class="co"># name function and arguments</span>
+  x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> xmin, <span class="dt">to =</span> xmax, <span class="dt">length.out =</span> <span class="dv">100</span>) <span class="co"># create x values</span>
+  y &lt;-<span class="st"> </span>b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>b2 <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>b3 <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span> <span class="co"># calculate y values</span>
+  <span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>) <span class="co"># plot the results</span>
+}
+<span class="co"># Now that the function is defined we can make plots for any values of the arguments pretty quickly</span>
+
+<span class="kw">plotPoly</span>(<span class="dt">b0 =</span> <span class="dv">1</span>, <span class="dt">b1 =</span> <span class="fl">0.5</span>, <span class="dt">b2 =</span> <span class="fl">0.03</span>, <span class="dt">b3 =</span> <span class="op">-</span><span class="fl">0.01</span>, <span class="dt">xmin =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">xmax =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="02.0_Rcomputation_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Adjust the range of x to get a better view</span>
+
+<span class="kw">plotPoly</span>(<span class="dt">b0 =</span> <span class="dv">1</span>, <span class="dt">b1 =</span> <span class="fl">0.5</span>, <span class="dt">b2 =</span> <span class="fl">0.03</span>, <span class="dt">b3 =</span> <span class="op">-</span><span class="fl">0.01</span>, <span class="dt">xmin =</span> <span class="op">-</span><span class="dv">10</span>, <span class="dt">xmax =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="02.0_Rcomputation_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+</div>
+<div id="help" class="section level2">
+<h2><span class="header-section-number">1.4</span> Help</h2>
+<p>RStudio has a pane specifically designed to find information about functions, objects, data and many other things in R. The help pane has an entry area for keywords at the top right. There is a basic toolbar that can be used to navigate pages as in a browser.</p>
+<p>There is a large community of R users all over the world. This community provides lots of help and support through multiple websites. Whenever you are stuck and cannot find the information you need in a form that you understand using R help, you should use a seach engine, typically Google, and pose your question directly as a web search. This works remarkably well if you use the correct keyworkds. Always end your query with “in R” so the search is much more focused.</p>
+</div>
+<div id="data-and-data-frames" class="section level2">
+<h2><span class="header-section-number">1.5</span> Data and data frames</h2>
+<p>See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>.</p>
+<p>One of the most common way to have data in R is using objects called data frames. These are table-like structures with rows and columns like a spreadsheet. Each column can have only one type of data, but different columns can have different data types. Data and objects in general in R can be of various types, called “modes.” Whenever we enter data into R and do not specify the type, R will assign it the data type that does not lose any information. For example, if we enter A, 1, 3, 4, t, i, 7.5, into a column of a data frame, R will make a column of type character, because that is the only mode that can contain letters and numbers, but the numbers are stored as characters. The mode of objects can be changed, with restrictions.</p>
+<p>Point to R resources and cheatsheets.</p>
+<p>Give simple examples.</p>
+<p>R will be a tool that we need to use, but it is not the goal of the course.</p>
+<p>All code will be provided, with exception of very simple fill-in-the-blank exercises.</p>
+<p>Should we use Rcmdr?</p>
+<p>Explain structure of R Studio, topology of scripts, markdown files, directory, etc.</p>
+</div>
+<div id="ch.statsR.ex01" class="section level2">
+<h2><span class="header-section-number">1.6</span> Examples</h2>
+<p>Provide and example of a simulation to determine the distribution of the sum of two independent uniform distributions. The definition of independence is found in Section @ref(ch.Prob.indep) . Show analytic and simulation solutions. Show that analytic solution is general. Simulation may depend on the specific values selected to simulate.</p>
+</div>
+<div id="exercises-and-solutions" class="section level2">
+<h2><span class="header-section-number">1.7</span> Exercises and Solutions</h2>
+<p>Use simulation and analytic/intuition to determine what happens when two uniform distributions are summed. Explore uniform distributions with different coefficients. Explain that the coefficients of the uniform distribution are the two ends of the “box.”</p>
+<p>Probability density function of the Uniform distribution U(a, b).</p>
+<p>We write</p>
+<span class="math display" id="eq:unif2pdf">\[\begin{equation}
+x \sim U(a, b) \quad \text{where} \quad \quad a&lt; b
+\tag{1.1}
+\end{equation}\]</span>
+<p>to state that the continuous random variable <span class="math inline">\(x\)</span> has a uniform distribution between a and b. This means that the probability of obtaining a value of x in an interval <span class="math inline">\([x_1, x_2]\)</span> within [a,b] is constant and equal to <span class="math inline">\((x_2-x_1)/(b-a)\)</span> @ref(fig:unif.dist.fig)</p>
+<p>Note that the uniform distribution U(0, 1) is the distribution of the random numbers generated by the function RAND() in Excel. For more details on this distribution, see [Uniform Distribution] (<a href="https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)" class="uri">https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)</a>).</p>
+<span class="math display" id="eq:unif-pdf">\[\begin{equation}
+f(x) =
+  \begin{cases}
+    \frac{1}{b-a}       &amp; \quad \text{if } a \leq x \leq b \\
+    0                   &amp; \quad \text{otherwise }
+  \end{cases}
+    \tag{1.2}
+\end{equation}\]</span>
+<p>(ref:fig.unif.dist) Probability density function for the uniform distribution that has a support between any two values of the x-axis is the area under the line between those values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># code for a unif dist with an interval and area selected</span>
+plotUnif &lt;-<span class="st"> </span><span class="cf">function</span>(a,b) {
+  x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> a <span class="op">-</span><span class="st"> </span>(b <span class="op">-</span><span class="st"> </span>a), <span class="dt">to =</span> b <span class="op">+</span><span class="st"> </span>(b <span class="op">-</span><span class="st"> </span>a), <span class="dt">length.out =</span> <span class="dv">200</span>)
+  <span class="kw">plot</span>(<span class="kw">dunif</span>(x, a, b) <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)
+}
+
+
+<span class="kw">plotUnif</span>(<span class="dv">1</span>, <span class="fl">4.5</span>)</code></pre></div>
+<div class="figure">
+<img src="02.0_Rcomputation_files/figure-html/unif.dist.fig-1.png" alt="(ref:fig.unif.dist)" width="672" />
+<p class="caption">
+(#fig:unif.dist.fig)(ref:fig.unif.dist)
+</p>
+</div>
+</div>
+<div id="homework-problems" class="section level2">
+<h2><span class="header-section-number">1.8</span> Homework Problems</h2>
+</div>
+<div id="laboratory-exercises" class="section level2">
+<h2><span class="header-section-number">1.9</span> Laboratory Exercises</h2>
+<div id="plant-sciences" class="section level3">
+<h3><span class="header-section-number">1.9.1</span> Plant Sciences</h3>
+</div>
+<div id="animal-sciences" class="section level3 unnumbered">
+<h3>Animal Sciences</h3>
+<div id="refs" class="references">
+<div>
+<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-base">
+<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

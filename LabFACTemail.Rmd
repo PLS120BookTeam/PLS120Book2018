@@ -1,0 +1,360 @@
+
+---
+title: "Lab07 Factorial ANOVA and LSD"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+# install.packages(c("tables", "pander","lsmeans", "multcomp","agricolae"))
+
+library(tables)
+
+library(pander)
+
+library(lsmeans)
+
+library(multcomp)
+
+library(agricolae)
+
+```
+
+#### Instructions
+
+The same instructions for completion and submission of work used in previous labs applies here. Refer to previous labs for the details. 
+
+For this lab you have to be familiar with the following sections of the textbook:
+
+\@ref(label) RCBD without subsamples
+\@ref(label) Factorial Experiments
+\@ref(label) Fisher's Protected LSD
+
+
+In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. These are based on the **same experiment used in Lab 06**, but now we will consider that seeding and fertilizer are two **factors** that create the set of 6 treatments in a **factorial** treatment structure. We ignore the factor water for simplicity and because it did not cause any effects. The 6 treatments were applied in a **Completely Randomized Block Design** in which each of 6 treatments were applied randomly to 2 plots in each of 3 blocks for a total of 36 experimental units or plots.
+
+Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in blocks 1, 2 and 3 to show block effects. Blocks were defined areas that were more or less homogeneous in soil and plant properties and that were contiguous. We will assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as logMass = log(logMass + 0.2) to achieve normality and equality of variances.
+
+
+### Part 1. Factorial ANOVA using R functions [ points]
+
+#### 1a. Random assignment of treatments to plots
+
+In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block (in today’s lab, the treatments will have 2 replicate plots in each block). The random assignment of treatments to plots within blocks can be done using the *sample()* R function.
+
+```{r}
+# Read and understand the code in this part but do not type or modify anything.
+# Create a data frame with all combinations of levels of the 2 factors. First, create treatment names for all 6 treatments. 
+
+treat <- expand.grid(
+  nitro = c("n", "N"), 
+  seeding = c("s", "S", "E")
+  )
+
+
+# Create a column containing the treatment name in the data frame
+
+treat$Treatment <- paste(
+  treat$nitro, 
+  treat$seeding, sep = ""
+  )
+
+
+# Number the 12 plots in each block 1 through 12, then shuffle the treatment names and assign to plots of each block.
+# The sample() function is used to create a vector that has each treatment randomly assigned to each block twice, because there are two plots for each treatment in each block.
+
+
+# Plots 1-12 of each block get:
+
+(block1 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
+
+
+(block2 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
+
+
+(block3 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
+
+
+```
+
+#### 1.b Add columns with factor levels to the data
+
+```{r}
+# Read and understand the code in this part but do not type or modify anything.
+# Read data (seedF for "factorial")
+
+# seedF <- read.csv(file = "Lab07SeedMassData.txt", header = TRUE)
+
+seedF <- read.table(header = TRUE, text = "
+Treatment  block  logMass
+wnE  Block1  -0.210836005431437
+wNE  Block1  1.55288938986704
+WnE  Block1  0.055235139345024
+WNE  Block1  0.835167804254832
+wns  Block1  1.24627323200302
+wnS  Block1  0.540066519204629
+wNs  Block1  1.57199447282598
+wNS  Block1  1.23870355136554
+Wns  Block1  0.986995928669204
+WnS  Block1  -0.170749893385349
+WNs  Block1  0.664136397253749
+WNS  Block1  0.736888706368722
+wnE  Block2  0.041449411568171
+wNE  Block2  1.428708818124
+WnE  Block2  0.319992367391131
+WNE  Block2  1.03098409320956
+wns  Block2  0.643797294741899
+wnS  Block2  -0.511211922892043
+wNs  Block2  1.84080033644501
+wNS  Block2  0.813650468511317
+Wns  Block2  1.69986757761409
+WnS  Block2  -0.154140967169852
+WNs  Block2  1.423732115253
+WNS  Block2  0.2968644855256
+wnE  Block3  -0.655926955677754
+wNE  Block3  -0.27934035269992
+WnE  Block3  -0.5542030003591
+WNE  Block3  -1.12888399571028
+wns  Block3  0.45627765803375
+wnS  Block3  -1.04875645623447
+wNs  Block3  0.49759250163951
+wNS  Block3  -0.097792008066854
+Wns  Block3  -0.513584856362292
+WnS  Block3  -1.36796547632004
+WNs  Block3  1.02290365359422
+WNS  Block3  -0.527897010482484
+")
+
+# Add columns $nitro and $seeding to the data, to show the levels for each factor.
+
+seedF$nitro <- factor(substr(seedF$Treatment, 2, 2))
+
+seedF$seeding <- factor(substr(seedF$Treatment, 3, 3))
+
+
+# Add column NStreat for treatments resulting from nitro and seeding combinations.
+
+seedF$NStreat <- factor(paste(seedF$nitro, seedF$seeding, sep = ""))
+
+
+```
+
+
+#### 1.c Perform a test of the Ho that all treatment means are equal.
+
+For this part you need to test the null hypotheses that:
+- there are no interactions between nitrogen and seeding,
+- there are no "main effects" of nitro or seeding.
+
+"Main effects" refers to the overall effect of a factor averaged over all levels of other factors. "Simple effects" are the effects of one factor for a given individual level of another factor.
+
+
+We do these tests with an ANOVA that partitions all variation (sum of squares) in the response variable (logMass) into Block, Treatment and Error, and then partition the Treatment variation into main effect of nitro, main effect of seeding, and the interaction between nitro and seeding (nitro x seeding).
+
+
+```{r}
+
+# First do the ANOVA ignoring the treatment factorial structure.
+
+# This yields the first partition of SS
+
+rcbd.mod <- lm(formula = logMass ~ NStreat + block, data = seedF)
+
+pander(anova(rcbd.mod))
+
+# Now, analyze the same data, this time partitioning the Treatment SS according to a factorial treatment structure.
+
+rcbdF.mod <- lm(formula = logMass ~ nitro * seeding + block, data = seedF)
+
+# complete the code below to make an ANOVA table for the same data partitioning the Treatment SS according to factorial, as above:
+
+pander(anova(rcbdF.mod))
+
+
+```
+
+
+Questions:
+
+a) Report MSE in the RCBD and RCBDF models.
+
+b) State the null hypothesis for the main effects of N in the RCBDF model.
+
+c) State the null hypothesis for the main effects of seeding in in the RCBDF model.
+
+c) Do we reject or fail to reject the following null hypothesis for the RCBDF model?
+
+Ho: There is no interaction between nitrogen and seeding affecting medusahead seed mass?
+
+
+### Part 2. Factorial ANOVA detailed calculations [ points]
+
+Create a new column in the data for each of the following:
+- overall average
+- nitro treatment average
+- nitro effect = nitro average - overall average
+- seeding treatment average
+- seeding effect = seeding average - overall average
+- overall average + nitro effect + seeding effect
+- nitro x seeding average
+- nitro x seeding interaction = 
+  = nitro x seeding average - (overall average + nitro effect + seeding effect)
+- block average
+-block effect = block average - overall average
+- residual
+
+
+Then calculate the sum of squares and degrees of freedom for nitro effect, seeding effect, interaction and residuals. Make sure that the numbers match the results from the previous section.
+
+
+```{r}
+
+# First calculate the average medusahead seed mass per factor and add to a data frame
+
+# Type the column name of the response variable after the dollar sign:
+
+seedF$overall.avg <- mean(seedF$logMass) 
+
+nitro.avg <- aggregate(formula = logMass ~ nitro, 
+                       data = seedF, 
+                       FUN = mean)
+
+names(nitro.avg)[2] <- "nitro.avg"
+
+seedF <- merge(seedF, nitro.avg)
+
+# Type the function for calculating averages:
+
+seed.avg <- aggregate(formula = logMass ~ seeding, 
+                      data = seedF, 
+                      FUN = mean)
+
+names(seed.avg)[2] <- "seed.avg"
+
+seedF <- merge(seedF, seed.avg)
+
+
+nitro.seed.avg <- aggregate(formula = logMass ~ nitro + seeding, 
+                      data = seedF, 
+                      FUN = mean)
+
+names(nitro.seed.avg)[3] <- "nitro.seed.avg"
+
+seedF <- merge(seedF, nitro.seed.avg)
+
+
+# Create a vector called block.avg to aggregate the response variable by block and calculate the means of each block
+
+block.avg <- aggregate(formula = logMass ~ block, 
+                       data = seedF, 
+                       FUN = "mean")
+
+names(block.avg)[2] <- "block.avg"
+
+seedF <- merge(seedF, block.avg)
+
+
+# Second, calculate the effects and residuals
+
+seedF$nitro.fx <- seedF$nitro.avg - seedF$overall.avg
+
+# Type the vector name for the average of the seeded/unseeded treatment:
+
+seedF$seed.fx <- seedF$seed.avg - seedF$overall.avg 
+
+seedF$nitro.seed.fx <- with(seedF, nitro.seed.avg - (overall.avg + nitro.fx + seed.fx))
+
+seedF$block.fx <- seedF$block.avg - seedF$overall.avg
+
+seedF$resdl <- with(seedF, 
+                    logMass - 
+                       overall.avg - 
+                       nitro.fx - 
+                       seed.fx - 
+                       nitro.seed.fx - 
+                       block.fx)
+
+
+# Finally, type your equations to calculate the sum of squares.
+
+(SSnitro <- sum(seedF$nitro.fx ^ 2))
+
+(SSseed <- sum(seedF$seed.fx ^ 2))
+
+(SSnitro.seed <- sum(seedF$nitro.seed.fx ^ 2))
+
+(SSblock <- sum(seedF$block.fx ^ 2))
+
+(SSresdl <- sum(seedF$resdl ^ 2))
+
+# HINT: check your answers of the SS with the anova table in Part1. It should be the same if your calculations are correct:
+
+pander(anova(rcbdF.mod)) 
+
+
+```
+
+
+### Part 3. Multiple comparison of means using Fisher's PLSD [ points]
+
+Fisher’s Protected Least Significant Difference is the LSD that is applied only if the overall F test is significant. In this section you need to calculate the Least Significant differences for nitro, seeding and nitro x seeding levels. For each one, construct a table that shows the means that are NOT significantly different connected by a common letter.
+
+``` {r}
+# First, use the LSD.test() function of the agricolae package.
+
+
+LSD.test(rcbdF.mod, "nitro", group = TRUE, console = TRUE)
+
+
+LSD.test(rcbdF.mod, "seeding", group = TRUE, console = TRUE)
+
+
+LSD.test(rcbdF.mod, c("nitro", "seeding"), group = TRUE, console = TRUE)
+
+
+# Second, calculate the LSD's and CI's "by hand."
+# Hint: check your answers of LSD with the lsd test table. It should be the same if your calculations are correct.
+
+(dfe.rcbd.F <- 36 - 1 - 2 - 2 - 2 - 1)
+(t.critical <- qt(0.975, dfe.rcbd.F))
+(MSE.rcbd.F <- SSresdl / dfe.rcbd.F)
+
+
+# nitrogen
+(se.nitro <- sqrt(MSE.rcbd.F / (length(seedF$logMass) / length(levels(seedF$nitro)))))
+(LSD.nitro <- t.critical * sqrt(2) * se.nitro)
+
+
+# seeding
+(se.seed <- sqrt(MSE.rcbd.F / (length(seedF$logMass) / length(levels(seedF$seeding)))))
+
+# Type your equation and calculate the LSD for seeding.
+(LSD.seed <- t.critical * sqrt(2) * se.seed)
+
+
+# nitrogen x seeding
+(se.nitro.seed <- sqrt(MSE.rcbd.F / 
+                         (length(seedF$logMass) / 
+                            (length(levels(seedF$nitro)) * 
+                            length(levels(seedF$seeding))))))
+
+# Type your equation and calculate the LSD for nitro * seeding
+(LSD.nitro.seed <- t.critical * sqrt(2) * se.nitro.seed)
+
+
+```
+
+
+Question Read the last lsd table and answer following questions:.
+
+a) Do treatments “n:s” and “N:s” differ? 
+
+b) Do treatments “n:s” and “N:E” differ? 
+
+c) Do treatments “n:s” and “n:E’ differ? 
+
+

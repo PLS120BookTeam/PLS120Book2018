@@ -1,0 +1,32 @@
+---
+title: "Untitled"
+author: "e"
+date: "6/20/2018"
+output: html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercises and Solutions
+
+Use simulation and analytic/intuition to determine what happens when two uniform distributions are summed. Explore uniform distributions with different coefficients. Explain that the coefficients of the uniform distribution are the two ends of the "box."
+
+Probability density function of the Uniform distribution U(a, b).
+
+This works and yields a numbered equation:
+
+\begin{equation}
+x \sim U(a, b) \quad \text{where} \quad \quad a< b
+(\#eq:unif2pdf)
+\end{equation}
+
+but this does not:
+
+\begin{equation}
+x \sim U(a, b) \quad \text{where} \quad \quad a< b
+(\#eq:unif.pdf)
+\end{equation}
+
+Now move on to other equations. See Equation \@ref(eq:unif2pdf).
