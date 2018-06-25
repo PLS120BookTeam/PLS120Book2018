@@ -45,6 +45,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -108,21 +109,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4" data-path=""><a href="#math.modl"><i class="fa fa-check"></i><b>1.4</b> Models</a><ul>
 <li class="chapter" data-level="1.4.1" data-path=""><a href="#math.smplMod"><i class="fa fa-check"></i><b>1.4.1</b> The simplest model</a></li>
 <li class="chapter" data-level="1.4.2" data-path=""><a href="#math.bttrMod"><i class="fa fa-check"></i><b>1.4.2</b> A slightly more complex model</a></li>
+<li class="chapter" data-level="1.4.3" data-path=""><a href="#mathGroups"><i class="fa fa-check"></i><b>1.4.3</b> Grouping or Indicator Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path=""><a href="#math.devs"><i class="fa fa-check"></i><b>1.5</b> Deviations, Errors and Residuals</a><ul>
-<li class="chapter" data-level="1.5.1" data-path=""><a href="#math.simu"><i class="fa fa-check"></i><b>1.5.1</b> Simulation: Population is Known</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#mathDevs"><i class="fa fa-check"></i><b>1.5</b> Deviations, Errors and Residuals</a><ul>
+<li class="chapter" data-level="1.5.1" data-path=""><a href="#mathSimu"><i class="fa fa-check"></i><b>1.5.1</b> Simulation: Population is Known</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path=""><a href="#math.optim"><i class="fa fa-check"></i><b>1.6</b> Optimization</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#mathOptim"><i class="fa fa-check"></i><b>1.6</b> Optimization</a></li>
 <li class="chapter" data-level="1.7" data-path=""><a href="#math.symbls"><i class="fa fa-check"></i><b>1.7</b> Symbols and Terms</a></li>
 <li class="chapter" data-level="1.8" data-path=""><a href="#math.exe"><i class="fa fa-check"></i><b>1.8</b> Exercises and Solutions</a><ul>
 <li class="chapter" data-level="1.8.1" data-path=""><a href="#exercise-1"><i class="fa fa-check"></i><b>1.8.1</b> Exercise 1</a></li>
 <li class="chapter" data-level="1.8.2" data-path=""><a href="#exercise-2"><i class="fa fa-check"></i><b>1.8.2</b> Exercise 2</a></li>
 <li class="chapter" data-level="1.8.3" data-path=""><a href="#exercise-3"><i class="fa fa-check"></i><b>1.8.3</b> Exercise 3</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path=""><a href="#math.hwk"><i class="fa fa-check"></i><b>1.9</b> Homework</a></li>
-<li class="chapter" data-level="1.10" data-path=""><a href="#math.lab"><i class="fa fa-check"></i><b>1.10</b> Laboratory Exercises</a><ul>
-<li class="chapter" data-level="1.10.1" data-path=""><a href="#plant-sciences"><i class="fa fa-check"></i><b>1.10.1</b> Plant Sciences</a></li>
-<li class="chapter" data-level="1.10.2" data-path=""><a href="#animal-sciences"><i class="fa fa-check"></i><b>1.10.2</b> Animal Sciences</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#mathHwk"><i class="fa fa-check"></i><b>1.9</b> Homework</a><ul>
+<li class="chapter" data-level="1.9.1" data-path=""><a href="#homework-exercise"><i class="fa fa-check"></i><b>1.9.1</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.9.2" data-path=""><a href="#homework-exercise-1"><i class="fa fa-check"></i><b>1.9.2</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.9.3" data-path=""><a href="#homework-exercise-2"><i class="fa fa-check"></i><b>1.9.3</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.9.4" data-path=""><a href="#homework-exercise-3"><i class="fa fa-check"></i><b>1.9.4</b> Homework Exercise</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -162,10 +165,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Pair symbols with corresponding concepts or definitions.</li>
 <li>Express sums using summation symbol and expand sums defined with the summation symbol.</li>
 <li>Calculate sum of squared deviations for a set of numbers.</li>
-<li>Explain in your own words what the sum of squares of a set of numbers describes.<br />
-</li>
 <li>Identify the symbols that correspond to standard deviation, variance, population mean, and sample average.</li>
-<li>List the different strategies we can use to find the optimal value for an unknown variable.</li>
+<li>List different strategies we can use to find the optimal value for an unknown parameter.</li>
+<li>Identify and write down polynomials and linear combinations of parameters.</li>
 </ol>
 </div>
 <div id="math.sum" class="section level2">
@@ -253,52 +255,50 @@ Y_1 + Y_2 + Y_2 + Y_3 + Y_3 + Y_4 \\ \\ &amp;=
 </div>
 <div id="math.2Dtbl" class="section level2">
 <h2><span class="header-section-number">1.3</span> Two-dimensional Data Tables and Summation</h2>
-<p>The vectors <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> used above are 1-dimensional; they are single columns of numbers. Frequently, data is organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its “address” in the table given by the row and column numbers, always in that order. The subscript <span class="math inline">\(i\)</span> refers to rows and <span class="math inline">\(j\)</span> refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for fields and columns for crops. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 62 does <strong>not</strong> mean 6 times 10 plus 2 times 1, but simply the sixth row and second column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if <span class="math inline">\(Y_{162}\)</span> is row 1 column 62 or row 16 column 2 we use <span class="math inline">\(Y_{1,62}\)</span> or <span class="math inline">\(Y_{16,2}\)</span>. The comma is omitted when each subscript is never greater than 9.</p>
+<p>The vectors <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> used above are 1-dimensional; they are single columns of numbers. Frequently, data is organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its “address” in the table given by the row and column numbers, always in that order. The subscript <span class="math inline">\(i\)</span> refers to rows and <span class="math inline">\(j\)</span> refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for crop and columns for fields. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 26 does <strong>not</strong> mean 2 times 10 plus 6 times 1, but simply the second row and sixth column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if <span class="math inline">\(Y_{162}\)</span> is row 1 column 62 or row 16 column 2 we use <span class="math inline">\(Y_{1,62}\)</span> or <span class="math inline">\(Y_{16,2}\)</span>. The comma is omitted when each subscript is never greater than 9.</p>
 <br />
 <br />
 
 <span class="math display" id="eq:math08">\[\begin{equation} 
 \mathbf{Y} = 
  \begin{pmatrix}
-  Y_{1,1} &amp; Y_{1,2} &amp; Y_{1,3} \\
-  Y_{2,1} &amp; Y_{2,2} &amp; Y_{2,3} \\
-  Y_{3,1} &amp; Y_{3,2} &amp; Y_{3,3} \\
-  Y_{4,1} &amp; Y_{4,2} &amp; Y_{4,3} \\
-  Y_{5,1} &amp; Y_{5,2} &amp; Y_{5,3} \\
-  Y_{6,1} &amp; Y_{6,2} &amp; Y_{6,3} \\
-  Y_{7,1} &amp; Y_{7,2} &amp; Y_{7,3} 
- \end{pmatrix} = 
+  Y_{1,1} &amp; Y_{1,2} &amp; Y_{1,3} &amp; Y_{1,4}  &amp; Y_{1,5}  &amp; Y_{1,6}  &amp; Y_{1,7} \\
+  Y_{2,1} &amp; Y_{2,2} &amp; Y_{2,3} &amp; Y_{2,4}  &amp; Y_{2,5}  &amp; Y_{2,6}  &amp; Y_{2,7} \\
+  Y_{3,1} &amp; Y_{3,2} &amp; Y_{3,3} &amp; Y_{3,4}  &amp; Y_{3,5}  &amp; Y_{3,6}  &amp; Y_{3,7} 
+  \end{pmatrix} \\[35pt] = 
   \begin{pmatrix}
-  34 &amp; 30 &amp; 29 \\
-  32 &amp; 26 &amp; 27 \\
-  27 &amp; 26 &amp; 24 \\
-  37 &amp; 33 &amp; 34 \\
-  25 &amp; 24 &amp; 23 \\
-  23 &amp; 22 &amp; 20 \\
-  30 &amp; 27 &amp; 26 
+34 &amp; 32 &amp; 27 &amp; 37 &amp; 25 &amp; 23 &amp; 30 \\
+30 &amp; 26 &amp; 26 &amp; 33 &amp; 24 &amp; 22 &amp; 27 \\
+29 &amp; 27 &amp; 24 &amp; 34 &amp; 23 &amp; 20 &amp; 26 
  \end{pmatrix}
  \tag{1.8}
 \end{equation}\]</span>
 <p><br />
 <br />
-In R we can define a matrix or a dataframe with rows and columns. We use a dataframe because it is the most common form for data in R and in science in general. Instead of Y, in the code below we call the data “Ydata” to avoid conflicts with the names of the vectors used above. First we make vectors of data for each crop and then we join them into a data frame with the <code>cbind</code> function, which stands for “column bind.”</p>
+In R we can define a matrix or a dataframe with rows and columns. We use a dataframe because it is the most common form for data in R and in science in general. Instead of Y, in the code below we call the data “Ydata” to avoid conflicts with the names of the vectors used above. First we make vectors of data for each crop and then we join them into a data frame with the <code>rbind</code> function, which stands for “row bind.”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wheat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">34</span>, <span class="dv">32</span>, <span class="dv">27</span>, <span class="dv">37</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">30</span>)
 corn &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">33</span>, <span class="dv">24</span>, <span class="dv">22</span>, <span class="dv">27</span>)
 tomat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">29</span>, <span class="dv">27</span>, <span class="dv">24</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">20</span>, <span class="dv">26</span>)
 
-Ydata &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(wheat, corn, tomat))
+Ydata &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(
+   <span class="kw">rbind</span>(wheat, corn, tomat)
+)
+
+<span class="kw">names</span>(Ydata) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;field1&quot;</span>, 
+                  <span class="st">&quot;field2&quot;</span>, 
+                  <span class="st">&quot;field3&quot;</span>, 
+                  <span class="st">&quot;field4&quot;</span>, 
+                  <span class="st">&quot;field5&quot;</span>, 
+                  <span class="st">&quot;field6&quot;</span>, 
+                  <span class="st">&quot;field7&quot;</span>)
 
 Ydata</code></pre></div>
-<pre><code>##   wheat corn tomat
-## 1    34   30    29
-## 2    32   26    27
-## 3    27   26    24
-## 4    37   33    34
-## 5    25   24    23
-## 6    23   22    20
-## 7    30   27    26</code></pre>
+<pre><code>##       field1 field2 field3 field4 field5 field6 field7
+## wheat     34     32     27     37     25     23     30
+## corn      30     26     26     33     24     22     27
+## tomat     29     27     24     34     23     20     26</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Ydata[<span class="dv">5</span>, <span class="dv">2</span>] <span class="co"># Soil moisture for field 5 with corn</span></code></pre></div>
-<pre><code>## [1] 24</code></pre>
+<pre><code>## [1] NA</code></pre>
 <p>In general, for a table of values with k rows and r columns we write:</p>
 <span class="math display" id="eq:math09">\[\begin{equation} 
 \mathbf{Y}_{k,r} = 
@@ -311,46 +311,50 @@ Ydata</code></pre></div>
 \tag{1.9}
  \end{equation}\]</span>
 <p>If we want to average all values in the table we need to use a double summation to indicate that the sum is supposed to proceed over rows and columns. As an exercise to make sure you understand the subscripts, write down the matrix <span class="math inline">\(\mathbf{Y}\)</span> with all subscripts without looking at the book</p>
+$$
 <span class="math display" id="eq:math10">\[\begin{equation} 
 \begin{aligned}
-&amp;\sum_{i=1}^{i=7} \displaystyle\sum_{j=1}^{j=3} \frac{Y_{ij}} {7 \times 3} = 
-\frac{1}{7 \times 3} \ \sum_{i=1}^{i=7}\sum_{j=1}^{j=3}Y_{ij} \\[20pt] 
-&amp;= \frac{1}{7 \times 3} \left( 
-\sum_{j=1}^{j=3}Y_{1j} + 
-\sum_{j=1}^{j=3}Y_{2j} + 
-\sum_{j=1}^{j=3}Y_{3j} + 
-\sum_{j=1}^{j=3}Y_{4j} + 
-\sum_{j=1}^{j=3}Y_{5j} + 
-\sum_{j=1}^{j=3}Y_{6j} + 
-\sum_{j=1}^{j=3}Y_{7j} \right) \\[18pt]
-&amp;= \frac{1}{7 \times 3} \ (
-Y_{11} + Y_{12} + Y_{13} + Y_{21} + Y_{22} + Y_{23} + Y_{31} + Y_{32} + Y_{33} \\
-&amp; \quad \qquad \quad + Y_{41} + Y_{42} + Y_{43} + Y_{51} + Y_{52} + Y_{53} + Y_{61} + Y_{62} + Y_{63} + Y_{71} + Y_{72} + Y_{73}) \\[20pt] 
-&amp; = \frac{1}{7 \times 3} \ (34 + 30 + 29 + 32 + 26 + 27 + 27 + 26 + 24 + 37 + 33 + 34 \\
-&amp;+ 25 + 24 + 23 + 23 + 22 + 20 + 30 + 27 + 26) = \frac{579}{21} = 27.57
+&amp;\sum_{i=1}^{i=3} \displaystyle\sum_{j=1}^{j=7} \frac{Y_{ij}} {3 \times 7} = 
+\frac{1}{3 \times 7} \ \sum_{i=1}^{i=3}\sum_{j=1}^{j=7}Y_{ij} \\[20pt] 
+&amp;= \frac{1}{3 \times 7} \left( 
+\sum_{j=1}^{j=7}Y_{1j} + 
+\sum_{j=1}^{j=7}Y_{2j} + 
+\sum_{j=1}^{j=7}Y_{3j} \right) \\[18pt]
+
+&amp;= \frac{1}{3 \times 7} \ (Y_{11} + Y_{12} + Y_{13} + Y_{14} + Y_{15} + Y_{16} + Y_{17} \\
+&amp; \qquad \qquad + Y_{21} + Y_{22} Y_{23} + Y_{24} + Y_{25} + Y_{26} + Y_{27} \\[8pt]
+&amp; \qquad \qquad + Y_{31} + Y_{32} + Y_{33} + Y_{34} + Y_{35} + Y_{36} + Y_{37}) \\[20pt] 
+&amp; = \frac{1}{7 \times 3} \ (34 + 32 + 27 + 37 + 25 + 23 + 30 \\
+&amp; \qquad \qquad + 30 + 26 + 26 + 33 + 24 + 22 + 27 \\
+&amp; \qquad \qquad + 29 + 27 + 24 + 34 + 23 + 20 + 26) = \frac{579}{21} = 27.57
 \end{aligned}
 \tag{1.10}
 \end{equation}\]</span>
+<p>$$</p>
 <p>Using R we can calculate the sums and the average very easily. Note that the functions <code>nrow</code> and <code>ncol</code> extract the number of rows and columns of a data frame or matrix. The function <code>mean</code> yields the average for the whole table.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata) <span class="co"># Works only when all columns are numeric.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata) <span class="co"># Sums all values in table. Double summation.</span></code></pre></div>
 <pre><code>## [1] 579</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(Ydata) <span class="co"># Ydata has 7 rows</span></code></pre></div>
-<pre><code>## [1] 7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(Ydata) <span class="co"># and 3 columns.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># (Works only when all columns are numeric.)</span>
+
+<span class="kw">nrow</span>(Ydata) <span class="co"># Ydata has 3 rows: k = 3</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata) <span class="op">/</span><span class="st"> </span>(<span class="kw">nrow</span>(Ydata) <span class="op">*</span><span class="st"> </span><span class="kw">ncol</span>(Ydata))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(Ydata) <span class="co"># and 7 columns: r = 7</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata) <span class="op">/</span><span class="st"> </span>(<span class="kw">nrow</span>(Ydata) <span class="op">*</span><span class="st"> </span><span class="kw">ncol</span>(Ydata)) <span class="co"># Overall average</span></code></pre></div>
 <pre><code>## [1] 27.57143</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">as.matrix</span>(Ydata)) <span class="co"># Works only when all columns are numeric.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">as.matrix</span>(Ydata)) <span class="co"># Average of all values in table</span></code></pre></div>
 <pre><code>## [1] 27.57143</code></pre>
-<p>If we just want the average for corn we specify just the column for corn (column 2) and sum over all rows for column 2. If we want the results for a field or a set of fields, we specify the corresponding row numbers. Let’s calculate the average moisture for corn and then the average for fields 3, 4, 5 and 7.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># (Works only when all columns are numeric.)</span></code></pre></div>
+<p>If we just want the average for corn we specify just the row for corn (row 2) and sum over all columns for row 2. If we want the results for a field or a set of fields, we specify the corresponding column numbers. Let’s calculate the average moisture for corn and then the average for fields 3, 4, 5 and 7.</p>
 <span class="math display" id="eq:math11">\[\begin{equation} 
 \begin{aligned}
-&amp;corn \ average = \frac{1}{7} \left( \sum_{i=1}^{i=7}Y_{i2} \right) \\[15pt] 
-&amp;= \frac{1}{7} (Y_{12} + Y_{22} + Y_{32} + Y_{42} + Y_{52} + Y_{62} + Y_{72}) \\[15pt]
+&amp;corn \ average = \frac{1}{7} \left( \sum_{j=1}^{i=7}Y_{2j} \right) \\[15pt] 
+&amp;= \frac{1}{7} (Y_{21} + Y_{22} + Y_{23} + Y_{24} + Y_{25} + Y_{26} + Y_{27}) \\[15pt]
 &amp;= \frac{1}{7} (30 + 26 + 26 + 33 + 24 + 22 + 27) = 26.86
 \end{aligned}
 \tag{1.11}
 \end{equation}\]</span>
+\
 <span class="math display" id="eq:math12">\[\begin{equation} 
 \begin{aligned}
 &amp;fields \ 3, \ 4, \ 5 \ \&amp; \ 7 \ average = \frac{1}{4 \times 3} \left( \sum_{j=1}^{j=3}Y_{3j} + 
@@ -364,13 +368,16 @@ Y_{11} + Y_{12} + Y_{13} + Y_{21} + Y_{22} + Y_{23} + Y_{31} + Y_{32} + Y_{33} \
 \tag{1.12}
 \end{equation}\]</span>
 <p>We obtain those averages in R with the following code. Note that when we leave the place for row (or column) number empty, it is interpreted as all rows (or columns).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(Ydata[, <span class="st">&quot;corn&quot;</span>]) <span class="co"># Average for corn across fields</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">as.numeric</span>(Ydata[<span class="dv">2</span>, ])) <span class="co"># Average for corn across fields</span></code></pre></div>
 <pre><code>## [1] 26.85714</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata[, <span class="dv">2</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that the row has to be transformed into a numeric vector</span>
+<span class="co"># before it can be used with the function &quot;mean.&quot;</span>
+
+<span class="kw">sum</span>(Ydata[<span class="dv">2</span>, ]) <span class="co"># This sums all values for row 2 which is corn</span></code></pre></div>
 <pre><code>## [1] 188</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(Ydata[, <span class="dv">2</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(Ydata[<span class="dv">2</span>, ]) <span class="co"># This calculates the value of r for corn</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata[, <span class="dv">2</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Ydata[, <span class="dv">2</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(Ydata[<span class="dv">2</span>, ]) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Ydata[<span class="dv">2</span>, ]) <span class="co"># Average for corn</span></code></pre></div>
 <pre><code>## [1] 26.85714</code></pre>
 </div>
 <div id="math.modl" class="section level2">
@@ -381,9 +388,18 @@ Y_{11} + Y_{12} + Y_{13} + Y_{21} + Y_{22} + Y_{23} + Y_{31} + Y_{32} + Y_{33} \
 <p>Say that we are interested in studying the milk production per dairy cow in <span class="math inline">\(kg \ day^{-1}\)</span> for all dairy cows in the US today. For example, we want to estimate what proportion of cows produce less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> to gauge the number of cows that could be targets of a program to increase productivity. One way to do this is to create a <em>model</em> for the statistical distribution of milk production, take a sample to estimate the parameters of the model and then use the model with estimated parameters to make the estimation of the proportion of cows for which production is less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> or any other quantity.</p>
 <p>A first attempt to estimate the needed proportion is to <em>model</em> milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter <span class="math inline">\(Y\)</span> to represent the milk production of a cow we write <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>, which is read “Y is a random variable with normal distribution, with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.” Sometimes we write <span class="math inline">\(\sigma\)</span>, the standard deviation, instead of <span class="math inline">\(\sigma^2\)</span>. Obviously, the standard deviation is the square root of the variance.</p>
 <p>The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(+\infty\)</span>, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are not important.</p>
+<hr />
 <blockquote>
-<p>Models are not supposed to be perfect representations of reality, they are supposed to be <strong>useful</strong> representations of reality.</p>
+<blockquote>
+<p>Models are not supposed to be perfect representations of reality,</p>
 </blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>they are supposed to be <strong>useful</strong> representations of reality.</p>
+</blockquote>
+</blockquote>
+<hr />
 <p>Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the distribution is expected to be below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.</p>
 <p>The simple model that we are using can also be expressed as follows:</p>
 <span class="math display" id="eq:math13">\[\begin{equation} 
@@ -426,11 +442,13 @@ Y_i = \mu + \epsilon_i \\[10pt]
 (#fig:prop.lt.mean)Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample.
 </p>
 </div>
-<p>We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the “fixed” or non-random parts, and the error is the “random” component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter <span class="math inline">\(\epsilon\)</span> for it.</p>
-<p><span class="math display">\[ data = Systematic \ Structure + Random \ Variation \\[10pt]
+<p>We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the “fixed” or non-random parts, and the error is the “random” component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter <span class="math inline">\(\epsilon\)</span> (epsilon) for it.<br />
+<br />
+<span class="math display">\[ data = Systematic \ Structure + Random \ Variation \\[10pt]
 = Fixed \ Component + Random \ Component \\[10pt]
 = Fixed \ Component + Structured \ Random + White \ Noise\]</span></p>
-<p>Models that partition the random component into structured and unstructured (white noise) random parts are beyond the scope of this book.</p>
+<p><br />
+Models that partition the random component into structured and unstructured (white noise) random parts are beyond the scope of this book.</p>
 <table class="kable_wrapper">
 <caption>
 (#tab:math.tab01)Milk production per lactating dairy cow in the US, by state in 2016. Based on USDA reports.
@@ -668,18 +686,604 @@ Y_i = \mu + \epsilon_i \\[10pt]
 <div id="math.bttrMod" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> A slightly more complex model</h3>
 <p>The model used above and stated in equation <a href="#eq:math13">(1.13)</a> can be improved in many ways. For example, we may guess that a lot the variance in productivity can be between states, due to different levels of investment and development of the industry in different states. By adding a part to account for differences among states in the fixed part of the model we can have much better predictions of the proportion of cows below <span class="math inline">\(15 \ kg \ day^{-1}\)</span> for each state. The model would look like this:</p>
-<p><span class="math display" id="eq:math17">\[\begin{equation}
+<span class="math display" id="eq:math17">\[\begin{equation}
 \begin{aligned}
 Y_{ij} &amp;= \mu_{i.} + \epsilon_{ij} \\[10pt]
 &amp;=  \mu_{..} + \tau_{i.} + \epsilon_{ij} \\[10pt]
 \epsilon &amp;\sim N(0, \sigma^2)
 \end{aligned}
 \tag{1.17}
-\end{equation}\]</span></p>
-<p>where <span class="math inline">\(\mu_{i.}\)</span> is the mean for state <span class="math inline">\(i\)</span> and <span class="math inline">\(\tau_{i.}\)</span> is called the “effect” of state <span class="math inline">\(i\)</span>. In general, when we have observations that are grouped like cows in states, we can view the model as allowing a separate mean for each group or as each group having an effect on the mean. Both views are equivalent and their relationship is given by the fact that the effect is defined as the difference between each group mean and the overall mean: <span class="math inline">\(\tau_{i.} = \mu_{i.} - \mu_{..}\)</span>. The “dots” in the subscript are used as place-holders for the subscript and to indicate that the average (or sum) has been done over all values of that subscript. Because the number of cows differs among states, the overall mean in this model has to be estimated as the average of the state averages, where each state receives equal weight: <span class="math inline">\(\hat{\mu}_{..} = \sum_{i=1}^{50} \hat{\mu}_{i.} / 50\)</span>. This estimated overall mean is 25.1123929 $  kg  day^{-1}.$</p>
+\end{equation}\]</span>
+<p>where <span class="math inline">\(\mu_{i.}\)</span> is the mean for state <span class="math inline">\(i\)</span> and <span class="math inline">\(\tau_{i.}\)</span> is called the “effect” of state <span class="math inline">\(i\)</span>. In general, when we have observations that are grouped like cows in states, we can view the model as allowing a separate mean for each group or as each group having an effect on the mean. Both views are equivalent and their relationship is given by the fact that the effect is defined as the difference between each group mean and the overall mean: <span class="math inline">\(\tau_{i.} = \mu_{i.} - \mu_{..}\)</span>. The “dots” in the subscript are used as place-holders for the subscript and to indicate that the average (or sum) has been done over all values of that subscript. Because the number of cows differs among states, the overall mean in this model has to be estimated as the average of the state averages, where each state receives equal weight: <span class="math inline">\(\hat{\mu}_{..} = \sum_{i=1}^{50} \hat{\mu}_{i.} / 50\)</span>. This estimated overall mean is 25.1123929 <span class="math inline">\(kg \ day^{-1}\)</span>.</p>
+</div>
+<div id="mathGroups" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Grouping or Indicator Variables</h3>
+<p>The model above can be written in a different form that is useful for further understanding of more advanced linear models, and to be used in the formulation of contrasts and custom comparisons an linear combinations of parameters presented in the chapter about <a href="#chTrtstr">treatment structure and comparisons</a>. This form is presented here to prepare students for that topic and for further studies that require writing down the models in matrix notation. Keep in mind that the use of matrix notation does not have to involve any more complicated concepts than the understanding that we are working with strings and tables of numbers, instead of single numbers at a time.</p>
+<p>Grouping or indicator variables are variables that take a value of 0 or 1 and are used to multiply parameters to determine if the parameters are included in the model for any given observation. The trick is that the equation includes all the parameters and then the values of the grouping variable are used to apply each parameter to the right rows of data. There are as many grouping variables as there are groups. For example, if an experiment has 3 treatment, there will be 3 grouping variables. Essentially, each variable “marks” each observation that belongs to a group.</p>
+Perhaps an analogy helps clarify the concept before we show the equations. Think of a model as a recipe where the parameters are the ingredients and the grouping variables indicate if the ingredient is or not in the recipe. For example, consider a simple recipe that can be made either with chicken, tofu or beef, and with mild or spicy chili peppers. The recipe will have a list of amounts and ingredients <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>:<br />
+<br />
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:recipe">Table 1.1: </span>Flexible recipe
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+amounts
+</th>
+<th style="text-align:left;">
+ingredient
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:left;">
+egg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+pinch of salt
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+dash of black pepper
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+cup of diced chicken, tofu, or beef
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+cup of chopped onion
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+tbs of curry paste
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+cup of jalapeños or poblano peppers
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:left;">
+cup of red cabbage
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+This looks like a single recipe, but it can yield 6 different dishes depending on whether you use beef, tofu or chicken, and jalapeños or poblano peppers. It is a lot simpler and shorter to write the recipe as above than to write 6 different recipes that are almost the same, at least in structure. The same happens with models. In fact, theoretically, any recipe can be expressed with this format if all ingredients are listed separately. With one row per ingredient we can decide how much (possibly none) of each ingredient to add. Let’s look at the ingredients in the example. The idea can be extended to any number of ingredients, and it is based on having a list of ingredients, so we know what the quantities refer to.<br />
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:recipe2">Table 1.2: </span>Numerical recipes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+ingredient
+</th>
+<th style="text-align:center;">
+hot_chicken
+</th>
+<th style="text-align:center;">
+mild_chicken
+</th>
+<th style="text-align:center;">
+hot_tofu
+</th>
+<th style="text-align:center;">
+mild_tofu
+</th>
+<th style="text-align:center;">
+hot_beef
+</th>
+<th style="text-align:left;">
+mild_beef
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+eggs
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+pinch of salt
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+dash of black pepper
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of diced chicken
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of diced tofu
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of diced beef
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of chopped onion
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+tbs of curry paste
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of jalapeños
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of poblano peppers
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cup of red cabbage
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+Now, the table represents each recipe with a set of numbers, and all recipes use the same list of potential ingredients. Note that when we want the chicken, the row for chicken shows a 1 and the rows for tofu and beef <strong>must</strong> show 0’s. The same happens with jalapeños and poblano peppers. The amounts for those ingredients are the grouping or indicator variables that indicate which recipe type or group we want.</p>
+We can easily show that the statistical models are like recipes <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> by chaging the symbols we use. We can simplify by noting that all recipes we are considering take eggs, salt, pepper, onions, curry paste and cabbage in the same amounts across recipes. We will refer to all of those ingredients together in the specified quantities as “common” ingredients, and to conform with the usual mathematical notation, we transpose the recipe table and put the dishes in rows and ingredients in columns with shortened names.<br />
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:recipe3">Table 1.3: </span>Mathematical recipes
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+common
+</th>
+<th style="text-align:center;">
+chicken
+</th>
+<th style="text-align:center;">
+tofu
+</th>
+<th style="text-align:center;">
+beef
+</th>
+<th style="text-align:center;">
+jalap
+</th>
+<th style="text-align:center;">
+pobla
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hot_chicken
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mild_chicken
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hot_tofu
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mild_tofu
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hot_beef
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mild_beef
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the first row of the table indicates that to make the spicy hot chicken version you add all common ingredients plus the chicken plus none of the tofu plus none of the beef, plus the jalapeño plus none of the poblanos. Note that we have three columns for protein type and two for pepper type, there is one column per option or group in each category. This is because any protein option can be combined with any pepper option, however only one protein and only one pepper type is allowed in any one dish. Additionally, whatever the dish you make, it must have a protein source and a pepper type. As a consequence of this, if you add the columns for protein or the columns for chili peppers you always get 1, regardless of the row.</p>
+<p>The column for chicken is the grouping variable that groups all recipes with chicken protein. Its value is defined as follows:</p>
+<span class="math display" id="eq:math18">\[\begin{equation}
+chicken \ group = G_1 = 
+  \begin{cases}
+    1       &amp; \quad \text{if dish has chicken, i = 1}\\
+    0                   &amp; \quad \text{otherwise}
+  \end{cases}
+    \tag{1.18}
+\end{equation}\]</span>
+<p>We name that column <span class="math inline">\(G_1\)</span> because it is the first grouping column, i.e., the subscript “1” is for chicken (think of chicken as treatment 1). Analogously, the columns for tofu and beef are defined as</p>
+<p><br></p>
+<span class="math display" id="eq:math19">\[\begin{equation}
+tofu \ group = G_2 = 
+  \begin{cases}
+    1       &amp; \quad \text{if dish has tofu, i = 2}\\
+    0                   &amp; \quad \text{otherwise}
+  \end{cases}
+    \tag{1.19}
+\end{equation}\]</span>
+<p><br></p>
+<span class="math display" id="eq:math20">\[\begin{equation}
+beef \ group = G_3 = 
+  \begin{cases}
+    1       &amp; \quad \text{if dish has beef, i = 3}\\
+    0                   &amp; \quad \text{otherwise}
+  \end{cases}
+    \tag{1.20}
+\end{equation}\]</span>
+<p><br></p>
+<p>The same sort of concepts are involved with the choice of pepper. For simplicity, now we consider only the recipes that differ in protein source and assume that all recipes are with poblanos and that poblanos are now included in the common ingredients. We can write the recipes as follows:</p>
+<p><br></p>
+<p><span class="math display">\[dish_i = 1 \times common + G_1 \times chicken + G_2 \times tofu + G_3 \times beef\]</span> <br></p>
+<p>We can think of this equation/recipe as follows: if we want the chicken version then <span class="math inline">\(G1 = 1\)</span>, $ G_2 = 0$ and <span class="math inline">\(G_3 = 0\)</span>. The result indicates to include the common ingredients, plus the chicken plus none of the tofu plus none of the beef, which is is simply: common ingredients and chicken. The common ingredients are like the overall mean, and chicken, tofu and beef are the effects of each of the protein choices; think of them as treatments. In which case the equation becomes:</p>
+<p><span class="math display">\[\mu + G_1 \ \tau_1 + G_2 \ \tau_2 + G_3 \ \tau_3 = \mu + \sum_{i=1}^3G_i \ \tau_i\]</span> <br></p>
 </div>
 </div>
-<div id="math.devs" class="section level2">
+<div id="mathDevs" class="section level2">
 <h2><span class="header-section-number">1.5</span> Deviations, Errors and Residuals</h2>
 <p>The difference between an observation and the mean is called a <em>deviation</em>, <em>residual</em> or <em>error</em>. The specific name depends on the context, but in general, we will use <em>deviation</em> for the total difference between observation and overall average, <em>residual</em> for the difference between an observation and the value estimated by a model, and <em>error</em> for the random component of a model.</p>
 <span class="math display" id="eq:math18">\[\begin{equation} 
@@ -731,118 +1335,222 @@ knitr<span class="op">::</span><span class="kw">kable</span>(
 )</code></pre></div>
 <table class="kable_wrapper">
 <caption>
-<span id="tab:unnamed-chunk-11">Table 1.1: </span>Effect of state on average milk production per cow per day.
+<span id="tab:unnamed-chunk-11">Table 1.4: </span>Effect of state on average milk production per cow per day.
 </caption>
 <tbody>
 <tr>
 <td>
 <table>
 <thead>
-<tr class="header">
-<th align="left">State</th>
-<th align="right">state.effect</th>
+<tr>
+<th style="text-align:left;">
+State
+</th>
+<th style="text-align:right;">
+state.effect
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Alabama</td>
-<td align="right">-8.8</td>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:right;">
+-8.8
+</td>
 </tr>
-<tr class="even">
-<td align="left">Alaska</td>
-<td align="right">-10.6</td>
+<tr>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:right;">
+-10.6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Arizona</td>
-<td align="right">5.2</td>
+<tr>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:right;">
+5.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">Arkansas</td>
-<td align="right">-8.7</td>
+<tr>
+<td style="text-align:left;">
+Arkansas
+</td>
+<td style="text-align:right;">
+-8.7
+</td>
 </tr>
-<tr class="odd">
-<td align="left">California</td>
-<td align="right">3.4</td>
+<tr>
+<td style="text-align:left;">
+California
+</td>
+<td style="text-align:right;">
+3.4
+</td>
 </tr>
-<tr class="even">
-<td align="left">Colorado</td>
-<td align="right">7.2</td>
+<tr>
+<td style="text-align:left;">
+Colorado
+</td>
+<td style="text-align:right;">
+7.2
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Connecticut</td>
-<td align="right">1.6</td>
+<tr>
+<td style="text-align:left;">
+Connecticut
+</td>
+<td style="text-align:right;">
+1.6
+</td>
 </tr>
-<tr class="even">
-<td align="left">Delaware</td>
-<td align="right">-1.4</td>
+<tr>
+<td style="text-align:left;">
+Delaware
+</td>
+<td style="text-align:right;">
+-1.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Florida</td>
-<td align="right">0.2</td>
+<tr>
+<td style="text-align:left;">
+Florida
+</td>
+<td style="text-align:right;">
+0.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">Georgia</td>
-<td align="right">2.0</td>
+<tr>
+<td style="text-align:left;">
+Georgia
+</td>
+<td style="text-align:right;">
+2.0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Hawaii</td>
-<td align="right">-7.0</td>
+<tr>
+<td style="text-align:left;">
+Hawaii
+</td>
+<td style="text-align:right;">
+-7.0
+</td>
 </tr>
-<tr class="even">
-<td align="left">Idaho</td>
-<td align="right">5.5</td>
+<tr>
+<td style="text-align:left;">
+Idaho
+</td>
+<td style="text-align:right;">
+5.5
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Illinois</td>
-<td align="right">0.0</td>
+<tr>
+<td style="text-align:left;">
+Illinois
+</td>
+<td style="text-align:right;">
+0.0
+</td>
 </tr>
-<tr class="even">
-<td align="left">Indiana</td>
-<td align="right">2.9</td>
+<tr>
+<td style="text-align:left;">
+Indiana
+</td>
+<td style="text-align:right;">
+2.9
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Iowa</td>
-<td align="right">4.3</td>
+<tr>
+<td style="text-align:left;">
+Iowa
+</td>
+<td style="text-align:right;">
+4.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">Kansas</td>
-<td align="right">3.2</td>
+<tr>
+<td style="text-align:left;">
+Kansas
+</td>
+<td style="text-align:right;">
+3.2
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Kentucky</td>
-<td align="right">-2.7</td>
+<tr>
+<td style="text-align:left;">
+Kentucky
+</td>
+<td style="text-align:right;">
+-2.7
+</td>
 </tr>
-<tr class="even">
-<td align="left">Louisiana</td>
-<td align="right">-7.6</td>
+<tr>
+<td style="text-align:left;">
+Louisiana
+</td>
+<td style="text-align:right;">
+-7.6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Maine</td>
-<td align="right">1.0</td>
+<tr>
+<td style="text-align:left;">
+Maine
+</td>
+<td style="text-align:right;">
+1.0
+</td>
 </tr>
-<tr class="even">
-<td align="left">Maryland</td>
-<td align="right">-0.4</td>
+<tr>
+<td style="text-align:left;">
+Maryland
+</td>
+<td style="text-align:right;">
+-0.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Massachusetts</td>
-<td align="right">-2.8</td>
+<tr>
+<td style="text-align:left;">
+Massachusetts
+</td>
+<td style="text-align:right;">
+-2.8
+</td>
 </tr>
-<tr class="even">
-<td align="left">Michigan</td>
-<td align="right">7.1</td>
+<tr>
+<td style="text-align:left;">
+Michigan
+</td>
+<td style="text-align:right;">
+7.1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Minnesota</td>
-<td align="right">0.9</td>
+<tr>
+<td style="text-align:left;">
+Minnesota
+</td>
+<td style="text-align:right;">
+0.9
+</td>
 </tr>
-<tr class="even">
-<td align="left">Mississippi</td>
-<td align="right">-7.2</td>
+<tr>
+<td style="text-align:left;">
+Mississippi
+</td>
+<td style="text-align:right;">
+-7.2
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Missouri</td>
-<td align="right">-5.7</td>
+<tr>
+<td style="text-align:left;">
+Missouri
+</td>
+<td style="text-align:right;">
+-5.7
+</td>
 </tr>
 </tbody>
 </table>
@@ -850,111 +1558,215 @@ knitr<span class="op">::</span><span class="kw">kable</span>(
 <td>
 <table>
 <thead>
-<tr class="header">
-<th align="left">State</th>
-<th align="right">state.effect</th>
+<tr>
+<th style="text-align:left;">
+State
+</th>
+<th style="text-align:right;">
+state.effect
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Montana</td>
-<td align="right">1.1</td>
+<tr>
+<td style="text-align:left;">
+Montana
+</td>
+<td style="text-align:right;">
+1.1
+</td>
 </tr>
-<tr class="even">
-<td align="left">Nebraska</td>
-<td align="right">3.9</td>
+<tr>
+<td style="text-align:left;">
+Nebraska
+</td>
+<td style="text-align:right;">
+3.9
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Nevada</td>
-<td align="right">2.2</td>
+<tr>
+<td style="text-align:left;">
+Nevada
+</td>
+<td style="text-align:right;">
+2.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">NewHampshire</td>
-<td align="right">0.1</td>
+<tr>
+<td style="text-align:left;">
+NewHampshire
+</td>
+<td style="text-align:right;">
+0.1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">NewJersey</td>
-<td align="right">-3.5</td>
+<tr>
+<td style="text-align:left;">
+NewJersey
+</td>
+<td style="text-align:right;">
+-3.5
+</td>
 </tr>
-<tr class="even">
-<td align="left">NewMexico</td>
-<td align="right">5.3</td>
+<tr>
+<td style="text-align:left;">
+NewMexico
+</td>
+<td style="text-align:right;">
+5.3
+</td>
 </tr>
-<tr class="odd">
-<td align="left">NewYork</td>
-<td align="right">4.5</td>
+<tr>
+<td style="text-align:left;">
+NewYork
+</td>
+<td style="text-align:right;">
+4.5
+</td>
 </tr>
-<tr class="even">
-<td align="left">NorthCarolina</td>
-<td align="right">1.0</td>
+<tr>
+<td style="text-align:left;">
+NorthCarolina
+</td>
+<td style="text-align:right;">
+1.0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">NorthDakota</td>
-<td align="right">1.7</td>
+<tr>
+<td style="text-align:left;">
+NorthDakota
+</td>
+<td style="text-align:right;">
+1.7
+</td>
 </tr>
-<tr class="even">
-<td align="left">Ohio</td>
-<td align="right">0.8</td>
+<tr>
+<td style="text-align:left;">
+Ohio
+</td>
+<td style="text-align:right;">
+0.8
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Oklahoma</td>
-<td align="right">-1.9</td>
+<tr>
+<td style="text-align:left;">
+Oklahoma
+</td>
+<td style="text-align:right;">
+-1.9
+</td>
 </tr>
-<tr class="even">
-<td align="left">Oregon</td>
-<td align="right">0.7</td>
+<tr>
+<td style="text-align:left;">
+Oregon
+</td>
+<td style="text-align:right;">
+0.7
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Pennsylvania</td>
-<td align="right">0.3</td>
+<tr>
+<td style="text-align:left;">
+Pennsylvania
+</td>
+<td style="text-align:right;">
+0.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">RhodeIsland</td>
-<td align="right">-3.4</td>
+<tr>
+<td style="text-align:left;">
+RhodeIsland
+</td>
+<td style="text-align:right;">
+-3.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">SouthCarolina</td>
-<td align="right">-4.4</td>
+<tr>
+<td style="text-align:left;">
+SouthCarolina
+</td>
+<td style="text-align:right;">
+-4.4
+</td>
 </tr>
-<tr class="even">
-<td align="left">SouthDakota</td>
-<td align="right">2.4</td>
+<tr>
+<td style="text-align:left;">
+SouthDakota
+</td>
+<td style="text-align:right;">
+2.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Tennessee</td>
-<td align="right">-4.5</td>
+<tr>
+<td style="text-align:left;">
+Tennessee
+</td>
+<td style="text-align:right;">
+-4.5
+</td>
 </tr>
-<tr class="even">
-<td align="left">Texas</td>
-<td align="right">3.1</td>
+<tr>
+<td style="text-align:left;">
+Texas
+</td>
+<td style="text-align:right;">
+3.1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Utah</td>
-<td align="right">3.2</td>
+<tr>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+3.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">Vermont</td>
-<td align="right">0.9</td>
+<tr>
+<td style="text-align:left;">
+Vermont
+</td>
+<td style="text-align:right;">
+0.9
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Virginia</td>
-<td align="right">-1.3</td>
+<tr>
+<td style="text-align:left;">
+Virginia
+</td>
+<td style="text-align:right;">
+-1.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">Washington</td>
-<td align="right">4.8</td>
+<tr>
+<td style="text-align:left;">
+Washington
+</td>
+<td style="text-align:right;">
+4.8
+</td>
 </tr>
-<tr class="odd">
-<td align="left">WestVirginia</td>
-<td align="right">-6.6</td>
+<tr>
+<td style="text-align:left;">
+WestVirginia
+</td>
+<td style="text-align:right;">
+-6.6
+</td>
 </tr>
-<tr class="even">
-<td align="left">Wisconsin</td>
-<td align="right">4.2</td>
+<tr>
+<td style="text-align:left;">
+Wisconsin
+</td>
+<td style="text-align:right;">
+4.2
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Wyoming</td>
-<td align="right">3.8</td>
+<tr>
+<td style="text-align:left;">
+Wyoming
+</td>
+<td style="text-align:right;">
+3.8
+</td>
 </tr>
 </tbody>
 </table>
@@ -962,7 +1774,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(
 </tr>
 </tbody>
 </table>
-<div id="math.simu" class="section level3">
+<div id="mathSimu" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Simulation: Population is Known</h3>
 <p>A simulation consists of making up a model with known parameters and generatign data by taking random samples from the theoretical distribution specified in the model. Then, the data are analyzed as if the model were not known and results compared to the known model values. This is an empirical method to check if the method of analysis leads to good estimates. By repeating the random sampling many times, we can get simulated distributions of the estimated parameters.</p>
 <p>Here, we simply use a simulation to show how sample results and estimated quantities are different from the real values. We cannot do this with real data because we tpically do not know the true parameter values.</p>
@@ -973,7 +1785,9 @@ Y_{ij} = \mu_{i.} + \epsilon_{ij} = \mu_{..} + \tau_{i.} + \epsilon_{ij} \\
 \tag{1.21}
 \end{equation}\]</span>
 <p>For each state, we simulate 100 observations by generating 100 random draws from a normal distribution with mean 0 standard deviation 4 and to each we add the state average. Figure @ref(fig:resdl.vs.error) shows that residuals are not equal to the true errors, but they are related.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk.sim.dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">State =</span> <span class="kw">rep</span>(milk<span class="op">$</span>State, <span class="dv">100</span>), 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">39</span>)
+
+milk.sim.dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">State =</span> <span class="kw">rep</span>(milk<span class="op">$</span>State, <span class="dv">100</span>), 
                            <span class="dt">state.mean =</span> <span class="kw">rep</span>(milk<span class="op">$</span>kg.cow.day, <span class="dv">100</span>),
                            <span class="dt">epsilon =</span> <span class="kw">rnorm</span>(<span class="dv">5000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">4</span>))
 
@@ -993,10 +1807,10 @@ milk.sim.dat<span class="op">$</span>residual =<span class="st"> </span><span cl
 <pre><code>## &#39;data.frame&#39;:    5000 obs. of  6 variables:
 ##  $ State        : Factor w/ 50 levels &quot;Alabama&quot;,&quot;Alaska&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ state.mean   : num  16.3 16.3 16.3 16.3 16.3 ...
-##  $ epsilon      : num  -2.16 -4.86 -1.38 -6.27 -5.76 ...
-##  $ Y            : num  14.2 11.5 15 10.1 10.6 ...
+##  $ epsilon      : num  -0.742 -2.178 1.829 -9.166 -9.399 ...
+##  $ Y            : num  15.59 14.16 18.16 7.17 6.93 ...
 ##  $ state.average: num  16 16 16 16 16 ...
-##  $ residual     : num  -1.87 -4.57 -1.09 -5.98 -5.47 ...</code></pre>
+##  $ residual     : num  -0.425 -1.861 2.146 -8.849 -9.082 ...</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(residual <span class="op">~</span><span class="st"> </span>epsilon, milk.sim.dat, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</code></pre></div>
 <div class="figure">
@@ -1007,12 +1821,28 @@ milk.sim.dat<span class="op">$</span>residual =<span class="st"> </span><span cl
 </div>
 </div>
 </div>
-<div id="math.optim" class="section level2">
+<div id="mathOptim" class="section level2">
 <h2><span class="header-section-number">1.6</span> Optimization</h2>
-<p>One way to “guess” or estimate the mean of a distribution that can be sampled directly is to take the average. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares is the most common method we will use to make estimates, but it is not the only method. Other method is to minimize the sum of the absolute deviations. The median of a set of observations is the value that minimizes the absolute deviations. “Absolute” means that all deviations are made positive.</p>
-<p><strong>Show an interactive graph where the values SS and SAD are shown as functions of the guessed mean. With and without outliers.</strong></p>
-<p>In many cases, the optimal value can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For more advanced statistical methods, there are no equations available, so numerical computations are used to approximate the optimal estimates.</p>
-<p>Say what a polynomial is.</p>
+<p>One way to “guess” or estimate the mean of a distribution using a sample is to calculate the <em>average</em>. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares - called “least-squares” - is the most common method we will use to make estimates, but it is not the only method. Another common method used is likelihood maximization, whereby parameters are estimated by choosing the values that maximize the likelihood of observing the data. The good news is that for most of the situations we will study, which involve the use of linear models, least-squares and maximum likelihood yield identical results.</p>
+<p>In many cases, the optimal value for a parameter can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For some advanced statistical methods, there are no equations available, so numerical computations are used to approximate the optimal estimates.</p>
+<p>Linear models are models that can be represented by a linear combination of parameters, it is like a recipe where the ingredients are the parameters. For example, to make a cup of swet tea with milk you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.</p>
+<span class="math display">\[\begin{equation}
+1 \ cup \ tea = 1 \ tsp \ tea + 1 \ cup \ hot \ water + 1 \ tbsp \ honey + 0.25 \ cup \ milk \\
+Y = X_1 \beta_1 + X_2 \beta_2 + X_3 \beta_3 + X_4 \beta_4
+\end{equation}\]</span>
+<p>What makes the equation <em>linear in the parameters</em> is that the parameters represented by the <span class="math inline">\(\beta\)</span>’s are not in exponents, powers, quotients or operations other than multiplication and addition. Even if the variables that multiply the parameters are involved in any kind of function, for as long as the complicated function does not involve a paramters, the equation is linear *_<em>in the parameters_</em>. For example, the following equations are linear in the parameters represented by the <span class="math inline">\(beta\)</span>’s.</p>
+<span class="math display">\[\begin{equation}
+Y = X_1^2 \beta_1 + log(X_2) \beta_2 + e^{X_3} \beta_3 + X_4 \beta_4 \\
+Y = X_1^0 \beta_0 + X_1^1 \beta_1 + X_1^2 \beta_2 + X_1^3 \beta_2
+\end{equation}\]</span>
+<p>The second equation is called a <strong>polynomial</strong> because it only involves powers of the variable <span class="math inline">\(X_1\)</span> multiplying the parameters. Because the highest power of X is 3, the polynomial is said to be of <em>3rd degree</em> or a <em>cubic</em> polynomial. Polynomials of 2nd degree are called <em>quadratic</em>. All polynomials are linear combinations of parameters. Typical polynomials of order or degree 0 to 3 are plottled in figure @ref(fig:math.polys).</p>
+<div class="figure">
+<img src="03.0_MathSymbols_files/figure-html/math.polys-1.png" alt="Types of shapes that can be produced by polynomials of first (black), second (blue) and third (orange) degree. Note that all have ranges where they are almost straight lines. The orientation, location and range of each shape can be changed by changing the values of the parameters of the polynomial." width="672" />
+<p class="caption">
+(#fig:math.polys)Types of shapes that can be produced by polynomials of first (black), second (blue) and third (orange) degree. Note that all have ranges where they are almost straight lines. The orientation, location and range of each shape can be changed by changing the values of the parameters of the polynomial.
+</p>
+</div>
+<p>Linear combinations are use throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different <a href="ch.2pops">Chapter 8</a> .</p>
 </div>
 <div id="math.symbls" class="section level2">
 <h2><span class="header-section-number">1.7</span> Symbols and Terms</h2>
@@ -1086,11 +1916,19 @@ milk.sim.dat<span class="op">$</span>residual =<span class="st"> </span><span cl
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\bar{Y}_{i.}\)</span></td>
-<td>Y bar sub i dot; average of all Y values in group i.</td>
+<td>Y bar sub i dot; average of all Y values observed in group i.</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\bar{Y}_{..}\)</span></td>
 <td>Y bar dot dot; average of all values.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mu\)</span></td>
+<td>Population mean; a parameter of the normal distribution.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{Y}\)</span></td>
+<td>Sample average.</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\hat{\mu}\)</span></td>
@@ -1158,7 +1996,7 @@ milk.sim.dat<span class="op">$</span>residual =<span class="st"> </span><span cl
 <h3><span class="header-section-number">1.8.2</span> Exercise 2</h3>
 <p>Expand the following summations with symbols, then with numbers and calculate it using the data in the table:</p>
 <p><span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})\]</span> <span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2\]</span></p>
-<table>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -1204,32 +2042,6 @@ Y_i
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr class="header">
-<th>i</th>
-<th><span class="math inline">\(Y_i\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>6</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>5</td>
-</tr>
-</tbody>
-</table>
 <p><strong>Solution:</strong></p>
 <p><span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..}) = (Y_1 - \bar{Y}_{..}) + (Y_2 - \bar{Y}_{..}) + (Y_3 - \bar{Y}_{..}) + (Y_4 - \bar{Y}_{..})\\[15pt]
 = (6 - 4) + (2 - 4) + (3 - 4) + (5 - 4) = 0\]</span></p>
@@ -1238,21 +2050,213 @@ Y_i
 </div>
 <div id="exercise-3" class="section level3">
 <h3><span class="header-section-number">1.8.3</span> Exercise 3</h3>
-<p>The following table has values for <span class="math inline">\(Y_{ij}\)</span>. States are in the rows, and each row has columns for different cows sampled from each state. What is the sample size r for all states? What is the value of k? Write down the equation with summation and symbols and then with numbers for Alabama’s average.</p>
+<p>The following table has values for <span class="math inline">\(Y_{ij}\)</span>. States are in the rows, and each row has columns for different cows sampled from each state.</p>
+<p>What is the sample size r for all states?</p>
+<p>What is the value of k?</p>
+<p>Write down the equation with summation and symbols and then with numbers for Alabama’s average.</p>
+<p>Calculate the averages by state and then all the residuals.</p>
+<p>Calculate all estimated state effects.</p>
+<p>Write down the partition of three observations into overall average, state effect and residual.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+cow1
+</th>
+<th style="text-align:right;">
+cow2
+</th>
+<th style="text-align:right;">
+cow3
+</th>
+<th style="text-align:right;">
+cow4
+</th>
+<th style="text-align:right;">
+cow5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:right;">
+15.59
+</td>
+<td style="text-align:right;">
+11.42
+</td>
+<td style="text-align:right;">
+14.62
+</td>
+<td style="text-align:right;">
+13.95
+</td>
+<td style="text-align:right;">
+18.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:right;">
+16.19
+</td>
+<td style="text-align:right;">
+10.41
+</td>
+<td style="text-align:right;">
+12.01
+</td>
+<td style="text-align:right;">
+17.85
+</td>
+<td style="text-align:right;">
+18.35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+California
+</td>
+<td style="text-align:right;">
+28.96
+</td>
+<td style="text-align:right;">
+28.30
+</td>
+<td style="text-align:right;">
+31.36
+</td>
+<td style="text-align:right;">
+25.52
+</td>
+<td style="text-align:right;">
+26.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wisconsin
+</td>
+<td style="text-align:right;">
+27.45
+</td>
+<td style="text-align:right;">
+28.80
+</td>
+<td style="text-align:right;">
+31.46
+</td>
+<td style="text-align:right;">
+29.59
+</td>
+<td style="text-align:right;">
+28.34
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Solution</strong></p>
+<p>Sample size is 5 cows for each states.</p>
+<p>k is the number of rows. There are 4 states in rows, so k = 4.</p>
+<p>Alabama is in row 1, thus i = 1. We need to sum over j from j=1 to j=5.</p>
+<p><span class="math display">\[\frac{1}{5} \sum_{j=1}^{j=5} Y_{1j} = 15.59 + 11.42 + 14.62 + 13.95 + 18.20 = 14.76\]</span> The rest of the calculations are performed in R to save time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data are in the matrix called &quot;tbl.exer3.math&quot;</span>
+tbl.exer3.math</code></pre></div>
+<pre><code>##             cow1  cow2  cow3  cow4  cow5
+## Alabama    15.59 11.42 14.62 13.95 18.20
+## Alaska     16.19 10.41 12.01 17.85 18.35
+## California 28.96 28.30 31.36 25.52 26.36
+## Wisconsin  27.45 28.80 31.46 29.59 28.34</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Alab.avg &lt;-<span class="st"> </span><span class="kw">mean</span>(tbl.exer3.math[<span class="dv">1</span>, ]))</code></pre></div>
+<pre><code>## [1] 14.756</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Alas.avg &lt;-<span class="st"> </span><span class="kw">mean</span>(tbl.exer3.math[<span class="dv">2</span>, ]))</code></pre></div>
+<pre><code>## [1] 14.962</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Cali.avg &lt;-<span class="st"> </span><span class="kw">mean</span>(tbl.exer3.math[<span class="dv">3</span>, ]))</code></pre></div>
+<pre><code>## [1] 28.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Wisc.avg &lt;-<span class="st"> </span><span class="kw">mean</span>(tbl.exer3.math[<span class="dv">4</span>, ]))</code></pre></div>
+<pre><code>## [1] 29.128</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a matrix with the averages</span>
+(averages &lt;-<span class="st"> </span><span class="kw">rbind</span>(
+   <span class="kw">rep</span>(Alab.avg, <span class="dv">5</span>),
+   <span class="kw">rep</span>(Alas.avg, <span class="dv">5</span>),
+   <span class="kw">rep</span>(Cali.avg, <span class="dv">5</span>),
+   <span class="kw">rep</span>(Wisc.avg, <span class="dv">5</span>)
+))</code></pre></div>
+<pre><code>##        [,1]   [,2]   [,3]   [,4]   [,5]
+## [1,] 14.756 14.756 14.756 14.756 14.756
+## [2,] 14.962 14.962 14.962 14.962 14.962
+## [3,] 28.100 28.100 28.100 28.100 28.100
+## [4,] 29.128 29.128 29.128 29.128 29.128</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate overall average as average of state averages.</span>
+<span class="co"># Obviously, this overall average is just for the four states considered,</span>
+<span class="co"># and therefore, the state effects are relative to just the four states.</span>
+
+(overall.avg &lt;-<span class="st"> </span>(Alab.avg <span class="op">+</span><span class="st"> </span>Alas.avg <span class="op">+</span><span class="st"> </span>Cali.avg <span class="op">+</span><span class="st"> </span>Wisc.avg) <span class="op">/</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div>
+<pre><code>## [1] 21.7365</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># State effects</span>
+(st.fx &lt;-<span class="st"> </span>averages <span class="op">-</span><span class="st"> </span>overall.avg)</code></pre></div>
+<pre><code>##         [,1]    [,2]    [,3]    [,4]    [,5]
+## [1,] -6.9805 -6.9805 -6.9805 -6.9805 -6.9805
+## [2,] -6.7745 -6.7745 -6.7745 -6.7745 -6.7745
+## [3,]  6.3635  6.3635  6.3635  6.3635  6.3635
+## [4,]  7.3915  7.3915  7.3915  7.3915  7.3915</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Residuals</span>
+(resdl &lt;-<span class="st"> </span>tbl.exer3.math <span class="op">-</span><span class="st"> </span>averages)</code></pre></div>
+<pre><code>##              cow1   cow2   cow3   cow4   cow5
+## Alabama     0.834 -3.336 -0.136 -0.806  3.444
+## Alaska      1.228 -4.552 -2.952  2.888  3.388
+## California  0.860  0.200  3.260 -2.580 -1.740
+## Wisconsin  -1.678 -0.328  2.332  0.462 -0.788</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that each observation in the original table of data is</span>
+<span class="co"># partitioned into overall average, state effect, and residual.</span></code></pre></div>
 </div>
 </div>
-<div id="math.hwk" class="section level2">
+<div id="mathHwk" class="section level2">
 <h2><span class="header-section-number">1.9</span> Homework</h2>
+<div id="homework-exercise" class="section level3">
+<h3><span class="header-section-number">1.9.1</span> Homework Exercise</h3>
+<p>Write the following expressions with short equations using summation</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(a_1 + 2 \ a_2 + 3 \ a_3 + 4 \ a_4 + 5 \ a_5\)</span></p></li>
+<li><p><span class="math inline">\(p^n + p^{n-1} \ q^1 + + p^{n-2} \ q^2 +\dots + p^{n-r} \ q^r + \dots + q^n\)</span></p></li>
+</ol>
 </div>
-<div id="math.lab" class="section level2">
-<h2><span class="header-section-number">1.10</span> Laboratory Exercises</h2>
-<div id="plant-sciences" class="section level3">
-<h3><span class="header-section-number">1.10.1</span> Plant Sciences</h3>
+<div id="homework-exercise-1" class="section level3">
+<h3><span class="header-section-number">1.9.2</span> Homework Exercise</h3>
+<p>Imagine you studied the effects of probiotic supplement on white cell count in rats. Five rats selected randomly from a set of 15 received a base diet, 5 received a based diet with sterilized probiotic and 5 received the base diet with the live probiotic. White cells were counted and averaged over 7 days for each rat before the treatments and again during second week after starting the diets.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Formulate a statistical model for this experiment and describe each component. Identify fixed and random components. Use subscripts and define their ranges and meaning.</p></li>
+<li><p>What is the response variable of interest? What is the predictor variable of interest?</p></li>
+</ol>
 </div>
-<div id="animal-sciences" class="section level3">
-<h3><span class="header-section-number">1.10.2</span> Animal Sciences</h3>
+<div id="homework-exercise-2" class="section level3">
+<h3><span class="header-section-number">1.9.3</span> Homework Exercise</h3>
+</div>
+<div id="homework-exercise-3" class="section level3">
+<h3><span class="header-section-number">1.9.4</span> Homework Exercise</h3>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>For this simple example we merged the units with the ingredients. Explicit use of units it always necessary. Measure twice cut once! One of many costly examples: NASA lost a Mars Explorer due to confusion between metric and imperial units.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>In reality, linear statistical models are <em>almost</em> like recipes because in statistical models we can have negative values for the amounts of a parameter put into the combination, but in recipes we cannot have negative amounts of ingredients.<a href="#fnref2">↩</a></p></li>
+</ol>
 </div>
             </section>
 

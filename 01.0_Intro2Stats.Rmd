@@ -1,4 +1,4 @@
-# Chapter 1: Introduction to Applied Statistics {#ch.intro}
+# Introduction to Applied Statistics {#chIntro}
 
 ## Learning Objectives
 
@@ -34,7 +34,8 @@ Learning statistics can be challenging but also fun. The math involved in introd
 You should use statistical knowledge to properly interpret pseudo information presented in advertisements and the media.
 
 Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, 
-https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271
+
+<a href="https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271" target="_blank">Innate concept of probability</a>
 
 Although humans do have an innate ability to assess contingencies and likelihood of certain events, our intuitive ability is far from perfect. In fact, it has been shown that humans tend to be particularly bad at estimating probabilities in certain situations. Kahneman and Tversky refer to the probabilities people guess without using calculations and the theory of probability as "subjective" probability.
 
@@ -53,26 +54,31 @@ Why are we bringing these things up?? The point is that when you need to deal wi
 
 ## Going to the movies: PBS program on statistics
 
-http://www.pbs.org/wgbh/nova/physics/prediction-numbers.html
+<a href="http://www.pbs.org/wgbh/nova/physics/prediction-numbers.html" target="_blank">Prediction by numbers</a>
 
 
+## Methods and Concepts in this Book 
 
+### Probability, estimation, inference {#estimationInference}
+Fixed part and random part
+Models
 
-## Exercise
+Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved (reference).
 
-Goal: Do many random experiments and estimations. Identify the elements involved in making estimates and sources of variation.
+## Statistics Defined
 
-This exercise is actually a game. The team that guesses the secret target most accurately wins the game. Students will form two teams. Each team will designate a pitcher or thrower. Pitchers will proceed to the front game area and get the projectiles (these projectiles can be darts or small chalk or sand bags). A horizontal line with marks and labels every 2 inches is drawn for each pitcher on the board. The referee gives each pitcher a different position as their target. Those numbers remain unknown to everyone else. Each pitcher throws the projectile at the designated position in the line three times, and the referee marks each hit on the horizontal line. Vertical positions are ignored. Each team collectively guesses the target point for their pitcher. Guesses are plotted against number of pitches on the board. Five to 6 rounds of throws and guesses are conducted. The team that is closest to their pitcher's true target wins. After the award ceremony, the following questions are asked for discussion:
-
-1. What factors determined the winner?
-1. Was one of the pitchers better? In what way?
-1. Which values varied between throws and which ones were constant?
-1. What would a team's guess if their pitcher did a large number of throws?
-1. What is the frequency of different distances from the true target?
-1. Why do distances from the target vary among throws? What does random mean?
+Keep in mind that the word "statistics" can have several meanings, even within the filed of statistics. We can say that *statistics* is the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
 
 
 ## Book Organization and Overview
+
+The big picture is that in order to deal with uncertainty, uncertainty has to be quantified. This is done with the use of probabilities (chapter \@ref(ch.prob)).
+
+Then we have to assign probabilities to events of interest, like the failure of an engine, or the yield of a field being sufficient to cover the costs of cropping. This step requires that we create model distributions for different types of random experiments, such as running an engine for 5,000 hours or planting a field.
+
+Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertaint are illustrated with an example. imagine that you draw a marble radomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the proability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But youwould probably get different results in other samples. THe quesiton is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
+
+Finally, we will frequently be interested in comparing parameters from potentially different distributions. We could have a second urn with marbles and be interested in determining if the probability of getting a white marble from the first is greater or less than from the second. Or we could be interested in determining if the mean productivity of a new crop variety is greater than the old one. These comparisons are reduced to calculating the value and distribution of linear combinations of estimated parameters. Usually, the distribution is normal, so the problem reduces to estimating the variance of a linear combination of estimated parameters. Analysis of variance is key to achieve this.
 
 This book has 14 chapters dealing with introductory statistical methods and concepts. The first section comprises chapters 1-3 provide essential but minimal tools necessary to be able to read and understand the rest of the book.
 
@@ -88,12 +94,11 @@ Theme: There are compelling arguments indicating that statistics has been misund
 
 Explain the misunderstanding and misuse of P
 
-
-https://www.nature.com/news/scientific-method-statistical-errors-1.14700
+<a href "https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
 
 End section with a positive note that by truly understanding we will see that statistical methods become 
 
-A common path is to learn math, learn how math is used as part of the foundation of statistical methods to obtain desired estimates, and then develop an understanding of the methods through the math. We will avoid this path and use the following approach.
+In dealing with problems or questions we will use the following approach:
 
 1. Identify and define the problem or question.
 2. Define what will be accepted as a useful solution.
@@ -102,24 +107,39 @@ A common path is to learn math, learn how math is used as part of the foundation
 5. State solution.
 6. Implement solution.
 
-Math and calculations will be necessary, particularly in step 4. We do not need to know the exact details of the calculation in order to understand the process to an acceptable degree.
+Math and calculations will be necessary, particularly in step 4. Frequently, in order to get to the solution the question has to be cast in the framework of an already existing mathematical procedure that is not immediately intuitive. A specific case if the use of analysis of variance to determine if means are different. The question is: "are means different?"" but the method compares variances instead of means! The approach works because there is an underlying theory that states that if means are different, then variances will also differ by an amount related to the difference among means. We do not need to know the exact details of the calculations in order to understand the process to an acceptable degree.
 
-In many real applications of advanced statistics, step 4 involves massive computations with complicated software that can only be fully understood from a computational math science approach. We do not need to study computational math. We just need to understand the concepts behind the computation (e.g. I know that the computation can give me the optimal estimate for the quantity I do not know, where "optimal" means that the sum of squared deviations are minimized).
+In many real applications of advanced statistics, step 4 involves massive computations with complicated software that can only be fully understood from a computational math science approach. We do not need to study computational math. We just need to understand the concepts behind the computation. It is sufficient to know that the computation yields a good approximation to the optimal estimate for the unknown quantity, where "optimal" means that the sum of squared deviations are minimized).
 
 Some computations are rather simple and we may look into those to get a better concept of what computation does.
 
-~~TODO~~
-Include an analogy like, but better than:
-Problem: I need to get to Woodland Courthouse at 8 am on Mo.
-Useful solution: Me at courthouse anytime between 7 & 8 am.
-Quantities to be estimated: transportation method or NA
-Method: could be select method that is fastest or
-could be bike, car, ride from friend, cab or bus
-Solution: take Yolobus at 6:15
-Implement: get up early and go!
+## Real-world problems
+
+### Detection of the Higgs boson
+
 
 
 ## Exercises and Solutions
+
+### Exercise 1
+
+Use the approach taken in this course to provide a solution for the following problems.
+
+a. .
+
+b. 
+### Exercise 2
+
+Goal: Do many random experiments and estimations. Identify the elements involved in making estimates and sources of variation.
+
+This exercise is actually a game. The team that guesses the secret target most accurately wins the game. Students will form two teams. Each team will designate a pitcher or thrower. Pitchers will proceed to the front game area and get the projectiles (these projectiles can be darts or small chalk or sand bags). A horizontal line with marks and labels every 2 inches is drawn for each pitcher on the board. The referee gives each pitcher a different position as their target. Those numbers remain unknown to everyone else. Each pitcher throws the projectile at the designated position in the line three times, and the referee marks each hit on the horizontal line. Vertical positions are ignored. Each team collectively guesses the target point for their pitcher. Guesses are plotted against number of pitches on the board. Five to 6 rounds of throws and guesses are conducted. The team that is closest to their pitcher's true target wins. After the award ceremony, the following questions are asked for discussion:
+
+1. What factors determined the winner?
+1. Was one of the pitchers better? In what way?
+1. Which values varied between throws and which ones were constant?
+1. What would a team's guess if their pitcher did a large number of throws?
+1. What is the frequency of different distances from the true target?
+1. Why do distances from the target vary among throws? What does random mean?
 
 
 ## Homework Problems

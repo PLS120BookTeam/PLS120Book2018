@@ -8,7 +8,7 @@ bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
 output:
-   html_document:
+   html_document2:
     fig_width: 6
     fig_height: 4
     fig_caption: true
@@ -23,12 +23,14 @@ library(knitr)
 library(rmarkdown)
 library(bookdown)
 library(pander)
+library(kableExtra)
 ```
 
 
-
-# Front Matter {#ch.front}
+# Front Matter {-#chFront}
 
 This section should have a cover, copyright, UCD logo, etc.
 
 Probably will take 3-4 pages.
+
+

@@ -1,4 +1,4 @@
-# Treatment Structures and Comparisons {#ch.trtstr}
+# Treatment Structures and Comparisons {#chTrtstr}
 
 ## Learning Objectives for Chapter {#LearnObj12}
 1. Identify the treatment in a factorial experiment
