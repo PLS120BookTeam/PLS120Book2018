@@ -55,7 +55,833 @@ http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
 
 ## Laboratory Exercises
 
-### Plant Sciences
+### Plant Sciences Lab
+---
+Title: "Normal distribution, T-distribution, Confidence Intervals, and One-sample Hypothesis testing"
+author: "YourFirstName YourLastName"
+date: "today's date here"
+output: html_document
+---
+### Instructions
 
-### Animal Sciences
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and part to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same filename but with an html extension (Lab02email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. 
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+###Section 1: Normal Distribution
+### Part 1. [10 points] 
+Normal Distribution
+
+A statistical distribution is a function that associates a probability to results of random experiments. For example, the random experiment can be the flip of a coin. Let's "measure" the result by assigning 1 to a tail and 0 to a head. The result is a discrete random variable Y that can take values 0 or 1. The statistical distribution, in this case a Probability Mass Function (pmf), is a function that associates a probability to each value of Y. For the example of the coin, we usually pick a function defined as follows: P(Y = 1) = P(Y = 0) = 0.5. This read as "the probability of Y taking a value of 1 is equal to the probability of Y taking a value of 0 and is equal to 0.5." Keep in mind that the actual pmf can and probably does differ for different individual coins. For an extreme example, remember that for a coin with two heads P(Y = 1) = 0 and P(Y = 0) = 1.0. The probability for the real coin experiment also depends on who flips the coin. It is possible to learn to get any side of the coin one wants.
+
+For continuous random variables we have statistical distributions that are called "Probability Density Functions" for which the probability of any specific number is 0, but the probability of getting a number in any interval, no matter how small, can be positive. The Normal distribution is one of those pdf's that is most used in statistics for many reasons. In this section we will explore and operate with the Normal distribution.
+
+In the R code section below, we will read the help for "Normal" and list the functions that are explained there. Set the seed of random numbers to 39 so everyone gets the same random numbers. Create a vector called “Y5” containing 5 random numbers from the standard normal distribution using the “rnorm()” function. In the “rnorm()” function, give values to arguments called q, p, n, mean and sd by using their names as shown in the **Usage** part of the help.  For example, rnorm(n = 5, mean = 0, sd = 1). Calculate the sample variance of Y5. Now, set the seed to 57 and create a new vector called “Y50” containing 50 random numbers from the standard normal distribution. Calculate the sample variance of Y50. Compare the variances. Is the relationship of the sample variances what you should have expected? What is the true variance of the populations from which you obtained the samples? Why do the calculated variances differ? 
+
+```{r}
+help("Normal")
+#Note, dnorm gives the probability density, pnorm gives the probability distribution function, qnorm gives the quantile function, and rnorm generates random values from the distribution.
+
+set.seed(39)
+
+# obtain 5 random numbers from the standard normal distribution and put into Y5
+Y5 <- rnorm(n = 5, 
+            mean = 0, 
+            sd = 1) 
+
+# obtain 50 random numbers
+Y50 <- rnorm(n=50, 
+             mean = 0, 
+             sd = 1) # obtain 50 random numbers
+
+#obtain the variances
+(var5 <- var(Y5))
+(var50 <- var(Y50)) 
+```
+
+Is the relationship of the sample variances what you should have expected? What is the true variance of the populations from which you obtained the samples? Why do the calculated variances differ?
+Answers here: 
+
+
+#### Part 2  [10  points]
+
+Plot the pdf for a standard normal distribution. Modify the code and produce a graph of the pdf for a normal distribution with mean = 2 and sd = 0.7. 
+
+```{r}
+# This plots the standard normal distribution.
+
+plot(function(x) dnorm(x, mean = 0, sd = 1), 
+     xlim = c(-5,5), 
+     ylim = c(0, 0.5)) 
+
+#Modify for mean = 2, sd = 0.7:
+
+plot(function(x) dnorm(x, mean = 2, sd = 0.7), 
+     xlim = c(-5,5), 
+     ylim = c(0, 0.6)) 
+
+```
+
+###Section 2: The t distribution
+##Part 1 [20 points]
+
+When your sample size is small, and the true population standard deviation is unknown for a continuous probability distribution that you assume is normal, we use the t distribution instead.  
+
+```{r}
+
+#plot t distribution with 100 degrees of freedom
+
+plot(function(x) dt(x, df = 100), 
+     xlim = c(-5,5), 
+     ylim = c(0, 0.6)) 
+
+#note the arguments “xlim” and “ylim” set the axis boundaries for the plot
+
+```
+
+Confidence interval from the t distribution, in relation to alpha level: Use R to determine the sample size (n), mean, standard deviation, standard error, and 95% (alpha = 0.05) confidence interval (CI) for sepal length for the iris data. Then calculate the confidence intervals at the
+alpha levels of 0.10 (90% CI) and .01 (99% CI).
+
+```{r iris.info, echo = TRUE, include = TRUE}
+
+myiris <- iris  #import the iris data into a data frame called myiris
+
+str(myiris) # see components and types of iris
+
+myiris.sl <- myiris$Sepal.Length  # Create sepal length vector
+
+myiris.n <- length(myiris.sl)  # get sample size
+
+myiris.mean <- mean(myiris.sl) # get mean
+
+myiris.sd <- sd(myiris.sl) # complete the code to get standard deviation
+  
+myiris.se <- myiris.sd/sqrt(myiris.n) # get standard error
+
+#add code below to get information on the qt() function, which is for the t distribution:
+
+#*DELETE THIS AND ADD CODE HERE*
+ help(qt)
+
+#Confidence interval
+(df <- myiris.n - 1) # get degrees of freedom
+
+alpha95 <- 0.05 # set the alpha level to 0.05 (95% CI)
+
+(t.crit95 <- qt(1 - alpha95/2 , df))  # critical t value at 95% quantile under this degree of freedom
+
+(LB95 <- myiris.mean - myiris.se * t.crit95) # lower bound of the 95% confidence interval
+
+(UB95 <- myiris.mean + myiris.se * t.crit95) # upper bound of the 95% confidence interval
+
+
+library(plotrix) ## needed for plotCI() function
+
+# The text() function adds text to the plot you just printed.  In Rmarkdown, you have to run all relevant lines at once or else you will get an error. Highlight and run plotCI() and text() together to avoid this error.  
+
+plotCI(x = myiris.mean, 
+       uiw = myiris.se * t.crit95, 
+       pch = 19, 
+       xlim = c(0.9, 1.1), 
+       ylim = c(5.5, 6.2), 
+       ylab = "Sepal Length", 
+       xlab = "", 
+       xaxt = 'n', 
+       main = "95% CI") ## plots the mean and 95% CI interval
+
+text(x = 1.05, 
+     y = UB95, 
+     labels = "Upper 95% CL")
+### add labels to "mean" and "Lower 95% CL"###
+text(x = 1.05, 
+     y = LB95, 
+     labels = "Lower 95% CL")
+text(x = 1.05, 
+     y = myiris.mean, 
+     labels = "Mean")
+
+
+
+### Calculate the CI for alpha level 0.10 (90% CI) and plot
+
+# First the 90% CI
+
+alpha90 <- 0.10  # set the alpha level to 0.10 (90% CI)
+
+(t.crit90 <- qt(1 - alpha90/2 , df)) # Fill in missing code to get critical t value at 90% quantile under this degree of freedom
+
+(LB90 <- myiris.mean - myiris.se * t.crit90 ) # fill in missing code to get lower bound of the 90% confidence interval
+
+(UB90 <- myiris.mean + myiris.se * t.crit90) 
+
+## plot both CIs in one plot - just run, all code is complete
+x <- c(myiris.mean, myiris.mean)
+
+uiws1 <- c(myiris.se * t.crit90, myiris.se * t.crit95)   #confidence interval widths
+
+#if you run plotCI(...) and text(...) separately you will get an error.  Highlight plotCI(...) and text(...) together to avoid error.  
+
+plotCI(x = x, 
+       uiw = uiws1, 
+       pch = 19, 
+       xlim = c(0, 3), 
+       ylim = c(5.5, 6.2), 
+       ylab = "Sepal Length", 
+       xlab = "", 
+       xaxt = "n", 
+       main = "90%, 
+95% CIs")
+
+text(1, 5.6, "90% CI")
+
+text(2, 5.6, "95% CI")
+
+```
+
+**Explain why the CI widths are different - what do the error bars represent?  
+
+
+
+
+
+### Part 2. [20 points]
+Confidence interval in relation to sample size: Use R to determine the mean, standard deviation, standard error, and 95% confidence interval (CI) for sepal length for varying sample sizes (n = 50, 150) in the iris data.
+
+```{r}
+
+alpha <- 0.05   # set alpha at a 95% CI
+
+myiris150 <- myiris$Sepal.Length
+
+# Calculate the 95% confidence interval for n = 150:
+
+myiris150.n <- length(myiris150)  # get sample size
+
+myiris150.mean <- mean(myiris150) # get mean
+
+myiris150.sd <- sd(myiris150) # get standard deviation
+
+myiris150.se <- myiris150.sd/sqrt(myiris150.n) # get standard error
+
+df150 <- myiris150.n - 1 # degrees of freedom
+
+t.crit150 <- qt(1 - alpha/2, df150) # t critical value at 95% quantile under this degree of freedom
+
+LB150 <- myiris150.mean - myiris150.se * t.crit150 # lower bound of the confidence interval
+
+#Complete code for the upper bound of the confidence interval:
+
+#*DELETE THIS AND ADD CODE HERE*
+UB150 <- myiris150.mean + myiris150.se * t.crit150
+
+
+#Sample randomly from entire myiris data set of n = 150 to get a subset of 50 for sepal length:
+
+myiris50 <- myiris$Sepal.Length[sample(1:150,50)]
+
+# Calculate the 95% confidence interval for 50 observations:
+
+myiris50.n <- length(myiris50) #get sample size
+
+myiris50.mean <- mean(myiris50) # get mean
+
+myiris50.sd <- sd(myiris50) # get standard deviation
+
+myiris50.se <- myiris50.sd/sqrt(myiris50.n) # get standard error
+
+df50 <- myiris50.n - 1 # degrees of freedom
+
+t.crit50 <- qt(1 - alpha/2 , df50)   #critical value at 95% quantile under this degree of freedom
+
+LB50 <- myiris50.mean - myiris50.se * t.crit50 #lower bound of the confidence interval 
+
+UB50 <- myiris50.mean + myiris50.se * t.crit50 #upper bound of the confidence interval
+
+## plot the means and 95% CIs for n = 50, 150
+
+x <- c(myiris50.mean, 
+       myiris150.mean)
+
+uiws2 <- c(myiris50.se * t.crit50, 
+           myiris150.se * t.crit150)
+
+plotCI(x = x, 
+       uiw = uiws2, 
+       pch = 19, 
+       xlim = c(0.5 , 2.5), 
+       ylim = c(5.4, 6.1), 
+       ylab = "Sepal Length", 
+       xlab = "", 
+       xaxt = "n")
+
+text(1, 5.45, "n = 50")
+
+text(2, 5.45, "n = 150")    
+
+```	
+
+
+* Why are the intervals different widths now?  Explain in terms of how changing the sample size changes se and critical t.
+
+
+
+### Part 3 [10 points]
+Express in words the meaning of the confidence intervals for sepal length at an alpha = 0.05.
+
+
+
+
+### Part 4 [20 points]	
+
+Using the statistics calculated in the above section, perform tests of hypotheses to determine if the population from which the samples were taken could have the following means:
+
+a) Average of Sepal.Length in setosa species = 5.84 (alpha 0.05, 0.10)
+b) Average of Sepal.Length for all species equal to 5.84 (N=50, 150, alpha= 0.05)
+In 4a-4b, use both the t statistic and confidence interval to perform your tests of hypothesis. Discuss your results and state (i) the null and alternate hypotheses, (ii) the decision rule (α) and test statistic, (iii) the final statistical decision, and conclusion. 
+
+```{r}
+# a)  One-sample t test on setosa species
+
+myiris.set <- myiris$Sepal.Length[myiris$Species == "setosa"] # get a vector of just the sepal lengths for the setosa species
+
+myiris.set.n <- length(myiris.set)  # get sample size
+
+myiris.set.mean <- mean(myiris.set) # get mean
+
+myiris.set.sd <- sd(myiris.set) # get standard deviation
+
+myiris.set.se <- myiris.set.sd/sqrt(myiris.set.n)
+
+df.set <- myiris.set.n - 1
+
+(tstar <- abs((myiris.set.mean - 5.84) / myiris.set.se     )) # complete code to get your sample t value. Note the abs() function
+
+alpha95 <- 0.05
+
+(t.crit95 <- qt(1 - alpha95/2 , df.set))  # critical value at 95% quantile under this degree of freedom #critical value at 95% quantile under this degree of freedom
+
+tstar > t.crit95 # logical query; if your sample test statistic is greater than the critical t value at your chosen alpha level, then you reject the null hypothesis that the population mean of sepal length is equal to 5.84
+
+# If result is TRUE, then we reject the null hypothesis; i.e. the means are different at the alpha level of 0.05. There is still a <5% probability we would sample a mean of 5.006 (the mean of the setosa species) when the true population  mean is 5.84.
+# If result is FALSE, then we cannot reject the null hypothesis; i.e. the means of the setosa species and the total data set are the same.  
+
+
+#plot the t distribution and the test and critical t values
+
+plot(function(x) dt(x, df = df.set), xlim = c(-5,16), ylim = c(0, 0.5))
+
+points(x = tstar, y = 0, pch = 24, bg = "blue")
+
+points(x = t.crit95, y = 0, pch = 24, bg = "red")
+
+## Using pt() function
+
+2 * (1 - pt(tstar, df.set))
+
+t.test(myiris.set, mu = 5.84) # Ho: mean = 5.84
+
+# Type your code to do t tests with an alpha level of 0.10. Use the test statistic, the critical t, and the p value to explain the results.  
+
+
+alpha90 <- 0.1
+
+(t.crit90 <- qt(1 - alpha90/2 , df.set))
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+Discuss your results and state (i) the null and alternate hypotheses, (ii) the decision rule (α) and test statistic, (iii) the final statistical decision, and conclusion (answer here):
+Alpha = 95%:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+Alpha = 90%:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+```{r}
+# b) One sample t test for all species, at the 95% CI, but varying sample sizes
+
+t.test(myiris.sl, mu = 5.84) ## fill in code to do a one sample t test on all 150 observations
+
+#Type your code in to do t tests on a sample size of 50 (In Part 2, we already created a data object for this sample size).
+
+alpha90 <- 0.10
+
+t.test(myiris50, mu = 5.84, conf.level = 0.95) 
+```
+
+Discuss your results and state (i) the null and alternate hypotheses, (ii) the decision rule (α) and test statistic, (iii) the final statistical decision, and conclusion (answer here):
+Sample size of 150:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+Sample size of 50:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+Were the results what you expected for (a) and (b)?  Why or why not? (answer here):
+
+
+
+
+###Part 5.  [10 points]
+
+Knit this file into html. [10 points]
+
+
+###---------------END PLANT SCIENCES LAB-----------------###
+
+### Animal Sciences Lab
+---
+Title: "Normal distribution, T-distribution, Confidence Intervals, and One-sample Hypothesis testing"
+author: "YourFirstName YourLastName"
+date: "today's date here"
+output: html_document
+---
+### Instructions
+
+For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and part to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same filename but with an html extension (Lab02email.html).
+
+**Submit BOTH files for your lab report using the appropriate Canvas tool**
+
+For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. 
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+###Section 1: Normal Distribution
+### Part 1. [10 points] 
+Normal Distribution
+
+A statistical distribution is a function that associates a probability to results of random experiments. For example, the random experiment can be the flip of a coin. Let's "measure" the result by assigning 1 to a tail and 0 to a head. The result is a discrete random variable Y that can take values 0 or 1. The statistical distribution, in this case a Probability Mass Function (pmf), is a function that associates a probability to each value of Y. For the example of the coin, we usually pick a function defined as follows: P(Y = 1) = P(Y = 0) = 0.5. This read as "the probability of Y taking a value of 1 is equal to the probability of Y taking a value of 0 and is equal to 0.5." Keep in mind that the actual pmf can and probably does differ for different individual coins. For an extreme example, remember that for a coin with two heads P(Y = 1) = 0 and P(Y = 0) = 1.0. The probability for the real coin experiment also depends on who flips the coin. It is possible to learn to get any side of the coin one wants.
+
+For continuous random variables we have statistical distributions that are called "Probability Density Functions" for which the probability of any specific number is 0, but the probability of getting a number in any interval, no matter how small, can be positive. The Normal distribution is one of those pdf's that is most used in statistics for many reasons. In this section we will explore and operate with the Normal distribution.
+
+In the R code section below, we will read the help for "Normal" and list the functions that are explained there. Set the seed of random numbers to 39 so everyone gets the same random numbers. Create a vector called “Y5” containing 5 random numbers from the standard normal distribution using the “rnorm()” function. In the “rnorm()” function, give values to arguments called q, p, n, mean and sd by using their names as shown in the **Usage** part of the help.  For example, rnorm(n = 5, mean = 0, sd = 1). Calculate the sample variance of Y5. Now, set the seed to 57 and create a new vector called “Y50” containing 50 random numbers from the standard normal distribution. Calculate the sample variance of Y50. Compare the variances. Is the relationship of the sample variances what you should have expected? What is the true variance of the populations from which you obtained the samples? Why do the calculated variances differ? 
+
+```{r}
+help("Normal")
+#Note, dnorm gives the probability density, pnorm gives the probability distribution function, qnorm gives the quantile function, and rnorm generates random values from the distribution.
+
+set.seed(39)
+
+# obtain 5 random numbers from the standard normal distribution and put into Y5
+Y5 <- rnorm(n = 5, 
+            mean = 0, 
+            sd = 1) 
+
+# obtain 50 random numbers
+Y50 <- rnorm(n=50, 
+             mean = 0, 
+             sd = 1) # obtain 50 random numbers
+
+#obtain the variances
+(var5 <- var(Y5))
+(var50 <- var(Y50)) 
+```
+
+Is the relationship of the sample variances what you should have expected? What is the true variance of the populations from which you obtained the samples? Why do the calculated variances differ?
+Answers here: 
+
+
+#### Part 2  [10  points]
+
+Plot the pdf for a standard normal distribution. Modify the code and produce a graph of the pdf for a normal distribution with mean = 2 and sd = 0.7. 
+
+```{r}
+# This plots the standard normal distribution.
+
+plot(function(x) dnorm(x, mean = 0, sd = 1), 
+     xlim = c(-5,5), 
+     ylim = c(0, 0.5)) 
+
+#Modify for mean = 2, sd = 0.7:
+
+plot(function(x) dnorm(x, mean = 2, sd = 0.7), 
+     xlim = c(-5,5), 
+     ylim = c(0, 0.6)) 
+
+```
+
+###Section 2: The t distribution
+##Part 1 [20 points]
+
+When your sample size is small, and the true population standard deviation is unknown for a continuous probability distribution that you assume is normal, we use the t distribution instead.  
+
+```{r}
+
+#plot t distribution with 100 degrees of freedom
+
+plot(function(x) dt(x, df = 100), 
+     xlim = c(-5,5), 
+     ylim = c(0, 0.6)) 
+
+#note the arguments “xlim” and “ylim” set the axis boundaries for the plot
+
+```
+
+Confidence interval from the t distribution, in relation to alpha level: Use R to determine the sample size (n), mean, standard deviation, standard error, and 95% (alpha = 0.05) confidence interval (CI) for wean weight for the heifer data. Then calculate the confidence intervals at the
+alpha levels of 0.10 (90% CI) and .01 (99% CI).
+
+```{r myheifer.info, echo = TRUE, include = TRUE}
+
+myheifer <- read.table('Lab02HeiferData.csv', header=TRUE, sep=',') #import the heifer data into a data frame called myheifer
+
+str(myheifer) # see components of heifer data
+
+myheifer.sl <- myheifer$Wean_weight  # Create Wean weight vector
+
+myheifer.n <- length(myheifer.sl)  # get sample size
+
+myheifer.mean <- mean(myheifer.sl) # get mean
+
+myheifer.sd <-  sd(myheifer.sl) # complete the code to get standard deviation
+  
+myheifer.se <- myheifer.sd/sqrt(myheifer.n) # get standard error
+
+#add code below to get information on the qt() function, which is for the t distribution:
+
+#*DELETE THIS AND ADD CODE HERE*
+ help(qt)  
+
+#Confidence interval
+(df <- myheifer.n - 1) # get degrees of freedom
+
+alpha95 <- 0.05 # set the alpha level to 0.05 (95% CI)
+
+(t.crit95 <- qt(1 - alpha95/2 , df))  # critical t value at 95% quantile under this degree of freedom
+
+(LB95 <- myheifer.mean - myheifer.se * t.crit95) # lower bound of the 95% confidence interval
+
+(UB95 <- myheifer.mean + myheifer.se * t.crit95) # upper bound of the 95% confidence interval
+
+
+library(plotrix) ## needed for plotCI() function
+
+# The text() function adds text to the plot you just printed.  In Rmarkdown, you have to run all relevant lines at once or else you will get an error. Highlight and run plotCI() and text() together to avoid this error.  
+
+plotCI(x = myheifer.mean, 
+       uiw = myheifer.se * t.crit95, 
+       pch = 19, 
+       xlim = c(0.9, 1.1), 
+       ylim = c(508, 540), 
+       ylab = "Wean Weight", 
+       xlab = "", 
+       xaxt = 'n', 
+       main = "95% CI") ## plots the mean and 95% CI interval
+
+text(x = 1.05, 
+     y = UB95, 
+     labels = "Upper 95% CL")
+### add labels to "mean" and "Lower 95% CL"###
+text(x = 1.05, 
+     y = LB95, 
+     labels = "Lower 95% CL")
+text(x = 1.05, 
+     y = myheifer.mean, 
+     labels = "Mean")
+
+
+
+### Calculate the CI for alpha level 0.10 (90% CI) and plot
+
+# First the 90% CI
+
+alpha90 <- 0.10  # set the alpha level to 0.10 (90% CI)
+
+(t.crit90 <- qt(1 - alpha90/2  , df)) # Fill in missing code to get critical t value at 90% quantile under this degree of freedom
+
+(LB90 <- myheifer.mean - myheifer.se * t.crit90 ) # fill in missing code to get lower bound of the 90% confidence interval
+
+(UB90 <- myheifer.mean + myheifer.se * t.crit90) 
+
+## plot both CIs in one plot - just run, all code is complete
+x <- c(myheifer.mean, myheifer.mean)
+
+uiws1 <- c(myheifer.se * t.crit90, myheifer.se * t.crit95)   #confidence interval widths
+
+#if you run plotCI(...) and text(...) separately you will get an error.  Highlight plotCI(...) and text(...) together to avoid error.  
+
+plotCI(x = x, 
+       uiw = uiws1, 
+       pch = 19, 
+       xlim = c(0, 3), 
+       ylim = c(505, 535), 
+       ylab = "Wean Weight", 
+       xlab = "", 
+       xaxt = "n", 
+       main = "90%, 
+95% CIs")
+
+text(1, 506, "90% CI")
+
+text(2, 506, "95% CI")
+
+```
+
+**Explain why the CI widths are different - what do the error bars represent?  
+
+
+
+
+
+### Part 2. [20 points]
+Confidence interval in relation to sample size: Use R to determine the mean, standard deviation, standard error, and 95% confidence interval (CI) for wean weight for varying sample sizes (n = 50, 150) in the heifer data.
+
+```{r}
+
+alpha <- 0.05   # set alpha at a 95% CI
+
+myheifer150 <- myheifer$Wean_weight
+
+# Calculate the 95% confidence interval for n = 150:
+
+myheifer150.n <- length(myheifer150)  # get sample size
+
+myheifer150.mean <- mean(myheifer150) # get mean
+
+myheifer150.sd <- sd(myheifer150) # get standard deviation
+
+myheifer150.se <- myheifer150.sd/sqrt(myheifer150.n) # get standard error
+
+df150 <- myheifer150.n - 1 # degrees of freedom
+
+t.crit150 <- qt(1 - alpha/2, df150) # t critical value at 95% quantile under this degree of freedom
+
+LB150 <- myheifer150.mean - myheifer150.se * t.crit150 # lower bound of the confidence interval
+
+#Complete code for the upper bound of the confidence interval:
+
+#*DELETE THIS AND ADD CODE HERE*
+UB150 <- myheifer150.mean + myheifer150.se * t.crit150 
+
+#Sample randomly from entire myheifer data set of n = 150 to get a subset of 50 for Wean_weight:
+
+myheifer50 <- myheifer$Wean_weight[sample(1:150,50)]
+
+# Calculate the 95% confidence interval for 50 observations:
+
+myheifer50.n <- length(myheifer50) #get sample size
+
+myheifer50.mean <- mean(myheifer50) # get mean
+
+myheifer50.sd <- sd(myheifer50) # get standard deviation
+
+myheifer50.se <- myheifer50.sd/sqrt(myheifer50.n) # get standard error
+
+df50 <- myheifer50.n - 1 # degrees of freedom
+
+t.crit50 <- qt(1 - alpha/2 , df50)   #critical value at 95% quantile under this degree of freedom
+
+LB50 <- myheifer50.mean - myheifer50.se * t.crit50 #lower bound of the confidence interval 
+
+UB50 <- myheifer50.mean + myheifer50.se * t.crit50 #upper bound of the confidence interval
+
+## plot the means and 95% CIs for n = 50, 150
+
+x <- c(myheifer50.mean, 
+       myheifer150.mean)
+
+uiws2 <- c(myheifer50.se * t.crit50, 
+           myheifer150.se * t.crit150)
+
+plotCI(x = x, 
+       uiw = uiws2, 
+       pch = 19, 
+       xlim = c(0.5 , 2.5), 
+       ylim = c(475, 550),
+       ylab = "Wean Weight", 
+       xlab = "", 
+       xaxt = "n")
+
+text(1, 476, "n = 50")
+
+text(2, 476, "n = 150")    
+
+```	
+
+
+* Why are the intervals different widths now?  Explain in terms of how changing the sample size changes se and critical t.
+
+
+
+### Part 3 [10 points]
+Express in words the meaning of the confidence intervals for wean weight at an alpha = 0.05.
+
+
+
+
+### Part 4 [20 points]	
+
+Using the statistics calculated in the above section, perform tests of hypotheses to determine if the population from which the samples were taken could have the following means:
+
+a) Average Wean_weight of heifers born in 2005 = 521.9 (alpha 0.05, 0.10)
+b) Average of Wean_weight for all heifers equal to 521.9 (N=50, 150, alpha= 0.05)
+In 4a-4b, use both the t statistic and confidence interval to perform your tests of hypothesis. Discuss your results and state (i) the null and alternate hypotheses, (ii) the decision rule (α) and test statistic, (iii) the final statistical decision, and conclusion. 
+
+```{r}
+# a)  One-sample t test on heifer wean weight
+
+myheifer.set <- myheifer$Wean_weight[myheifer$Year == "2005"] # get a vector of the wean weight for the heifers born in 2005 
+
+myheifer.set.n <- length(myheifer.set)  # get sample size
+
+myheifer.set.mean <- mean(myheifer.set) # get mean
+
+myheifer.set.sd <- sd(myheifer.set) # get standard deviation
+
+myheifer.set.se <- myheifer.set.sd/sqrt(myheifer.set.n)
+
+df.set <- myheifer.set.n - 1
+
+(tstar <- abs((myheifer.set.mean - 521.9) / myheifer.set.se  )) # complete code to get your sample t value. Note the abs() function
+
+alpha95 <- 0.05
+
+(t.crit95 <- qt(1 - alpha95/2 , df.set))  # critical value at 95% quantile under this degree of freedom #critical value at 95% quantile under this degree of freedom
+
+tstar > t.crit95 # logical query; if your sample test statistic is greater than the critical t value at your chosen alpha level, then you reject the null hypothesis that the population mean of heifer wean weight is equal to 521.9
+
+# If result is TRUE, then we reject the null hypothesis; i.e. the means are different at the alpha level of 0.05. There is still a <5% probability we would sample a mean of 542.38 (the mean of heifer wean weight in 2005) when the true population  mean is 521.9.
+# If result is FALSE, then we cannot reject the null hypothesis; i.e. the means of the wean weight in 2005 and the total data set are the same.  
+
+
+#plot the t distribution and the test and critical t values
+
+plot(function(x) dt(x, df = df.set), xlim = c(-5,16), ylim = c(0, 0.5))
+
+points(x = tstar, y = 0, pch = 24, bg = "blue")
+
+points(x = t.crit95, y = 0, pch = 24, bg = "red")
+
+## Using pt() function
+
+2 * (1 - pt(tstar, df.set))
+
+t.test(myheifer.set, mu = 521.9) # Ho: mean = 532.4
+
+# Type your code to do t tests with an alpha level of 0.10. Use the test statistic, the critical t, and the p value to explain the results.  
+
+alpha90 <- 0.1
+
+(t.crit90 <- qt(1 - alpha90/2 , df.set))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+Discuss your results and state (i) the null and alternate hypotheses, (ii) the decision rule (α) and test statistic, (iii) the final statistical decision, and conclusion (answer here):
+Alpha = 95%:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+Alpha = 90%:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+```{r}
+# b) One sample t test for all years, at the 95% CI, but varying sample sizes
+
+t.test(myheifer.sl, mu =521.9, conf.level = 0.95) ## fill in code to do a one sample t test on all 150 observations
+
+#Type your code in to do t tests on a sample size of 50 (In Part 2, we already created a data object for this sample size).
+
+t.test(myheifer50, mu =521.9, conf.level = 0.95)
+
+```
+
+Discuss your results and state (i) the null and alternate hypotheses, (ii) the decision rule (α) and test statistic, (iii) the final statistical decision, and conclusion (answer here):
+Sample size of 150:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+Sample size of 50:
+(i)
+
+(ii)
+
+(iii)
+
+
+
+Were the results what you expected for (a) and (b)?  Why or why not? (answer here):
+
+
+
+
+###Part 5.  [10 points]
+
+Knit this file into html. [10 points]
+
+
 
