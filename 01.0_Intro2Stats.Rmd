@@ -46,11 +46,11 @@ What is your estimate of the number of families surveyed in which the exact orde
 
 In another series of experiments, K&T asked students to estimate sampling distributions for various processes, for example, the number of boys and girls born each day. They concluded that:
 
-"The notion that sampling variance decreases in proportion to sample size is apparently not part of man’s repertoire of intuitions."
+>>"The notion that sampling variance decreases in proportion to sample size is apparently not part of man’s repertoire of intuitions."
 
-This is very interesting and challenging, because the fact that variance of sample averages decreases with sample size is the most important concept for this course!
+This is very interesting and challenging, because the fact that variance of sample averages decreases with increasing sample size is the most important concept for this course!
 
-Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you cannot trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although at some point, we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error.
+Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you cannot trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although at some point, we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error. ^[Do not confuse this statement about "sujective" probability as defined by K&T with the idea of subjective probability as used in Bayesian statistics. The concept of subjective probability in Bayesian statistics (as in "subjective priors" is not what we describe above.]
 
 ## Going to the movies: PBS program on statistics
 
