@@ -72,7 +72,6 @@ Keep in mind that the word "statistics" can have several meanings, even within t
 
 ## Book Organization and Overview
 
-The big picture is that in order to deal with uncertainty, uncertainty has to be quantified. This is done with the use of probabilities (chapter \@ref(ch.prob)).
 
 Then we have to assign probabilities to events of interest, like the failure of an engine, or the yield of a field being sufficient to cover the costs of cropping. This step requires that we create model distributions for different types of random experiments, such as running an engine for 5,000 hours or planting a field.
 
