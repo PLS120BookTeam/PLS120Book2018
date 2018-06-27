@@ -5,7 +5,7 @@
 1. Compare two population means based on two samples.
 1. State the null and alternative hypothesis for a two sample t-test.  
 1. Determine if samples are paired or unpaired ("independent") when comparing two means.
-1. Describe the three cases for comparing two populations means and determine when each one applies for a problem.
+1. Describe the four cases for comparing two populations means and determine when each one applies for a problem.
 1. Perform an F-test of homogeneity of variance using samples from two populations.
 1. After performing a two sample t test, sketch the t distribution, with the following parts labeled: 
   - the critical t value
@@ -15,10 +15,68 @@
   - where the CI bounds would lie on the X axis (approximately)
 1. Interpret the results of a t-test in terms of the original scientific question. 
 
+We have learned in the previous chapters how to determine if a sample is significantly different from the population it belongs to.  However, researchers may want to know if two populations are significantly different from each other.  In research experiments, populations are considered distinct when there are unique treatments that are applied to them.  For example, one could conduct an experiment comparing a fertilized field to an unfertilized field to determine a difference in yield, or an experiment comparing a high-protein diet to a high-carbohydrate diet to determine a difference in milk quality among cows.   These experiments are conducted by taking samples from each of the populations and using the differences between the two samples to make inferences about the differences between the two treatment populations.  
+
+There are two different methods of sampling to compare treatment means: independent samples or paired (dependent) samples.  Samples are considered independent when there is no relationship between the observations in one treatment and the observations in the other treatment.  For example, pigs are randomly assigned to two different diets to collectively measure the difference in body weight.  Samples are considered paired or dependent when there is a relationship between the observations in one treatment and the observations in the other treatment.  For example, two pigs from the same pen are assigned to different diets to measure the difference in body weight among all the paired pigs from the same pen. 
+
+##Hypothesis Testing
+When testing if there is a significant difference between two populations and/or two treatments, our null  hypothesis and alternative hypothesis can be stated, respectively, as 
+
+$H_0 : \mu_1 = \mu_2$         or       $\mu_{\bar{d}} = 0$
+$H_1 : \mu_1 \neq \mu_2$      or       $\mu_{\bar{d}} \neq 0$
+
+In previous chapters, we used the t-stastic for hypothesis testing within a single population.  The t-statistic can also be used for hypothesis testing between two populations by treating it as a single population consisting of the differences between the two treatments.  
+
+To perform a hypothesis test for two populations, the difference between the two samples averages ($\bar{d}$), the mean of the difference ($\mu_{\bar{d}}$), and the standard error of the difference ($S_{\bar{d}}$) are needed to calculate the t-statistic.  
+
+$\bar{d} = \bar{Y}_1 - \bar{Y}_2$
+
+$\mu_{\bar{d}} = ( \mu_1 - \mu_2 )$
+
+$t = \frac{ (\bar{d} - \mu_{\bar{d}})} {S_{\bar{d}}}$
+
+These standard error of the difference will be calculated differently depending on (1) if the samples are independent or paired, (2) if the population variances are equal or unequal and (3) if the sample sizes are equal or unequal.  This presents four unique cases to calculate the standard error of the difference which is needed to calculate the t-statistic. 
+
+#Case 1      Independent samples with unequal population variances
+
+When the population variances are unequal or it is unknown, we calculate the standard error of the differences using the known information about the sample variances and sample sizes
+
+$S_{\bar{d}} = ( \frac {{S_1}^2}{r_1} + \frac {{S_2}^2}{r_2} )^{1/2}$ 
+
+#Case 2      Independent samples with equal population variances but unequal sample sizes
+
+When the two population variances are equal, then the two sample variances are estimates of the same population variance.  To calculate a better estimate of this value, we can average the two sample variances to calculate the pooled sample variance $( S^2 )$.
+
+$S^2 = \frac {({{S_1}^2})({r_1 - 1}) + ({{S_2}^2})({r_2 - 1})} {(r_1 + r_2 - 2)}$      with     $df = r_1 + r_2 -2$
+
+When the sample variances are pooled, the standard error of the differences can be calculated as
+
+$S_{\bar{d}} = [({S}^2)({1 / r_1} + {1 / r_2})]^{1/2}$ 
+
+
+#Case 3      Independent samples with equal population variances and equal sample sizes
+
+When the two population variances are equal and the two sample sizes are equal, the pooled variance and the standard error of the difference can be calculated as
+
+$S^2 = \frac {{{S_1}^2} + {{S_2}^2}} {2}$       with     $df = 2(r-1)$
+
+$S_{\bar{d}} = (\frac {{2S}^2}{r} )^{1/2}$ 
+
+#Case 4      Paired samples
+
+When observations come from one common unit (adjacent plots in the same field, pigs from the same pen) and are assigned to different treatments, they are considered paired samples.  The difference between paired averages, the variance of the difference, the standard error of the difference, and the t-statistic are calculated 
+
+$\bar{d} = \frac{\sum{d_i}}{r}$
+
+$S_d^2 = \frac{\sum(d_i -\bar{d})^2}{r -1}$
+
+$S_\bar{d} = (\frac{S_d^2}{r})^{1/2}$
+
+
+
 ## Exercises and Solutions
 
 ## Homework
-
 ## Laboratory Exercises
 
 ### Plant Sciences
