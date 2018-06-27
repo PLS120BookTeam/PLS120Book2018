@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Treatment Structures and Comparisons {#chTrtstr}
 
 ## Learning Objectives for Chapter {#LearnObj12}
@@ -86,14 +91,16 @@ For this lab you have to be familiar with the following sections of the textbook
 
 In this exercise we analyze the data resulting from an experiment at the UC Davis Plant Sciences research fields. These are based on the **same experiment used in Lab 06**, but now we will consider that seeding and fertilizer are two **factors** that create the set of 6 treatments in a **factorial** treatment structure. We ignore the factor water for simplicity and because it did not cause any effects. The 6 treatments were applied in a **Completely Randomized Block Design** in which each of 6 treatments were applied randomly to 2 plots in each of 3 blocks for a total of 36 experimental units or plots.
 
-Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in blocks 1, 2 and 3 to show block effects. Blocks were defined areas that were more or less homogeneous in soil and plant properties and that were contiguous. We will assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as logMass = log(logMass + 0.2) to achieve normality and equality of variances.
+Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in blocks 1, 2 and 3 to show block effects. Blocks were defined areas that were more or less homogeneous in soil and plant properties and that were contiguous. We will assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as $logMass = log(SeedMass + 0.2)$ to achieve normality and equality of variances.
 
 
 #### Part 1. Factorial ANOVA using R functions [ points]
 
 ##### 1a. Random assignment of treatments to plots
 
-In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block (in today’s lab, the treatments will have 2 replicate plots in each block). The random assignment of treatments to plots within blocks can be done using the *sample()* R function.
+In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block. Because we ignore the water factor, treatments will have 2 replicate plots in each block, one for each original level of the water factor. There are a total of 6 treatments that resulf from the combination each level of the factor "nitrogen" (n and N) with each of the three levels of the factor "seeding" (s, S and E). The treatments are identified by the two letters together. For example. NE is the treatment with addition of nitrogen and at the egde between naturalized annual and seeded native perennial grasses.
+
+First, we pretend that the experiment is about to start and we need to assign treatments to experimental units. The random assignment of treatments to plots within blocks can be done using the '*'sample' R function. To preform the random assignment we start by creating a dataframe with a row for each treatment and a column for each factor. A new column called "Treatment" is created by pasting together the two letters that represent the corresponding level of the factor.
 
 ```{r}
 # Read and understand the code in this part but do not type or modify anything.
@@ -112,10 +119,14 @@ treat$Treatment <- paste(
   treat$seeding, sep = ""
   )
 
+```
 
+In the second step, plots in each block are labeled with the numbers 1 through 12. We make a character vector with two copies of each treatment label, shuffle the order of treatment with 'sample' and column-bind the results with the plot labels. At this point, the objects called 'block1', 'block2' and 'block3' list the plot number and the treatment it should receive.
+
+
+```{r}
 # Number the 12 plots in each block 1 through 12, then shuffle the treatment names and assign to plots of each block.
 # The sample() function is used to create a vector that has each treatment randomly assigned to each block twice, because there are two plots for each treatment in each block.
-
 
 # Plots 1-12 of each block get:
 
@@ -127,10 +138,11 @@ treat$Treatment <- paste(
 
 (block3 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
 
-
 ```
 
 ##### 1.b Add columns with factor levels to the data
+
+Treatments were applied, plantts grown and measured. Data were collected and organized, and we enter them below. Because the data have the labels for the original treatments, we need to split the labels into the columns that correspond to nitrogen and seeding treatment. In order to analyze the experiment as a factorial of nitrogen x seeding, each factor has to be in a separate column.
 
 ```{r}
 # Read and understand the code in this part but do not type or modify anything.
@@ -178,17 +190,20 @@ WNs  Block3  1.02290365359422
 WNS  Block3  -0.527897010482484
 ")
 
+```
+
+The two factor columns are sufficient to perform the analysis using preexisting R functions for factorial treatment combinations, but to do the calculations using only "basic" R functions (we refer to this as "by hand") we need a new column that contain labels for all 12 treatments. We create the colkumn by pasting the letters for nitrogen and seeding levels, make it into a factor, and add it to the data frame. Recall that a factor is a special type of column in data frames that behaves as a categorical variable with a certain set of possible values. The same column of strings could be set to be a character vector, in which case it would not have reconizable levels. You can explore this by running 'levels(seedF\$NStreat)' and then 'levels(as.character(seedF\$NStreat))'
+
+```{r}
 # Add columns $nitro and $seeding to the data, to show the levels for each factor.
 
 seedF$nitro <- factor(substr(seedF$Treatment, 2, 2))
 
 seedF$seeding <- factor(substr(seedF$Treatment, 3, 3))
 
-
 # Add column NStreat for treatments resulting from nitro and seeding combinations.
 
 seedF$NStreat <- factor(paste(seedF$nitro, seedF$seeding, sep = ""))
-
 
 ```
 
@@ -199,8 +214,9 @@ For this part you need to test the null hypotheses that:
 - there are no interactions between nitrogen and seeding,
 - there are no "main effects" of nitro or seeding.
 
-"Main effects" refers to the overall effect of a factor averaged over all levels of other factors. "Simple effects" are the effects of one factor for a given individual level of another factor.
+"Main effects" refers to the overall effect of a factor averaged over all levels of other factors. "Simple effects" are the effects of one factor for a given individual level of another factor. For example, the simple effect of S for level n is:
 
+$$\bar{Y}_{nS}$$
 
 We do these tests with an ANOVA that partitions all variation (sum of squares) in the response variable (logMass) into Block, Treatment and Error, and then partition the Treatment variation into main effect of nitro, main effect of seeding, and the interaction between nitro and seeding (nitro x seeding).
 
