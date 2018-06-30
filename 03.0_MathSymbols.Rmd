@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Required Math Skills and Symbols {#ch.math}
+# Required Math Skills and Symbols {#chMath}
 
 In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we dive into equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.
 
@@ -13,7 +13,7 @@ A second key concept, related to the first one, is that we rarely, if ever, can 
 
 In reading this chapter, focus on the symbols and concepts. In addition to, and better before doing the exercises, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend writing down the equations as they are read, and then trying to reproduce them from memory and a description of the calculation (e.g. sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate the attention to the symbols and details of each equation, and will reveal those aspects that are were not yet clear to the reader.
 
-## Learning Objectives for Chapter {#math.obj}
+## Learning Objectives for Chapter {#mathObj}
 
 1. Identify and write down simple statistical models.
 1. Read and interpret mathematical equations.
@@ -26,7 +26,7 @@ In reading this chapter, focus on the symbols and concepts. In addition to, and 
 1. Identify and write down polynomials and linear combinations of parameters.
 
 
-## Data Columns and Summation {#math.sum}
+## Data Columns and Summation {#mathSum}
 
 Summations, the sum of several numbers that are organized with subscripts, is used all the time in statistics. In order to be able to read equations and understand the concepts in them, you have to be familiar with summations. The Greek letter capital sigma $\Sigma$ is used to represent summation. For example, $\sum_{i=1}^{4} Y_i$ represents the sum $Y_1 + Y_2 + Y_3 + Y_4$. Sometimes, for simplicity, when we want to sum over all possible values of the subscript i from $i = 1$ to the maximum but unspecified value of $i = k$, we write $\sum_{i=1}^k Y_i$, meaning "sum of all values of $Y_i$."
 
@@ -140,7 +140,7 @@ The notation is very general and can be used to express sums like the following 
 (\#eq:math07)
 \end{equation} 
 
-## Two-dimensional Data Tables and Summation {#math.2Dtbl}
+## Two-dimensional Data Tables and Summation {#math2Dtbl}
 
 The vectors $\mathbf{X}$ and $\mathbf{Y}$ used above are 1-dimensional; they are single columns of numbers. Frequently, data is organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its "address" in the table given by the row and column numbers, always in that order. The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for crop and columns for fields. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 26 does **not** mean 2 times 10 plus 6 times 1, but simply the second row and sixth column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if $Y_{162}$ is row 1 column 62 or row 16 column 2 we use $Y_{1,62}$ or $Y_{16,2}$. The comma is omitted when each subscript is never greater than 9.
 
@@ -279,11 +279,11 @@ sum(Ydata[2, ]) / length(Ydata[2, ]) # Average for corn
 ```
 
 
-## Models {#math.modl}
+## Models {#mathModl}
 
 In statistics we use models all the time, and it is necessary to make those models explicit. Explicit models make it easier to understand and critically evaluate the use of statistics. Specifically, we can determine what parts of the model may be inadequate to solve the problem at hand, and we can modify the model to improve it.
 
-### The simplest model{#math.smplMod}
+### The simplest model{#mathSmplMod}
 
 Say that we are interested in studying the milk production per dairy cow in $kg \ day^{-1}$ for all dairy cows in the US today. For example, we want to estimate what proportion of cows produce less than $24 \ kg \ day^{-1}$ to gauge the number of cows that could be targets of a program to increase productivity. One way to do this is to create a *model* for the statistical distribution of milk production, take a sample to estimate the parameters of the model and then use the model with estimated parameters to make the estimation of the proportion of cows for which production is less than $24 \ kg \ day^{-1}$ or any other quantity.
 
@@ -404,7 +404,7 @@ $$ data = Systematic \ Structure + Random \ Variation \\[10pt]
  \
 Models that partition the random component into structured and unstructured (white noise) random parts are beyond the scope of this book.
 
-```{r math.tab01, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r mathTab01, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 #------dairy data-----
 milk <- read.table(header = TRUE, text = "
 State Kcows lb.cow.yr
@@ -492,7 +492,7 @@ milk <- milk[, c("State", "Kcows", "tot.Mkg", "kg.cow.day")]
 ```
 
 
-### A slightly more complex model {#math.bttrMod}
+### A slightly more complex model {#mathBttrMod}
 
 The model used above and stated in equation \@ref(eq:math13) can be improved in many ways. For example, we may guess that a lot the variance in productivity can be between states, due to different levels of investment and development of the industry in different states. By adding a part to account for differences among states in the fixed part of the model we can have much better predictions of the proportion of cows below $15 \ kg \ day^{-1}$ for each state. The model would look like this:
 
@@ -826,7 +826,7 @@ lines((-20:20)/2,
 
 Linear combinations are use throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different [Chapter 8](ch.2pops) .
 
-## Symbols and Terms{#math.symbls}
+## Symbols and Terms{#mathSymbls}
 Term or symbol| Explanation
 ------------| ----------------------------------------------------------
 Observation | Result of measuring one or several variables in one unit of experimental material. For example, the milk production of one cow in a day.
@@ -860,7 +860,7 @@ $\sum_{i=1}^{i=4} Y_i$ | Sum of Y sub i for i equal 1 to 4;
 $\sum$ | Capital Sigma, summation symbol
 
 
-## Exercises and Solutions {#math.exe}
+## Exercises and Solutions {#mathExe}
 
 ### Exercise 1
 

@@ -3,6 +3,23 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+
+```{r}
+# load packages for chapter
+
+library(emmeans)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(tables)
+library(pander)
+library(multcomp)
+library(agricolae)
+
+```
+
+
 # Treatment Structures and Comparisons {#chTrtstr}
 
 ## Learning Objectives for Chapter {#LearnObj12}
@@ -24,7 +41,7 @@ editor_options:
 1. Estimate the variance of a linear combination of means.
 1. Make confidence intervals for linear combination of estimated means.
 1. Calculate and use the Least Significant Difference (LSD) to test for differences among treatments.
-1. Apply the Protected LSD and explai how it ameliorates the inflation of alpha?
+1. Apply the Protected LSD and explain how it ameliorates the inflation of alpha?
 1. Create linear combinations of estimated treatment means.
 1. Create contrasts to answer research questions such as effects of treatments, linear and quadratic effects of continuous treatment variables.
 
@@ -33,9 +50,334 @@ editor_options:
 
 ## Factorials {#Factorials}
 
+Factorials are experiments where treatments have a special structure resulting from combining levels of different factors. The treatment structure allows us to assess the effects of several treatment factors as well as the interaction between factors. The concept of **interaction** is fundamental in statistics and in life in general and is treated in detail below. Let's concentrate on the factorial structure for now.
+
+
+### Advantages of factorials
+
+Consider that you have to study the effects of irrigation and fertilization with N on corn yield. You could take a simple approach and do one experiment forirrigation and another for nitrogen, or you could study both factor at the same time in a factorial experiment. Note that "factorial" refers to the way treatments are organized and it says nothing about the experimental design in terms of how treatments are assigned to experimental units.
+
+Here we demonstrate two main advantages of factorials:
+
+- abiliyt to detect interactions between factors, and
+- much greater efficiency than separate experiments.
+
+To show the advantage of a factorial, we first simulate two separate experiments and then a single combined experiment with both factors. By comparing the results we will be able to see that the factorial approach has advantages.
+
+<br>
+
+#### Effects of Irrigation alone
+
+Using the simple approach, the experiment for irrigation includes two treatments: one or two irrigations. For this experiment, a moderate level of nitrogen of 160 lb/ac is selected. Treatments are repeated three times in each of two blocks (Table \@ref(tab:tblIrrigDat)). In this case we include replicates of treatments within blocks to have a total number of observations that will be comparable to case when we test both factors at once. The original data set has 20 observations, so we will simulate 12 observations ^[We use 12 instead of 10 for simplicity, to have the same number of replicates equal in all treatments. This is not absolutely necessary, but different sample sizes per treatment makes things a bit more complicated.] for the irrigation experiment and 10 observations for the nitrogen experiment.
+
+<br>
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+# Wheat yield data from page 137 of SG book
+
+# IxN <- read.csv("IrrigationNitroFactorial.csv", header = TRUE)
+IxN <- read.table(header = TRUE, text = "
+Block Irrigation Nitrogen Yield
+1 1 0 31.7
+1 2 160 68.5
+1 1 160 56.8
+1 1 80 50
+1 1 240 57.3
+1 2 0 38.9
+1 2 240 73.5
+1 2 80 61.4
+1 2 320 70.6
+1 1 320 53.1
+2 2 240 72.9
+2 2 160 66.7
+2 1 240 59.4
+2 2 0 40
+2 1 160 60.6
+2 1 80 48.6
+2 2 320 72.3
+2 1 320 54.1
+2 2 80 53.1
+2 1 0 39.1
+")
+
+IxN$Block <- factor(IxN$Block)
+IxN$Irrigation <- factor(IxN$Irrigation)
+IxN$Nitrogen <- factor(IxN$Nitrogen)
+IxN <- IxN[order(IxN$Block, IxN$Irrigation, IxN$Nitrogen), ]
+
+
+
+# Get estimated parameters and use them to generate simulated data for single experiments.
+
+set.seed(12)
+
+ixn.m1 <- lm(Yield ~ Irrigation * Nitrogen + Block, data = IxN)
+
+IrrigDat <- expand.grid(Block = levels(IxN$Block), 
+                        Irrigation = factor(c(1,2)), 
+                        Nitrogen = factor(160), 
+                        rep = c(1:3))
+
+IrrigDat$Yield <- predict(object = ixn.m1, 
+                          newdata = IrrigDat) + 
+   rnorm(dim(IrrigDat)[1], mean = 0, sd = summary(ixn.m1)$sigma)
+```
+
+
+```{r tblIrrigDat, echo= FALSE}
+
+kable(IrrigDat, 
+      caption = "Simulated data for a simple experiment to test the effect of irrigation on wheat yield.") %>% kable_styling(full_width = FALSE)
+
+```
+<br>
+
+We analyze these data using the following model (Equation \@ref(eq:irrigMod1)), which is known to have the correct form because the data were simulated based on the same model. Note that the model does not mention the effect of nitrogen because the same dose of nitrogen was applied to all plots.
+<br>
+
+\begin{equation}
+Y_{ijh} = \mu_{...} + \tau_i + B_j +  \epsilon_{ijh} \\[20pt]
+\tau_i = \text{ effect of irrigation treatment with level i} \\
+B_j = \text{ effect of block j} \\
+\epsilon_{ijh} = \text{ random error in treatment i, block j and replicate h}
+(\#eq:irrigMod1)
+\end{equation}
+
+<br>
+
+```{r IrrigAnova, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+irrig.m1 <- lm(Yield ~ Irrigation + Block, data = IrrigDat)
+
+kable(anova(irrig.m1), 
+      caption = "ANOVA table for irrigation effects on yield.",
+      digits = c(0, 1, 1, 2, 5)) %>% 
+   kable_styling(full_width = FALSE)
+
+```
+
+<br>
+
+```{r IrrigEmmeans, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+kable(emmeans(irrig.m1, "Irrigation"), 
+      caption = "Effect of irrigation on wheat yield", 
+      digits = c(0, 1, 2, 0, 2, 2)) %>% 
+   kable_styling(full_width = FALSE)
+
+```
+<br>
+
+The ANOVA table shows that there is a significant difference in yield between treatments. Table \@ref(tab:IrrigEmmeans) contains the estimated means for both irrigations and shows that yield is significantly greater with two than with a single irrigation. The precision of the estimates is reflected in both the MSE in the ANOVA table and in the width of the confidence intervals of the table of means, which is about `r round(2 * qt(p = 0.975, df = irrig.m1$df.residual) * sqrt(anova(irrig.m1)[3, 3] / 6), 2)` bushels/ac (1 bushel of wheat is equivalent to 60 lb). The width of the confidence interval is calculated as twice the product of the critical t value, which depends on the degrees of freedom of the residuals (dfe = 9), and the standard error, which is the square root of the MSE divided by the square root of the number of experimental units averaged to get each estimated mean. There were 12 experimental units equally divided between the two treatments in the experiment, so six experimental units were used for the average of each treatment.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+tcrit <- qt(p = 0.975, df = irrig.m1$df.residual)
+MSE <- anova(irrig.m1)[3, 3]
+```
+
+
+\begin{equation}
+\text{CI width } = 2 \ t_{dfe, \alpha} \ \sqrt{\frac{MSE}{r}} \\[20pt]
+\text{where the number of plots averaged per treatment is } r = 6 \\[20pt]
+dfe = `r irrig.m1$df.residual` \\[20pt]
+t_{dfe, \alpha} = `r round(tcrit, 4)` \\[20pt]
+\text{therefore, CI width } = 2 \times `r round(tcrit, 4)` \times `r round(sqrt(MSE / 6), 3)` = `r round(2 * tcrit * sqrt(MSE / 6), 3)`
+\end{equation}
+
+
+<br>
+
+#### Effects of Nitrogen alone
+
+Following with the simple approach of one factor at a time, we do a second experiment to determine the effect of nitrogen fertilization on wheat yield. Five equally-spaced doses of nitrogen (0, 80, 160, 240 and 320 lb/ac) are selected. For this experiment, one irrigation is used for all plots. The five treatments are replicated in each of two blocks, such that each treatment appears in a single experimental unit per block.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, include=FALSE}
+
+NitroDat <- expand.grid(Block = levels(IxN$Block), 
+                        Irrigation = factor(1), 
+                        Nitrogen = factor(c(0, 80, 160, 240, 320)))
+
+set.seed(902)
+NitroDat$Yield <- predict(object = ixn.m1, 
+                          newdata = NitroDat) + 
+   rnorm(dim(NitroDat)[1], mean = 0, sd = summary(ixn.m1)$sigma)
+
+```
+
+
+```{r tblNitroDat, echo= FALSE}
+
+kable(NitroDat, 
+      caption = "Simulated data for a simple experiment to test the effect of nitrogen on wheat yield.") %>% kable_styling(full_width = FALSE)
+
+```
+<br>
+
+We analyze these data using the following model (Equation \@ref(eq:NitroMod1)), which is known to have the correct form because the data were simulated based on the same model. Note that the model does not mention the effect of irrigation because the same single irrigation was applied to all plots.
+
+<br>
+
+\begin{equation}
+\begin{aligned}
+Y_{ij} &= \mu_{...} + \tau_i + B_j + \epsilon_{ij} \\[20pt]
+\tau_i &= \text{ effect of nitrogen treatment with level i} \\
+B_j &= \text{ effect of block j} \\
+\epsilon_{ij} &= \text{ random error in treatment i, block j}
+\end{aligned}
+(\#eq:NitroMod1)
+\end{equation}
+
+<br>
+
+```{r NitroAnova, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+nitro.m1 <- lm(Yield ~ Nitrogen + Block, data = NitroDat)
+
+kable(anova(nitro.m1), 
+      caption = "ANOVA table for nitrogen effects on yield.",
+      digits = c(0, 1, 1, 2, 5)) %>% 
+   kable_styling(full_width = FALSE)
+
+```
+
+<br>
+
+```{r NitroEmmeans, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+kable(emmeans(nitro.m1, "Nitrogen"), 
+      caption = "Effect of nitrogen on wheat yield", 
+      digits = c(0, 1, 2, 0, 2, 2)) %>% 
+   kable_styling(full_width = FALSE)
+
+```
+<br>
+
+The ANOVA table for the nitrogen experiment shows that there is a significant difference in yield between treatments. Table \@ref(tab:NitroEmmeans) contains the estimated means for nitrogen doses and shows that yield is highest when a dose of 160 lb N/ac is applied. Note that the reponse to nitrogen in not a straight line, and that the effect of adding 80 lb N/ac depends on how much was added already. An important part of this result is that more is not alway better when it comes to nitrogen and plants. Too much nitrogen has a negative effect on plant growth, and in wheat it is known to be detrimental to the metabolism necessary for grain filling. Too much nitrogen results in reduced antioxidant ability, which lead to increased lipied peroxidation [KongEtAl2017]. Moreover, wheat is unable to absorb all the applied nitrogen, which leads to nitrogen percolating into deeper soil layers and water contamination [DongEtAl2011]. A graph of the response to nitrogen levels reveals the non-linearity of the response and the reduction of yield for doses above 160 lb/ac (Figure \@ref(fig:nitroFig1)).
+
+<br><br>
+
+```{r nitroFig1, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap ="Effects of nitrogen fertilization level o wheat yield. Vertical error bars are confidence intervals."}
+
+nitroMeans <- as.data.frame(emmeans(nitro.m1, "Nitrogen"))
+nitroMeans$Nitrogen <- as.numeric(as.character(nitroMeans$Nitrogen))
+
+ggplot(data = nitroMeans, aes(x = Nitrogen, y = emmean)) + 
+   geom_line(size = 1.5) + 
+   geom_point(size = 4) + 
+   geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL), width = 5,
+                 position = position_dodge(0.05)) + 
+   labs(x = "Nitrogen (lb/ac)", y = "Grain Yield (bu/ac)")
+
+```
+
+<br><br>
+
+
+Precision of mean estimates is reflected in both the MSE in the ANOVA table and in the width of the confidence intervals of the table of means, which is about `r round(2 * qt(p = 0.975, df = nitro.m1$df.residual) * sqrt(anova(nitro.m1)[3, 3] / 2), 2)` bushels/ac. Again, confidence interval width is calculated as twice the product of the critical t value, which depends on the degrees of freedom of the residuals (in this case dfe = 4), and the standard error, which is the square root of the MSE divided by the square root of the number of experimental units averaged to get each estimated mean. There were 10 experimental units equally divided between the 5 treatments in the experiment, so 2 experimental units were used for the average of each nitrogen treatment.
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+
+tcrit <- qt(p = 0.975, df = nitro.m1$df.residual)
+
+MSE <- anova(nitro.m1)[3, 3]
+
+```
+
+<br>
+
+\begin{equation}
+\text{CI width } = 2 \ t_{dfe, \alpha} \ \sqrt{\frac{MSE}{r}} \\[20pt]
+\text{where the number of plots averaged per treatment is } r = 2 \\[20pt]
+dfe = `r nitro.m1$df.residual` \\[20pt]
+t_{dfe, \alpha} = `r round(tcrit, 4)` \\[20pt]
+\text{therefore, CI width } = 2 \times `r round(tcrit, 4)` \times `r round(sqrt(MSE / 2), 3)` = `r round(2 * tcrit * sqrt(MSE / 2), 3)`
+\end{equation}
+
+
+If we base our irrigation and fertilization decisions in these two experiments we would decide to irrigate twice and apply 160 lb N/ac. As we will see below, it turns out that this is not the best decision possible, and that only a factorial experiment can reveal the optimal combination of irrigation and nitrogen because those two factors interact biologically and statistically.
+
+<br>
+
+#### Combined Effects of Irrigation and Nitrogen
+
+Instead of two experiments, we could do a single one where all levels of irrigation are combined with all levels of nitrogen in a factorial treatment structure. Each treatment is replicated once in each of two blocks. The experiment has 5 levels of nitrogen x 2 levels of irrigation x 2 blocks = 20 plots or experimental units. This is 2 fewer than the two individuial experiments together.
+
+```{r tblIxNDat, echo= FALSE}
+
+tblixn <- cbind(IxN[IxN$Block == 1, 2:4],IxN[IxN$Block == 2, 4])
+
+names(tblixn) <- c("Irrig", "Nitro", "Block 1", "Block 2")
+
+kable(tblixn, 
+      row.names = FALSE, 
+      caption = "Wheat yield (bu/ac) in an experiment to test the joint effects of nitrogen (lb/ac) and irrigation (times).") %>% kable_styling(full_width = FALSE)
+
+```
+<br>
+
+Data from the factorial experiment are analyzed using the model in Equation \@ref(eq:IxnMod1). The equation shows that each treatment effect is partitioned into nitrogen effect, irrigation effect and nitrogen by irrigation interaction. The interaction reflects the part of the response that is not explained by simply adding the individual effects of each factor.
+
+<br>
+
+\begin{equation}
+\begin{aligned}
+Y_{ijh} &= \mu_{...} + \tau_[ij] + B_j + \epsilon_{ij} \\[20pt]
+\tau_{ij} &= \text{ effect of treatment with level i of nitrogen and level j of irrigation} \\
+&= N_i + I_j + NI_{ij} \\
+N_i &= \text{ effect of level i of nitrogen} \\
+I_j &= \text{ effect of level j of irrigation} \\
+IN_{ij} &= \text{ interaction effect of levels i and j} \\
+B_j &= \text{ effect of block j} \\
+\epsilon_{ij} = \text{ random error in treatment i, block j}
+\end{aligned}
+(\#eq:IxnMod1)
+\end{equation}
+
+<br>
+
+```{r IxNAnova, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+kable(anova(ixn.m1), 
+      caption = "ANOVA table for nitrogen x irrigation factorial effects on yield.",
+      digits = c(0, 1, 1, 2, 5)) %>% 
+   kable_styling(full_width = FALSE)
+
+```
+
+<br>
+
+Because we did the experiment using a factorial arrangewment of treatments, we have three types of comparisons we can do:
+
+- compare average yield for levels of irrigation averaged over levels of nitrogen,
+- compare average yield for levels of nitrogen averaged over levels of irrigation, and
+- compare averages of individual treatments resulting from any two combinations of irrigation and nitrogen.
+
+The tables of estimated means show that there are
+
+```{r IxNEmmeans, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+
+kable(emmeans(ixn.m1, "Nitrogen"), 
+      caption = "Effect of nitrogen on wheat yield", 
+      digits = c(0, 1, 2, 0, 2, 2)) %>% 
+   kable_styling(full_width = FALSE)
+
+kable(emmeans(ixn.m1, "Irrigation"), 
+      caption = "Effect of nitrogen on wheat yield", 
+      digits = c(0, 1, 2, 0, 2, 2)) %>% 
+   kable_styling(full_width = FALSE)
+
+```
+<br>
+
+
+
+
+
 ## Control vs. Treatments {#CtlTrt}
 
-## Linear, Quadratic and Cubic Trends {LCQtrends}
+## Linear, Quadratic and Cubic Trends {#LCQtrends}
 
 ## Contrasts {#Contrasts}
 
@@ -67,13 +409,9 @@ knitr::opts_chunk$set(echo = TRUE)
 # install.packages(c("tables", "pander","lsmeans", "multcomp","agricolae"))
 
 library(tables)
-
 library(pander)
-
 library(lsmeans)
-
 library(multcomp)
-
 library(agricolae)
 
 ```
@@ -84,8 +422,8 @@ The same instructions for completion and submission of work used in previous lab
 
 For this lab you have to be familiar with the following sections of the textbook:
 
-\@ref(label) RCBD without subsamples
-\@ref(label) Factorial Experiments
+\@ref(chRcbd) RCBD without subsamples
+\@ref(chTrtstr) Factorial Experiments
 \@ref(label) Fisher's Protected LSD
 
 
@@ -192,7 +530,7 @@ WNS  Block3  -0.527897010482484
 
 ```
 
-The two factor columns are sufficient to perform the analysis using preexisting R functions for factorial treatment combinations, but to do the calculations using only "basic" R functions (we refer to this as "by hand") we need a new column that contain labels for all 12 treatments. We create the colkumn by pasting the letters for nitrogen and seeding levels, make it into a factor, and add it to the data frame. Recall that a factor is a special type of column in data frames that behaves as a categorical variable with a certain set of possible values. The same column of strings could be set to be a character vector, in which case it would not have reconizable levels. You can explore this by running 'levels(seedF\$NStreat)' and then 'levels(as.character(seedF\$NStreat))'
+The two factor columns are sufficient to perform the analysis using preexisting R functions for factorial treatment combinations, but to do the calculations using only "basic" R functions (we refer to this as "by hand") we need a new column that contain labels for all 12 treatments. We create the colkumn by pasting the letters for nitrogen and seeding levels, make it into a factor, and add it to the data frame. Recall that a factor is a special type of column in data frames that behaves as a categorical variable with a certain set of possible values. The same column of strings could be set to be a character vector, in which case it would not have recognizable levels. You can explore this by running 'levels(seedF\$NStreat)' and then 'levels(as.character(seedF\$NStreat))'
 
 ```{r}
 # Add columns $nitro and $seeding to the data, to show the levels for each factor.
@@ -214,7 +552,7 @@ For this part you need to test the null hypotheses that:
 - there are no interactions between nitrogen and seeding,
 - there are no "main effects" of nitro or seeding.
 
-"Main effects" refers to the overall effect of a factor averaged over all levels of other factors. "Simple effects" are the effects of one factor for a given individual level of another factor. For example, the simple effect of S for level n is:
+"Main effects" refers to the overall effect of a factor averaged over all levels of other factors. "Simple effects" are the effects of one factor for a given individual level of another factor. For example, the main effect of S for level n is:
 
 $$\bar{Y}_{nS}$$
 
