@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# ANOVA with Blocks {#ch.rcbd}
+# ANOVA with Blocks {#chRcbd}
 
 ## Learning Objectives for Chapter
 
@@ -24,7 +24,7 @@ editor_options:
 
 ## Laboratory Exercises
 
-### Plant Sciences {#LabCh11PLS}
+### Plant Sciences {#LabRCBD}
 
 Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
 
