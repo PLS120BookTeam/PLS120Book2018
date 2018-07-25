@@ -3,10 +3,10 @@
 ## Learning Objectives for Chapter
 
 1. Compare two population means based on two samples.
-1. State the null and alternative hypothesis for a two sample t-test.  
 1. Determine if samples are paired or unpaired ("independent") when comparing two means.
-1. Describe the four cases for comparing two populations means and determine when each one applies for a problem.
+1. State the null and alternative hypothesis for a two sample t-test. 
 1. Perform an F-test of homogeneity of variance using samples from two populations.
+1. Describe the four cases for comparing two populations means and determine when each one applies for a problem.
 1. After performing a two sample t test, sketch the t distribution, with the following parts labeled: 
   - the critical t value
   - the test statistic
@@ -15,9 +15,9 @@
   - where the CI bounds would lie on the X axis (approximately)
 1. Interpret the results of a t-test in terms of the original scientific question. 
 
-We have learned in the previous chapters how to determine if a sample is significantly different from the population it belongs to.  However, researchers may want to know if two populations are significantly different from each other.  In research experiments, populations are considered distinct when there are unique treatments that are applied to them.  For example, one could conduct an experiment comparing a fertilized field to an unfertilized field to determine a difference in yield, or an experiment comparing a high-protein diet to a high-carbohydrate diet to determine a difference in milk quality among cows.   These experiments are conducted by taking samples from each of the populations and using the differences between the two samples to make inferences about the differences between the two treatment populations.  
+We have learned in the previous chapters how to determine if a sample is significantly different from the population it belongs to.  However, researchers may want to know if two populations are significantly different from each other.  In research experiments, populations are considered distinct when there are unique treatments that are applied to them.  For example, one could conduct an experiment comparing a fertilized field to an unfertilized field to determine a difference in yield, or an experiment comparing a high-protein diet to a high-carbohydrate diet to determine a difference in milk quality among cows.  These experiments are conducted by taking samples from each of the populations and using the differences between the two samples to make inferences about the differences between the two populations/treatments.  
 
-There are two different methods of sampling to compare treatment means: independent samples or paired (dependent) samples.  Samples are considered independent when there is no relationship between the observations in one treatment and the observations in the other treatment.  For example, pigs are randomly assigned to two different diets to collectively measure the difference in body weight.  Samples are considered paired or dependent when there is a relationship between the observations in one treatment and the observations in the other treatment.  For example, two pigs from the same pen are assigned to different diets to measure the difference in body weight among all the paired pigs from the same pen. 
+There are two different methods of sampling to compare treatment means: independent samples and paired (dependent) samples.  Samples are considered independent when there is no relationship between the observations in one treatment and the observations in the other treatment.  For example, pigs are randomly assigned to two different diets to collectively measure the difference in body weight, and difference between the two diet averages are measured.  Samples are considered paired or dependent when there is a relationship between the observations in one treatment and the observations in the other treatment, and there is a direct comparison of the observations with the shared relationship.  For example, two pigs from the same pen are assigned to different diets to measure the difference in body weight among all the paired pigs from the same pen, and the differences between the two diets are measured by comparing the pigs from the same pens. 
 
 ##Hypothesis Testing
 When testing if there is a significant difference between two populations and/or two treatments, our null  hypothesis and alternative hypothesis can be stated, respectively, as 
@@ -27,7 +27,7 @@ $H_1 : \mu_1 \neq \mu_2$      or       $\mu_{\bar{d}} \neq 0$
 
 In previous chapters, we used the t-stastic for hypothesis testing within a single population.  The t-statistic can also be used for hypothesis testing between two populations by treating it as a single population consisting of the differences between the two treatments.  
 
-To perform a hypothesis test for two populations, the difference between the two samples averages ($\bar{d}$), the mean of the difference ($\mu_{\bar{d}}$), and the standard error of the difference ($S_{\bar{d}}$) are needed to calculate the t-statistic.  
+To perform a hypothesis test for two populations, the difference between the two samples averages ($\bar{d}$), the mean of the difference ($\mu_{\bar{d}}$), and the standard error of the difference ($S_{\bar{d}}$) are needed to calculate the t-statistic ($t$).  
 
 $\bar{d} = \bar{Y}_1 - \bar{Y}_2$
 
@@ -35,21 +35,34 @@ $\mu_{\bar{d}} = ( \mu_1 - \mu_2 )$
 
 $t = \frac{ (\bar{d} - \mu_{\bar{d}})} {S_{\bar{d}}}$
 
-These standard error of the difference will be calculated differently depending on (1) if the samples are independent or paired, (2) if the population variances are equal or unequal and (3) if the sample sizes are equal or unequal.  This presents four unique cases to calculate the standard error of the difference which is needed to calculate the t-statistic. 
+The standard error of the difference will be calculated differently depending on (1) if the samples are independent or paired, (2) if the population variances are equal or unequal and (3) if the sample sizes are equal or unequal.  This presents four unique cases to calculate the standard error of the difference, and 3 unique cases to first calculate the population variance, which is needed to calculate the t-statistic.
+
+To understand which case is appropriate, an F-test is used to determine if the population variances are equal or unequal ($H_0 : \sigma_1 = \sigma_2$).  Since we may not know the population variances, we use the sample variances to test equality with the larger of the two variances as the numerator and the smaller of the two variances as the denominator
+
+$F = \frac {larger S^2}{smaller S^2}$  with $df_{numerator} = r_{larger} -1 , df_{denominator} = r_{smaller} -1$
+
+This calculated F-value can be tested for significance against the critical F-value on the F-distribution table (Appendix XXX).  The degrees of freedom for the two samples are needed to identify the critical F-value on the F-distribution table to determine if the calculated F-value is significant and if our sample variances are equal.  The results of the F-test will narrow which case to use for calculating the standard error of the difference for our samples.  
+
 
 #Case 1      Independent samples with unequal population variances
 
-When the population variances are unequal or it is unknown, we calculate the standard error of the differences using the known information about the sample variances and sample sizes
+When the population variances are unequal, we calculate the standard error of the difference using the known information about the sample variances and sample sizes
 
 $S_{\bar{d}} = ( \frac {{S_1}^2}{r_1} + \frac {{S_2}^2}{r_2} )^{1/2}$ 
 
+Since the population variances are unqual, we cannot use the Student t-table to identify the critical t-value ($t_\alpha$).  Therefore, the critical t-value is calculated as
+
+$t_\alpha = \frac {(t_1 S_{\bar{Y_1}}^2 + t_2 S_{\bar{Y_2}}^2)}{(S_{\bar{Y_1}}^2 + S_{\bar{Y_2}}^2)}$
+
+where $t_1$ and $t_2$ are calculated with $r_1 -1$ and $r_2 -1$ degrees of freedom, respectively.
+
 #Case 2      Independent samples with equal population variances but unequal sample sizes
 
-When the two population variances are equal, then the two sample variances are estimates of the same population variance.  To calculate a better estimate of this value, we can average the two sample variances to calculate the pooled sample variance $( S^2 )$.
+When the two population variances are equal, then the two sample variances are estimates of the same population variance.  To calculate a better estimate of this value, we can average the two sample variances to calculate the pooled sample variance $( S^2 )$ and the standard error of the difference as
 
 $S^2 = \frac {({{S_1}^2})({r_1 - 1}) + ({{S_2}^2})({r_2 - 1})} {(r_1 + r_2 - 2)}$      with     $df = r_1 + r_2 -2$
 
-When the sample variances are pooled, the standard error of the differences can be calculated as
+When the sample variances are pooled, the standard error of the difference can be calculated as
 
 $S_{\bar{d}} = [({S}^2)({1 / r_1} + {1 / r_2})]^{1/2}$ 
 
@@ -64,17 +77,28 @@ $S_{\bar{d}} = (\frac {{2S}^2}{r} )^{1/2}$
 
 #Case 4      Paired samples
 
-When observations come from one common unit (adjacent plots in the same field, pigs from the same pen) and are assigned to different treatments, they are considered paired samples.  The difference between paired averages, the variance of the difference, the standard error of the difference, and the t-statistic are calculated 
+When observations come from one common unit (adjacent plots in the same field, pigs from the same pen) and are assigned to different treatments, they are considered paired samples.  The difference between paired averages ($\bar{d}$), the variance of the difference and the standard error of the difference are calculated as
 
 $\bar{d} = \frac{\sum{d_i}}{r}$
 
-$S_d^2 = \frac{\sum(d_i -\bar{d})^2}{r -1}$
+$S_d^2 = \frac{\sum(d_i -\bar{d})^2}{r -1}$     with     $df = r -1$
 
 $S_\bar{d} = (\frac{S_d^2}{r})^{1/2}$
 
 
+# Confidence Intervals
+
+After identifying the difference between the two samples averages ($\bar{d}$) and the standard error of the difference ($S_{\bar{d}}$), a confidence interval for the mean difference can be calculated to understand the level of confidence associated with the estimated mean difference. 
+
+${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$
+
+Note that for Case 1, you will need to calculate the critical t-value (see Case 1 for equation), however for Case 2-4 you can identify this value from the Student t-table (Appendix XXX) with the appropriate degrees of freedom (see appropriate Case for equation). Depending on which case is used to calculate the standard error of the difference, the degrees of freedom to identify the critical t-value ($t_\alpha$) will vary when calculating your confidence intervals. 
+
+
 
 ## Exercises and Solutions
+
+
 
 ## Homework
 ## Laboratory Exercises

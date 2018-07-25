@@ -19,6 +19,49 @@ editor_options:
 Run a T-test and report the calculated t-value.  Compare this value to the F-value; what is the relationship?
 Compare the calculated experimental error with and without subsamples in R.  
 
+##Analysis of Variance (ANOVA)
+
+In the previous chapter, significant differences between two treatments were identified with t-tests.  However, there may be experiments when researchers want to test more than two treatments at the same time.  For example, a researcher may want to test the effects of 4 different fertilizer levels to compare yield, or a researcher may want to test the effects of 4 different diets on milk quality production in cows.  In these experiments, we can use the analysis of variance to compare the different sources of variation (treatments) to determine if any are significant.  
+
+Analysis of Variance allows researchers to calculate important components of their experiment
+1. partition the total variation (total sums of squares) into different sources of variation (treatments, residual/experimental error)
+2. estimate the amount of variation per experimental unit from the different sources of variation
+3. compare the different sources of variation using an F-test to determine if variances are equal
+
+##Assumptions of ANOVA
+
+Prior to running an ANOVA, there are assumptions that must all be met
+1. the data collected must be normally distributed 
+2. each experimental unit must be independent from any other experimental unit
+3. the variances of the different treatments are homogeneous
+4. the treatment and residual effects are additive
+
+##Partitioning of Variance
+
+When the different components of an experiment are identified and the effects are additive, then we can use a linear equation to calculate the value of any observation in the experiment.  
+
+$Y_{ij} = \mu_{..} + \tau_i + \epsilon_{ij}$       where
+
+$\mu{..}$ is the overall mean
+$\tau_i$ is the treatment effect of treatment $i$ 
+$\epsilon_{ij}$ is the experimental/residual error for treatment $i$ and repetition $j$
+
+#ANOVA Table
+
+An experiment that tests four different treatments with five different replications will allow researchers to partition the variance into differences among treatments and within treatments (experimental error).  This type of experiment is considered a completely randomized design when the observational units for treatment and the replications are randomized.  
+
+------------------------------------------------------------------------------------------
+Source         df       Sum of Squares (SS)       Mean Squares (MS)        Observed F
+------------------------------------------------------------------------------------------
+Total       $kr-1$            $TSS$      
+
+Among        $k-1$            $SST$                   $MST$             $\frac{MST}{MSE}$
+Treatments
+
+Within     $k(r-1)$           $SSE$                   $MSE$
+Treatments
+------------------------------------------------------------------------------------------
+
 ANOVA intuition. Present students with a series of groups of objects and ask them to guess if they think they are subsets of the some large group of whether any group seems to come from a different population.
 
 Exercise: All objects in each of the squares below were randomly selected from a single larger set called  *parent* set. The set of objects in any square is called a *group*. Does it look like all groups have the same parent set?
@@ -73,6 +116,16 @@ for (i in 1:4) {
 
 
 ```
+
+
+##Hypothesis Testing
+
+When using ANOVA to test for a difference among treatments, our null hypothesis and alternative hypothesis can be stated, respectively, as
+
+$H_0 : \mu_1 = \mu_2 = ... =\mu_k$ for $k$ treatments        
+$H_1 : at least 1 treatment is different$     
+
+
 
 
 ## Exercises and Solutions
