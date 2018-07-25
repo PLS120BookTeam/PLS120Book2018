@@ -10,18 +10,58 @@ output:
 
 ## Learning Objectives for Chapter
 
-1. State the null and alternative hypotheses for a linear regression
+1. For a simple linear regression, state the null and alternative hypotheses.
 1. Describe how variance is partitioned in a linear regression.  
 1. Calculate the slope and intercept for a regression model and their CIs, and interpret what the values mean in real, biological terms.  
-1. Calculate the coefficient of determination and state what the value means.  
+1. Calculate the coefficient of determination and state what the value means.
 1. Describe how ANOVA and regression analyses are related in terms of variance partitioning and the F test.  
 1. List examples of uses for simple linear regression (SLR).
 1. Write the model and assumptions for simple linear regression.
 1. Make confidence intervals for the SLR parameters.
 1. List strategies to increase the precision of slope estimates.
 1. Determine is a problem requires an estimate for the expected value or for a single observation.
-1. Calculate and interpret the ANOVA table for SLR.
+1. Calculate and interpret an ANOVA table for SLR.
 1. Discuss the difference between estimating parameters and making predictions in SLR.
+
+##Introduction to Simple Linear Regression
+
+In simple linear regression, we are interested in the relationship between two continuous variables. More specifically, we are interested in how one variable (Y, the dependent variable) changes with each unit change in another variable (X, the independent variable). First, we construct a linear mathematical model that describes the change in Y with each unit change in X. This linear model takes the following form: $$\hat{Y}_i = \beta_0 + \beta_1X_i + \epsilon_i$$ 
+where $\hat{Y}_i$ is the predicted value of variable Y for a particular (*i*) value of variable X. The variable $\epsilon_i$ represents the random *observed* deviation from the model's theoretical, predicted value of Y, and it is normally distributed with mean 0 and variance $\sigma^2$. Each random deviation from $\hat{Y}$ ($\epsilon_i$) is called a **residual**. 
+
+We use observed values of X and Y to estimate the parameters $\beta_0$ and $\beta_1$. These are called the regression coefficients, and they have their own special interpretations. The $\beta_0$ coefficient is also called the **intercept**, and if you examine the regression model closely, you might realize that $\beta_0$ is simply $\hat{Y}_i$ when $X_i$ is equal to 0. The $\beta_1$ coefficient is also referred to as the **slope**, and it is a rate parameter that represents the change in Y for each unit change in X. We use a method called **ordinary least squares** to estimate these values. 
+Once the regression coefficients are estimated, we can use a statistical test to determine if the relationship between X and Y is significant. If it is, we can then use our model to estimate or predict values of Y for a particular value of X.
+
+##Simple Linear Regression Visualized
+
+As the independent and dependent variables in linear regression are both continuous, the relationship between X and Y can best be visualized with a scatterplot, as shown in Fig. \@ref(fig:slr) 
+```{r slr, echo = F, fig.cap = "A scatterplot of simulated random data, with dots representing observations.  The line represents the linear regression model used to generate the data, in combination with residuals drawn from a random normal distribution. An example residual is show in red."}
+########make a figure and label it slr#####
+set.seed(400)
+x <- 1:10
+Y <- x +rnorm(10)
+plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "", ylab = "", xlim = c(0,10), ylim = c(0,10), bty = "l")
+text(-1,5, "Y" , cex = 1.75)
+text(5, -1.5,"X", cex = 1.75 )
+lines(0:10, 0:10)
+arrows(x0 = 6, y0 = 6, y1 = Y[6], code = 0, col = "red",lty = 3, lwd = 1.15)
+text(7, 5.5, labels = expression(hat(Y) - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(4.5, y0 = 4.5, y1 = 6.5, code = 0, lwd = 1.15, lty = 3)
+arrows(4.5, x1 = 6.5, y0 = 6.5, y1 = 6.5, code = 0, lwd = 1.15, lty = 3)
+text(5.5, 7, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.1, 5.5, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(7.5, 1.5, expression(hat(Y)[i] == beta[0] + beta[1]*X[i] + epsilon[i]), cex = 2)
+
+library(shape)
+Arrows(5.5,1.55,2.25,1.75)
+text(3.5,8,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+```
+
+As mentioned above, we use ordinary least squares to estimate the regression coefficients. This method minimizes the sum of the squared residuals. In other words, it finds the $\beta_0$ and $\beta_1$ that minimizes the squared distances of the observed values of Y from those predicted by the linear regression model, $hat{Y}$. With that in mind, we can use the following equations to estimate the regression coefficients, with r replicates: 
+
+$$\beta_1 = \frac{\sum X_iY_i - r\overline{XY}}{\sum X_i^2 - r\overline{X}}^2$$
+
+$$\beta_0 = \bar{Y} - \beta_1\bar{X}$$
+
 
 ## Exercises and Solutions
 
@@ -47,7 +87,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### Plant Sciences 
-
 
 In simple linear regression (SLR) we study the relationship between a *predictor, explanatory, or independent* variable (X, horizontal axis) and a *response or dependent* variable (Y, vertical axis). Different goals may be achieved with SLR. We may be interested in determining how much Y changes as X changes, or we may be interested in estimating the value of Y for values of X that were not observed. All goals require that we estimate parameters of a linear function for a straight line that best fits the data, which is represented by the linear model:
 
