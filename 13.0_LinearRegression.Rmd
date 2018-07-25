@@ -25,11 +25,14 @@ output:
 
 ##Introduction to Simple Linear Regression
 
-In simple linear regression, we are interested in the relationship between two continuous variables. More specifically, we are interested in how one variable (Y, the dependent variable) changes with each unit change in another variable (X, the independent variable). First, we construct a linear mathematical model that describes the change in Y with each unit change in X. This linear model takes the following form: $$\hat{Y}_i = \beta_0 + \beta_1X_i + \epsilon_i$$ 
+In simple linear regression, we are interested in the relationship between two continuous variables. More specifically, we are interested in how one variable (Y, the dependent variable) changes with each unit change in another variable (X, the independent variable). First, we construct a linear mathematical model that describes the change in Y with each unit change in X. This linear model takes the following form: 
+$$\hat{Y}_i = \beta_0 + \beta_1X_i + \epsilon_i \\ \epsilon_{i} \sim N(0, \ \sigma^2)$$
 where $\hat{Y}_i$ is the predicted value of variable Y for a particular (*i*) value of variable X. The variable $\epsilon_i$ represents the random *observed* deviation from the model's theoretical, predicted value of Y, and it is normally distributed with mean 0 and variance $\sigma^2$. Each random deviation from $\hat{Y}$ ($\epsilon_i$) is called a **residual**. 
 
 We use observed values of X and Y to estimate the parameters $\beta_0$ and $\beta_1$. These are called the regression coefficients, and they have their own special interpretations. The $\beta_0$ coefficient is also called the **intercept**, and if you examine the regression model closely, you might realize that $\beta_0$ is simply $\hat{Y}_i$ when $X_i$ is equal to 0. The $\beta_1$ coefficient is also referred to as the **slope**, and it is a rate parameter that represents the change in Y for each unit change in X. We use a method called **ordinary least squares** to estimate these values. 
 Once the regression coefficients are estimated, we can use a statistical test to determine if the relationship between X and Y is significant. If it is, we can then use our model to estimate or predict values of Y for a particular value of X.
+
+
 
 ##Simple Linear Regression Visualized
 
@@ -61,7 +64,29 @@ As mentioned above, we use ordinary least squares to estimate the regression coe
 $$\beta_1 = \frac{\sum X_iY_i - r\overline{XY}}{\sum X_i^2 - r\overline{X}}^2$$
 
 $$\beta_0 = \bar{Y} - \beta_1\bar{X}$$
+##Analysis of variance of regression
 
+In Chapter 11, we introduced you to a method called the analysis of variance.  To review, the general idea of analysis of variance is that we can partition the total variance of a Y dependent variable in order to test if there is a significant effect of an X independent variable on Y. In simple linear regression, we partition the total sum of squares of Y into the sum of squares that can be explained by the regression line and the sum of squares that cannot not explained by the regression line. In Figure \@ref(fig:anovaslr), we recycle Figure \@ref(fig:slr) to show you each component of variation in Y. The total variation in Y has to do with the deviation of each $Y_i$ from $\overline{Y}$. The regression line explains some of that variation in the deviations of each $\hat{Y}_i$ from $\overline{Y}$. The remaining, residual variation is in the deviations of each observation$Y_i$ from$\hat{Y}_i$.
+
+```{r anovaslr, echo = F, fig.cap = ""}
+########make a figure and label it slr#####
+set.seed(400)
+x <- 1:10
+Y <- x +rnorm(10)
+plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "", ylab = "", xlim = c(0,10), ylim = c(0,10), bty = "l")
+lines(0:10, rep(mean(Y),11), lty = 5, lwd = 1.5)
+text(1, mean(Y)+1, expression(bar(Y)), cex = 1.5)
+arrows(x0 = 2, y0 = Y[2], y1 = mean(Y), code = 0, lwd = 1.15, lty = 3)
+text(1.25, 3.75, expression(Y[i] - bar(Y)))
+text(-1,5, "Y" , cex = 1.75)
+text(5, -1.5,"X", cex = 1.75 )
+lines(0:10, 0:10)
+arrows(x0 = 6, y0 = 6, y1 = Y[6], code = 0,lty = 3, lwd = 1.15)
+text(7, 5.5, labels = expression(hat(Y) - Y == epsilon[i]),cex = 1.5)
+
+
+
+```
 
 ## Exercises and Solutions
 
