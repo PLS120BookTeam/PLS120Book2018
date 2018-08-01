@@ -84,17 +84,10 @@ span.search-highlight {
     border-bottom: none;
 }
 
-<<<<<<< HEAD
 div.theorem, div.lemma, div.corollary, div.proposition {
   font-style: italic;
 }
 span.theorem, span.lemma, span.corollary, span.proposition {
-=======
-div.theorem, div.lemma, div.corollary, div.proposition, div.conjecture {
-  font-style: italic;
-}
-span.theorem, span.lemma, span.corollary, span.proposition, span.conjecture {
->>>>>>> Jen's-labs
   font-style: normal;
 }
 div.proof:after {

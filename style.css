@@ -12,3 +12,77 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+div.rtip {
+  font-weight: normal;
+  font-family: courier;
+  padding: 10px;
+  color: hsl(0, 100%, 25%);
+  background-color: #f0f0f0;
+  margin: 40px;
+  display: inline-block;
+}
+
+div.rtip:before {
+    content: url(images/Rlogo.png);
+    float: left;
+    display: inline-block;
+    position:relative;
+    padding-right: 20px;
+}
+
+
+div.rstip {
+  font-weight: normal;
+  font-family: verdana;
+  padding: 10px;
+  color: #24478f;
+  background-color: #f0f0f5;
+  margin: 40px;
+  display: inline-block;
+}
+
+div.rstip:before {
+    content: url(images/RStudio.png);
+    float: left;
+    display: inline-block;
+    position:relative;
+    padding-right: 20px;
+}
+
+div.stattip {
+  font-weight: normal;
+  font-family: arial;
+  padding: 10px;
+  color: #24478f;
+  background-color: #ecf2f9;
+  margin: 40px;
+  display: inline-block;
+}
+
+div.stattip:before {
+    content: url(images/StatTip.png);
+    float: left;
+    display: inline-block;
+    position:relative;
+    padding-right: 20px;
+}
+
+div.mydef {
+  font-weight: normal;
+  font-family: times;
+  padding: 10px;
+  border: 1px;
+  color: #050538;
+  background-color: #f7fcfb;
+  margin: 40px;
+  display: inline-block;
+}
+
+div.mydef:before {
+    content: url(images/Definition.png);
+    float: left;
+    display: inline-block;
+    position:relative;
+    padding-right: 20px;
+}

@@ -1,3 +1,11 @@
+---
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+---
 # Statistics with R {#chStatsR}
 
 ## Learning Objectives for Chapter
@@ -62,6 +70,13 @@ plotPoly(b0 = 1, b1 = 0.5, b2 = 0.03, b3 = -0.01, xmin = -10, xmax = 10)
 RStudio has a pane specifically designed to find information about functions, objects, data and many other things in R. The help pane has an entry area for keywords at the top right. There is a basic toolbar that can be used to navigate pages as in a browser.
 
 There is a large community of R users all over the world. This community provides lots of help and support through multiple websites. Whenever you are stuck and cannot find the information you need in a form that you understand using R help, you should use a seach engine, typically Google, and pose your question directly as a web search. This works remarkably well if you use the correct keyworkds. Always end your query with "in R" so the search is much more focused.
+
+## RStudio editor
+
+```{block, type = 'rsstip'}
+
+In R studio you can easily add balanced parenthesis ( ), brackets [ ], braces { }, single ' ' and double " " quotation marks by selecting the text to be enclosed and then typing the beginning character (, [, {, ', or ". RStudio will insert both the beginning and end parenthesis etc. making them "balanced."
+```
 
 ## Data and data frames
 
@@ -147,7 +162,7 @@ Summary statistics are classified as measures of central tendency and measures o
 We use the *clover.txt* data set provided in the first assignment. These data represent the mass of clover plants grown for different periods at three different temperatures. Temperatures are in the first column coded as 1 for 5-15 C, 2 for 10-20 C and 3 for 15-25 C. The second column contains the number of days of growth and the last column contains the log of the plant mass in g. Column names are in the first row of the file, so we specify *header = TRUE* in the line of code to read the data. Data are placed in a data frame named "clover.
 
 ```{r summarystats1, echo = TRUE}
-clover <- read.csv("../PLS120Fall2016/LabFiles/Lab01clover.txt", header = TRUE) # read in data.
+clover <- read.csv("Datasets/Lab01clover.txt", header = TRUE) # read in data.
 help(clover) # Read about the nature of the data set.
 (avg.lnwt <- mean(clover$lnwt)) # obtain the average lnwtance; note the use of $ to select parts of an object and the outer parentheses to display the result.
 (med.lnwt <- median(clover$lnwt)) # median or 50th percentile

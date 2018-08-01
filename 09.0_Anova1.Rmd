@@ -8,16 +8,17 @@ editor_options:
 ## Learning Objectives for Chapter
 
 1. Write down the model for ANOVA and label its components.
-1. Define experimental unit and determine number of experimental units in a given example.
+1. Define experimental unit and determine number of experimental units in an experiment.
 1. State the typical assumptions for ANOVA.
-1. Perform tests of ANOVA assumptions.
+1. Test ANOVA assumptions.
+1. Translate scientific questions into null and alternative hypotheses.
 1. State the null and alternative hypotheses for ANOVA.
-1. Describe how variance is partitioned in a simple one-way ANOVA .
-1. When is an ANOVA more appropriate than a T-test for hypothesis testing?
-1. How does the calculation of experimental error change with and without subsamples?
-1. Run an ANOVA, report the calculated F-value, report the p-value and state your hypothesis decision.    
-Run a T-test and report the calculated t-value.  Compare this value to the F-value; what is the relationship?
-Compare the calculated experimental error with and without subsamples in R.  
+1. Describe how variance is partitioned in a simple one-way ANOVA.
+1. Calculate sum of squares and the corresponding degrees of freedom.
+1. Compare ANOVA with t-tests for hypothesis testing.
+1. Calculate of experimental error with and without subsamples.
+1. Run an ANOVA and interpret the results in terms of the original scientific question.
+1. Run a T-test and report the calculated t-value.  Compare this value to the F-value; what is the relationship?
 
 ##Analysis of Variance (ANOVA)
 
@@ -116,6 +117,14 @@ for (i in 1:4) {
 
 
 ```
+
+## Estimation of parameters
+
+### R Code
+
+### Detailed calculations
+
+First, we present the calculations as traditionally taught in introductory courses. Then we briefly explain the method and equations actually used in the theory of least squares and emplemented by statistical software.
 
 
 ##Hypothesis Testing
@@ -427,7 +436,7 @@ The descriptive statistics for these data are augmented by with a table of avera
 
 $$\bar{Y}_i. = \exp(\bar{Z}_i.) - 1.0$$
 
-where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of reponse and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that inference (**insert cross-reference**) means to make statistical statements about populations and their parameters based on samples.
+where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of reponse and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that inference ([see Chapter about inference](#)) means to make statistical statements about populations and their parameters based on samples.
 
 To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a dataframe that has two columns: one for treatment names and the other with the mean `logSmass` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logSmass) and what variable to use as grouping factor (Treatment). These variables are to be found in the dataframe specified by `data = `. Each group will be processed with the function `mean` as specified in `FUN = `. Note that the parentheses are not necessary to refer to the function that calculates the averages.
 
