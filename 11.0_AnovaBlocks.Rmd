@@ -37,7 +37,7 @@ output: html_document
 ---
 ```
 
-```{r setup, include=FALSE}
+```{r setupPS, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
@@ -393,7 +393,7 @@ output: html_document
 ---
 ```
 
-```{r setup, include=FALSE}
+```{r setupAS, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 ```

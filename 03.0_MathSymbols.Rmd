@@ -3,15 +3,27 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+
 # Required Math Skills and Symbols {#chMath}
 
-In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we dive into equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.
+In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we explore ito equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.
 
-A key point in this chapter is that in statistics we are always using models, and that making those models explicit by writing them down completely is essential to understanding and communicating what we are doing. The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throughout the rest of the book.
+A **key point** in this chapter is that 
 
-A second key concept, related to the first one, is that we rarely, if ever, can know the actual "true" value of parameters, variables or quantities about the real world. We do not know parameter values because we rarely know or even have access to the whole population, which would be necessary to "measure" a parameter like the true mean. Measurements are imperfect because measuring instruments have limited precision, and because they are used by "imperfect" humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.
+>in statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.
+>
 
-In reading this chapter, focus on the symbols and concepts. In addition to, and better before doing the exercises, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend writing down the equations as they are read, and then trying to reproduce them from memory and a description of the calculation (e.g. sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate the attention to the symbols and details of each equation, and will reveal those aspects that are were not yet clear to the reader.
+The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throughout the rest of the book.
+
+A second **key concept**, related to the first one, is that 
+
+>we rarely, if ever, know the actual "true" value of parameters, \
+>variables or quantities in the real world (as opposed to simulations).
+>
+
+We do not know parameter values because we rarely know or even have access to the whole population, which would be necessary to "measure" a parameter like the true mean. Even if we had access to the whole population to measure each individual, we would not know parameter values with certainty, because measurements always have "errors." Measurements are imperfect because measuring instruments have limited precision, and because they are used by "imperfect" humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.
+
+In reading this chapter, focus on the symbols and concepts. In addition to --and better before-- doing the exercises, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend that you write down the equations as as you read them, and then try to reproduce them from memory and a description of the calculation (e.g. sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate attention to the symbols and details of each equation, and will reveal those aspects that are not yet clear to you.
 
 ## Learning Objectives for Chapter {#mathObj}
 
@@ -28,7 +40,7 @@ In reading this chapter, focus on the symbols and concepts. In addition to, and 
 
 ## Data Columns and Summation {#mathSum}
 
-Summations, the sum of several numbers that are organized with subscripts, is used all the time in statistics. In order to be able to read equations and understand the concepts in them, you have to be familiar with summations. The Greek letter capital sigma $\Sigma$ is used to represent summation. For example, $\sum_{i=1}^{4} Y_i$ represents the sum $Y_1 + Y_2 + Y_3 + Y_4$. Sometimes, for simplicity, when we want to sum over all possible values of the subscript i from $i = 1$ to the maximum but unspecified value of $i = k$, we write $\sum_{i=1}^k Y_i$, meaning "sum of all values of $Y_i$."
+Summations, the sum of several numbers that are organized with subscripts, is used all the time in statistics. In order to be able to read equations and understand the concepts in them, you have to be familiar with summations. The Greek letter capital sigma $\Sigma$ is used to represent summation. For example, $\sum_{i=1}^{4} Y_i$ represents the sum $Y_1 + Y_2 + Y_3 + Y_4$. Sometimes, for simplicity, when we want to sum over all possible values of the subscript $i$ from $i = 1$ to the maximum but unspecified value of $i = k$, we write $\sum_{i=1}^k Y_i$, meaning "sum of all values of $Y_i$."
 
 We can write a symbol for all the $Y_i$ to avoid having to write each one of them. All the values of $Y$ in the correct order constitute a *vector* of values. We use bold letters to refer to vectors. Suppose we have a vector with the numbers 7, 5, 9 and 6. We write this as:
 
@@ -46,7 +58,7 @@ print(Y)
 # The "[1]" on the left simply indicates that 7 is the first element in the vector.
 ```
 
-These summation equations have parallels in R code. In R, we put all values of Y in a vector, and the subscripts are automatically assigned or implicit based on the position of each value of Y. You can think of the vector being a column, so the positions of the vector elements are the row numbers.
+These summation equations have parallels in R code. In R, we put all values of Y in a vector, and the subscripts are automatically assigned based on the position of each value of Y. You can think of the vector being a column, so the positions of the vector elements are the row numbers.
 
 We can refer to each element in Y by using its row number or index number inside brackets and right next to the name of the vector. For example, `Y[2]` is the second element of Y, which is the number 5. Using different expressions instead of a single number we can extract any parts of Y we need to operate with.
 
@@ -138,11 +150,27 @@ The notation is very general and can be used to express sums like the following 
 3 \times 7 + 2 \times 5 + 4 \times 9 + 5 \times 6 = 97
 \end{aligned}
 (\#eq:math07)
-\end{equation} 
+\end{equation}
+
+```{r}
+sum(X * Y) # R understands what you mean
+
+# Optional learning:
+
+X %*% Y # the same operation in matrix algebra yields a 1x1 matrix
+
+
+```
+
 
 ## Two-dimensional Data Tables and Summation {#math2Dtbl}
 
-The vectors $\mathbf{X}$ and $\mathbf{Y}$ used above are 1-dimensional; they are single columns of numbers. Frequently, data is organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its "address" in the table given by the row and column numbers, always in that order. The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for crop and columns for fields. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 26 does **not** mean 2 times 10 plus 6 times 1, but simply the second row and sixth column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if $Y_{162}$ is row 1 column 62 or row 16 column 2 we use $Y_{1,62}$ or $Y_{16,2}$. The comma is omitted when each subscript is never greater than 9.
+The vectors $\mathbf{X}$ and $\mathbf{Y}$ used above are 1-dimensional; they are single columns of numbers. Frequently, data are organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its "address" in the table given by the row and column numbers, always in that order.
+
+> In matrices, subscripts are always row, column. \
+> $Y_{3,7}$ is the value in row 3 and column 7
+
+The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for crop and columns for fields. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 26 does **not** mean 2 times 10 plus 6 times 1, but simply the second row and sixth column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if $Y_{162}$ is row 1 column 62 or row 16 column 2 we use $Y_{1,62}$ or $Y_{16,2}$. The comma can be omitted when neither subscript is ever greater than 9.
 
   \
   \
@@ -200,9 +228,9 @@ In general, for a table of values with k rows and r columns we write:
 (\#eq:math09)
  \end{equation} 
 
-If we want to average all values in the table we need to use a double summation to indicate that the sum is supposed to proceed over rows and columns. As an exercise to make sure you understand the subscripts, write down the matrix $\mathbf{Y}$ with all subscripts without looking at the book
+If we want to average all values in the table we need to use a double summation to indicate that the sum is supposed to proceed over rows and columns (Equation \@ref(eq:math10)). As an exercise to make sure you understand the subscripts, write down the matrix $\mathbf{Y}$ with all subscripts without looking at the book.
 
-$$\begin{equation} 
+\begin{equation} 
 \begin{aligned}
 &\sum_{i=1}^{i=3} \displaystyle\sum_{j=1}^{j=7} \frac{Y_{ij}} {3 \times 7} = 
 \frac{1}{3 \times 7} \ \sum_{i=1}^{i=3}\sum_{j=1}^{j=7}Y_{ij} \\[20pt] 
@@ -219,7 +247,7 @@ $$\begin{equation}
 & \qquad \qquad + 29 + 27 + 24 + 34 + 23 + 20 + 26) = \frac{579}{21} = 27.57
 \end{aligned}
 (\#eq:math10)
-\end{equation} $$
+\end{equation}
 
 Using R we can calculate the sums and the average very easily. Note that the functions `nrow` and `ncol` extract the number of rows and columns of a data frame or  matrix. The function `mean` yields the average for the whole table.
 
@@ -281,15 +309,16 @@ sum(Ydata[2, ]) / length(Ydata[2, ]) # Average for corn
 
 ## Models {#mathModl}
 
-In statistics we use models all the time, and it is necessary to make those models explicit. Explicit models make it easier to understand and critically evaluate the use of statistics. Specifically, we can determine what parts of the model may be inadequate to solve the problem at hand, and we can modify the model to improve it.
+In statistics we use models all the time, and it is necessary to make those models explicit. Explicit models make it easier to understand and critically evaluate the use of statistics. Specifically, we can determine what parts of the model may be inadequate to solve the problem at hand, and we can modify the model to improve it. This section of the book present a brief overview of the role of modeling in statistics. I strongly recommend <a href="http://r4ds.had.co.nz/model-basics.html" target="_blank">Chapter 24</a> of *R for Data Science* by Grolemund and Wickham [@r4ds] for a more extensive treatment of the topic.
+
 
 ### The simplest model{#mathSmplMod}
 
 Say that we are interested in studying the milk production per dairy cow in $kg \ day^{-1}$ for all dairy cows in the US today. For example, we want to estimate what proportion of cows produce less than $24 \ kg \ day^{-1}$ to gauge the number of cows that could be targets of a program to increase productivity. One way to do this is to create a *model* for the statistical distribution of milk production, take a sample to estimate the parameters of the model and then use the model with estimated parameters to make the estimation of the proportion of cows for which production is less than $24 \ kg \ day^{-1}$ or any other quantity.
 
-A first attempt to estimate the needed proportion is to *model* milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter $Y$ to represent the milk production of a cow we write $Y \sim N(\mu, \sigma^2)$, which is read "Y is a random variable with normal distribution, with mean $\mu$ and variance $\sigma^2$." Sometimes we write $\sigma$, the standard deviation, instead of $\sigma^2$. Obviously, the standard deviation is the square root of the variance.
+A first attempt to estimate the needed proportion is to *model* milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter $Y$ to represent milk production of a cow we write $Y \sim N(\mu, \sigma^2)$, which is read "Y is a random variable with normal distribution, with mean $\mu$ and variance $\sigma^2$." Sometimes we write $\sigma$, the standard deviation, instead of $\sigma^2$. Obviously, the standard deviation is the square root of the variance.
 
-The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between $-\infty$ and $+\infty$, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are not important.
+The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between $-\infty$ and $+\infty$, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are **not** important!
 
 ***
 
@@ -299,9 +328,11 @@ The model is not correct, and it could not be correct, for a number of reasons. 
 
 ***
 
-Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the distribution is expected to be below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.
+Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the normal distribution used is below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.
 
-The simple model that we are using can also be expressed as follows:
+The simple model that we are using can also be written as:
+
+<br>
 
 \begin{equation} 
 \begin{aligned}
@@ -311,9 +342,11 @@ Y_i = \mu + \epsilon_i \\[10pt]
 (\#eq:math13)
 \end{equation} 
 
-where $Y_i$ is the milk produced by cow number$i$, $\mu$ is the population mean and $\epsilon$ is a random variable with a normal distribution with mean 0 and variance $\sigma^2$. This is exactly the same model as before, but now we have isolated the deviations of each cow from the mean for the whole population which we call "errors" not because there is anything wrong, but because we choose not to be interested in why cows differ in milk production per day. In this model, milk production is partitioned into an overall mean and a random "error."
+<br>
 
-The equation $\epsilon_i \sim N(0, \sigma^2)$ is actually a simplified version of $\epsilon_i \sim iid \quad N(0, \sigma^2) \quad \forall i$, which means that the errors for all observations have independent and identical normal distributions with mean 0 and variance $\sigma^2$. Why is it necessary to state this?! Isn't $\epsilon$ just one random variable? Actually, it does not have to be, so we need to specify how we are modeling the errors. In reality, it is possible for the error for each observation to come from a different distribution, although a model with such complexity would probably not be useful. Errors can also come from distributions that are not independent. The potential differences in error distributions and their correlations are topics for a more advanced course. At this point, you should just keep in mind that in real-world applications of statistics one frequently finds errors that are not normal, have unequal variances, and/or are correlated. The more advanced models necessary to deal with those situations include parts and parameters to deal with lack of normality, heterogeneity of variance and lack of independence.
+where $Y_i$ is the milk produced by cow number $i$, $\mu$ is the population mean and $\epsilon$ is a random variable with a normal distribution with mean 0 and variance $\sigma^2$. This is exactly the same model as before, but now we have isolated the deviations of each cow from the mean for the whole population which we call "errors" not because there is anything wrong, but because we choose not to be interested in why cows differ in milk production per day. In this model, milk production is partitioned into an overall mean and a random "error."
+
+The equation $\epsilon_i \sim N(0, \sigma^2)$ is actually a simplified version of $\epsilon_i \sim iid \quad N(0, \sigma^2) \quad \forall \ i$, which means that the errors for all^[$\forall$ means "for all" in math] observations have independent and identical normal distributions with mean 0 and variance $\sigma^2$. Why is it necessary to state this?! Isn't $\epsilon$ just one random variable? Actually, it does not have to be, so we need to specify how we are modeling the errors. In reality, it is possible for the error for each observation to come from a different distribution, although a model with such complexity would probably not be useful. Errors can also come from distributions that are not independent. The potential differences in error distributions and their correlations are topics for a more advanced course. At this point, you should just keep in mind that in real-world applications of statistics one frequently finds errors that are not normal, have unequal variances, and/or are correlated. The more advanced models necessary to deal with those situations include parts and parameters to deal with lack of normality, heterogeneity of variance and lack of independence.
 
 In order to use the simple model to estimate the proportion of cows that produce less than $24 \ kg \ day^{-1}$ we can get a random sample of r cows and, based on that sample, estimate the mean as
 
@@ -329,7 +362,7 @@ and the variance as
 (\#eq:math15)
 \end{equation} 
 
-where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from the estimated overall mean. These equations are presented with more detail in a later chapter (\@ref(ch.anova)). Finally, the proportion of cows whose daily milk production is less than $24 \ kg \ day^{-1}$ is estimated as the area under the normal distribution curve between $-\infty$ and  $24 \ kg \ day^{-1}$. Using the capital letter$P$ to indicate "probability" we can write:
+where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from the estimated overall mean. These equations are presented with more detail in a later [chapter](\@ref(ch.anova)). Finally, the proportion of cows whose daily milk production is less than $24 \ kg \ day^{-1}$ is estimated as the area under the normal distribution curve between $-\infty$ and $24 \ kg \ day^{-1}$. Using the capital letter $P$ to indicate "probability" we can write:
 
 \begin{equation} 
 \begin{aligned}
@@ -339,7 +372,7 @@ where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from
 (\#eq:math16)
 \end{equation} 
 
-Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016 (https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf). The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (figure \@ref(fig:prop.lt.mean)) would be calculated in R as follows (note how the code is written in several lines and indented for better readability):
+Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016 (https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf). The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (Figure \@ref(fig:propLtMean)) is calculated in R as follows (note how the code is written in several lines and indented for better readability):
 
 ```{r}
 
@@ -352,7 +385,7 @@ pnorm(           # function that calculates areas unde the normal
 ```
 
 
-```{r prop.lt.mean, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap="Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample."}
+```{r propLtMean, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap="Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample."}
 
 library(plotrix)
 
@@ -403,6 +436,8 @@ $$ data = Systematic \ Structure + Random \ Variation \\[10pt]
 
  \
 Models that partition the random component into structured and unstructured (white noise) random parts are beyond the scope of this book.
+
+<br>
 
 ```{r mathTab01, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 #------dairy data-----
@@ -670,7 +705,7 @@ We can think of this equation/recipe as follows: if we want the chicken version 
 
 $$\mu + G_1 \ \tau_1 + G_2 \ \tau_2 + G_3 \ \tau_3 = \mu + \sum_{i=1}^3G_i \ \tau_i$$
 <br>
-Therefore, the model is a recipe where the amounts are 1, $G_1$, $G_2$ and $G_3$, and the ingredients are $\mu$, $\tau_1$, $\tau_2$ and $\tau_3$. The $G$'s are grouping or indicator variables.
+Therefore, the model is a recipe where the amounts are 1, $G_1$, $G_2$ and $G_3$, and the ingredients are $\mu$, $\tau_1$, $\tau_2$ and $\tau_3$. **The $G$'s are grouping or indicator variables.**
 
 
 ## Deviations, Errors and Residuals {#mathDevs}
@@ -688,7 +723,7 @@ The difference between an observation and the mean is called a *deviation*, *res
 
 The symbol $\hat{Y}_{ij}$ is read "Y hat sub i j" and it represents the value that would be expected for that observation if the experiment were repeated many, many times. Intuitively, it is the best guess that you have for the value that would be observed if a new measurement were done for $Y_{ij}$, based on data and model. Keep in mind that the subscripts depend on the organization of the data. For the simple model we only need one subscript because there are no groups.
 
-Unfortunately, the terms *error*, *deviation* and *residual* are frequently used interchangeably, but the good news is that the meaning can be easily derived from the context. **Errors** $\epsilon$ are usually not observable and unknown, unless we create them in a computer simulation (see [Simulation](#math.simu) section). The main reason for this is that all measurements include some sort of random component that we cannot control, and that we usually do not know all the values in the population of interest; we only have a sample.
+Unfortunately, the terms *error*, *deviation* and *residual* are frequently used interchangeably, but the good news is that the meaning can be easily derived from the context. **Errors** $\epsilon$ are usually not observable and unknown, unless we create them in a computer simulation (see [Simulation](#mathSimu) section). The main reason for this is that all measurements include some sort of random component that we cannot control, and that we usually do not know all the values in the population of interest; we only have a sample.
 
 Usually, population parameters are unknown and have to be estimated using samples, which is a main focus in statistics. With a model and a sample we can estimate parameter values, such as $\hat{\mu}$ and then by the difference we can estimate the errors. Estimated errors are called **residuals** in part because they are the parts of the observations that remain after all other parts accounted for by the model are subtracted. The total **deviation** is the difference between the value observed $Y_{ij}$ and the overall mean $\mu_{..}$, typically estimated with the overall average $\bar{Y}_{..}$.
 
@@ -803,9 +838,9 @@ Y = X_1^2 \beta_1 + log(X_2) \beta_2 + e^{X_3} \beta_3 + X_4 \beta_4 \\
 Y = X_1^0 \beta_0 + X_1^1 \beta_1 + X_1^2 \beta_2 + X_1^3 \beta_2
 \end{equation}
 
-The second equation is called a **polynomial** because it only involves powers of the variable $X_1$ multiplying the parameters. Because the highest power of X is 3, the polynomial is said to be of *3rd degree* or a *cubic* polynomial. Polynomials of 2nd degree are called *quadratic*. All polynomials are linear combinations of parameters. Typical polynomials of order or degree 0 to 3 are plottled in figure \@ref(fig:math.polys).
+The second equation is called a **polynomial** because it only involves powers of the variable $X_1$ multiplying the parameters. Because the highest power of X is 3, the polynomial is said to be of *3rd degree* or a *cubic* polynomial. Polynomials of 2nd degree are called *quadratic*. All polynomials are linear combinations of parameters. Typical polynomials of order or degree 0 to 3 are plottled in Figure \@ref(fig:mathPolys).
 
-```{r math.polys, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap="Types of shapes that can be produced by polynomials of first (black), second (blue) and third (orange) degree. Note that all have ranges where they are almost straight lines. The orientation, location and range of each shape can be changed by changing the values of the parameters of the polynomial."}
+```{r mathPolys, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap="Types of shapes that can be produced by polynomials of first (black), second (blue) and third (orange) degree. Note that all have ranges where they are almost straight lines. The orientation, location and range of each shape can be changed by changing the values of the parameters of the polynomial."}
 
 plot((-20:20)/2, poly((-20:20)/2), 
      ylab = "Y", xlab = "X", 
@@ -824,8 +859,14 @@ lines((-20:20)/2,
 
 ```
 
-Linear combinations are use throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different [Chapter 8](ch.2pops) .
+<br>
 
+Linear combinations are used throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different [Chapter 8](ch.2pops).
+
+```{block, type = "stattip"}
+The shape of polynomials can be modified by changing their parameter values. The basic shapes shown in the figure can be stretched, tilted and flipped. For example, if the parameter for $X^2$ is negative in a second-degree polynomial, the "smile" blue shape will turn into a "frown."
+
+```
 ## Symbols and Terms{#mathSymbls}
 Term or symbol| Explanation
 ------------| ----------------------------------------------------------
