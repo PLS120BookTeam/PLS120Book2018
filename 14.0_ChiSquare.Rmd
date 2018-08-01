@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Chi-square: Contingency Tables and Goodness of Fit {#ch.chisq}
 
 ## Learning Objectives for Chapter
@@ -39,13 +44,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Plant Sciences
 
-We can use the $\chi^{2}$ distribution to test for a relationship between two categorical variables.  This type of test is called a *test of independence*. We specifically test the null hypothesis that there is statistical independence between the two categorical variables. We will be working on a dataset published by @PierantozziPierluigi2012PaCI.  They were interested in the effect of olive plant cultivar type on the number of seeds produced per olive fruit.  Olive fruit can contain 1, 2, or no seeds. The common case is 1 seed, though rarely they will contain two seeds, and some may contain no seeds at all due to embryo death. In 2007, they collected 1,072 olives from different cultivar plants in Central Italy, noting the number of seeds each fruit contained. 
+We can use the $\chi^{2}$ distribution to test for a relationship between two categorical variables.  This type of test is called a **test of independence**. We specifically test the null hypothesis that there is statistical independence between the two categorical variables. We will be working on a dataset published by @PierantozziPierluigi2012PaCI.  They were interested in the effect of olive plant cultivar type on the number of seeds produced per olive fruit.  Olive fruit can contain 1, 2, or no seeds. The common case is 1 seed, though rarely they will contain two seeds, and some may contain no seeds at all due to embryo death. In 2007, they collected 1,072 olives from different cultivar plants in Central Italy, noting the number of seeds each fruit contained. 
 
 To perform this test of independence, we will (1) create a contingency table, (2) calculate the frequencies we would expect to observe if cultivar type and number of seeds are independent, (3) calculate a $\chi^{2}$ test statistic that contains information about the deviation of our observations from what is expected under $H_{0}$ , and finally (4) compare the $\chi^{2}$ test statistic against the critical $\chi^{2}$ value to decide if we reject or fail to reject $H_{0}$
 
 ###Part 1 Create contingency table
 
-The first step in performing a test of independence is to build a *contingency table* with j rows and k columns. One variable is classed into j factor levels in the rows, and the second variable is classed into k factor levels in the columns.  The frequencies of each combination of attributes between the two variables fill the table and are used to calculate the marginal totals for each attribute.
+The first step in performing a test of independence is to build a **contingency table** with j rows and k columns. One variable is classed into j factor levels in the rows, and the second variable is classed into k factor levels in the columns.  The frequencies of each combination of attributes between the two variables fill the table and are used to calculate the marginal totals for each attribute.
 
 1A) Read in the olive data set as a csv file
 1B) Create a contingency table using the table() function.  
@@ -221,7 +226,7 @@ mice <- read.csv("mice.csv")
 
 ###Part 2: Expected Frequencies
 
-We have a table of our observed frequencies, but how do we calculate what we would have expected if the survival of mice is independent of treatment? Under the $H_{0}$, we would expect the joint probability of each cell in our contingency table to be based on the probability of two independent "events" (represented by the row and column categories) happening together. The probability of two independent events occuring simultaneously is simply the multiplication of the probabilities of each independent event. For example, if $H_{0}$ is true, the probability that a mice randomly sampled from this population of olive plants would receive the control treatment **and** remain alive is equal to the probability of receiving the control treatment multiplied by the probability of remaining alive.  We estimate these probabilities using the marginal totals we calculated above, divided by the total number of mice we sampled.
+We have a table of our observed frequencies, but how do we calculate what we would have expected if the survival of mice is independent of treatment? Under the $H_{0}$, we would expect the joint probability of each cell in our contingency table to be based on the probability of two independent "events" (represented by the row and column categories) happening together. The probability of two independent events occuring simultaneously is simply the multiplication of the probabilities of each independent event. For example, if $H_{0}$ is true, the probability that a mice randomly sampled from this population of olive plants would receive the control treatment *and* remain alive is equal to the probability of receiving the control treatment multiplied by the probability of remaining alive.  We estimate these probabilities using the marginal totals we calculated above, divided by the total number of mice we sampled.
 
 2A) Calculate the marginal probabilities of each variable attribute. 
 2B) Using the marginal probabilities from 2A, create a table of expected joint probabilities for each combination of treatment type and survival outcome.  
