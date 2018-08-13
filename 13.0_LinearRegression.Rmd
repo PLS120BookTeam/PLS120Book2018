@@ -2,8 +2,10 @@
 editor_options:
   chunk_output_type: console
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
+header-includes:
+- \usepackage{amsmath}
 ---
 
 # Linear Regression {#ch.linreg}
@@ -37,12 +39,12 @@ Once the regression coefficients are estimated, we can use a statistical test to
 ##Simple Linear Regression Visualized
 
 As the independent and dependent variables in linear regression are both continuous, the relationship between X and Y can best be visualized with a scatterplot, as shown in Fig. \@ref(fig:slr) 
-```{r slr, echo = F, fig.cap = "A scatterplot of simulated random data, with dots representing observations.  The line represents the linear regression model used to generate the data, in combination with residuals drawn from a random normal distribution. An example residual is show in red."}
+```{r slr, echo = F, fig.cap = "A scatterplot of simulated random data, with dots representing observations. The line represents the linear regression model used to generate the data, in combination with residuals drawn from a random normal distribution. An example residual is show in red."}
 ########make a figure and label it slr#####
 set.seed(400)
 x <- 1:10
 Y <- x +rnorm(10)
-plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "", ylab = "", xlim = c(0,10), ylim = c(0,10), bty = "l")
+plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "X", ylab = "Y", xlim = c(0,10), ylim = c(0,10), bty = "l", cex.lab = 1.5)
 text(-1,5, "Y" , cex = 1.75)
 text(5, -1.5,"X", cex = 1.75 )
 lines(0:10, 0:10)
@@ -59,35 +61,485 @@ Arrows(5.5,1.55,2.25,1.75)
 text(3.5,8,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
 ```
 
-As mentioned above, we use ordinary least squares to estimate the regression coefficients. This method minimizes the sum of the squared residuals. In other words, it finds the $\beta_0$ and $\beta_1$ that minimizes the squared distances of the observed values of Y from those predicted by the linear regression model, $hat{Y}$. With that in mind, we can use the following equations to estimate the regression coefficients, with r replicates: 
+As mentioned above, we use ordinary least squares to estimate regression coefficients that represent a line of "best fit". This method finds the $\beta_0$ and $\beta_1$ that minimizes the squared distances of observed values of Y from values of Y that are predicted from the regression equation, $\hat{Y}$. Figure \@ref(fig:leastsquaresline) illustrates a least squares line versus alternative lines we could use to explain the relationship between X and Y. 
 
-$$\beta_1 = \frac{\sum X_iY_i - r\overline{XY}}{\sum X_i^2 - r\overline{X}}^2$$
 
-$$\beta_0 = \bar{Y} - \beta_1\bar{X}$$
-##Analysis of variance of regression
+```{r leastsquaresline, echo = F, warning = F, fig.cap = "The solid line is the line of 'best fit' that minimizes the sum of the squared deviations between the line and the observations, which are represented by the points. The dashed lines represent lines with the same $\\overline{Y}$ but with different regression coefficients ($\\beta_0$ and $\\beta_1$). These lines do not minimize the overall error between $\\hat{Y}_i$ and the observed Y$_i$"}
 
-In Chapter 11, we introduced you to a method called the analysis of variance.  To review, the general idea of analysis of variance is that we can partition the total variance of a Y dependent variable in order to test if there is a significant effect of an X independent variable on Y. In simple linear regression, we partition the total sum of squares of Y into the sum of squares that can be explained by the regression line and the sum of squares that cannot not explained by the regression line. In Figure \@ref(fig:anovaslr), we recycle Figure \@ref(fig:slr) to show you each component of variation in Y. The total variation in Y has to do with the deviation of each $Y_i$ from $\overline{Y}$. The regression line explains some of that variation in the deviations of each $\hat{Y}_i$ from $\overline{Y}$. The remaining, residual variation is in the deviations of each observation$Y_i$ from$\hat{Y}_i$.
-
-```{r anovaslr, echo = F, fig.cap = ""}
-########make a figure and label it slr#####
 set.seed(400)
-x <- 1:10
+x <- 0:10
 Y <- x +rnorm(10)
-plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "", ylab = "", xlim = c(0,10), ylim = c(0,10), bty = "l")
-lines(0:10, rep(mean(Y),11), lty = 5, lwd = 1.5)
-text(1, mean(Y)+1, expression(bar(Y)), cex = 1.5)
-arrows(x0 = 2, y0 = Y[2], y1 = mean(Y), code = 0, lwd = 1.15, lty = 3)
-text(1.25, 3.75, expression(Y[i] - bar(Y)))
-text(-1,5, "Y" , cex = 1.75)
-text(5, -1.5,"X", cex = 1.75 )
-lines(0:10, 0:10)
-arrows(x0 = 6, y0 = 6, y1 = Y[6], code = 0,lty = 3, lwd = 1.15)
-text(7, 5.5, labels = expression(hat(Y) - Y == epsilon[i]),cex = 1.5)
+plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "X", ylab = "Y", xlim = c(0,10), ylim = c(0,10), bty = "l")
+lines(0:10, 0:10, lwd = 2)
+slopes <- seq(0, 1, .20)
+b0 <- sort(seq(0,5, 1), decreasing = T)
+for(i in 1:6){
+   y <-  b0[i] + x*slopes[i]
+   lines(0:10, y, lty = 3, lwd = 1.5)
+
+}
+
+```
+
+We can use the following equations to estimate the regression coefficients, with *k* observations: 
+
+\begin{equation}
+\beta_1 = \frac{\sum_{i=1}^k (X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^k (X_i-\overline{X})^2} 
+(\#eq:b1)
+\end{equation}
+
+\begin{equation}
+\beta_0 = \overline{Y} - \beta_1\overline{X}
+(\#eq:b0)
+\end{equation}
+##Fitting the least squares line
+
+An example of a linear relationship between an independent continuous variable (X) and a dependent continuous variable (Y) would be the relationship between annual rainfall and rice crop yield (kg/ha) in India. Figure \@ref(fig:rice) shows observed rice crop yields in India from 1990--2000 against annual rainfall levels.
+
+```{r rice, echo = F, warning = F, fig.cap="Observed rice crop yields in India from 1990–2000 against annual rainfall levels"}
+rice <- read.csv("./Datasets/rainYield.csv")
+plot(rice$AR..raingall., rice$yield..kg.ha., xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+
+```
+
+In table \@ref(tab:ricetab), we show the values and calculations necessary to find the regression coefficients for the least squares regression line. 
+
+```{r ricetab, echo = F}
+library(kableExtra)
+X <- rice$AR..raingall.
+Y <- rice$yield..kg.ha.
+meanX <- round(mean(X),1)
+meanY <- round(mean(Y),1)
+deltaX <- round(X-meanX,1)
+deltaY <- round(Y-meanY,1)
+cross <- round(deltaX*deltaY,1)
+SSX <- round(deltaX^2,1)
+sums <- c("","","", "Sums", round(sum(cross),1), round(sum(SSX),1))
+
+df <- data.frame(X = x, Y = y, deltaX = deltaX, deltaY = deltaY, XY = cross, SSX = SSX)
+df <- rbind(df, sums)
+
+knitr::kable(
+   df,
+   col.names = c("$X_i$", "$Y_i$", "$(X_i - \\overline{X})$", "$(Y_i - \\overline{Y})$", "$\\Delta X$$\\Delta Y$", "$\\Delta X^2$"), 
+   caption = "Table shows the rice crop yields in India (Y) from 1990--2000, along with annual rainfall (X), the difference between each X$_i$ and \\overline{X}, the difference between each Y$_i$ and \\overline{Y}, the product of the X and Y deviations from their respective means ($\\Delta X$$\\Delta Y$), and the squared deviations of X$_i$ from \\overline{X}",
+   align = rep("r", 6)
+) %>% row_spec(12, bold = T) 
 
 
 
 ```
 
+We can now use equation \@ref(eq:b1) to find the slope of the regression line that minimizes the error in the observations around the line:
+
+\begin{equation}
+\begin{aligned}
+\sum_{i=1}^k (X_i-\overline{X})(Y_i-\overline{Y}) & = -60241.5 \\
+\sum_{i=1}^k (X_i-\overline{X})^2 & = 93019.4 \\
+\beta_1 & = \frac{\sum (X_i-\overline{X})(Y_i-\overline{Y})}{\sum (X_i-\overline{X})^2} \\
+\beta_1 & = -60241.5/93019.4 \\
+\beta_1 & = -0.65
+\end{aligned}
+\end{equation}
+
+And we can use \@ref(eq:b0) to find the intercept:
+
+\begin{equation}
+\begin{aligned}
+\beta_0 & = \overline{Y} - \beta_1\overline{X} \\
+\overline{Y} & = 2064 \\
+\beta_1 & = -0.65 \\
+\overline{X} & = 1130.7 \\
+\beta_0 & = 2064 - 0.65 \times 1130.7 \\
+\beta_0 & = 2799
+\end{aligned}
+\end{equation}
+
+This gives us the regression equation: 
+
+\begin{equation}
+\hat{Y}_i = 2799 - 0.65 \times X_i + \epsilon_i
+(\#eq:fittedrice)
+\end{equation}
+
+And we can plot this line on the original data scatterplot: 
+
+```{r riceline, echo = F, warning = F, fig.cap="Observed rice crop yields in India from 1990–2000 against annual rainfall levels and the least squares regression line ($\\beta_0 = 2799$kg/ha,  $\\beta_1 = -0.65$)"}
+rice <- read.csv("./Datasets/rainYield.csv")
+plot(rice$AR..raingall., rice$yield..kg.ha., xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+yhat <- 2799 - 0.65*rice$AR..raingall.
+
+lines(rice$AR..raingall., yhat, lwd = 2)
+```
+
+
+We have shown you above how to fit a simple linear regression line to explain the relationship between a predictor variable X and a dependent variable Y. We can state the direction of the relationship (negative) and report an effect size based on the estimated slope (for every increase in one unit of annual rainfall, there is a 0.65 decrease in projected rice crop yield). We can even state what we would expect the crop yield to be when there is no rain at all on a given year, which is simply the intercept (2,799 kg/ha).  
+
+But how do we know if the relationship that our regression line describes is significant? If you observe the scatter of the observations around the line in figure \@ref(fig:riceline), you can see that the line does not perfectly predict crop yield given the annual rainfall. Those deviations are represented by the residual error symbol, $\epsilon_i$ in equation \@ref(eq:fittedrice). The residual error is the random variation in crop yield (Y) that is not explained by our regression line. In other words, it is the variation in Y that is not explained by X. Is the residual error so large that our model of the relationship between X and Y is useless?  In the next section, we will demonstrate how we test that the relationship between X and Y is significant, given the variation we see in Y. 
+
+##Analysis of variance of regression 
+
+In Chapter 9, we introduced you to a method called the analysis of variance. The general idea of analysis of variance is that we can partition the total variance of a Y dependent variable into random variation and variation explained by an X independent variable in order to test if there is a significant effect of X on Y. In simple linear regression, we partition the total sum of squares of Y (SSY) into the sum of squares that can be explained by the regression line (SSR) and the sum of squares that is not explained by the regression line, also called the residual sum of squares (RSS). $SSY = SSR + RSS$. In Figure \@ref(fig:anovaslr), we show you each component of variation in Y. The total variation in Y has to do with the deviation of each $Y_i$ from $\overline{Y}$. The regression line explains some of that variation in the deviations of each $\hat{Y}_i$ from $\overline{Y}$. The remaining, residual variation is in the deviations of each observation $Y_i$ from$\hat{Y}_i$.
+
+```{r anovaslr, echo = F, fig.cap = "Components of variation in Y. The total sum of squares represents the total variation in Y (SSY $= \\sum (Y_i - \\overline{Y})^2$. The sum of squares of the regression represents the variation that is explained by the regression line, and by extension, X (SSR $= \\sum (\\hat{Y}_i  - \\overline{Y})^2$). The residual sum of squares represents the random variation in the scatter of Y observations around the regression line (RSS $= \\sum (Y_i - \\hat{Y}_i)^2$) "}
+########make a figure and label it slr#####
+set.seed(400)
+x <- 1:10
+Y <- x +rnorm(10)
+plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "X", ylab = "Y", xlim = c(0,10), ylim = c(0,10), bty = "l", cex.lab = 1.5)
+lines(0:10, rep(mean(Y),11), lty = 5, lwd = 1.5)
+text(1, mean(Y)+1, expression(bar(Y)), cex = 1.5)
+arrows(x0 = 2, y0 = Y[2], y1 = mean(Y), code = 0, lwd = 1.15, lty = 3)
+text(1, 3.75, expression(Y[i] - bar(Y)), cex = 1.5)
+text(-1,5, "Y" , cex = 1.75)
+text(5, -1.5,"X", cex = 1.75 )
+lines(0:10, 0:10)
+arrows(x0 = 6, y0 = 6, y1 = Y[6], code = 0,lty = 3, lwd = 1.15)
+text(6.5, 3.75, labels = expression(hat(Y) - Y == epsilon[i]),cex = 1.5)
+arrows(x0 = 8, y0 =mean(Y), y1 = 8, code = 0, lty=3, lwd = 1.15)
+text(9, 7.25, labels = expression(hat(Y) - bar(Y)),cex = 1.5)
+
+
+```
+
+From the sum of squares (SS), we can obtain estimates of the **variances**, which are called the mean squares (MS). The MS is simply the SS divided by its corresponding degrees of freedom. In a simple linear regression, we are interested in comparing the variance explained by the regression (MSR) and the variance explained by the residuals (MSr). Specifically, we wish to obtain an F-ratio, which we calculate as the ratio of the variance explained by the regression to the residual variance $\frac{MSR}{MSr}$.  
+ 
+
+We can summarize this information in an analysis of variance table.  
+
+```{r aovtable, echo = F, warning = F}
+
+source <- c("Total", "Regression", "Residual")
+df <- c("k-1", 1, "k-2")
+SS <- c("$\\sum (Y_i - \\overline{Y})^2$", "$\\sum (\\hat{Y}_i  - \\overline{Y})^2$", "$\\sum (Y_i - \\hat{Y}_i)^2$")
+MS <- c("","MSR", "MSr")
+Finfo <- c("", "F","")
+df <- cbind(source, df, SS, MS, Finfo)
+knitr::kable(df,
+             col.names = c("source", "df", "SS", "MS", "F-ratio"),
+             caption = "Analysis of variance table.")
+
+```
+  
+  
+We can use the F-ratio to determine the significance of the regression. 
+Specifically, the null hypothesis that we are interested in testing is that the regression coefficient ($\beta_1$) = 0.  If $\beta_1$ is equal to 0, then for each unit change in X, Y does not change, and there is no relationship between X and Y.  
+
+We will now demonstrate how to do an analysis of variance on the dataset from the previous section on rice crop yields in India.  
+
+First, we must calculate the different sources of variation in Y: 
+
+```{r SS, warning = F, echo = F}
+
+library(kableExtra)
+X <- rice$AR..raingall.
+Y <- rice$yield..kg.ha.
+meanX <- mean(X)
+meanY <- mean(Y)
+TS <- round((Y-meanY)^2, 1)
+yhat <- 2799 - 0.65*rice$AR..raingall.
+SR <- round((yhat-meanY)^2, 1)
+RS <- round((Y - yhat)^2)
+sumlabels <- c("","","","SSY", "SSR", "RSS")
+sums <- c("","","", round(sum(TS),1), round(sum(SR),1),round(sum(RS),1))
+
+df <- data.frame(X, Y, yhat, TS, SR, RS)
+df <- rbind(df, sumlabels, sums)
+
+knitr::kable(
+   df,
+   col.names = c("X$_i$", "Y$_i$", "$\\hat{Y}_i$", "$(Y_i - \\overline{Y})^2$", "$(\\hat{Y}_i - \\overline{Y})^2$", "$(Y_i - \\hat{Y}_i)^2$"), 
+   caption = "Table shows the rice crop yields in India (Y) from 1990--2000, along with annual rainfall (X), predicted crop yields based on regression equation \\@ref(eq:fittedrice) ($\\hat{Y}_i$), the squared deviations in Y$_i$ from $\\overline{Y}$, the squared deviations between Y$_i$ and $\\hat{Y}_i$, and the squared deviations between $\\overline{Y}$ and $\\hat{Y}$. The final row shows the sums of the squared deviations for the corresponding columns, representing the total sum of squares (SSY), sum of squares due to regression (SSR), and residual sum of squares (RSS)",
+   align = rep("r", 6)
+) %>% row_spec(12, bold = T) 
+
+
+
+```
+  
+  
+No we can construct and analysis of variance table:
+
+```{r riceaov, echo = F, warning = F}
+
+
+source <- c("Total", "Regression", "Residual")
+df <- c(10, 1, 9)
+SS <- c(190919.4, 39300.9, 151906)
+MS <- c("",39300.9, 16878.4)
+Finfo <- c("", 2.3,"")
+df <- cbind(source, df, SS, MS, Finfo)
+knitr::kable(df,
+             col.names = c("source", "df", "SS", "MS", "F-ratio"),
+             caption = "Analysis of variance table.")
+```
+  
+  
+We now have an F-ratio which we can compare to a critical F-ratio given a significance probability threshold, from an F distribution with the appropriate degrees of freedom. The degrees of freedom that are relevant are from the numerator ($df_1$) and denominator ($df_2$) of the F-ratio. In the example above, $df_1 = 1$ and $df_2 = 9$.  
+
+We can plot an F distribution with those degrees of freedom in R, using the following code:  
+
+
+Create a sequence of F values which will be plotted on the X axis of the F probability density distribution:
+   
+```{r}
+
+x <- seq(0.25,6,0.1)
+
+```
+
+Generate probability densities for the F values in x:
+
+```{r}
+
+pd <- df(x, df1 = 1, df2 = 9, ncp = 0)
+
+```
+
+
+Plot the probability density of an F distribution with df1 = 1, df2 = 9:
+
+```{r}
+
+plot(x, pd, 
+     type = "l",
+     xlab = "", ylab = "")
+
+```
+
+We will use the typical threshold of probability for significance, where $\alpha = 0.05$ and obtain the critical F value corresponding to that probability: 
+
+```{r}
+
+criticalF <- qf(p = 1 - 0.05, 
+                df1 = 1, df2 = 9)
+
+```
+
+Note that we specified 0.05 instead of $\alpha/2$ = 0.025 because the F test for a linear regression is one-tailed.
+
+Add a red dashed vertical line where that critical F value is located and a mark where our test F-ratio falls. Note the "col" argument changes the color of the line, and "lty" changes the line type to a dashed line""
+
+```{r}
+
+plot(x, pd, 
+     type = "l",
+     xlab = "", ylab = "")
+
+abline(v = criticalF, 
+       col = "red", 
+       lty = 3)
+
+points(2.3, df(2.3,1,9), pch = 4)
+
+text(2.3, 0.15, "F-ratio")  
+
+```
+  
+  
+  As you can see, the F-ratio we calculated from our dataset on rice crop yields and annual rainfall was not significant. The test F-ratio was much smaller than the critical F value. We can calculate a p value for our test F ratio using the following code:
+  
+Note that we specify below the "lower.tail" is F so that it gives us the probability in the upper tail, to the right of where our F-ratio falls on the pdf.  
+
+```{r}
+
+pf(2.3, 
+   df1 = 1, 
+   df2 = 9, 
+   lower.tail = F)
+
+```  
+  
+  
+  This p value indicates that there is a 0.16 probability of seeing the results that we saw or more extreme results if the null hypothesis was true. This is larger than $\alpha = 0.05$. We therefore fail to reject our null hypothesis that the slope of our regression line is equal to 0, and state that the relationship was not significant.  
+  
+  We can also use a built-in statistics function in R to do the simple linear regression all at once:
+  
+```{r}
+
+X <- rice[,1] #annual rainfall
+Y <- rice[,2] #crop yield
+
+summary(lm(Y ~ X))
+
+```
+
+
+  
+  Note that the F-ratio, the p value, and the regression coefficients are the same as what we calculated above.  The estimate of (Intercept) is the same as $\beta_0$, though it differs slightly from our hand calculations due to rounding error. The estimate of the "X" coefficient is the same as $\beta_1$.  
+  
+  The summary output from the lm() function in R also reports a t value and a p value, [PR(>|t|)], for each of the coefficients. We are generally only interested in the p value for the predictor variable coefficients, and can ignore the t test results for the $\beta_0$ coefficient. The p value that was reported for the "X" coefficient is the same as the p value reported for the F test. This is because there is only one X predictor in a simple linear regression, so all of the explained variance in Y is from the single X variable, annual rainfall. Doing a t test on the $\beta_1$ coefficient for X in this case will therefore yield the same results as doing an F test. 
+  
+
+##Confidence Interval for $\hat{\beta_1}$
+
+We can construct confidence intervals for an estimate of $\beta_1$ using the calculated MSr as an estimate of the population variance. The standard error of the regression coefficient is:
+
+\begin{equation}
+s_b = \sqrt{\frac{MSr}{\sum (X_i - \overline{X})^2}}
+(\#eq:sb)
+\end{equation}
+
+Note the two components of the standard error in our estimate of $\beta_1$: the MSr and the SSX. If we want to increase our certainty in the slope of the regression, then we can either decrease our MSr by increasing sample size or increase the variation in X by increasing the range of X values for which we have measurements of Y.  
+
+In addition to $s_b$, we need a t value to construct as confidence interval around the esimate of $\beta_1$.  We use the degrees of freedom from the residual variance (k-2) and calculate a t value under the null hypothesis that the true population $\beta_1$ = 0. We can use the following formula to obtain the t value: 
+
+\begin{equation}
+t = \frac{\hat{\beta}_1 - \beta_1}{s_b}, 
+df = k-2
+(\#eq:tsb)
+\end{equation}  
+
+The confidence interval can then be calculated as:   
+
+\begin{equation}
+\hat{\beta}_1 \pm t_{\alpha, k-2} \times s_b
+(\#eq:CIb)
+\end{equation}  
+
+##Confidence Interval for $\hat{\beta}_0$
+
+We can also construct confidence intervals for an estimate of $\beta_0$ The standard error of the intercept is:
+
+\begin{equation}
+s_a = \sqrt{MSr\Bigg(\frac{1}{k} + \frac{\overline{x}^2}{\sum (X_i - \overline{X})^2}\Bigg)}
+(\#eq:sa)
+\end{equation}
+
+where k is the number of observations. 
+
+Just as in the calculation of a t value for the $\beta_1$ confidence intervals, we use the degrees of freedom from the residual variance (k-2) to obtain a t value under the null hypothesis that the true population intercept = 0. We can use the following formula to obtain the t value: 
+
+\begin{equation}
+t = \frac{\hat{\beta}_0 - \beta_0}{s_a},
+df = k-2
+(\#eq:tsb)
+\end{equation}  
+
+The confidence interval can then be calculated as:   
+
+\begin{equation}
+\hat{\beta}_0 \pm t_{\alpha, k-2} \times s_a
+(\#eq:CIb)
+\end{equation}  
+
+##Confidence Intervals for $\hat{Y}_i$ 
+
+The predicted value for Y at a given X$_i$ can be considered in two different ways. For X$_i$, $\hat{Y}_i$ can represent the expected mean of Y, or it can represent the expected value of an indivdual Y. The predicted value will be the same for either case, but our certainty in the estimate will be different.   
+Predicting for a single Y means incorporating random variation at observation i. Recall that variation is represented by $\epsilon_i$ in the regression formula, and that visually it is represented by the scatter of points around the regression line on a scatterplot. We must account for the individual variance in the Y observations at X$_i$ for an individual $\hat{Y_i}$, so the confidence intervals for an individual $\hat{Y_i}$ will be larger.  
+
+Just as in the calculations for the standard error of $\hat{\beta}_1$ and $\hat{\beta}_0$, we will use the degrees of freedom of the MSr (k-2) in our calculations.
+
+The standard error of $\hat{Y_i}$ for an expected mean of Y is:
+
+\begin{equation}
+s_{\hat{\overline{Y}}} = \sqrt{MSr\Bigg(\frac{1}{k} + \frac{(x_i - \overline{x})^2}{\sum (X_i - \overline{X})^2}\Bigg)}
+(\#eq:symean)
+\end{equation}
+
+while the standard error of $\hat{Y_i}$ for an individual Y is
+
+\begin{equation}
+s_{\hat{Y}} = \sqrt{MSr\Bigg(1 + \frac{1}{k} + \frac{(x_i - \overline{x})^2}{\sum (X_i - \overline{X})^2}\Bigg)}
+(\#eq:sy)
+\end{equation}
+
+Note the addition of 1 in the calculation of $s_{\hat{Y}}$ to account for the additional residual variance when predicting an individual Y$_i$.
+
+The confidence interval for $\hat{\overline{Y}}$ is
+
+\begin{equation}
+\hat{\overline{Y}} \pm t_{\alpha, k-2} \times s_{\hat{\overline{Y}}}
+(\#eq:CIsymean)
+\end{equation}  
+
+and the confidence interval for $\hat{Y}$ is
+
+\begin{equation}
+\hat{Y} \pm t_{\alpha, k-2} \times s_{\hat{Y}}
+(\#eq:CIsy)
+\end{equation}.
+
+
+
+##Coefficient of Determination, $R^2$
+
+The coefficient of determination ($R^2$) is the proportion of variance that is explained by the regression line. If a large proportion of the variation in Y is not due to the regression line, then even if you obtain significant results, X is not a very good predictor of Y. The formula for $R^2$ is
+
+\begin{equation}
+R^2 = \frac{SSR}{SSY}
+(\#eq:r2)
+\end{equation}
+
+For a simple linear regression with only one X predictor, $R^2$ can also simply be referred to as $r^2$.
+
+In some cases, we may choose to adjust the $R^2$ value ($R^2_{adj}$ for the degrees of freedom from the regression, which is only 1 in a simple linear regression.  
+
+\begin{equation}
+R^2_{adj} = 1 - frac{MSr}{MSY}
+(\#eq:radj)
+\end{equation}
+
+Using the example of rice crop yields in India, we can calculate an $R^2$ of
+
+\begin{equation}
+\begin{aligned}
+R^2 & = \frac{39300.7}{190919.4} \\
+& = 0.21
+\end{aligned}
+(\#eq:r2)
+\end{equation}
+
+We can multiply $R^2$ by 100 to state that 21% of the variation in annual rice crop yields was explained by annual rainfall.  
+
+We can also calculate $R^2_adj$ as
+
+\begin{equation}
+\begin{aligned}
+R^2_adj & = 1 - \frac{MSr}{MSY} \\
+R^2_adj & = 1 - \frac{16878.4}{190919.4/10} \\
+& = 0.12
+\end{aligned}
+(\#eq:r2)
+\end{equation}  
+
+There is a large reduction from $R^2$ to $R^2_{adj}$ because of the small number of observations ($k = 11$). The $R^2_{adj}$ from datasets with large sample sizes will have a closer match to $R^2$
+
+Let's look again at the summary output from the lm() function in R:
+
+```{r}
+
+X <- rice[,1] #annual rainfall
+Y <- rice[,2] #crop yield
+
+summary(lm(Y ~ X))
+
+```
+
+The lm() funtion reports that the "Multiple R-squared" = 0.2043, while the "Adjust R-squared' is 0.12, which are equivalent to our calculations above. The small difference between our calculated $R^2$ and the "Multiple R-squared" from R is again due to rounding error.  
+
+Our results were not significant, but if they were, then $R^2 = 20.4\%$ and $R^2_{adj} = 11.6\%$ would indicate that a fairly large proportion of the variance in Y is not explained by X. This is one way of ascertaining lack of fit in the regression model.
+
+
+##Correlation Coefficient, r
+
+The correlation coefficient, r, is a measure of the linear correlation between two variables. It does not imply a causal relationship between a fixed X variable and a Y dependent variable as regression does.
+
+We calculate r using the following formula:
+
+\begin{equation}
+r = \frac{\sum(X_i - \overline{X})(Y_i - \overline{Y})}{\sqrt{\sum (X_i - \overline{X})^2 \times \sum (Y_i - \overline{Y})^2}} 
+(\#eq:r)
+\end{equation}
+
+The correlation coefficient ranges from -1 to 1. A perfect positive linear relationship between two variables would result in  $r = 1$, while a perfect negative relationship would results in $r = -1$.  No relationship is indicated by $r = 0$.
+
+
+
+
+##Fitness of the regression model
+
+Another aspect of using linear regression to test the significance of a relationship between X and Y is whether or not the test is appropriate for the data. There are certain assumptions that must be met to 
 ## Exercises and Solutions
 
 ## Homework
@@ -136,7 +588,7 @@ RGR means relative growth rate and is estimated by the slope of the regression.
 
 ```{r}
 
-clover <- read.csv("Lab13clover.txt", header = TRUE)
+clover <- read.csv("./Datasets/Lab01clover.txt", header = TRUE)
 str(clover)
 
 
@@ -334,7 +786,7 @@ between heart weight and body weight in cats.
 
 
 ```{r}
-cats <- read.csv("Lab13Cats.csv")
+cats <- read.csv("./Datasets/Lab13Cats.csv")
 str(cats)
 
 plot(Bwt_Kg ~ Hwt_g, data = cats)

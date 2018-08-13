@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Chi-square: Contingency Tables and Goodness of Fit {#ch.chisq}
+# Chi-square: Goodness of Fit and Test of Independence {#ch.chisq}
 
 ## Learning Objectives for Chapter
 
@@ -20,7 +20,462 @@ Jen's:
 1. Test the goodness of fit of theoretical distributions to data.
 1. Look up quantiles and probabilities for the $\chi^2$ distribution.
 
-## Origin of the $\chi^2$ distribution
+## The chi-square $\chi^2$ distribution
+
+The chi-square $\chi^2$ distribution is widely used in a variety of statistical tests.  If describes the distribution of the sum of the squares of k independent standard normal random variables.  Two of the most important applications of the $\chi^2$ distribution are the test for goodness of fit of an observed distribution to a theoretical one and the test of independence between two categorical random variables.  
+
+In both tests, we calculate a $\chi^2$ test statistic based the differences between observed and expected frequencies, given some theoretical model.   
+
+ADD: PLOT OF CHI SQUARE HERE
+
+##Goodness of Fit: Discrete distributions
+
+In goodness of fit tests for discrete distributions, we are dealing with a single random variable with discrete classes.  Supposed we take a sample from a population with k different classes for the random variable.  We have an expected theoretical probability distribution across the k classes and want to test the "goodness of fit" of the population to the theoretical distribution using our sample.  
+Our data would consist of k observed frequencies ($O_1:O_k$), which we would compare to k expected frequencies ($E_1:E_k$).  Then we can calculate $\chi^2$ as
+
+\begin{equation}
+\chi^2 = \sum_{i = 1}^k \frac{(O_i - E_i)^2}{E_i}
+,\; df = k-1
+(\#eq:chi)
+\end{equation}  
+
+If there are only 2 classes involved (i.e., k = 2, df = 1), then we use an adjusted $\chi^2$ formula:
+
+\begin{equation}
+\chi^2_{adj} = \sum_{i = 1}^2 \frac{(\mid{O_i - E_i}\mid - 1/2)^2}{E_i}
+,\; df = 1
+(\#eq:chiadj)
+\end{equation} 
+
+
+The smaller the differences between the observed frequencies and what we expected based on our theoretical model, the smaller the $\chi^2$ value. The larger ther $\chi^2$ values, the less likely our results will support that the population follows our theoretical distribution. This deviates from previous tests, where our general desire was the reject the null hypothesis, because it meant that there was a significant effect of some variable of interest on another. Here, our null hypothesis is that the variable in our population of interest follows our theoretical distribution, and to reject the null hypothesis would suggest that it does not.
+
+An example of a discrete theoretical distribution for a single variable is based on Mendel's experiments with the common pea.  He studied seven traits in total, but we will focus on two: seed shape and seed color.  Mendel produced an F1 generation from crossing true-breeding parental pea plants producing wrinkled seeds (the recessive trait) with true-breeding parental plants that produced round seeds (the dominant trait). All of the F1 produced round seeds.  He then produced an F2 generation through self-fertilization of the F1 hybrids, and this time he observed a 3:1 phenotypic ratio of smooth to wrinkled. This ratio of 3:1 for the dominant to recessive phentoypic traits was true in all of the traits he studied. We can use his dataset on pea seed shape to test the goodness of fit to a 3:1 ratio. 
+
+These were the observed frequencies for each seed shape phenotype: 
+
+```{r, echo = F, warning = F}
+
+mendel <- read.csv("./Datasets/MendelPeas.csv")
+
+
+roundO <- sum(mendel[mendel$shape == "round", "count"])
+wrinkledO <- sum(mendel[mendel$shape == "wrinkled", "count"])
+
+(Observed <- c(roundO, wrinkledO))
+
+```
+
+We first sum the total number of pea observations to calculate the expected frequencies under a 3:1 ratio.  
+$423 + 133 = 556$
+
+Then we can figure out the expected values given a 3:1 ratio: 
+
+```{r}
+
+Er <- (556/4)*3
+
+Ew <- (556/4)*1
+
+(Expected <- c(Er, Ew))
+
+```
+
+Now, we can combine the expected frequenices with the observed frequencies in a table:
+
+```{r}
+
+mTab <- data.frame(Observed, Expected)
+rownames(mTab) <- c("round", "wrinkled")
+mTab
+```
+
+We can calculate a $\chi^2$ value for both seed shapes, but we will need to use the $\chi^2_{adj}$ formula because we only have $k - 2$ classes.  
+
+
+```{r}
+
+
+(chiAdj <- sum((abs(Observed - Expected) - 0.5)^2 / Expected))
+
+```
+
+We now have a $\chi^2_{adj}$ test statistic that we can compare to a critical $\chi^2$ value with $df = 1$ at $\alpha = 0.05$. In R, we can use the qchisq() function to get a critical $\chi^2$ value, and the pchisq() function to obtain a p value for our test statistic: 
+
+```{r}
+
+(criticalChi <- qchisq(p = 1 - 0.05, df = 1))
+
+(pval <- pchisq(chiAdj, df = 1, lower.tail = F))
+
+```
+
+
+As you can see, our $\chi^2_{adj}$ value of 0.29 is much smaller than the critical $\chi^2$ value of 3.84, and our p value is 0.59.  There is a 59% probability of seeing our results or more extreme results if the null hypothesis was true. We therefore conclude that our observed phenotypic ratio matches the expected ratio of 3:1.    
+
+We can use the same data to test the assumption that the combination of two traits will have a phenotypic ratio of 9:3:3:1 under Mendel's law of independent assortment. We will look at the combination of seed shape and color, with round/yellow(RY), round/green (RG), wrinkled/yellow (WY), and wrinkled/green (WG) as the possible phenotypes. For seed color, yellow is the dominant trait. We would expect to see the phenotypes to follow a 9:3:3:1 ratio in the order RY:RG:WY:WG. 
+
+```{r}
+
+mendel
+
+(Observed2 <- mendel[,c(3:4)])
+
+#Just as before, the total number of plants is 556.  
+ExpRY <- 9*(556/16)
+ExpRG <- 3*(556/16)
+ExpWY <- 3*(556/16)
+ExpWG <- 1*(556/16)
+
+(Expected2 <- c(ExpRY, ExpRG, ExpWY, ExpWG))
+
+mTab2 <- data.frame(Observed2, Expected2)
+
+mTab2
+```  
+
+
+We can use the regular $\chi^2$ formula to obtain our test statistic because we have more than 2 classes:
+
+
+```{r}
+
+(chi2 <- sum((Observed2$count - Expected2)^2 / Expected2))
+
+```  
+
+And use R to find a critical $\chi^2$ value and p value again: 
+
+```{r}
+
+k <- 4 # We have 4 classes
+
+(criticalChi2 <- qchisq(p = 1 - 0.05, df = k-1))
+
+(pval2 <- pchisq(chi2, df = k-1, lower.tail = F))
+
+```
+
+
+We once again fail to reject the null hypothesis because our p value is much greater than 0.05. 
+
+We can also use the chisq.test() function in R to perform these tests very easily. We will demonstrate how to do this using the test for two traits. The function requires two arguments for a goodness of fit test: \\
+x = vector of observed frequencies \\
+p = vector of expected probabilities \\
+
+```{r}
+
+x <- Observed2$count
+p <- c(9/16, 3/16, 3/16, 1/16)
+
+chisq.test(x = x, p = p)
+
+```
+
+You can see that all results from the chisq.test() function match our calculations exactly.  
+
+##Goodness of Fit: Continuous distributions
+
+We often wish to know if our data follows a particular continuous probability distribution.  One common application of a $\chi^2$ goodness of fit test for a continuous distribution is to test if continuous data follows a normal distribution.  
+
+To perform this test, we bin the continuous data into discrete classes of equal intervals so that we can calculate a $\chi^2$ value for each discrete interval and sum them to obtain an overall $\chi^2$test statistic. We will use 144 adult cat heart weights from a free dataset that comes with the MASS package in R (cats) to test that the cat heart weights are normally distributed. 
+
+
+
+First, we order the observations from smallest to largest, then set up vectors that record the midpoints and endpoints of 9 discrete bins of the data range: 
+
+```{r}
+
+library(MASS)
+cwt <- cats
+
+#sorting the heart weights into a vector
+weights <- sort(cwt$Hwt)
+
+```
+
+Now, we can do a quick check to see if the data appears normally distributed before even doing our goodness of fit test:
+
+```{r}
+
+hist(weights)
+
+```
+
+The data looks right-skewed, so we might consider log-transforming the weights to make them more normally distributed:
+
+```{r}
+
+hist(log(weights))
+
+```
+
+
+That looks much better.  We will use the log-transformed heart weights instead to test for normality.
+
+First, we will set up a vector containing the endpoints of 9 discrete intervals of equal length within the range of observed log(weight) values:
+
+```{r}
+
+classes <- 1:9 #number of intervals
+
+#log transform
+logwt <- log(weights)
+
+#Get the total range of values:
+range <- max(logwt) - min(logwt) 
+
+#Length of each bin interval when k = 9:
+binInt <- range/9
+
+#The endpoints of the bin intervals:
+endpoints <- seq(min(logwt), max(logwt), binInt)
+
+```
+
+The next part is a little trickier.  We need to get a frequency of observed weights in each bin interval.  We will show you how to do this using a for loop in R.
+
+```{r}
+#set up a vector of NAs that will hold the observed frequencies
+Ofreq <- rep(NA, 9)
+#We use a logical query for each interval, where we ask which logwts are less than or equal to endpoint i, starting at i = 2 since the first endpoint is the minimum logwt., and greater than the previous endpoint.
+#Then we sum each result to get the frequency of observations in each interval i.
+
+for(i in 2:10){
+   Ofreq[i-1] <- sum(logwt > (endpoints[i-1]) & 
+                      logwt <= endpoints[i])
+}
+
+#we add 1 to Ofreq[1] since the minimum logwt value was not included in the first interval frequency using the code above. 
+Ofreq[1] <- Ofreq[1] + 1 
+
+Ofreq
+```
+
+Now that we have all of our observed frequencies, we need to work on getting expected frequencies under the null hypothesis that our data are normally distributed. We first find the z score for each interval using the endpoint of the interval, the standard deviation of the weights, and the total mean of the weights:
+
+
+```{r}
+
+meanWt <- mean(logwt)
+sdWt <- sd(logwt)
+(zscores <- (endpoints[-1] - meanWt) / sdWt)
+
+```
+
+We can now use the z scores to find the probability within each interval from a standard normal probability distribution. We can do this by finding the left-tailed cumulative probability at each endpoint and substracting the left-tailed cumulative probability at the previous endpoint. For example, if we have the probability at a z score of -1: 
+
+```{r, echo = F}
+
+pnorm(-1)
+x <- seq(-4, 4, 0.1)
+y <- dnorm(x)
+plot(x, y, type = "l", ylab = "", xlab = "")
+polygon(c( x[x<=-1], -1 ),  c(y[x<=-1],0 ), col="blue")
+text(-3, 0.1, "p = 0.16 at z = -1")
+```
+
+And we know the left-tailed probability at z = -2: 
+
+```{r, echo = F}
+
+pnorm(-2)
+x <- seq(-4, 4, 0.1)
+y <- dnorm(x)
+plot(x, y, type = "l", ylab = "", xlab = "")
+polygon(c( x[x<=-2], -2 ),  c(y[x<=-2],0 ), col="gray")
+text(-3, 0.1, "p = 0.02 at z = -1")
+
+```
+
+Then the probability between $z = -2$ and $z = -1$ is $p(z \leq{-1}) - p(z \leq{-2})$:
+
+```{r, echo = F}
+
+pnorm(-1) - pnorm(-2)
+x <- seq(-4, 4, 0.1)
+y <- dnorm(x)
+plot(x, y, type = "l", ylab = "", xlab = "")
+polygon(c(-2, x[x<=-1 & x >= -2], -1 ),  c(0,y[x<=-1 & x >= -2],0 ), col="red")
+text(-2.25, 0.1, "p = 0.14")
+
+
+
+
+```
+
+To calculate this in R, we can use the pnorm() function:
+
+```{r}
+
+pnorm(-1) - pnorm(-2)
+
+```
+
+We will do this for each interval endpoint in our logwt dataset using a for loop:
+
+```{r}
+
+probs <- rep(NA, 9)
+probs[1] <- pnorm(zscores[1])
+
+for(i in 2:9){
+   probs[i] <- pnorm(zscores[i]) - pnorm(zscores[i-1])
+}
+
+```
+
+Now that we have the expected probabilities for each interval if our data were normally distributed, we can calculate expected frequencies by multiplying the expected probabilities by the total number of logwts in our dataset:
+
+```{r}
+(Efreq <- probs * sum(Ofreq))
+```
+
+For each interval, we can calculate the squared deviation of the observed frequency from the expected frequency divided by the expected frequency, and then sum these values up to obtain our $\chi^2$ statistic:
+
+```{r}
+
+(chiSq <- (sum((Ofreq - Efreq)^2/Efreq)))
+
+```
+
+And as per usual, we can compare this $\chi^2$ statistic to a critical $\chi^2$ and obtain a p value. 
+
+The number of degrees of freedom is in general the total number of dimensions in which the results can vary. For the test of goodness of fit, the degrees of freedom are the total number of observed values used in the calculation of $\chi^2$ minus the number of calculated values or parameters used to estimate the expected values. In this example, we have 9 observed frequencies, and in order to calculate the expected frequencies, we used the total number of observations (144), the estimated mean (2.34) and the estimated standard deviation (0.22). Therefore, $df = 9 - 3$.
+
+```{r}
+
+k <- 9
+
+#Critical chi-squared value at alpha = 0.05
+qchisq(p = 1 - 0.05, df = k-3)
+#p value at our test statistic
+pchisq(chiSq, k-3, lower.tail = F)
+
+```
+
+
+We can see that our $\chi^2$ test statistic is much smaller than the critical value and that p > 0.05, so we fail to reject the null hypothesis that the log of the cat heart weight data is normally distributed.
+
+##The $\chi^2$ Test of Independence: Contingency Tables
+
+The test of independence is related to the goodness of fit test. Just as in goodness of fit tests, we are concerned with observed frequencies versus expected frequencies under a theoretical model.  The theoretical model in the case of the test of independence is specifically that two categorical variables are independent. The categorical variables each have a number of classes. When we classify our observations according to the two variables in a two way table with j rows and k columns, then we create a **contingency table**.  For such a contingency table, $df = (j-1)(k-1)$.
+
+We show an example of a contingency table in Table \@ref(tab:cont). 
+
+```{r cont, echo = F, warning = F}
+planttab <- read.csv("./Datasets/rareplants2.csv")[-1]
+knitr::kable(x = planttab,
+             col.names = c("Species type", "Dry", "Wet", "Wet or Dry", "Total"), 
+             caption = "Observed frequencies of common versus rare plant species in South Australia and Victoria, Australia according to habitat type (dry only, wet only, and wet or dry)."
+)
+```
+
+Does habitat (wet or dry) influence the prevalence of common or rare plant sepcies in South Australia and Victoria?
+
+The null hypothesis of our test is that the habitat type and species type are independent of one another. We have observed frequencies in the table above, but how do we calculate expected frequencies? We have to understand that if the two variables are independent, then the joint probability in each cell of our contingency table will be the product of the corresponding row and colum marginal probabilities. In other words, the joint probability of a plant species being both common and found in a dry only habitat would equal the probability of it being found in a dry only habitat multiplied by the probability of it being common, *if* the habitat type and species type are indendent of one another.  
+
+We first build a table that contains the estimated joint probabilities for each cell under the null hypothesis of independence. 
+
+```{r}
+#create a table from the original data table, with appropriate dimensions just to hold joint probabilities:
+plantP <- planttab[1:2,2:4] 
+#total sample size:
+Grand <- as.numeric(planttab[3,5])
+#Create vectors of the marginal probabilities
+(HabP <- as.numeric(planttab[3,2:4])/Grand)
+(SpP <- as.numeric(planttab[1:2,5])/Grand)
+
+#multiply the row and column marginal probabilities to get the joint probabilities in each cell:
+for(j in 1:2){
+   for(k in 1:3){
+      plantP[j,k] <- SpP[j] * HabP[k]
+   }
+}
+
+rownames(plantP) <- c("common", "rare")
+knitr::kable(x = round(plantP,2),
+             col.names = c("Dry", "Wet", "Wet or Dry"), 
+             caption = "Joint probabilities given the marginal probabilities in rows and columns"
+)
+```
+
+Now that we have theoretical probabilities, we can multiply them by the total sample size (n = 694) to obtain expected frequencies in each cell of our contingency table.
+```{r}
+
+Exp <- plantP * Grand
+knitr::kable(x = Exp,
+             col.names = c("Dry", "Wet", "Wet or Dry"), 
+             caption = "Expected frequencies if the rareness of plant species was independent of habitat type"
+)
+```
+
+We know that we have $(2-1) \times (3-1) = 2$ degrees of freedom, so there is no need to use the $\chi^2_{adj}$ formula.  We can find the sum of each cell contribution to the test statistic using the normal $\chi^2$ formula, equation \@ref(eq:chi):
+
+```{r}
+
+#Matrices of the observed and expected frequencies:
+Obs <- apply(planttab[1:2, 2:4], c(1,2), "as.numeric")
+Exp
+
+(chiSq <- sum((Obs - Exp)^2/Exp))
+
+```
+
+Our critical $\chi^2$ value and p value are:
+
+```{r}
+
+(crit <- qchisq(1-0.05, df = 2))
+(pval <- pchisq(chiSq, df = 2, lower.tail = F))
+
+```
+
+We can also use the chisq.test() function in R to perform the same test: 
+
+```{r}
+
+chisq.test(Obs)
+```
+You can see we obtain identical results.  
+
+We see that our test statistic is much larger than our critical value (18.06 > 5.99), and that our p value ($p = 0.00012$) is much smaller than 0.05. We reject the null hypothesis and conclude that habitat type *does* have a relationship with the rareness of plant species in South Australia and Victoria. 
+
+If we take a closer look at the individual contributions to the $\chi^2$ statistic:
+
+```{r}
+
+(Obs - Exp)^2/Exp
+
+```
+we see that the frequency of rare plants in wet and wet or dry habitats in particular have larger deviations of observed from expected frequencies. 
+
+Lets look again at our original observed frequencies and compare with our expected frequencies.
+
+Observed:
+
+```{r, echo = F}
+
+knitr::kable(x = planttab[1:2, 1:4],
+             col.names = c("Species type", "Dry", "Wet", "Wet or Dry")
+)
+
+```
+
+Expected:
+
+```{r, echo = F}
+
+rownames(Exp) <- NULL
+Exp$spt <- c("common", "rare")
+Exp <- cbind(Exp$spt, round(Exp[1:3],0))
+knitr::kable(x = Exp,
+             col.names = c("Species type", "Dry", "Wet", "Wet or Dry")
+)
+
+```
+
+It appears that rare species are found less than expected in mixed habitats, but slightly more than expected in wet only habitats. This suggests that wet only habitats might offer better conditions than variable moisture habitats for rare plant species.  
 
 ## Exercises and Solutions
 
@@ -57,7 +512,7 @@ The first step in performing a test of independence is to build a **contingency 
 1C) Calculate the marginal totals of each attribute type of each of the two variables.  
 
 ```{r}
-olives <- read.csv("olives.csv")
+olives <- read.csv("./Datasets/olives.csv")
 
 ##use table() to calculate the frequencies of each cultivar/No.seeds combination in the data. 
 (olivect <- table(olives))
@@ -207,7 +662,7 @@ The first step in performing a test of independence is to build a *contingency t
 1C) Calculate the marginal totals of each attribute type of each of the two variables.  
 
 ```{r}
-mice <- read.csv("mice.csv")
+mice <- read.csv("./Datasets/mice.csv")
 
 ##use table() to calculate the frequencies of each treatment/result combination in the data. 
 (micect <- table(mice))
