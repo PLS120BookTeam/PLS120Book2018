@@ -1,6 +1,41 @@
+---
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup0, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+# load packages for chapter
+
+options(digits = 10)
+library(bookdown)
+library(emmeans)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(tables)
+library(pander)
+library(multcomp)
+library(agricolae)
+library(nlme)
+library(car)
+library(tidyr)
+
+```
+
 # Two Populations Means {#ch.2pops}
 
-## Learning Objectives for Chapter
+## Learning Objectives for Chapter {#LearnObj8}
 
 1. Compare two population means based on two samples.
 1. Determine if samples are paired or unpaired ("independent") when comparing two means.
@@ -15,78 +50,171 @@
   - where the CI bounds would lie on the X axis (approximately)
 1. Interpret the results of a t-test in terms of the original scientific question. 
 
-We have learned in the previous chapters how to determine if a sample is significantly different from the population it belongs to.  However, researchers may want to know if two populations are significantly different from each other.  In research experiments, populations are considered distinct when there are unique treatments that are applied to them.  For example, one could conduct an experiment comparing a fertilized field to an unfertilized field to determine a difference in yield, or an experiment comparing a high-protein diet to a high-carbohydrate diet to determine a difference in milk quality among cows.  These experiments are conducted by taking samples from each of the populations and using the differences between the two samples to make inferences about the differences between the two populations/treatments.  
+## Two Populations {TwoPops}
 
-There are two different methods of sampling to compare treatment means: independent samples and paired (dependent) samples.  Samples are considered independent when there is no relationship between the observations in one treatment and the observations in the other treatment.  For example, pigs are randomly assigned to two different diets to collectively measure the difference in body weight, and difference between the two diet averages are measured.  Samples are considered paired or dependent when there is a relationship between the observations in one treatment and the observations in the other treatment, and there is a direct comparison of the observations with the shared relationship.  For example, two pigs from the same pen are assigned to different diets to measure the difference in body weight among all the paired pigs from the same pen, and the differences between the two diets are measured by comparing the pigs from the same pens. 
+We have learned in the previous chapters how to determine if a sample is significantly different from the population it belongs to.  However, researchers may want to know if two populations are significantly different from each other.  In research experiments, populations are considered distinct when there are unique treatments that are applied to them.  For example, one could conduct an experiment comparing a fertilized field to an unfertilized field to determine a difference in yield, or an experiment comparing a high-carbohydrate diet to a high-protein diet to determine a difference in milk quality among cows.  These experiments are conducted by taking samples from each of the populations and using the difference between the two samples to make inferences about the difference between the two treatments or the two populations.  
 
-##Hypothesis Testing
-When testing if there is a significant difference between two populations and/or two treatments, our null  hypothesis and alternative hypothesis can be stated, respectively, as 
+```{block, type = 'stattip'}
+# Steps to Test Two Population Means
+1. State the null and alternative hypotheses for the two populations
+2. Collect samples from each population
+3. Calculate the sample averages, $\bar{Y}_1$ and $\bar{Y}_2$, and the difference of the averages,$\bar{d}$
+4. Calculate the sample variances, $S^2_1$ and $S^2_2$, and the standard error of the mean difference, $S_{\bar{d}}$, between the two samples 
+  **It is important to identify the appropriate Case equations to apply to the samples in this step**
+5. Calculate the t-statistic using the calculated $\bar{d}$ and $S_{\bar{d}}$
+6. Compare the calculated t-statistic to the critical t-value, to decide to reject or fail to reject the null hypothesis
+```
 
+## Hypothesis Testing
+Before all the calculations have begun, it is important to understand the aim of these calculations.  The purpose of testing two population means is to understand if there is a statistically significant difference between these two populations or two treatments.  Thus, our null  hypothesis and alternative hypothesis can be stated, respectively, as 
+
+$$\text{Null hypothesis: the mean of population 1 is equal to the mean of population 2, or that there is no difference between the two population means} \\[15pt]$$
 $H_0 : \mu_1 = \mu_2$         or       $\mu_{\bar{d}} = 0$
+
+$$\text{Alternative hypothesis: the mean of population 1 is not equal to the mean of population 2, or that there is a difference between the two population means} \\[15pt]$$
 $H_1 : \mu_1 \neq \mu_2$      or       $\mu_{\bar{d}} \neq 0$
+
+
+## Sampling Methods
+
+There are two different methods of sampling to compare treatment means: **independent** samples and **paired** or dependent samples.  
+
+Samples are considered **independent** when there is no relationship between the observations in one treatment and the observations in the other treatment, and the samples are randomly assigned to a given treatment.  For example, pigs are randomly assigned to two different diets to measure the difference in body weight, and the difference between the two diet averages are measured.  Since there is no information of the relationship between the pigs in the two diet treatments and the pigs are randomly assigned to a diet, the assumption is that these samples (pigs) are independent of each other.  
+
+ (Figure \@ref(fig:IndSamples))
+
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of pigs are randomly placed into two treatments, where $\r$ is the number of samples per treatment, and $\i$ is the sample number for a given treatment"}
+
+knitr::include_graphics("images/CH8IndSamp.png")
+
+```
+
+Samples are considered **paired** or dependent when there is a relationship between the observations in one treatment and the observations in the other treatment, and there is a direct comparison of the observations with the shared relationship.  Paired samples are made from the direct comparisons of two measurements made on the same experimental unit.  Individual pigs can be treated as experimental units if two measurements are collected on the same individual.  For example, to understand the effect of two different diets on pigs, an initial body weight measurement is collected on all pigs on standard high-carbohydrate diet.  Then following a set period of time on a high-protein diet, a second body weight measurement will be taken on all pigs.  The difference between the two diets are measured by collectively comparing the two body weight measurements for each pig (each experimental unit) involved in the study.
+
+In some examples, restrictions may make it difficult to test two treatments on the same individual organism, however, understanding shared relationships between individual organisms may allow paired samples of separate individuals that are within the same experimental unit.  Pigs that are from the same pen share genetic and environmental effects that are unique to that pen, and we can treat individuals from the same pen as our experimental unit.  For example, two pigs from the same pen are assigned to different diets to measure the difference in body weight among all the paired pigs from the same pen.  The difference between the two diets are measured by collectively comparing the sets of pigs from the same pens.  In this example, the experimental unit is not individual pigs but the pens that the pair of pigs come from. 
+
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen placed into two treatments, where $\r$ is the number of samples per treatment, and $\i$ is the sample number for a given treatment"}
+
+knitr::include_graphics("images/CH8PairSamp.png")
+
+```
+
+It is important to understand how the two populations are created (through sampling) to decide which equations are appropriate for the experiment.  Using the incorrect equation may lead to incorrect calculations and conclusions, so take the time to understand the given parameters of the populations under evaluation.  
+
+## Calculating the F-statistic
+
+To understand the parameters of the two populations and to identify which Case is appropriate for later calculations, an F-test is used to determine if the population variances are equal or unequal.  With any test, it is important to state the null and alternative hypotheses
+
+$$\text{Null hypothesis: the variance of population 1 is equal to the variance of population 2} \\[15pt]$$
+$H_0 : \sigma_1 = \sigma_2$)
+
+$$\text{Alternative hypothesis: the variance of population 1 is not equal to the variance of population 2 \\[15pt]$$
+$H_1 : \sigma_1 \neq \sigma_2$)
+
+```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
+
+knitr::include_graphics("images/CH8FTestDec.png")
+
+```
+
+Since we may not always know the population variances, we use the sample variances to infer the equality of the population variances using a two-tailed F-test.  
+
+```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Curve image from www.mtstatic.com"}
+
+knitr::include_graphics("images/CH8FCurve.png")
+
+```
+
+In the calculation, the larger of the two variances is used as the numerator and the smaller of the two variances as the denominator.
+
+$F = \frac {larger S^2}{smaller S^2}$  with $df_{numerator} = r_{larger} -1 , df_{denominator} = r_{smaller} -1$
+
+This calculated F-value can be tested for significance against the critical F-value on the F-distribution table (Appendix XXX).  The degrees of freedom for the two samples are needed to identify the critical F-value on the F-distribution table to determine if the calculated F-value is significant and if our sample variances are equal.  
+
+The results of the F-test will narrow which case to use for calculating the standard error of the difference for our samples. Since this is a two-tailed F-test, the $\alpha$ value to determine the critical F-value, $F_{crit}$, will be divided by two, $\frac{\alpha}{2}$.,
+
+### F-test Decision
+
+If $F_{calc} > F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$), is rejected and the population variances are not equal.
+
+If $F_{calc} < F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$), is not rejected and the population variances are assumed to be equal.
+
+
+## Calculating $\bar{Y}$, $\bar{d}$, $S^2$, $S_{\bar{d}}$ and the t-statistic
 
 In previous chapters, we used the t-stastic for hypothesis testing within a single population.  The t-statistic can also be used for hypothesis testing between two populations by treating it as a single population consisting of the differences between the two treatments.  
 
 To perform a hypothesis test for two populations, the difference between the two samples averages ($\bar{d}$), the mean of the difference ($\mu_{\bar{d}}$), and the standard error of the difference ($S_{\bar{d}}$) are needed to calculate the t-statistic ($t$).  
 
-$\bar{d} = \bar{Y}_1 - \bar{Y}_2$
+$\bar{d} = \bar{Y}_1-\bar{Y}_2$
 
-$\mu_{\bar{d}} = ( \mu_1 - \mu_2 )$
+$\mu_{\bar{d}} = (\mu_1-\mu_2)$
 
-$t = \frac{ (\bar{d} - \mu_{\bar{d}})} {S_{\bar{d}}}$
+$t = \frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$
 
-The standard error of the difference will be calculated differently depending on (1) if the samples are independent or paired, (2) if the population variances are equal or unequal and (3) if the sample sizes are equal or unequal.  This presents four unique cases to calculate the standard error of the difference, and 3 unique cases to first calculate the population variance, which is needed to calculate the t-statistic.
-
-To understand which case is appropriate, an F-test is used to determine if the population variances are equal or unequal ($H_0 : \sigma_1 = \sigma_2$).  Since we may not know the population variances, we use the sample variances to test equality with the larger of the two variances as the numerator and the smaller of the two variances as the denominator
-
-$F = \frac {larger S^2}{smaller S^2}$  with $df_{numerator} = r_{larger} -1 , df_{denominator} = r_{smaller} -1$
-
-This calculated F-value can be tested for significance against the critical F-value on the F-distribution table (Appendix XXX).  The degrees of freedom for the two samples are needed to identify the critical F-value on the F-distribution table to determine if the calculated F-value is significant and if our sample variances are equal.  The results of the F-test will narrow which case to use for calculating the standard error of the difference for our samples.  
+The standard error of the difference will be calculated differently depending on (1) if the samples are independent or paired, (2) if the population variances are equal or unequal and (3) if the sample sizes are equal or unequal.  This presents four unique cases to calculate the standard error of the difference, and 3 unique cases to first calculate the population variance, which are needed to calculate the t-statistic.
 
 
-#Case 1      Independent samples with unequal population variances
-
-When the population variances are unequal, we calculate the standard error of the difference using the known information about the sample variances and sample sizes
-
-$S_{\bar{d}} = ( \frac {{S_1}^2}{r_1} + \frac {{S_2}^2}{r_2} )^{1/2}$ 
-
-Since the population variances are unqual, we cannot use the Student t-table to identify the critical t-value ($t_\alpha$).  Therefore, the critical t-value is calculated as
-
-$t_\alpha = \frac {(t_1 S_{\bar{Y_1}}^2 + t_2 S_{\bar{Y_2}}^2)}{(S_{\bar{Y_1}}^2 + S_{\bar{Y_2}}^2)}$
-
-where $t_1$ and $t_2$ are calculated with $r_1 -1$ and $r_2 -1$ degrees of freedom, respectively.
-
-#Case 2      Independent samples with equal population variances but unequal sample sizes
+### Independent samples with equal population variances : Case 1 (#Case1)
 
 When the two population variances are equal, then the two sample variances are estimates of the same population variance.  To calculate a better estimate of this value, we can average the two sample variances to calculate the pooled sample variance $( S^2 )$ and the standard error of the difference as
 
-$S^2 = \frac {({{S_1}^2})({r_1 - 1}) + ({{S_2}^2})({r_2 - 1})} {(r_1 + r_2 - 2)}$      with     $df = r_1 + r_2 -2$
+$S^2 = \frac{({{S_1}^2})({r_1-1})+({{S_2}^2})({r_2-1})}{(r_1+r_2-2)}$      with     $df = r_1+r_2-2$
 
-When the sample variances are pooled, the standard error of the difference can be calculated as
+$S_{\bar{d}} = [({S}^2)({1/r_1}+{1/r_2})]^{1/2}$ 
 
-$S_{\bar{d}} = [({S}^2)({1 / r_1} + {1 / r_2})]^{1/2}$ 
+When **the two sample sizes are equal**, the pooled variance and the standard error of the difference can more simply be calculated as
+
+$S^2 = \frac{{{S_1}^2}+{{S_2}^2}}{2}$       with     $df = 2(r-1)$
+
+$S_{\bar{d}} = (\frac{{2S}^2}{r})^{1/2}$ 
+
+$t = \frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$
 
 
-#Case 3      Independent samples with equal population variances and equal sample sizes
+### Independent samples with unequal population variances : Case 2 (#Case2)
 
-When the two population variances are equal and the two sample sizes are equal, the pooled variance and the standard error of the difference can be calculated as
+When the population variances are unequal, we calculate the standard error of the difference using the known information about the sample variances and sample sizes
 
-$S^2 = \frac {{{S_1}^2} + {{S_2}^2}} {2}$       with     $df = 2(r-1)$
+$S_{\bar{d}} = (\frac{{S_1}^2}{r_1}+\frac{{S_2}^2}{r_2})^{1/2}$      with     $df = r_1+r_2-2$
 
-$S_{\bar{d}} = (\frac {{2S}^2}{r} )^{1/2}$ 
+$t = \frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$
 
-#Case 4      Paired samples
+Since the population variances are unqual, we cannot use the Student t-table to identify the critical t-value ($t_\alpha$).  Therefore, the critical t-value is calculated as
 
-When observations come from one common unit (adjacent plots in the same field, pigs from the same pen) and are assigned to different treatments, they are considered paired samples.  The difference between paired averages ($\bar{d}$), the variance of the difference and the standard error of the difference are calculated as
+$t_\alpha = \frac{(t_1 S_{\bar{Y_1}}^2+t_2 S_{\bar{Y_2}}^2)}{(S_{\bar{Y_1}}^2+S_{\bar{Y_2}}^2)}$
+
+where $t_1$ and $t_2$ are calculated with $r_1 -1$ and $r_2 -1$ degrees of freedom, respectively.
+
+
+### Paired samples : Case 3 (#Case3)
+
+When observations are made on the same experimental unit (adjacent plots in the same field, pigs from the same pen) and are assigned to different treatments, they are considered **paired samples**.  The difference between paired averages ($\bar{d}$), the variance of the difference and the standard error of the difference are calculated as
 
 $\bar{d} = \frac{\sum{d_i}}{r}$
 
-$S_d^2 = \frac{\sum(d_i -\bar{d})^2}{r -1}$     with     $df = r -1$
+$S_d^2 = \frac{\sum(d_i-\bar{d})^2}{r-1}$     with     $df = r-1$
 
 $S_\bar{d} = (\frac{S_d^2}{r})^{1/2}$
 
+$t = \frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$
 
-# Confidence Intervals
+
+<br>
+Table: (\#tab:CaseEquations) 
+
+| Case  |  Pop Variances  |  Sample Size  |  Paired/Independent  |                       Sample Variance                           |        Standard Error of the Difference           |      df     |          t-statistic          |
+|------:|:---------------:|:-------------:|:--------------------:|:---------------------------------------------------------------:|:-------------------------------------------------:|:-----------:| :-------------------------------------------:|
+|   1   |      Equal      |Equal/Not Equal|     Independent      | $\frac{({{S_1}^2})({r_1-1})+({{S_2}^2})({r_2-1})}{(r_1+r_2-2)}$ |       $[({S}^2)({1/r_1}+{1/r_2})]^{1/2}$          | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$  |
+|   1   |      Equal      |     Equal     |     Independent      |              $\frac{{{S_1}^2}+{{S_2}^2}}{2}$                    |           $(\frac{{2S}^2}{r})^{1/2}$              |   $2(r-1)$  | $\frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$|
+|   2   |    Not Equal    |Equal/Not Equal|     Independent      |                                                                 | $(\frac{{S_1}^2}{r_1}+\frac{{S_2}^2}{r_2})^{1/2}$ | $r_1+r_2-2$ |  $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$  |
+|   3   |      Equal      |     Equal     |       Paired         |          $S_d^2=\frac{\sum(d_i-\bar{d})^2}{r-1}$                |            $(\frac{S_d^2}{r})^{1/2}$              |     $r-1$   | $\frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$|
+
+<br>
+
+
+
+### Confidence Intervals
 
 After identifying the difference between the two samples averages ($\bar{d}$) and the standard error of the difference ($S_{\bar{d}}$), a confidence interval for the mean difference can be calculated to understand the level of confidence associated with the estimated mean difference. 
 
@@ -98,9 +226,146 @@ Note that for Case 1, you will need to calculate the critical t-value (see Case 
 
 ## Exercises and Solutions
 
+1. Data is collected on the insecticidal properties of two populations of lima beans, *Phaseolus lunatus*, representing different geographical origins.  Random samples of the two populations, Andean and Mesoamerican, are cultivated in Davis, CA and data is collected on the cyanide content of flower buds. The data is presented in the table below. 
+
+<br>
+
+Table: (\#tab:CrossedFactors) Cyanide content of flower buds (nM HCN) of Andean and Mesoamerican lima beans
 
 
-## Homework
+| Lima Population   |  Sample Size  |   Mean   |    SD    |
+|------------------:|:-------------:|:--------:|:--------:|
+| Andean            |       20      |   0.74   |   0.36   |
+| Mesoamerican      |       48      |   6.18   |   2.28   |
+
+
+<br>
+
+
+
+
+Is there a significant difference in yield between the two bean populations, assuming the following conditions:
+
+
+
+
+## Homework : Two Population Means
+
+### Walking Spiders
+
+Wilder and Rypstra (2004) examined the effect of praying mantis excrement on the behavior of wolf spiders to test whether cues from an introduced predator (the praying mantis) would change the movement rate of the native wolf spider. They put 15 wolf spiders in individual containers; inside each container there were two semicircles of filter paper. One semicircle was smeared with praying mantis excrement and one circle was without excrement. The researchers observed each spider for one hour, and calculated spider mean walking speed while it moved across first the excrement circle and then the non-excrement circle. (Each of the 15 spiders was exposed to both treatments). Data were modified for the purpose of homework and are not the original true data.			
+
+```{r}
+
+walking.spiders <- data.frame(
+  'Spider Number' = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+  'no excrement (cm/sec)' = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
+  'excrement (cm/sec)' = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3),
+  'difference' = c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3.0, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4)) 
+
+```
+<br>
+
+Table: (\#tab:WalkingSpiders) The mean walking speed of 15 wolf spiders inside a container in the presence and absence of praying mantis excrement.
+
+
+| Spider Number   | no excrement (cm/sec) |  excrement (cm/sec)  |    difference    |
+|----------------:|:---------------------:|:--------------------:|:----------------:|
+|       1         |          2.5          |         0.4          |        2.1       |
+|       2         |          5.5          |         1.9          |        3.6       |
+|       3         |          1.1          |         1.2          |       -0.1       |
+|       4         |          2.7          |         2.6          |        0.1       |
+|       5         |          2.8          |         4.3          |       -1.5       |
+|       6         |          1.6          |         0.3          |        1.3       |
+|       7         |          3.2          |         1.0          |        2.2       |
+|       8         |          4.5          |         1.5          |        3.0       |
+|       9         |          5.0          |         3.3          |        1.7       |
+|       10        |          6.9          |         2.6          |        4.3       |
+|       11        |          2.2          |         0.7          |        1.5       |
+|       12        |          3.9          |         1.4          |        2.5       |
+|       13        |          3.8          |         2.1          |        1.7       |
+|       14        |          3.5          |         3.4          |        0.1       |
+|       15        |          5.7          |         2.3          |        3.4       |
+
+<br>
+
+1. Calculate the average speed and sample variance for each treatment.
+
+2. Calculate the difference in speed between treatments for each spider. Report the average difference.
+
+3. Calculate the sample variance for the difference between treatments.
+
+4. Calculate the estimated variance of the averages of difference between treatments.
+
+5. Is this a paired or independent sample case?
+
+6. Calculate the t-value that corresponds to the observed difference.
+
+7. Calculate the critical t value to determine if the difference is significant at the 5% level.
+
+8. Calculate a 95% confidence interval for the difference between treatment means.
+
+9. Can you conclude with 95% confidence that mean spider walking speed differed based on cue (praying mantis excrement)?
+
+
+### Rat Life
+
+Carlson and Hoelzel looked at the average lifespan of a rats based on gender (1946, Journal of Nutrition). Below is lifespan (days) data from 14 male and 14 female rats, you may assume rat lifespan is distributed normally. Data were modified and are not the original true data. Assume variances are the same for males and females.	
+```{r}
+
+rat.life <- data.frame(
+  'males' = c(700, 825, 425, 500, 575, 725, 800, 475, 575, 725, 500, 700, 575, 775),
+  'females' = c(450, 725, 675, 725, 750, 850, 690, 725, 475, 700, 725, 475, 825, 725))
+
+sample.avg <- sapply(rat.life, mean)
+
+sample.var <- sapply(rat.life, var)
+
+```
+
+<br>
+
+Table: (\#tab:InterSteps)
+
+|   rat   |     males     |      females      |    
+|--------:|:-------------:|:-----------------:|
+|    1    |      700      |        450        |   
+|    2    |      825      |        725        |  
+|    3    |      425      |        675        |  
+|    4    |      500      |        725        |  
+|    5    |      575      |        750        |  
+|    6    |      725      |        850        |  
+|    7    |      800      |        690        |  
+|    8    |      475      |        725        |  
+|    9    |      575      |        475        |  
+|    10   |      725      |        700        |  
+|    11   |      500      |        725        |  
+|    12   |      700      |        475        |  
+|    13   |      575      |        825        |  
+|    14   |      775      |        725        |  
+|--------:|:-------------:|:-----------------:|
+| average |     633.928   |       679.642     | 
+|  s.var  |    17269.917  |      15571.016    | 
+
+<br>
+
+Test the hypothesis that lifespan does not differ between sexes.
+
+10. Write the corresponding null and alternative hypothesis.
+
+11. Assume homogeneous variance and calculate the pooled sample variance for rat lifespan.
+
+12. Calculate the estimated variance of the difference between sample averages.
+
+13. Calculate the t value to test for difference between sexes in lifespan. Subtract males from females.
+
+14. Calculate the degrees of freedom of the t value.
+
+15. Calculate the probability of observing a larger absolute value of t if Ho were true.
+
+16. What do you conclude based on whether the calculated p is greater than alpha = 0.05.
+
+
 ## Laboratory Exercises
 
 ### Plant Sciences

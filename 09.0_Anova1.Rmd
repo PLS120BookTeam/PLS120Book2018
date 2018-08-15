@@ -1,8 +1,39 @@
 ---
-output: html_document
-editor_options: 
-  chunk_output_type: console
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+  pdf_document:
+    toc: yes
 ---
+
+```{r setup0, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+# load packages for chapter
+
+options(digits = 10)
+library(bookdown)
+library(emmeans)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(tables)
+library(pander)
+library(multcomp)
+library(agricolae)
+library(nlme)
+library(car)
+library(tidyr)
+
+```
+
 # Analysis of Variance {#chAnova}
 
 ## Learning Objectives for Chapter
@@ -50,6 +81,7 @@ $\epsilon_{ij}$ is the experimental/residual error for treatment $i$ and repetit
 #ANOVA Table
 
 An experiment that tests four different treatments with five different replications will allow researchers to partition the variance into differences among treatments and within treatments (experimental error).  This type of experiment is considered a completely randomized design when the observational units for treatment and the replications are randomized.  
+
 
 ------------------------------------------------------------------------------------------
 Source         df       Sum of Squares (SS)       Mean Squares (MS)        Observed F
@@ -135,11 +167,141 @@ $H_0 : \mu_1 = \mu_2 = ... =\mu_k$ for $k$ treatments
 $H_1 : at least 1 treatment is different$     
 
 
-
-
 ## Exercises and Solutions
 
 ## Homework
+
+### Introduction to ANOVA
+
+This set of exercises introduces the need for and shows the use of a method called Analysis of Variance (ANOVA). This method is used to determine if there are differences in the means of several populations. Instead of two populations, now there are many. We start with a type of ANOVA called One-way ANOVA. The term "One-way" means that the populations may differ in only one factor. For example, the factor can be the amount of fertilizer applied to a crop or the type of diet fed to an animal. Conversely, "Two-way" ANOVA involves more than one factor, for example when plots differ not only in the amount of fertilizer but also in the amount of irrigation. For now we focus on one-way ANOVA.							
+							
+### Need for ANOVA
+
+We already know how to compare two means. When we have many means and want to determine if any of them are different we could simply test all possible pairs. Why is this not a good idea unless we take precautions? This first part of this homework illustrates this.	
+
+### Comparison of Diets
+
+You are looking for diets that reduce blood cholesterol in rats. You created 14 test diets and did an experiment in which 4 randomly selected rats were fed each diet. Blood cholesterol was measured on each rat at the end of 30 days of feeding.  Because you do this before knowing about ANOVA you decide to test for differences using the independent observations procedure for two population means, taking two diets at a time. You use alpha=0.05 for each test. Assume that the test are  all independent.							
+
+**Binomial**
+
+1. How many different tests of $H_0: \mu1 =\mu2$ do you make? Consider that each time you make a test you are choosing 2 out of 14 means. The order of the means does not matter, because we are making 2-tailed tests.				
+
+2. What is the probability that you make a type I error in each test separately?
+
+3. What is the probability that you make a type I error in just one of all the tests?
+
+4. What is the probability that you make a type I error in none of the tests?
+
+5. What is the probability that you make a type I error in at least one test (family-wise error rate)?
+
+### Use of ANOVA
+
+When you make a lot of tests, your chance of making at least one mistake can be quite large. ANOVA avoids the problem with your "all-tests" approach by doing a single test that simultaneously checks for evidence of at least one difference. Interestingly, although the test is to determine if there are differences among means, it actually is a test of equality of variances estimated in two different ways. So first we practice testing for equality (or difference) of variances. When two random variables have normal distributions with equal variance, the ratio of sample variances from each population has an F distribution (SG textbook pages 54 and 81).							
+
+### Test of Equality of Variances
+
+The data below are samples of forage yield (ton/ha) from a variety of fescue grown with and without irrigation. Test the hypothesis that irrigated and rainfed yields have the same variance.		
+
+```{r}
+
+test.of.eq.var <- data.frame(
+'rainfed'<- c(4.55531, 3.28384,3.69763, 4.97093, 4.86167, 3.51156, 5.37135, 4.17079, 3.51320, 4.02560, 
+              2.79041, 3.55350, 3.22606, 5.89298, 1.66526, 4.16665, 3.50212, 3.72783, 2.36477, 3.30673, 
+              4.40777, 3.66480, 3.35171, 3.10409, 2.85976, 3.81750, 5.39221, 4.99803,4.11388, 4.11004),
+'irrigated' <- c(13.10275, 11.66548, 8.40485, 8.37005, 10.32271, 10.22372, 8.08630, 12.99069, 11.70000, 12.10000, 
+                 7.87410, 10.22707, 12.10700, 11.00452, 10.64577, 8.68308, 6.83079, 12.25721, 10.20000, 12.52602, 
+                 NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
+
+```
+
+**Note: because our two treatments do not contain the same number of samples, 'NA' values are included to balance out the dataset in R.**
+
+For the following calculations, assume an $\alpha = 0.05$, and $df_{rainfed} = 29$ and $df_{irrigated} = 19$ to calculate these values.
+
+6. Calculate the sample variances and report the "calculated" or sample F value. 
+
+7. What is the probability of observing an F-value larger than the one observed? 
+
+8. What is the critical F "from table?"
+
+9. Interpret the results of the test of equality of variances.
+
+### Estimation of the Variance Between and Within Samples
+
+For this section of the exercise we will use yield (ton/ha) data about 10 fescue varieties, all grown in rainfed conditions. We assume that the variances are the same for all varieties. This is an important point to understand: we assume that the variance is the same for all varieties, regardless of their means. We are referring to the variances within each sample. Because the variances are assumed to be the same, we can follow the idea used in Case 1 of two populations means (textbook page 88) and pool the estimates to get a better overall estimate of the variance.				
+
+These are randomly simulated data. All variances are equal to 1 and the true means are below. These values are given just FYI, to see how samples differ.
+
+```{r}
+
+fescue.samples <- data.frame(
+'var1' = c(3.10, 3.88, 2.37, 3.95, 2.42, 1.72, 3.28, 2.51, 2.44), 
+'var2' = c(3.84, 2.65, 3.10, 2.83, 1.81, 3.86, 4.25, 4.21, 5.44), 
+'var3' = c(5.80, 5.87, 4.25, 2.56, 4.32, 3.05, 4.31, 3.67, 2.36), 
+'var4' = c(5.03, 2.18, 3.49, 4.50, 1.99, 2.95, 3.48, 2.74, 3.89), 
+'var5' = c(3.90, 4.24, 4.60, 5.00, 4.04, 4.85, 4.65, 4.26, 5.47), 
+'var6' = c(7.57, 3.76, 6.66, 5.87, 5.69, 6.41, 5.12, 6.74, 6.04), 
+'var7' = c(2.47, 4.23, 2.63, 4.68, 3.22, 3.88, 3.17, 3.62, 3.22), 
+'var8' = c(3.23, 4.15, 4.12, 6.05, 3.66, 4.90, 3.88, 3.76, 3.15), 
+'var9' = c(4.01, 5.46, 4.31, 5.63, 5.22, 4.38, 4.75, 4.09, 4.60),
+'var10' = c(6.96, 5.79, 6.76, 6.25, 6.83, 7.24, 7.26, 5.00, 4.66))
+
+#Actual Population Means
+pop.means <- data.frame(
+'var1' = 3.0, 
+'var2' = 3.5, 
+'var3' = 4.0, 
+'var4' = 3.0, 
+'var5' = 5.0, 
+'var6' = 6.0, 
+'var7' = 3.2, 
+'var8' = 3.9, 
+'var9' = 4.5, 
+'var10' = 6.0)
+
+df <- data.frame('var1' = 8, 'var2' = 8, 'var3'= 8, 'var4' = 8, 'var5' = 8, 'var6' = 8, 'var7' = 8, 'var8' = 8, 'var9' = 8, 'var10' = 8)
+
+#Sample Averages for Each Variety
+sample.avg <- sapply(fescue.var, mean)
+
+#Sample Variances for Each Variety
+sample.var <- sapply(fescue.var, var)
+
+```
+
+For the following calculations, assume an $\alpha = 0.05$, and $df_{var_i} = 8$ to calculate these values.
+
+$S^2_{\bar{Y}} = \frac{S^2_{Y}}{r}$
+
+$S^2 = \frac{(r_1 - 1)S^2_{1} + (r_2 - 1)S^2_{2} +(r_3 - 1)S^2_{3} + (r_4 - 1)S^2_{4} + (r_5 - 1)S^2_{5} + (r_6 - 1)S^2_{6} + (r_7 - 1)S^2_{7} + (r_8 - 1)S^2_{8} + (r_9 - 1)S^2_{9} + (r_10 - 1)S^2_{10}}{(r_1 -1) + (r_2 -1) + (r_3 -1) + (r_4 -1) + (r_5 -1) + (r_6 -1) + (r_7 -1) + (r_8 -1) + (r_9 -1) + (r_{10} -1)}$
+
+10. Estimate the pooled variance for the 10 varieties of fescue.
+
+
+Now we recall that the variance of averages for samples from a population is the variance of individual observations divided by sample size. If it is true that all means are the same for all varieties, then we can obtain another estimate of the individual variance by calculating the variance among averages and multiplying by sample size.	
+
+
+11. Estimate the variance of yield using the variance among averages and sample size. Refer to the equation you were asked to memorize for this course.						
+12. What is the overall average?
+
+13. What is the pooled within variance?
+
+14.  What is the variance of averages?
+
+15.  What is the second variance estimate?
+
+16.  What is $F_{calc}$?
+
+17.  What is $F_{critical}$?
+
+18.  What is P($F$ > $F_{calc}$)?
+
+19.  What is $df_{numerator}$?
+
+20.  What is $df_{denominator}$?
+
+
 
 ## Laboratory Exercises
 
