@@ -21,7 +21,7 @@ See "TeachingExperimentalDesign2014.pdf"
 
 Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments were not assigned independently of other characteristics of experimental units. For example, consider the comparison of susceptibility to the common cold between people who exercise regularly and sedentary people. Any difference detected cannot be attributed to exercise, because it may be that colds and exercise are unrelated but have a common cause. It may be that people who have to work more indoors exposed to contagion also have less time to exercise. Work indoors causes both more colds and less time to exercise. Changing the level of exercise will not change the incidence of colds unless it also reduces the time people spend indoors exposed to contagion.
 
-## Experimental design and Treatment Structure
+## Experimental Design and Treatment Structure
 
 Experimental design in the narrow sense refers to the arrangement of experimental units and the manner in which treatments are assigned to experimental units. Experimental design determines the sources of errors and the apportioning of variance to typically uninteresting sources such as blocks.
 

@@ -86,3 +86,22 @@ div.mydef:before {
     position:relative;
     padding-right: 20px;
 }
+
+div.think {
+  font-weight: normal;
+  font-family: arial;
+  padding: 10px;
+  border: 1px;
+  color: #050538;
+  background-color: #f7fcfb;
+  margin: 40px;
+  display: inline-block;
+}
+
+div.think:before {
+    content: url(images/thinking.png);
+    float: left;
+    display: inline-block;
+    position:relative;
+    padding-right: 20px;
+}

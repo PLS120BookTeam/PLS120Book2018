@@ -21,7 +21,9 @@ This way, there is no implied difference in the concept of making an CI for the 
 
 ## Theme: compare A and B
 
-A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is used when whe have more than one pair of parameters, compariosin of two population means is used when we have just two parameters, and a single population test is used when one of the values is a known number. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
+See CommonTheme.pdf in Images.
+
+A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is used when whe have more than one pair of parameters, comparison of two population means is used when we have just two parameters, and a single population test is used when one of the values is a known number. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
 
 ## Confidence intervals
 Explain why we prefer a 95% CI in the middle instead on both ends of a distribution.
@@ -48,6 +50,12 @@ Include simulation or figure with known population parameters. Show 100 Ci's and
 ## What is the meaning of the p-value?
 
 http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
+
+## Types of Errors in Hypothesis testing
+
+```{block, type = 'stattip'}
+- Even when everything is done correctly and assumptions are met, we are expected to make errors in hypothesis testing. We will reject true null hypothesis and fail to reject false ones. Statistics gives us methods to estimate and set the approximate rates at which we makes different types of mistakes. If assumptions are not valid, or methods are applied incorrectly we will make mistakes with unknown frequency.
+```
 
 ## Exercises and Solutions
 

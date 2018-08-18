@@ -38,80 +38,47 @@ library(tidyr)
 
 ## Learning Objectives for Chapter
 
+1. Translate scientific questions into null and alternative hypotheses.
+1. State the null and alternative hypotheses for ANOVA.
 1. Write down the model for ANOVA and label its components.
 1. Define experimental unit and determine number of experimental units in an experiment.
 1. State the typical assumptions for ANOVA.
 1. Test ANOVA assumptions.
-1. Translate scientific questions into null and alternative hypotheses.
-1. State the null and alternative hypotheses for ANOVA.
 1. Describe how variance is partitioned in a simple one-way ANOVA.
 1. Calculate sum of squares and the corresponding degrees of freedom.
 1. Compare ANOVA with t-tests for hypothesis testing.
 1. Calculate of experimental error with and without subsamples.
 1. Run an ANOVA and interpret the results in terms of the original scientific question.
-1. Run a T-test and report the calculated t-value.  Compare this value to the F-value; what is the relationship?
 
-##Analysis of Variance (ANOVA)
+## Introduction to ANOVA)
 
-In the previous chapter, significant differences between two treatments were identified with t-tests.  However, there may be experiments when researchers want to test more than two treatments at the same time.  For example, a researcher may want to test the effects of 4 different fertilizer levels to compare yield, or a researcher may want to test the effects of 4 different diets on milk quality production in cows.  In these experiments, we can use the analysis of variance to compare the different sources of variation (treatments) to determine if any are significant.  
+In the previous chapter we used t-tests to test the null hypothesis that two means are equal. The general idea was that if sample means differ a lot more than expected if true means were equal, we conclude that means were not equal. In each test we incurred a risk of making a mistake, either by rejecting a true null hypothesis of by failing to reject a false one. People are particularly keen on making sure that they do not reject true null hypotheses ^[There may be some reasons to favor concern about error type I vs. II, but neither error is inherently more troubling. It is more useful to assess the relative importance of errors by thinking about their consequences. What happens if you fail to reject a false hypothesis? What happens if you reject one that is true?] This means that we want to make sure that we control the probability or making an error type I, called $\alpha$ and that we kwep it at the selected value, usually 0.05.
 
-Analysis of Variance allows researchers to calculate important components of their experiment
-1. partition the total variation (total sums of squares) into different sources of variation (treatments, residual/experimental error)
-2. estimate the amount of variation per experimental unit from the different sources of variation
-3. compare the different sources of variation using an F-test to determine if variances are equal
+However, there are stuatioins when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. The analysis of variance helps correct this problem by performing a single test of the null hypothesis, regardless of the number of treatments.
 
-##Assumptions of ANOVA
+```{block, type='mydef'}
+_ The probability of making an error in one test is $\alpha$ and is called the test-wise error rate. \
+_ The probabiliyt of making at least one error in a set  or "family" of tests is called the *family-wise* error rate.\
+- For all tests done in a experiment, the error rate is called *experiment-wise*.
+```
 
-Prior to running an ANOVA, there are assumptions that must all be met
-1. the data collected must be normally distributed 
-2. each experimental unit must be independent from any other experimental unit
-3. the variances of the different treatments are homogeneous
-4. the treatment and residual effects are additive
+Before we present the method in detail, we illustrate it with an intuitive example. The null hypothesis of equality of all means is rejected if the variation among groups or sample averages is much larger than expected on the basis of the variation within samples. All objects in each of the square groups below were randomly selected from a single larger set called  *parent* set. The set of objects in any square is called a *group*. Does it look like all groups have the same parent?
 
-##Partitioning of Variance
-
-When the different components of an experiment are identified and the effects are additive, then we can use a linear equation to calculate the value of any observation in the experiment.  
-
-$Y_{ij} = \mu_{..} + \tau_i + \epsilon_{ij}$       where
-
-$\mu{..}$ is the overall mean
-$\tau_i$ is the treatment effect of treatment $i$ 
-$\epsilon_{ij}$ is the experimental/residual error for treatment $i$ and repetition $j$
-
-#ANOVA Table
-
-An experiment that tests four different treatments with five different replications will allow researchers to partition the variance into differences among treatments and within treatments (experimental error).  This type of experiment is considered a completely randomized design when the observational units for treatment and the replications are randomized.  
-
-
-------------------------------------------------------------------------------------------
-Source         df       Sum of Squares (SS)       Mean Squares (MS)        Observed F
-------------------------------------------------------------------------------------------
-Total       $kr-1$            $TSS$      
-
-Among        $k-1$            $SST$                   $MST$             $\frac{MST}{MSE}$
-Treatments
-
-Within     $k(r-1)$           $SSE$                   $MSE$
-Treatments
-------------------------------------------------------------------------------------------
-
-ANOVA intuition. Present students with a series of groups of objects and ask them to guess if they think they are subsets of the some large group of whether any group seems to come from a different population.
-
-Exercise: All objects in each of the squares below were randomly selected from a single larger set called  *parent* set. The set of objects in any square is called a *group*. Does it look like all groups have the same parent set?
-
-```{r anova.intuition1, fig.cap="Does it look like all groups come from the same parent population?"}
+```{r anova.intuition1, echo=FALSE, out.width='60%', fig.cap="Does it look like all groups come from the same parent population?"}
 
 # Code to generate 4 groups from two populations.
 
 library(randomcoloR)
 
-par(mfrow = c(2,2))
+set.seed(1005)
+
+par(mfrow = c(2,2), mai = c(1, 0.1, 0.1, 0.1))
 
 for (i in 1:4) {
   plot(rep(1:3, 3), 
          rep(1:3, each = 3),
          pch = 21,
-         cex = 4,
+         cex = 6,
        xlim = c(-1, 5), 
        ylim = c(0.5, 3.5),
        bg = randomColor(count = 9, 
@@ -126,17 +93,19 @@ for (i in 1:4) {
 
 Is the answer the same for the next figure?
 
-```{r anova.intuition2, fig.cap="Does it look like all groups come from the same parent population?"}
+```{r anova.intuition2, echo=FALSE, out.width='60%', fig.cap="Does it look like all groups come from the same parent population?"}
 
 # Code to generate 4 groups from a single population.
 
-par(mfrow = c(2,2))
+set.seed(3833)
+
+par(mfrow = c(2,2), mai = c(1, 0.1, 0.1, 0.1))
 
 for (i in 1:4) {
   plot(rep(1:3, 3), 
          rep(1:3, each = 3),
          pch = 21,
-         cex = 4,
+         cex = 6,
        xlim = c(-1, 5), 
        ylim = c(0.5, 3.5),
        bg = randomColor(count = 9, 
@@ -149,6 +118,192 @@ for (i in 1:4) {
 
 
 ```
+
+Chances are that you thought one group was different from the rest in the first case, whereas no group stood out in the second case. Your eye (acutally, mostly your brain) automatically assessed the variability between and within groups and compared them. One group in the first picture differed more from the rest than expected based on the variation of color within groups. This is the basis for ANOVA.
+
+The intuitive recognition of group differeces above is probably not the same for all people because of variation in the way people perceive and process color. Therefore, a formal and objective method has to be used. Most of the rest of this chapter consists of explaining how the intuition is formalized to allow calculations that are not subjective and that lead to the same results, regardless of the person doing the test.
+
+
+Analysis of variance allows us to use data to calculate the following:
+
+1. Total variation among observations, variation between groups and variation within groups.
+2. Ratio of variance between:within groups and its expected statistical distribution.
+3. Probability of obtaining the ratio equal to or more extreme than the observed one if means are all equal.
+
+
+The main idea behind ANOVA is based directly on the most important equation in this course:
+
+<br>
+
+\begin{equation}
+\sigma^2_{\bar{Y}} = \frac{\sigma_Y^2}{n} \quad \text{ for populations} \\[20pt]
+S^2_{\bar{Y}} = \frac{S_Y^2}{n} \quad \text{ for samples} \\[20pt]
+\end{equation}
+
+<br>
+
+```{block, type = 'stattip'}
+- The variance of the average is the variance of the original random variable divided by the size of the sample used to calculate the average.
+```
+
+
+When there are several treatments, and IF THE TREATMENTS HAVE NO EFFECTS on the response variable, the observations in each treatment are a sample from the population, and all samples come from the same population. Therefore, there is one sample from the same population for each treatment in the experiment. Each sample provides an average, so we have as many averages as there are treatments. Because we have many averages, we can estimate the variance among averages $\sigma_{\bar{Y}}$ directly, using the calculation formula for the estimated variance of any random variable: $S^2_{\bar{Y}} = \frac{1}{k-1} \sum_{i=1}^k (\bar{Y}_k - \bar{Y}_{..})^2$. We obtain the estimated variance of Y simply by multiplying the estimated variance of the averages times the sample size: $S^2_Y = k \ S^2_{\bar{Y}}$. Note that this calculation results in a valid estimate of the variance ONLY if all means and variances are equal.
+
+We can also estimate the variance using the pooled variance: $S^2_Y = \frac{1}{k \ (r - 1)} \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{ij} - \bar{Y}_{.k})^2$. The pooled variance is the average squared deviations from each sample average, and thus, it does not need the means to be equal to be a valid estimate of the common variance for all treatments.
+
+
+If indeed the first estimate above is a valid one, the quotient of the first over the second should have a distribution with values about 1.0. The statistical distribution resulting from the quotient of two variance estimates is called an F-distribution, which was fully described in the *F Distribution* section of the [Probability chapter](#chProb). If the quotient calculated, called "calculated F-value," is too far from 1.0 we conclude that the two variances are not equal, therefore, the estimation of the variance using the averages is not a valid estimate, and the averages are consiudered too different to come from the same population. The means of the source populations must be different, so the null hypothesis is rejected. This is further illustrated with a numerical example below.
+
+The logic behind a rejection of the null hypothesis using ANOVA is analogous to the following situation. Imagine that there are two jars with blue and yellow marbles. These jars represent the two possible cases: urn "Different" on the left is the case where we have different treatment means, whereas urn "Equal" on the right represents the case where all means are the same. On the outside the urns are identical and you cannot see inside. The "Different" urn has 90% blue marbles, whereas the "Equal" urn has only 20% blue marbles. Suppose that the number of marbles is large enough that the probabilities are not affected by the removal of marbles. Only one urn is available to sample from, depending on whether the true but unknonw means are or are not different, but you do not know which one. You sample 5 marbles and they are all blue. Did you sample from "Different" or "Equal?" The null hypothesis is that the means are equal, which in the analogy signifies that the hypothesis is that we sampled the jar on the right labeled E for "Equal." We cannot know for sure where the marbles came from, because there are both blue and yellow marbles in both jars.
+
+<br>
+<br>
+```{r urns1, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '70%', fig.align='center', echo=FALSE, fig.cap ="Representation of the logic of hypothesis testing in frequentist statistics. Urn D on the left represents the situation when means of treatments are different. Urn E on the right represents the situation when means are all equal. Imagine that there is a large number of marbles in each jar or that sampling is done with replacement. Marbles in each urn represent the distribution of the test statistic under each condition. A sample of r = 5 marbles represents the process of experimentation, sampling and calculation of the observed statistic value. Intuitively, if most of the marbles sampled are blue, we will tend to say that the urn sampled was D. As an exercise, design urns with various proportions of colors and see if it becomes easier or harder to guess the sampled urn."}
+
+knitr::include_graphics("images/UrnsAnova1.png")
+
+```
+<br>
+
+Intuition indicates that if most of the marbles are blue, we should reject the null hypothesis, otherwise we fail to reject it. Say that you sample 5 marbles and 4 are blue. The logic of Ho testing would go somethiogn like this: "I hypothesize that we sampled the E jar with mostly yellow marbles, but I got 4 blue, and the chances of getting 4 blue marbles from the E jar is very small, so I will guess that in reality I sampled from the D jar. At least two means are different." In the case of the marbles, all parameters of the problem are known, so we can calculate the exact probabilities of making errors. Because sampling is with replacement (or the number of marbles is really large), if the means are all equal, i.e., if we sampled from jar E the probability of getting a blue marble P(blue) in any draw would be constant at 0.20, and the number of blue marbles would have a binomial distribution. Therefore, the probability of getting 4 or more blue marbles from E would be `r round(1 - pbinom(4,5,0.20), 5)`. This is the probability that we reject the null hypothesis while in fact it is true. We can call the number of blue marbles the "decision variable" or sample statistic that we use to determine whether to reject the null hypothesis. The probability of drawing 3 or more blue marbles out of 5 from E is `r round(1 - pbinom(2,5,0.20), 3)`, which is close to the standard $\alpha = 0.05$. Thus, we can say that we will reject the null that we sampled from E if we get 3 or more blue marbles out of 5. In this case calculating the sample statistic and its sampling distribution is rather simple: we count the blue marbles, and the number of blue marbles has a binomial distribution.
+
+<br>
+```{block, type = 'think'}
+The proportion of marbles in the D jar was not used for anything! What if the D jar had just one more blue marble than the E jar??? This is a problem in frequentist statistics: it does not take into account the distribution of the statistics if some version of the alternative hypothesis were true.
+
+```
+<br>
+
+In most experiments, the variable observed is not the numbers of marbles and they do not have a binomial distribution. A more complicated procedure is used to calculate a statistic whose theoretical distribution is known when the null hypothesis is true. This procedure is the analysis of variance, and the statistic calculated is the calculated F-value. When the means are all the same, then the calculated F has an F-distribution with certain parameters called degrees of freedom that depend on sample size and number of treatments compared.
+
+
+
+
+*** Add shiny for students to run simulations of draws from randomly selected urns and the be shown the true urn. Use probabilities such that they can explore both types of errors. Assign homework where they explore the rates of errors as a function sample size and probabilities.****
+
+================================
+FROM lecture notes
+The probability of making a type I error is, by design, equal to alpha. Say that we set alpha to be 0.05. By definition, alpha is the probability that the test statistic (for example tcalc) has an observed value that is greater than the critical value when the null hypothesis is actually true. Alpha is the probability of rejecting a true null hypothesis.
+
+Therefore, we expect to reject 5/100 true null hypotheses. This error rate may be unacceptable if the number of tests is very large and most or all the null hypotheses are true. ANOVA is a method to make a single test that simultaneously tests multiple hypotheses, thus reducing the family-wise or experiment-wise error rate.
+
+Family-wise or experiment wise error rate is the probability of making at least one type I error in one experiment or in a set or “family” of tests. For example, comparing all treatments in an experiment is a family of tests.
+
+In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least on error type I is 1 - 0.95 45 = 0.90!
+
+
+
+When we compared two population means in the case where the population variances were known to be equal, we used a pooled variance to get the best estimate possible for the unknown but common variance.
+
+The pooled variance increases the power of the test because it combines the degrees of freedom from both samples. More degrees of freedom lead to a lower critical t (take a look at the t table), and therefore make it ieasier to detect a significant difference. For example, if we have six observation in each of two samples, the separate degrees of freedom are 5 for each, whereas the pooled variance has 10 df.
+
+The same pooling of variances can be done when we have more than one sample, for as long as we can assume or know that the variances for all the populations from which the samples come are equal. This is called HOMOGENEITY of variances. For example, if we have 4 samples, the pooled variance can be calculated as:
+
+
+Suppose that you take several samples of size r from the same population.
+The number of samples is k.
+The number of observations in each sample is r
+
+We have observed three averages, so we can calculate the sample variance among averages directly and then multiply it to get another estimate of the original population variance.
+
+The first estimate of the variance, which is the pooled variance, does not need the samples to come from the same population, because the deviations are calculated with respect to the average for each sample.
+
+The first estimate of the variance based on the deviations WITHIN samples does not depend on the samples having the same mean. The second estimate that uses the deviations BETWEEN samples and the overall average is an estimate of the population variance only if the populations are all the same. Otherwise, it contains more variation, which is due to the differences between population means.
+
+Therefore, a test of equality of the two estimates of variance constitutes a test of whether the samples come from the same population or not. If the variance BETWEEN is significantly greater than WITHIN, then there must be at least one mean that is different from another.
+
+Therefore, a test of equality of the two estimates of variance constitutes a test of whether the samples come from the same population or not. If the variance BETWEEN is significantly greater than WITHIN, then there must be at least one mean that is different from another.
+
+The calculations for the analysis of variance can also be seen as a partitioning of the total variance in the data. This approach lends itself for presenting the results in what is knonw as an ANOVA table or analysis of variance table.
+
+Each observation is partitioned into overall average, treatment effect and error.
+
+
+LOGIC OF TESTS OF NULL HYPOTHESIS:
+
+IF it is true that one bowl has mostly red and the other mostly blue marbles,
+AND if the marble were selected at random from bowl A,
+THEN the probability of selecting a red marble would be SMALL
+SO, because indeed a red marble was observed, we reject the idea that it came from bowl A.
+
+
+LOGIC OF TESTS OF NULL HYPOTHESIS:
+
+IF the assumptions are true,
+AND the null hypothesis is true,
+THEN the quotient MSTreat/MSE has an F distribution
+with df Treat in numerator and dfe in the denominator.
+THEREFORE, the probability of obtaining a LARGE Fcalc is small.
+SO, if the calculated F is indeed large, we doubt (reject) the null hypothesis.
+
+
+================================
+
+## Model and Partitioning of Variance
+
+
+When the different components of an experiment are identified and the effects are additive, then we can use a linear equation to calculate the value of any observation in the experiment.
+
+<br>
+$$\begin{align}
+&Y_{ij} = \mu_{..} + \tau_i + \epsilon_{ij} \quad \quad i = 1, \dots, k, \quad j = 1, \dots, r \\[10pt]
+&\epsilon_{ij} \sim iid \ N(0, \sigma^2) \\[15pt]
+&\quad \quad \text{where} \\[15pt]
+&\mu_{..} \quad \text{is the overall mean if r is the same in all treatments, otherwise, } \\[15pt]
+&\mu_{..} = \frac{1}{k}\sum_{i = 1}^{k} \mu_{i.}\\[15pt]
+&\tau_i \quad \text{is the treatment effect of treatment i } \\[15pt]
+&\epsilon_{ij} \quad \text{is the experimental error for treatment i and repetition j} \\[15pt]
+& iid \quad \text{means "independent and identically distributed"}
+(\#eq:modelCRD)
+\end{align}$$
+<br>
+
+
+
+When we do not know the parameters of the actual distributions, which is usually the case, parameters are estimated and each observation is partitioned as follows:
+
+<br>
+$$\begin{align}
+&Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_i + \hat{\epsilon}_{ij} \\[10pt]
+&= \bar{Y}_{..} + \hat{\tau}_i + e_{ij} \\[15pt]
+&= \bar{Y}_{i.} + e_{ij} \quad \quad \text{where} \\[15pt]
+
+&\bar{Y}{..} \quad \text{is the overall average calculated as } \frac{1}{k}\sum_{i = 1}^{k} \bar{Y}_{i.}\ \\[15pt]
+&\bar{Y}_{i.} \quad \text{is the average for treatment i} \\[15pt]
+&e_{ij} \quad \text{is the residual error for treatment i and repetition j} \\[15pt]
+(\#eq:estModelCRD)
+\end{align}$$
+<br>
+
+
+### Assumptions of ANOVA
+
+In order for the ANOVA results and interpretation to be valid, the following assumptions must be true:
+
+a. the variable of interest must be normally distributed
+b. each experimental unit must be independent from any other experimental unit
+c. variances of the different treatments must be all equal ("homogeneous")
+d. treatment and residual effects must be additive additive
+
+These assumptions are part of the model above and are important for ANOVA, although some deviation from certain assumptions is not always a grave problem. The main part of the model states clearly that each observation is composed of three additive parts: overall mean, treatment effect and error. Further, the errors,-one for each observation- are assumed to all have identical, independent distributions that are normal with mean 0 and common variance $\sigma^2$ (or standard deviation $\sigma$).
+
+
+Consider for example that the 
+
+
+Because the true parameters are not known,
+
+## ANOVA Table
+
+An experiment that tests four different treatments with five different replications will allow researchers to partition the variance into differences among treatments and within treatments (experimental error).  This type of experiment is considered a completely randomized design when the observational units for treatment and the replications are randomized.  
+
+
+|Source            |  df      | Sum of Squares (SS) | Mean Squares (MS) | Observed F  |
+|:----------------:|:--------:|:-------------------:|:-----------------:|:-----------:|
+|Total             | k r - 1  |     TSS             |                   |             |
+|Among Treatments  | k - 1    |     SST             |        MST        |   MST / MSE |
+|Within Treatments | k (r-1)  |     SSE             |        MSE        |             |
+
 
 ## Estimation of parameters
 
@@ -173,19 +328,19 @@ $H_1 : at least 1 treatment is different$
 
 ### Introduction to ANOVA
 
-This set of exercises introduces the need for and shows the use of a method called Analysis of Variance (ANOVA). This method is used to determine if there are differences in the means of several populations. Instead of two populations, now there are many. We start with a type of ANOVA called One-way ANOVA. The term "One-way" means that the populations may differ in only one factor. For example, the factor can be the amount of fertilizer applied to a crop or the type of diet fed to an animal. Conversely, "Two-way" ANOVA involves more than one factor, for example when plots differ not only in the amount of fertilizer but also in the amount of irrigation. For now we focus on one-way ANOVA.							
-							
+This set of exercises introduces the need for and shows the use of a method called Analysis of Variance (ANOVA). This method is used to determine if there are differences in the means of several populations. Instead of two populations, now there are many. We start with a type of ANOVA called One-way ANOVA. The term "One-way" means that the populations may differ in only one factor. For example, the factor can be the amount of fertilizer applied to a crop or the type of diet fed to an animal. Conversely, "Two-way" ANOVA involves more than one factor, for example when plots differ not only in the amount of fertilizer but also in the amount of irrigation. For now we focus on one-way ANOVA.
+
 ### Need for ANOVA
 
 We already know how to compare two means. When we have many means and want to determine if any of them are different we could simply test all possible pairs. Why is this not a good idea unless we take precautions? This first part of this homework illustrates this.	
 
 ### Comparison of Diets
 
-You are looking for diets that reduce blood cholesterol in rats. You created 14 test diets and did an experiment in which 4 randomly selected rats were fed each diet. Blood cholesterol was measured on each rat at the end of 30 days of feeding.  Because you do this before knowing about ANOVA you decide to test for differences using the independent observations procedure for two population means, taking two diets at a time. You use alpha=0.05 for each test. Assume that the test are  all independent.							
+You are looking for diets that reduce blood cholesterol in rats. You created 14 test diets and did an experiment in which 4 randomly selected rats were fed each diet. Blood cholesterol was measured on each rat at the end of 30 days of feeding.  Because you do this before knowing about ANOVA you decide to test for differences using the independent observations procedure for two population means, taking two diets at a time. You use alpha=0.05 for each test. Assume that the test are  all independent.
 
 **Binomial**
 
-1. How many different tests of $H_0: \mu1 =\mu2$ do you make? Consider that each time you make a test you are choosing 2 out of 14 means. The order of the means does not matter, because we are making 2-tailed tests.				
+1. How many different tests of $H_0: \mu1 =\mu2$ do you make? Consider that each time you make a test you are choosing 2 out of 14 means. The order of the means does not matter, because we are making 2-tailed tests.
 
 2. What is the probability that you make a type I error in each test separately?
 
@@ -197,26 +352,26 @@ You are looking for diets that reduce blood cholesterol in rats. You created 14 
 
 ### Use of ANOVA
 
-When you make a lot of tests, your chance of making at least one mistake can be quite large. ANOVA avoids the problem with your "all-tests" approach by doing a single test that simultaneously checks for evidence of at least one difference. Interestingly, although the test is to determine if there are differences among means, it actually is a test of equality of variances estimated in two different ways. So first we practice testing for equality (or difference) of variances. When two random variables have normal distributions with equal variance, the ratio of sample variances from each population has an F distribution (SG textbook pages 54 and 81).							
-
+When you make a lot of tests, your chance of making at least one mistake can be quite large. ANOVA avoids the problem with your "all-tests" approach by doing a single test that simultaneously checks for evidence of at least one difference. Interestingly, although the test is to determine if there are differences among means, it actually is a test of equality of variances estimated in two different ways. So first we practice testing for equality (or difference) of variances. When two random variables have normal distributions with equal variance, the ratio of sample variances from each population has an F distribution (SG textbook pages 54 and 81).
 ### Test of Equality of Variances
 
-The data below are samples of forage yield (ton/ha) from a variety of fescue grown with and without irrigation. Test the hypothesis that irrigated and rainfed yields have the same variance.		
+The data below are samples of forage yield (ton/ha) from a variety of fescue grown with and without irrigation. Test the hypothesis that irrigated and rainfed yields have the same variance.
 
 ```{r}
 
 test.of.eq.var <- data.frame(
-'rainfed'<- c(4.55531, 3.28384,3.69763, 4.97093, 4.86167, 3.51156, 5.37135, 4.17079, 3.51320, 4.02560, 
+rainfed = c(4.55531, 3.28384,3.69763, 4.97093, 4.86167, 3.51156, 5.37135, 4.17079, 3.51320, 4.02560, 
               2.79041, 3.55350, 3.22606, 5.89298, 1.66526, 4.16665, 3.50212, 3.72783, 2.36477, 3.30673, 
               4.40777, 3.66480, 3.35171, 3.10409, 2.85976, 3.81750, 5.39221, 4.99803,4.11388, 4.11004),
-'irrigated' <- c(13.10275, 11.66548, 8.40485, 8.37005, 10.32271, 10.22372, 8.08630, 12.99069, 11.70000, 12.10000, 
+irrigated = c(13.10275, 11.66548, 8.40485, 8.37005, 10.32271, 10.22372, 8.08630, 12.99069, 11.70000, 12.10000, 
                  7.87410, 10.22707, 12.10700, 11.00452, 10.64577, 8.68308, 6.83079, 12.25721, 10.20000, 12.52602, 
                  NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
 
 ```
 
-**Note: because our two treatments do not contain the same number of samples, 'NA' values are included to balance out the dataset in R.**
-
+```{block, type = 'rtip'}
+Data frames are rectangular tables with data. All columns must have the same length. Because our two treatments do not contain the same number of samples, 'NA' values are included to make columns of equal length that can be joined into a data frame.**
+```
 For the following calculations, assume an $\alpha = 0.05$, and $df_{rainfed} = 29$ and $df_{irrigated} = 19$ to calculate these values.
 
 6. Calculate the sample variances and report the "calculated" or sample F value. 
@@ -260,13 +415,13 @@ pop.means <- data.frame(
 'var9' = 4.5, 
 'var10' = 6.0)
 
-df <- data.frame('var1' = 8, 'var2' = 8, 'var3'= 8, 'var4' = 8, 'var5' = 8, 'var6' = 8, 'var7' = 8, 'var8' = 8, 'var9' = 8, 'var10' = 8)
+df <- data.frame('var1' = 8, 'var2' = 8, 'var3' = 8, 'var4' = 8, 'var5' = 8, 'var6' = 8, 'var7' = 8, 'var8' = 8, 'var9' = 8, 'var10' = 8)
 
 #Sample Averages for Each Variety
-sample.avg <- sapply(fescue.var, mean)
+sample.avg <- sapply(fescue.samples, mean)
 
 #Sample Variances for Each Variety
-sample.var <- sapply(fescue.var, var)
+sample.var <- sapply(fescue.samples, var)
 
 ```
 
@@ -318,7 +473,7 @@ output: html_document
 ---
 ```
 
-```{r setup, include=FALSE}
+```{r setupPS, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 library(pander)
@@ -827,7 +982,7 @@ output: html_document
 ---
 ```
 
-```{r setup, include=FALSE}
+```{r setupAS, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 library(pander)

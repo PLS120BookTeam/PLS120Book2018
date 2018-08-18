@@ -1,7 +1,10 @@
 ---
-output: html_document
-editor_options: 
-  chunk_output_type: console
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
 ---
 
 # Required Math Skills and Symbols {#chMath}
@@ -10,16 +13,17 @@ In this chapter we introduce most of the mathematics and symbols that are used i
 
 A **key point** in this chapter is that 
 
->in statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.
->
+```{block, type = 'stattip'}
+- In statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.
+```
 
 The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throughout the rest of the book.
 
-A second **key concept**, related to the first one, is that 
+A second **key point**, related to the first one, is that 
 
->we rarely, if ever, know the actual "true" value of parameters, \
->variables or quantities in the real world (as opposed to simulations).
->
+```{block, type = 'stattip'}
+- We rarely, if ever, know the actual "true" value of parameters, variables or quantities in the real world (as opposed to simulations).
+```
 
 We do not know parameter values because we rarely know or even have access to the whole population, which would be necessary to "measure" a parameter like the true mean. Even if we had access to the whole population to measure each individual, we would not know parameter values with certainty, because measurements always have "errors." Measurements are imperfect because measuring instruments have limited precision, and because they are used by "imperfect" humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.
 
@@ -320,13 +324,12 @@ A first attempt to estimate the needed proportion is to *model* milk production 
 
 The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between $-\infty$ and $+\infty$, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are **not** important!
 
-***
 
-> > Models are not supposed to be perfect representations of reality,
+```{block, type = 'stattip'}
+- Models are not supposed to be perfect representations of reality,
+they are supposed to be **useful** representations of reality.
+```
 
-> > they are supposed to be **useful** representations of reality.
-
-***
 
 Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the normal distribution used is below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.
 
@@ -820,9 +823,11 @@ abline(0,1, col = "green")
 
 ## Optimization {#mathOptim}
 
-One way to "guess" or estimate the mean of a distribution using a sample is to calculate the *average*. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares - called "least-squares" - is the most common method we will use to make estimates, but it is not the only method. Another common method used is likelihood maximization, whereby parameters are estimated by choosing the values that maximize the likelihood of observing the data. The good news is that for most of the situations we will study, which involve the use of linear models, least-squares and maximum likelihood yield identical results.
+One way to "guess" or estimate the mean of a distribution using a sample is to calculate the *average*. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares - called "least-squares" - is the most common method we will use to make estimates, but it is not the only method. Another common method used is likelihood maximization, whereby parameters are estimated by choosing the values that maximize the likelihood of observing the data. The good news is that for most of the situations we will study, which involve the use of **linear models**, least-squares and maximum likelihood yield identical results.
 
 In many cases, the optimal value for a parameter can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For some advanced statistical methods, there are no equations available, so numerical computations are used to approximate the optimal estimates.
+
+## Linear Models
 
 Linear models are models that can be represented by a linear combination of parameters, it is like a recipe where the ingredients are the parameters. For example, to make a cup of swet tea with milk you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.
 

@@ -1,8 +1,6 @@
 # Probability in Applied Statistics {#chProb}
 
 
-
-
 ## Learning Objectives for Chapter
 
 
