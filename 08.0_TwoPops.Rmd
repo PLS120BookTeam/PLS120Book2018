@@ -66,7 +66,7 @@ We have learned in the previous chapters how to determine if a sample is signifi
 ```
 
 ## Hypothesis Testing
-Before all the calculations have begun, it is important to understand the aim of these calculations.  The purpose of testing two population means is to understand if there is a statistically significant difference between these two populations or two treatments.  Thus, our null  hypothesis and alternative hypothesis can be stated, respectively, as 
+Before all the calculations have begun, it is important to understand the aim of these calculations.  The purpose of testing two population means is to understand if there is a statistically significant difference between these two populations or two treatments. Thus, our null hypothesis and alternative hypothesis can be stated, respectively, as 
 
 $$\text{Null hypothesis: the mean of population 1 is equal to the mean of population 2, or that there is no difference between the two population means} \\[15pt]$$
 $H_0 : \mu_1 = \mu_2$         or       $\mu_{\bar{d}} = 0$
@@ -83,7 +83,7 @@ Samples are considered **independent** when there is no relationship between the
 
  (Figure \@ref(fig:IndSamples))
 
-```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of pigs are randomly placed into two treatments, where $\r$ is the number of samples per treatment, and $\i$ is the sample number for a given treatment"}
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of pigs are randomly placed into two treatments, where $r$ is the number of samples per treatment, and $i$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8IndSamp.png")
 
@@ -93,7 +93,7 @@ Samples are considered **paired** or dependent when there is a relationship betw
 
 In some examples, restrictions may make it difficult to test two treatments on the same individual organism, however, understanding shared relationships between individual organisms may allow paired samples of separate individuals that are within the same experimental unit.  Pigs that are from the same pen share genetic and environmental effects that are unique to that pen, and we can treat individuals from the same pen as our experimental unit.  For example, two pigs from the same pen are assigned to different diets to measure the difference in body weight among all the paired pigs from the same pen.  The difference between the two diets are measured by collectively comparing the sets of pigs from the same pens.  In this example, the experimental unit is not individual pigs but the pens that the pair of pigs come from. 
 
-```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen placed into two treatments, where $\r$ is the number of samples per treatment, and $\i$ is the sample number for a given treatment"}
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen placed into two treatments, where $r$ is the number of samples per treatment, and $i$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8PairSamp.png")
 
@@ -108,7 +108,7 @@ To understand the parameters of the two populations and to identify which Case i
 $$\text{Null hypothesis: the variance of population 1 is equal to the variance of population 2} \\[15pt]$$
 $H_0 : \sigma_1 = \sigma_2$)
 
-$$\text{Alternative hypothesis: the variance of population 1 is not equal to the variance of population 2 \\[15pt]$$
+$$\text{Alternative hypothesis: the variance of population 1 is not equal to the variance of population 2} \\[15pt]$$
 $H_1 : \sigma_1 \neq \sigma_2$)
 
 ```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
@@ -129,9 +129,9 @@ In the calculation, the larger of the two variances is used as the numerator and
 
 $F = \frac {larger S^2}{smaller S^2}$  with $df_{numerator} = r_{larger} -1 , df_{denominator} = r_{smaller} -1$
 
-This calculated F-value can be tested for significance against the critical F-value on the F-distribution table (Appendix XXX).  The degrees of freedom for the two samples are needed to identify the critical F-value on the F-distribution table to determine if the calculated F-value is significant and if our sample variances are equal.  
+This calculated F-value can be tested for significance against the critical F-value on the F-distribution table (Appendix XXX).  The degrees of freedom for the two samples are needed to identify the critical F-value on the F-distribution table to determine if the calculated F-value is significant and if our sample variances are equal.
 
-The results of the F-test will narrow which case to use for calculating the standard error of the difference for our samples. Since this is a two-tailed F-test, the $\alpha$ value to determine the critical F-value, $F_{crit}$, will be divided by two, $\frac{\alpha}{2}$.,
+The results of the F-test will narrow which case to use for calculating the standard error of the difference for our samples. Since this is a two-tailed F-test, the $\alpha$ value to determine the critical F-value, $F_{crit}$, will be divided by two, $\frac{\alpha}{2}$.
 
 ### F-test Decision
 
@@ -223,6 +223,21 @@ ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$
 Note that for Case 1, you will need to calculate the critical t-value (see Case 1 for equation), however for Case 2-4 you can identify this value from the Student t-table (Appendix XXX) with the appropriate degrees of freedom (see appropriate Case for equation). Depending on which case is used to calculate the standard error of the difference, the degrees of freedom to identify the critical t-value ($t_\alpha$) will vary when calculating your confidence intervals. 
 
 
+## What is Significantly Different?
+
+Main point: testing for significant differences is in a way a fool's errand, because unless we are actually sampling exactly the same populations, it is almost certain that the means will be different. When different sets of experimental units are treated differently, *something* is bound to change and most likely the means will be different. If means are different, we will **always** find that they are "significantly" different if we get large enough samples. This means that for the most part, the simple rejection of a null hyothesis of equality is not very informative.
+
+```{bock, type = 'think'}
+
+What!!?? If it is not very informative, why do we test whether means are equal??!! Because of historic reasons mostly, and a little due to misuse and misunderstanding of statistics by pracitioners. The good news is that the same methods are useful to test **better** hypothesis.
+
+```
+
+Statistical significance is not the same as biological or practical significance. This is clearly illustrated by an example. Suppose that you are interested in getting a phone with a long battery life. Model A costs $50 more and has a battery life that is statistically significantly longer than model B. The difference in battery life is 37.5 seconds.
+
+So how do we make useful statistical statements and tests of hypotheses? Now, that is a great question! 
+
+***** Add idea of least practically significant difference and testing null where the point is to determine if means differ at least by a certain amount, instead if they are different at all. COmplete with numerical example examined both ways: are measn different and are means practically different?*****
 
 ## Exercises and Solutions
 
@@ -534,15 +549,15 @@ Answer here:
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area.
 
-
-```{r}
-### Part 1 [25 points]
-
 Milk production (lb), milk composition and body weights of UCD lactating dairy cows was collected in August of 2000.  The cows are classified in two groups, Herd1 and Herd2, based on their genotype.
 
 Does the variance of milk production differ between the two herds (Herd1 vs. Herd2)? Perform a test of hypothesis at the 5% level (α=.05) using the F-statistic. Look up the critical F value in Table A.7 and by using the qf(p = 0.05, df1 = , df2 = ) function.
 
 Complete the calculations "by hand", using only basic R functions like var(). Then, use the var.test () R function to test for difference of variances.
+
+
+```{r}
+### Part 1 [25 points]
 
 
 library(readxl)
@@ -590,7 +605,7 @@ Write the interpretation and conclusion from the test here:
 
 
 
-```{r}
+
 ### Part 2 [30 points]
 
 Calculate the 95% confidence interval for the difference between the milk production of dairy cows between the two herds. *Ignore the possibility of using the z-approximation due to the large sample size and use the t distribution.*

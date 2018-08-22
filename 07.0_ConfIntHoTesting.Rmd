@@ -59,6 +59,15 @@ http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
 
 ## Exercises and Solutions
 
+Exercises for lecture
+
+Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value. Count how many people reject the true null.
+
+Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value + $\delta$. Count how many people reject the true null. Then, make a graph on the board showing the proportion of students that rejected Ho as delta increases. What should the graph look like? Plot against the theoretical t-distribution.
+
+
+
+
 ## Homework
 
 ## Laboratory Exercises

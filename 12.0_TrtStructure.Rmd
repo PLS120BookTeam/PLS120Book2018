@@ -432,11 +432,12 @@ lb.compDat <- lb.compDat[
 
 ```{r LomuBrhoCompDat, message=FALSE, warning=FALSE, paged.print=TRUE, }
 
-kable(list(lb.compDat[1:30, c(1:3,5)], lb.compDat[31:60, c(1:3,5)]), 
-      caption = "Data from experiment on competition between ryegrass and softchess (Laca, unpublished data)", 
-      row.names = FALSE, 
-      digits = c(0, 0, 0, 1, 1)) %>% kable_styling(font_size = 10, 
-                                                   bootstrap_options = c("responsive"))
+list(lb.compDat[1:30, c(1:3,5)], lb.compDat[31:60, c(1:3,5)]) %>%
+   kable(caption = "Data from experiment on competition between ryegrass and softchess (Laca, unpublished data)", 
+         row.names = FALSE, 
+         digits = c(0, 0, 0, 1, 1)) %>% 
+   kable_styling(font_size = 10, 
+                 bootstrap_options = c("condensed"))
 
 ```
 

@@ -353,20 +353,25 @@ The equation $\epsilon_i \sim N(0, \sigma^2)$ is actually a simplified version o
 
 In order to use the simple model to estimate the proportion of cows that produce less than $24 \ kg \ day^{-1}$ we can get a random sample of r cows and, based on that sample, estimate the mean as
 
+<br>
 \begin{equation} 
 \hat{\mu} = \frac{1}{r} \sum_{i=1}^{i=r} Y_i 
 (\#eq:math14)
 \end{equation} 
+<br>
 
 and the variance as
 
+<br>
 \begin{equation} 
 \hat{\sigma^2} =\frac{1}{r-1} \sum_{i=1}^{i=r} (Y_i-\hat{\mu})^2
 (\#eq:math15)
 \end{equation} 
+<br>
 
 where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from the estimated overall mean. These equations are presented with more detail in a later [chapter](\@ref(ch.anova)). Finally, the proportion of cows whose daily milk production is less than $24 \ kg \ day^{-1}$ is estimated as the area under the normal distribution curve between $-\infty$ and $24 \ kg \ day^{-1}$. Using the capital letter $P$ to indicate "probability" we can write:
 
+<br>
 \begin{equation} 
 \begin{aligned}
 &\hat{P}(Y \le 24 \ kg \ day^{-1}) = area \ under \ curve = \int_{-\infty}^{24} f(Y) \ \mathrm{d}Y \\[20pt]
@@ -374,6 +379,7 @@ where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from
 \end{aligned}
 (\#eq:math16)
 \end{equation} 
+<br>
 
 Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016 (https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf). The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (Figure \@ref(fig:propLtMean)) is calculated in R as follows (note how the code is written in several lines and indented for better readability):
 
@@ -430,14 +436,15 @@ arrows(x0 = 13.5, y0 = 0.030, x1 = 20, y1 = 0.02,
 
 ```
 
-We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the "fixed" or non-random parts, and the error is the "random" component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter $\epsilon$ (epsilon) for it. \
- \
+We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the "fixed" or non-random parts, and the error is the "random" component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter $\epsilon$ (epsilon) for it.
 
+
+<br>
 $$ data = Systematic \ Structure + Random \ Variation \\[10pt]
 = Fixed \ Component + Random \ Component \\[10pt]
 = Fixed \ Component + Structured \ Random + White \ Noise$$
+<br>
 
- \
 Models that partition the random component into structured and unstructured (white noise) random parts are beyond the scope of this book.
 
 <br>
@@ -528,12 +535,14 @@ knitr::kable(
 
 milk <- milk[, c("State", "Kcows", "tot.Mkg", "kg.cow.day")]
 ```
+<br>
 
 
 ### A slightly more complex model {#mathBttrMod}
 
 The model used above and stated in equation \@ref(eq:math13) can be improved in many ways. For example, we may guess that a lot the variance in productivity can be between states, due to different levels of investment and development of the industry in different states. By adding a part to account for differences among states in the fixed part of the model we can have much better predictions of the proportion of cows below $15 \ kg \ day^{-1}$ for each state. The model would look like this:
 
+<br>
 \begin{equation}
 \begin{aligned}
 Y_{ij} &= \mu_{i.} + \epsilon_{ij} \\[10pt]
@@ -542,6 +551,7 @@ Y_{ij} &= \mu_{i.} + \epsilon_{ij} \\[10pt]
 \end{aligned}
 (\#eq:math17)
 \end{equation}
+<br>
 
 where $\mu_{i.}$ is the mean for state $i$ and $\tau_{i.}$ is called the "effect" of state $i$. In general, when we have observations that are grouped like cows in states, we can view the model as allowing a separate mean for each group or as each group having an effect on the mean. Both views are equivalent and their relationship is given by the fact that the effect is defined as the difference between each group mean and the overall mean: $\tau_{i.} = \mu_{i.} - \mu_{..}$. The "dots" in the subscript are used as place-holders for the subscript and to indicate that the average (or sum) has been done over all values of that subscript. Because the number of cows differs among states, the overall mean in this model has to be estimated as the average of the state averages, where each state receives equal weight: $\hat{\mu}_{..} = \sum_{i=1}^{50} \hat{\mu}_{i.} / 50$. This estimated overall mean is `r mean(milk$kg.cow.d)` $kg \ day^{-1}$.
 
@@ -551,9 +561,10 @@ The model above can be written in a different form that is useful for further un
 
 Grouping or indicator variables are variables that take a value of 0 or 1 and are used to multiply parameters to determine if the parameters are included in the model for any given observation. The trick is that the equation includes all the parameters and then the values of the grouping variable are used to apply each parameter to the right rows of data. There are as many grouping variables as there are groups. For example, if an experiment has 3 treatment, there will be 3 grouping variables. Essentially, each variable "marks" each observation that belongs to a group.
 
-Perhaps an analogy helps clarify the concept before we show the equations. Think of a model as a recipe where the parameters are the ingredients and the grouping variables indicate if the ingredient is or not in the recipe. For example, consider a simple recipe that can be made either with chicken, tofu or beef,  and with mild or spicy chili peppers. The recipe will have a list of amounts and ingredients ^[For this simple example we merged the units with the ingredients. Explicit use of units it always necessary. Measure twice cut once! One of many costly examples: NASA lost a Mars Explorer due to confusion between metric and imperial units.]:\
- \
- 
+Perhaps an analogy helps clarify the concept before we show the equations. Think of a model as a recipe where the parameters are the ingredients and the grouping variables indicate if the ingredient is or not in the recipe. For example, consider a simple recipe that can be made either with chicken, tofu or beef,  and with mild or spicy chili peppers. The recipe will have a list of amounts and ingredients ^[For this simple example we merged the units with the ingredients. Explicit use of units it always necessary. Measure twice cut once! One of many costly examples: NASA lost a Mars Explorer due to confusion between metric and imperial units.]:
+
+
+<br>
 ```{r recipe, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 
 library(kableExtra)
@@ -574,10 +585,13 @@ knitr::kable(cbind(amounts, ingredient),
    kable_styling(full_width = FALSE)
 
 ```
- \
+<br>
 
 
-This looks like a single recipe, but it can yield 6 different dishes depending on whether you use beef, tofu or chicken, and jalapeños or poblano peppers. It is a lot simpler and shorter to write the recipe as above than to write 6 different recipes that are almost the same, at least in structure. The same happens with models. In fact, theoretically, any recipe can be expressed with this format if all ingredients are listed separately. With one row per ingredient we can decide how much (possibly none) of each ingredient to add. Let's look at the ingredients in the example. The idea can be extended to any number of ingredients, and it is based on having a list of ingredients, so we know what the quantities refer to. \
+
+This looks like a single recipe, but it can yield 6 different dishes depending on whether you use beef, tofu or chicken, and jalapeños or poblano peppers. It is a lot simpler and shorter to write the recipe as above than to write 6 different recipes that are almost the same, at least in structure. The same happens with models. In fact, theoretically, any recipe can be expressed with this format if all ingredients are listed separately. With one row per ingredient we can decide how much (possibly none) of each ingredient to add. Let's look at the ingredients in the example. The idea can be extended to any number of ingredients, and it is based on having a list of ingredients, so we know what the quantities refer to.
+
+<br>
 
 ```{r recipe2, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 
@@ -612,11 +626,14 @@ knitr::kable(cbind(ingredient,
    kable_styling(full_width = FALSE)
 
 ```
- \
+<br>
+
 
 Now, the table represents each recipe with a set of numbers, and all recipes use the same list of potential ingredients. Note that when we want the chicken, the row for chicken shows a 1 and the rows for tofu and beef **must** show 0's. The same happens with jalapeños and poblano peppers. The amounts for those ingredients are the grouping or indicator variables that indicate which recipe type or group we want.
 
-We can easily show that the statistical models are like recipes ^[In reality, linear statistical models are *almost* like recipes because in statistical models we can have negative values for the amounts of a parameter put into the combination, but in recipes we cannot have negative amounts of ingredients.] by chaging the symbols we use. We can simplify by noting that all recipes we are considering take eggs, salt, pepper, onions, curry paste and cabbage in the same amounts across recipes. We will refer to all of those ingredients together in the specified quantities as "common" ingredients, and to conform with the usual mathematical notation, we transpose the recipe table and put the dishes in rows and ingredients in columns with shortened names. \
+We can easily show that the statistical models are like recipes ^[In reality, linear statistical models are *almost* like recipes because in statistical models we can have negative values for the amounts of a parameter put into the combination, but in recipes we cannot have negative amounts of ingredients.] by chaging the symbols we use. We can simplify by noting that all recipes we are considering take eggs, salt, pepper, onions, curry paste and cabbage in the same amounts across recipes. We will refer to all of those ingredients together in the specified quantities as "common" ingredients, and to conform with the usual mathematical notation, we transpose the recipe table and put the dishes in rows and ingredients in columns with shortened names.
+
+<br>
 
 ```{r recipe3, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 
@@ -715,6 +732,7 @@ Therefore, the model is a recipe where the amounts are 1, $G_1$, $G_2$ and $G_3$
 
 The difference between an observation and the mean is called a *deviation*, *residual* or *error*. The specific name depends on the context, but in general, we will use *deviation* for the total difference between observation and overall average, *residual* for the difference between an observation and the value estimated by a model, and *error* for the random component of a model.
 
+<br>
 \begin{equation} 
 \begin{aligned}
 &error = \epsilon &\textrm{a random variable}\\[15pt]
@@ -723,6 +741,7 @@ The difference between an observation and the mean is called a *deviation*, *res
 \end{aligned}
 (\#eq:math18)
 \end{equation}
+<br>
 
 The symbol $\hat{Y}_{ij}$ is read "Y hat sub i j" and it represents the value that would be expected for that observation if the experiment were repeated many, many times. Intuitively, it is the best guess that you have for the value that would be observed if a new measurement were done for $Y_{ij}$, based on data and model. Keep in mind that the subscripts depend on the organization of the data. For the simple model we only need one subscript because there are no groups.
 
@@ -732,22 +751,26 @@ Usually, population parameters are unknown and have to be estimated using sample
 
 In the two models above (equations \@ref(eq:math13) and \@ref(eq:math17) the equations to calculate the residuals are different, because observations are modeled differently. For the simple model, the best guess or estimate that we have for the production of a randomly selected cow (observation) is the overall average given in equation \@ref(eq:math19). Because we are considering all cows **not** grouped by state, the overall average is equal to the weighted average of state averages, or more simply, the average of all cows, regardless of state:
 
+<br>
 \begin{equation}
 \hat{Y}_i = \hat{\mu} = \bar{Y}_. \\[10pt]
 e = \hat{\epsilon} = Y_i - \hat{Y}_i  = Y_i - \hat{\mu} = Y_i - \bar{Y}_. \\[10pt]
 = Observation - Fixed \ Component
 (\#eq:math19)
 \end{equation}
+<br>
 
 In this case of the simplest model, the error is equal to the total deviation, because the model does not have any other fixed component beyond the overall mean.
 
 For the better model in equation \@ref(eq:math17), the fixed part of the model includes both an overall mean and a state effect $\tau_{i.}$ where $i$ is the subscript that specifies what state is being considered. The estimation for any given observation includes both components. Thus, the residual is the observed value $Y_{ij}$ minus the estimated overall mean $\hat{\mu}_{..}$ minus the estimated state effect $\hat{\tau}_{i.}$.
 
+<br>
 \begin{equation}
 \hat{Y}_{ij} = \hat{\mu}_{i.} = \bar{Y}_{i.} = \hat{\mu} + \hat{\tau}_{i.} = \bar{Y}_{..} + \hat{\tau}_{i.}\\[10pt]
 e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \bar{Y}_{..} - \hat{\tau}_{i.}. \\[10pt]
 (\#eq:math20)
 \end{equation}
+<br>
 
 Keep in mind that the effect of state will be a negative number for those states that have mean milk production that is lower than the average of all states. We can use the values reported by USDA (2017) to determine the state effects for all states.
 
@@ -785,11 +808,13 @@ Here, we simply use a simulation to show how sample results and estimated quanti
 The simulation will create data analogous to the US milk production data. For simplicity, we will use a sample of 100 cows per state. Thus, the weighted and unweighted averages will be the same. We will use the same values as above for state means. Note that here we use the averages reported by USDA as if they were the known means for each state. Because the variance within each state is not known, we use $\sigma = 4$ for all states. The model used to generate data is:
 
 
+<br>
 \begin{equation}
 Y_{ij} = \mu_{i.} + \epsilon_{ij} = \mu_{..} + \tau_{i.} + \epsilon_{ij} \\
 \epsilon_{ij} \sim N(0, \ \sigma = 4) 
 (\#eq:math21)
 \end{equation}
+<br>
 
 For each state, we simulate 100 observations by generating 100 random draws from a normal distribution with mean 0 standard deviation 4 and to each we add the state average. Figure \@ref(fig:resdl.vs.error) shows that residuals are not equal to the true errors, but they are related.
 
@@ -831,17 +856,21 @@ In many cases, the optimal value for a parameter can be found analytically, whic
 
 Linear models are models that can be represented by a linear combination of parameters, it is like a recipe where the ingredients are the parameters. For example, to make a cup of swet tea with milk you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.
 
+<br>
 \begin{equation}
 1 \ cup \ tea = 1 \ tsp \ tea + 1 \ cup \ hot \ water + 1 \ tbsp \ honey + 0.25 \ cup \ milk \\
 Y = X_1 \beta_1 + X_2 \beta_2 + X_3 \beta_3 + X_4 \beta_4
 \end{equation}
+<br>
 
 What makes the equation *linear in the parameters* is that the parameters represented by the $\beta$'s are not in exponents, powers, quotients or operations other than multiplication and addition. Even if the variables that multiply the parameters are involved in any kind of function, for as long as the complicated function does not involve a paramters, the equation is linear *_*in the parameters_*. For example, the following equations are linear in the parameters represented by the $beta$'s.
 
+<br>
 \begin{equation}
 Y = X_1^2 \beta_1 + log(X_2) \beta_2 + e^{X_3} \beta_3 + X_4 \beta_4 \\
 Y = X_1^0 \beta_0 + X_1^1 \beta_1 + X_1^2 \beta_2 + X_1^3 \beta_2
 \end{equation}
+<br>
 
 The second equation is called a **polynomial** because it only involves powers of the variable $X_1$ multiplying the parameters. Because the highest power of X is 3, the polynomial is said to be of *3rd degree* or a *cubic* polynomial. Polynomials of 2nd degree are called *quadratic*. All polynomials are linear combinations of parameters. Typical polynomials of order or degree 0 to 3 are plottled in Figure \@ref(fig:mathPolys).
 
@@ -867,11 +896,14 @@ lines((-20:20)/2,
 <br>
 
 Linear combinations are used throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different [Chapter 8](ch.2pops).
+<br>
 
 ```{block, type = "stattip"}
 The shape of polynomials can be modified by changing their parameter values. The basic shapes shown in the figure can be stretched, tilted and flipped. For example, if the parameter for $X^2$ is negative in a second-degree polynomial, the "smile" blue shape will turn into a "frown."
 
 ```
+<br>
+<br>
 ## Symbols and Terms{#mathSymbls}
 Term or symbol| Explanation
 ------------| ----------------------------------------------------------

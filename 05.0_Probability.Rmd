@@ -302,25 +302,25 @@ Consider the number of tweets so that each student in the class has sent in the 
 
 See lecture "Distributions Oct 6, 2017.pdf"
 
-### Bernoulli Distribution
+### Bernoulli Distribution (#BerDist)
 
-### Discrete Uniform Distribution
+### Discrete Uniform Distribution (#DUnifDist)
 
-### Continuous Uniform Distribution
+### Continuous Uniform Distribution (#CUnifDist)
 
-### Binomial Distribution
+### Binomial Distribution (#BinDist)
 
 See "BernoulliBinomial.mp4""
 
-### Poisson Distribution
+### Poisson Distribution (#PoisDist)
 
-### Normal Distribution
+### Normal Distribution (#NormDist)
 
-### $\chi^2$ Distribution
+### $\chi^2$ Distribution (#chisqDist)
 
-### Student's t Distribution
+### Student's t Distribution (#tDist)
 
-### F Distribution
+### F Distribution (#FDist)
 
 
 
