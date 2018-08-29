@@ -389,12 +389,13 @@ Figure 1.7: Treatments used in the experiment to study competition between ryegr
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">list</span>(lb.compDat[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">5</span>)], lb.compDat[<span class="dv">31</span><span class="op">:</span><span class="dv">60</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">5</span>)]), 
-      <span class="dt">caption =</span> <span class="st">&quot;Data from experiment on competition between ryegrass and softchess (Laca, unpublished data)&quot;</span>, 
-      <span class="dt">row.names =</span> <span class="ot">FALSE</span>, 
-      <span class="dt">digits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling</span>(<span class="dt">font_size =</span> <span class="dv">10</span>, 
-                                                   <span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;responsive&quot;</span>))</code></pre></div>
-<table class="kable_wrapper table table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(lb.compDat[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">5</span>)], lb.compDat[<span class="dv">31</span><span class="op">:</span><span class="dv">60</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">5</span>)]) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;Data from experiment on competition between ryegrass and softchess (Laca, unpublished data)&quot;</span>, 
+         <span class="dt">row.names =</span> <span class="ot">FALSE</span>, 
+         <span class="dt">digits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">kable_styling</span>(<span class="dt">font_size =</span> <span class="dv">10</span>, 
+                 <span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;condensed&quot;</span>))</code></pre></div>
+<table class="kable_wrapper table table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:LomuBrhoCompDat">Table 1.2: </span>Data from experiment on competition between ryegrass and softchess (Laca, unpublished data)
 </caption>
@@ -4290,14 +4291,14 @@ NA
 ## Confidence level used: 0.95</code></pre>
 <p>Each contrast has <strong>1 df</strong> and an associated <strong>SS contrast</strong>. The SS associated with each contrast in Table <a href="#tab:OrthoContr4">1.18</a> is calculated as follows:</p>
 <p><br></p>
-<span class="math display" id="eq:SScontr">\[\begin{aligned}
+<p><span class="math display" id="eq:SScontr">\[\begin{aligned}
 &amp;\text{let } C_h \text{ be a row of coefficients for contrast } h \\[15pt]
 &amp;\text{and } \mathbf{C} = \begin{Bmatrix}c_{hi}\end{Bmatrix} \text{be a }(k-1) \times k \text{ matrix of orthogonal contrasts} \\[15pt]
 &amp;\text{for a set of k treatments in a balanced experiment with r replicates;} \\[15pt]
 &amp;\text{the sum of squares associated with each row of } \mathbf{C} \text{ is: } \\[15pt]
 &amp;SSC_h = \frac{r \sum_{i=1}^k \left( c_{hi}\bar{Y}_{i.} \right)^2 }{\sum_{i=1}^kc_{hi}^2}
 \tag{1.10}
-\end{aligned}\]</span>
+\end{aligned}\]</span></p>
 <p><br></p>
 <p>Let’s calculate the SSC for the first two contrasts in the weed control experiment “by hand” using basic R functions. Note that <span class="math inline">\(\mathbf{C}\)</span> in Equation <a href="#eq:SScontr">(1.10)</a> is the matrix called <code>Cmat</code> in the previous code. Recall that the first set of contrast coefficients, which is the first row of <code>Cmat</code>, is called <code>TvsC</code> and compares all weed control methods against the undisturbed control.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a vector with the estimated means for each treatment in the weed control experiment.</span>

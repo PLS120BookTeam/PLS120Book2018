@@ -115,17 +115,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.1" data-path=""><a href="#mathSimu"><i class="fa fa-check"></i><b>1.5.1</b> Simulation: Population is Known</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path=""><a href="#mathOptim"><i class="fa fa-check"></i><b>1.6</b> Optimization</a></li>
-<li class="chapter" data-level="1.7" data-path=""><a href="#mathSymbls"><i class="fa fa-check"></i><b>1.7</b> Symbols and Terms</a></li>
-<li class="chapter" data-level="1.8" data-path=""><a href="#mathExe"><i class="fa fa-check"></i><b>1.8</b> Exercises and Solutions</a><ul>
-<li class="chapter" data-level="1.8.1" data-path=""><a href="#exercise-1"><i class="fa fa-check"></i><b>1.8.1</b> Exercise 1</a></li>
-<li class="chapter" data-level="1.8.2" data-path=""><a href="#exercise-2"><i class="fa fa-check"></i><b>1.8.2</b> Exercise 2</a></li>
-<li class="chapter" data-level="1.8.3" data-path=""><a href="#exercise-3"><i class="fa fa-check"></i><b>1.8.3</b> Exercise 3</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#linear-models"><i class="fa fa-check"></i><b>1.7</b> Linear Models</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#mathSymbls"><i class="fa fa-check"></i><b>1.8</b> Symbols and Terms</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#mathExe"><i class="fa fa-check"></i><b>1.9</b> Exercises and Solutions</a><ul>
+<li class="chapter" data-level="1.9.1" data-path=""><a href="#exercise-1"><i class="fa fa-check"></i><b>1.9.1</b> Exercise 1</a></li>
+<li class="chapter" data-level="1.9.2" data-path=""><a href="#exercise-2"><i class="fa fa-check"></i><b>1.9.2</b> Exercise 2</a></li>
+<li class="chapter" data-level="1.9.3" data-path=""><a href="#exercise-3"><i class="fa fa-check"></i><b>1.9.3</b> Exercise 3</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path=""><a href="#mathHwk"><i class="fa fa-check"></i><b>1.9</b> Homework</a><ul>
-<li class="chapter" data-level="1.9.1" data-path=""><a href="#homework-exercise"><i class="fa fa-check"></i><b>1.9.1</b> Homework Exercise</a></li>
-<li class="chapter" data-level="1.9.2" data-path=""><a href="#homework-exercise-1"><i class="fa fa-check"></i><b>1.9.2</b> Homework Exercise</a></li>
-<li class="chapter" data-level="1.9.3" data-path=""><a href="#homework-exercise-2"><i class="fa fa-check"></i><b>1.9.3</b> Homework Exercise</a></li>
-<li class="chapter" data-level="1.9.4" data-path=""><a href="#homework-exercise-3"><i class="fa fa-check"></i><b>1.9.4</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#mathHwk"><i class="fa fa-check"></i><b>1.10</b> Homework</a><ul>
+<li class="chapter" data-level="1.10.1" data-path=""><a href="#homework-exercise"><i class="fa fa-check"></i><b>1.10.1</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.10.2" data-path=""><a href="#homework-exercise-1"><i class="fa fa-check"></i><b>1.10.2</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.10.3" data-path=""><a href="#homework-exercise-2"><i class="fa fa-check"></i><b>1.10.3</b> Homework Exercise</a></li>
+<li class="chapter" data-level="1.10.4" data-path=""><a href="#homework-exercise-3"><i class="fa fa-check"></i><b>1.10.4</b> Homework Exercise</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -154,15 +155,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 1</span> Required Math Skills and Symbols</h1>
 <p>In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we explore ito equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.</p>
 <p>A <strong>key point</strong> in this chapter is that</p>
-<blockquote>
-<p>in statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.</p>
-</blockquote>
+<div class="stattip">
+<ul>
+<li>
+In statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.
+</li>
+</ul>
+</div>
 <p>The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throughout the rest of the book.</p>
-<p>A second <strong>key concept</strong>, related to the first one, is that</p>
-<blockquote>
-<p>we rarely, if ever, know the actual “true” value of parameters,<br />
-variables or quantities in the real world (as opposed to simulations).</p>
-</blockquote>
+<p>A second <strong>key point</strong>, related to the first one, is that</p>
+<div class="stattip">
+<ul>
+<li>
+We rarely, if ever, know the actual “true” value of parameters, variables or quantities in the real world (as opposed to simulations).
+</li>
+</ul>
+</div>
 <p>We do not know parameter values because we rarely know or even have access to the whole population, which would be necessary to “measure” a parameter like the true mean. Even if we had access to the whole population to measure each individual, we would not know parameter values with certainty, because measurements always have “errors.” Measurements are imperfect because measuring instruments have limited precision, and because they are used by “imperfect” humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.</p>
 <p>In reading this chapter, focus on the symbols and concepts. In addition to –and better before– doing the exercises, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend that you write down the equations as as you read them, and then try to reproduce them from memory and a description of the calculation (e.g. sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate attention to the symbols and details of each equation, and will reveal those aspects that are not yet clear to you.</p>
 <div id="mathObj" class="section level2">
@@ -407,18 +415,13 @@ Ydata</code></pre></div>
 <p>Say that we are interested in studying the milk production per dairy cow in <span class="math inline">\(kg \ day^{-1}\)</span> for all dairy cows in the US today. For example, we want to estimate what proportion of cows produce less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> to gauge the number of cows that could be targets of a program to increase productivity. One way to do this is to create a <em>model</em> for the statistical distribution of milk production, take a sample to estimate the parameters of the model and then use the model with estimated parameters to make the estimation of the proportion of cows for which production is less than <span class="math inline">\(24 \ kg \ day^{-1}\)</span> or any other quantity.</p>
 <p>A first attempt to estimate the needed proportion is to <em>model</em> milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter <span class="math inline">\(Y\)</span> to represent milk production of a cow we write <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>, which is read “Y is a random variable with normal distribution, with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.” Sometimes we write <span class="math inline">\(\sigma\)</span>, the standard deviation, instead of <span class="math inline">\(\sigma^2\)</span>. Obviously, the standard deviation is the square root of the variance.</p>
 <p>The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(+\infty\)</span>, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are <strong>not</strong> important!</p>
-<hr />
-<blockquote>
-<blockquote>
-<p>Models are not supposed to be perfect representations of reality,</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>they are supposed to be <strong>useful</strong> representations of reality.</p>
-</blockquote>
-</blockquote>
-<hr />
+<div class="stattip">
+<ul>
+<li>
+Models are not supposed to be perfect representations of reality, they are supposed to be <strong>useful</strong> representations of reality.
+</li>
+</ul>
+</div>
 <p>Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the normal distribution used is below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.</p>
 <p>The simple model that we are using can also be written as:</p>
 <p><br></p>
@@ -1360,7 +1363,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(
 )</code></pre></div>
 <table class="kable_wrapper">
 <caption>
-<span id="tab:unnamed-chunk-12">Table 1.5: </span>Effect of state on average milk production per cow per day.
+<span id="tab:unnamed-chunk-15">Table 1.5: </span>Effect of state on average milk production per cow per day.
 </caption>
 <tbody>
 <tr>
@@ -1848,8 +1851,11 @@ milk.sim.dat<span class="op">$</span>residual =<span class="st"> </span><span cl
 </div>
 <div id="mathOptim" class="section level2">
 <h2><span class="header-section-number">1.6</span> Optimization</h2>
-<p>One way to “guess” or estimate the mean of a distribution using a sample is to calculate the <em>average</em>. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares - called “least-squares” - is the most common method we will use to make estimates, but it is not the only method. Another common method used is likelihood maximization, whereby parameters are estimated by choosing the values that maximize the likelihood of observing the data. The good news is that for most of the situations we will study, which involve the use of linear models, least-squares and maximum likelihood yield identical results.</p>
+<p>One way to “guess” or estimate the mean of a distribution using a sample is to calculate the <em>average</em>. The average minimizes the sum of the squared deviations of the observations. Minimization of sums of squares - called “least-squares” - is the most common method we will use to make estimates, but it is not the only method. Another common method used is likelihood maximization, whereby parameters are estimated by choosing the values that maximize the likelihood of observing the data. The good news is that for most of the situations we will study, which involve the use of <strong>linear models</strong>, least-squares and maximum likelihood yield identical results.</p>
 <p>In many cases, the optimal value for a parameter can be found analytically, which means that we can use an equation that yields the best estimate directly. This formula is obtained by taking the first derivative of the equation that calculates the SS as a function of the estimate, set it to zero and solve for the estimate. For some advanced statistical methods, there are no equations available, so numerical computations are used to approximate the optimal estimates.</p>
+</div>
+<div id="linear-models" class="section level2">
+<h2><span class="header-section-number">1.7</span> Linear Models</h2>
 <p>Linear models are models that can be represented by a linear combination of parameters, it is like a recipe where the ingredients are the parameters. For example, to make a cup of swet tea with milk you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.</p>
 <span class="math display">\[\begin{equation}
 1 \ cup \ tea = 1 \ tsp \ tea + 1 \ cup \ hot \ water + 1 \ tbsp \ honey + 0.25 \ cup \ milk \\
@@ -1876,7 +1882,7 @@ The shape of polynomials can be modified by changing their parameter values. The
 </div>
 </div>
 <div id="mathSymbls" class="section level2">
-<h2><span class="header-section-number">1.7</span> Symbols and Terms</h2>
+<h2><span class="header-section-number">1.8</span> Symbols and Terms</h2>
 <table>
 <colgroup>
 <col width="18%" />
@@ -2009,9 +2015,9 @@ The shape of polynomials can be modified by changing their parameter values. The
 </table>
 </div>
 <div id="mathExe" class="section level2">
-<h2><span class="header-section-number">1.8</span> Exercises and Solutions</h2>
+<h2><span class="header-section-number">1.9</span> Exercises and Solutions</h2>
 <div id="exercise-1" class="section level3">
-<h3><span class="header-section-number">1.8.1</span> Exercise 1</h3>
+<h3><span class="header-section-number">1.9.1</span> Exercise 1</h3>
 <p>Write pseudo-code (set of logical instructions in natural language) for an algorithm to find out what integer between 0 and 1000 I am thinking of just by asking if it is larger than a value that you choose for each question (or to numerically approximate a root of a polynomial).</p>
 <p><strong>Solution:</strong></p>
 <ol style="list-style-type: decimal">
@@ -2024,7 +2030,7 @@ The shape of polynomials can be modified by changing their parameter values. The
 </ol>
 </div>
 <div id="exercise-2" class="section level3">
-<h3><span class="header-section-number">1.8.2</span> Exercise 2</h3>
+<h3><span class="header-section-number">1.9.2</span> Exercise 2</h3>
 <p>Expand the following summations with symbols, then with numbers and calculate it using the data in the table:</p>
 <p><span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})\]</span> <span class="math display">\[\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2\]</span></p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -2080,7 +2086,7 @@ Y_i
 = (6 - 4)^2 + (2 - 4)^2 + (3 - 4)^2 + (5 - 4)^2 = 4 + 4 + 1 + 1 = 10\]</span></p>
 </div>
 <div id="exercise-3" class="section level3">
-<h3><span class="header-section-number">1.8.3</span> Exercise 3</h3>
+<h3><span class="header-section-number">1.9.3</span> Exercise 3</h3>
 <p>The following table has values for <span class="math inline">\(Y_{ij}\)</span>. States are in the rows, and each row has columns for different cows sampled from each state.</p>
 <p>What is the sample size r for all states?</p>
 <p>What is the value of k?</p>
@@ -2250,9 +2256,9 @@ tbl.exer3.math</code></pre></div>
 </div>
 </div>
 <div id="mathHwk" class="section level2">
-<h2><span class="header-section-number">1.9</span> Homework</h2>
+<h2><span class="header-section-number">1.10</span> Homework</h2>
 <div id="homework-exercise" class="section level3">
-<h3><span class="header-section-number">1.9.1</span> Homework Exercise</h3>
+<h3><span class="header-section-number">1.10.1</span> Homework Exercise</h3>
 <p>Write the following expressions with short equations using summation</p>
 <ol style="list-style-type: lower-alpha">
 <li><p><span class="math inline">\(a_1 + 2 \ a_2 + 3 \ a_3 + 4 \ a_4 + 5 \ a_5\)</span></p></li>
@@ -2260,7 +2266,7 @@ tbl.exer3.math</code></pre></div>
 </ol>
 </div>
 <div id="homework-exercise-1" class="section level3">
-<h3><span class="header-section-number">1.9.2</span> Homework Exercise</h3>
+<h3><span class="header-section-number">1.10.2</span> Homework Exercise</h3>
 <p>Imagine you studied the effects of probiotic supplement on white cell count in rats. Five rats selected randomly from a set of 15 received a base diet, 5 received a based diet with sterilized probiotic and 5 received the base diet with the live probiotic. White cells were counted and averaged over 7 days for each rat before the treatments and again during second week after starting the diets.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Formulate a statistical model for this experiment and describe each component. Identify fixed and random components. Use subscripts and define their ranges and meaning.</p></li>
@@ -2268,10 +2274,10 @@ tbl.exer3.math</code></pre></div>
 </ol>
 </div>
 <div id="homework-exercise-2" class="section level3">
-<h3><span class="header-section-number">1.9.3</span> Homework Exercise</h3>
+<h3><span class="header-section-number">1.10.3</span> Homework Exercise</h3>
 </div>
 <div id="homework-exercise-3" class="section level3">
-<h3><span class="header-section-number">1.9.4</span> Homework Exercise</h3>
+<h3><span class="header-section-number">1.10.4</span> Homework Exercise</h3>
 </div>
 </div>
 </div>

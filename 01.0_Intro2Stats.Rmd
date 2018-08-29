@@ -1,5 +1,7 @@
 # Introduction to Applied Statistics {#chIntro}
 
+See Intro2StatsLectureNotes in Notability
+
 ## Learning Objectives
 
 1. Define statistics and its use.
@@ -13,7 +15,7 @@
 
 ## Course Goals
 1. Identify questions and problems that can be addressed by using statistical methods.
-1. Propose basic statistical methods to test hypotheses.
+1. Propose basic statistical methods to test hypotheses and estimate unknown quantities.
 1. Given a problem that can be addressed with statistics, define the response variable, predictor or explanatory variables, parameters and their hypothesized relationship.
 1. Write down linear models for simple experimental designs.
 1. Calculate or propose appropriate distributions for specific random variables.
@@ -22,35 +24,41 @@
 1. Test simple hypotheses such as equality of means, independence of variables and goodness of fit.
 1. State the effects of sample size on the variance of estimates of population means.
 
+## Why Statistics?
+
+For us, the world is an uncertain place. We do not know exactly what will happen, and for a lot of stuff, we do not know what actually happened, even if we were looking at it as it happened. What will be the cost of increased drought and wildfires due to climate change in California? Will my house increase, maintain of decrease in value in the next 30 years? Should I get vaccine XX? Is my weight lifting program leading to increases in my muscle mass? Does my landscape design lead to lower water use? Is the Bay Delta estuary ecosystem damaged because of the use of water for agricultural irrigation? All of these and many more questions you think of daily reflect the fact that we operate with uncertainty all the time. So far as we know, use of statistical methods is the only formal and objective way to answer these questions. Statistics, just like haphazard or biased opinions, will not lead to infallible statements. However, unlike opinions and statements, statistics will lead to results with chosen error rates.
+
 ## Definition of Statistics
 
 **Statistics** is frequently defined as a branch of mathematics that deals with the collection, analysis, interpretation, presentation and organization of data. One of the key aspects of statistics is that it formalizes methods to operate in an uncertain world. It gives us a set of tools to get clear quantitative assessments of situations, and to make estimates and predictions with the corresponding estimates of uncertainty.
 
 For example, the "situation" is to determine if milk productivity in terms of kg/ha of farm is increasing or decreasing in California. A sample of farms is selected and milk production and farm area are measured over two years. Based on the measurements, an estimate of the difference between years is calculated, as well as an interval that represents the uncertainty of the estimate.
 
-## Learning Statistics
+## Learning Statistics {#LearnStats}
 
-Learning statistics can be challenging but also fun. The math involved in introductory statistics is very basic and for the most part involves only addition and multiplication. You can use statistics to make better decisions about your life.
-You should use statistical knowledge to properly interpret pseudo information presented in advertisements and the media.
+Learning statistics can be challenging but also fun. The math involved in introductory statistics is very basic and for the most part involves only addition and multiplication. You can use statistics to make better decisions about your life. You should use statistical knowledge to properly interpret pseudo information presented in advertisements and the media.
 
-Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, 
+Consider the following examples:
 
-<a href="https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271" target="_blank">Innate concept of probability</a>
+1. The three door game. In this game show you are presenetd with three doors (A, B, C) behind which there are prizes. Two of the doors hide a goat each and one hides a brand-new car. You choose one of the doors, say A. Before the selected door is opened, the hosts opens one of the other two doors, say C, and revelas a goat. Then, you are asked whether you want to keep your choice of door A or switch to door B. What do you do? Does it make any difference? Why?
 
-Although humans do have an innate ability to assess contingencies and likelihood of certain events, our intuitive ability is far from perfect. In fact, it has been shown that humans tend to be particularly bad at estimating probabilities in certain situations. Kahneman and Tversky refer to the probabilities people guess without using calculations and the theory of probability as "subjective" probability.
+1. 
 
-*** Add basic concepts from David Kahneman Amos Tversky 1972 *** 
+
+Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, in the piece <a href="https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271" target="_blank">Innate concept of probability</a>, [@Callaway2014] gives multile examples of studies that show that humans and several animals have at least basic mechanisms to handle mathematical problems involving probability. However, the abilities are limited.
+
+Although humans do have an innate ability to assess contingencies and likelihood of certain events, our intuitive ability is far from perfect. In fact, it has been shown that humans tend to be particularly bad at estimating probabilities in certain situations. Kahneman and Tversky [@KahnemanTversky1972] refer to the probabilities people guess without using calculations and the theory of probability as "subjective" probability, not to be confused with the subjective probabilities of Bayesian statistics.
 
 Statistical methods allow us to remove some of the biases introduced by human intuition. Many of the errors Kahneman and Tversky's subjects made would have been prevented if those subjects used statistical calculations instead of their intuition.For example, K&T posed the following question to high school students: All families of six children in a city were surveyed. In 72 families the exact order of births of boys and girls was GBGBBG.
-What is your estimate of the number of families surveyed in which the exact order of births was BGBBBB? What do you think? The median (add cross reference to definition of median in Ch04) estimate that students gave was 30. If the probability of G and B are the same, then both sequences have equal probability.
+What is your estimate of the number of families surveyed in which the exact order of births was BGBBBB? What do you think? The [median](#chData) estimate that students gave was 30. If the probability of G and B are the same, then both sequences have equal probability.
 
 In another series of experiments, K&T asked students to estimate sampling distributions for various processes, for example, the number of boys and girls born each day. They concluded that:
 
 >>"The notion that sampling variance decreases in proportion to sample size is apparently not part of man’s repertoire of intuitions."
 
-This is very interesting and challenging, because the fact that variance of sample averages decreases with increasing sample size is the most important concept for this course!
+This is very interesting and challenging, because the fact that variance of sample averages decreases with increasing sample size is the **most important concept for this course!**
 
-Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you cannot trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although at some point, we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error. ^[Do not confuse this statement about "sujective" probability as defined by K&T with the idea of subjective probability as used in Bayesian statistics. The concept of subjective probability in Bayesian statistics (as in "subjective priors") is not what we describe above.]
+Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you cannot trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error. ^[Do not confuse this statement about "sujective" probability as defined by K&T with the idea of subjective probability as used in Bayesian statistics. The concept of subjective probability in Bayesian statistics (as in "subjective priors") is not what we describe above.]
 
 ## Going to the movies: PBS program on statistics
 
@@ -63,7 +71,7 @@ Why are we bringing these things up?? The point is that when you need to deal wi
 Fixed part and random part
 Models
 
-Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved (reference).
+Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved <a href="https://www.iep.utm.edu/evol-psy/" target="_blank">See Evolutionary Psychology</a>.
 
 ## Statistics Defined
 
@@ -122,11 +130,8 @@ Some computations are rather simple and we may look into those to get a better c
 
 ### Exercise 1
 
-Use the approach taken in this course to provide a solution for the following problems.
+Describe three decision making situations that you face at least once a year in your laife and that involve uncertainty. Describe the sources of uncertainty and your method to come to a decision. For example, you may have arrive at a meeting on Mondays at 5 pm, so you have to decide when you will start your trip towards the meeting place.
 
-a. .
-
-b. 
 ### Exercise 2
 
 Goal: Do many random experiments and estimations. Identify the elements involved in making estimates and sources of variation.
@@ -139,6 +144,10 @@ This exercise is actually a game. The team that guesses the secret target most a
 1. What would a team's guess if their pitcher did a large number of throws?
 1. What is the frequency of different distances from the true target?
 1. Why do distances from the target vary among throws? What does random mean?
+
+### Exercise 3: three doors and two goats
+
+This exercise is a game to be repeated many times by one person or several people to elicit the probabilities of what happens "in the long run." The point is to do random simulations of the choices and get estimated probabilities.
 
 
 ## Homework Problems

@@ -1,0 +1,39 @@
+---
+title: "table test"
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
+library(bookdown)
+```
+
+## A section
+
+Some text here.
+
+```{r}
+
+dt <- mtcars[1:5, 1:6]
+
+kable(
+   dt, 
+   digits = 2, 
+   align = "cccccc", 
+   caption = 'Fictitious data'
+) %>% 
+   kable_styling(bootstrap_options = c("basic"), 
+                 full_width = F, 
+                 position = "center") %>% 
+   column_spec(c(1,2), width = "1.5in")
+
+dt %>%
+  kable() %>%
+  kable_styling()
+
+dt %>%
+kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+
+```
+
