@@ -50,6 +50,10 @@ Include simulation or figure with known population parameters. Show 100 Ci's and
 
 ## Confidence interval and test of one mean
 
+The test of hypothesis is based on a conditional probability, the probability that the summary statistics or calculated t value is greater than or equal to the one observed, given that the dsitribution of the observations is normal and independent with mean equal to that hypothesized. For this to make more sense formally we need to distinguish between the random function or variable calculated, call it $s = (\bar{Y} - \mu_0)/S_{\bar{Y}}$ (s for "statistic") and any specific value that it takes for a sample, say $t_{calc}$ (because it is the name we generally use). In symbols:
+
+$$p-value = P(s \ge t_{calc}|X \sim N(\mu_0, \sigma))$$
+
 ## What is the meaning of the p-value?
 
 http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html

@@ -2,6 +2,7 @@
 
 
 See "TeachingExperimentalDesign2014.pdf"
+"Chapter1.3-1.5.pdf"
 
 ## Learning Objectives for Chapter
 

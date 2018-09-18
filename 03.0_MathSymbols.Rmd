@@ -255,7 +255,7 @@ If we want to average all values in the table we need to use a double summation 
 
 Using R we can calculate the sums and the average very easily. Note that the functions `nrow` and `ncol` extract the number of rows and columns of a data frame or  matrix. The function `mean` yields the average for the whole table.
 
-```{r}
+```{r, }
 
 sum(Ydata) # Sums all values in table. Double summation.
 # (Works only when all columns are numeric.)

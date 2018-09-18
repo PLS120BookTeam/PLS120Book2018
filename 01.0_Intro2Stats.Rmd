@@ -34,6 +34,34 @@ For us, the world is an uncertain place. We do not know exactly what will happen
 
 For example, the "situation" is to determine if milk productivity in terms of kg/ha of farm is increasing or decreasing in California. A sample of farms is selected and milk production and farm area are measured over two years. Based on the measurements, an estimate of the difference between years is calculated, as well as an interval that represents the uncertainty of the estimate.
 
+
+Traditionally, the science of statistics deals with the collection and summarization of data, design of experiments and surveys, measurement of variation of observations, estimation of population parameters as well as the accuracy and precision of these estimates, test of hypotheses, and assessment of relationship among variables. In my opinion, the science of statistics revolves around the creation and use of methods to make statistical statements about a clearly defined part of the world. Statistical statements have two components: a description or guess about something, and a quantitative description of the certainty of the first component. For example:
+
+<br>
+\begin{itemize}
+  \item ``I am pretty sure it is going to rain'' is \textbf{not} a statistical statement.
+  \item ``The chance of rain is 50\%'' is \textbf{not} a statistical statement.
+  \item The chance of rain in Davis for tomorrow is 50\% \textbf{is} a statistical statement.
+\end{itemize}
+<br>
+
+Statistical methods allow us (i.e., provide a formal, logical basis) to make statistical statements. A statistical statement is characterized by specifying a clearly defined subject, an estimation of some characteristic of the subject, and an estimation of the certainty about that characteristic.
+
+It is common to express statistical statements informally and incompletely. Although that is not a problem when one fully knows and understands what has been omitted, it can be a problem when the audience does not have the details. At best, incomplete statements are misinterpreted, and at worst they are unethical and deceitful. Examples of the statistical statements we will be making in this course are as follows:
+
+\begin{itemize}
+  \item Based on a random sample of 10 coin tosses I was not able to reject the hypothesis that the probability of getting a head with this specific quarter is 0.5 at a significance level of 5\%.
+  \item The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
+\end{itemize}
+
+The latter statement shows the use of units for quantitative variables. The population it refers to is the total area planted to rice in the US in 2013. The estimate is the average yield and the number is correctly expressed with units as a complete quantity. The degree of certainty is also expressed quantitatively as the width of a confidence interval. Notice how the population for which the statement applies is clearly defined by saying where and when.
+
+
+```{block, typ='stattip'}
+- Statistics and statistical tests cannot and do not attempt to categorically prove or disprove statements and hypotheses about the real world. They simply provide methods to determine how consistent, in a proabilitstic way, statements and hypotheses are with data.
+```
+
+
 ## Learning Statistics {#LearnStats}
 
 Learning statistics can be challenging but also fun. The math involved in introductory statistics is very basic and for the most part involves only addition and multiplication. You can use statistics to make better decisions about your life. You should use statistical knowledge to properly interpret pseudo information presented in advertisements and the media.
@@ -42,7 +70,16 @@ Consider the following examples:
 
 1. The three door game. In this game show you are presenetd with three doors (A, B, C) behind which there are prizes. Two of the doors hide a goat each and one hides a brand-new car. You choose one of the doors, say A. Before the selected door is opened, the hosts opens one of the other two doors, say C, and revelas a goat. Then, you are asked whether you want to keep your choice of door A or switch to door B. What do you do? Does it make any difference? Why?
 
-1. 
+1. A news cast presents the following graph while the anchorman speaks about the disastrous effect of the new president on the loss of jobs. What do you think?
+
+<br>
+```{r JobLossFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Graphical representation of job losses from December 2007 to June 2010."}
+
+knitr::include_graphics("images/JobLoss.png")
+
+```
+<br>
+
 
 
 Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, in the piece <a href="https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271" target="_blank">Innate concept of probability</a>, [@Callaway2014] gives multile examples of studies that show that humans and several animals have at least basic mechanisms to handle mathematical problems involving probability. However, the abilities are limited.
