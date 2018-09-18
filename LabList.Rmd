@@ -1,0 +1,25 @@
+---
+title: "List of Labs"
+author: "Emilio A. Laca"
+date: "9/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Laboratory Exercises
+
+### Lab 01: R computation and Summary Statistics
+
+
+### Lab 02: Probability
+
+### Lab 03 : Distributions and Confidence Intervals
+
+
+### Lab 03 Hypotesis testing and Comparing Means
+
+
+### Lab 04: 
