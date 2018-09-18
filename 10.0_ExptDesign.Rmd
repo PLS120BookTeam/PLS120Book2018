@@ -2,10 +2,11 @@
 
 
 See "TeachingExperimentalDesign2014.pdf"
+"Chapter1.3-1.5.pdf"
 
 ## Learning Objectives for Chapter
 
-1. List sources of possible error in an estimator for a variable of interest. 
+1. List sources of possible error in an estimator for a variable of interest.
 1. List ways that you could reduce or eliminate sampling bias
 1. Identify the experimental unit of a given study design.
 1. Explain the advantages of subsampling
@@ -17,7 +18,9 @@ See "TeachingExperimentalDesign2014.pdf"
 1. Design factorial treatments using two factors.
 1. Identify and use design feature to avoid confounding and to reduce error.
 
-"An experiment is characterized by the treatments and experimental units to be used, the way treatments are assigned to units, and the responses that are measured." (Gary W. Oehlert, 2010)
+>"An experiment is characterized by the treatments and experimental units to be used, the way treatments are assigned to units, and the responses that are measured."
+>
+>Gary W. Oehlert, 2010
 
 Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments were not assigned independently of other characteristics of experimental units. For example, consider the comparison of susceptibility to the common cold between people who exercise regularly and sedentary people. Any difference detected cannot be attributed to exercise, because it may be that colds and exercise are unrelated but have a common cause. It may be that people who have to work more indoors exposed to contagion also have less time to exercise. Work indoors causes both more colds and less time to exercise. Changing the level of exercise will not change the incidence of colds unless it also reduces the time people spend indoors exposed to contagion.
 

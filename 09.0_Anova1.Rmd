@@ -36,6 +36,10 @@ library(tidyr)
 
 # Analysis of Variance {#chAnova}
 
+
+see Formulas SG Ch 7-9 Nov 15, 2017 in Notability
+See CRDwithSS in Explain Everything
+
 ## Learning Objectives for Chapter
 
 1. Translate scientific questions into null and alternative hypotheses.
@@ -55,11 +59,11 @@ library(tidyr)
 
 In the previous chapter we used t-tests to test the null hypothesis that two means are equal. The general idea was that if sample means differ a lot more than expected if true means were equal, we conclude that means were not equal. In each test we incurred a risk of making a mistake, either by rejecting a true null hypothesis of by failing to reject a false one. People are particularly keen on making sure that they do not reject true null hypotheses^[There may be some reasons to favor concern about error type I vs. II, but neither error is inherently more troubling. It is more useful to assess the relative importance of errors by thinking about their consequences. What happens if you fail to reject a false hypothesis? What happens if you reject one that is true?]. This means that we want to make sure that we control the probability or making an error type I, called $\alpha$ and that we kwep it at the selected value, usually 0.05.
 
-However, there are stuatioins when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least one error type I is $1 - 0.95^{45} = 0.90$!
+However, there are stuations when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least one error type I is $1 - 0.95^{45} = 0.90$!
 Analysis of variance helps correct this problem by performing a single test of the null hypothesis, regardless of the number of treatments. Preview: the remedy is limited if the null hypothesis is rejected (Be the first to ask why in lecture and get an Easter egg!! Make sure to mention that you want your Easter egg.)
 
 ```{block, type='mydef'}
-The probability of making an error in one test is $\alpha$ and it is called the test-wise error rate.\
+The probability of making an error in one test is $\alpha$ and it is called the *test-wise* error rate.\
 The probability of making at least one error in a set or "family" of tests is called *family-wise* error rate.\
 For all tests done in a experiment, the error rate is called *experiment-wise*.
 ```
@@ -191,8 +195,7 @@ Intuition indicates that if most of the marbles are blue, we should reject the n
 <br>
 
 ```{block, type = 'think'}
-The proportion of marbles in the D jar was not used for anything! What if the D jar had just one more blue marble than the E jar??? This is a problem in frequentist statistics: it does not take into account the distribution of the statistics if some version of the alternative hypothesis were true.
-
+The proportion of marbles in the D jar was not used for anything! What if the D jar had just one more blue marble than the E jar??? This is a problem in frequentist hypothesis testing: it does not take into account the sampling distribution of statistics under plausible alternative hypotheses.
 ```
 <br>
 
@@ -432,9 +435,18 @@ d. treatment and residual effects must be additive
 
 These assumptions are part of the model above and are important for ANOVA, although some deviation from certain assumptions is not always a grave problem. The main part of the model states clearly that each observation is composed of three additive parts: overall mean, treatment effect and error. Further, the errors,-one for each observation- are assumed to all have identical, independent distributions that are normal with mean 0 and common variance $\sigma^2$ (or standard deviation $\sigma$).
 
+<br>
+```{block, type = 'stattip'}
+ANOVA involves two tests of equality of variances:
+1. The focal test that MST and MSE both estimate the same variance, which is a test of $H_0$.
+2. The ancillary test that variances within treatments are equal, which is a corroboration of the assumption of homogeneity of variances.
+```
+<br>
+
+
 ## ANOVA example
 
-We will study the ANOVA procedure with an example. First, the analysis is presented as concisely as possible, from research question to conclusion, using R functions. Then, each step is explained in detail and calculations are presented step by step.
+We will study the ANOVA procedure with an example. First, the analysis is presented with the theory but as concisely as possible, from research question to conclusion, using R functions. Then, each step is explained in detail and calculations are presented step by step.
 
 This is a fictitious example with elements based on actual research. Alfalfa geneticists and breeders created two transgenic varieties with genetic modifications of the metabolic pathways that synthesize ligning. Lignin is undigestible fiber that reduces the nutritional quality of forages. A common, unmodified variety and the two GMO varieties need to be compared to determine if the modification leads to better nutrition of cattle. Twelve animals were randomly selected from a large herd of beef cattle for the experiment. Varieties were labeled A, B and C, where A is the unmodified one. Twelve identical ping-pong balls were used for the randomization of treatment assignment to experimental units (animals). Four balls were labelled "A," four "B" and four "C." Balls were put into a bucket and mixed, then a blindfolded operator drew them randomly, one at a time and without replacement. The random sequence of letters was writen down. Animals were lined up haphazardly and assigned the treatments from left to right in the order given by the random sequence. Each animal was housed in an individual pen and fed the corresponding variety of alfalfa for 30 days. Weight gain in lbs per day was calculated for the last 10 days of the experiment and used as the response variable.
 
@@ -486,6 +498,9 @@ H_0: \quad &\mu_A = \mu_B = \mu_C \quad &\text{or equivalently:} \\
 H_A: \quad &\mu_A \ne \mu_B \quad \text{or} \quad \mu_A \ne \mu_C \quad \text{or} \quad \mu_B \ne \mu_C \\
 \end{align}
 
+
+###Formulas and calculations in R
+
 We use the `lm` and `anova` functions of R. The `lm` function finds the optimal values for the estimated parameters by minimizing the residual sum of squares. The `anova` uses the estimated parameters to partition the total variance and gives the resulting calculated F with the corresponding probability of observing a value at least that extreme if indeed all varieties result in the same weight gain.
 
 ```{r, echo = TRUE, warning=FALSE}
@@ -508,57 +523,244 @@ plot(residuals(transg.aa.m1) ~ jitter(fitted(transg.aa.m1)),
      ylab = "Residuals", 
      xlab = "Treatment averages (lbs/day)")
 
-qqp(residuals(transg.aa.m1))
+qqp(residuals(transg.aa.m1), id = FALSE)
 
 ```
 <br>
 
+The graph on the left shows that the vertical variation of points does not differ extremely among treatments, which are depicted as diferent values in the horizontal axis. Therefore, we do not have sufficient information to question the assumption of homogeneity of variance. The graph on the right shows that the observed quantiles do not deviate significantly (they are within the dashed curves) from the normal quantiles, so we cannot question the assumption of normality. In this data we do not have enough information to assess the independence of the obervations, so that assumption is based on the way that animals were treated and kept separately, and it is not challenged. One possible way to challenge the idependence of residuals would be to determine if observations have more similar residuals when animals are in closer pens, but the spatial distribution of pens is not known (the data are fictitious and no spatial distribution was created)^[It is strongly recommended that experimenters always record the operator ID, date, time and spatial location of all observations. For lab experiments, location on benches, batches, runs etc. should be recorded with each observation. The time-place-set-group information will allow experimenters to test for lack of homogeneity in variance and lack of independence in the residuals, as well as for nuisance effects of groupings or batches]. 
 
 Although there are other more formal tests to assess whether assumptions are met, a visual inspection of the residuals is usually sufficient. Formal methods to test for deviation from assumptions are beyond the scope of this course. This data set is very small and the residuals do not show major problems, so the analysis is pursued. Note that when doing real data analysis, this step should be more detailed.
 
 ```{r, echo = TRUE, warning=FALSE}
 
-kable(anova(transg.aa.m1)) %>% 
+kable(anova(transg.aa.m1), digits = c(0, 0, 3, 3, 4)) %>% 
    kable_styling(full_width = FALSE)
 
 ```
 
-The analysis of variance table has columns for source of variations, degrees of freedom, sum of squares, mean squares, calculated F-value and probability of observing an F that large or larger if the null hypothesis were true. Of course, the F value and the probability are the same as in the previous table.
+The analysis of variance table has columns for source of variations, degrees of freedom, sum of squares, mean squares, calculated F-value and probability of observing an F that large or larger if the null hypothesis were true. Of course, the F value and the probability are the same as in the previous table. The probability reported is the probability that an F-distributed random variable with 2 df in the numerator and 9 df in the denominator will take values equal to or greater than the calculated F. If the means are indeed all the same, then the calculated F is supposed to be an F-distributed random variable with 2 df in the numerator and 9 df in the denominator. If the probability is too low, we reject the F distribution, which cascades back to rejecting $H_0$.
 
-Because the probability associated with the calculated F-value is larger than 0.05, we cannot reject the null hypothesis and the study is inconclusive. We do not have enough evidence to say that the varieties lead to different weight gains, because the variation among treatment means is not sufficiently larger than that within treatments, due to experimental error (variation among experimental units due to other, unmeasured causes).
+Because the probability associated with the calculated F-value is larger than 0.05, we cannot reject the null hypothesis and the study is inconclusive. This is the same as to say that the calculated F is smaller than the critical $F$. We do not have enough evidence to say that the varieties lead to different weight gains, because the variation among treatment means is not sufficiently larger than that within treatments, due to experimental error (variation among experimental units due to other, unmeasured causes).
 
-Keep in mind that not being able to reject the null hypothesis is not the same as accepting it. The reason for this is that is it very easy not to reject any null hypothesis: all you have to do is not try hard enough. If not being able to reject the null meant that you accept it, then you could accept any null hypothesis, which obviosuly is not very useful. It would simply lead you to be wrong most of the time.
+Keep in mind that not being able to reject the null hypothesis is not the same as accepting it. The reason for this is that *it is very easy not to reject a null hypothesis*: all you have to do is not try hard enough, for example by obtaining a very samll sample. If not being able to reject the null meant that you accept it, then you would be able to accept any null hypothesis, which obviosuly is not very useful. It would simply lead you to be wrong most of the time.
 
-If the above is not clear, consider the following. You took a a multiple choice test and obtained 75% correct in 20 questions. The questions are a sample of your knowledge. Your professor hypothesizes that your real knowledge of the material is at 73%. With the sample size available, he cannot reject his null hypothesis. Will you accept it?
+If the above is not clear, consider the following. Say you took a a multiple choice test and obtained 75% correct. The questions are a sample of your knowledge. Your professor hypothesizes that your real knowledge of the material is at 73%. With the sample size available, he cannot reject his null hypothesis. Will you accept a grade of 73%?
 
 ```{block, type = 'stattip'}
 - Failure to reject the null hypothesis DOES NOT mean that you accept it. It means the study is inconclusive, unless you did a calculation of power.
 ```
 
+Even though treatments were not significanlty different, we can calculate confidence intervals for the means and we can estimate the minimum difference between means that could be detected with the present variance and sample size. In all cases, the best estimate of the variance of the error we have is the MSE with dfe degrees of freedom.
+
+**Confidence interval for a treatment mean**
+
+<br>
+\begin{align}
+&{U \atop L} = \hat{\mu}_{i.} \pm t_{(1-\alpha/2), dfe} \ S_{\hat{\mu}_{i.}} \quad \text{ where} \\[15pt]
+& \hat{\mu}_{i.} = \bar{Y}_{i.} \quad \text{is the estimated treatment mean or average} \\[15pt]
+&t_{(1-\alpha/2), dfe} \quad \text{ is the } \quad 1-\alpha/2 \quad \text{ t quantile with dfe degrees of freedom} \\[15pt]
+&S_{\hat{\mu}_{i.}} = S_{\bar{Y}_{i.}} \quad \text{is the standard deviation of the estimated treatment mean} \\[15pt]
+&S_{\bar{Y}_{i.}}^2 = MSE/r \\[15pt]
+(\#eq:CiTrtMeanCRD)
+\end{align}
+<br>
+
+The key step in the calculation is finding $S_{\bar{Y}_{i.}}$. We recall that the treatment average is the average of all replicates for the treatment and apply the most important equation of this course. If the estimated variance of $Y$ is $S^2_Y$, then the estimated variance of $\bar{Y}_{i.}$ is $S^2_Y/r_i$ where $r_i$ is the number of replicates in treatment i. If the experiment is balanced and all treatments have the same number of replications, then $r = r_i$ which in the example is 4 replications. For $S^2_Y$ we use the best estimate of the variance of the error we have, which is the MSE. Note that the MSE is preferred to using the estimated variance based just on the r replicates for the treatment because it has more degrees of freedom. This works if the assumption of homogeneity of variance is correct.
+
+For the calculation of confidence intervals we us the `emmeans` function in the `emmeans` [@Lenth2018] package of R. The `emmeans` function computes the estimated treatment means, their standard errors and confidence intervals. Note that the code below repeats the code for the table to have it printed in a nice format using the functions `kable` and `kableExtras` Thus, you can see the table as direct output form R and then as formatted by the software used to write this book.
+
+<br>
+```{r aaAnovaTbl}
+
+emmeans::emmeans(transg.aa.m1, "variety")
+
+emmeans(transg.aa.m1, "variety") %>%
+   kable(caption = "Estimated mean weight gains for animals 
+         fed each variety of alfalfa, with the corresponding 
+         standard errors and confidence intervals.", 
+         digits = c(0, 1, 4, 0, 4, 4)) %>%
+   kable_styling(full_width = FALSE)
+```
+<br>
+
+Table \@ref(tab:aaAnovaTbl) shows that all estimated treatment means have the same SE and df of the error, which leads to identical confidence interval widths. The t-value for the confidence intervals, known as "critical" t or colloquialy "t from table" (as opposed to calculated t) is $t_{\ 0.975, \ 9} =$ `r qt(0.975,9)`
 
 
+**Comparing two treatment means**
+
+In this specific example the single F-test did not lead to rejection of $H_0$, so comparisons among means should not be pursued. However, we present the calculations that are necessary for comparing means using the *Least Significant Difference* (LSD) procedure. In this procedure, we calculate the smallest difference necessary to conclude that any two means are different. Any two means that differ by more than the LSD are considered to be "significantly" different, which means that we reject the null that they are the same.
+
+As we saw in [Chapter 8: Two populations](#ch2pops), when we test the $H_0$ that two means are equal we have two random variables: each of the two estimated means. Because experimental units were randomly assigned to treatments and treated independently, the estimates should be, and are assumed to be, independent random variables. The test of equality becomes a test of whether the difference between the two random variable realizations is significantly different from zero. That is, we ask "is the difference much greater that it would be expected if the two means were actually equal?" The difference between two normal random variables is also a normal random variable with mean equal to the difference in the true means and variance equal to the sum of the variances of the two estimated means. Because we are assuming that there is homogeneity of variance, then the two variances are equal, so we use a pooled estimated variance. In the two sample case in Chapter 8 we pooled the two estimated variances. When we have several treatments, we use the estimated variance pooling all within-treatment variation, which is the MSE.
 
 
+<br>
+\begin{align}
+&H_0: \mu_{1.} = \mu_{2.} \quad \equiv \quad \mu_{1.} - \mu_{2.} = 0 \\[15pt]
+&H_A:  \mu_{1.} \ne \mu_{2.}\\[15pt]
+& \bar{d} = \bar{Y}_{1.} - \bar{Y}_{2.} \sim N(\mu_{\bar{d}}, \sigma^2_{\bar{d}}) \\[15pt]
+& \sigma^2_{\bar{d}} =  \sigma^2_{\bar{Y}_{1.}} + \sigma^2_{\bar{Y}_{2.}} = 2 \ \sigma^2_Y/r \quad \text{ which is estimated by } \quad S^2_{\bar{d}} = 2 \ MSE/r\\[15pt]
+&\text{ therefore, if } \quad \mu_{\bar{d}} = 0 \implies t_{calc} = \frac{\bar{d}}{S_{\bar{d}}} \sim t_{dfe} \\[15pt]
+(\#eq:DifTrtMeanCRD)
+\end{align}
+<br>
 
+The decision rule is to compare the calculated t with the critical "two-tailed" t for $\alpha$. If the calculated t is greater than the critical t, then $H_0$ is rejected and the treatment means are said to be "significantly different." Note that if $$\bar{d}/S_{\bar{d}} \gt t_{(1-\alpha/2)}$$ then $$\bar{d} \gt t_{(1-\alpha/2)} \ S_{\bar{d}}$$ so the product of the critial t times the standard error of the difference between to averages is the smallest difference that will lead to a rejection of the null hypothesis.
 
-## Estimation of parameters
+```{r}
 
-### R Code
+library(agricolae) #load package necessary for LSD test
+
+LSD.test(transg.aa.m1, 
+         "variety", 
+         console = TRUE,
+         p.adj = "none")
+
+```
+
+The output reports:
+- MSE, 
+- a table with estimated treatment means with their group standard deviations without pooling, number of observations in each group, confidence intervals (same as reported by `emmeams` above) and rank of each extreme of the confidence intervals,
+- $\alpha$, dfe and critical t for the given $\alpha$, and dfe,
+- least significant difference,
+- table with treatment averages connected with letters.
+
+The last part of the ouput, a table of averages followed with letters is a standard way to present the results. Means that are followed by at least one letter in common are not significnatly different from each other. In this case there is only one letter following all the means because there are no significant differences.
 
 ### Detailed calculations
 
-First, we present the calculations as traditionally taught in introductory courses. Then we briefly explain the method and equations actually used in the theory of least squares and emplemented by statistical software.
+In this section we will repeat some of the analysis above in more detail. We will show the detailed calculations that are "behind the scene" when we used the high-level R functions.
 
+There are two principal goals for the calculations:
 
-## Hypothesis Testing
+1. get the calculated-F to compare to the "F from table," and
+1. get the standard error of estimated means and differences between estiamted means to test pairs of means or make confidence intervals.
 
-When using ANOVA to test for a difference among treatments, our null hypothesis and alternative hypothesis can be stated, respectively, as
+To obtain the calculated F we need to complete the ANOVA table, which contains the MSE. The standard error of estimated means and of their differences is calculated using the MSE.
 
-$H_0 : \mu_1 = \mu_2 = ... =\mu_k$ for $k$ treatments        
-$H_1 : at least 1 treatment is different$     
+Sums of squares, the central component of the ANOVA table can be calculated by making a table with all components for each of the observations and then squaring and summing the components.
+
+```{r}
+
+# First calculate treatment averages and add them to each corresponding observation
+# in a new column. We use the aggregate function.
+
+var.avg <- aggregate(wgain ~ variety, 
+                     data = aaAnovaExmpl1.dat, 
+                     FUN = mean)
+
+names(var.avg)[2] <- "avg.wgain" # Change name to avoid conflict during merge.
+
+aaAnovaExmpl1.dat <- merge(aaAnovaExmpl1.dat, var.avg, all = TRUE)
+
+# Calculate treatment effects
+aaAnovaExmpl1.dat$trt.fx <- aaAnovaExmpl1.dat$avg.wgain - mean(aaAnovaExmpl1.dat$wgain)
+
+# Calculate residuals
+aaAnovaExmpl1.dat$rsdl <- aaAnovaExmpl1.dat$wgain - aaAnovaExmpl1.dat$avg.wgain
+
+# Calculate total deviations from average
+aaAnovaExmpl1.dat$tot.dev <- with(aaAnovaExmpl1.dat, trt.fx + rsdl)
+
+print(aaAnovaExmpl1.dat)
+
+```
+
+The data frame now has the original observations plus their decomposition into overall average ($Y_{..} = `r mean(aaAnovaExmpl1.dat$wgain)`), treatment effect and residual. The total deviation from each observation to the overall average is the sum of treatment effect and residual, for example for the first two rows:
+
+\begin{equation}
+Y_{11} = 1.0 = 2.5 + (-0.5) + (-1.0) \\[15pt]
+Y_{12} = 3.0 = 2.5 + (-0.5) + 1.0
+\end{equation}
+
+Total sum of squares is the sum of the squared values in the `tot.dev` column:
+
+\begin{align}
+TSS &= (-1.5)^2 + 0.5^2 + (-0.5)^2 + (-0.5)^2 + 0.5^2 + (-0.5)^2 \\
+&+ 0.5^2 + (-0.5)^2 + 0.5^2 + 1.5^2 + 0.5^2 + (-0.5)^2 \\
+&= 7.0
+\end{align}
+
+Treatment and residual SS can be found in a similar way using the corresponding columns.
+
+\begin{align}
+SST &= (-0.5)^2 + (-0.5)^2 + (-0.5)^2 + (-0.5)^2 + 0^2 + 0^2 \\
+&+ 0^2 + 0^2 + 0.5^2 + 0.5^2 + 0.5^2 + 0.5^2 \\
+&= 2.0
+\end{align}
+
+\begin{align}
+SSE &= (-1)^2 + 1^2 + 0^2 + 0^2 + 0.5^2 + (-0.5)^2 + 0.5^2 \\
+&+ (-0.5)^2 + 0^2 + 1^2 + 0^2 + (-1)^2 \\
+&= 5.0
+\end{align}
+
+Degrees of freedom are as follows: For SSE there are 12 independent terms in the summation, and we estimated 3 treatment means to calculate it. Therefore, dfe = 12 - 3 = 9. Using the geometric approach, the observation vector is in a 12-dimensional space and the vector of treatment means is in a 3-dimensional space, so the residual vector is restricted to a 9-dimensions.
+
+For TSS there are 12 independent terms and one estimate of the overall mean. Thus, total df = 12 - 1 = 11. Treatment or variety SS has 3 independent terms that repeat over each of the replications and it uses one estimate for the overall mean. Thus, df treatments = 3 - 1 = 2.
+
+$$ MSE = \frac{SSE}{dfe} = \frac{5.0} {9} = 0.55556$$
+
+$$MST =  \frac{SST}{df_{treat}} = \frac{2.0} {2} = 1.0$$
+
+$$F_{calc} = \frac{MST}{MSE} = 1.8 \quad \text{with 2 df in the numerator and 9 df in the denominator}$$
+
+Critical F and the probability associated with the observed F are calculated in R as follows. Recall that the value of the critical F is a quantile, more specifically the $1 - \alpha$ quantile:
+
+```{r}
+
+# Critical F quantile
+qf(p = 0.05, df1 = 2, df2 = 9, lower.tail = FALSE)
+
+# Probability of F > Fcalc
+pf(q = 1.8, df1 = 2, df2 = 9, lower.tail = FALSE)
+
+```
+
+This completes all the information in the ANOVA table. Now we proceed to make a confidence interval for an estimated treatment mean, for example for variety C. The standard error of the estimated mean is the MSE divided by the number of observations used to estimated the mean. In this case, all treatments has the same sample size or number of replications, and thus, all treatment standard errors are the same. However, in other experiments, sample sizes can differ among treatments and the standard error will be larger for the treatments with fewer observations.
+
+$$S_C = \sqrt{\frac{MSE}{r}} = \sqrt{\frac{0.55556}{4}} = 0.372678$$
+
+The critical value of t for the CI is obtained using the `qt` function in R. For a confidence interval we always use the 2-tailed quantile, which leaves $\alpha/2$ on each tail.:
+
+```{r}
+# Critical t
+qt(p = 0.05/2, df = 9, lower.tail = FALSE)
+
+# Average for variety C
+mean(aaAnovaExmpl1.dat$wgain[aaAnovaExmpl1.dat$variety == "C"])
+
+```
+We corroborate that the value obtained is the same as above when we used the `LSD.test` function.
+
+$${U \atop L} = 3.0 \ \pm \ 2.262157 \cdot 0.372678 = {3.843056 \atop 2.156944}$$
+
+Finally, we construct a test and calculate the LSD to compare the means of varieties A and C. Because we are calculating a difference between two estimated means, the variance is twice that of each estimated mean. Critical t is the same, given that we use the same $\alpha = 0.05$ and that the dfe are the same as before. The mean of variety A is 2.0.
+
+$$S_{\bar{d}} = S_{C-A} = \sqrt{\frac{2MSE}{r}} = \sqrt{\frac{2\cdot0.55556}{4}} = 0.5270463$$
+
+$$\bar{d} = 3.0 - 2.0 = 1.0$$
+$$t_{calc} = \frac{\bar{d}}{S_{\bar{d}}} = \frac{1.0}{0.5270463} = 1.897367$$
+The probability associated with the calculated t is found in R taking into account that the test is two-tailed, so the probability for one tail has to be multiplied times 2:
+
+```{r}
+
+2 * pt(1.897367, df = 9, lower.tail = FALSE)
+
+```
+
+The LSD is the product of the critical t and $S_{\bar{d}}$
+
+$$ LSD = 2.262157 \cdot 0.5270463 = 1.192262$$
+We cannot reject the null hypothesis that themeans for varieties A and C are equal because of three equivalent facts (in addition to the nonsignifcant ANOVA test):
+
+1. The probability associated with calculated t is greater than 0.05.
+1. Calculated t is smaller than critical t.
+1. The difference between averages is smaller than the LSD.
 
 
 ## Exercises and Solutions
+
 
 ## Exercises
 
@@ -649,11 +851,9 @@ We already know how to compare two means. When we have many means and want to de
 
 ### Comparison of Diets
 
-You are looking for diets that reduce blood cholesterol in rats. You created 14 test diets and did an experiment in which 4 randomly selected rats were fed each diet. Blood cholesterol was measured on each rat at the end of 30 days of feeding.  Because you do this before knowing about ANOVA you decide to test for differences using the independent observations procedure for two population means, taking two diets at a time. You use alpha=0.05 for each test. Assume that the test are  all independent.
+You are looking for diets that reduce blood cholesterol in rats. You created 14 test diets and did an experiment in which 4 randomly selected rats were independently fed each diet. Blood cholesterol was measured on each rat at the end of 30 days of feeding.  Because you do this before knowing about ANOVA you decide to test for differences using the independent observations procedure for two population means, taking two diets at a time. You use alpha=0.05 for each test. Assume that the test are all independent.
 
-**Binomial**
-
-1. How many different tests of $H_0: \mu1 =\mu2$ do you make? Consider that each time you make a test you are choosing 2 out of 14 means. The order of the means does not matter, because we are making 2-tailed tests.
+1. How many different tests of $H_0: \mu_1 =\mu_2$ do you make? Consider that each time you make a test you are choosing 2 out of 14 means. The order of the means does not matter, because we are making 2-tailed tests.
 
 2. What is the probability that you make a type I error in each test separately?
 
@@ -665,27 +865,27 @@ You are looking for diets that reduce blood cholesterol in rats. You created 14 
 
 ### Use of ANOVA
 
-When you make a lot of tests, your chance of making at least one mistake can be quite large. ANOVA avoids the problem with your "all-tests" approach by doing a single test that simultaneously checks for evidence of at least one difference. Interestingly, although the test is to determine if there are differences among means, it actually is a test of equality of variances estimated in two different ways. So first we practice testing for equality (or difference) of variances. When two random variables have normal distributions with equal variance, the ratio of sample variances from each population has an F distribution (see [F Distribution](#FDist) .
+When you make a lot of tests, your chance of making at least one mistake can be quite large. ANOVA avoids the problem with your "all-tests" approach by doing a single test that simultaneously checks for evidence of at least one difference. Interestingly, although the test is to determine if there are differences among means, it actually is a test of equality of variances estimated in two different ways. So first we practice testing for equality (or difference) of variances. When two random variables have normal distributions with equal variance, the ratio of sample variances from each population has an F distribution (see [F Distribution](#FDist).
+
 
 ### Test of Equality of Variances
 
 The data below are samples of forage yield (ton/ha) from a variety of fescue grown with and without irrigation. Test the hypothesis that irrigated and rainfed yields have the same variance.
 
+<br>
 ```{r}
 
 test.of.eq.var <- data.frame(
-rainfed = c(4.55531, 3.28384,3.69763, 4.97093, 4.86167, 3.51156, 5.37135, 4.17079, 3.51320, 4.02560, 
-              2.79041, 3.55350, 3.22606, 5.89298, 1.66526, 4.16665, 3.50212, 3.72783, 2.36477, 3.30673, 
-              4.40777, 3.66480, 3.35171, 3.10409, 2.85976, 3.81750, 5.39221, 4.99803,4.11388, 4.11004),
-irrigated = c(13.10275, 11.66548, 8.40485, 8.37005, 10.32271, 10.22372, 8.08630, 12.99069, 11.70000, 12.10000, 
-                 7.87410, 10.22707, 12.10700, 11.00452, 10.64577, 8.68308, 6.83079, 12.25721, 10.20000, 12.52602, 
-                 NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
+rainfed = c(4.55531, 3.28384,3.69763, 4.97093, 4.86167, 3.51156, 5.37135, 4.17079, 3.51320, 4.02560, 2.79041, 3.55350, 3.22606, 5.89298, 1.66526, 4.16665, 3.50212, 3.72783, 2.36477, 3.30673, 4.40777, 3.66480, 3.35171, 3.10409, 2.85976, 3.81750, 5.39221, 4.99803,4.11388, 4.11004),
+irrigated = c(13.10275, 11.66548, 8.40485, 8.37005, 10.32271, 10.22372, 8.08630, 12.99069, 11.70000, 12.10000, 7.87410, 10.22707, 12.10700, 11.00452, 10.64577, 8.68308, 6.83079, 12.25721, 10.20000, 12.52602, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
 
 ```
 
+<br>
 ```{block, type = 'rtip'}
 Data frames are rectangular tables with data. All columns must have the same length. Because our two treatments do not contain the same number of samples, 'NA' values are included to make columns of equal length that can be joined into a data frame.**
 ```
+<br>
 For the following calculations, assume an $\alpha = 0.05$, and $df_{rainfed} = 29$ and $df_{irrigated} = 19$ to calculate these values.
 
 6. Calculate the sample variances and report the "calculated" or sample F value. 
@@ -751,7 +951,8 @@ $S^2 = \frac{(r_1 - 1)S^2_{1} + (r_2 - 1)S^2_{2} +(r_3 - 1)S^2_{3} + (r_4 - 1)S^
 Now we recall that the variance of averages for samples from a population is the variance of individual observations divided by sample size. If it is true that all means are the same for all varieties, then we can obtain another estimate of the individual variance by calculating the variance among averages and multiplying by sample size.	
 
 
-11. Estimate the variance of yield using the variance among averages and sample size. Refer to the equation you were asked to memorize for this course.						
+11. Estimate the variance of yield using the variance among averages and sample size. Refer to the most important equation for this course.
+
 12. What is the overall average?
 
 13. What is the pooled within variance?

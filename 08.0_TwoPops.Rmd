@@ -35,7 +35,7 @@ library(latex2exp)
 
 ```
 
-# Two Populations Means {#ch.2pops}
+# Two Populations Means {#ch2pops}
 
 ## Learning Objectives for Chapter {#LearnObj8}
 
