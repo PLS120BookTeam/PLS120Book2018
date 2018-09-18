@@ -1,5 +1,140 @@
 # Confidence intervals and Hypothesis testing {#ch.hotest}
 
+## Learning Objectives for Chapter
+#Updated 9-16
+1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
+1. State null and alternative hypotheses in words and equations.
+1. Calculate and explain the meaning of level of significance in words and with a graph.
+1. Calculate power of a test and explain it with a graph.
+1. Calculate and interpret confidence intervals.
+1. Describe how sample size and alpha effect the CI. 
+1. Perform a simulation to check the correctness of a CI.
+1. Explain the difference between a one-tailed and two-tailed test and determine when each one is applicable.
+1. Recreate and explain a table showing the outcomes of statistical tests and the types of errors.
+1. Test if the mean of a population is equal to a hypothetical mean when variance is known and unknown.
+
+A **statistical hypothesis** is an assertion made about some parameter or aspect of a popualtion. Performing a statistical hypothesis permits for making a statistical inference which consists of making statements about population characteristics based on information obtained from samples. 
+
+Perfoming a hypothesis test examines the probability of whether or not the assertion made from the statistical hypothesis is "*true*." The steps involved for conducting a hypothesis test are:
+
+1) Stating the hypothesis (null and alternative) 
+2) Set the level of significance 
+3) determine/state the decision rule
+4) Calculate test-statistic
+5) Interpret the decision and state conclusion  
+
+##Conducting a hypothesis test
+
+A hypothesis is stated about a popualtion, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay. 
+
+*Identify null and alternative hypotheses*
+
+In the example above, the null hypothesis states that the mean photosynthetic rate of the eelgrass population in the south quadrant $(\mu_{south})$ is the *same* as the mean photosynthetic rate of the eelgrass population for all quadrants $(\mu_{all})$ (i.e., no difference in photosynthetic rate between the two popualtions). Thus, the *null hypothesis** states there is no difference between means for the specificed populations. The null hypothesis is denoted as $$H_o$$. 
+
+The alternative hypothesis for this example would state that the mean photosynthetic rate of the eelgrass population in the south quadrant is *different* than the mean photosynthetic rate of eelgrass found in all quadrants. The alternative hypothesis is denoted $$H_a$$ 
+
+Hypotheses written out follow the forms:
+
+Null hypothesis: 
+
+$$H_o: \mu_{south} = \mu_{all}$$
+Alternative hypothesis:
+
+$$H_a: \mu_{south} \neq \mu_{all}$$
+Above, the alternative hypothesis states that the mean photosynthetic rate of the south quadrant popualtion is *not equal* to the mean photosynthetic rate of the all quadrant population. An important aspect of this statement is that it is not specified how the two popualtion means are different. For example, the sample taken $(\mu_{south})$ to test this hypothesis could have a mean that is greater or less than the all quadrant population $(\mu_{all})$. If the goal were to determine if the sample population mean were greater or less than the all quadrant population, this would be referred to as a **one-tailed** test. Since the goal is to just identify if the two population means are different---in some form---than this is referred to as a **two-tailed** test. 
+
+```{block, type = 'stattip'}
+- Two-tailed test: $$H_o: \mu = \mu_{0}$$ 
+                   $$H_a: \mu \neq \mu_{0}$$
+                   
+                   
+- One-tailed test: $$H_o: \mu = \mu_{0}$$ or
+                   $$H_o: \mu \geq \mu_{0}$$
+                   $$H_a: \mu < \mu_{0}$$
+
+- One-tailed test: $$H_o: \mu = \mu_{0}$$ or 
+                   $$H_o: \mu \leq \mu_{0}$$
+                     $$H_a: \mu > \mu_{0}$$
+```
+
+*Level of significance*
+
+Setting the level of significance $(\alpha)$ determines at what calcualted probability value the null hypothesis is either accpeted or rejected. Setting the level of signficance for the hypothesis before the test is conducted is referred to as *a priori* and a practice intended to prevent implicit bias when drawing conclusions from the hypothesis test. The possible outcomes from a hypothesis test are described in figure (\@ref(fig:Error_table)).  
+
+<br>
+
+```{r Error_table, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Hypothesis test results: type I and type II errors."}
+
+knitr::include_graphics("images/Error_table.pdf")
+
+```
+
+<br>
+
+A *Type I error* is also referred to as a "false positive," and is the probability of rejecting the null hypothesis when it is actually true. Conversley, a *Type II error* is a "false negative," and is the probability of not rejecting the null hypothesis when the alternative hypothesis is true. Based on the level of significance, there will be some degree of probability that which a type I or type II error may occur since there are no absolutes in inferential statistics. 
+
+The probability of making either a type I or type II error can be defined as the power of the statistical test. That is, the **power** of a staistical test is the probability of corrrectly rejecting the null hypothesis when the alternative hypothesis is true.  
+
+
+```{block, type = 'stattip'}
+In statistics, it is never stated that the null or alternative hypothesis is true. Rather, it is stated that the null hypothesis is rejected or failed to be rejected based on the inferential statistics concluded from the hypothesis test. 
+
+```
+
+Create figure with changing sample size and variance
+
+*Test-statistic*
+
+In order to assess the probability of a statistical test, a test-statistic needs to be calculated. One such test-statistic is the z-statistic (i.e., z-score). When the data are normally distributed, or aprroximately normal given a large sample size (e.g., n >30), the **z-statistic** is, specifically, the number of standard deviations or standard error from the mean value. A z-statistic can be calculated as follws:
+
+$$z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}$$
+where the calculated *z-statistic* is the the difference between the sample mean $(\bar{x})$ and the known population mean $(\mu)$ over the known population standard deviation divded by the square root of the sample size. If the popualtion variance is unnknown, it can be appoximated from the sample variance and the t-statistic can used to peform the hypothesis test:
+
+$$t = \frac{\bar{x} - \mu}{s / \sqrt{n}}.$$
+ 
+A calculated z-statistic and t-statistic need to be compared against a z-critcal or t-crtical value to determie whether or not the null hypothesis will be rejected or fail to be rejected. Stipulations for calculating a z-statistic are that the populaiton mean and standard deviation need to be known. If these two criteria are not met or the smaple size is small, and the data distribution is approximately normal, a t-statsitic must be calcualted.
+
+The z-critical value is a reference value and dependent on the level of significance (see appendix....), whereas the t-critical value varies with sample size (see appendix... for table). All the z- and t-values are the cumulative probabilites under a normal distribution where the critical values set the threshold of the extreme probabilites of which the result of the hypothesis test can be determined. That is, based on the calculated test-statistics, what is the probability of the calcualted values being smaller or greater than the critical values. 
+#Figure (\@ref(fig:prob_dist)) is a visual reprsentation of test-statistic values under a normal distribtuion. 
+
+
+
+Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true popualation parameters. A **confidence interval** is a range values that will encompass the true popualtion parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
+
+
+
+<br>
+
+```{r CI, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Confidence intervals 68, 95, and 99 % displayed as one standard deviation apart across a standard normal distribtuion"}
+
+knitr::include_graphics("images/CI.pdf")
+
+```
+
+<br>
+
+For example, if you have known popualtion parameters such as mean and standard deviation (i.e. $\sqrt \sigma^2$) the confidence intervals are calculated:
+
+$$Lower bound = \bar{x} - z* \frac{\sigma}{\sqrt n}$$
+$$Upper bound = \bar{x} + z* \frac{\sigma}{\sqrt n}$$
+where *z** is the z-critical value, and at 95% confidence, equal to 1.96. 
+
+Say you want to estimate the mean length of the oldest leaf on a seagrass shoot collected from a nearby estuary. You collect 100 samples of seagrass shoots were with a mean length of 30 cm and a standard deviation of 3.2 cm. The confidence interval for these samples can then be calculated: 
+
+$$\pm 1.96*(3.2/10) = 0.63 cm$$
+
+With a lower bound of 29.37 cm and an upper bound of 30.63 cm. The confidence interval when then be stated as *out of 100 samples we are 95% confident that the mean value from 95 of the 100 samples will fall between the lengths of 29.37 and 30.63 cm.
+
+Given the equation above either decreasing the standard deviation or incresing the sample size would lower the confidence bounds and give a narrower range in which the true population mean lies. 
+
+If you have a small sample size  (e.g., <30), you would calculate a confidence interval based on the *t*-critical value which varies based on sample size and level of confidence (see z-table in appendix... ). 
+
+The formula would be the same as above but replacing the *z*-critical value with the *t*-critical value:
+
+$$CI = \bar{x} \pm t* \frac{\sigma}{\sqrt n}$$. 
+
+# Confidence intervals and Hypothesis testing {#ch.hotest}
+
 Include section on the misuse of alpha. WassersteinLazar2016.pdf
 Nuzzo2014.pdf
 
