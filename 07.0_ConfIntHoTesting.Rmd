@@ -1,5 +1,8 @@
 # Confidence intervals and Hypothesis testing {#ch.hotest}
 
+Include section on the misuse of alpha. WassersteinLazar2016.pdf
+Nuzzo2014.pdf
+
 ## Learning Objectives for Chapter
 
 1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
@@ -47,9 +50,27 @@ Include simulation or figure with known population parameters. Show 100 Ci's and
 
 ## Confidence interval and test of one mean
 
+The test of hypothesis is based on a conditional probability, the probability that the summary statistics or calculated t value is greater than or equal to the one observed, given that the dsitribution of the observations is normal and independent with mean equal to that hypothesized. For this to make more sense formally we need to distinguish between the random function or variable calculated, call it $s = (\bar{Y} - \mu_0)/S_{\bar{Y}}$ (s for "statistic") and any specific value that it takes for a sample, say $t_{calc}$ (because it is the name we generally use). In symbols:
+
+$$p-value = P(s \ge t_{calc}|X \sim N(\mu_0, \sigma))$$
+
 ## What is the meaning of the p-value?
 
 http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
+
+[@Nuzzo2014] stated:
+
+>P values have always had critics. In their almost nine decades of existence, they have been lik- ened to mosquitoes (annoying and impossible to swat away), the emperor’s new clothes (fraught with obvious problems that everyone ignores) and the tool of a “sterile intellectual rake” who ravishes science but leaves it with no progeny3. One researcher suggested rechristening the methodology “statistical hypothesis inference testing”, presumably for the acronym it would yield.
+
+```{block, type = 'think'}
+Interesting... It looks like we are studying p-values and that they may mean “statistical hypothesis inference testing.” You may think: "I do not have time for this SHI Testing!" but you do. You are traveling the statistical times at an exciting crossroads. Woman up and man up!
+```
+
+The formal procedure of obtaining and interpreting p-values is correct. P-values in themselves are not flawed, except that they are used in ways that are not correct.
+
+>Informally, a p-value is the probability under a specified statistical model that a statistical summary of the data (e.g., the sample mean difference between two compared groups) would be equal to or more extreme than its observed value.
+>
+> [@WassersteinLazar2016]
 
 ## Types of Errors in Hypothesis testing
 
@@ -89,7 +110,7 @@ This is a markdown document. You will type your code and run it one line at a ti
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. 
 
-```{r setup, include=FALSE}
+```{r setup1, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 

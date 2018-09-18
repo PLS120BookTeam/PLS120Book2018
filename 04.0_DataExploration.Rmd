@@ -1,4 +1,4 @@
-# Data Manipulation, Exploration and Summaries {#ch.data}
+# Data Manipulation, Exploration and Summaries {#chData}
 
 ## Learning Objectives for Chapter
 
