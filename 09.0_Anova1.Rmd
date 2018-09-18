@@ -59,7 +59,7 @@ See CRDwithSS in Explain Everything
 
 In the previous chapter we used t-tests to test the null hypothesis that two means are equal. The general idea was that if sample means differ a lot more than expected if true means were equal, we conclude that means were not equal. In each test we incurred a risk of making a mistake, either by rejecting a true null hypothesis of by failing to reject a false one. People are particularly keen on making sure that they do not reject true null hypotheses^[There may be some reasons to favor concern about error type I vs. II, but neither error is inherently more troubling. It is more useful to assess the relative importance of errors by thinking about their consequences. What happens if you fail to reject a false hypothesis? What happens if you reject one that is true?]. This means that we want to make sure that we control the probability or making an error type I, called $\alpha$ and that we kwep it at the selected value, usually 0.05.
 
-However, there are stuatioins when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least one error type I is $1 - 0.95^{45} = 0.90$!
+However, there are stuations when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least one error type I is $1 - 0.95^{45} = 0.90$!
 Analysis of variance helps correct this problem by performing a single test of the null hypothesis, regardless of the number of treatments. Preview: the remedy is limited if the null hypothesis is rejected (Be the first to ask why in lecture and get an Easter egg!! Make sure to mention that you want your Easter egg.)
 
 ```{block, type='mydef'}
@@ -761,6 +761,82 @@ We cannot reject the null hypothesis that themeans for varieties A and C are equ
 
 ## Exercises and Solutions
 
+
+## Exercises
+
+1. Explain what analysis of variance means practically?  How can one use variances to compare the means of different treatments?
+
+
+2. What are the assumptions of the analysis of variance and why are each of them required prior to analysis?
+
+
+3. Data is collected on 4 groups of 30 Romney ewes that were clipped and shorn on different days across 3 replicated time periods in New Zealand.  Mean clean fleece weight (g) is shown in the table below.
+
+<br>
+
+Table: (\#tab:SheepWool) Mean clean fleece weight (g) is measured from ewes that were clipped and shorn on different days across three consecutive 112 day intervals (Bigham, 1974)
+
+|   Treatment   |      Rep 1     |      Rep 2     |      Rep 3     |   Total   |    Mean   |
+|--------------:|:--------------:|:--------------:|:--------------:|:---------:|:---------:|
+|    A(28,28)   |      1.44      |      1.13      |      1.93      |    4.50   |           |
+|    B(56,56)   |      1.34      |      1.11      |      1.87      |    4.32   |           |
+|   C(112,112)  |      1.30      |      1.03      |      1.88      |    4.21   |           |
+|   D(28,112)   |      1.33      |      1.00      |      1.87      |    4.20   |           |
+
+<br>
+```{r}
+
+sheep.wool <- data.frame(
+  'A' = c(1.44, 1.13, 1.93),
+  'B' = c(1.34, 1.11, 1.87),
+  'C' = c(1.30, 1.03, 1.88),
+  'D' = c(1.33, 1.00, 1.87))
+
+```
+
+a. What is the MST and MSE of this data?
+
+b. What is the calculated F-value of this data?
+
+c. Is there a significant difference among the treatments at a 5% significance level?
+
+d. Is there a significant difference among the treatments at a 1% significance level?
+
+e. Is there a significant difference among the treatments at a 10% significance level?
+
+
+4. If treatments are considered significantly different at the 5% level, will they also be considered significantly at the 10% level?  at the 1% level?
+
+5. Data is collected on the yield (bushels/acre) in four different varieties of wheat replicated at a single location.  
+
+<br>
+
+Table: (\#tab:WheatYield) Wheat yield (bushels/acre) is measured from four different varieties.  
+
+|   Treatment   |      Rep 1     |      Rep 2     |      Rep 3     |      Rep 4     |      Rep 5     |      Rep 6     | 
+|--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|
+|       A       |       60       |       40       |       45       |       55       |                |                |
+|       B       |       25       |       30       |       25       |       35       |       30       |       25       |
+|       C       |       55       |       50       |       40       |       60       |       55       |                |
+|       D       |       60       |       55       |       55       |       45       |       50       |                |
+
+<br>
+
+```{r}
+
+wheat.yield <- data.frame(
+  'A' = c(60, 40, 45, 55),
+  'B' = c(25, 30, 25, 35, 30, 25),
+  'C' = c(55, 50, 40, 60, 55),
+  'D' = c(60, 55, 55, 45, 50))
+
+```
+
+a. What is the MST and MSE of this data?
+
+b. What is the calculated F-value?
+
+c. Is there a significant difference among the treatments at the 5% significance level?
 
 
 ## Homework
