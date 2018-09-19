@@ -1,3 +1,33 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup0, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Updated 9-16
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+# load packages for chapter
+
+options(digits = 10)
+library(bookdown)
+library(emmeans)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(tables)
+library(pander)
+library(multcomp)
+library(agricolae)
+library(nlme)
+library(car)
+library(tidyr)
+
+```
 # Data Manipulation, Exploration and Summaries {#ch.data}
 
 ## Learning Objectives for Chapter
@@ -12,6 +42,169 @@
 1. Calculate the coefficient of variation and describe its weaknesses.
 The next one has to be explained more:
 1. Describe what a sample average tells you in the context of (1) data description, (2) data estimation, and (3) inference.  
+
+## Data curation
+
+Within a statistical framework, the term population refers to an entire set of measurments or a specific characteristic that is being examined. A descriptive measure for a population is refered to as a parameter. For exxample, popualtion parameters can be the number of all diary cows in California (population size = N) or the mean body weight of all diary cow calves in California. To determine these parameters a survey would need to be conducted, which is often not fesible. In such cases, inferential statistics is used by taking representative, random samples, of the popualtion and infering conclusions about the entire popualtion.
+
+When conducting random samples from a popualtion, collected parameters from a sample are refered to as statistics. Using the example above where *N* (captial letter) referred to the entire popualtion of dairy cows in California, a random sample of dairy cows in California can be designated with the varibale *n* (lower-case). 
+
+In the figure below (\@ref(fig:Map_cows)) two random samples were drawn from the California dairy cow popualtion to infer the average weight of newborn calves for the entire popualtion. In this example the sample statistic is weight of newborn dairy cow calves.  
+
+<br>
+
+```{r Map_cows, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of random samples of newborn calf weight collected from dairy cows in northern and southern California."}
+
+knitr::include_graphics("images/Map_cows.pdf")
+
+```
+
+<br>
+
+## Measures of central tendency
+
+The measure of central tendency is a summary measure that represents the center point of a whole data set and indicates the typical value of the data. The three measures of central tendency are the mean, median, and mode. 
+
+In the above example the mean weight of newborn dairy cows in California was collected from a random sample of the entire popualtion. In statistics, the **mean** is the average value from the collected data set. Advantages of using the mean are that most other statitcs such as variance and standard deviations can be determined algebraically using the mean. The variable that represents the mean for a popualtion is 
+
+$$\mu$$ 
+
+and for a sample:
+
+$$\bar{x}$$.
+
+The **median** of a sample data set is the middle value when the data are arranged in ascending or descending order. The median is simple to calcuate as it is the middle value and is not influenced by extreme values. 
+
+The **mode** of a sample data set is the value that occurs most frequently. Since multiple values can occur several times, one or more mode may be present for a data set. Alternatively, there may not be a most frequent value in a data set and, thus, no mode value. 
+
+For the sample data set in table \@ref(tab:PR_seagrass)) the mean, median, and mode can be calculated as:
+
+$$ \bar{x} = \frac{y_1 + y_2 + y_3 + y_4 + y_5 ... y_{10}} {n}$$
+For the data in table 1.1:
+$$mean = \frac{180 + 166 + 226 + 226 + 206 ... 154}{10}.$$
+
+$${y_1 , y_2 , y_3 , y_4, y_5, y_6, y_7}$$
+
+$${median = y_4}$$
+
+For the data in table 1.1:
+$${180, 166, 226, 206, 197, 180, 108, 243, 289, 154}$$
+
+$$median = \frac{197 + 180}{2}.$$
+$$ mode = {y_1, y_6}$$
+For the data in table 1.1:
+$$ mode = 180$$
+
+<br>
+
+```{r PR_seagrass, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Sample data set of photosynthetic rate for 10 different shoots of the seagrass *Zostera marina*."}
+
+knitr::include_graphics("images/PR_seagrass.pdf")
+
+```
+
+<br>
+
+## Measures of dispersion
+
+Measures of dispersion are important parameters and statistics that describe the spread of the data around its central measure (e.g., mean). Knowing the variability in conjunction with the measure if central tendency, a more clear and better inference can be made about a given popualtion from a random sample. 
+
+The two most important measure of dispersion are the **variance** which numerically describes the variability of values in a data set, and the **standard deviation** which  quantifies how spread out your data is around the central measure. That is, how much your data deviates from your most common value (e.g., mean). The variance of a popualtion can be calculated as the summation (\sum) of all observations (*i*) minus the mean (\mu) squared, over the sample size (N) minus 1: 
+
+$$\sigma^2 = \frac{\sum_{i=1}^N (x_i - \mu)^2}{N-1}.$$
+Different variables are used when determining the variance of a sample:
+
+$$s^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}.$$
+To calcuate the standard deviation of the popualtion (\sigma) take the square root of the variance, or calculate:
+
+$$\sigma = \sqrt{\frac{1}{N}{\sum_{i=1}^N (x_i - \mu)^2}}.$$
+Again, the variables differ when calcuating for a sample:
+
+$$s = \sqrt{\frac{1}{n}{\sum_{i=1}^Nn(x_i - \bar{x})^2}}.$$
+
+One final measure of dispersion is the range. The **range** is the difference between the largest and smallest values in a data set. The range is the most ambiguous measure of dispersion and is not suited for determing data dispersion when dealing with large data sets. 
+
+
+```{block, type = 'stattip'}
+- Variance: How far values in a group are spreadout. 
+- Standard deviation: How much values of a data set deviate from the central measure of tendency.
+```
+
+##Frequency distributions and histograms
+
+Sample data sets from a population can be summerized in a frequency table as a first step in data analysis (Table \@ref(tab:Freq)). In the example below, the number of leaves per one shoot of seagrass were put into classes: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7 in order to identify the frequency of occurences found in the data set. In this case, the data set was leaves counted per shoot in a 3x3 m plot and the observations were then catagorized into classes.      
+
+<br><br>
+
+Table: (\#tab:Freq) Number of leaves per shoot counted in a 3x3 m plot of seagrass in a northern California estuary. 
+
+| # Leaves| Frequency|
+|--------:|---------:|
+|    1-2  |     10   |  
+|    2-3  |     23   |  
+|    3-4  |     55   |    
+|    4-5  |     67   |   
+|    5-6  |     57   |   
+|    6-7  |     18   |
+
+<br><br>
+
+A good way to visualize the distribution of frequencies in a data set is to construct a histogram. A **histogram** uses the height of adjacent bars to display frequency of a value and the center of the bar as the midpoint of each class (\@ref(fig:Hist)). 
+
+<br>
+```{r Hist, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap = "Histogram constructed from frequency of leaves per shoot ."}
+
+knitr::include_graphics("images/Hist.png")
+
+```
+<br>
+
+Observing the histogram, the frequency of each class is easy to identify, with 4-5 leaves being the most frequent observation in the 3x3 m plot. The distribution of the data is such that there is a peak around the middle classes and lower frequencies to the left and right of the peak (i.e., the left and right tails). The red curve fit over the historgam highlights the distribuution of frequencies (\@ref(fig:Hist_curve)). This type of distribution with a peak in the middle and approximately equal length tails on each end is referred to as a normal distribution. A **normal distribution** takes the shape of a bell curve. This informs that the data are normally distributed. That is, it is not skewed to the left or right.
+
+<br>
+```{r Hist_curve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Histogram constructed from frequency of leaves per shoot with fit curve over frequency distribution."}
+
+knitr::include_graphics("images/Hist_curve.png")
+
+```
+<br>
+
+##Five-number summary 
+Another form of initial data analysis can be conducted by computing a five-number summary. The **five-number summary** is a set of descriptive statistics that provides information about the frequency distribution of a data set when values are arranged in ascending order. These descriptive statistics are as follows:
+
+Minimum (Min.): Smallest value in the data set.
+
+Lower quartile (Q_1): The median for the lower half of the data set that seperates the first 25% of the values from the other 75%. 
+
+Median: The value that falls in the middle of the data set.
+
+Upper Quartile (Q_3): The median for the upper half of the data set that seperates the last 25% of the values from the lower 75%. 
+
+Maximum (Max.): Largest value in the data set.
+
+The five-number summary can be graphically represented with a boxplot, sometimes referred to as a box and wisker plot (\@ref(fig:boxplot)). The median (red line in (\@ref(fig:boxplot)) is shifted slightly to the left, but close to center. Since there is not a large observable skew to the distribution, the data are said to be normally distributed. 
+
+<br>
+```{r boxplot, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Boxplot and five-number summary of the photosynthetic rates presented in from seagrass leaves."}
+
+knitr::include_graphics("images/boxplot.png")
+
+```
+<br>
+
+The output from the five-number summary for the 10 observations (i.e., values) of photosynthetic rate describe a minimum value of 108, Q_1 of 166, median of 188.5, Q_3 of 226, and a maximum of 289  \mumol TCO_2 gDW^-^1 h^-^1. The descriptive statistics help inform about the spread of data while providing a measure of central tendency and a way to visually assess the normality of the data set. That is, whether or not the data are normally distributed. 
+
+##Coefficient of variation 
+
+The final topic to be discussed in this chapter is the parameter or, statsitic, known as the coefficient of variation. The **coefficient of variation (CV)** is simply the ratio of the standard deviation to the mean. 
+
+$$ CV_{population} = \frac{SD}{\mu}$$
+Or
+$$ CV_{sample} = \frac{SD}{\bar{x}}$$
+
+The CV then describes the variability---in the form of the standard deviation---relative to the mean. For example, the CV is a beneficial when determining the variability or, spread, of a data set paticularliy when you are comparing data from two or more different surveys or samples that used different measures. Thus, the CV is independent of the unit of measurment scale.  
+
+It should be noted that the CV should only be used when the measurement scale of a data set is on the ratio scale rather than the interval scale. Interval scasles can have arbitrary zero values which can produce nonsensical CV values. In addition, the CV is sensitive to mean values close to zero potentially resulting in an inflated CV value. 
 
 ## Data curation
 

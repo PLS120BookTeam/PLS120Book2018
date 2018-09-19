@@ -82,7 +82,7 @@ div.mydef {
 div.mydef:before {
     content: url(images/Definition.png);
     float: left;
-    display: inline-block;
+    display: left;
     position:relative;
     padding-right: 20px;
 }

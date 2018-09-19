@@ -181,7 +181,7 @@ Factorial treatment combinations can result from combining levels of more than t
 
 When there are more than two factors, new levels of interactions appear in the partition of variation and each observation. With three factors, say A, B and C there are three 2-way interactions (AB, AC and BC) and one 3-way interaction (ABC). A 3-way interaction means that the two way interaction between two of the three factors is different in the two levels of the third factor.
 
-Photosynthesis and plant growth are known to require nitrogen (mostly for enzymes, nucleic acids and structural proteins), light and carbon dioxide. Growth rate typically responds nonlinearly to each of these factors and is limited by all of them. The following figure shows a representation of a typical pattern of response (Figure \@ref(fig:threeWayA))
+Photosynthesis and plant growth are known to require nitrogen (mostly for enzymes, nucleic acids and structural proteins), light and carbon dioxide. Growth rate typically responds nonlinearly to each of these factors and is limited by all of them. Figure \@ref(fig:threeWayA) shows a representation of a typical pattern of response.
 
 <br>
 

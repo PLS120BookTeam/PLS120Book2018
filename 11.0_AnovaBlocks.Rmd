@@ -5,6 +5,9 @@ editor_options:
 ---
 # ANOVA with Blocks {#chRcbd}
 
+See RCBD_Equations in Notability.
+See RCBD&ExpDesign in ExplainEverything
+
 ## Learning Objectives for Chapter
 
 1. Determine when it maybe advantageous to use blocking of experimental units.
