@@ -113,7 +113,7 @@ knitr::include_graphics("images/CI.pdf")
 
 <br>
 
-For example, if you have known popualtion parameters such as mean and standard deviation (i.e. $\sqrt \sigma^2$) the confidence intervals are calculated:
+For example, if you have known population parameters such as mean and standard deviation (i.e. $\sqrt \sigma^2$) the confidence intervals are calculated:
 
 $$Lower bound = \bar{x} - z* \frac{\sigma}{\sqrt n}$$
 $$Upper bound = \bar{x} + z* \frac{\sigma}{\sqrt n}$$
