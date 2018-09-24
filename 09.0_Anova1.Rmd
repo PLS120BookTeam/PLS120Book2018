@@ -1,12 +1,11 @@
 ---
-output:
-  html_document:
+output: 
+  html_document: 
     fig_caption: yes
     number_sections: yes
     theme: readable
     toc: yes
-  pdf_document:
-    toc: yes
+    toc_depth: 3
 ---
 
 ```{r setup0, include=FALSE}
@@ -174,51 +173,6 @@ The pooled variance is the average squared deviations from each sample average, 
 If indeed the first estimate of the variance above, based on the variation among treatment averages, is a valid one, the quotient of the first estimate over the second one, based on the pooled variance, should have an F distribution with values about 1.0. We saw this when testing for differences between independent variance estimates in [section XXX](#addReference). The statistical distribution resulting from the quotient of two variance estimates is called an F-distribution, which was fully described in the *F Distribution* section of the [Probability chapter](#chProb). If the quotient calculated, called "calculated F-value," is too far from 1.0 we conclude that the two variances are not equal, therefore, the estimation of the variance using the averages is not a valid estimate, and the averages are considered too different to come from the same population. The means of the source populations must be different, so the null hypothesis is rejected. This is further illustrated with a numerical example below.
 
 
-## Logic of Null Hypothesis test with ANOVA
-
-The logic behind a rejection of the null hypothesis using ANOVA is analogous to the following situation. Imagine that there are two jars with blue and yellow marbles. These jars represent the two possible cases: jar "Different" on the left is the case where we have different treatment means, whereas jar "Equal" on the right represents the case where all means are the same. One of the jars is the true situation available to be observed, but we do not know which one. We just know what the jars have inside. The observation/experimentation process does not allow us to see the jar, but we get a sample of what they have inside.
-
-On the outside the jars are identical and you cannot see inside. The "Different" jar has 90% blue marbles, whereas the "Equal" jar has only 20% blue marbles. Suppose that the number of marbles is large enough that the probabilities are not affected by the removal of marbles. Only one jar is available to sample from, depending on whether the true but unknonw means are or are not different, but you do not know which one. You sample 5 marbles and they are all blue. Did you sample from "Different" or "Equal?" The null hypothesis is that the means are equal, which in the analogy signifies that the hypothesis is that we sampled the jar on the right labeled E for "Equal." We cannot know for sure where the marbles came from, because there are both blue and yellow marbles in both jars.
-
-<br>
-<br>
-```{r jars1, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Representation of the logic of hypothesis testing in frequentist statistics. Jar D on the left represents the situation when means of treatments are different. Jar E on the right represents the situation when means are all equal. Imagine that there is a large number of marbles in each jar or that sampling is done with replacement. Marbles in each jar represent the distribution of the test statistic under each condition. A sample of r = 5 marbles represents the process of experimentation, sampling and calculation of the observed statistic value. Intuitively, if most of the marbles sampled are blue, we will tend to say that the jar sampled was D. As an exercise, design jars with various proportions of colors and see if it becomes easier or harder to guess the sampled jar."}
-
-knitr::include_graphics("images/UrnsAnova1.png")
-
-```
-<br>
-<br>
-
-Intuition indicates that if most of the marbles are blue, we should reject the null hypothesis, otherwise we fail to reject it. Say that you sample 5 marbles and 4 are blue. The logic of Ho testing would go somethiogn like this: "I hypothesize that we sampled the E jar with mostly yellow marbles, but I got 4 blue, and the chances of getting 4 blue marbles from the E jar is very small, so I will guess that in reality I sampled from the D jar. At least two means are different." In the case of the marbles, all parameters of the problem are known, so we can calculate the exact probabilities of making errors. Because sampling is with replacement (or the number of marbles is really large), if the means are all equal, i.e., if we sampled from jar E the probability of getting a blue marble P(blue) in any draw would be constant at 0.20, and the number of blue marbles would have a binomial distribution. Therefore, the probability of getting 4 or more blue marbles from E would be `r round(1 - pbinom(4,5,0.20), 5)`. This is the probability that we reject the null hypothesis while in fact it is true. We can call the number of blue marbles the "decision variable" or sample statistic that we use to determine whether to reject the null hypothesis. The probability of drawing 3 or more blue marbles out of 5 from E is `r round(1 - pbinom(2,5,0.20), 3)`, which is close to the standard $\alpha = 0.05$. Thus, we can say that we will reject the null that we sampled from E if we get 3 or more blue marbles out of 5. In this case calculating the sample statistic and its sampling distribution is rather simple: we count the blue marbles, and the number of blue marbles has a binomial distribution.
-
-<br>
-
-```{block, type = 'think'}
-The proportion of marbles in the D jar was not used for anything! What if the D jar had just one more blue marble than the E jar??? This is a problem in frequentist hypothesis testing: it does not take into account the sampling distribution of statistics under plausible alternative hypotheses.
-```
-<br>
-
-In many experiments the response variable of interest is not binary; the variable observed is not like the number of marbles and it does not have a binomial distribution. A slightly more complicated procedure than applying the binomial distribution is used to calculate a statistic (calculated F-value) whose theoretical distribution is known when the null hypothesis is true (F distribution). This procedure is the analysis of variance, and the statistic calculated is the calculated F-value. When all means are the same, the calculated F has an F-distribution defined by certain parameters called "degrees of freedom" that depend on sample size and number of treatments compared.
-
-```{block, type = "stattip"}
-
-LOGIC OF TESTS OF NULL HYPOTHESIS:
-IF the assumptions are true, AND the null hypothesis is true,\
-THEN the quotient MSTreat/MSE has an F distribution.\
-THEREFORE, the probability of a LARGE Fcalc is small.\
-SO, if the calculated F is indeed large we doubt (reject) the null hypothesis.\
-Essentially, we say that events with low probability did not occur.
-```
-
-```{block, type = "stattip"}
-
-- If you try a sufficiently large number of times, any hypothesis, regardless of their truthfulness, will be rejected. When somebody tells you they rejected a hypothesis, make sure to ask how many times they tried. Remember that correctly applied statistical methods will lead to rejection of true null hypothesis with an expected rate of 5 out of 100 tests.
-
-```
-
-** Add shiny for students to run simulations of draws from randomly selected urns and the be shown the true urn. Use probabilities such that they can explore both types of errors. Assign homework where they explore the rates of errors as a function sample size and probabilities.**
-
 
 ## Model and Partitioning of Variance
 
@@ -291,9 +245,9 @@ In reality, degrees of freedom refers to the number of dimensions in which vecto
 
 This concept is illustrated for a sample consisting of three observations, so we can plot them in a 3D figure.
 
-```{r, echo=FALSE, warning=FALSE}
+```{r 3Dsample, echo=FALSE, warning=FALSE, fig.cap="Three-dimensional representation of a sample with 3 observations. The longest arrow (hypotenuse) represents the sample vector. The base of the triangle is the average and the third side is the vector of deviations from the average to the observation."}
 
-library(rgl)
+# library(rgl)
 smpl <- c(3, 4, 8)
 avg <- rep(mean(smpl), 3)
 rsdl <- smpl - avg
@@ -303,25 +257,25 @@ xyz.orig <- rbind(xyz0, xyz0, avg)
 colnames(xyz.tips) <- c("obs1", "obs2", "obs3")
 colnames(xyz.orig) <- c("obs1", "obs2", "obs3")
 ssr <- rsdl %*% rsdl
-
-plot3d(xyz.tips, 
-       xlab = "observation 1", 
-       ylab = "observation 2", 
-       zlab = "observation 3", 
-       box = FALSE, 
-       xlim = c(0, 10), 
-       ylim = c(0, 10), 
-       zlim = c(0, 10))
-
-
-arrow3d(xyz0, xyz.tips[1,], type = "rotation", col = "grey", barblen = 0.05, width = 0.4)
-arrow3d(xyz0, xyz.tips[2,], type = "rotation", col = "lightblue", barblen = 0.05, width = 0.4)
-arrow3d(xyz.tips[1,], xyz.tips[2,], type = "rotation", col = "maroon", barblen = 0.05, width = 0.4)
-planes3d(a = -4,
-         b = 5,
-         c = -1,
-         d = 0, 
-         alpha = 0.4)
+# 
+# plot3d(xyz.tips, 
+#        xlab = "observation 1", 
+#        ylab = "observation 2", 
+#        zlab = "observation 3", 
+#        box = FALSE, 
+#        xlim = c(0, 10), 
+#        ylim = c(0, 10), 
+#        zlim = c(0, 10))
+# 
+# 
+# arrow3d(xyz0, xyz.tips[1,], type = "rotation", col = "grey", barblen = 0.05, width = 0.4)
+# arrow3d(xyz0, xyz.tips[2,], type = "rotation", col = "lightblue", barblen = 0.05, width = 0.4)
+# arrow3d(xyz.tips[1,], xyz.tips[2,], type = "rotation", col = "maroon", barblen = 0.05, width = 0.4)
+# planes3d(a = -4,
+#          b = 5,
+#          c = -1,
+#          d = 0, 
+#          alpha = 0.4)
 
 library(plot3D)
 
@@ -825,10 +779,10 @@ Table: (\#tab:WheatYield) Wheat yield (bushels/acre) is measured from four diffe
 ```{r}
 
 wheat.yield <- data.frame(
-  'A' = c(60, 40, 45, 55),
+  'A' = c(60, 40, 45, 55, NA, NA),
   'B' = c(25, 30, 25, 35, 30, 25),
-  'C' = c(55, 50, 40, 60, 55),
-  'D' = c(60, 55, 55, 45, 50))
+  'C' = c(55, 50, 40, 60, 55, NA),
+  'D' = c(60, 55, 55, 45, 50,  NA))
 
 ```
 
@@ -979,14 +933,14 @@ Now we recall that the variance of averages for samples from a population is the
 
 Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
 
-```
----
+
+"---" Unquote the three dashes
 title: "Lab05 CRD Anova"
 author: "YourFirstName YourLastName"
 date: "enter date here"
 output: html_document
----
-```
+"---" Unquote the three dashes
+
 
 ```{r setupPS, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -1488,14 +1442,12 @@ ANSWER THE FOLLOWING QUESTIONS.
 
 Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
 
-```
----
+"---" Unquote the three dashes
 title: "Lab05 CRD Anova"
 author: "YourFirstName YourLastName"
 date: "enter date here"
 output: html_document
----
-```
+"---" Unquote the three dashes
 
 ```{r setupAS, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

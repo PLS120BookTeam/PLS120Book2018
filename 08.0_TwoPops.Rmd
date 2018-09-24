@@ -1,12 +1,11 @@
 ---
-output:
-  html_document:
+output: 
+  html_document: 
     fig_caption: yes
     number_sections: yes
     theme: readable
     toc: yes
-  pdf_document:
-    toc: yes
+    toc_depth: 3
 ---
 
 ```{r setup0, include=FALSE}

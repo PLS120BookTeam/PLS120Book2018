@@ -1,39 +1,82 @@
-# Confidence intervals and Hypothesis testing {#ch.hotest}
+---
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
+---
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+# load packages for chapter
+
+options(digits = 10)
+library(arrangements)
+library(bookdown)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(car)
+library(tidyr)
+library(ggplot2)
+library(latex2exp)
+library(plotrix)
+options(scipen = 999)
+```
+
+# Confidence intervals and Hypothesis testing {#chHotest}
 
 ## Learning Objectives for Chapter
-#Updated 9-16
+
 1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
 1. State null and alternative hypotheses in words and equations.
 1. Calculate and explain the meaning of level of significance in words and with a graph.
 1. Calculate power of a test and explain it with a graph.
 1. Calculate and interpret confidence intervals.
-1. Describe how sample size and alpha effect the CI. 
+1. Describe how sample size and alpha affect CI width. 
 1. Perform a simulation to check the correctness of a CI.
 1. Explain the difference between a one-tailed and two-tailed test and determine when each one is applicable.
 1. Recreate and explain a table showing the outcomes of statistical tests and the types of errors.
 1. Test if the mean of a population is equal to a hypothetical mean when variance is known and unknown.
 
-A **statistical hypothesis** is an assertion made about some parameter or aspect of a popualtion. Performing a statistical hypothesis permits for making a statistical inference which consists of making statements about population characteristics based on information obtained from samples. 
+With this chapter we enter the topic of **Inference**. Statistical inference consists of making statements about population characteristics based on information obtained from samples. We aim at presenting a general idea that in order to answer interesting practical questions we need to estimate parameters or other unknown and unknowable quantities, and we need to determine how confident we are about the estimated values. Frequently, the topics of estimation and inference are separated in textbooks, because estimation methods can be treated independently of the statitical distributions of the estimators and associated probabilities. Many important properties of estimators, like expected value and variance, can be worked out without assuming any particular distribution for the random components of models. One estimation method we mentioned before is called *least-squares*, another one is *maximum likelihood*.
 
-Perfoming a hypothesis test examines the probability of whether or not the assertion made from the statistical hypothesis is "*true*." The steps involved for conducting a hypothesis test are:
+The main point of this chapter is to present methods to test hypotheses where unknown parameters, typically the mean of normal distributions are estimated and hypothesized to have specific known values. The mean is unkown so we estimate it with the average of a sample. Using the mathematical "trick" that is the most important equation in this course, we also use a single sample to estimate the sampling variance of the sample average. Armed with a known distribution shape (Normal), an estimate of its mean, and an estimate of the variance of sample average we make inferences about the population. We test hypotheses of specific values of the mean by calculating how likely it would be to observed the data in hand if indeed the hypothesis were true. In later chapters we expand the test to two and then several means.
 
-1) Stating the hypothesis (null and alternative) 
-2) Set the level of significance 
-3) determine/state the decision rule
+```{block StatementCertainty, type='stattip'}
+- A main goal of statistics is to estimate unknown parameters or quantities and state the estimates anf our degree of certainty about the estimate. Confidence intervals are the primary tool for this and have a simple structure that is the same across apparently diverse statistical tests:
+
+$$CI = \text{estimate} \ \pm \ \text{margin of error}$$
+
+```
+
+
+## Testing a hypothesis
+
+A **statistical hypothesis** is an assertion made about some parameter or aspect of a population. By testing a statistical hypothesis we are making a statistical inference, which consists of making a statement about population characteristics based on information obtained from samples. Keep in mind that statistics, like science in general, is not meant to lead to "the truth." The scientific method and its direct implementation in statistical inference only allow us to make good guesses about which model of reality is better. Other things being equal, the models that agree more with the data are preferred.
+
+Perfoming a hypothesis test consists of posing a statement about a population parameters or a "model" of some aspect or phenomenon. Then, we gather data and calculate the probability of observing such data under the assumption that the statement or model is true. If the probability is too low, we guess that the statement is not correct, we reject it. Obviously, the whole process is a random process, and we never know for sure if our conclusion is correct or not. We just know that the probability of incorrectly rejecting the statement is low. This is the logic of frequentists hypothesis testing. We will come back to this in more detail.
+
+We insist in the understanding of the logic behind hypothesis testing in an overt attempt to correct the widespread misunderstanding and misuse of hypothesis testing in science. One of the most important points of this chapter is to understand the elogic behind hypothesis testing and to be able to spot its misuse and misinterpretation. Correctly used and interpreted, hypothesis testing can be a useful tool in science and business. First, let's show the mechanics of hypothesis testing. Then we will point out pitfalls and things to watch out for.
+
+
+The steps involved for conducting a hypothesis test are:
+
+1) State null and alternative hypotheses
+2) Set the level of "significance" 
+3) Determine/state the decision rule
 4) Calculate test-statistic
-5) Interpret the decision and state conclusion  
+5) Interpret the decision and state conclusion
 
-##Conducting a hypothesis test
 
-A hypothesis is stated about a popualtion, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay. 
+**State null and alternative hypotheses**
 
-*Identify null and alternative hypotheses*
+A hypothesis is stated about a population, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay. 
 
-In the example above, the null hypothesis states that the mean photosynthetic rate of the eelgrass population in the south quadrant $(\mu_{south})$ is the *same* as the mean photosynthetic rate of the eelgrass population for all quadrants $(\mu_{all})$ (i.e., no difference in photosynthetic rate between the two popualtions). Thus, the *null hypothesis** states there is no difference between means for the specificed populations. The null hypothesis is denoted as $$H_o$$. 
+In the example above, the null hypothesis states that the mean photosynthetic rate of the eelgrass population in the south quadrant $(\mu_{south})$ is the *same* as the mean photosynthetic rate of the eelgrass population for all quadrants $(\mu_{all})$ (i.e., no difference in photosynthetic rate between the two populations). Thus, the *null hypothesis** states there is no difference between means for the specificed populations. The null hypothesis is denoted as $H_o$. 
 
-The alternative hypothesis for this example would state that the mean photosynthetic rate of the eelgrass population in the south quadrant is *different* than the mean photosynthetic rate of eelgrass found in all quadrants. The alternative hypothesis is denoted $$H_a$$ 
-
-Hypotheses written out follow the forms:
+The alternative hypothesis for this example would state that the mean photosynthetic rate of the eelgrass population in the south quadrant is *different* than the mean photosynthetic rate of eelgrass found in all quadrants. The alternative hypothesis is denoted $H_a$ 
 
 Null hypothesis: 
 
@@ -41,20 +84,21 @@ $$H_o: \mu_{south} = \mu_{all}$$
 Alternative hypothesis:
 
 $$H_a: \mu_{south} \neq \mu_{all}$$
-Above, the alternative hypothesis states that the mean photosynthetic rate of the south quadrant popualtion is *not equal* to the mean photosynthetic rate of the all quadrant population. An important aspect of this statement is that it is not specified how the two popualtion means are different. For example, the sample taken $(\mu_{south})$ to test this hypothesis could have a mean that is greater or less than the all quadrant population $(\mu_{all})$. If the goal were to determine if the sample population mean were greater or less than the all quadrant population, this would be referred to as a **one-tailed** test. Since the goal is to just identify if the two population means are different---in some form---than this is referred to as a **two-tailed** test. 
+Above, the alternative hypothesis states that the mean photosynthetic rate of the south quadrant population is *not equal* to the mean photosynthetic rate of the all quadrant population. An important aspect of this statement is that it is not specified how the two population means are different. For example, the sample taken $(\mu_{south})$ to test this hypothesis could have a mean that is greater or less than the all quadrant population $(\mu_{all})$. If the goal were to determine if the sample population mean were greater or less than the all quadrant population, this would be referred to as a **one-tailed** test. Since the goal is to just identify if the two population means are different---in some form---than this is referred to as a **two-tailed** test. 
 
 ```{block, type = 'stattip'}
-- Two-tailed test: $$H_o: \mu = \mu_{0}$$ 
-                   $$H_a: \mu \neq \mu_{0}$$
-                   
-                   
-- One-tailed test: $$H_o: \mu = \mu_{0}$$ or
-                   $$H_o: \mu \geq \mu_{0}$$
-                   $$H_a: \mu < \mu_{0}$$
+- Two-tailed test: 
+$$H_o: \mu = \mu_0 \\
+H_a: \mu \neq \mu_0$$
 
-- One-tailed test: $$H_o: \mu = \mu_{0}$$ or 
-                   $$H_o: \mu \leq \mu_{0}$$
-                     $$H_a: \mu > \mu_{0}$$
+- One-tailed test: 
+$$H_o: \mu \le \mu_0 \\
+H_o: \mu \gt \mu_0$$
+$$H_a: \mu < \mu_0$$
+
+- One-tailed test: 
+$$H_o: \mu \ge \mu_0 \\
+H_o: \mu \lt \mu_0$$
 ```
 
 *Level of significance*
@@ -77,31 +121,28 @@ The probability of making either a type I or type II error can be defined as the
 
 
 ```{block, type = 'stattip'}
-In statistics, it is never stated that the null or alternative hypothesis is true. Rather, it is stated that the null hypothesis is rejected or failed to be rejected based on the inferential statistics concluded from the hypothesis test. 
+- In statistics, it is never stated that the null or alternative hypothesis is true. Rather, it is stated that the null hypothesis is rejected or failed to be rejected based on the inferential statistics concluded from the hypothesis test. 
 
 ```
 
-Create figure with changing sample size and variance
+<!-- Create figure with changing sample size and variance -->
 
-*Test-statistic*
+**Test-statistic**
 
 In order to assess the probability of a statistical test, a test-statistic needs to be calculated. One such test-statistic is the z-statistic (i.e., z-score). When the data are normally distributed, or aprroximately normal given a large sample size (e.g., n >30), the **z-statistic** is, specifically, the number of standard deviations or standard error from the mean value. A z-statistic can be calculated as follws:
 
 $$z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}$$
-where the calculated *z-statistic* is the the difference between the sample mean $(\bar{x})$ and the known population mean $(\mu)$ over the known population standard deviation divded by the square root of the sample size. If the popualtion variance is unnknown, it can be appoximated from the sample variance and the t-statistic can used to peform the hypothesis test:
+where the calculated *z-statistic* is the the difference between the sample mean $(\bar{x})$ and the known population mean $(\mu)$ over the known population standard deviation divded by the square root of the sample size. If the population variance is unnknown, it can be appoximated from the sample variance and the t-statistic can used to peform the hypothesis test:
 
 $$t = \frac{\bar{x} - \mu}{s / \sqrt{n}}.$$
  
 A calculated z-statistic and t-statistic need to be compared against a z-critcal or t-crtical value to determie whether or not the null hypothesis will be rejected or fail to be rejected. Stipulations for calculating a z-statistic are that the populaiton mean and standard deviation need to be known. If these two criteria are not met or the smaple size is small, and the data distribution is approximately normal, a t-statsitic must be calcualted.
 
 The z-critical value is a reference value and dependent on the level of significance (see appendix....), whereas the t-critical value varies with sample size (see appendix... for table). All the z- and t-values are the cumulative probabilites under a normal distribution where the critical values set the threshold of the extreme probabilites of which the result of the hypothesis test can be determined. That is, based on the calculated test-statistics, what is the probability of the calcualted values being smaller or greater than the critical values. 
-#Figure (\@ref(fig:prob_dist)) is a visual reprsentation of test-statistic values under a normal distribtuion. 
 
+<!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
-
-Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true popualation parameters. A **confidence interval** is a range values that will encompass the true popualtion parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
-
-
+Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true popualation parameters. A **confidence interval** is a range values that will encompass the true population parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
 
 <br>
 
@@ -133,29 +174,52 @@ The formula would be the same as above but replacing the *z*-critical value with
 
 $$CI = \bar{x} \pm t* \frac{\sigma}{\sqrt n}$$. 
 
-# Confidence intervals and Hypothesis testing {#ch.hotest}
+## Logic of Null Hypothesis test with ANOVA
 
-Include section on the misuse of alpha. WassersteinLazar2016.pdf
-Nuzzo2014.pdf
+The logic behind test of null hypothesis is analogous to the following situation. Imagine that there are two jars with blue and yellow marbles. These jars represent the two possible cases: jar "Different" on the left is the case where we have different treatment means, whereas jar "Equal" on the right represents the case where all means are the same. One of the jars is the true situation available to be observed, the jar from which the marbles are selected at random, representing the process of collecting data. However, we do not know which one is being observed. We just know what the jars have inside, which represents the two possible states of reality, means equal or means different. The observation/experimentation process does not allow us to see the "real" jar, but we get a sample of what it has inside. Of course, we can only sample or observe the "real" situation.
 
-## Learning Objectives for Chapter
+On the outside, the jars are identical and you cannot see inside. The "Different" jar has 90% blue marbles, whereas the "Equal" jar has only 20% blue marbles. Suppose that the number of marbles is large enough that the probabilities are not affected by the removal of marbles, or that the marbles are returned to the jar after observing them. Only one jar is available to sample from, depending on whether the true but unknonw means are or are not different, but you do not know which one. You sample 5 marbles and they are all blue. Did you sample from "Different" or "Equal?" The null hypothesis is that the means are equal, which in the analogy signifies that the hypothesis is that we sampled the jar on the right labeled E for "Equal." We cannot know for sure where the marbles came from, because there are both blue and yellow marbles in both jars.
 
-1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.  
-1. State null and alternative hypotheses in words and equations.
-1. Calculate and explain the meaning of level of significance in words and with a graph.
-1. Calculate power of a test and explain it with a graph.
-1. Calculate and interpret confidence intervals.
-1. Describe how sample size and alpha effect the CI. 
-1. Perform a simulation to check the correctness of a CI.
-1. Explain the difference between a one-tailed and two-tailed test and determine when each one is applicable.
-1. Recreate and explain a table showing the outcomes of statistical tests and the types of errors.
-1. Test if the mean of a population is equal to a hypothetical mean when variance is known and unknown.
+<br>
+<br>
+```{r jars1, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Representation of the logic of hypothesis testing in frequentist statistics. Jar D on the left represents the situation when means of treatments are different. Jar E on the right represents the situation when means are all equal. Imagine that there is a large number of marbles in each jar or that sampling is done with replacement. Marbles in each jar represent the distribution of the test statistic under each condition. A sample of r = 5 marbles represents the process of experimentation, sampling and calculation of the observed statistic value. Intuitively, if most of the marbles sampled are blue, we will tend to say that the jar sampled was D. As an exercise, design jars with various proportions of colors and see if it becomes easier or harder to guess the sampled jar."}
 
-Statistical inference consists of making statements about population characteristics based on information obtained from samples.
+knitr::include_graphics("images/UrnsAnova1.png")
 
-I would like to present a general idea that in order to answer interesting practical questions we need to estimate parameters or other unknown and unknowable quantities, and the we need to determine how confident we are about the estimated values.
+```
+<br>
+<br>
 
-This way, there is no implied difference in the concept of making an CI for the mean of a population, of for the proportion of the population that has a particular trait, or for predicting future values of random variables.
+Intuition indicates that if most of the marbles are blue, we should reject the null hypothesis, otherwise we fail to reject it. Say that you sample 5 marbles and 4 are blue. The logic of Ho testing would go something like this: "I hypothesize that we sampled the E jar with mostly yellow marbles, but I got 4 blue, and the chances of getting 4 blue marbles from the E jar is very small, so I will guess that in reality I sampled from the D jar. I will guess that the means are different." In the case of the marbles, all parameters of the problem are known, so we can calculate the exact probabilities of making errors. Because sampling is with replacement (or the number of marbles is really large), if the means are all equal, i.e., if we sampled from jar E the probability of getting a blue marble P(blue) in any draw would be constant at 0.20, and the number of blue marbles drawn would have a binomial distribution. Therefore, the probability of getting 4 or more blue marbles from E would be `r round(1 - pbinom(4,5,0.20), 5)`. This is the probability that we reject the null hypothesis while in fact it is true. We can call the number of blue marbles the "decision variable" or sample statistic that we use to determine whether to reject the null hypothesis. The probability of drawing 3 or more blue marbles out of 5 from E is `r round(1 - pbinom(2,5,0.20), 3)`, which is close to the standard $\alpha = 0.05$. Thus, we can say that we will reject the null that we sampled from E if we get 3 or more blue marbles out of 5. In this case, calculating the sample statistic and its sampling distribution is rather simple: to calculate the sample statistic we count the blue marbles, and the number of blue marbles has a binomial distribution.
+
+<br>
+
+```{block, type = 'think'}
+The proportion of marbles in the D jar was not used for anything! What if the D jar had just one more blue marble than the E jar??? This is a problem in frequentist hypothesis testing: it does not take into account the sampling distribution of statistics under plausible alternative hypotheses.
+```
+<br>
+
+In many experiments the response variable of interest is not binary; the variable observed is not like the number of marbles and it does not have a binomial distribution. A slightly more complicated procedure than applying the binomial distribution is used to calculate a statistic (calculated F-value) whose theoretical distribution is known when the null hypothesis is true (F distribution). This procedure is the analysis of variance, and the statistic calculated is the calculated F-value. When all means are the same, the calculated F has an F-distribution defined by certain parameters called "degrees of freedom" that depend on sample size and number of treatments compared.
+
+```{block, type = "stattip"}
+
+LOGIC OF TESTS OF NULL HYPOTHESIS:
+IF the assumptions are true, AND the null hypothesis is true,\
+THEN the quotient MSTreat/MSE has an F distribution.\
+THEREFORE, the probability of a LARGE Fcalc is small.\
+SO, if the calculated F is indeed large we doubt (reject) the null hypothesis.\
+Essentially, we say that events with low probability did not occur.
+```
+
+```{block, type = "stattip"}
+
+- If you try a sufficiently large number of times, any hypothesis, regardless of their truthfulness, will be rejected. When somebody tells you they rejected a hypothesis, make sure to ask how many times they tried. Remember that correctly applied statistical methods will lead to rejection of true null hypothesis with an expected rate of 5 out of 100 tests.
+
+```
+
+<!-- ** Add shiny for students to run simulations of draws from randomly selected urns and the be shown the true urn. Use probabilities such that they can explore both types of errors. Assign homework where they explore the rates of errors as a function sample size and probabilities.** -->
+
+
 
 ## Theme: compare A and B
 
@@ -164,6 +228,7 @@ See CommonTheme.pdf in Images.
 A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is used when whe have more than one pair of parameters, comparison of two population means is used when we have just two parameters, and a single population test is used when one of the values is a known number. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
 
 ## Confidence intervals
+
 Explain why we prefer a 95% CI in the middle instead on both ends of a distribution.
 What happens if the distribution is bimodal? Show an example. This counterintuitive example is useful to weed out misconceptions and focus on the real purpose and feasibility of a CI.
 
@@ -191,7 +256,9 @@ $$p-value = P(s \ge t_{calc}|X \sim N(\mu_0, \sigma))$$
 
 ## What is the meaning of the p-value?
 
-http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
+The following video has a brienf description of the historical origin of the p-value. Unfortunately, a scientific culture developed where the p-value lost its original meaning and resulted in one of the major issues in science today.
+
+<a href = "https://player.pbs.org/viralplayer/3010227907/" target="_blank"> Tea and milk</a>
 
 [@Nuzzo2014] stated:
 
@@ -201,7 +268,8 @@ http://www.pbs.org/wgbh/nova/physics/what-is-p-value.html
 Interesting... It looks like we are studying p-values and that they may mean “statistical hypothesis inference testing.” You may think: "I do not have time for this SHI Testing!" but you do. You are traveling the statistical times at an exciting crossroads. Woman up and man up!
 ```
 
-The formal procedure of obtaining and interpreting p-values is correct. P-values in themselves are not flawed, except that they are used in ways that are not correct.
+Do not confuse the incorrect use of p-values with incorrect p-values. The formal procedures of obtaining and interpreting p-values are correct. P-values in themselves are not flawed, except that they are used in ways that are not correct. A culture developed in which "statistical significance with p = 0.05"" took a life of its own. Data are analyzed with intention to achieve this false icon, and in doing so, scientists invalidate the p-value. How should p-value be used then??
+
 
 >Informally, a p-value is the probability under a specified statistical model that a statistical summary of the data (e.g., the sample mean difference between two compared groups) would be equal to or more extreme than its observed value.
 >
@@ -221,7 +289,25 @@ Generate a random sample from the same population for each student and have them
 
 Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value + $\delta$. Count how many people reject the true null. Then, make a graph on the board showing the proportion of students that rejected Ho as delta increases. What should the graph look like? Plot against the theoretical t-distribution.
 
+## Pitfalls to avoid
 
+Avoid the following statements or concepts:
+
+"The probability that the null hypothesis is correct is 0.95."
+
+"We accept the null hypothesis."
+
+"There is a statistically significant difference, therefore there is something interesting and important to discuss and or report."
+
+## Facts to remember
+
+- Any null hypothesis will be rejected if it is tested enough times, because there are always samples for which the null is rejected. Cure: look at all studies done, not just those published, which are heavily biased towards significance. At least, look at many published studies. Publish negative results. Publish data.
+
+- With enough sample size almost any null hypothesis of equality will be rejected, because no two parts of the world are exactly the same. Of course, if we sample exactly the same population, then we will not reject $H_0$. Cure: Test whether differences are greater than a value that has practical, theoretical or biological significance.
+
+- Originally, statistical significance was designed to be an indicator that there was probably something interesting warranting further investigation. Statistical significance was the start of the work, not the end. Cure: Value and promote replication of experiments in multiple labs.
+
+- Data are fact, except for errors of measurement or transcription. Interpretations and models are ephemeral; they can be disproved and improved.
 
 
 ## Homework
@@ -229,15 +315,17 @@ Generate a random sample from the same population for each student and have them
 ## Laboratory Exercises
 
 ### Plant Sciences Lab
----
+
+"---" Unquote the three dashes
 Title: "Normal distribution, T-distribution, Confidence Intervals, and One-sample Hypothesis testing"
 author: "YourFirstName YourLastName"
 date: "today's date here"
 output: html_document
----
+"---" Unquote the three dashes
+
 ### Instructions
 
-For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
+For this lab you will modify and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
 
 This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and part to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same filename but with an html extension (Lab02email.html).
 
@@ -250,8 +338,10 @@ For each part and question below, type your code in the grey area below, between
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
-###Section 1: Normal Distribution
-### Part 1. [10 points] 
+
+
+### Normal Distribution Part 1. [10 points]
+
 Normal Distribution
 
 A statistical distribution is a function that associates a probability to results of random experiments. For example, the random experiment can be the flip of a coin. Let's "measure" the result by assigning 1 to a tail and 0 to a head. The result is a discrete random variable Y that can take values 0 or 1. The statistical distribution, in this case a Probability Mass Function (pmf), is a function that associates a probability to each value of Y. For the example of the coin, we usually pick a function defined as follows: P(Y = 1) = P(Y = 0) = 0.5. This read as "the probability of Y taking a value of 1 is equal to the probability of Y taking a value of 0 and is equal to 0.5." Keep in mind that the actual pmf can and probably does differ for different individual coins. For an extreme example, remember that for a coin with two heads P(Y = 1) = 0 and P(Y = 0) = 1.0. The probability for the real coin experiment also depends on who flips the coin. It is possible to learn to get any side of the coin one wants.
@@ -272,7 +362,7 @@ Y5 <- rnorm(n = 5,
             sd = 1) 
 
 # obtain 50 random numbers
-Y50 <- rnorm(n=50, 
+Y50 <- rnorm(n = 50, 
              mean = 0, 
              sd = 1) # obtain 50 random numbers
 
@@ -285,7 +375,7 @@ Is the relationship of the sample variances what you should have expected? What 
 Answers here: 
 
 
-#### Part 2  [10  points]
+### Normal Distribution Part 2  [10  points]
 
 Plot the pdf for a standard normal distribution. Modify the code and produce a graph of the pdf for a normal distribution with mean = 2 and sd = 0.7. 
 
@@ -304,8 +394,8 @@ plot(function(x) dnorm(x, mean = 2, sd = 0.7),
 
 ```
 
-###Section 2: The t distribution
-##Part 1 [20 points]
+
+### Student's t distribution Part 1 [20 points]
 
 When your sample size is small, and the true population standard deviation is unknown for a continuous probability distribution that you assume is normal, we use the t distribution instead.  
 
@@ -426,7 +516,7 @@ text(2, 5.6, "95% CI")
 
 
 
-### Part 2. [20 points]
+### Student's t distribution Part 2. [20 points]
 Confidence interval in relation to sample size: Use R to determine the mean, standard deviation, standard error, and 95% confidence interval (CI) for sepal length for varying sample sizes (n = 50, 150) in the iris data.
 
 ```{r}
@@ -507,13 +597,13 @@ text(2, 5.45, "n = 150")
 
 
 
-### Part 3 [10 points]
+### Student's t distribution Part 3 [10 points]
 Express in words the meaning of the confidence intervals for sepal length at an alpha = 0.05.
 
 
 
 
-### Part 4 [20 points]	
+### Student's t distribution Part 4 [20 points]	
 
 Using the statistics calculated in the above section, perform tests of hypotheses to determine if the population from which the samples were taken could have the following means:
 
@@ -637,20 +727,22 @@ Were the results what you expected for (a) and (b)?  Why or why not? (answer her
 
 
 
-###Part 5.  [10 points]
+### Student's t distribution Part 5.  [10 points]
 
 Knit this file into html. [10 points]
 
 
-###---------------END PLANT SCIENCES LAB-----------------###
+<!-- ###---------------END PLANT SCIENCES LAB-----------------### -->
 
 ### Animal Sciences Lab
----
+
+"---" Unquote the three dashes
 Title: "Normal distribution, T-distribution, Confidence Intervals, and One-sample Hypothesis testing"
 author: "YourFirstName YourLastName"
 date: "today's date here"
 output: html_document
----
+"---" Unquote the three dashes
+
 ### Instructions
 
 For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
@@ -666,8 +758,8 @@ For each part and question below, type your code in the grey area below, between
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
-###Section 1: Normal Distribution
-### Part 1. [10 points] 
+### Normal Distribution Part 1. [10 points]
+
 Normal Distribution
 
 A statistical distribution is a function that associates a probability to results of random experiments. For example, the random experiment can be the flip of a coin. Let's "measure" the result by assigning 1 to a tail and 0 to a head. The result is a discrete random variable Y that can take values 0 or 1. The statistical distribution, in this case a Probability Mass Function (pmf), is a function that associates a probability to each value of Y. For the example of the coin, we usually pick a function defined as follows: P(Y = 1) = P(Y = 0) = 0.5. This read as "the probability of Y taking a value of 1 is equal to the probability of Y taking a value of 0 and is equal to 0.5." Keep in mind that the actual pmf can and probably does differ for different individual coins. For an extreme example, remember that for a coin with two heads P(Y = 1) = 0 and P(Y = 0) = 1.0. The probability for the real coin experiment also depends on who flips the coin. It is possible to learn to get any side of the coin one wants.
@@ -701,7 +793,7 @@ Is the relationship of the sample variances what you should have expected? What 
 Answers here: 
 
 
-#### Part 2  [10  points]
+#### Normal Distribution Part 2  [10  points]
 
 Plot the pdf for a standard normal distribution. Modify the code and produce a graph of the pdf for a normal distribution with mean = 2 and sd = 0.7. 
 
@@ -720,8 +812,7 @@ plot(function(x) dnorm(x, mean = 2, sd = 0.7),
 
 ```
 
-###Section 2: The t distribution
-##Part 1 [20 points]
+### Student's t distribution Part 1 [20 points]
 
 When your sample size is small, and the true population standard deviation is unknown for a continuous probability distribution that you assume is normal, we use the t distribution instead.  
 
@@ -742,7 +833,8 @@ alpha levels of 0.10 (90% CI) and .01 (99% CI).
 
 ```{r myheifer.info, echo = TRUE, include = TRUE}
 
-myheifer <- read.table('Lab02HeiferData.csv', header=TRUE, sep=',') #import the heifer data into a data frame called myheifer
+# import the heifer data into a data frame called myheifer
+myheifer <- read.table('Datasets/Lab02HeiferData.csv', header = TRUE, sep = ',')
 
 str(myheifer) # see components of heifer data
 
@@ -842,7 +934,7 @@ text(2, 506, "95% CI")
 
 
 
-### Part 2. [20 points]
+### Student's t distribution Part 2. [20 points]
 Confidence interval in relation to sample size: Use R to determine the mean, standard deviation, standard error, and 95% confidence interval (CI) for wean weight for varying sample sizes (n = 50, 150) in the heifer data.
 
 ```{r}
@@ -922,13 +1014,13 @@ text(2, 476, "n = 150")
 
 
 
-### Part 3 [10 points]
+### Student's t distribution Part 3 [10 points]
 Express in words the meaning of the confidence intervals for wean weight at an alpha = 0.05.
 
 
 
 
-### Part 4 [20 points]	
+### Student's t distribution Part 4 [20 points]	
 
 Using the statistics calculated in the above section, perform tests of hypotheses to determine if the population from which the samples were taken could have the following means:
 
@@ -1020,11 +1112,11 @@ Alpha = 90%:
 ```{r}
 # b) One sample t test for all years, at the 95% CI, but varying sample sizes
 
-t.test(myheifer.sl, mu =521.9, conf.level = 0.95) ## fill in code to do a one sample t test on all 150 observations
+t.test(myheifer.sl, mu = 521.9, conf.level = 0.95) ## fill in code to do a one sample t test on all 150 observations
 
 #Type your code in to do t tests on a sample size of 50 (In Part 2, we already created a data object for this sample size).
 
-t.test(myheifer50, mu =521.9, conf.level = 0.95)
+t.test(myheifer50, mu = 521.9, conf.level = 0.95)
 
 ```
 
@@ -1052,7 +1144,7 @@ Were the results what you expected for (a) and (b)?  Why or why not? (answer her
 
 
 
-###Part 5.  [10 points]
+### Student's t distribution Part 5.  [10 points]
 
 Knit this file into html. [10 points]
 

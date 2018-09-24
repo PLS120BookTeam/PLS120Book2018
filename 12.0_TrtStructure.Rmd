@@ -5,6 +5,7 @@ output:
     number_sections: yes
     theme: readable
     toc: yes
+    toc_depth: 3
 ---
 
 ```{r setup0, include=FALSE}

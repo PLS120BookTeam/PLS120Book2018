@@ -1,3 +1,13 @@
+---
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
+---
+
 # Experimental Design {#chEdesign}
 
 

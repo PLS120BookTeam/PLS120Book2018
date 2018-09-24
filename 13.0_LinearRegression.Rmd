@@ -1,14 +1,14 @@
 ---
-editor_options:
-  chunk_output_type: console
-output:
-  html_document: default
-  pdf_document: default
-header-includes:
-- \usepackage{amsmath}
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
 ---
 
-# Linear Regression {#ch.linreg}
+# Linear Regression {#chLinReg}
 
 ## Learning Objectives for Chapter
 

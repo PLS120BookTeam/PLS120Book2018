@@ -1,3 +1,13 @@
+---
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
+---
+
 # Introduction to Applied Statistics {#chIntro}
 
 See Intro2StatsLectureNotes in Notability
@@ -26,7 +36,7 @@ See Intro2StatsLectureNotes in Notability
 
 ## Why Statistics?
 
-For us, the world is an uncertain place. We do not know exactly what will happen, and for a lot of stuff, we do not know what actually happened, even if we were looking at it as it happened. What will be the cost of increased drought and wildfires due to climate change in California? Will my house increase, maintain of decrease in value in the next 30 years? Should I get vaccine XX? Is my weight lifting program leading to increases in my muscle mass? Does my landscape design lead to lower water use? Is the Bay Delta estuary ecosystem damaged because of the use of water for agricultural irrigation? All of these and many more questions you think of daily reflect the fact that we operate with uncertainty all the time. So far as we know, use of statistical methods is the only formal and objective way to answer these questions. Statistics, just like haphazard or biased opinions, will not lead to infallible statements. However, unlike opinions and statements, statistics will lead to results with chosen error rates.
+For us, the world is an uncertain place. We do not know exactly what will happen, and for a lot of stuff, we do not know what actually happened, even if we were looking at it as it happened. What will be the cost of increased drought and wildfires due to climate change in California? Will my house increase, maintain of decrease in value in the next 30 years? Should I get vaccine XX? Is my weight lifting program leading to increases in my muscle mass? Does my landscape design lead to lower water use? Is the Bay Delta estuary ecosystem damaged because of the use of water for agricultural irrigation? All of these and many more questions you think of daily reflect the fact that we operate with uncertainty all the time. So far as we know, the use of statistical methods is the only formal and objective way to answer these questions. Statistics, just like haphazard or biased opinions, will not lead to infallible statements. However, unlike opinions and statements, statistics will lead to results with chosen error rates.
 
 ## Definition of Statistics
 
@@ -38,29 +48,32 @@ For example, the "situation" is to determine if milk productivity in terms of kg
 Traditionally, the science of statistics deals with the collection and summarization of data, design of experiments and surveys, measurement of variation of observations, estimation of population parameters as well as the accuracy and precision of these estimates, test of hypotheses, and assessment of relationship among variables. In my opinion, the science of statistics revolves around the creation and use of methods to make statistical statements about a clearly defined part of the world. Statistical statements have two components: a description or guess about something, and a quantitative description of the certainty of the first component. For example:
 
 <br>
-\begin{itemize}
-  \item ``I am pretty sure it is going to rain'' is \textbf{not} a statistical statement.
-  \item ``The chance of rain is 50\%'' is \textbf{not} a statistical statement.
-  \item The chance of rain in Davis for tomorrow is 50\% \textbf{is} a statistical statement.
-\end{itemize}
+
+- "I am pretty sure it is going to rain" is not a statistical statement.
+
+- "The chance of rain is 50\%" is not a statistical statement.
+
+- "The chance of rain in Davis for tomorrow is 50\%" is a statistical statement.
+
 <br>
 
 Statistical methods allow us (i.e., provide a formal, logical basis) to make statistical statements. A statistical statement is characterized by specifying a clearly defined subject, an estimation of some characteristic of the subject, and an estimation of the certainty about that characteristic.
 
 It is common to express statistical statements informally and incompletely. Although that is not a problem when one fully knows and understands what has been omitted, it can be a problem when the audience does not have the details. At best, incomplete statements are misinterpreted, and at worst they are unethical and deceitful. Examples of the statistical statements we will be making in this course are as follows:
 
-\begin{itemize}
-  \item Based on a random sample of 10 coin tosses I was not able to reject the hypothesis that the probability of getting a head with this specific quarter is 0.5 at a significance level of 5\%.
-  \item The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
-\end{itemize}
+
+- Based on a random sample of 10 coin tosses I was not able to reject the hypothesis that the probability of getting a head with this specific quarter is 0.5 at a significance level of 5\%.
+
+- The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
+
 
 The latter statement shows the use of units for quantitative variables. The population it refers to is the total area planted to rice in the US in 2013. The estimate is the average yield and the number is correctly expressed with units as a complete quantity. The degree of certainty is also expressed quantitatively as the width of a confidence interval. Notice how the population for which the statement applies is clearly defined by saying where and when.
 
-
-```{block, typ='stattip'}
+<br>
+```{block, type='stattip'}
 - Statistics and statistical tests cannot and do not attempt to categorically prove or disprove statements and hypotheses about the real world. They simply provide methods to determine how consistent, in a proabilitstic way, statements and hypotheses are with data.
 ```
-
+<br>
 
 ## Learning Statistics {#LearnStats}
 
@@ -70,7 +83,7 @@ Consider the following examples:
 
 1. The three door game. In this game show you are presenetd with three doors (A, B, C) behind which there are prizes. Two of the doors hide a goat each and one hides a brand-new car. You choose one of the doors, say A. Before the selected door is opened, the hosts opens one of the other two doors, say C, and revelas a goat. Then, you are asked whether you want to keep your choice of door A or switch to door B. What do you do? Does it make any difference? Why?
 
-1. A news cast presents the following graph while the anchorman speaks about the disastrous effect of the new president on the loss of jobs. What do you think?
+1. A news cast presents the following graph while the anchorman speaks about the disastrous effect of the new president on job loss. What do you think?
 
 <br>
 ```{r JobLossFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Graphical representation of job losses from December 2007 to June 2010."}
@@ -81,13 +94,12 @@ knitr::include_graphics("images/JobLoss.png")
 <br>
 
 
-
-Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, in the piece <a href="https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271" target="_blank">Innate concept of probability</a>, [@Callaway2014] gives multile examples of studies that show that humans and several animals have at least basic mechanisms to handle mathematical problems involving probability. However, the abilities are limited.
+Many statistical concepts and methods have intuitive counterparts. Humans have intuitions and subconscious methods to deal with uncertainty which evolved because they have adaptive value. For example, in the piece <a href="https://www.nature.com/news/humans-have-innate-grasp-of-probability-1.16271" target="_blank">Innate concept of probability</a>, [@Callaway2014] gives multiple examples of studies that show that humans and several animals have at least basic mechanisms to handle mathematical problems involving probability. However, the abilities are limited.
 
 Although humans do have an innate ability to assess contingencies and likelihood of certain events, our intuitive ability is far from perfect. In fact, it has been shown that humans tend to be particularly bad at estimating probabilities in certain situations. Kahneman and Tversky [@KahnemanTversky1972] refer to the probabilities people guess without using calculations and the theory of probability as "subjective" probability, not to be confused with the subjective probabilities of Bayesian statistics.
 
 Statistical methods allow us to remove some of the biases introduced by human intuition. Many of the errors Kahneman and Tversky's subjects made would have been prevented if those subjects used statistical calculations instead of their intuition.For example, K&T posed the following question to high school students: All families of six children in a city were surveyed. In 72 families the exact order of births of boys and girls was GBGBBG.
-What is your estimate of the number of families surveyed in which the exact order of births was BGBBBB? What do you think? The [median](#chData) estimate that students gave was 30. If the probability of G and B are the same, then both sequences have equal probability.
+What is your estimate of the number of families surveyed in which the exact order of births was BGBBBB? What do you think? The [median](#chData) estimate that students gave was 30. In fact, if the probability of G and B are the same, then both sequences have **equal** probability!
 
 In another series of experiments, K&T asked students to estimate sampling distributions for various processes, for example, the number of boys and girls born each day. They concluded that:
 
@@ -95,9 +107,11 @@ In another series of experiments, K&T asked students to estimate sampling distri
 
 This is very interesting and challenging, because the fact that variance of sample averages decreases with increasing sample size is the **most important concept for this course!**
 
-Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you cannot trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error. ^[Do not confuse this statement about "sujective" probability as defined by K&T with the idea of subjective probability as used in Bayesian statistics. The concept of subjective probability in Bayesian statistics (as in "subjective priors") is not what we describe above.]
+Why are we bringing these things up?? The point is that when you need to deal with uncertainty, you cannot trust your intuition. If you need to get it right, use statistics and do the calculations. It is important for you to know that it is not safe to rely on raw intuition to solve many problems that involve estimation of probabilities and statistical distributions. Although we believe that many statistical and probability concepts can become almost intuitive with practice, the message is clear: using untrained intuition to deal with uncertainty leads to error. ^[Do not confuse this statement about "subjective" probability as defined by K&T with the idea of subjective probability as used in Bayesian statistics. The concept of subjective probability in Bayesian statistics (as in "subjective priors") is not what we describe above.]
 
 ## Going to the movies: PBS program on statistics
+
+The PBS NOVA program *Prediction by the numbers* will be shown during a lecture.
 
 <a href="http://www.pbs.org/wgbh/nova/physics/prediction-numbers.html" target="_blank">Prediction by numbers</a>
 
@@ -105,14 +119,12 @@ Why are we bringing these things up?? The point is that when you need to deal wi
 ## Methods and Concepts in this Book 
 
 ### Probability, estimation, inference {#estimationInference}
-Fixed part and random part
-Models
 
-Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved <a href="https://www.iep.utm.edu/evol-psy/" target="_blank">See Evolutionary Psychology</a>.
+Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved. For more detail on theories about how and why the human mind evolved, see the following webpage on <a href="https://www.iep.utm.edu/evol-psy/" target="_blank">Evolutionary Psychology</a>.
 
 ## Statistics Defined
 
-Keep in mind that the word "statistics" can have several meanings, even within the filed of statistics. We can say that *statistics* is the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
+Keep in mind that the word "statistics" can have several meanings, even within the field of statistics. We can describe **Statistics** as the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
 
 
 ## Book Organization and Overview
@@ -120,7 +132,7 @@ Keep in mind that the word "statistics" can have several meanings, even within t
 
 Then we have to assign probabilities to events of interest, like the failure of an engine, or the yield of a field being sufficient to cover the costs of cropping. This step requires that we create model distributions for different types of random experiments, such as running an engine for 5,000 hours or planting a field.
 
-Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertaint are illustrated with an example. imagine that you draw a marble radomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the proability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But youwould probably get different results in other samples. THe quesiton is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
+Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertaint are illustrated with an example. imagine that you draw a marble radomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the proability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But you would probably get different results in other samples. THe quesiton is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
 
 Finally, we will frequently be interested in comparing parameters from potentially different distributions. We could have a second urn with marbles and be interested in determining if the probability of getting a white marble from the first is greater or less than from the second. Or we could be interested in determining if the mean productivity of a new crop variety is greater than the old one. These comparisons are reduced to calculating the value and distribution of linear combinations of estimated parameters. Usually, the distribution is normal, so the problem reduces to estimating the variance of a linear combination of estimated parameters. Analysis of variance is key to achieve this.
 
@@ -138,7 +150,7 @@ Theme: There are compelling arguments indicating that statistics has been misund
 
 Explain the misunderstanding and misuse of P
 
-<a href "https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
+<a href="https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
 
 End section with a positive note that by truly understanding we will see that statistical methods become 
 
@@ -158,6 +170,8 @@ In many real applications of advanced statistics, step 4 involves massive comput
 Some computations are rather simple and we may look into those to get a better concept of what computation does.
 
 ## Real-world problems
+
+
 
 ### Detection of the Higgs boson
 

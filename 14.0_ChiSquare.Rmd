@@ -1,16 +1,21 @@
 ---
-output:
-  pdf_document: default
-  html_document: default
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
 ---
-# Chi-square: Goodness of Fit and Test of Independence {#ch.chisq}
+
+# Chi-square: Goodness of Fit and Test of Independence {#chChisq}
 
 ## Learning Objectives for Chapter
 
-Jen's:
-1. Construct a contingency table and calculate its degrees of freedom.
-2. State if a larger or smaller chi square value indicates stronger dependency between variables in a test of independence.
-3. Describe the theory behind how we calculate the expected values in a test of independence.
+<!-- Jen's: -->
+<!-- 1. Construct a contingency table and calculate its degrees of freedom. -->
+<!-- 2. State if a larger or smaller chi square value indicates stronger dependency between variables in a test of independence. -->
+<!-- 3. Describe the theory behind how we calculate the expected values in a test of independence. -->
 
 
 1. Define independence between random variables.
@@ -20,7 +25,7 @@ Jen's:
 1. Test the goodness of fit of theoretical distributions to data.
 1. Look up quantiles and probabilities for the $\chi^2$ distribution.
 
-## The chi-square $\chi^2$ distribution
+## The $\chi^2$ distribution
 
 The chi-square $\chi^2$ distribution is widely used in a variety of statistical tests.  If describes the distribution of the sum of the squares of k independent standard normal random variables.  Two of the most important applications of the $\chi^2$ distribution are the test for goodness of fit of an observed distribution to a theoretical one and the test of independence between two categorical random variables.  
 
@@ -33,11 +38,13 @@ ADD: PLOT OF CHI SQUARE HERE
 In goodness of fit tests for discrete distributions, we are dealing with a single random variable with discrete classes.  Supposed we take a sample from a population with k different classes for the random variable.  We have an expected theoretical probability distribution across the k classes and want to test the "goodness of fit" of the population to the theoretical distribution using our sample.  
 Our data would consist of k observed frequencies ($O_1:O_k$), which we would compare to k expected frequencies ($E_1:E_k$).  Then we can calculate $\chi^2$ as
 
+<br>
 \begin{equation}
-\chi^2 = \sum_{i = 1}^k \frac{(O_i - E_i)^2}{E_i}
-,\; df = k-1
+\chi^2 = \sum_{i = 1}^k \frac{(O_i - E_i)^2}{E_i} \\[20pt]
+df = k-1
 (\#eq:chi)
-\end{equation}  
+\end{equation}
+<br>
 
 If there are only 2 classes involved (i.e., k = 2, df = 1), then we use an adjusted $\chi^2$ formula:
 

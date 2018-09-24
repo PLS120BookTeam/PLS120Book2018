@@ -1,0 +1,203 @@
+24 Sep 2018
+
+
+Get a new branch or clone and complete the assignments ASAP.
+TO DO for book. Please, get the first chapter assigned done by Th 27 Sep and submit a pull request on Th night.
+Finish the second chapter by Sunday night and submit another pull request.
+
+Chapter assignments:
+
+1. Stephanie
+2. Cale
+3. Jennifer
+4. Cale - Emilio (as requested by earlier email)
+5. Stephanie
+6. Cale
+7. Emilio
+8. Jennifer
+9.  Stephanie
+10. Cale
+11. Emilio
+12. Stephanie
+13. Cale
+14. Jennifer
+
+==== All Chapters ==========
+
+1. Make captions for all figures, even if simple. Give the figure chunk a name.
+
+2. All chunk, equation, table figure and section labels for reference should be a single work with capitals for word separation. For example "Chunk about important thing" should be "ChunkAboutImportantThing". Bookdown does not like periods or underscores in labels.
+
+3. Add a blank line above and below each equation, table and figure using the following:
+
+(previous content)
+blank line
+<br>
+Figure, table or equation
+<br>
+blank line
+(subsequent content)
+
+4. Spell check and read for syntax and meaning.
+
+5. The heading 1 level is only used for the chapter title.
+
+Headings level 2 ## should be used for
+
+Learning objectives
+Exercises
+Homework
+Laboratory Exercises
+
+and other sections specific to the chapter.
+
+Insert a space between the level symbol ## and the title as in:
+
+## Laboratory Exercises
+
+Plant Sciences and Animal Sciences labs are each in level 3 ###
+
+6. For those chunks that are used just to place content in the book, such as for adding graphics, or other code that we do not need students to see, prevent R code from printing by using echo='FALSE' in the chunk options.
+
+7. Add message='FALSE' option to all chunks.
+
+8. Make sure labs run with all the info in them. Runs and save a copy of the output to be the key.
+Remove the answers from the original markdown file. Set all Lab chinks NOT to run buy using the chunk option eval='FALSE'. This way the code will be shown but it will not be run in the book and we can have incomplete code for the students to complete. MAKE SURE to tell students to remove the eval="FALSE". Add a corresponding note in the instructions of the book.
+
+9. Make sure that all links open in blank targets by using:
+<a href="complete url here" target="_blank">Text here</a>
+
+10. Add anything cited to the book.bib file. Make sure that citations are working correctly.
+
+11. Make sure your chapter knits and that all figures, tables etc have numbers and are cross referenced correctly.
+
+12. Mute (echo=FALSE chunk option) all code that we do not specifically want the reader to see. For example, code used just to load a graphic should not be displayed.
+
+13. Add 2 choice exercises from the SG book. Modify exercise a bit and include a complete solution with a figure if possible. Cite the source.
+
+===============================
+001. FrontMatter
+
+Figure out how to add a book cover to the book.
+
+===============================
+Ch01
+
+Check that the chapter has information for students to achieve learning objectives.
+
+Include figure and list of chapters with book organization and relationships between chapters.
+
+Add example of application of statistics to solve a real world famous problem.
+Include figure ans simple calculations if possible. Original figures preferred.
+
+Include complete instructions to run the Monty Hall 3-door game in class, where pairs of students act as host and player. Run one set when everyone keeping the original door and then reverse roles and repeat telling everyone to switch doors.
+
+===============================
+Ch02
+
+Check that the chapter has information for students to achieve learning objectives.
+
+Fix the levels of the headings. Looks like all need to be increased by 1 (e.g. h1 -> h2)
+
+===============================
+Ch03
+
+Check that the chapter has information for students to achieve learning objectives.
+
+===============================
+Ch04
+
+Check that the chapter has information for students to achieve learning objectives.
+
+Complete section on data curation.
+
+Clarify Learning Objective 9 or delete it.
+
+Correct usage of terms mean, symbol and variable.
+
+Cite source of figure with photosynthesis rate. Refer to it as a Figure. It is a figure and the numbering and referencing should treat it as such.
+
+Remove absolute references to anything and write in the correct relative references using the \@ref(...) format.
+
+Use back tics to have r code or functions display as such in the text, e.g., The function `mean` calculates the average of a set of numbers.
+
+Remove equations for population parameters. Present only equations for samples and summary calculations. We will get to estimation in later chapters. Note that population and sample equations are confused. The equation for the mean of finite populations does not divide by N-1 but by N.
+
+Explain a bit more the meaning of the statip on variance and standard deviation. I am not sure the tip is conceptually correct.
+
+Do not use underscores to label figures or anything to be cross referenced. Use NamesLikeThis.
+
+Include R chunks to calculate the statistics and make histograms as they are first presented. You can get the code from the lab.
+
+Use the proper symbols for population and sample standard deviation. \sigma and s.
+Add a couple of exercises.
+
+Add a couple of Homework questions.
+
+===============================
+Ch05
+
+Check that the chapter has information for students to achieve learning objectives.
+
+Select questions from TopHat for Homework. Assign through TopHat.
+
+===============================
+Ch06
+
+Check that the chapter has information for students to achieve learning objectives.
+
+Complete assigned questions from module Probability Homework in TopHat site.
+Select questions from Introductory Statistics I and II and Probability
+
+Complete section on Sampling distributions, estimators and bias.
+
+Add lab exercises. Short ones are OK.
+
+===============================
+Ch07
+
+Check that the chapter has information for students to achieve learning objectives.
+
+Add more figures.
+
+===============================
+Ch08
+
+Check that the chapter has information for students to achieve learning objectives.
+
+===============================
+Ch09
+
+Check that the chapter has information for students to achieve learning objectives.
+
+===============================
+Ch10
+
+Check that the chapter has information for students to achieve learning objectives.
+
+This chapter still has to be completed!!
+
+===============================
+Ch11
+
+Check that the chapter has information for students to achieve learning objectives.
+
+This` chapter is practically empty!!
+
+===============================
+Ch12
+
+Check that the chapter has information for students to achieve learning objectives.
+
+===============================
+Ch13
+
+Check that the chapter has information for students to achieve learning objectives.
+
+===============================
+Ch14
+
+Add examples with tables and figures.
+
+Check that the chapter has information for students to achieve learning objectives.
+

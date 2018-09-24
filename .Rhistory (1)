@@ -1,512 +1,512 @@
+rhino.pop
+sample(rhino.pop$Yi, size = 1, replace = TRUE)
+sample(rhino.pop$Yi, size = 1, replace = TRUE)
+sample(rhino.pop$Yi, size = 3, replace = TRUE)
+samples1 <- sample(rhino.pop$Yi, size = 1*10000, replace = TRUE)
+hist(samples1)
+plot(table(samples1))
+samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
+plot(table(samples1))
+samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
+samples1 <- matrix(samples1, 2)
+dim(samples1)
+samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 2))
+dim(samples1)
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans))
+samples1 <- sample(rhino.pop$Yi, size = 3*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 3))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans))
+samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 4))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans))
+samples1 <- sample(rhino.pop$Yi, size = 5*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 5))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans))
+samples1 <- sample(rhino.pop$Yi, size = 10*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 10))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans))
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
+plot(table(samples1)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 2))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 4))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 5*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 5))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
+plot(table(samples1)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 2))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 4))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 8*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 5))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+samples1 <- sample(rhino.pop$Yi, size = 16*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 10))
+smeans <- apply(samples1, 1, mean)
+plot(table(smeans)/9000)
+plot(table(smeans)/9000, add = true)
+plot(table(smeans)/9000, add = TRUE)
+samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
+samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
+ftable <- as.data.frame(table(samples1)/9000)
+ftable
+samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
+ftable <- as.data.frame(table(samples1)/9000)
+ftable$samples1 <- as.numeric(as.character(ftable$samples1))
+plot(ftable$samples1, ftable$Freq, xlim = c(1.5, 7.5))
+samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 2))
+smeans <- apply(samples1, 1, mean)
+hist(smeans, breaks = seq(from = 1.5, to = 7.5, by = 0.25))
+hist(smeans, breaks = seq(from = 1.5, to = 7.5, by = 0.2))
+samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
+samples1 <- t(matrix(samples1, 4))
+smeans <- apply(samples1, 1, mean)
+hist(smeans, breaks = seq(from = 1.5, to = 7.5, by = 0.25))
+par(mfrow = c(2, 3))
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages")
+}
+par(mfrow = c(2, 3))
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab",
+density = 100)
+}
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab",
+density = 10)
+}
+par(mfrow = c(1, 1))
+par(mfrow = c(2, 3))
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(1, 1))
+par(mfrow = c(2, 3))
+opar=par(ps=18)  # Make text 18 point
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab")
+}
+opar
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab")
+}
+opar
+par(mfrow = c(1, 1))
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = "",
+xlab = "Sample averages",
+col = "olivedrab")
+}
+paste("r = ", i)
+ss <- paste("r =", i)
+paste("r =", i)
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/sqrt(i)),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+log(16)
+log2(16)
+log2(32)
+log2(1)
+opar = par(ps=18)  # Make text 18 point
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/(1 + log2(i))),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/(1 + 0.5 * log2(i))),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/(1 + 0.5 * log2(i))),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/(1 + 0.25 * log2(i))),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+set.seed(90)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/(1 + 0.25 * log2(i))),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25/(1 + 0.2 * log2(i))),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.1),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.2),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(90)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.2),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.2),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.5),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste(c("r =", i, "Variance = ", round(var(smeans),2)))
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+text(x = 2,
+y = 500,
+labels = paste("Var = ", round(var(smeans), 2)))
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+h <- hist(smeans,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+text(x = 2.5,
+y = 1000,
+labels = paste("Var = ", round(var(smeans), 2)))
+}
+str(h)
+max(h$density)
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+h <- hist(smeans,
+freq = FALSE,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab")
+text(x = 2.5,
+y = 1000,
+labels = paste("Var = ", round(var(smeans), 2)))
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+for(i in c(1, 2, 4, 8, 16, 32)){
+samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, i))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", i)
+h <- hist(smeans,
+freq = FALSE,
+breaks = seq(from = 1.5, to = 7.5, by = 0.25),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab",
+ylim = c(0, 1.4))
+text(x = 2.5,
+y = 0,
+labels = paste("Var = ", round(var(smeans), 2)))
+}
+par(mfrow = c(2, 3))
+opar = par(ps=18)  # Make text 18 point
+set.seed(91)
+r <- c(1, 2, 4, 8, 16, 32)
+w <- c(rep(0.25, 4), 0.20, 0.15)
+for(i in 1:6){
+samples1 <- sample(rhino.pop$Yi, size = r[i] * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, r[i]))
+smeans <- apply(samples1, 1, mean)
+ss <- paste("r =", r[i])
+h <- hist(smeans,
+freq = FALSE,
+breaks = seq(from = 1.5, to = 7.5, by = w[i]),
+main = ss,
+xlab = "Sample averages",
+col = "olivedrab",
+ylim = c(0, 1.4))
+text(x = 2.5,
+y = 1.2,
+labels = paste("Var = ", round(var(smeans), 2)))
+}
+bookdown:::serve_book()
+setwd("~/Google Drive/Documents/TeachServ/CLASSES/PLS120/KnitDirectoryPLS120Book2018a")
+plot3d(xyz.tips,
+xlab = "observation 1",
+ylab = "observation 2",
+zlab = "observation 3",
+box = FALSE,
+xlim = c(0, 10),
+ylim = c(0, 10),
+zlim = c(0, 10))
+library(rgl)
+smpl <- c(3, 4, 8)
+avg <- rep(mean(smpl), 3)
+rsdl <- smpl - avg
+xyz0 <- c(0, 0, 0)
+xyz.tips <- rbind(smpl, avg, smpl)
+xyz.orig <- rbind(xyz0, xyz0, avg)
+colnames(xyz.tips) <- c("obs1", "obs2", "obs3")
+colnames(xyz.orig) <- c("obs1", "obs2", "obs3")
+ssr <- rsdl %*% rsdl
+plot3d(xyz.tips,
+xlab = "observation 1",
+ylab = "observation 2",
+zlab = "observation 3",
+box = FALSE,
+xlim = c(0, 10),
+ylim = c(0, 10),
+zlim = c(0, 10))
+library(plot3D)
+arrows3D(x0 = xyz.orig[, 1],
+y0 = xyz.orig[, 2],
+z0 = xyz.orig[, 3],
+x1 = xyz.tips[, 1],
+y1 = xyz.tips[, 2],
+z1 = xyz.tips[, 3],
+xlim = c(0, 10),
+ylim = c(0, 10),
+zlim = c(0, 10),
+phi = 35,
+theta = 450,
 lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 8),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "darkgreen",
-add = TRUE)
-par(mfrow = c(1, 2))
-curve(dchisq(x = x, df = 1),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 3),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "darkgreen",
-add = TRUE)
-curve(dchisq(x = x, df = 6),
-from = 0, to = 20,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 6),
-from = 0, to = 20,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2)
-curve(dchisq(x = x, df = 10),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 10),
-from = 0, to = 20,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 15),
-from = 0, to = 20,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 1),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 3),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "darkgreen",
-add = TRUE)
-abline(v=1.5)
-abline(v=1)
-abline(v=0.7)
-abline(v=2)
-abline(h=0.38)
-abline(h=0.3)
-abline(h=0.2)
-abline(h=0.15)
-text(x = c(0.7, 1, 2, 4), y = c(0.38, 0.30, 0.20, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"))
-text(x = c(0.9, 1.3, 2.3, 4.1), y = c(0.38, 0.30, 0.20, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"))
-curve(dchisq(x = x, df = 1),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 3),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "darkgreen",
-add = TRUE)
-text(x = c(0.9, 1.3, 2.3, 4.1), y = c(0.38, 0.30, 0.20, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"))
-text(x = c(1, 1.4, 2.5, 4.2), y = c(0.39, 0.30, 0.20, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"))
-curve(dchisq(x = x, df = 1),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 3),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 2,
-col = "darkgreen",
-add = TRUE)
-text(x = c(1, 1.4, 2.5, 4.2), y = c(0.39, 0.30, 0.20, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"))
-text(x = c(1, 1.4, 2.5, 4.2), y = c(0.39, 0.30, 0.21, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"))
-curve(dchisq(x = x, df = 1),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 3),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "darkgreen",
-add = TRUE)
-text(x = c(1, 1.4, 2.5, 4.2), y = c(0.39, 0.30, 0.21, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"), cex = 1.1)
-curve(dchisq(x = x, df = 1),
-from = 0, to = 10,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-ylim = c(0, 0.4))
-curve(dchisq(x = x, df = 2),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 3),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 4),
-from = 0, to = 10,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "darkgreen",
-add = TRUE)
-text(x = c(1, 1.5, 2.5, 4.3), y = c(0.39, 0.30, 0.21, 0.15),
-labels = c("df = 1", "df = 2", "df = 3", "df = 4"), cex = 1.1)
-curve(dchisq(x = x, df = 5),
-from = 0, to = 25,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3)
-curve(dchisq(x = x, df = 10),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 15),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 20),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "darkgreen",
-add = TRUE)
-abline(h = 0:1.5/10)
-abline(h = 0:15/100)
-abline(v = 0:12*2)
-text(x = c(5, 10, 15, 22), y = c(0.15, 0.09, 0.07, 0.65),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 10, 15, 22), y = c(0.15, 0.09, 0.07, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 12, 17, 22), y = c(0.15, 0.09, 0.075, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 11, 17, 22), y = c(0.15, 0.09, 0.075, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-curve(dchisq(x = x, df = 5),
-from = 0, to = 25,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3)
-curve(dchisq(x = x, df = 10),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 15),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 20),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "darkgreen",
-add = TRUE)
-text(x = c(5, 11, 17, 22), y = c(0.15, 0.09, 0.075, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 10.5, 17, 22), y = c(0.15, 0.095, 0.075, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 10.5, 17, 22), y = c(0.15, 0.1, 0.075, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 10, 17, 22), y = c(0.15, 0.1, 0.075, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 10, 16, 22), y = c(0.15, 0.1, 0.08, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-text(x = c(5, 10, 15, 22), y = c(0.15, 0.1, 0.08, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"))
-curve(dchisq(x = x, df = 5),
-from = 0, to = 25,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3)
-curve(dchisq(x = x, df = 10),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "blue",
-add = TRUE)
-curve(dchisq(x = x, df = 15),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "lightblue",
-add = TRUE)
-curve(dchisq(x = x, df = 20),
-from = 0, to = 25,
-xlab = "",
-ylab = "",
-lwd = 3,
-col = "darkgreen",
-add = TRUE)
-text(x = c(5, 10, 15, 22), y = c(0.15, 0.1, 0.08, 0.065),
-labels = c("df = 5", "df = 10", "df = 15", "df = 20"), cex = 1.1)
-curve(dt(x = x, df = 1),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3)
-curve(dnorm(x = x),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3)
-curve(dt(x = x, df = 1),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE)
-curve(dnorm(x = x),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 1)
-curve(dt(x = x, df = 1),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE)
-curve(dt(x = x, df = 4),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "blue")
-curve(dt(x = x, df = 4),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "lightblue")
-curve(dt(x = x, df = 2),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "blue")
-curve(dt(x = x, df = 30),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 2,
-add = TRUE,
-col = "maroon")
-abline(v=-1)
-abline(v=-0.3)
-abline(v=-0.2)
-ys <- dt(-0.2, df = c(1, 2, 4, 30))
-ys
-text(x = rep(-3, 4), y = ys, pos = 2,
-labels = c("df = 1", "df = 2", "df = 4", "df = 30"), cex = 1.1)
-text(x = rep(-1, 4), y = ys, pos = 2,
-labels = c("df = 1", "df = 2", "df = 4", "df = 30"), cex = 1.1)
-x <- stats::runif(12)
-seq(length(x)-1)
-x[seq(length(x)-1)]
-x
-arrows(x0 = rep(-1, 4), y0 = ys, x1 = rep(-0.2, 4), y1 = ys, length = 0.1, angle = 25)
-curve(dt(x = x, df = 30),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "maroon")
-curve(dnorm(x = x),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 1,
-col = "green")
-curve(dt(x = x, df = 1),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE)
-curve(dt(x = x, df = 2),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "blue")
-curve(dt(x = x, df = 4),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "lightblue")
-curve(dt(x = x, df = 30),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "maroon")
-curve(dnorm(x = x),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 1,
-lty = 2)
-curve(dt(x = x, df = 1),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE)
-curve(dt(x = x, df = 2),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "blue")
-curve(dt(x = x, df = 4),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "lightblue")
-curve(dt(x = x, df = 30),
-from = -4, to = 4,
-xlab = "Y",
-ylab = "PDF",
-lwd = 3,
-add = TRUE,
-col = "maroon")
-ys <- dt(-0.2, df = c(1, 2, 4, 30))
-text(x = rep(-1, 4), y = ys, pos = 2,
-labels = c("df = 1", "df = 2", "df = 4", "df = 30"), cex = 1.1)
-arrows(x0 = rep(-1, 4), y0 = ys, x1 = rep(-0.2, 4), y1 = ys, length = 0.1, angle = 25)
-knitr::kable(data.frame(
-df = 1:30,
-t0.025 = qt(p = 0.025, df = c(1:30)),
-t0.975 = qt(p = 0.975, df = c(1:30))),
-caption = "Critical t values for 95% confidence with two tails.") %>%
-kable_styling(full_width = FALSE)
-library(kableExtra)
-knitr::kable(data.frame(
-df = 1:30,
-t0.025 = qt(p = 0.025, df = c(1:30)),
-t0.975 = qt(p = 0.975, df = c(1:30))),
-caption = "Critical t values for 95% confidence with two tails.") %>%
-kable_styling(full_width = FALSE)
-help("Distributions")
+d = 3,
+bty = "g",
+ticktype = "detailed")
+bookdown:::serve_book()
+install.packages("servr")
+bookdown:::serve_book()
+servr::daemon_stop("4747113896")

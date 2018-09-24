@@ -5,6 +5,7 @@ output:
     number_sections: yes
     theme: readable
     toc: yes
+    toc_depth: 3
 ---
 # Statistics with R {#chStatsR}
 
@@ -58,21 +59,33 @@ In the lab we will create a lab report based on some sections of this document.
 
 ## Exploring RStudio
 
-RStudio have 4 panes in the window.  These windows and many other features of RStudio are explained <a href="https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-part-1/" target="new">here</a>. Make sure to watch the video as part of your homework and send questions to your instructors.
+RStudio have 4 panes in the window.  These windows and many other features of RStudio are explained in the video below. Make sure to watch the video as part of your homework and send questions to your instructors.
 
-When RStudio is opened, there are four windows that appear : 
-  the Terminal or Console window, which is where R computes the command line code you enter, 
-  the Markdown File window, which is where you can edit and save lines of code and send code to the console to calculate, 
-  the Environment and History window, which is where working datasets and objects are listed, and 
-  the Files/Plots/Packages/Help window, which is where you can see what other files are in your working directory, view plots, install and load packages and find help on functions. 
-  
+<br>
+<a href="https://resources.rstudio.com/wistia-rstudio-essentials-2/rstudioessentialsprogrammingpart1-2" target="new"><img src="images/RStudioVideo01.png" width="640" height="362" title="RStudio Video1" alt="RStudio Video"></a>
+<br>
+
+
+When RStudio is opened, four windows that appear :
+
+- the Terminal or Console window, which is where R computes the command line code you enter,
+
+- the Markdown File window, which is where you can edit and save lines of code and send code to the console to calculate, 
+
+- the Environment and History window, which is where working datasets and objects are listed, and
+
+- the Files/Plots/Packages/Help window, which is where you can see what other files are in your working directory, view plots, install and load packages and find help on functions. 
+
 You can customize the windows and adjust the size of each of these windows by clicking and dragging the borders between them, and minimize/maximize them depending on your preference.  
-  
-```{r Window Panes}
+
+
+<br>
+```{r WindowPanes, echo=FALSE, out.width="80%", fig.pos="center"}
 
 knitr::include_graphics("images/CH2Windows.png")
 
 ```
+<br>
 
 
 ### Terminal or Console Window
@@ -83,7 +96,7 @@ The Terminal or Console window is where the R program computes command line code
 Take some time to practice simple arithmetic commands in the Console window.  After inputting the code press "Enter" to perform the calculation.  
 
 
-```{r Calculations}
+```{r Calculations, echo=FALSE}
 
 knitr::include_graphics("images/CH2Console.png")
 
@@ -93,7 +106,7 @@ When R returns the calculation it will include a "[1]" when there is only a sing
 
 In R studio you can easily add balanced parenthesis ( ), brackets [ ], braces { }, single ' ' and double " " quotation marks by selecting the text to be enclosed and then typing the beginning character (, [, {, ', or ". RStudio will insert both the beginning and end parenthesis etc. making them "balanced."
 
-```{r Calculations2}
+```{r Calculations2, echo=FALSE}
 
 knitr::include_graphics("images/CH2Console2.png")
 
@@ -101,7 +114,7 @@ knitr::include_graphics("images/CH2Console2.png")
 
 If you enter a command and the code is not complete, the cursor changes to "+" and R is waiting for you to finish the command. A common example of this is when your code includes multiple parentheses and an open or closed end of the parentheses is missing.   
 
-```{r Incomplete Code}
+```{r IncompleteCode, echo=FALSE}
 
 knitr::include_graphics("images/CH2IncompleteError.png")
 
@@ -109,7 +122,7 @@ knitr::include_graphics("images/CH2IncompleteError.png")
 
 If parts of the code is missing or incorrectly entered, you will recieve an **error** message with some detail of the error.  Using the "up arrow" with the cursor in the Console allows you to scroll through previous commands; this is helpful when making corrections to a previous command that did not compute, especially if the code is complex.  
 
-```{r Error Message}
+```{r ErrorMessage, echo=FALSE}
 
 knitr::include_graphics("images/CH2Error.png")
 
@@ -118,13 +131,13 @@ knitr::include_graphics("images/CH2Error.png")
 To clear the history in the Console, you can click on the broom button or press "Ctrl" + "L".
 
 
-### Markdown Window
+### Markdown (Source) Window
 
 The Markdown window is similar to a notepad; this is where you can input and save command line code, include instructions and attach notes.  All of the computer labs for this class will have you working with instructions provided in R Markdown, saved in .rmd files.  These files will contain written instructions and then "chunks" within the R Markdown file where you can input and send command line code to the Terminal window for computation.  The "chunks" will appear as gray lines that always start with three ticks and a lowercase r in brackets and end with another three ticks. See the example below of an empty chunk.  
 
 Code entered in these "chunks" can be sent to the Console for computation several ways.  The fastest method to compute a single line of code is by having the cursor on the same line as the code and pressing "Ctrl" + "Enter" (for Windows) or "command" + "return" (for Macs).  To run multiple lines of code within a single chunk, you can press "Ctrl" + "Alt" + "C" (for Windows) or "command" + "option" + "C" (for Macs).  You can also go to the top right bar of the Markdown window and click on "Run" which will give you multiple options to run a single line, an entire chunk, all of the code in a document, etc.  The third option is to click on the green arrow at the top right corner of the chunk, which will run the entire chunk of code.  
 
-```{r Running Chunk}
+```{r RunningChunk, echo=FALSE}
 
 knitr::include_graphics("images/CH2RunChunk.png")
 
@@ -133,7 +146,7 @@ knitr::include_graphics("images/CH2RunChunk.png")
 
 Code that is entered in white space is not computable; code can only be sent to the Console for computation when it is in the gray space known as a chunk. You can also include non-computable notes within a chunk when it is prefaced with a "#".  Entering these notes can be useful as code gains complexity.
 
-```{r Basic Functions}
+```{r BasicFunctions, echo=FALSE}
 #two ways to calculate the sum of 1 and 5
 1 + 5
 
@@ -157,7 +170,7 @@ The benefit of using RMarkdown is the ability to save instructions, codes and no
 
 Saving as a .Rmd file can be done by either clicking on the floppy disk button on the top of the Markdown pane, by pressing "Ctrl" + "S" or going to the upper left File button in the RStudio pane.  
 
-```{r Rmd File}
+```{r RmdFile, echo=FALSE}
 
 knitr::include_graphics("images/CH2RmdSave.png")
 
@@ -263,7 +276,6 @@ help(c) #help() allows you to search for a description of a given function
 
 ```
 
-See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>.
 
 One of the most common way to have data in R is using objects called data frames. These are table-like structures with rows and columns like a spreadsheet. Data frames are two-dimensional data sets that consist of a width and height, or more accurately the length of their columns (or number of rows) and the number of columns (or length of their rows).  Data frames can also be thought of as multiple vectors (columns) of the same length that are bound together.  Each column can have only one type of data, but different columns can have different data types. Data and objects in general in R can be of various types, called "modes." Whenever we enter data into R and do not specify the type, R will assign it the data type that does not lose any information. For example, if we enter A, 1, 3, 4, t, i, 7.5, into a column of a data frame, R will make a column of type character, because that is the only mode that can contain letters and numbers, but the numbers are stored as characters. The mode of objects can be changed, with restrictions.
 
@@ -381,7 +393,7 @@ Lets take the numbers 1-10 and extrapolate different summary statistics from the
 
 Table: (\#tab:SumStatFun) Summary Statistics for the length, summation, minimum, maximum, median, mean, range, variance, standard deviation and summary of a set of data
 
-|   Function   |    Example    |    Calculation    |
+|   Function   |    Example    |  Result returned  |
 |-------------:|:-------------:|:-----------------:|
 |   length()   | length(1:10)  |        10         |
 |    sum()     |   sum(1:10)   |        55         |
@@ -412,7 +424,9 @@ sd(1:10)
 summary(1:10)
 
 ```
-# Exercises
+<br>
+
+## Exercises
 
 1. For data set E1 consisting of 12 values, calculate the following summary statistics
 
@@ -451,18 +465,18 @@ e. standard deviation
 4. Add 100 to each of the 12 values you calculated in Question 3, how does this change the mean, range, variance and standard deviation?
 
 
-#Lab
+## Laboratory Exercises
 
-##Plant Sciences
+### Plant Sciences
 
-### Introduction to R and RStudio
+#### Introduction to R and RStudio
 
 If you are using a lab computer and not your personal computer, insert your flash drive and set the working directory to be in your drive. This way you will have all of your files with you in your drive. Files that you save to the lab computers are wiped every night. The following script chunk allows you to manually select your working directory by selecting a file within it. 
 
 Once you have installed the necessary packages, you can render this Rmd file and produce the html file that can be viewed in any browser. **For full credit you will submit both the Rmd and html files you complete.**
 
 
-### Create a dataframe and table 
+#### Create a dataframe and table 
 
 To create a data frame we use the data.frame() function. In this example we create a data frame named "mydata." This data frame has 2 columns (Y1 and Y2) and 3 rows.
 
@@ -482,7 +496,7 @@ pander(mydata, caption = "Table showing my data.") #pander() creates a table for
 
 ```
 
-### Summary Statistics 
+#### Summary Statistics 
 
 Summary statistics are classified as measures of central tendency and measures of dispersion. Mean, and median are measures of central tendency. Variance, standard deviation, range minimum and maximum are measures of dispersion. For positive random variables, the coefficient of variation is a measure of variation relative to the mean.
 
@@ -521,7 +535,7 @@ max(clover$lnwt) # maximum braking lnwtance
 The **coefficient of variation** is the standard deviation in units of the average. A value greater than 1 is high and indicates that there is a large amount of variation unexplained. Values below 0.30 are very low and indicate that there is little unexplained variation. For laboratory or controlled field experiments the CV should be below 0.5, whereas for observational studies an acceptable CV can be up to 1.0.
 
 
-### Frequency Table and Histogram
+#### Frequency Table and Histogram
 We can create a frequency table by dividing the range of lnwt into bins according to a general guideline: number of bins = 1 + 3.3 log(sample size). For this we use the cut() function. Then we create the frequency table using the xtabs() function and plot the histogram. All of this is done automatically by R using the hist() function. We will worry about making the graphs look pretty later on.
 
 ```{r ps freqhist, echo = TRUE, include = TRUE}
@@ -577,7 +591,7 @@ summary(clover)[,1] #  get the first column of the summary table
 The function str() is really important to see what objects are composed of and to use parts of those objects. Any part of an object can be referenced and modified using its "address."
 
 
-### Box-and-Whisker Plot and 5-Number Summary
+#### Box-and-Whisker Plot and 5-Number Summary
 Data can be summarized using a boxplot and or the 5-number summary. These contain information about the average, median, first quartile, third quartile, range and outliers. The *range* argument determines how far the plot whiskers extend out from the box. If range is positive, the whiskers extend to the most extreme data point which is no more than *range* times the interquartile range (IQR) from the box. Data points that fall outside the whiskers are plotted and can be interpreted as "outliers" or values more extreme than expected. Outliers are so only on the basis of some preconceived expectation, usually a more or less normal distribution. A range value of zero causes the whiskers to extend to the data extremes, so no outliers are shown.
 
 ```{r ps boxplot1, echo = TRUE, include = TRUE}
@@ -659,7 +673,7 @@ pander(cbind(c("min", "lower hinge", "median", "upper hinge", "max"), fivenum(cl
 
 ```
 
-### Analyses by Groups
+#### Analyses by Groups
 
 The clover data has groups defined by the temperature treatments. Because the group numbers are just lables, we need to transform them into what is called "factor" class in R. This way, we can apply functions that obtain summaries and figures for each group. In the case of the clover, we expect that plants to grow faster at higher temperature; let's see what the data say.
 
@@ -688,16 +702,16 @@ pander(sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summ
 
 
 
-## Animal Sciences
+### Animal Sciences
 
-### Introduction to R and RStudio
+#### Introduction to R and RStudio
 
 If you are using a lab computer and not your personal computer, insert your flash drive and set the working directory to be in your drive. This way you will have all of your files with you in your drive. Files that you save to the lab computers are wiped every night. The following script chunk allows you to manually select your working directory by selecting a file within it. 
 
 Once you have installed the necessary packages, you can render this Rmd file and produce the html file that can be viewed in any browser. **For full credit you will submit both the Rmd and html files you complete.**
 
 
-### Create a dataframe and table 
+#### Create a dataframe and table 
 To create a data frame we use the data.frame() function. In this example we create a data frame named "mydata." This data frame has 2 columns (Y1 and Y2) and 3 rows.
 
 ```{r as createdf, echo=TRUE}
@@ -716,18 +730,22 @@ pander(mydata, caption = "Table showing my data.") #pander() creates a table for
 
 ```
 
-### Summary Statistics 
+#### Summary Statistics 
 
 Summary statistics are classified as measures of central tendency and measures of dispersion. Mean, and median are measures of central tendency. Variance, standard deviation, range minimum and maximum are measures of dispersion. For positive random variables, the coefficient of variation is a measure of variation relative to the mean.
 
 We use the *heifer.xlsx* data set provided in the first assignment. These data represent the birth weight of heifers across three different years (2005, 2006, 2007). Column names are in the first row of the file, so we specify *col_names = TRUE* in the line of code to read the data. Data are placed in a data frame named "heifer".
 
 ```{r as summarystats1, echo = TRUE}
+
 library(readxl)
 
-heifer <- read_excel("Datasets/HeiferDataLab1.xlsx", col_names = TRUE) # read in data.
+ # read in data.
+heifer <- read_excel("Datasets/HeiferDataLab1.xlsx", col_names = TRUE)
 
-(avg.bwt <- mean(heifer$Birth_Wt)) # obtain the average bwtance; note the use of $ to select parts of an object and the outer parentheses to display the result.
+(avg.bwt <- mean(heifer$Birth_Wt)) # obtain the average bwt
+# note the use of $ to select parts of an object and the outer
+# parentheses to display the result.
 
 (med.bwt <- median(heifer$Birth_Wt)) # median or 50th percentile
 
@@ -754,7 +772,7 @@ max(heifer$Birth_Wt) # maximum braking bwtance
 The **coefficient of variation** is the standard deviation in units of the average. A value greater than 1 is high and indicates that there is a large amount of variation unexplained. Values below 0.30 are very low and indicate that there is little unexplained variation. For laboratory or controlled field experiments the CV should be below 0.5, whereas for observational studies an acceptable CV can be up to 1.0.
 
 
-### Frequency Table and Histogram
+#### Frequency Table and Histogram
 
 We can create a frequency table by dividing the range of bwt into bins according to a general guideline: number of bins = 1 + 3.3 log(sample size). For this we use the cut() function. Then we create the frequency table using the xtabs() function and plot the histogram. All of this is done automatically by R using the hist() function. We will worry about making the graphs look pretty later on.
 
@@ -811,7 +829,7 @@ summary(heifer)[,1] #  get the first column of the summary table
 The function str() is really important to see what objects are composed of and to use parts of those objects. Any part of an object can be referenced and modified using its "address."
 
 
-### Box-and-Whisker Plot and 5-Number Summary
+#### Box-and-Whisker Plot and 5-Number Summary
 
 Data can be summarized using a boxplot and or the 5-number summary. These contain information about the average, median, first quartile, third quartile, range and outliers. The *range* argument determines how far the plot whiskers extend out from the box. If range is positive, the whiskers extend to the most extreme data point which is no more than *range* times the interquartile range (IQR) from the box. Data points that fall outside the whiskers are plotted and can be interpreted as "outliers" or values more extreme than expected. Outliers are so only on the basis of some preconceived expectation, usually a more or less normal distribution. A range value of zero causes the whiskers to extend to the data extremes, so no outliers are shown.
 
@@ -889,23 +907,23 @@ text(x = 0.65, y = up.fence, label = "Upper Fence")
 ```
 
 
-**PUT THIS IN THE CORRECT PLACE**
+<!-- **PUT THIS IN THE CORRECT PLACE** -->
 
-Note that the uniform distribution U(0, 1) is the distribution of the random numbers generated by the function RAND() in Excel. For more details on this distribution, see Uniform Distribution at <https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)>.
+<!-- Note that the uniform distribution U(0, 1) is the distribution of the random numbers generated by the function RAND() in Excel. For more details on this distribution, see Uniform Distribution at <https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)>. -->
 
-\begin{equation}
-f(x) =
-  \begin{cases}
-    \frac{1}{b-a}       & \quad \text{if } a \leq x \leq b \\
-    0                   & \quad \text{otherwise }
-  \end{cases}
-    (\#eq:unifPdf)
-\end{equation}
+<!-- \begin{equation} -->
+<!-- f(x) = -->
+<!--   \begin{cases} -->
+<!--     \frac{1}{b-a}       & \quad \text{if } a \leq x \leq b \\ -->
+<!--     0                   & \quad \text{otherwise } -->
+<!--   \end{cases} -->
+<!--     (\#eq:unifPdf) -->
+<!-- \end{equation} -->
 
-```{r UnifDist, fig.cap="Probability density function for a continuous uniform distribution."}
+<!-- ```{r UnifDist, fig.cap="Probability density function for a continuous uniform distribution."} -->
 
-```
-**DOWN TO HERE** 
+<!-- ``` -->
+<!-- **DOWN TO HERE**  -->
 
 
 The values for the five-number summary can be obtained directly with the fivenum() function:
@@ -917,7 +935,7 @@ pander(cbind(c("min", "lower hinge", "median", "upper hinge", "max"), fivenum(he
 
 ```
 
-### Analyses by Groups
+#### Analyses by Groups
 
 The heifer data has groups defined by the year. Because the group numbers are just labels, we need to transform them into what is called "factor" class in R. This way, we can apply functions that obtain summaries and figures for each group. We can see if there are any differences in the birth weight across the three years for heifers.  
 

@@ -1,7 +1,11 @@
 ---
-output: html_document
-editor_options: 
-  chunk_output_type: console
+output: 
+  html_document: 
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
 ---
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
@@ -17,6 +21,8 @@ library(car)
 library(tidyr)
 library(ggplot2)
 library(latex2exp)
+library(arrangements)
+library(plotrix)
 options(scipen = 999)
 ```
 
@@ -25,6 +31,8 @@ options(scipen = 999)
 
 ## Learning Objectives for Chapter
 
+
+1. Define random variables and their distributions.
 1. Define and identify population, sample and observation.
 1. Explain why we need to sample populations.
 1. Describe and use a method to obtain random samples with equal probabilities.
@@ -33,6 +41,7 @@ options(scipen = 999)
 1. Explain the difference between sampling with and without replacement.
 1. Write and use equations for estimators of population mean and variance.
 1. Distinguish between estimators and definitions of parameters.
+1. List the most important distributions in elementary statistics.
 1. Define and calculate bias of an estimator of a parameter.
 1. When should a Student's t distribution be used over a normal distribution for samples?
 1. Define statistical bias and give a few examples of situations that may lead to a biased estimator
@@ -816,7 +825,7 @@ dpois(x = 2, lambda = 0.8)
 plot(df, type = "h", lwd = 4)
 
 # Cumulative distribution function for number of crossovers
-(df <- data.frame(y = 0:7, P = ppois(q = 0:7, lambda = 10 = 1/6)))
+(df <- data.frame(y = 0:7, P = ppois(q = 0:7, lambda = 0.8)))
 plot(df, type = "h", col = "skyblue", lwd = 4)
 
 # Expected proportion of gametes with 3 or more crossovers
@@ -1436,13 +1445,6 @@ run `help("Distributions")` or type "Distributions" in the search field of the H
 
 
 
-##Central Limit Theorem
-
-
-
-
-
-
 
 ## Sampling and samples
 
@@ -1489,7 +1491,7 @@ Incidentally, and to remark the importance of formulating questions carefully, t
 
 There are many sampling methods that use unequal probability. If they are used in conjunction with the proper estimators and analysis procedures, there should not be a problem. As a matter of fact, unequal sampling probability may be the only approach in some situations and it is not a problem for as long as the probabilities of any unit being selected is known and greater than 0. Assigning a zero probability to some elements of the population is equivalent to defining a new populations without them. Obviously, the samples will not have information about the original but about the reduced population. Therefor, another interpretation of the phrase "biased sample" would be that the sample does not come from the population about which we want to make statements.
 
-```{block NoZeroP. type='statip'}
+```{block NoZeroP, type='statip'}
 - Samples have to be obtained using a random process in which all units of the population have a strictly positive and known probability of being selected, even if the probabilites differ among units.
 ```
 
@@ -1537,7 +1539,7 @@ The sample average is the least squares, maximum likelihood and method-of-moment
 Parameters are estimated by doing calculations with the observed sample values. The results of doing calculations based on sample values are called **statistics** Obviously, this is a different meaning of the term **statistics* in the "science of statistics".
 
 <br>
-```{block statisticDef. type='mydef'}
+```{block statisticDef, type='mydef'}
 
 - A **statistic** is a function of sample values, and therefore, a random variable.
 
@@ -1548,6 +1550,253 @@ Parameters are estimated by doing calculations with the observed sample values. 
 For example, the **sample average** is a statistic that is typically used to estimate a parameter: the **mean** of a normal population. However, the mean is not necessarily a parameter of all distributions, so we need to come up with methods to estimate parameters in general, not just the mean for normal distributions. For example, the mean is a moment but not a parameter in the Binomial distribution. 
 
 
+<!-- Move to sampling -->
+
+In this example we illustrate the sampling and inference process with a simple fictitious example. Suppose that a model of reality states that the population density of an endangered species S is equal to or lower than a level $D_c$ considered to be critically low. We can hypothesize $H_0: \ \mu_S \ge D_c$ versus $H_0: \ \mu_S \lt D_c$. These alternatives cover the whole universe of possibilities. For simplicity, let's assume that the whole population of the species is represented by the points in Figure \@ref(fig:InferenceExample) and that the whole area where the population exists is divided into quadrats or sampling units (this is called a *sampling frame*). Each 10 - miles^2^ quadrat is labeled with a letter and represents a sampling unit that can selected to count the number of individuals. Resources and time available permit the collection and processing of data from 3 quadrats. Three letters between A and I are selected randomly and the corresponding quadrats are sampled and counted. 
+
+<br>
+```{r InferenceExample, echo=FALSE, message=FALSE, fig.cap="A population of an endangered species is organized into a sampling frame to obtain a sample. Sampling units are identified by letters. Using simple random sampling without replacement, each sampling unit has an equal chance of being selected. The total population is 39, with mean 4.333 per sampling unit.", fig.align='center', out.width="90%"}
+
+knitr::include_graphics("images/RhinoPop.png")
+
+```
+<br>
+
+There are $C^9_3 = `r arrangements::ncombinations(k = 3, n = 9)`$ different samples of size 3 that can be obtained without replacement from this population (Table \@ref(tab:AllRhinoSamples)).
+
+<br>
+```{r AllRhinoSamples, echo=FALSE, message=FALSE}
+
+rhino.pop <- data.frame(s.unit = c(LETTERS[1:9]), 
+                        Yi = c(4, 5, 7, 4, 6, 3, 5, 3, 2))
+
+rtbl <- as.data.frame(table(Y = rhino.pop$Yi))
+
+rtbl$Y <- as.numeric(as.character((rtbl$Y)))
+
+all.samples <- as.data.frame(
+   do.call(rbind, 
+           combinations(x = rhino.pop$s.unit, 
+                        k = 3, 
+                        layout = "list")))
+
+all.samples$s.unit1 <- LETTERS[all.samples$V1]
+all.samples$s.unit2 <- LETTERS[all.samples$V2]
+all.samples$s.unit3 <- LETTERS[all.samples$V3]
+
+all.samples <- merge(x = all.samples, y = rhino.pop,
+                     by.x = "s.unit1",
+                     by.y = "s.unit")
+
+all.samples <- merge(x = all.samples, y = rhino.pop,
+                     by.x = "s.unit2",
+                     by.y = "s.unit")
+
+all.samples <- merge(x = all.samples, y = rhino.pop,
+                     by.x = "s.unit3",
+                     by.y = "s.unit")
+
+names(all.samples)[7:9] <- c("Y1","Y2","Y3")
+
+all.samples <- all.samples[, c("s.unit1", "s.unit2", "s.unit3", "Y1", "Y2", "Y3")]
+
+all.samples$s.avg <- apply(all.samples[, c("Y1", "Y2", "Y3")], 1, mean)
+
+knitr::kable(list(all.samples[1:42, ], all.samples[43:84, ]), 
+             digits = 2, 
+             row.names = FALSE, 
+             caption = "All possible samples from the Rhino population, as defined by the sampling frame above. Note that although each row of the table has equal probability, the same sample average can be obtained in many different ways. The sample average is a random variable.") %>%
+   kable_styling(full_width = FALSE, font_size = 11)
+
+```
+<br>
+
+Each average value can be obtained more than one way. For example the value 4.33 appears 13 times in 13 different samples. A frequency table of the average for all samples constitutes the sampling distribution of the sample average (Figure \@ref(fig:RhinoSamplingDistribution)). Note how the sampling distribution resembles a Normal distribution. The mean of the sampling distribution is the same as the mean of the original population:
+
+<br>
+
+$$\mu_S = \frac{4 + 5 + 7 + 4 + 6 + 3 + 5 + 3 + 2}{9} = \frac{39}{9} = 4.\bar{33} \\[25pt]
+\mu_{\bar{Y}} = \frac{1}{84} \times 2.67 + \frac{4}{84} \times 3.00 + \frac{7}{84} \times 3.33 + \frac{10}{84} \times 3.67 + \frac{14}{84} \times 4.00 + \frac{13}{84} \times 4.33 \\[25pt]
++ \frac{13}{84} \times 4.67 + \frac{10}{84} \times 5.00 + \frac{7}{84} \times 5.33 + \frac{3}{84} \times 5.67 + \frac{2}{84} \times 6.00 = 4.\bar{33}$$
+<br>
+
+
+
+<br>
+```{r RhinoSamplingDistribution, echo=FALSE, message=FALSE, fig.cap="Sampling distribution of the average number of rhinos per quadrat. All 84 possible samples of size 3 were created and averaged."}
+
+rhino.table <- as.data.frame(
+   table(Sample.average = all.samples$s.avg))
+
+rhino.table$Sample.average <- as.numeric(as.character(rhino.table$Sample.average))
+
+rhino.table2 <- rhino.table
+
+rhino.table2$Sample.average <- format(rhino.table2$Sample.average, digits = 3)
+
+par(mfrow = c(1,2))
+
+plot(rhino.table$Sample.average, rhino.table$Freq, 
+     type = "h", lwd = 4,
+     xlab = "Sample average (rhinos/10 sq. miles)", 
+     ylab = "Frequency (no. samples)", 
+     col = "olivedrab")
+
+plot.new()
+
+addtable2plot(-0.2, 0.0, rhino.table2,
+ypad = 0.6, xpad = 0.2, bty = "o", 
+hlines = TRUE,
+vlines = TRUE, 
+title = "Frequency table",
+cex = 1.5)
+
+par(mfrow = c(1,1))
+
+```
+<br>
+
+We use R code to calculate the variances of the original population and the sampling distribution of the average. The original population is already in a data frame called `rhino.pop` and all possible samples are in `all.samples`. Each row of `rhino.pop` is a quadrat (Figure \@ref(fig:InferenceExample)), whereas each row of `all.samples` is a sample of size 3.
+
+```{r SamplingDistributionVariance, message=FALSE}
+
+str(rhino.pop)
+
+str(all.samples)
+
+o.pop.size <- length(rhino.pop$Yi)
+
+s.pop.size <- length(all.samples$s.avg)
+
+(o.var <- var(rhino.pop$Yi) * (o.pop.size-1) / o.pop.size)
+
+(s.var <- var(all.samples$s.avg) * (s.pop.size-1) / s.pop.size)
+
+o.var/s.var
+
+```
+
+The R function `var` is designed to estimate variances using samples, and it divides the sums of squared deviations by $(N-1)$ to yield an unbiased estimate of the population variance based on each sample. However, we have been working with two populations: the original population of rhinos per quadrat, and a second virtual population created by the process of getting all possible samples of 3 quadrats and taking the average (Figure \@ref(fig:OriginalAndSampleRhinoPops)). In other words, although we talk about samples, we are dealing with ALL of the samples, therefore, we are dealing with a second population of averages. Therefore, in order to calculate the population variances we have to multiply the result of `var` by $(N-1)/N$.
+
+<br>
+```{r OriginalAndSampleRhinoPops, echo=FALSE, message=FALSE, fig.cap="Original rhino population of interest, and virtual population of average rhinos per quadrat in samples of size 3. When sampling the 9 original quadrats without replacement, there are 84 different samples possible. The bar graph on the left is the probability mass function of the original population. The bar graph on the right is the probability mass function of the population of sample averages.", fig.align='center', out.width="95%"}
+
+knitr::include_graphics("images/OriginalAndSampleRhinoPops.png")
+
+```
+<br>
+
+
+The variance of the averages is much smaller than the variance of the original population. It can be shown that when sampling is performed without replacement as in this example, the relationship between the original population variance and the variance of the population of averages is as follows:
+
+<br>
+\begin{align}
+V\{^r\bar{Y}\} &= \frac{V\{Y\}}{r} \ \left( 1 - \frac{r - 1}{N - 1} \right) \\[20pt]
+\text{where } \quad & ^r\bar{Y} \quad \text{is the average of samples of size r} \\[20pt]
+&N \quad \text{is the size of the original population} \\[20pt]
+&r \quad \text{is the sample size} \\[20pt]
+(\#eq:VarNoReplacement)
+\end{align}
+<br>
+
+The derivation of Equation \@ref(eq:VarNoReplacement) is beyond the scope of this book, but we can check the results numerically for the rhino example. The original variance $V\{Y\} = 2.2222$ and we used $r = 3$, therefore the equation above indicates that the variance of averages of samples size 3 ($V\{^3\bar{Y}\}$) should be 
+
+<br>
+$$V\{^r\bar{Y}\} = \frac{2.2222}{3} \ \left( 1 - \frac{3 - 1}{9 - 1} \right) = \frac{2.2222}{3} \ \left( 1 - \frac{2}{8} \right) \\[25pt]
+= \frac{2.2222}{3} \ \left( 1 - \frac{2}{8} \right) = \frac{2.2222}{3} \ \left( \frac{3}{4} \right) = 0.5555$$
+<br>
+
+which indeed is the value we obtained by creating the population of averages and then calculating their variance directly.
+
+Unless it is stated otherwise, in this course we will assume that sampling is with replacement or that populations are infinite, which in both cases leads to a simplification of Equation \@ref(eq:VarNoReplacement) because $(r-1)/(N-1) = 0$ when $N = \infty$.
+
+### Variance of the sample average
+
+Memorize this equation and its meaning. This equation is a pretty handy trick.
+
+<br>
+\begin{equation}
+V\{^r\bar{Y}\} = \frac{V\{Y\}}{r} \\[20pt]
+\sigma^2_{\bar{Y}} = \frac{\sigma^2_Y}{r}
+(\#eq:VarOfAverage)
+\end{equation}
+<br>
+
+When we sample to estimate a mean, we want to know how the sample average varies about the true mean, but we have only one sample. We cannot estimate the among-sample variance directly. However, with one sample we can estimate the variance of the original distribution and plug it into Equation \@ref(eq:VarOfAverage) to get an estimate of the variance of sample averages among samples!
+
+<br>
+$$\begin{equation}
+\hat{V}\{^r\bar{Y}\} = \frac{\hat{V}\{Y\}}{r} \\[20pt]
+\hat{\sigma}^2_{\bar{Y}} = \frac{\hat{\sigma}^2_Y}{r} \\[20pt]
+\end{equation}$$
+<br>
+
+For the sample shown in Figure \@ref(fig:InferenceExample) the estimated variance of sample averages is obtainedd by first estimating the variance of the original population and then dividing by the sample size.:
+
+<br>
+$$\begin{equation}
+\hat{\sigma}^2_Y = \hat{V}\{Y\} = \sum_{i=1}^3 \ \frac{(Y_i - \bar{Y})^2}{r-1}= \frac{(4 - 5)^2 + (6 - 5)^2 + (5 - 5)^2}{3-1} = 1 \\[20pt]
+\hat{\sigma}^2_{\bar{Y}} = \frac{\hat{\sigma}^2_Y}{r} = \frac{1}{3}
+\end{equation}$$
+<br>
+
+Assume that the original population is not known, which is usually the case, but that you have the one sample $Y = \{4, 6, 5\}$. The estimated population mean is $\bar{Y} = 5$ and the estiamted variance of the estimate is $\hat{\sigma}^2_{\bar{Y}} = 1/3$. With this information, if we knew the shape of the sampling distribution we could make inferences about the original population. The Central Limit Theorem is what we need!
+
+
+## Central Limit Theorem
+<br>
+```{block CentralLimitTheorem, type='stattip'}
+- As sample size r tends to infinite, the sample average tends to have a normal distribution with the same mean as the original distribution and variance equal to the original population variance divided by r.
+```
+<br>
+
+A bit more formally, the Central Limit Theorem (CLT) states that the random variable defined as the average of a series of $r$ independent draws from a population with mean $\mu$ and variance $\sigma^2$ converges in distribution to a normal with the same mean and variance $\sigma^2/r$
+
+$$\begin{equation}
+\bar{Y} = \sum_{i = 1}^r \ \frac{Y_i}{r} \ \xrightarrow[r \to \infty] \ \ N(\mu, \sigma^2/r)
+\end{equation}$$
+
+Therefore, for sample sizes large enough and independent observations we can assume that the sample average comes from a Normal Distribution. Now, armed with an estimated distribution for the sample averages and knowing that the average is a good estimate of the mean, we can make inferences about the original population by observing samples.
+
+
+<br>
+```{r cltHistograms, echo=FALSE, message=FALSE, fig.cap="Effect of sample size r on the distribution of simulated sample averages. Increasing sample size causes the distribution of averages to approach a Normal distribution with decreasing variance and constant mean equal to the original mean."}
+
+par(mfrow = c(2, 3))
+
+opar = par(ps=18)  # Make text 18 point
+
+set.seed(91)
+
+r <- c(1, 2, 4, 8, 16, 32)
+w <- c(rep(0.25, 4), 0.20, 0.15)
+
+for(i in 1:6){
+samples1 <- sample(rhino.pop$Yi, size = r[i] * 9000, replace = TRUE)
+samples1 <- t(matrix(samples1, r[i]))
+smeans <- apply(samples1, 1, mean)
+
+ss <- paste("r =", r[i])
+
+h <- hist(smeans, 
+          freq = FALSE, 
+          breaks = seq(from = 1.5, to = 7.5, by = w[i]), 
+          main = ss,
+          xlab = "Sample averages",
+          col = "olivedrab",
+          ylim = c(0, 1.4))
+
+text(x = 2.5, 
+     y = 1.2, 
+     labels = paste("Var = ", round(var(smeans), 2)))
+}
+
+opar # Reset text to 12 point
+
+par(mfrow = c(1, 1))
+
+```
+<br>
 
 
 ## Sampling distributions
@@ -1594,6 +1843,50 @@ Most exercises with solutions in the book *Probability and Statistics Applicatio
 
 ### Exercise
 
+Objective: understand that we use theoretical probabilities as models that approximate reality but that are not reality. Models are based on specific knowledge or assumptions. One model assumes that a parameter is constant, but in reality the parameter might change. More complicated models can accomodate changing parameters.
+
+Assume that the electric motor of a water pump has a constant probability of failing in any time interval, and that on average the failure rate is once every 10,000 hours and independent of previous or future failures after repairs. 
+
+What distribution can be used to model the number of failures in any given 1000 hour interval?
+
+Solution
+
+A good candidate distribution would be the Poisson because the number of failures is a discrete number that can only be 0 or take positive values. The assumption of constant probabiliyt and independence of events meets the characteristics of the Poisson distribution.
+
+What is the probability that the motor will fail exactly once in 1000 hours?
+
+Solution
+
+We use the PMF for the Poisson with $\lambda = 10^{-4} \ h^{-1}$ and $s = 1000 \ h$. The average number of failures in 1000 h equals $\mu = \lambda \ d = 0.1$.
+
+<br>
+$$P(Y = 1) = \frac{e^{-0.1} \ 0.1^1}{1!} = 0.0905$$
+<br>
+
+In R we can get the probability using `dpois(x = 1, lambda = 0.1)`, note that in R the term "lambda" is used to refer to the mean of the distribution foe the specific time period.
+
+
+What is the probability that it will fail at least once in 1000 hours?
+
+Solution
+
+$$P(Y \ge 1) = 1 - P(Y = 0) = 1 - \frac{e^{-0.1} \ 0.1^0}{0!} = 1 - 0.9048$$
+
+Do you think the assumptions about the pump are realistic? How would you modify the assumptions to work towards a better model?
+
+Solution
+
+The assumptions may not be realistic because the pump suffers wear and tear and the longer it operates the more likely it will be that it fails within any period of time. Perhaps a better model is one were the probability of failure increases with the length of time since the last repair. We could start modeling this by using $\mu_t = \lambda_0 + \beta \cdot t$, where t is the time since repair.
+
+Given the potential deficiencies of the model based on the original assumptions, what errors do you expect to see as the pump get older and more time passes since the last repair?
+
+Solution
+
+The estimated probabilities of failure will underestimate the actual risk of failure. I will be likely that we observe more failures than what a model with constant probability predicts, particularly as the pump become older. Presumably, the pump will reach a time when its probability of failure in a short time is almost 1. 
+
+
+### Exercise
+
 Find processes that could be described with the more common distribution functions, sample them amd create histograms for the results. Determine if the results look like the hypothesized distribution.
 
 ### Exercise
@@ -1604,9 +1897,7 @@ This is a game. Each player starts with 10 cents in pennies. The bank (instructo
 
 ## Homework
 
-1. 
-
-1. Make a frequency table where two random variables are not correlated and are not independent. Use calculations to show both properties are as requested.
+<!-- Select questions from TopHat. Assign through TopHat -->
 
 ## Laboratory Exercises
 

@@ -3,40 +3,33 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+
 # Probability in Applied Statistics {#chProb}
 
-See probability_cheat sheet.pdf
-See Appendix A of KNN book.
-See Introductory Statistics with R.
-See Distributions Oct 6, 2017 in Notability
-Constant, Random variable and Random number. PSAES ch. 6
-Permutations, combinations. See PSAES.pdf.
-Types of random variables.
-Distributions of random variables. Discrete. Continuous.
-Distributions of functions of random variables.
-Mean, variance, covariance vs. parameters of distributions. Examples: Normal and Student's t.
+This chapter introduces the concept of and a semi-formal theory for probability. The rules of probability are applied to random variables defined in the next chapter. We explain the fact that there are at least two ways of thinking about the intepretation of probability in the empirical world, Bayesian and Frequentist, but that in the "mathematical world" probability is just one thing and it follows a single set of rules (at least for the purpose of this course).
+
+The main point of this chapter is to show students how probabilities work and how the can be used to solve practical problems that involve uncertainty. Thus, we start by linking simple real world experiments whose results are uncertain with probabilities that can be handled mathematically. Then we show some of the main properties and rules that facilitate the calculations with probability.
+
+A second main concept that is treated in this chapter is "randomness"  and the meaning of random. Briefly, in a deep sense no phenomenon in the macro world (larger than atoms) is random in the sense that exaclty the same conditions could lead to different results. Random means that part of what we observe will be modeled using random variables whose values change from experiment to experiment, and part will be modeled as constants that remain the same across experiments.
+
+For most of this chapter we will do calculations that assume that we know all the values that are supposed to remain constant and focus on calculating probability of events. In later chapters, we kind of reverse the view to address real world questions and try to guess the unknown constant values based on the observed results of experiments.
+
+
 
 
 
 ## Learning Objectives for Chapter
 
-1. Define random variables and their distributions.
 1. Define probability and list the main probability "laws."
 1. Determine if a process is random or deterministic and give examples of both.
 1. Given a random experiment like rolling a die, write down the sample space.
-1. Determine the probability mass function of a given random experiment.
-1. List multiple causes that determine the outcome of a random experiment.
-1. Define "parameter."
+1. Determine the probability mass function of a given random variable
 1. Classify a list of quantities as values of random variables or parameters.
 1. Define "independence" in the context of probability events and determine if two events are independent.
 1. Explain what conditional probability is with a diagram and with formulas.
-1. Calculate the probability of:
- - 1 of 2 mutually exlusive events occurring (either/or)
- - two events occuring that are independent
- - the probability of one event occuring, given that another event has already occurred.  
+1. Calculate the probability of 1 of 2 mutually exclusive events, two independent events, one event occurring, given that another event has already occurred.
 1. Write down Bayes rule and define each of its components.
-1. Apply Bayes rule to minimize error rate in classification of a plant as annual or perennial.
-1. List the most important distributions in elementary statistics.
+1. Apply Bayes rule in a classification problem.
 1. Plot and describe the main features of the statistical distributions.
 1. Give examples of processes that generate random variables with the most important distributions.
 1. State the central limit theorem and show its effects with a simulation.
@@ -97,7 +90,7 @@ It is important to correctly interpret phrases like "due to chance" and we recom
 
 Specificallly, to say that "The P-value reports the likelihood that the observed difference was due to chance alone." is very misleading. For the record, 
 
->"Informally, a p-value is the probability under a specified statisti- cal model that a statistical summary of the data (e.g., the sample mean difference between two compared groups) would be equal to or more extreme than its observed value." [@WassesteinLazar2016]
+>"Informally, a p-value is the probability under a specified statisti- cal model that a statistical summary of the data (e.g., the sample mean difference between two compared groups) would be equal to or more extreme than its observed value." [@WassersteinLazar2016]
 
 Further, consider the number of tweets so that each student has sent in the last day. For an investigator interested in the population of students, perhaps the variation from student to student can be considered to be random and have some sort of statistical distribution for random errors. However, for each individual student the number of tweets they made is a known quantity and it is not considered to be an error in any way, not even in a statistical way. Presumably, students know exactly why they sent each tweet and the number of tweets for a particular day.
 
@@ -586,7 +579,7 @@ $$P(D|+) = \frac{1.0 \cdot 0.001}{1.0 \cdot 0.001 + 0.05 \cdot 0.999} = 0.019627
 <br>
 
 
-The small probability is very counterintuitive, but it can be understood without the detailed math as [@Westbury] explains:
+The small probability is very counterintuitive, but it can be understood without the detailed math as [@Westbury2010] explains:
 
 "Although the test is highly accurate, it in fact gives a correct positive result just 2\% of the time. How can this be? The answer (and the importance of Bayes Rule in diagnostic situations) lies in the highly skewed base rates of the disease. Since so few people actually have the disease, the probability of a true positive test result is very small. It is swamped by the probability of a false positive result, which is fifty times larger than the probability of a true positive result.
 
@@ -715,33 +708,16 @@ Thus, the probability of 3 aces in 3 cards is 24/132600 = 1/5525
 
 In the section [Combinatorics] we calculated the probability of getting 3 aces when drawing 3 cards using the idea of symmetry and calculating the total and favorable number of events possible. Show that the same result can be obtained using the rules independent events applied to the sequence of draws. Hint: you have to remember that in order to get 3 aces you have to get one in the first draw AND one in the second draw AND one in the third draw.
 
-Solution.
+Solution
 
 You get three aces in three cards only if you get ace in the first, AND you get ace in the second after getting an ace first (or GIVEN THAT you got an ace first) AND you get an ace in the third place GIVEN that you got aces in the first two places. This is the same as getting an ace from a full deck AND getting an ace from another deck with a missing ace AND getting an ace from another deck missing two aces. The three events are independent, so the probabilites are multiplied: $(4/52) \cdot (3/51) \cdot (2/50) = 1/5525$
-
-### Exercise
-
-Objectives:
-
-Models are approximations of reality.
-Models are based on specific knowledge or assumptions.
-One model assumes that a parameter is constant, but in reality the parameters can change.
-More complicated models can accomodate changing parameters.
-
-Assume that the electric motor of a water pump has a constant probability of failing in any time interval, and that on average the failure rate is once every 10,000 hours and independent of preious or future failures after repairs. 
-What distribution can be used to model the number of failures in any given 1000 hour interval?
-
-What is the probability that the motor will fail exactly once in 1000 hours?
-
-What is the probability that it will fail at least once in 1000 hours?
-
-Do you think the assumptions about the pump are realistic? How would you modify the assumptions to work towards a better model?
-
-Given the potential deficiencies of the model based on the original assumptions, what errors do you expect to see as the pump get older and more time passes since the last repair?
 
 
 
 ## Homework
+
+<!-- Complete assigned questions from module Probability Homework in TopHat site. -->
+<!-- Select questions from Introductory Statistics I and II and Probability-->
 
 ### Outcomes and events
 

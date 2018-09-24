@@ -5,6 +5,7 @@ output:
     number_sections: yes
     theme: readable
     toc: yes
+    toc_depth: 3
 ---
 
 # Required Math Skills and Symbols {#chMath}
@@ -381,7 +382,7 @@ where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from
 \end{equation} 
 <br>
 
-Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016 (https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf). The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (Figure \@ref(fig:propLtMean)) is calculated in R as follows (note how the code is written in several lines and indented for better readability):
+Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016. a href="https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf" target="_blank">See report here.</a>. The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (Figure \@ref(fig:propLtMean)) is calculated in R as follows (note how the code is written in several lines and indented for better readability):
 
 ```{r}
 
@@ -904,7 +905,10 @@ The shape of polynomials can be modified by changing their parameter values. The
 ```
 <br>
 <br>
+
+
 ## Symbols and Terms{#mathSymbls}
+
 Term or symbol| Explanation
 ------------| ----------------------------------------------------------
 Observation | Result of measuring one or several variables in one unit of experimental material. For example, the milk production of one cow in a day.
