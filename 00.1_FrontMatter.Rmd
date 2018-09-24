@@ -1,6 +1,6 @@
 ---
 title: "PLS 120. Introduction to Applied Statistics"
-author: "Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie, Zullo"
+author: "Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie Zullo"
 date: "2018-02-16"
 site: bookdown::bookdown_site
 documentclass: book

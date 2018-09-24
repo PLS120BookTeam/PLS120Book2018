@@ -3,7 +3,7 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
-repo: https://github.com/emilioalaca/PLS120Book2018
+repo: https://github.com/PLS120BookTeam/PLS120Book2018
 output_dir: docs
 rmd_files: ["00.1_FrontMatter.Rmd",
             "00.2_Contents.Rmd",
