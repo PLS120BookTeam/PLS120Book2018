@@ -244,16 +244,16 @@ Ydata[2, 5] # Soil moisture for field 5 with corn
 Ydata["corn", "field5"] # You can also directly use the row and column names to extract values.
 ```
 
-In general, for a table of values with i rows and j columns, we write:
+In general, for a table of values with k rows and r columns, we write:
 
 <br>
 \begin{equation} 
-\mathbf{Y}_{i,j} = 
+\mathbf{Y}_{k,r} = 
  \begin{pmatrix}
-  Y_{1,1} & Y_{1,2} & \cdots & Y_{1,j} \\
-  Y_{2,1} & Y_{2,2} & \cdots & Y_{2,j} \\
+  Y_{1,1} & Y_{1,2} & \cdots & Y_{1,r} \\
+  Y_{2,1} & Y_{2,2} & \cdots & Y_{2,r} \\
   \vdots  & \vdots  & \ddots & \vdots  \\
-  Y_{i,1} & Y_{i,2} & \cdots & Y_{k,j} 
+  Y_{i,1} & Y_{i,2} & \cdots & Y_{k,r} 
  \end{pmatrix}
 (\#eq:math09)
  \end{equation} 
@@ -290,9 +290,9 @@ Using R, we can calculate sums and averages very easily. Note that the functions
 sum(Ydata) # Sums all values in table. Double summation.
 # (Works only when all columns are numeric.)
 
-nrow(Ydata) # Ydata has 3 rows: i = 3
+nrow(Ydata) # Ydata has 3 rows: k = 3
 
-ncol(Ydata) # and 7 columns: j = 7
+ncol(Ydata) # and 7 columns: r = 7
 
 sum(Ydata) / (nrow(Ydata) * ncol(Ydata)) # Overall average
 
@@ -339,7 +339,7 @@ mean(as.numeric(Ydata[2, ])) # Average for corn across fields
    
 sum(Ydata[2, ]) # This sums all values for row 2, which is corn
 
-length(Ydata[2, ]) # This calculates the number of values in the corn row
+length(Ydata[2, ]) # This calculates the value for r for corn
 
 sum(Ydata[2, ]) / length(Ydata[2, ]) # Average for corn
 ```
