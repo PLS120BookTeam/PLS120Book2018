@@ -6,6 +6,8 @@ output:
     theme: readable
     toc: yes
     toc_depth: 3
+editor_options: 
+  chunk_output_type: console
 ---
 # Statistics with R {#chStatsR}
 
@@ -388,7 +390,7 @@ There are also basic summary statistics that can be calculated with different fu
 
 Lets take the numbers 1-10 and extrapolate different summary statistics from the data.
 
-```{block}
+
 ### Summary Statistics Functions
 
 Table: (\#tab:SumStatFun) Summary Statistics for the length, summation, minimum, maximum, median, mean, range, variance, standard deviation and summary of a set of data
@@ -406,9 +408,9 @@ Table: (\#tab:SumStatFun) Summary Statistics for the length, summation, minimum,
 |     sd()     |    sd(1:10)   |       3.03        |
 |              |               |Min. 1,  1st Q.3.25|
 |  summary()   | summary(1:10) |Med. 5.5,  Mean 5.5|
-|              |               |3rd Q.7.75,  Max 10|        
+|              |               |3rd Q.7.75,  Max 10|
 
-```
+
 
 ```{r}
 
@@ -480,7 +482,7 @@ Once you have installed the necessary packages, you can render this Rmd file and
 
 To create a data frame we use the data.frame() function. In this example we create a data frame named "mydata." This data frame has 2 columns (Y1 and Y2) and 3 rows.
 
-```{r ps createdf, echo=TRUE}
+```{r PsCreateDf, echo=TRUE}
 
 mydata <- data.frame(Y1 = c("treatment 1", "treatment 2", "treatment 3"), Y2 = c(35, 23, 30)) # Create data frame with 2 columns and 3 rows
 
@@ -536,6 +538,7 @@ The **coefficient of variation** is the standard deviation in units of the avera
 
 
 #### Frequency Table and Histogram
+
 We can create a frequency table by dividing the range of lnwt into bins according to a general guideline: number of bins = 1 + 3.3 log(sample size). For this we use the cut() function. Then we create the frequency table using the xtabs() function and plot the histogram. All of this is done automatically by R using the hist() function. We will worry about making the graphs look pretty later on.
 
 ```{r ps freqhist, echo = TRUE, include = TRUE}
@@ -567,7 +570,7 @@ summary(clover$lnwt) # summary of a numeric variable or vector
 
 class(clover$lnwt) # a numeriv vector contains real numbers
 
-summary(clover$bin) # this is a charcater variable coded as a factor
+summary(clover$bin) # this is a character variable coded as a factor
 
 class(clover$bin)
 
@@ -592,11 +595,12 @@ The function str() is really important to see what objects are composed of and t
 
 
 #### Box-and-Whisker Plot and 5-Number Summary
+
 Data can be summarized using a boxplot and or the 5-number summary. These contain information about the average, median, first quartile, third quartile, range and outliers. The *range* argument determines how far the plot whiskers extend out from the box. If range is positive, the whiskers extend to the most extreme data point which is no more than *range* times the interquartile range (IQR) from the box. Data points that fall outside the whiskers are plotted and can be interpreted as "outliers" or values more extreme than expected. Outliers are so only on the basis of some preconceived expectation, usually a more or less normal distribution. A range value of zero causes the whiskers to extend to the data extremes, so no outliers are shown.
 
-```{r ps boxplot1, echo = TRUE, include = TRUE}
+```{r PsBoxplot1, echo = TRUE, include = TRUE}
 
-myrange.factor = 1.5 # save number in a named object for later use
+myrange.factor <- 1.5
 
 boxplot(clover$lnwt, range = myrange.factor)
 
@@ -667,6 +671,7 @@ text(x = 0.65, y = up.fence, label = "Upper Fence")
 ```
 
 The values for the five-number summary can be obtained directly with the fivenum() function:
+
 ```{r ps fiven, echo = TRUE, include = TRUE}
 
 pander(cbind(c("min", "lower hinge", "median", "upper hinge", "max"), fivenum(clover$lnwt)))
@@ -677,7 +682,7 @@ pander(cbind(c("min", "lower hinge", "median", "upper hinge", "max"), fivenum(cl
 
 The clover data has groups defined by the temperature treatments. Because the group numbers are just lables, we need to transform them into what is called "factor" class in R. This way, we can apply functions that obtain summaries and figures for each group. In the case of the clover, we expect that plants to grow faster at higher temperature; let's see what the data say.
 
-```{r ps grouped, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
+```{r PsGrouped, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
 
 clover$temp <- factor(clover$temp)
 
@@ -689,16 +694,14 @@ boxplot(lnwt ~ temp, data = clover, notch = TRUE) # boxplots by treatment
 
 help(by) # by produces a list with an element for each value of the grouping variable.
 
-pander(sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summary))
+sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summary)
+
+pander(sumry.by.temp)
 
 (fiven.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = fivenum))
 
 
 ```
-
-
-
-
 
 
 

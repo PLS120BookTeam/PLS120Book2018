@@ -716,8 +716,6 @@ We cannot reject the null hypothesis that themeans for varieties A and C are equ
 ## Exercises and Solutions
 
 
-## Exercises
-
 1. Explain what analysis of variance means practically?  How can one use variances to compare the means of different treatments?
 
 
