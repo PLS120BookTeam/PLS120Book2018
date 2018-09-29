@@ -9,17 +9,89 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Laboratory Exercises
+# Chapter 01: Intro to stats
 
-### Lab 01: R computation and Summary Statistics
+# Chapter 02: R
+## R computation and Summary Statistics
+## Introduction to R and RStudio 
+## Create a dataframe and table  
+## Summary Statistics  
+## Frequency Table and Histogram 
+## Box-and-Whisker Plot and 5-Number Summary 
+## Analyses by Groups 
 
 
-### Lab 02: Probability
-
-### Lab 03 : Distributions and Confidence Intervals
+# Chapter 03: Math symbols
 
 
-### Lab 03 Hypotesis testing and Comparing Means
+# Chapter 04: Data Exploration and summary statistics
+## Part 1. Data input [10 points] 
+## Part 2. Coefficient of variation [15 points] 
+## Part 3. Five number summary table of iris data [15 points] 
+## Part 4. Frequency table and histogram [15 points] 
+## Part 5. Box and whisker plot [15 points] 
+## Part 6. fivenum() function [10 points] 
+## Part 7. Making a vector [10 points] 
+## Part 8. Knitting [10 points] 
 
 
-### Lab 04: 
+# Chapter 05: Probability
+
+
+# Chapter 06: Distributions, sampling and estimators
+
+# Chapter 07: Distributions and Confidence Intervals
+## Part 1. Normal Distribution R functions [10 points]
+## Part 2. Normal PDF [10  points]
+## Part 3. Students's t Distribution [20 points]
+## Part 4. Effect of sample size on CI width [20 points]
+## Part 5. Interpretation of the CI [10 points]
+## Part 6. Test of null hypothesis [20 points]	
+## Part 7. Knit report [10 points]
+
+# Chapter 08: Two populations
+## Part 1. Equality of variances [25 points]
+## Part 2. Difference between means with independent samples [30 points]
+## Part 3. Difference between means with paired samples [30 points]
+## Part 4: Paired or independent? [15 points] 
+### A. Aphids on soybeans 
+### B. Compost for broccoli 
+### C. Habanero chili 
+### D. Fish oil and triglycerides 
+### E. Botanical composition after restoration 
+
+# Chapter 09: ANOVA in Completely Randomized Design
+## Part 1. Inspection and summary of data [25 points] 
+## Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points] 
+## Part 3. ANOVA using R functions.[20 points] 
+## Part 4. Confidence intervals for treatment means [25 points] 
+
+# Chapter 10: Experimental Design
+
+
+# Chapter 11: ANOVA in Block Designs
+## Part 1. Read in, inspect and summarize data [15 points] 
+## Part 2. Analyze data ignoring the blocking design [25 points] 
+## Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points] 
+## Part 4. ANOVA for RCBD using R functions.[25 points] 
+
+# Chapter 12: Treatment Structures and Comparisons 
+## Part 1. Factorial ANOVA using R functions [45 points] 
+### 1a. Random assignment of treatments to plots [15 points] 
+### 1.b Add columns with factor levels to the data [15 points] 
+### 1.c Perform a test of the Ho that all treatment means are equal [15 points] 
+## Part 2. Factorial ANOVA detailed calculations [30 points] 
+## Part 3. Multiple comparison of means using Fisher's PLSD [25 points] 
+
+# Chapter 13: Linear Regression
+## Part 1. Plot of data and estimation of parameters. [25 points] 
+## Part 2. Test of null hypothesis and R-square. [30 points] 
+## Part 3. Make a 95% confidence interval for the RGR or slope. [25 points] 
+## Part 4. Make a 95% confidence interval for mean plant size at a given age. [20 points] 
+
+# Chapter 14: Contingency tables and Goodness of fit
+## Part 1. Create contingency table 
+## Part 2. Expected Frequencies 
+## Part 3. Calculate $\\chi^{2}$ 
+## Part 4. Results 
+

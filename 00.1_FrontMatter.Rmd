@@ -1,7 +1,13 @@
 ---
+<<<<<<< HEAD
 title: "PLS 120. Introduction to Applied Statistics"
 author: "Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie Zullo"
 date: "2018-02-16"
+=======
+title: "APPLIED STATISTICS IN AGRICULTURAL AND LIFE SCIENCES WITH R"
+author: "Emilio A. Laca, Jennifer Brazeal, Cale Miller, Stephanie Zullo"
+date: "`r date()`"
+>>>>>>> EAL18Sep18
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -26,11 +32,24 @@ library(pander)
 library(kableExtra)
 ```
 
+# Cover {-#Cover}
+
+```{r, echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics("images/Cover.jpg")
+```
 
 # Front Matter {-#chFront}
+
+## This is an early draft published just so students can use it at UC Davis this quarter.
+
+## Look for updates weekly.
 
 This section should have a cover, copyright, UCD logo, etc.
 
 Probably will take 3-4 pages.
+
+The online version of this book is licensed under the
+
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
 
 

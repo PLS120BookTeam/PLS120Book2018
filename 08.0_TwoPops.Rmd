@@ -885,7 +885,7 @@ Test the hypothesis that lifespan does not differ between sexes.
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area.
 
-### Part 1 [25 points]
+#### Part 1. Equality of variances [25 points]
 
 Mass per mature seed (mg) of an invasive grass (medusahead, *Taeniatherum caput-medusae*) was measured when plants were grown in several randomly selected plots of perennial or annual grasses typical of the California Grasslands. The data are included in the R block below. 'A' stands for annual and 'P' for perennial.
 
@@ -895,7 +895,7 @@ Complete the calculations "by hand", using only basic R functions like var(). Th
 
 
 ```{r}
-seedMassA <-c(5.02, 4.34, 4.17, 7.07, 5.92, 5.33, 5.48, 4.59, 5.47, 5.88, 4.1, 5.14, 4.98, 4.47, 4.26, 5.02, 5.38, 5.3, 4.92, 4.96, 5.86, 6.65, 5.23, 4.51, 5.41, 6.23, 5.96, 5.12, 5.43, 4.98, 5.15, 5.81, 6.14, 5.87, 6.16, 5.97, 6.39, 6.25, 5.3, 5.43, 4.81, 4.76, 6.11, 4.18, 5.59, 5.26, 5.23, 5.9, 6.27, 5.31, 5.17, 4.93, 5.24, 4.96)
+seedMassA <- c(5.02, 4.34, 4.17, 7.07, 5.92, 5.33, 5.48, 4.59, 5.47, 5.88, 4.1, 5.14, 4.98, 4.47, 4.26, 5.02, 5.38, 5.3, 4.92, 4.96, 5.86, 6.65, 5.23, 4.51, 5.41, 6.23, 5.96, 5.12, 5.43, 4.98, 5.15, 5.81, 6.14, 5.87, 6.16, 5.97, 6.39, 6.25, 5.3, 5.43, 4.81, 4.76, 6.11, 4.18, 5.59, 5.26, 5.23, 5.9, 6.27, 5.31, 5.17, 4.93, 5.24, 4.96)
 
 seedMassP <- c(4.9, 4.17, 4.47, 6.3, 4.52, 4.81, 4.4, 2.98, 4.75, 5.17, 4.64, 4.7, 5.13, 5.11, 5.33, 4.3, 4.24, 4.49, 4.46, 5.06, 4.62, 5.58, 4.39, 4.77, 5.18, 4.38, 4.76, 4.38, 4.95, 5.71, 3.03, 4.2, 4.78, 5.04, 4.76, 4.72, 4.87, 4.58, 4.69, 4.27, 5.17, 4.93, 3.51, 5.11, 5.38, 5.1, 3.2, 4.8, 4.17, 5.01, 3.95, 5.62, 5.44, 3.7, 4.08, 4.36, 4.68, 4.24)
 
@@ -930,7 +930,7 @@ ANSWER. Write the interpretation and conclusion from the test here:
 
 
 
-### Part 2 [30 points]
+#### Part 2. Difference between means with independent samples [30 points]
 
 Calculate the 95% confidence interval for the difference between the mean mass per seed of plants grown in annual and perennial grass plots. *Ignore the possibility of using the z-approximation due to the large sample size and use the t distribution.*
 
@@ -964,7 +964,7 @@ ANSWER. State the extremes of the confidence interval and interpret the result o
 
 
 
-### Part 3 [30 points]
+#### Part 3. Difference between means with paired samples [30 points]
 
 Twelve plants were used in an experiment to study the effectiveness of using praying mantises to control aphid populations. Aphid density was measured before and after the addition of a mantis to the plant. Perform a test to determine if the mantis reduces aphid density. (Note that these are fictitious data and that the experimental design is simplified for teaching purposes. A real experiment should include a series of control plants to make sure that the potential change in aphid density is not due to other uncontrolled causes besides the addition of the mantis).
 
@@ -1002,39 +1002,49 @@ ANSWER. Interpret the result of the test of hypothesis here:
 
 
 
-### Part 4: Paired or independent? [15 points]
+#### Part 4: Paired or independent? [15 points]
 
 For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers!  In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
 
-#### A. A researcher is interested in whether the presence of natural enemies significantly reduces herbivory from the invasive pest soybean aphid (Aphis glycines). She randomly chooses 36 individual soybean plants in 4 fields to measure. As a proxy for herbivory, she counts the number of soybean aphids on each plant. She then encloses half of the plants with a mesh exclusion cage, through which aphids can pass but large predatory insects cannot. After two weeks, she counts aphids on all 36 plants again, and determines the net change in aphid abundance under each treatment.
+##### A. Aphids on soybeans
+
+A researcher is interested in whether the presence of natural enemies significantly reduces herbivory from the invasive pest soybean aphid (*Aphis glycines*). She randomly chooses 36 individual soybean plants in 4 fields to measure. As a proxy for herbivory, she counts the number of soybean aphids on each plant. She then encloses half of the plants with a mesh exclusion cage, through which aphids can pass but large predatory insects cannot. After two weeks, she counts aphids on all 36 plants again, and determines the net change in aphid abundance under each treatment.
 
 Answer here:
 
 
 
-#### B. A master gardener wants to know whether his decision to use organic compost instead of synthetic fertilizer is going to change the yield of his broccoli. To test this, he applies a consistent amount of fertilizer or compost to the soil in each of six plots in a random design (3 receive compost, 3 receive fertilizer). He then plants the same variety of broccoli in all plots and measures the average yield (grams of broccoli head per plant) at harvest for each treatment.
+##### B. Compost for broccoli
 
-Answer here:
-
-
-
-
-#### C. You have developed a new cultivar of habanero chili (Capsicum chinense) that you have named "Screaming Siren". You are curious if the chilies produced at your breeding facility differ in spice from a colleague's farm in New Mexico. Both you and your colleague gather a sample of 10 random chilies and send the chilies to a lab to have their capsaicin, the compound in chilies that cause their piquancy, concentration measured. 
-
-Answer here:
-
-
-
-
-#### D. A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the patients had their blood triglyceride level measured.
-
+A master gardener wants to know whether his decision to use organic compost instead of synthetic fertilizer is going to change the yield of his broccoli. To test this, he applies a consistent amount of fertilizer or compost to the soil in each of six plots in a random design (3 receive compost, 3 receive fertilizer). He then plants the same variety of broccoli in all plots and measures the average yield (grams of broccoli head per plant) at harvest for each treatment.
 
 Answer here:
 
 
 
 
-#### E. A researcher is interested in determining the difference in plant species composition after seeding with native perennial seeds. Before seeding they sample quadrats within the field at random to determine the initial plant species composition. At the end of the second growing season they sample quadrats within the field at random to determine the new plant species composition.
+##### C. Habanero chili
+
+You have developed a new cultivar of habanero chili (Capsicum chinense) that you have named "Screaming Siren". You are curious if the chilies produced at your breeding facility differ in spice from a colleague's farm in New Mexico. Both you and your colleague gather a sample of 10 random chilies and send the chilies to a lab to have their capsaicin, the compound in chilies that cause their piquancy, concentration measured. 
+
+Answer here:
+
+
+
+
+##### D. Fish oil and triglycerides
+
+A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the patients had their blood triglyceride level measured.
+
+
+Answer here:
+
+
+
+
+##### E. Botanical composition after restoration
+
+A researcher is interested in determining the difference in plant species composition after seeding with native perennial seeds. Before seeding they sample quadrats within the field at random to determine the initial plant species composition. At the end of the second growing season they sample quadrats within the field at random to determine the new plant species composition.
 
 Answer here:
 
@@ -1049,7 +1059,7 @@ For each part and question below, type your code in the grey area below, between
 
 
 
-### Part 1 [25 points]
+#### Part 1 [25 points]
 
 Milk production (lb), milk composition and body weights of UCD lactating dairy cows was collected in August of 2000.  The cows are classified in two groups, Herd1 and Herd2, based on their genotype.
 
@@ -1105,7 +1115,7 @@ Write the interpretation and conclusion from the test here:
 
 
 
-### Part 2 [30 points]
+#### Part 2 [30 points]
 
 Calculate the 95% confidence interval for the difference between the milk production of dairy cows between the two herds. *Ignore the possibility of using the z-approximation due to the large sample size and use the t distribution.*
 
@@ -1119,7 +1129,7 @@ b. Perform a t-test of the null hypothesis that milk production does not differ 
 (var12 <- (df1 * var1 + df2 * var2) / (df1 + df2))
 
 #Calculate the difference in variances between Herd1 and Herd2
-varDbar <- var12 / r1 + var12/ r2
+varDbar <- var12 / r1 + var12 / r2
 
 #calculate the t-value for our treatments (Herd1 and Herd2)
 (tcalc <- (mean(milkherd2) - mean(milkherd1)) / sqrt(varDbar))
@@ -1144,7 +1154,7 @@ ANSWER. State the extremes of the confidence interval and interpret the result o
 
 
 
-### Part 3 [30 points]
+#### Part 3 [30 points]
 
 Milk production was measured in the morning (AM) and again in the evening (PM).  Perform a test to determine if there is a difference in milk production between the AM and PM. (Note that this is a paired t-test since the same sample of cows is being milk at two separate times).
 
@@ -1184,39 +1194,49 @@ ANSWER. Interpret the result of the test of hypothesis here:
 
 
 
-### Part 4: Paired or independent? [15 points]
+#### Part 4: Paired or independent? [15 points]
 
 For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers!  In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
 
-#### A. A researcher is interested in whether a high protein diet for dairy cows will significantly increase the protein content in milk.  36 dairy cows are randomly chosen in 4 fields to measure and the protein content of their milk is measured.  Half of the cows are chosen to receive a high protein diet and half recieve the standard diet.  After two weeks, protein content of milk production is measured again, and the change in protein content is calculated for each treatment.
+##### A. High protein diet
+
+A researcher is interested in whether a high protein diet for dairy cows will significantly increase the protein content in milk.  36 dairy cows are randomly chosen in 4 fields to measure and the protein content of their milk is measured.  Half of the cows are chosen to receive a high protein diet and half recieve the standard diet.  After two weeks, protein content of milk production is measured again, and the change in protein content is calculated for each treatment.
 
 Answer here:
 
 
 
-#### B. A researcher wants to know whether using organic diary feed will change the milk production of his cows.  To test this, organic feed and non-organic feed is given to six cows of the same breed in a random design (3 receive organic feed, 3 receive non-organic feed) and dairy production is measured for each treatment.  
+##### B. Organic dairy feed
 
+A researcher wants to know whether using organic diary feed will change the milk production of his cows.  To test this, organic feed and non-organic feed is given to six cows of the same breed in a random design (3 receive organic feed, 3 receive non-organic feed) and dairy production is measured for each treatment.  
 
-Answer here:
-
-
-
-
-#### C. You have developed a new breed of dairy cows that you have named "Cowabunga".  You are curious if the milk produced from these cows at your facility in Davis differ in lactose content from a colleagues farm in Fresno.  Both you and your colleague gather a sample of 10 random cows and send the milk to a lab to have their lactose content measured.  
-
-Answer here:
-
-
-
-
-#### D. A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3) on blood triglyceride level in diary cows.  You wish to know if the ingredients differ in effect on blood triglycerides.  Forty cows had their blood triglyceride levels measured before the experiment began.  The forty cows were divided into two treatment groups of twenty cows.  One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the cows had their blood triglyceride level measured.  
 
 Answer here:
 
 
 
 
-#### E. A research is interested in determining the difference in bacteria species composition in the rumen of a cow after changing the grazing location from one year to the next.  At the first grazing location they sample gut bacteria within a herd at random to determine the initial rumen bacteria composition.  At the end of the year at the second grazing location they sample rumen bacteria within the herd at random to determine the new bacteria species composition.  
+##### C. Cowabunga
+
+You have developed a new breed of dairy cows that you have named "Cowabunga".  You are curious if the milk produced from these cows at your facility in Davis differ in lactose content from a colleague's farm in Fresno.  Both you and your colleague gather a sample of 10 random cows and send the milk to a lab to have their lactose content measured.  
+
+Answer here:
+
+
+
+
+##### D. Fish oil and blood triglycerides
+
+A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3) on blood triglyceride level in diary cows.  You wish to know if the ingredients differ in effect on blood triglycerides.  Forty cows had their blood triglyceride levels measured before the experiment began.  The forty cows were divided into two treatment groups of twenty cows.  One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the cows had their blood triglyceride level measured.  
+
+Answer here:
+
+
+
+
+##### E. Rumen flora
+
+A research is interested in determining the difference in bacteria species composition in the rumen of a cow after changing the grazing location from one year to the next.  At the first grazing location they sample gut bacteria within a herd at random to determine the initial rumen bacteria composition.  At the end of the year at the second grazing location they sample rumen bacteria within the herd at random to determine the new bacteria species composition.  
 
 Answer here:
 

@@ -580,7 +580,7 @@ FOR THIS LAB WE IGNORE THE TEMPERATURE GROUPS.
 RGR means relative growth rate and is estimated by the slope of the regression.
 
 
-### Part 1. Plot of data and estimation of parameters. [25 points]
+#### Part 1. Plot of data and estimation of parameters. [25 points]
 
 1A) Make a scatterplot of plant size vs. age, ignoring the temperature groups. 
 1B) Obtain estimates for the slope and intercept and interpret the results in terms of plant growth. 
@@ -606,7 +606,7 @@ summary(slr1)
 1B) What are the estimates for the slope and intercept? Interpret the results in terms of plant growth. 
 
 
-### Part 2. Test of null hypothesis and R-square. [30 points]
+#### Part 2. Test of null hypothesis and R-square. [30 points]
 
 
 Test the null hypothesis that RGR = 0 by performing an ANOVA for regression. Do the calculations "by hand" and then repeat using R functions.
@@ -638,7 +638,7 @@ n <- length(clover$lnwt) # Code needed here. Complete the code with the column t
 
 (dfe <- n - length(coef(slr1))) # df of the residuals
 
-(dfTotal <- n-1) # Complete the code to calculate the total df
+(dfTotal <- n - 1) # Complete the code to calculate the total df
 
 (dfReg <- 1) # Complete the code to calculate the df of the regression
 
@@ -646,7 +646,6 @@ n <- length(clover$lnwt) # Code needed here. Complete the code with the column t
 (MSReg <- SSReg / dfReg)
 
 (MSE <- SSErrors / dfe) # Complete the code to calculate the MSE 
-
 
 (Fcalc <- MSReg / MSE) # Calculated F statistic from the data 
 
@@ -667,7 +666,7 @@ anova(slr1) # check your previous “by hand” calculation against the anova ta
 
 
 
-### Part 3. Make a 95% confidence interval for the RGR or slope. [25 points]
+#### Part 3. Make a 95% confidence interval for the RGR or slope. [25 points]
 
 
 First, do the calculations by hand, using the formulas from the textbook 179-180. Then use R functions.
@@ -707,7 +706,7 @@ confint(slr1)[2,] # easier way to get the CI using the function from R
 
 
 
-### Part 4. Make a 95% confidence interval for mean plant size at a given age. [20 points]
+#### Part 4. Make a 95% confidence interval for mean plant size at a given age. [20 points]
 
 
 Assume that you are interested in using the fitted regression model (the line) to estimate the mean mass of plants when they are 33 days old. Use the regression equation to make the estimate and then calculate the standard error of the estimate to make a confidence interval for it. Do detailed calculations first and then use R functions.
@@ -779,7 +778,7 @@ Data for the exercise consists of body weight (Bwt) in kilograms and heart weigh
 between heart weight and body weight in cats.
 
 
-### Part 1. Plot of data and estimation of parameters. [25 points]
+#### Part 1. Plot of data and estimation of parameters. [25 points]
 
 1A) Make a scatterplot of body weight vs. heart weight. 
 1B) Obtain estimates for the slope and intercept and interpret the results in terms of heart weight. 
@@ -802,7 +801,7 @@ summary(slr1)
 
 
 
-### Part 2. Test of null hypothesis and R-square. [30 points]
+#### Part 2. Test of null hypothesis and R-square. [30 points]
 
 Test the null hypothesis that there is no relationship between body weight and heart weight (i.e., $\beta_{1}$ = 0) by performing an ANOVA for regression. Do the calculations "by hand" and then repeat using R functions.
 
@@ -866,7 +865,7 @@ anova(slr1) # check your previous “by hand” calculation against the anova ta
 
 
 
-### Part 3. Make a 95% confidence interval for the estimation of the slope. [25 points]
+#### Part 3. Make a 95% confidence interval for the estimation of the slope. [25 points]
 
 
 First, do the calculations by hand, using the formulas from the textbook 179-180. Then use R functions.
@@ -906,7 +905,7 @@ confint(slr1)[2,] # easier way to get the CI using the function from R
 
 
 
-### Part 4. Make a 95% confidence interval for mean heart weight at a given body weight. [20 points]
+#### Part 4. Make a 95% confidence interval for mean heart weight at a given body weight. [20 points]
 
 
 Assume that you are interested in using the fitted regression model (the line) to estimate the mean heart weight of cats when they are 2.9 kg. Use the regression equation to make the estimate and then calculate the standard error of the estimate to make a confidence interval for it. Do detailed calculations first and then use R functions.

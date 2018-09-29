@@ -215,9 +215,11 @@ The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this w
  \end{pmatrix}
  (\#eq:math08)
 \end{equation}
-  \
-  \
+  
+
 <br>
+In R we can define a matrix or a data frame with rows and columns. We use a data frame because it is the most common form for data in R and in science in general. Instead of Y, in the code below we call the data "Ydata" to avoid conflicts with the names of the vectors used above. First we make vectors of data for each crop and then we join them into a data frame with the `rbind` function, which stands for "row bind."
+
 
 In R we can specify that 2 dimensional data (rows and columns) is either a matrix or a dataframe. In a matrix, all values in the array must be the same type of data. In a dataframe, columns can differ in the type of value they contain. For example, column 1 can contain integer numbers, while column 2 can contain character values (e.g., "wheat", "corn", etc), and column 3 can contain factor levels. We often use dataframes even when the data are all the same type of values, because dataframes are more versatile, and are the most common form of data in R and science in general. Instead of Y, in the code below we call the data "Ydata" to avoid conflicts with the names of the vectors used above. First, we make vectors of data for each crop, and then we join them into a data frame with the `rbind` function, which stands for "row bind."
 
@@ -662,6 +664,7 @@ knitr::kable(cbind(ingredient,
 
 Now, the table represents each recipe with a set of numbers, and all recipes use the same list of potential ingredients. Note that when we want the chicken, the row for chicken shows a 1 and the rows for tofu and beef **must** show 0's. The same happens with jalapeños and poblano peppers. The amounts for those ingredients are the grouping or indicator variables that indicate which recipe type or group we want.
 
+
 We can easily show that the statistical models are like recipes ^[In reality, linear statistical models are *almost* like recipes because in statistical models we can have negative values for the amounts of a parameter put into the combination, but in recipes we cannot have negative amounts of ingredients.]  by changing the symbols we use. We can simplify things by noting that all recipes we are considering take eggs, salt, pepper, onions, curry paste, and cabbage in the same amounts across recipes. We will refer to all of those ingredients together in the specified quantities as "common" ingredients, and to conform with the usual mathematical notation, we transpose the recipe table and put the dishes in rows and ingredients in columns with shortened names.
 
 <br>
@@ -806,7 +809,7 @@ e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \
 
 Keep in mind that the effect of state will be a negative number for those states that have mean milk production that is lower than the average of all states. We can use the values reported by USDA (2017) to determine the state effects for all states.
 
-The dataframe `milk` has the data, including the state name, average number of milking cows in 2016 (in thousands), total milk production per year (in millions of kg) and average production per cow (in kg per day). First, we calculate the overall average to estimate $\mu$. Then, the effect of each state is obtained by subtracting the overal mean from the average for each state. (Residuals cannot be calculated because the data reported is at the state level, not for individual cows.)
+The data frame `milk` has the data, including the state name, average number of milking cows in 2016 (in thousands), total milk production per year (in millions of kg) and average production per cow (in kg per day). First, we calculate the overall average to estimate $\mu$. Then, the effect of each state is obtained by subtracting the overall mean from the average for each state. (Residuals cannot be calculated because the data reported is at the state level, not for individual cows.)
 
 <br>
 ```{r, message=FALSE}
@@ -901,7 +904,7 @@ In many cases, the optimal value for a parameter can be found analytically, whic
 
 ## Linear Models
 
-Linear models are models that can be represented by a linear combination of parameters, it is like a recipe where the ingredients are the parameters. For example, to make a cup of sweet tea with milk, you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.
+Linear models are models that can be represented by a linear combination of parameters. THey are like recipes where the ingredients are the parameters. For example, to make a cup of sweet tea with milk, you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.
 
 <br>
 \begin{equation}
