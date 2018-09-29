@@ -6,12 +6,6 @@ output:
     theme: readable
     toc: yes
     toc_depth: 3
-<<<<<<< HEAD
----
-
-=======
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, include=FALSE}
@@ -20,9 +14,6 @@ library(knitr)
 ```
 
 
-
-
->>>>>>> EAL18Sep18
 # Introduction to Applied Statistics {#chIntro}
 
 <!-- See Intro2StatsLectureNotes in Notability -->
@@ -59,7 +50,6 @@ For us, the world is an uncertain place. We do not know exactly what will happen
 
 For example, the "situation" is to determine if milk productivity in terms of kg/ha of farm is increasing or decreasing in California. A sample of farms is selected and milk production and farm area are measured over two years. Based on the measurements, an estimate of the difference between years is calculated, as well as an interval that represents the uncertainty of the estimate.
 
-
 Traditionally, the science of statistics deals with the collection and summarization of data, design of experiments and surveys, measurement of variation of observations, estimation of population parameters as well as the accuracy and precision of these estimates, test of hypotheses, and assessment of relationship among variables. In my opinion, the science of statistics revolves around the creation and use of methods to make statistical statements about a clearly defined part of the world. Statistical statements have two components: a description or guess about something, and a quantitative description of the certainty of the first component. For example:
 
 <br>
@@ -77,8 +67,7 @@ Statistical methods allow us (i.e., provide a formal, logical basis) to make sta
 It is common to express statistical statements informally and incompletely. Although that is not a problem when one fully knows and understands what has been omitted, it can be a problem when the audience does not have the details. At best, incomplete statements are misinterpreted, and at worst they are unethical and deceitful. Examples of the statistical statements we will be making in this course are as follows:
 
 
-- Based on a random sample of 10 coin tosses I was not able to reject the hypothesis that the probability of getting a head with this specific quarter is 0.5 at a significance level of 5\%.
-<<<<<<< HEAD
+- "Based on a random sample of 10 coin tosses I was not able to reject the hypothesis that the probability of getting a head with this specific quarter is 0.5 at a significance level of 5\%".
 
 - The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
 
@@ -90,24 +79,7 @@ The latter statement shows the use of units for quantitative variables. The popu
 - Statistics and statistical tests cannot and do not attempt to categorically prove or disprove statements and hypotheses about the real world. They simply provide methods to determine how consistent, in a proabilitstic way, statements and hypotheses are with data.
 ```
 <br>
-=======
 
-- The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
-
-
-The latter statement shows the use of units for quantitative variables. The population it refers to is the total area planted to rice in the US in 2013. The estimate is the average yield and the number is correctly expressed with units as a complete quantity. The degree of certainty is also expressed quantitatively as the width of a confidence interval. Notice how the population for which the statement applies is clearly defined by saying where and when.
-
-<br>
-```{block StatsAreNotTheTruth, type='stattip'}
-- Statistics and statistical tests cannot and do not attempt to categorically prove or disprove statements and hypotheses about the real world. They simply provide methods to determine how consistent, in a probabilistic way, statements and hypotheses are with data.
-```
-<br>
-
-
-Keep in mind that the word "statistics" can have several meanings, even within the field of statistics. We can describe **Statistics** as the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
-
-
->>>>>>> EAL18Sep18
 
 ## Learning Statistics {#LearnStats}
 
@@ -155,33 +127,24 @@ The PBS NOVA program *Prediction by the numbers* will be shown during a lecture.
 ### Probability, estimation, inference {#estimationInference}
 
 Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved. For more detail on theories about how and why the human mind evolved, see the following webpage on <a href="https://www.iep.utm.edu/evol-psy/" target="_blank">Evolutionary Psychology</a>.
-<<<<<<< HEAD
-=======
 
 We routinely assign chances or probabilities to events, and we subconsciously estimate unknown probabilities. We also estimate other unknown quantities and how uncertain we are about those. For example, a contractor will give you an estimate how long it will take to complete a project and how much it will cost. Naturally, you would ask how much those values could vary. You predict how much money you will have to pay for the job in the future and compare it with the estimate from the contractor.
 
 In statistics these terms have specific meaning, and we will be revisiting these definitions frequently. Informally,
->>>>>>> EAL18Sep18
 
 - A probability is an idea of how likely an event is.
 
-<<<<<<< HEAD
+
 Keep in mind that the word "statistics" can have several meanings, even within the field of statistics. We can describe **Statistics** as the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
-=======
+
 - An estimate is a statement about the value of a fixed but unknown quantity.
->>>>>>> EAL18Sep18
 
 - A prediction is a statement about the result of a random event that is not observed.
 
 
-
 In order to use statistics we have to assign probabilities to events of interest, like the failure of an engine, or the yield of a field being sufficient to cover the costs of cropping. This step requires that we create model distributions for different types of random experiments, such as running an engine for 5,000 hours or planting a field.
 
-<<<<<<< HEAD
 Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertaint are illustrated with an example. imagine that you draw a marble radomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the proability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But you would probably get different results in other samples. THe quesiton is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
-=======
-Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertainty are illustrated with an example. imagine that you draw a marble randomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the probability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But you would probably get different results in other samples. The question is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
->>>>>>> EAL18Sep18
 
 Finally, we will frequently be interested in comparing parameters from potentially different distributions. We could have a second urn with marbles and be interested in determining if the probability of getting a white marble from the first is greater or less than from the second. Or we could be interested in determining if the mean productivity of a new crop variety is greater than the old one. These comparisons are reduced to calculating the value and distribution of linear combinations of estimated parameters. Usually, the distribution is normal, so the problem reduces to estimating the variance of a linear combination of estimated parameters. Analysis of variance is key to achieve this.
 
@@ -211,11 +174,6 @@ A main problem in science is the misuse and misunderstanding of the so-called p-
 
 <a href="https://https://youtu.be/cOgscsjUvvE" target="_blank">What is the p-value?</a>
 
-<<<<<<< HEAD
-<a href="https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
-=======
->>>>>>> EAL18Sep18
-
 <a href="https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
 
 In dealing with problems or questions we will use the following approach:
@@ -229,13 +187,7 @@ In dealing with problems or questions we will use the following approach:
 
 Math and calculations will be necessary, particularly in step 4. Frequently, in order to get to the solution the question has to be cast in the framework of an already existing mathematical procedure that is not immediately intuitive. A specific case is the use of analysis of variance to determine if means are different. The question is: "are means different?" but the method compares variances instead of means! The approach works because there is an underlying theory that states that if means are different, then variances will also differ by an amount related to the difference among means. We do not need to know the exact details of the calculations in order to understand the process to an acceptable degree.
 
-<<<<<<< HEAD
-
-
-### Detection of the Higgs boson
-=======
 In many real applications of advanced statistics, step 4 involves massive computations with complicated software that can only be fully understood from a computational math science approach. We do not need to study computational math. We just need to understand the concepts behind the computation. It is sufficient to know that the computation yields a good approximation to the optimal estimate for the unknown quantity, where "optimal" means that the sum of squared deviations are minimized, for example. Some computations are rather simple and we may look into those to get a better concept of what computation does.
->>>>>>> EAL18Sep18
 
 <!-- ## Real-world problems -->
 

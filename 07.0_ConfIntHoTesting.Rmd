@@ -43,7 +43,6 @@ options(scipen = 999)
 With this chapter we enter the topic of **Inference**. Statistical inference consists of making statements about population characteristics based on information obtained from samples. We aim at presenting a general idea that in order to answer interesting practical questions we need to estimate parameters or other unknown and unknowable quantities, and we need to determine how confident we are about the estimated values. Frequently, the topics of estimation and inference are separated in textbooks, because estimation methods can be treated independently of the statitical distributions of the estimators and associated probabilities. Many important properties of estimators, like expected value and variance, can be worked out without assuming any particular distribution for the random components of models. One estimation method we mentioned before is called *least-squares*, another one is *maximum likelihood*.
 
 The main point of this chapter is to present methods to test hypotheses where unknown parameters, typically the mean of normal distributions are estimated and hypothesized to have specific known values. The mean is unkown so we estimate it with the average of a sample. Using the mathematical "trick" that is the most important equation in this course, we also use a single sample to estimate the sampling variance of the sample average. Armed with a known distribution shape (Normal), an estimate of its mean, and an estimate of the variance of sample average we make inferences about the population. We test hypotheses of specific values of the mean by calculating how likely it would be to observed the data in hand if indeed the hypothesis were true. In later chapters we expand the test to two and then several means.
-<<<<<<< HEAD
 
 ```{block StatementCertainty, type='stattip'}
 - A main goal of statistics is to estimate unknown parameters or quantities and state the estimates anf our degree of certainty about the estimate. Confidence intervals are the primary tool for this and have a simple structure that is the same across apparently diverse statistical tests:
@@ -62,26 +61,6 @@ Perfoming a hypothesis test consists of posing a statement about a population pa
 We insist in the understanding of the logic behind hypothesis testing in an overt attempt to correct the widespread misunderstanding and misuse of hypothesis testing in science. One of the most important points of this chapter is to understand the elogic behind hypothesis testing and to be able to spot its misuse and misinterpretation. Correctly used and interpreted, hypothesis testing can be a useful tool in science and business. First, let's show the mechanics of hypothesis testing. Then we will point out pitfalls and things to watch out for.
 
 
-=======
-
-```{block StatementCertainty, type='stattip'}
-- A main goal of statistics is to estimate unknown parameters or quantities and state the estimates anf our degree of certainty about the estimate. Confidence intervals are the primary tool for this and have a simple structure that is the same across apparently diverse statistical tests:
-
-$$CI = \text{estimate} \ \pm \ \text{margin of error}$$
-
-```
-
-
-## Testing a hypothesis
-
-A **statistical hypothesis** is an assertion made about some parameter or aspect of a population. By testing a statistical hypothesis we are making a statistical inference, which consists of making a statement about population characteristics based on information obtained from samples. Keep in mind that statistics, like science in general, is not meant to lead to "the truth." The scientific method and its direct implementation in statistical inference only allow us to make good guesses about which model of reality is better. Other things being equal, the models that agree more with the data are preferred.
-
-Perfoming a hypothesis test consists of posing a statement about a population parameters or a "model" of some aspect or phenomenon. Then, we gather data and calculate the probability of observing such data under the assumption that the statement or model is true. If the probability is too low, we guess that the statement is not correct, we reject it. Obviously, the whole process is a random process, and we never know for sure if our conclusion is correct or not. We just know that the probability of incorrectly rejecting the statement is low. This is the logic of frequentists hypothesis testing. We will come back to this in more detail.
-
-We insist in the understanding of the logic behind hypothesis testing in an overt attempt to correct the widespread misunderstanding and misuse of hypothesis testing in science. One of the most important points of this chapter is to understand the elogic behind hypothesis testing and to be able to spot its misuse and misinterpretation. Correctly used and interpreted, hypothesis testing can be a useful tool in science and business. First, let's show the mechanics of hypothesis testing. Then we will point out pitfalls and things to watch out for.
-
-
->>>>>>> EAL18Sep18
 The steps involved for conducting a hypothesis test are:
 
 1) State null and alternative hypotheses
@@ -91,11 +70,7 @@ The steps involved for conducting a hypothesis test are:
 5) Interpret the decision and state conclusion
 
 
-<<<<<<< HEAD
-**State null and alternative hypotheses**
-=======
 ### State null and alternative hypotheses
->>>>>>> EAL18Sep18
 
 A hypothesis is stated about a population, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay. 
 
@@ -163,19 +138,11 @@ $$t = \frac{\bar{x} - \mu}{s / \sqrt{n}}.$$
  
 A calculated z-statistic and t-statistic need to be compared against a z-critcal or t-crtical value to determie whether or not the null hypothesis will be rejected or fail to be rejected. Stipulations for calculating a z-statistic are that the populaiton mean and standard deviation need to be known. If these two criteria are not met or the smaple size is small, and the data distribution is approximately normal, a t-statsitic must be calcualted.
 
-<<<<<<< HEAD
-The z-critical value is a reference value and dependent on the level of significance (see appendix....), whereas the t-critical value varies with sample size (see appendix... for table). All the z- and t-values are the cumulative probabilites under a normal distribution where the critical values set the threshold of the extreme probabilites of which the result of the hypothesis test can be determined. That is, based on the calculated test-statistics, what is the probability of the calcualted values being smaller or greater than the critical values. 
-
-<!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
-
-Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true popualation parameters. A **confidence interval** is a range values that will encompass the true population parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
-=======
 The z-critical value is a reference value and dependent on the level of significance (see appendix....), whereas the t-critical value varies with sample size (see appendix... for table). All the z- and t-values are the cumulative probabilites under a normal distribution where the critical values set the threshold of the extreme probabilites of which the result of the hypothesis test can be determined. That is, based on the calculated test-statistics, what is the probability of the calculated values being smaller or greater than the critical values. 
 
 <!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
 Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true population parameters. A **confidence interval** is a range values that will encompass the true population parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
->>>>>>> EAL18Sep18
 
 <br>
 
@@ -189,17 +156,17 @@ knitr::include_graphics("images/CI.pdf")
 
 For example, if you have known population parameters such as mean and standard deviation (i.e. $\sqrt \sigma^2$) the confidence intervals are calculated:
 
-$$Lower bound = \bar{x} - z* \frac{\sigma}{\sqrt n}$$
-$$Upper bound = \bar{x} + z* \frac{\sigma}{\sqrt n}$$
+$$Lower Bound = \bar{X} - z* \frac{\sigma}{\sqrt n}$$
+$$Upper Bound = \bar{X} + z* \frac{\sigma}{\sqrt n}$$
 where *z** is the z-critical value, and at 95% confidence, equal to 1.96. 
 
 Say you want to estimate the mean length of the oldest leaf on a seagrass shoot collected from a nearby estuary. You collect 100 samples of seagrass shoots were with a mean length of 30 cm and a standard deviation of 3.2 cm. The confidence interval for these samples can then be calculated: 
 
-$$\pm 1.96*(3.2/10) = 0.63 cm$$
+$$\pm 1.96*(3.2\ cm\ /10) = 0.63 \ cm$$
 
-With a lower bound of 29.37 cm and an upper bound of 30.63 cm. The confidence interval when then be stated as *out of 100 samples we are 95% confident that the mean value from 95 of the 100 samples will fall between the lengths of 29.37 and 30.63 cm.
+With a lower bound of 29.37 cm and an upper bound of 30.63 cm. We can state that there is a 95% chance that the confidence interval will contain the true mean of the population. Because we are using a frequentist approach, the rationale is that the average of samples of size 100 falls within 0.63 cm of the mean 95% of the time. If we extend "arms" that are 0.63 cm long from each average we calculate, the segment encompassed should contain the mean 95% of the time, in the long, long run. Just like when drawing marbles from a urn with white an dblue marbles there is a certain probability that it is blue, when we "draw" confidence intervals, there is a certain probability that they contain the mean. We make the confidence intervals such that the probability is 95% or other desired degree of certainty.
 
-Given the equation above either decreasing the standard deviation or incresing the sample size would lower the confidence bounds and give a narrower range in which the true population mean lies. 
+Given the equation above either decreasing the standard deviation or incresing the sample size would reduce the margin of error (the lenght of the "arm" on each side of the average) and give a narrower range within which the true population mean lies. For any given standard deviation and sample size, the margin of error depends on the degree of certainty. The greater the certainty desired, the larger the z and the wider the CI. Obviously, the CI looks for a balance between width and certainty. One can be immediatley certain that the true mean is something between 0 and $+\infty$, but that would not be very helpful. By observing the sample we can eliminate values that are extremely unlikely and concentrate out guess of the mean value in a narrow section of the positive real numbers.
 
 If you have a small sample size  (e.g., <30), you would calculate a confidence interval based on the *t*-critical value which varies based on sample size and level of confidence (see z-table in appendix... ). 
 
@@ -262,13 +229,8 @@ A lot of the course contents can be reduced to comparing two unknown parameters.
 
 ## Confidence intervals
 
-<<<<<<< HEAD
-Explain why we prefer a 95% CI in the middle instead on both ends of a distribution.
-What happens if the distribution is bimodal? Show an example. This counterintuitive example is useful to weed out misconceptions and focus on the real purpose and feasibility of a CI.
-=======
 <!-- Explain why we prefer a 95% CI in the middle instead on both ends of a distribution. -->
 <!-- What happens if the distribution is bimodal? Show an example. This counterintuitive example is useful to weed out misconceptions and focus on the real purpose and feasibility of a CI. -->
->>>>>>> EAL18Sep18
 
 
 Example of a published incorrect interpretation of a confidence interval:
@@ -357,7 +319,6 @@ Avoid the following statements or concepts:
 
 "There is a statistically significant difference, therefore there is something interesting and important to discuss and or report."
 
-<<<<<<< HEAD
 ## Facts to remember
 
 - Any null hypothesis will be rejected if it is tested enough times, because there are always samples for which the null is rejected. Cure: look at all studies done, not just those published, which are heavily biased towards significance. At least, look at many published studies. Publish negative results. Publish data.
@@ -369,8 +330,6 @@ Avoid the following statements or concepts:
 - Data are fact, except for errors of measurement or transcription. Interpretations and models are ephemeral; they can be disproved and improved.
 
 
-=======
->>>>>>> EAL18Sep18
 ## Homework
 
 ## Laboratory Exercises
@@ -401,11 +360,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-<<<<<<< HEAD
-### Normal Distribution Part 1. [10 points]
-=======
 ### Part 1. Normal Distribution R functions [10 points]
->>>>>>> EAL18Sep18
 
 Normal Distribution
 
@@ -440,11 +395,7 @@ Is the relationship of the sample variances what you should have expected? What 
 Answers here: 
 
 
-<<<<<<< HEAD
-### Normal Distribution Part 2  [10  points]
-=======
 ### Part 2. Normal PDF [10  points]
->>>>>>> EAL18Sep18
 
 Plot the pdf for a standard normal distribution. Modify the code and produce a graph of the pdf for a normal distribution with mean = 2 and sd = 0.7. 
 
@@ -464,11 +415,7 @@ plot(function(x) dnorm(x, mean = 2, sd = 0.7),
 ```
 
 
-<<<<<<< HEAD
-### Student's t distribution Part 1 [20 points]
-=======
 ### Part 3. Students's t Distribution [20 points]
->>>>>>> EAL18Sep18
 
 When your sample size is small, and the true population standard deviation is unknown for a continuous probability distribution that you assume is normal, we use the t distribution instead.  
 
@@ -592,11 +539,9 @@ text(2, 5.6, "95% CI")
 
 
 
-<<<<<<< HEAD
-### Student's t distribution Part 2. [20 points]
-=======
 ### Part 4. Effect of sample size on CI width [20 points]
->>>>>>> EAL18Sep18
+
+
 Confidence interval in relation to sample size: Use R to determine the mean, standard deviation, standard error, and 95% confidence interval (CI) for sepal length for varying sample sizes (n = 50, 150) in the iris data.
 
 ```{r}
@@ -677,21 +622,14 @@ text(2, 5.45, "n = 150")
 
 
 
-<<<<<<< HEAD
-### Student's t distribution Part 3 [10 points]
-=======
 ### Part 5. Interpretation of the CI [10 points]
->>>>>>> EAL18Sep18
+
 Express in words the meaning of the confidence intervals for sepal length at an alpha = 0.05.
 
 
 
 
-<<<<<<< HEAD
-### Student's t distribution Part 4 [20 points]	
-=======
 ### Part 6. Test of null hypothesis [20 points]	
->>>>>>> EAL18Sep18
 
 Using the statistics calculated in the above section, perform tests of hypotheses to determine if the population from which the samples were taken could have the following means:
 
@@ -815,11 +753,7 @@ Were the results what you expected for (a) and (b)?  Why or why not? (answer her
 
 
 
-<<<<<<< HEAD
-### Student's t distribution Part 5.  [10 points]
-=======
 ### Part 7. Knit report [10 points]
->>>>>>> EAL18Sep18
 
 Knit this file into html. [10 points]
 
