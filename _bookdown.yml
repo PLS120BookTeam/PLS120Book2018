@@ -21,8 +21,7 @@ rmd_files: ["00.1_FrontMatter.Rmd",
             "11.0_AnovaBlocks.Rmd",
             "12.0_TrtStructure.Rmd",
             "13.0_LinearRegression.Rmd",
-            "14.0_ChiSquare.Rmd",
-            "15.0_References.Rmd"
+            "14.0_ChiSquare.Rmd"
             ]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes

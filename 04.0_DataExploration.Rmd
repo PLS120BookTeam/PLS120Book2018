@@ -43,11 +43,10 @@ library(tidyr)
 1. Calculate the 5-number summary and make a box and whisker plot with all elements labeled.
 1. Asses the normality of data using the histogram and boxplot.  
 1. Calculate the coefficient of variation and describe its weaknesses.
-The next one has to be explained more:
-1. Describe what a sample average tells you in the context of (1) data description, (2) data estimation, and (3) inference.  
 
 ## Data curation
 
+<<<<<<< HEAD
 See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>.
 
 
@@ -55,6 +54,55 @@ See message from Duncan Lang and Vessela Ensberg:
 
 The content that you want to cover is very similar to one of my seminars on keeping data tidy and organized (slides here) and data sharing (slides attached). If you prefer, I can adapt this content for your class. I have presented data management sessions for a number of graduate seminar classes.
  
+=======
+<!-- See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>. -->
+
+
+<!-- See message from Duncan Lang and Vessela Ensberg: -->
+
+<!-- The content that you want to cover is very similar to one of my seminars on keeping data tidy and organized (slides here) and data sharing (slides attached). If you prefer, I can adapt this content for your class. I have presented data management sessions for a number of graduate seminar classes. -->
+
+Data analysis depends completely on having good data that is correclty organized. The data curation is a new discipline that has become extremely important. We have the ability to gather and store very, very large amounts of data, but those data are useful only if the are well organized, maintained and validated. Most of us work with data and use our senses, hands and brains to organize and check the data. For example, we look at two numbers on the screen and decide if the are equal or not. This may work when we handle a few numbers and pieces of information, but not for more than that, even if it feels that it works. We must use computers and validated logic and programs to manage data.
+
+### Entering data
+
+There are several rules for data entry, and we mention a few.
+
+- Format data area as a rectangular set of cells.
+
+- Only one point of entry and storage for each piece of information or data. No data should be entered more than at one point or stored in more than one place (except for backups, of course).
+
+- Include metadata. Where does data come from? Methods? Who entered it? When? Where? Units. Contact info.
+
+- Keep data in a format that is open, widely adopted, widely supported and stored without loss (this last part is particularly important for media).
+
+- Use a validated file naming convention. You will have to handle files as if each were a datapoint.
+
+- Do not mix data and metadata in the same portio of the file.
+
+- One row per observation or number. Nothing unrelated to the observation in the row.
+
+- A row is analogous to a RECORD in a relational database structure.
+
+- One column per variable. Specify units. A column is analogous to a FIELD in a relational database structure.
+
+- Short column names without spaces or non-ASCII characters. Styles that work wiht R can be my.col.name.cm, my_col_name_cm or MyColNameCm.
+
+- Never enter values that can be calculated based on other primary values.
+
+- No Excel or other formatting except for dates.
+
+- Enter dates as 10-Mar-2018. 10-5-18 is ambiguous. It could be October 5, 2018 or May 10, 1918, or other combinations.
+
+- No spaces before or after visible characters. No leading or trailing spaces.
+
+The followng figure shows a messy data file created in Excel. See if you can spot all the problems and errors in the file. Interestingly, some errors are not visible at all. Can you guess which ones are those?
+
+```{r messyExcelData, echo=FALSE, message=FALSE, fig.cap="Example of what NOT TO DO with data. This file has multiple errors and violations of the principles listed above."}
+
+```
+
+>>>>>>> EAL18Sep18
 For references, I’d recommend starting with FAIR data:
 https://www.nature.com/articles/sdata201618
 https://www.force11.org/group/fairgroup/fairprinciples
@@ -67,19 +115,28 @@ https://library.umassmed.edu/necdmc/modules
  
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> EAL18Sep18
 ## Data comes from samples
 
 Within a statistical framework, the term population refers to an entire set of measurments or a specific characteristic that is being examined. A descriptive measure for a population is refered to as a parameter. For example, popualtion parameters can be the number of all diary cows in California (population size = N) or the mean body weight of all diary cow calves in California. To determine these parameters a survey would need to be conducted, which is often not fesible. In such cases, inferential statistics is used by taking representative, random samples, of the popualtion and infering conclusions about the entire popualtion.
 
 When conducting random samples from a population, collected parameters from a sample are refered to as statistics. Using the example above where *N* (captial letter) referred to the entire population of dairy cows in California, a random sample of dairy cows in California can be designated with the varibale *n* (lower-case). 
 
+<<<<<<< HEAD
 In the figure below (\@ref(fig:Map_cows)) two random samples were drawn from the California dairy cow population to infer the average weight of newborn calves for the entire population. In this example the sample statistic is weight of newborn dairy cow calves.  
+=======
+In the figure below (\@ref(fig:MapCows)) two random samples were drawn from the California dairy cow population to infer the average weight of newborn calves for the entire population. In this example the sample statistic is weight of newborn dairy cow calves.  
+>>>>>>> EAL18Sep18
 
 <br>
 
-```{r Map_cows, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of random samples of newborn calf weight collected from dairy cows in northern and southern California."}
+```{r MapCows, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Example of random samples of newborn calf weight collected from dairy cows in northern and southern California."}
 
-knitr::include_graphics("images/Map_cows.pdf")
+knitr::include_graphics("images/MapCows.pdf")
 
 ```
 
@@ -101,26 +158,66 @@ The **median** of a sample data set is the middle value when the data are arrang
 
 The **mode** of a sample data set is the value that occurs most frequently. Since multiple values can occur several times, one or more mode may be present for a data set. Alternatively, there may not be a most frequent value in a data set and, thus, no mode value. 
 
+<<<<<<< HEAD
 For the sample data set in table \@ref(fig:photoRateSeagrass) the average, sample median, and sample mode can be calculated as:
+=======
+For the sample data set in table \@ref(fig:PhotoRateSeagrass) the average, sample median, and sample mode can be calculated as:
+>>>>>>> EAL18Sep18
 
 $$ \bar{x} = \frac{y_1 + y_2 + y_3 + y_4 + y_5 + \ldots + y_{10}} {n}$$
 For the data in table :
 $$mean = \frac{180 + 166 + 226 + 226 + 206 +  \ldots + 154}{10}$$
+<<<<<<< HEAD
 
 
 $${median = 206}$$
 
+=======
+```{r}
+# R code
+# Functions: 
+#combine numbers into a vector (c)
+#mean (calculates mean value)
+
+x = c(180, 166, 226, 206, 197, 180, 108, 243, 289, 154)
+
+mean(x)
+
+```
+
+
+
+$${median = 206}$$
+>>>>>>> EAL18Sep18
 For the data in table:
 $${180, 166, 226, 206, 197, 180, 108, 243, 289, 154}$$
 
 $$median = \frac{197 + 180}{2}.$$
+```{r}
+# R code
+# Functions: 
+#median (calculates median value)
+median(x)
+
+```
+
 $$ mode = {y_1, y_6}$$
 For the data in table 1.1:
 $$ mode = 180$$
+```{r}
+# R code
+# Functions: 
+#mode (calculates mode value)
+mode(x)
 
+```
 <br>
 
+<<<<<<< HEAD
 ```{r photoRateSeagrass, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '30%', fig.align='center', echo=FALSE, fig.cap ="Sample data set of photosynthetic rate for 10 different shoots of the seagrass *Zostera marina*."}
+=======
+```{r PhotoRateSeagrass, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Sample data set of photosynthetic rate for 10 different shoots of the seagrass *Zostera marina*. Reference: Miller et al. 2016 Master's thesis"}
+>>>>>>> EAL18Sep18
 
 knitr::include_graphics("images/PR_seagrass.pdf")
 
@@ -132,30 +229,42 @@ knitr::include_graphics("images/PR_seagrass.pdf")
 
 Measures of dispersion are important parameters and statistics that describe the spread of the data around its central measure (e.g., mean). Knowing the variability in conjunction with the measure if central tendency, a more clear and better inference can be made about a given popualtion from a random sample. 
 
-The two most important measure of dispersion are the **variance** which numerically describes the variability of values in a data set, and the **standard deviation** which  quantifies how spread out your data is around the central measure. That is, how much your data deviates from your most common value (e.g., mean). The variance of a popualtion can be calculated as the summation (\sum) of all observations (*i*) minus the mean (\mu) squared, over the sample size (N) minus 1: 
+The most important measure of dispersion is the **variance** which numerically describes the variability of values in a data set. The **standard deviation** is ther square root of the variance and it evaluates dispersion in the same units as the random variable, while the variance is in the units squared. For example, the random variable defined as the girth growth rate of a randomly selected valley oak tree in California during the spring of 2018 has units of mm day^-1^, its variance has units of mm^2^ days^-2^ and its standar deviation has units of mm day^-1^. The population variance of random variable $X$ is denoted by $\sigma^2_X = V\{X\}$ and its standard deviation is $\sigma_X$.
 
-$$\sigma^2 = \frac{\sum_{i=1}^N (x_i - \mu)^2}{N-1}.$$
-Different variables are used when determining the variance of a sample:
+The variance is estimated from a sample with the following equation, where $S^2$ stands for *sample variance*.
 
-$$s^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}.$$
-To calcuate the standard deviation of the popualtion (\sigma) take the square root of the variance, or calculate:
+$$S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n-1}$$
 
-$$\sigma = \sqrt{\frac{1}{N}{\sum_{i=1}^N (x_i - \mu)^2}}.$$
-Again, the variables differ when calcuating for a sample:
+```{r}
+# R code
+# Functions:
+#var (calculates variance)
+var(x)
 
-$$s = \sqrt{\frac{1}{n}{\sum_{i=1}^Nn(x_i - \bar{x})^2}}.$$
+```
 
+and for the standard deviation, which is the square root of the variance:
+
+$$s = \sqrt{\frac{{\sum_{i=1}^n(x_i - \bar{x})^2}}{n-1}}.$$
+```{r}
+# R code
+# Functions:
+#sd (calculates standard deviation)
+sd(x)
+
+```
 One final measure of dispersion is the range. The **range** is the difference between the largest and smallest values in a data set. The range is the most ambiguous measure of dispersion and is not suited for determing data dispersion when dealing with large data sets. 
 
 
-```{block, type = 'stattip'}
-- Variance: How far values in a group are spreadout. 
-- Standard deviation: How much values of a data set deviate from the central measure of tendency.
-```
+## Frequency distributions and histograms
 
-##Frequency distributions and histograms
+Sample data sets from a population can be summerized in a frequency table as a first step in data analysis Table \@ref(tab:Freq). In the example below, the number of leaves per one shoot of seagrass were put into classes: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7 in order to identify the frequency of occurences found in the data set. In this case, the data set was leaves counted per shoot in a 3x3 m plot and the observations were then catagorized into classes.
 
-Sample data sets from a population can be summerized in a frequency table as a first step in data analysis (Table \@ref(tab:Freq)). In the example below, the number of leaves per one shoot of seagrass were put into classes: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7 in order to identify the frequency of occurences found in the data set. In this case, the data set was leaves counted per shoot in a 3x3 m plot and the observations were then catagorized into classes.      
+When breaking a data set into classes, an approximation for the number of classes can be determined by using sturges rule:
+
+$$ k = 1 + 3.3 log(n)$$
+
+where k is the number of classes (i.e., bins).
 
 <br><br>
 
@@ -182,17 +291,27 @@ knitr::include_graphics("images/Hist.png")
 ```
 <br>
 
-Observing the histogram, the frequency of each class is easy to identify, with 4-5 leaves being the most frequent observation in the 3x3 m plot. The distribution of the data is such that there is a peak around the middle classes and lower frequencies to the left and right of the peak (i.e., the left and right tails). The red curve fit over the historgam highlights the distribuution of frequencies (\@ref(fig:Hist_curve)). This type of distribution with a peak in the middle and approximately equal length tails on each end is referred to as a normal distribution. A **normal distribution** takes the shape of a bell curve. This informs that the data are normally distributed. That is, it is not skewed to the left or right.
+Observing the histogram, the frequency of each class is easy to identify, with 4-5 leaves being the most frequent observation in the 3x3 m plot. The distribution of the data is such that there is a peak around the middle classes and lower frequencies to the left and right of the peak (i.e., the left and right tails). The red curve fit over the historgam highlights the distribuution of frequencies (\@ref(fig:Histcurve). This type of distribution with a peak in the middle and approximately equal length tails on each end is referred to as a normal distribution. A **normal distribution** takes the shape of a bell curve. This informs that the data are normally distributed. That is, it is not skewed to the left or right.
 
 <br>
-```{r Hist_curve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Histogram constructed from frequency of leaves per shoot with fit curve over frequency distribution."}
+```{r Histcurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Histogram constructed from frequency of leaves per shoot with fit curve over frequency distribution."}
 
 knitr::include_graphics("images/Hist_curve.png")
 
 ```
 <br>
 
-##Five-number summary 
+```{r}
+# R code
+# Functions:
+#create a data object (<-)
+#Create a histogram (hist)
+PRrate<-c(180, 166, 226, 206, 197, 180, 108, 243, 289, 154)
+hist(PRrate)
+```
+
+
+## Five-number summary 
 Another form of initial data analysis can be conducted by computing a five-number summary. The **five-number summary** is a set of descriptive statistics that provides information about the frequency distribution of a data set when values are arranged in ascending order. These descriptive statistics are as follows:
 
 Minimum (Min.): Smallest value in the data set.
@@ -205,7 +324,11 @@ Upper Quartile (Q_3): The median for the upper half of the data set that seperat
 
 Maximum (Max.): Largest value in the data set.
 
-The five-number summary can be graphically represented with a boxplot, sometimes referred to as a box and wisker plot (\@ref(fig:boxplot)). The median (red line in (\@ref(fig:boxplot)) is shifted slightly to the left, but close to center. Since there is not a large observable skew to the distribution, the data are said to be normally distributed. 
+Not included in the five-number summary is the interquartile range (IQR), which may be useful in determining the middle 50% values in the data set. The IQR is calculated:
+
+$$IQR = Q3 - Q1.$$
+
+The five-number summary can be graphically represented with a boxplot, sometimes referred to as a box and wisker plot (\@ref(fig:boxplot)). The median (red line in \@ref(fig:boxplot) is shifted slightly to the left, but close to center. Since there is not a large observable skew to the distribution, the data are said to be normally distributed. 
 
 <br>
 ```{r boxplot, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Boxplot and five-number summary of the photosynthetic rates presented in from seagrass leaves."}
@@ -215,22 +338,234 @@ knitr::include_graphics("images/boxplot.png")
 ```
 <br>
 
-The output from the five-number summary for the 10 observations (i.e., values) of photosynthetic rate describe a minimum value of 108, Q_1 of 166, median of 188.5, Q_3 of 226, and a maximum of 289  \mumol TCO_2 gDW^-^1 h^-^1. The descriptive statistics help inform about the spread of data while providing a measure of central tendency and a way to visually assess the normality of the data set. That is, whether or not the data are normally distributed. 
+The output from the five-number summary for the 10 observations (i.e., values) of photosynthetic rate describe a minimum value of 108, Q~1~ of 166, median of 188.5, Q~3~ of 226, and a maximum of 289 $\mu$mol TCO~2~ gDW^-1^ h^-1^. The descriptive statistics help inform about the spread of data while providing a measure of central tendency and a way to visually assess the normality of the data set. That is, whether or not the data are normally distributed. 
 
-##Coefficient of variation 
+```{r}
+# R code
+# Functions:
+#Create a boxplot (boxplot)
+#Get five-number summary (fivenum)
+boxplot(PRrate)
+fivenum(PRrate)
+```
 
-The final topic to be discussed in this chapter is the parameter or, statsitic, known as the coefficient of variation. The **coefficient of variation (CV)** is simply the ratio of the standard deviation to the mean. 
+## Coefficient of variation 
 
-$$ CV_{population} = \frac{SD}{\mu}$$
+The final topic to be discussed in this chapter is the statistic, known as the coefficient of variation. The **coefficient of variation (CV)** is simply the ratio of the standard deviation to the mean. 
+
+$$ CV_{population} = \frac{\sigma}{\mu}$$
+
 Or
-$$ CV_{sample} = \frac{SD}{\bar{x}}$$
 
-The CV then describes the variability---in the form of the standard deviation---relative to the mean. For example, the CV is a beneficial when determining the variability or, spread, of a data set paticularliy when you are comparing data from two or more different surveys or samples that used different measures. Thus, the CV is independent of the unit of measurment scale.  
+$$ CV_{sample} = \frac{s}{\bar{x}}$$
 
-It should be noted that the CV should only be used when the measurement scale of a data set is on the ratio scale rather than the interval scale. Interval scasles can have arbitrary zero values which can produce nonsensical CV values. In addition, the CV is sensitive to mean values close to zero potentially resulting in an inflated CV value. 
+ 
+```{r}
+# R code
+#Assigning values
 
+<<<<<<< HEAD
+=======
+PRmean = 194.9
+PRsd =   50.29
+(CV = PRmean/PRsd)
+```
+
+What is the use of the coefficient of variation? The CV provides a dimensionless value that permits comparison of variability between random variables that are in different dimensions (i.e., have different types of units) or that have ranges of values that are very different from each other.
+
+For example, in some cases, we may be interested in determining if the seed mass produced by an individual plant is more or less variable than the variability of leaf area. Mass and area are different dimensions, so it makes no sense to compare the values of their variances or standard deviations directly. The question "is 1 g greater than 1 m^2^?" is not answerable, and therefore it is not a meaningful question. If we divide the standard deviation of each variable by its average, the units cancel out and we obtain a dimensionless coefficient that can now be compared. 
+
+<!-- Include figure with example of CV comparison. -->
+
+Frequently, tolerances, allowable or acceptable values of certain variables are expressed as proportions of percentages of the mean or average value. This makes sense because usually, the needed precision in instruments, construction, machines, etc. increases as the units become smaller or lighter. For example, vehicle scales may have a precision of 2%. Accordingly, vehicles within 2% of the nominal value are allowable. It would not make sense to establish a set tolerance for all vehicles. A range of 800 lb might make sense for loaded trucks up to 80,000 lb, but it would be ridiculous for a smart car that has a maximum weight of 2,000 lb. The coefficient of variation allows quick and meaning full comparisons of variability across vehicle categories.
+
+The coefficient of variation is also useful to establish standards for the acceptable variability in lab results. A CV smaller than 10% is achievable in and acceptable for indoor lab experiments with a great level of environmental control. However, such a level is very difficult to achieve in field experiments, where 20-40% is pretty frequent.
+
+**CV pitfalls**
+
+The CV has issues with zero in a couple of ways. This makes sense because it has a denominator, the mean or the average, that can be very close to zero. First, the CV is only meaningful for random variables that are measured in *ratio* scales like mass, length, area and volume. The ratio scale is characterized for having a set and well defined zero. Because of this it does make sense to use ratios in those scales. To say that 2 cm is twice as long as 1 cm makes sense. Interval scale variables such as temperature in C is not a ratio scale variable. It does not make sense to say that 10 C is twice as hot as 5 degrees, because 0 C is an arbitrary zero.
+
+Second, the CV is not very useful when the variable measures has a range of values that is close to zero, particularly when the mean or average is also close to zero. When the means are close to zero, minor difference in mean will cause large changes in the CV.
+
+>>>>>>> EAL18Sep18
 
 ## Exercises and Solutions
+
+Wilder and Rypstra (2004) examined the effect of praying mantis excrement on the behavior of wolf spiders to test whether cues from an introduced predator (the praying mantis) would change the movement rate of the native wolf spider. They put 15 wolf spiders in individual containers; inside each container there were two semicircles of filter paper. One semicircle was smeared with praying mantis excrement and one circle was without excrement. The researchers observed each spider for one hour, and calculated spider mean walking speed while it moved across first the excrement circle and then the non-excrement circle (data were modified for the purpose of this exercise and are not the original true data).
+
+
+1. Calculate the average speed and sample variance for each treatment
+2. Calculate the difference in speed between treatments for each spider. Report the average difference.
+
+3. Calculate the sample variance for the difference between treatments.
+
+4. Calculate the estimated variance of the averages of difference between treatments.
+
+5. What is the median, first and third quartile for difference bewteen treatments?
+
+6. What is the coefficient of variation for both treatments?
+
+**Data**
+
+```{r} 
+
+Spider<-(1:1:15)
+Nexc<-c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7)
+Wexc<-c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3)
+Diff<-c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4)
+```
+
+**Solutions**
+  
+1. Average speed No excrement: 3.66; Variance: 2.63 cm/s
+   Average speed with excrement: 1.93; Variance: 1.36 cm/s
+```{r}
+Nomean<-mean(Nexc) #Mean value for no excrement treatment
+Novar<-var(Nexc) #Variance for no excrement treatment
+Wmean<-mean(Wexc) #Mean value for excrement treatment
+Wvar<-var(Wexc) #Variance for excrement treatment
+```
+   
+2. Average difference in speed between treatments: 1.73 cm/s
+```{r}
+Difmean<-mean(Diff)
+```
+
+3. Sample variance for differnec between treatments: 2.48 cm/s
+
+```{r}
+Difvar<-var(Diff)
+```
+
+4. Estimated variance of averages of difference between treatments: 0.166 cm/s
+
+```{r}
+Estvar = Difvar/length(Diff) #Variance of difference divided by the number of observations (n)
+```
+
+5. Median, first and third quartiles for difference bewteen treatments: -1.50, 1.70, 2.75 cm/s
+
+```{r}
+sum<-fivenum(Diff) #Get five-bumber summary
+```
+
+6. CV for both treatments: 
+   No excrement: 0.443
+   With excrement: 0.604
+
+```{r}
+CVNoexc = (sqrt(Novar))/Nomean
+CVWexc = (sqrt(Wvar))/Wmean
+```
+<br><br>
+
+Table: (\#spider) Wolf spider walking speed with and without mantis excrement. 
+
+| Spider #| cm/sec no|cm/sec with| difference|
+|         | excrement| excrement |           |
+|--------:|---------:|----------:|----------:|
+|    1    |    2.5   |    0.4    |    2.1    |
+|    2    |    5.5   |    1.9    |    3.6    |
+|    3    |    1.1   |    1.2    |   -0.1    |
+|    4    |    2.7   |    2.6    |    0.1    |
+|    5    |    2.8   |    4.3    |   -1.5    |
+|    6    |    1.6   |    0.3    |    1.3    |
+|    7    |    3.2   |    1.0    |    2.2    |
+|    8    |    4.5   |    1.5    |    3.0    |
+|    9    |     5    |    3.3    |    1.7    |
+|   10    |    6.9   |    2.6    |    4.3    |
+|   11    |    2.2   |    0.7    |    1.5    |
+|   12    |    3.9   |    1.4    |    2.5    |
+|   13    |    3.8   |    2.1    |    1.7    |
+|   14    |    3.5   |    3.4    |    0.1    |
+|   15    |    5.7   |    2.3    |    3.4    |
+<br><br>
+
+
+### Homework
+
+1. Samples are taken from a population of heifers with known mean and variance of weight gains equal to 80 kg and 324 kg, respectively.
+
+a. What are the mean and variance of the average weight gain of random samples of 20 heifers?
+
+n = ?
+Mean = ?
+Variance = ?
+
+b. What are the mean and variance of the average weight  gain of random samples of 30 heifers? 
+
+n = ?
+Mean = ?
+Variance = ?
+
+c. How many heifers have to be sampled for the variance of the average weight to equal 12.96 ?
+
+2. The mean and standard deviation (kg/ha) of wheat yield two different soils are given in the table below.
+
+	     **mean**	**sd**
+soil A	 3000	   450
+soil B	 4000	   600
+
+a. What are the mean and variance of the differences between sample averages (average of B - average of A) when independent  samples of size 9 are taken from fields 
+in soil A and samples of size 16 are taken from fields in soil B?
+
+n (soil A) = ?
+n (soil B) = ?
+Mean = ?
+Variance = ?
+
+3. Heights of many individual plants were measured for  plants of two varieties. Find summary statistics for both plant varieties.
+ 
+
+**variety 1**	 **variety 2**
+   14.9	           3.1
+    9.5	          11.8
+   10.6	          15.4
+   19.8	          13.3
+   20.2	           8.2
+   14.8	          18.3
+   16.8	          20.7
+   14.6	           6.6
+   11.2	           8.5
+   18.3	           9.8
+   20.9	           9.1
+   13.3	          18.1
+   18.4	          28.0
+   17.7	           7.4
+   16.5	          12.9
+   16.7	          15.7
+    8.3	           8.7
+   10.1	           9.0
+   16.7	          12.6
+   16.3	          13.6
+   14.9	          12.2
+   12.6	          19.2
+   12.4	           9.9
+   12.5	           8.1
+   11.7	          13.4
+   16.3	          23.3
+   14.9	          19.7
+                   9.5
+                  19.3
+                  14.9
+                  14.8
+                   7.9
+                  14.2
+                   9.8
+
+
+a. r = ?
+   mean = ?
+   sample variance = ?
+   q1 = ?
+   min = ?
+   median = ?
+   max = ?
+   q3 = ?
+   IQR = ?
+   k (number of classes) = ?
+
+b. Create a boxplot for both plant varieties.
 
 ## Homework
 
@@ -240,12 +575,23 @@ It should be noted that the CV should only be used when the measurement scale of
 
 Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
 
+<<<<<<< HEAD
 "---" Unquote the three dashes
+=======
+
+```
+---
+>>>>>>> EAL18Sep18
 title: "Lab01: Data Exploration and Summaries"
 author: "YourFirstName YourLastName"
 date: "today's date here"
 output: html_document
+<<<<<<< HEAD
 "---" Unquote the three dashes
+=======
+--- 
+```
+>>>>>>> EAL18Sep18
 
 ```{r setup, include=FALSE}
 
@@ -257,13 +603,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
 
-This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between "\```{r}" and "\```". These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab01email.html).
+This is a markdown document. You will type your code and run it one line at a time as you add it in the lines indicated below. Add code **ONLY** in the areas between `{r}` and ` ``` `. These areas are highlighted with a light grey color. Run each line and parts to learn and experiment until you get the result you want. Keep the lines that worked and move on. At any time you can see if your document "knits" or not by clicking on the Knit HTML icon at the top. Once you have completed all work, knit your document and save the html file produced with the same file name but with an html extension (Lab01email.html).
 
 **Submit BOTH files for your lab report using the appropriate Canvas tool**
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. A completed example follows.
 
-###Example Question with Answer
+### Example Question with Answer
 
 Create a vector with 5 random numbers from the standard normal distribution. Call it "x." Calculate the average and variance of the values in x. Create a second 5-number vector using the same procedure. Call it "y." Calculate the sum of the elements in y. Make a nicely formatted table showing x and y as columns. Calculate x + y and then sum(x) + sum(y). Discuss the difference between the last two calculations.
 
@@ -291,7 +637,7 @@ sum(x) + sum(y)
 The x + y and sum(x) + sum(y) are totally different. The former results in a vector of five numbers, each number being the sum of the corresponding elements in x and y. The latter results in a single number that is the sum of the 5 numbers in x plus the 5 numbers in y. (Full credit!)
 
 
-### Part 1.  [10 points]
+### Part 1. Data input [10 points]
 
 Load the iris data that comes with R into a data frame called myiris, and get its structure. Use help() to learn what the iris data are about. When were the data first published? Hint: you need help. [5 points]
 
@@ -466,7 +812,7 @@ help(iris)
 When were the data first published? Your answer here:.
 
 
-### Part 2.  [15 points]
+### Part 2. Coefficient of variation [15 points]
 
 Do a web search and explain the use of the coefficient of variation and one of its main disadvantages. Hint: what happens when your mean is zero or close to zero? [15 points]
 
@@ -474,7 +820,7 @@ Your answer here:
 
 
 
-### Part 3.  [15 points]
+### Part 3. Five number summary table of iris data [15 points]
 
 Make a data frame and a nicely formatted table containing the following statistics: mean, median, range, minimum, maximum, standard deviation, coefficient of variation and sample size for each of the measurements (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) in myiris data. What variable has the most variation relative to the average? [15 points]
 
@@ -519,7 +865,7 @@ pander(Table1) # use pander to create a nicely formatted table.
 What variable has the most variation relative to the average? Your answer here:
 
 
-### Part 4.  [15 points]
+### Part 4. Frequency table and histogram [15 points]
 
 Make and print a nicely formatted frequency table for the sepal length of the flowers. Calculate the number of classes (bins) using the formula in the LabO1 instructive. Make a histogram using your calculations "by-hand" and then a new histogram using the hist() function. [15 points]
 
@@ -542,7 +888,7 @@ hist(myiris$Sepal.Length) # by default it uses Sturges rule for bins.
 ```
 
 
-### Part 5.  [15 points]
+### Part 5. Box and whisker plot [15 points]
 
 Create two box and whisker plots for the sepal length. Label at least three of the elements in the plot. Create a new box and whisker plot with a *range* argument value of 0.5. [15 points]
 
@@ -562,13 +908,15 @@ text(x = 0.6, y = 4.4, labels = "Lower")
 
 ```
 
-### Part 6.  [10 points]
+### Part 6. fivenum() function [10 points]
 
 What does the fivenum() function do? [5 points]
 
 Your answer here: 
 
-### Part 7.  [10 points]
+
+
+### Part 7. Making a vector [10 points]
 
 What function allows you to **combine** numbers to make numeric vectors? Use the function to make a vector with the numbers 1, 3, 4, 9 and call it "sa.vector." [5 points]
 
@@ -581,7 +929,7 @@ What function allows you to **combine** numbers to make numeric vectors? Use the
 
 What function allows you to **combine** numbers to make numeric vectors? Your answer here: 
 
-###Part 8.  [10 points]
+### Part 8. Knitting [10 points]
 
 Knit this file into html. [10 points]
 
@@ -614,7 +962,7 @@ This is a markdown document. You will type your code and run it one line at a ti
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. A completed example follows.
 
-###Example Question with Answer
+### Example Question with Answer
 
 Create a vector with 5 random numbers from the standard normal distribution. Call it "x." Calculate the average and variance of the values in x. Create a second 5-number vector using the same procedure. Call it "y." Calculate the sum of the elements in y. Make a nicely formatted table showing x and y as columns. Calculate x + y and then sum(x) + sum(y). Discuss the difference between the last two calculations.
 

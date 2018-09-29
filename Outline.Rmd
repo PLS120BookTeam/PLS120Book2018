@@ -1,0 +1,422 @@
+---
+title: Outline
+author: Emilio A. Laca
+date: 9/24/2018
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Front Matter {-#chFront} 
+# Contents {-#chContent} 
+# Preface {-#chPreface} 
+
+# Introduction to Applied Statistics {#chIntro} 
+## Learning Objectives 
+## Course Goals 
+## Why Statistics? 
+## Definition of Statistics 
+## Learning Statistics {#LearnStats} 
+## Going to the movies: PBS program on statistics 
+## Methods and Concepts in this Book 
+### Probability, estimation, inference {#estimationInference} 
+## Statistics Defined 
+## Book Organization and Overview 
+## Use and Misuse of Statistics 
+## Real-world problems 
+### Detection of the Higgs boson 
+## Exercises and Solutions 
+### Exercise 1 
+### Exercise 2 
+### Exercise 3: three doors and two goats 
+## Homework Problems 
+## Laboratory Exercise 
+
+# Statistics with R {#chStatsR} 
+## Learning Objectives for Chapter 
+## Background on R and RStudio 
+## R Basics 
+## Exploring RStudio 
+### Terminal or Console Window 
+### Markdown (Source) Window 
+#### Saving Files 
+### Files, Plots, Packages, Help Window 
+#### Files 
+#### Plots 
+#### Packages 
+#### Help 
+### Environment and History Window 
+#### Vectors and Data Frames 
+#### Importing Data 
+## Functions 
+## Exercises 
+## Laboratory Exercises 
+### Plant Sciences 
+#### Introduction to R and RStudio 
+#### Create a dataframe and table 
+#### Summary Statistics 
+#### Frequency Table and Histogram 
+#### Box-and-Whisker Plot and 5-Number Summary 
+#### Analyses by Groups 
+### Animal Sciences 
+#### Introduction to R and RStudio 
+#### Create a dataframe and table 
+#### Summary Statistics 
+#### Frequency Table and Histogram 
+#### Box-and-Whisker Plot and 5-Number Summary 
+#### Analyses by Groups 
+
+# Required Math Skills and Symbols {#chMath} 
+## Learning Objectives for Chapter {#mathObj} 
+## Data Columns and Summation {#mathSum} 
+## Two-dimensional Data Tables and Summation {#math2Dtbl} 
+## Models {#mathModl} 
+### The simplest model{#mathSmplMod} 
+### A slightly more complex model {#mathBttrMod} 
+### Grouping or Indicator Variables {#mathGroups} 
+## Deviations, Errors and Residuals {#mathDevs} 
+### Simulation: Population is Known {#mathSimu} 
+## Optimization {#mathOptim} 
+## Linear Models 
+## Symbols and Terms{#mathSymbls} 
+## Exercises and Solutions {#mathExe} 
+### Exercise 1 
+### Exercise 2 
+### Exercise 3 
+## Homework {#mathHwk} 
+### Homework Exercise 
+### Homework Exercise 
+### Homework Exercise 
+### Homework Exercise 
+
+# Data Manipulation, Exploration and Summaries {#ch.data} 
+## Learning Objectives for Chapter 
+## Data curation 
+## Data comes from samples 
+## Measures of central tendency 
+## Measures of dispersion 
+## Frequency distributions and histograms 
+## Five-number summary 
+## Coefficient of variation 
+## Exercises and Solutions 
+## Homework 
+## Laboratory Exercises 
+### Plant Sciences Lab 
+### Instructions 
+### Example Question with Answer 
+### Part 1. Data input [10 points] 
+### Part 2. Coefficient of variation [15 points] 
+### Part 3. Five number summary table of iris data [15 points] 
+### Part 4. Frequency table and histogram [15 points] 
+### Part 5. Box and whisker plot [15 points] 
+### Part 6. fivenum() function [10 points] 
+### Part 7. Making a vector [10 points] 
+### Part 8. Knitting [10 points] 
+### Animal Sciences Lab 
+### Instructions 
+### Example Question with Answer 
+### Part 1. [10 points] 
+### Part 2. [15 points] 
+### Part 3. [15 points] 
+### Part 4. [15 points] 
+### Part 5. [15 points] 
+### Part 6. [10 points] 
+### Part 7. [10 points] 
+### Part 8. [10 points] 
+
+# Probability in Applied Statistics {#chProb} 
+## Learning Objectives for Chapter 
+## Variables and parameters 
+### What does \random\ mean? 
+### \Just due to Chance\ 
+## Probability 
+### Frequentist and Bayesian probability 
+### Outcomes, sample space and events 
+### Combinatorics 
+### Probability of two events {#Pof2Events} 
+### Conditional probability and independence 
+## Bayes Rule 
+### Bayesian data analysis 
+### Frequentist data analysis 
+## de Méré's dice problem 
+## Next steps 
+## Exercises and Solutions 
+### Exercise 
+### Exercise 
+## Homework 
+### Outcomes and events 
+## Laboratory Exercises 
+### Plant Sciences 
+### Animal Sciences 
+
+# Random Variables, Sampling and Distributions {#chSampling} 
+## Learning Objectives for Chapter 
+## Random variables 
+### Types of Variables and Notation 
+### Using random variables 
+## Probability Distributions 
+## Parameters and Moments 
+### Expectation, Mean or First Moment 
+### Variance or Second Moment 
+### Covariance and Correlation between two RV's 
+### Parameters are not necessarily the moments 
+### Properties of Mean and Variance 
+### Standardized variables 
+## Common distributions 
+### Discrete Uniform Distribution {#DUnifDist} 
+### Continuous Uniform Distribution {#CUnifDist} 
+### Binomial Distribution {#BinDist} 
+### Poisson Distribution {#PoisDist} 
+### Normal Distribution {#NormDist} 
+### $\\chi^2$ Distribution {#chisqDist} 
+### Student's t Distribution {#tDist} 
+### F Distribution {#FDist} 
+## Sampling and samples 
+### Universe, population and sample 
+### No Representative samples allowed 
+### No Biased samples allowed 
+### Sampling methods 
+### Estimators 
+### Variance of the sample average 
+## Central Limit Theorem 
+## Sampling distributions 
+## Estimation vs. inference and prediction 
+## Exercises and Solutions 
+### Exercise 
+### Exercise 
+### Exercise 
+## Homework 
+## Laboratory Exercises 
+### Plant Sciences 
+### Animal Sciences 
+
+# Confidence intervals and Hypothesis testing {#chHotest} 
+## Learning Objectives for Chapter 
+## Testing a hypothesis 
+## Logic of Null Hypothesis test with ANOVA 
+## Theme: compare A and B 
+## Confidence intervals 
+## Confidence interval and test of one mean 
+## What is the meaning of the p-value? 
+## Types of Errors in Hypothesis testing 
+## Exercises and Solutions 
+## Pitfalls to avoid 
+## Facts to remember 
+## Homework 
+## Laboratory Exercises 
+### Plant Sciences Lab 
+### Instructions 
+### Part 1. Normal Distribution R functions [10 points]
+### Part 2. Normal PDF [10 points]
+### Part 3. Students's t Distribution [20 points]
+### Part 4. Effect of sample size on CI width [20 points]
+### Part 5. Interpretation of the CI [10 points]
+### Part 6. Test of null hypothesis [20 points]	
+### Part 7. Knit report [10 points]
+### Animal Sciences Lab 
+### Instructions 
+### Normal Distribution Part 1. [10 points] 
+#### Normal Distribution Part 2 [10 points] 
+### Student's t distribution Part 1 [20 points] 
+### Student's t distribution Part 2. [20 points] 
+### Student's t distribution Part 3 [10 points] 
+### Student's t distribution Part 4 [20 points]\t 
+### Student's t distribution Part 5. [10 points] 
+
+# Two Populations Means {#ch2pops} 
+## Learning Objectives for Chapter {#LearnObj8} 
+## Two Populations 
+## Hypothesis Testing 
+## Sampling Methods 
+### Independent Samples 
+### Paired Samples 
+## Calculating Sample Averages and the Average of the Difference 
+## Calculating the Sample Variances 
+## Calculating the F-statistic 
+### F-test Decision 
+## Calculating the Pooled Sample Variance, the Standard Error of the Difference, and the t-statistic 
+### Case 1: Independent samples with equal population variances (#Case1) 
+### Case 2: Independent samples with unequal population variances (#Case2) 
+### Case 3: Paired samples (#Case3) 
+## Confidence Intervals 
+## Decision to Reject or Fail to Reject the Null Hypothesis 
+## Bean Drought Example 
+### Stating the Hypotheses 
+### Sampling Method 
+### Calculating Sample Averages and the Mean Difference 
+### Calculating Sample Variances 
+#### Calculate the Individual Sample Variances 
+#### Using an F-test to determine if Population Variances are Equal 
+#### Pooling Sample Variances 
+### Calculating the Standard Error of the Difference 
+### Calculating the t-statistic 
+## Bean Drought Example - Paired 
+### Stating the Hypotheses 
+### Sampling Method 
+### Calculating Sample Averages and the Average of the Difference 
+### Calculating the Variance of the Difference 
+### Calculating the Standard Error of the Difference 
+### Calculating the t-statistic 
+## Exercises 
+## Homework : Two Population Means 
+### Walking Spiders 
+### Rat Life 
+## Laboratory Exercises 
+### Plant Sciences 
+#### Part 1. Equality of variances [25 points]
+#### Part 2. Difference between means with independent samples [30 points]
+#### Part 3. Difference between means with paired samples [30 points]
+#### Part 4: Paired or independent? [15 points] 
+##### A. Aphids on soybeans 
+##### B. Compost for broccoli 
+##### C. Habanero chili 
+##### D. Fish oil and triglycerides 
+##### E. Botanical composition after restoration 
+### Animal Sciences 
+#### Part 1 [25 points] 
+#### Part 2 [30 points] 
+#### Part 3 [30 points] 
+#### Part 4: Paired or independent? [15 points] 
+##### A. High protein diet 
+##### B. Organic dairy feed 
+##### C. Cowabunga 
+##### D. Fish oil and blood triglycerides 
+##### E. Rumen flora 
+
+# Analysis of Variance {#chAnova} 
+## Learning Objectives for Chapter 
+## Introduction to ANOVA 
+## Model and Partitioning of Variance 
+## Degrees of freedom (The bulk of this section should be moved to the first time df are mentioned) 
+## ANOVA Table 
+## Assumptions of ANOVA 
+## ANOVA example 
+###Formulas and calculations in R 
+### Detailed calculations 
+## Exercises and Solutions 
+## Homework 
+### Introduction to ANOVA 
+### Need for ANOVA 
+### Comparison of Diets 
+### Use of ANOVA 
+### Test of Equality of Variances 
+### Estimation of the Variance Between and Within Samples 
+## Laboratory Exercises 
+### Plant Sciences {#LabCh09PLS} 
+#### Instructions 
+#### Part 1. Inspection and summary of data [25 points] 
+#### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points] 
+#### Part 3. ANOVA using R functions.[20 points] 
+#### Part 4. Confidence intervals for treatment means [25 points] 
+### Animal Sciences {#LabCh09ANS} 
+#### Instructions 
+#### Part 1. Inspection and summary of data [25 points] 
+#### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points] 
+#### Part 3. ANOVA using R functions.[20 points] 
+#### Part 4. Confidence intervals for treatment means [25 points] 
+
+# Experimental Design {#chEdesign} 
+## Learning Objectives for Chapter 
+## Experimental Design and Treatment Structure 
+## Elements of Experimental Design 
+## Exercises and Solutions 
+## Homework 
+## Laboratory Exercises 
+### Plant Sciences 
+### Animal Sciences 
+
+# ANOVA with Blocks {#chRcbd} 
+## Learning Objectives for Chapter 
+## Exercises and Solutions 
+## Homework 
+## Laboratory Exercises 
+### Plant Sciences {#LabRCBD} 
+#### Instructions 
+#### Part 1. Read in, inspect and summarize data [15 points] 
+#### Part 2. Analyze data ignoring the blocking design [25 points] 
+#### Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points] 
+#### Part 4. ANOVA for RCBD using R functions.[25 points] 
+### Animal Science {#LabCh11ANS} 
+#### Instructions 
+#### Part 1. Read in, inspect and summarize data [15 points] 
+#### Part 2. Analyze data ignoring the blocking design [25 points] 
+#### Part 3. RCBD Sum of Squares and Degrees of Freedom [35 points] 
+#### Part 4. ANOVA for RCBD using R functions.[25 points] 
+
+# Treatment Structures and Comparisons {#chTrtstr} 
+## Learning Objectives for Chapter {#LearnObj12} 
+## Pairwise Comparisons {#PairComp} 
+### Least Significant Difference 
+### Experiment-wise and Family-wise Error Rates 
+## Factorials {#Factorials} 
+### Interactions 
+### Interactions and Main Effects 
+### Model and Calculations in Factorials 
+#### R Code for Factorial in RCBD 
+#### Detailed Calculations for Factorial in RCBD 
+### Advantages of factorials 
+#### Effects of Irrigation alone 
+#### Effects of Nitrogen alone 
+#### Combined Effects of Irrigation and Nitrogen 
+## Contrasts {#Contrasts} 
+## Linear Combinations {#LinCombo} 
+## Exercises and Solutions {#ExSol12} 
+## Homework {#Hwk12} 
+## Laboratory Exercises 
+### Plant Sciences {#Lab12PLS} 
+#### Instructions 
+#### Part 1. Factorial ANOVA using R functions [ points] 
+##### 1a. Random assignment of treatments to plots 
+##### 1.b Add columns with factor levels to the data 
+##### 1.c Perform a test of the Ho that all treatment means are equal. 
+#### Part 2. Factorial ANOVA detailed calculations [ points] 
+#### Part 3. Multiple comparison of means using Fisher's PLSD [ points] 
+### Animal Sciences {#Lab12ANS} 
+
+# Linear Regression {#chLinReg} 
+## Learning Objectives for Chapter 
+##Introduction to Simple Linear Regression 
+##Simple Linear Regression Visualized 
+##Fitting the least squares line 
+##Analysis of variance of regression 
+##Confidence Interval for $\\hat{\\beta_1}$ 
+##Confidence Interval for $\\hat{\\beta}_0$ 
+##Confidence Intervals for $\\hat{Y}_i$ 
+##Coefficient of Determination, $R^2$ 
+##Correlation Coefficient, r 
+##Fitness of the regression model 
+## Exercises and Solutions 
+## Homework 
+## Laboratory Exercises {#LabCh13PLS} 
+### Plant Sciences 
+#### Part 1. Plot of data and estimation of parameters. [25 points] 
+#### Part 2. Test of null hypothesis and R-square. [30 points] 
+#### Part 3. Make a 95% confidence interval for the RGR or slope. [25 points] 
+#### Part 4. Make a 95% confidence interval for mean plant size at a given age. [20 points] 
+### Animal Sciences 
+#### Part 1. Plot of data and estimation of parameters. [25 points] 
+#### Part 2. Test of null hypothesis and R-square. [30 points] 
+#### Part 3. Make a 95% confidence interval for the estimation of the slope. [25 points] 
+#### Part 4. Make a 95% confidence interval for mean heart weight at a given body weight. [20 points]
+
+# Chi-square: Goodness of Fit and Test of Independence {#chChisq} 
+## Learning Objectives for Chapter 
+## The $\\chi^2$ distribution 
+## Goodness of Fit: Discrete distributions 
+## Goodness of Fit: Continuous distributions 
+## The $\\chi^2$ Test of Independence: Contingency Tables 
+## Exercises and Solutions 
+## Homework Problems 
+## Laboratory Exercises {#LabCh14PLS} 
+### Plant Sciences 
+#### Part 1. Create contingency table 
+#### Part 2. Expected Frequencies 
+#### Part 3. Calculate $\\chi^{2}$ 
+#### Part 4. Results 
+### Animal Sciences 
+#### Part 1. Create contingency table 
+#### Part 2. Expected Frequencies 
+#### Part 3. Calculate $\\chi^{2}$ 
+#### Part 4. Results 
