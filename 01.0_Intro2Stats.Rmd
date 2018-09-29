@@ -6,12 +6,6 @@ output:
     theme: readable
     toc: yes
     toc_depth: 3
-<<<<<<< HEAD
----
-
-=======
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, include=FALSE}
@@ -20,9 +14,6 @@ library(knitr)
 ```
 
 
-
-
->>>>>>> EAL18Sep18
 # Introduction to Applied Statistics {#chIntro}
 
 <!-- See Intro2StatsLectureNotes in Notability -->
@@ -78,19 +69,6 @@ It is common to express statistical statements informally and incompletely. Alth
 
 
 - Based on a random sample of 10 coin tosses I was not able to reject the hypothesis that the probability of getting a head with this specific quarter is 0.5 at a significance level of 5\%.
-<<<<<<< HEAD
-
-- The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
-
-
-The latter statement shows the use of units for quantitative variables. The population it refers to is the total area planted to rice in the US in 2013. The estimate is the average yield and the number is correctly expressed with units as a complete quantity. The degree of certainty is also expressed quantitatively as the width of a confidence interval. Notice how the population for which the statement applies is clearly defined by saying where and when.
-
-<br>
-```{block, type='stattip'}
-- Statistics and statistical tests cannot and do not attempt to categorically prove or disprove statements and hypotheses about the real world. They simply provide methods to determine how consistent, in a proabilitstic way, statements and hypotheses are with data.
-```
-<br>
-=======
 
 - The average yield of rice in the US in 2013 was estimated at 7,694 pounds per acre, with a 95\% confidence interval width of 100 pounds per acre.
 
@@ -107,17 +85,21 @@ The latter statement shows the use of units for quantitative variables. The popu
 Keep in mind that the word "statistics" can have several meanings, even within the field of statistics. We can describe **Statistics** as the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
 
 
->>>>>>> EAL18Sep18
-
 ## Learning Statistics {#LearnStats}
 
 Learning statistics can be challenging but also fun. The math involved in introductory statistics is very basic and for the most part involves only addition and multiplication. You can use statistics to make better decisions about your life. You should use statistical knowledge to properly interpret pseudo information presented in advertisements and the media.
 
 Consider the following examples:
 
-1. The three door game. In this game show you are presented with three doors (A, B, C) behind which there are prizes. Two of the doors hide a goat each and one hides a brand-new car. You choose one of the doors, say A. Before the selected door is opened, the hosts opens one of the other two doors, say C, and reveals a goat. Then, you are asked whether you want to keep your choice of door A or switch to door B. What do you do? Does it make any difference? Why?
+1. The "Monty Hall" three door game. In this game show you are presented with three doors (A, B, C) behind which there are prizes. Two of the doors hide a goat each and one hides a brand-new car. You choose one of the doors, say A. Before the selected door is opened, the hosts opens one of the other two doors, either B or C, and reveals a goat. Then, you are asked whether you want to keep your choice of door A or switch to door B. What do you do? Does it make any difference? Why?
 
-1. A news cast presents the following graph while the anchorman speaks about the disastrous effect of the new president on job loss. What do you think?
+<br>
+```{r MontyHallFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Three initial configurations of the game. In two of them, the player wins by switching away from the choice made before a door was opened."}
+
+knitr::include_graphics("images/CH1MontyHall1.png")
+
+```
+<br>
 
 <br>
 ```{r JobLossFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Graphical representation of job losses from December 2007 to June 2010."}
@@ -155,21 +137,15 @@ The PBS NOVA program *Prediction by the numbers* will be shown during a lecture.
 ### Probability, estimation, inference {#estimationInference}
 
 Humans and animals go about our lives acting and making decision with uncertainty. Although the world is for the most part deterministic, we are not able to know it in sufficient detail to have certainty about events that have not yet happened or that we cannot observe. Even when we can observe events, the picture of reality that is created in our brains differs from reality because our senses are imperfect. Evolutionary psychology has documented multiple cases and offers theories to understand why it is not possible and even not good to know everything. The brain and the senses are products of evolution and reflect the conditions and constraints within which they evolved. For more detail on theories about how and why the human mind evolved, see the following webpage on <a href="https://www.iep.utm.edu/evol-psy/" target="_blank">Evolutionary Psychology</a>.
-<<<<<<< HEAD
-=======
 
 We routinely assign chances or probabilities to events, and we subconsciously estimate unknown probabilities. We also estimate other unknown quantities and how uncertain we are about those. For example, a contractor will give you an estimate how long it will take to complete a project and how much it will cost. Naturally, you would ask how much those values could vary. You predict how much money you will have to pay for the job in the future and compare it with the estimate from the contractor.
 
 In statistics these terms have specific meaning, and we will be revisiting these definitions frequently. Informally,
->>>>>>> EAL18Sep18
+
 
 - A probability is an idea of how likely an event is.
 
-<<<<<<< HEAD
-Keep in mind that the word "statistics" can have several meanings, even within the field of statistics. We can describe **Statistics** as the science of data collection, analysis, interpretation and presentation of results. As a science, statistics uses mathematical models and mathematics extensively. However, we also use the term *statistic* to refer to the result of applying a function to a set of sample data. For example. the average of a set of numbers is a statistic. The name of the science ends in "s" but it is singular ("Statistics is a science.") whereas in reference to calculations based on samples the term can be plural or singular. For example, we say the sample average is one *statistic* of the various *statistics* that can be calculated from a sample.
-=======
 - An estimate is a statement about the value of a fixed but unknown quantity.
->>>>>>> EAL18Sep18
 
 - A prediction is a statement about the result of a random event that is not observed.
 
@@ -177,17 +153,46 @@ Keep in mind that the word "statistics" can have several meanings, even within t
 
 In order to use statistics we have to assign probabilities to events of interest, like the failure of an engine, or the yield of a field being sufficient to cover the costs of cropping. This step requires that we create model distributions for different types of random experiments, such as running an engine for 5,000 hours or planting a field.
 
-<<<<<<< HEAD
-Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertaint are illustrated with an example. imagine that you draw a marble radomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the proability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But you would probably get different results in other samples. THe quesiton is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
-=======
 Distribution models will frequently involve parameters such as the mean and variance that are unknown, which requires that we obtain sample data and analyze it to estimate parameters. Estimated parameters add a second layer of uncertainty. These two layers of uncertainty are illustrated with an example. imagine that you draw a marble randomly from an urn that has 9 white and 1 orange marble. We are uncertain about the color of the marble drawn, but we are certain that the probability of white is 9/10. Now, suppose that I add black and white marbles to the urn, but you do not know how many of each I added. When you draw another marble at random you will be uncertain about the color of the marble AND about the probability of getting a white one. You could take a sample of marbles with replacement (easier to calculate), meaning that you put each marble back after you observe it, and record the colors. Say that in a sample of 20 marbles you get 10 white ones. Now you can estimate the probability of white as 10/20 = 0.5, but you would not be sure that this is the true proportion of marbles. You used a sample of 20 marbles to **estimate** the proportions. But you would probably get different results in other samples. The question is, how certain are you that the proportion is 0.5? The answer to this question requires that we determine how much the proportion in a sample varies from sample to sample. Therefore, in this third step we need to use methods to determine the sampling distribution of the estimated parameters.
->>>>>>> EAL18Sep18
 
 Finally, we will frequently be interested in comparing parameters from potentially different distributions. We could have a second urn with marbles and be interested in determining if the probability of getting a white marble from the first is greater or less than from the second. Or we could be interested in determining if the mean productivity of a new crop variety is greater than the old one. These comparisons are reduced to calculating the value and distribution of linear combinations of estimated parameters. Usually, the distribution is normal, so the problem reduces to estimating the variance of a linear combination of estimated parameters. Analysis of variance is key to achieve this.
 
 This book has 14 chapters dealing with introductory statistical methods and concepts. The first section comprises chapters 1-3 provide essential but minimal tools necessary to be able to read and understand the rest of the book.
 
-This first chapter introduces statistics and the rest of the book. It gives a general introduction to the need for formal methods that yield repeatable quantitative results to deal with uncertainty in an optimal manner. Chapter 2 is an introduction to the tool that we use for doing statistics: R and RStudio. R is the program that actually does all the computations; essentially, it is a programming language for statistics. RStudio is an integrated development environment (IDE) that handles the creation and debugging of code, as well as the input and output. Chapter 2 is necessary because this book is written using RStudio and code for R. There are examples, exercises and explanations that use R in the rest of the chapters. Chapter 3 presents the required math skills and symbols that are used in the rest of the book.
+<br>
+```{block}
+Chapter 1: Introduction to Statistics
+
+Chapter 2: Introduction to R and RStudio
+
+Chapter 3: Mathematical Symbols
+
+Chapter 4: Data Manipulation, Exploration and Summaries
+
+Chapter 5: Probability
+
+Chapter 6: Random Variables, Sampling and Distribution
+
+Chapter 7: Confidence Intervals and Hypothesis Testing
+
+Chapter 8: Two Population Means
+
+Chapter 9: Analysis of Variance (ANOVA)
+
+Chapter 10: Experimental Design
+
+Chapter 11: ANOVA with Blocking 
+
+Chapter 12: Treatment Structures and Comparisons
+
+Chapter 13: Linear Regression
+
+Chapter 14: Chi-Square
+```
+<br>
+
+This first chapter introduces statistics and the rest of the book. It gives a general introduction to the need for formal methods that yield repeatable quantitative results to deal with uncertainty in an optimal manner. Chapter 2 is an introduction to the tool that we use for doing statistics: R and RStudio. R is the program that actually does all the computations; essentially, it is a programming language for statistics. RStudio is an integrated development environment (IDE) that handles the creation and debugging of code, as well as the input and output. Chapter 2 is necessary because this book is written using RStudio and code for R. There are examples, exercises and explanations that use R in the rest of the chapters. Chapter 3 presents the required math skills and symbols that are used in the rest of the book. Chapter 4 discusses the differences between populations and samples, and how to visualize and summarize the data collected.  Chapter 5 introduces important concepts underlying probability and randomness and how it can be applied practically.  Chapter 6 discusses what random variables are, how random variables are classified and sampled, and the most important distributions that random variables follow.  Chapter 7 discusses the concept of hypothesis testing in theory and practice and how confidence intervals can be used to determine levels of significance. Chapter 8 presents how to test for significant differences between two population means.  Chapter 9 presents how to compare if more than two treatments are significantly different from eachother using Analysis of Variance (ANOVA).  Chapter 10 presents different ways to identify error throughout an experiment and important componenets related to experimental design.  Chapter 11 presents the concept of "blocking" for error using the Randomized Complete Block Design and how to run an ANOVA with blocks.  Chapter 12 discusses how to identify treatments and factor levels of a factorial experiment and how to determine the least significant difference (LSD) for pairwise comparisons.  Chapter 13 discusses the partitioning of variance to form a simple linear regression.  Chapter 14 presents how to perform a goodness of fit test using Chi-Square for discrete data.  
+
 
 In chapter 4 we start working with data. Data are summarized and descriptions of central tendency and variability are calculated. These exploratory techniques are implemented in R, which we use to create frequency tables, histograms and box-and-whisker plots.
 
@@ -211,11 +216,6 @@ A main problem in science is the misuse and misunderstanding of the so-called p-
 
 <a href="https://https://youtu.be/cOgscsjUvvE" target="_blank">What is the p-value?</a>
 
-<<<<<<< HEAD
-<a href="https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
-=======
->>>>>>> EAL18Sep18
-
 <a href="https://www.nature.com/news/scientific-method-statistical-errors-1.14700" target="_blank">Not understanding and misusing p-value</a>
 
 In dealing with problems or questions we will use the following approach:
@@ -229,22 +229,31 @@ In dealing with problems or questions we will use the following approach:
 
 Math and calculations will be necessary, particularly in step 4. Frequently, in order to get to the solution the question has to be cast in the framework of an already existing mathematical procedure that is not immediately intuitive. A specific case is the use of analysis of variance to determine if means are different. The question is: "are means different?" but the method compares variances instead of means! The approach works because there is an underlying theory that states that if means are different, then variances will also differ by an amount related to the difference among means. We do not need to know the exact details of the calculations in order to understand the process to an acceptable degree.
 
-<<<<<<< HEAD
+### The Birthday Problem
+
+In probability theory, with a given group of people, $n$, there is some probability that a pair of them share a birthday.  When there are 367 people in a group, there is a 100% probability that at least one pair share a birthday, which is intuitive since there are 365 days in a non-leap year and 366 in a leap year.  When there are 70 people in a group, the probability that at least one pair share a birthday is 99.9% (as a student in PLS 120 you have a 99.9% chance of sharing a birthday with another student in this class).  It may be more surprising to learn that a group of only 23 people has a 50% chance that at least one pair share a birthday.  This is because we are looking at pairs of combinations of all 23 people, and those pairwise comparisons add up.  Another way to think of this is the probability of individuals in a group not sharing a birthday.  The probability of people sharing a birthday and the inverse, which is people not sharing a birthday, will always add up to one or 100%.  
 
 
-### Detection of the Higgs boson
-=======
+From the Wikipedia page on the Birthday problem, "In deference to widely published solutions concluding that 23 is the minimum number of people necessary to have a P(A) that is greater than 50%, the following calculation of P(A) will use 23 people as an example. If one numbers the 23 people from 1 to 23, the event that all 23 people have different birthdays is the same as the event that person 2 does not have the same birthday as person 1, and that person 3 does not have the same birthday as either person 1 or person 2, and so on, and finally that person 23 does not have the same birthday as any of persons 1 through 22. Let these events respectively be called "Event 2", "Event 3", and so on. One may also add an "Event 1", corresponding to the event of person 1 having a birthday, which occurs with probability 1. This conjunction of events may be computed using conditional probability: the probability of Event 2 is 364/365, as person 2 may have any birthday other than the birthday of person 1. Similarly, the probability of Event 3 given that Event 2 occurred is 363/365, as person 3 may have any of the birthdays not already taken by persons 1 and 2. This continues until finally the probability of Event 23 given that all preceding events occurred is 343/365. Finally, the principle of conditional probability implies that P(A') is equal to the product of these individual probabilities:
+
+{\displaystyle P(A')={\frac {365}{365}}\times {\frac {364}{365}}\times {\frac {363}{365}}\times {\frac {362}{365}}\times \cdots \times {\frac {343}{365}}} P(A')={\frac {365}{365}}\times {\frac {364}{365}}\times {\frac {363}{365}}\times {\frac {362}{365}}\times \cdots \times {\frac {343}{365}}
+
 In many real applications of advanced statistics, step 4 involves massive computations with complicated software that can only be fully understood from a computational math science approach. We do not need to study computational math. We just need to understand the concepts behind the computation. It is sufficient to know that the computation yields a good approximation to the optimal estimate for the unknown quantity, where "optimal" means that the sum of squared deviations are minimized, for example. Some computations are rather simple and we may look into those to get a better concept of what computation does.
->>>>>>> EAL18Sep18
 
 <!-- ## Real-world problems -->
+<br>
+```{r BirthdayProblem, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="The probability of at least one pair of individuals sharing a birthday for a given number of people."}
 
+knitr::include_graphics("images/CH1BirthdayProblem.png")
+
+```
+<br>   
 
 ## Exercises and Solutions
 
 ### Exercise 1
 
-Describe three decision making situations that you face at least once a year in your life and that involve uncertainty. Describe the sources of uncertainty and your method to come to a decision.
+Describe three decision making situations that you face at least once a year in your life and that involve uncertainty. Describe the sources of uncertainty and your method to come to a decision. For example, you may have arrive at a meeting on Mondays at 5 pm, so you have to decide when you will start your trip towards the meeting place.
 
 ### Exercise 2
 
@@ -261,6 +270,12 @@ This exercise is actually a game. The team that guesses the secret target most a
 1. What does random mean?
 
 ### Exercise 3: three doors and two goats
+
+This exercise is a game to be repeated many times by two people to elicit the probabilities of what happens "in the long run." The point is to do random simulations of the choices and get estimated probabilities.
+
+Have one person take on the role of host, and the other as contestant. 
+
+The host will have 3 metal objects, AKA "doors", that can hide a quarter.  The host hides a single quarter among the three metal objects and keep track of where this quarter is located.  The contestant will select one of the three "doors" hoping to find the quarter.  The host will reveal one of the "doors" not selected by the contestant that the host knows does not contain the quarter.  Then the host will give the contestant the option to keep their original "door" selection or to switch to the other "door" that has not been revealed.  In the first scenario, the contestant will continue with their original "door" selection.  In the second scenario, the contestant will switch their "door" selection.  Keep track of when the contestant guesses the correct "door" with the quarter behind it for both scenarios.  
 
 This is a simulation of a game show performed by Monty Hall a few decades ago. One contestant is offered a choice of three doors, but she cannot open the doors. Only the show host can open the doors. Behind one door is a car, whereas the other two have goats. The contestant selects one door, which is marked as his initial choice. Then, the host open one of the other doors behind which is a goat and offers the contestant the opportunity to switch his choice to the unopened door that he did not select at first. Should she switch?
 
@@ -316,3 +331,4 @@ knitr::kable(mhGoats, caption = "Simplified cases in the Monty Hall problem. Doo
 <!-- How do you learn best? -->
 <!-- What should this class NOT be like? -->
 <!-- Anything else that you would like to tell me? -->
+
