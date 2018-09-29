@@ -6,11 +6,6 @@ output:
     theme: readable
     toc: yes
     toc_depth: 3
-<<<<<<< HEAD
-=======
-editor_options: 
-  chunk_output_type: console
->>>>>>> EAL18Sep18
 ---
 # Statistics with R {#chStatsR}
 
@@ -36,7 +31,7 @@ editor_options:
 
 
 
-## Background on R and RStudio 
+### Background on R and RStudio 
 
 W. N. Venables, D. M. Smith and the R Core Team [@R-base] state: "R is an integrated suite of software facilities for data manipulation, calculation and graphical display." They specifically leave out the word "statistics" to emphasize that R is actually an "environment" or fully planned coherent system for programming. RStudio furthers this idea and provides an IDE or integrated development environment for programming in R and other languages. In fact, this book and all the figures and interactive examples and simulations were completely programmed, compiled and deployed using R in the RStudio IDE. The only way to get a good idea of what R and Rstudio can do is to use them with a curious and exploratory approach.
 
@@ -54,7 +49,7 @@ We will use the "knitr" package to produce the lab reports. You have to install 
 
 The reports are actually written in Markdown, so we need to install *rmarkdown*. As an exercise, repeat the procedure above to install this package. For an intro video about rmarkdown, go <a href="http://rmarkdown.rstudio.com/lesson-1.html" target="new">here</a>. The installation instructions, as well as more links for R Markdown are also found on that page.
 
-## R Basics 
+### R Basics 
 
 **Do not worry about the details of markdown and knitr!** You will be given all code you need to use in the course, and most reports will be formatted for you so you can learn reproducible research, but you will not have to be an expert in programming or markdown!
 
@@ -62,7 +57,7 @@ For the basic features of R Programming we will use *"A (very) short introductio
 In the lab we will create a lab report based on some sections of this document.
 
 
-## Exploring RStudio
+### Exploring RStudio
 
 RStudio have 4 panes in the window.  These windows and many other features of RStudio are explained in the video below. Make sure to watch the video as part of your homework and send questions to your instructors.
 
@@ -169,7 +164,7 @@ mean(c(8,4,6))
 
 ```
 
-#### Saving Files
+### Saving Files
 
 The benefit of using RMarkdown is the ability to save instructions, codes and notes.  There are two ways that you can save the file (1) as the working .Rmd file, which will allow the Markdown file to be accessed for future edits and (2) as a .html file that provides a finished easy-to-read file that can be opened up in a browser complete with all plots.  For each lab, you will be submitting both the .Rmd and .html files.  
 
@@ -192,7 +187,7 @@ knitr::include_graphics("images/CH2htmlSave.png")
 
 ### Files, Plots, Packages, Help Window
 
-#### Files
+### Files
 
 This pane will includes all of the files that are currently available in your working directory.  Here you can read and save files and set your working directory.  Your working directory is the default location R will use as the file path for importing and saving files on the computer.  If there is a particular location or folder on your computer that is where you plan to import and save files from R, you will need to set this file path to your working directory in R.  This simplifies the need to re-write the entire file path everytime you plan to import or save data.  
 
@@ -211,7 +206,7 @@ setwd(dirname(file.choose()))
 After you set your working directory, verify that it is set at the appropriate location with getwd().
 
 
-#### Plots
+### Plots
 
 This pane will allow you to see each of the plot images that you have created individually when the code is entered in the Console.  Within this tab you have the ability to open up the plot in a separate window, to copy the plot to your clipboard, and to export the plot as a PDF or JPEG image.  
 
@@ -223,7 +218,7 @@ knitr::include_graphics("images/CH2Plot.png")
 ```
 
 
-#### Packages
+### Packages
 
 The Packages pane is where we can install and access "packages" in our library for different functions.  At the beginning of each of our computer labs, there will be a list of packages that we will be using for different functions throughout each lab.  We load each of these packages with the library() function.  However the first time you use a package, we need to install the package on the local computer.  This step requires internet access to install a package on your computer, but once installed it will be saved in your library. Click on the "Install" button and then enter the name of the package you wish to install on your computer.  Then once installed we need to load the package into our current working session by using the library() function or by manually checking the box next to the function.  Using the library() function will automatically check this box in the Packages pane 
 
@@ -235,7 +230,7 @@ knitr::include_graphics("images/CH2Packages.png")
 
 ```
 
-#### Help
+### Help
 
 
 RStudio has a pane specifically designed to find information about functions, objects, data and many other things in R. The help pane has an entry area for keywords at the top right. There is a basic toolbar that can be used to navigate pages as in a browser.  You can also use help() with the name of a function within it to prompt this pane.
@@ -257,7 +252,7 @@ knitr::include_graphics("images/CH2Help.png")
 The Environment and History window shows you data and objects that are loaded into R.  The History tab will provide you a list of all code that has been entered into the Console during your active working session.  The Environment will list data imported from external files (.xls, .txt, .csv) and objects that are defined within R.  These objects include vectors and data frames.  
 
 
-#### Vectors and Data Frames
+### Vectors and Data Frames
 
 ```{r Vectors and Data Frames}
 
@@ -308,7 +303,7 @@ help(as.data.frame)
 `my.random.numbers <- rnorm(n = 3, mean = 3, sd = 2)`
 
 
-#### Importing Data
+### Importing Data
 
 Data files can be imported from your local computer for manipulation and analysis in R and new files can be created and saved back to your local computer from R.  We will be importing data from select files for most of our computer labs to perform statistical analyses and creating new .RMD and .HTML files in R.  
 
@@ -330,7 +325,7 @@ Another option is to click on the Import Dataset button at the top of the Enviro
 
 
 
-## Functions
+### Functions
 
 Functions take arguments, perform operations on them and return results. For example, in mean(x = c(8, 4, 6)), mean() is the function and the argument called x receives the value c(8, 4, 6), which is a vector made up of the numbers 8, 4, and 6 in that order. The function returns a result that is the number 6.
 
@@ -537,14 +532,11 @@ max(clover$lnwt) # maximum braking lnwtance
 
 ```
 
-The **coefficient of variation** is the standard deviation in units of the average. A value greater than 1 is high and indicates that there is a large amount of variation unexplained. Values below 0.30 are very low and indicate that there is little unexplained variation. For laboratory or controlled field experiments the CV should be below 0.5, whereas for observational studies an acceptable CV can be up to 1.0.
+The **coefficient of variation** is the standard deviation in units of the average. A value greater than 100% is high and indicates that there is a large amount of variation unexplained. Values below 0.30 are low and indicate that there is little unexplained variation. For controlled field experiments the CV should be below 0.5, whereas for observational studies an acceptable CV can be up to 1.0.
 
 
 #### Frequency Table and Histogram
-<<<<<<< HEAD
-=======
 
->>>>>>> EAL18Sep18
 We can create a frequency table by dividing the range of lnwt into bins according to a general guideline: number of bins = 1 + 3.3 log(sample size). For this we use the cut() function. Then we create the frequency table using the xtabs() function and plot the histogram. All of this is done automatically by R using the hist() function. We will worry about making the graphs look pretty later on.
 
 ```{r ps freqhist, echo = TRUE, include = TRUE}
@@ -601,10 +593,7 @@ The function str() is really important to see what objects are composed of and t
 
 
 #### Box-and-Whisker Plot and 5-Number Summary
-<<<<<<< HEAD
-=======
 
->>>>>>> EAL18Sep18
 Data can be summarized using a boxplot and or the 5-number summary. These contain information about the average, median, first quartile, third quartile, range and outliers. The *range* argument determines how far the plot whiskers extend out from the box. If range is positive, the whiskers extend to the most extreme data point which is no more than *range* times the interquartile range (IQR) from the box. Data points that fall outside the whiskers are plotted and can be interpreted as "outliers" or values more extreme than expected. Outliers are so only on the basis of some preconceived expectation, usually a more or less normal distribution. A range value of zero causes the whiskers to extend to the data extremes, so no outliers are shown.
 
 ```{r PsBoxplot1, echo = TRUE, include = TRUE}
@@ -716,14 +705,7 @@ pander(sumry.by.temp)
 
 ### Animal Sciences
 
-<<<<<<< HEAD
 
-
-
-### Animal Sciences
-
-=======
->>>>>>> EAL18Sep18
 #### Introduction to R and RStudio
 
 If you are using a lab computer and not your personal computer, insert your flash drive and set the working directory to be in your drive. This way you will have all of your files with you in your drive. Files that you save to the lab computers are wiped every night. The following script chunk allows you to manually select your working directory by selecting a file within it. 
