@@ -70,7 +70,7 @@ The steps involved for conducting a hypothesis test are:
 5) Interpret the decision and state conclusion
 
 
-**State null and alternative hypotheses**
+### State null and alternative hypotheses
 
 A hypothesis is stated about a population, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay. 
 
@@ -101,7 +101,7 @@ $$H_o: \mu \ge \mu_0 \\
 H_o: \mu \lt \mu_0$$
 ```
 
-*Level of significance*
+### Level of significance
 
 Setting the level of significance $(\alpha)$ determines at what calcualted probability value the null hypothesis is either accpeted or rejected. Setting the level of signficance for the hypothesis before the test is conducted is referred to as *a priori* and a practice intended to prevent implicit bias when drawing conclusions from the hypothesis test. The possible outcomes from a hypothesis test are described in figure (\@ref(fig:Error_table)).  
 
@@ -138,11 +138,11 @@ $$t = \frac{\bar{x} - \mu}{s / \sqrt{n}}.$$
  
 A calculated z-statistic and t-statistic need to be compared against a z-critcal or t-crtical value to determie whether or not the null hypothesis will be rejected or fail to be rejected. Stipulations for calculating a z-statistic are that the populaiton mean and standard deviation need to be known. If these two criteria are not met or the smaple size is small, and the data distribution is approximately normal, a t-statsitic must be calcualted.
 
-The z-critical value is a reference value and dependent on the level of significance (see appendix....), whereas the t-critical value varies with sample size (see appendix... for table). All the z- and t-values are the cumulative probabilites under a normal distribution where the critical values set the threshold of the extreme probabilites of which the result of the hypothesis test can be determined. That is, based on the calculated test-statistics, what is the probability of the calcualted values being smaller or greater than the critical values. 
+The z-critical value is a reference value and dependent on the level of significance (see appendix....), whereas the t-critical value varies with sample size (see appendix... for table). All the z- and t-values are the cumulative probabilites under a normal distribution where the critical values set the threshold of the extreme probabilites of which the result of the hypothesis test can be determined. That is, based on the calculated test-statistics, what is the probability of the calculated values being smaller or greater than the critical values. 
 
 <!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
-Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true popualation parameters. A **confidence interval** is a range values that will encompass the true population parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
+Another critical component of conducting a hypothesis test is not only comparing sample means and variances, but knowing the confidence in our sample as being representative of the true population parameters. A **confidence interval** is a range values that will encompass the true population parameter within a certain degree of assigned confidence. The confidence level is equalt to 1 - $\alpha$ and can be interpreted as the inverse of the level of significance. On a standard normal distribtuion with \mu = 0 and sigma = 1,  the degree of confidence increases stepwise with sigma. That is, 68%, 95%, and 99% confidence are 1, 2, and 3 standard deviations with a mean of zero (\@ref(fig:CI)).  
 
 <br>
 
@@ -229,8 +229,8 @@ A lot of the course contents can be reduced to comparing two unknown parameters.
 
 ## Confidence intervals
 
-Explain why we prefer a 95% CI in the middle instead on both ends of a distribution.
-What happens if the distribution is bimodal? Show an example. This counterintuitive example is useful to weed out misconceptions and focus on the real purpose and feasibility of a CI.
+<!-- Explain why we prefer a 95% CI in the middle instead on both ends of a distribution. -->
+<!-- What happens if the distribution is bimodal? Show an example. This counterintuitive example is useful to weed out misconceptions and focus on the real purpose and feasibility of a CI. -->
 
 
 Example of a published incorrect interpretation of a confidence interval:
@@ -245,12 +245,12 @@ Snedecor and Cochran 1989. Statistical Methods. Iowa State University Press, Ame
 
 The main difference that makes the first statement incorrect and the second one correct is that the second statement does not specify the values for the extremes of the confidence interval. Those values will be changing from sample sample. Thus, the probability statement refers to a confidence interval that changes from sample sample, not to a single specific confidence interval. In other words, when we make hundred statement the extremes of the confidence interval change from one statement to the next. In 100 statements we expect to be correct 95 times, but all 100 statements will be different. Notice that the 95% correct rate is expected and may not be realized in any specific set of statements or samples.
 
-Include simulation or figure with known population parameters. Show 100 Ci's and how they distribute around the known mean. Include a comparison that shows the effect of sample size on the width of the CI's but not on the % correct. This is by design: the width is reduced to maintain the rate of correct statements.
+<!-- Include simulation or figure with known population parameters. Show 100 Ci's and how they distribute around the known mean. Include a comparison that shows the effect of sample size on the width of the CI's but not on the % correct. This is by design: the width is reduced to maintain the rate of correct statements. -->
 
 
 ## Confidence interval and test of one mean
 
-The test of hypothesis is based on a conditional probability, the probability that the summary statistics or calculated t value is greater than or equal to the one observed, given that the dsitribution of the observations is normal and independent with mean equal to that hypothesized. For this to make more sense formally we need to distinguish between the random function or variable calculated, call it $s = (\bar{Y} - \mu_0)/S_{\bar{Y}}$ (s for "statistic") and any specific value that it takes for a sample, say $t_{calc}$ (because it is the name we generally use). In symbols:
+The test of hypothesis is based on a conditional probability, the probability that the summary statistics or calculated t value is greater than or equal to the one observed, given that the distribution of the observations is normal and independent with mean equal to that hypothesized. For this to make more sense formally we need to distinguish between the random function or variable calculated, call it $s = (\bar{Y} - \mu_0)/S_{\bar{Y}}$ (s for "statistic") and any specific value that it takes for a sample, say $t_{calc}$ (because it is the name we generally use). In symbols:
 
 $$p-value = P(s \ge t_{calc}|X \sim N(\mu_0, \sigma))$$
 
@@ -262,10 +262,10 @@ The following video has a brienf description of the historical origin of the p-v
 
 [@Nuzzo2014] stated:
 
->P values have always had critics. In their almost nine decades of existence, they have been lik- ened to mosquitoes (annoying and impossible to swat away), the emperor’s new clothes (fraught with obvious problems that everyone ignores) and the tool of a “sterile intellectual rake” who ravishes science but leaves it with no progeny3. One researcher suggested rechristening the methodology “statistical hypothesis inference testing”, presumably for the acronym it would yield.
+>P values have always had critics. In their almost nine decades of existence, they have been lik- ened to mosquitoes (annoying and impossible to swat away), the emperor’s new clothes (fraught with obvious problems that everyone ignores) and the tool of a “sterile intellectual rake” who ravishes science but leaves it with no progeny. One researcher suggested rechristening the methodology “statistical hypothesis inference testing”, presumably for the acronym it would yield.
 
 ```{block, type = 'think'}
-Interesting... It looks like we are studying p-values and that they may mean “statistical hypothesis inference testing.” You may think: "I do not have time for this SHI Testing!" but you do. You are traveling the statistical times at an exciting crossroads. Woman up and man up!
+Interesting... It looks like we are studying p-values and that they may mean “statistical hypothesis inference testing.” You may think: "I do not have time for this SHI Testing!" but you do. You are traveling the statistical times at an exciting crossroads!
 ```
 
 Do not confuse the incorrect use of p-values with incorrect p-values. The formal procedures of obtaining and interpreting p-values are correct. P-values in themselves are not flawed, except that they are used in ways that are not correct. A culture developed in which "statistical significance with p = 0.05"" took a life of its own. Data are analyzed with intention to achieve this false icon, and in doing so, scientists invalidate the p-value. How should p-value be used then??
@@ -280,14 +280,6 @@ Do not confuse the incorrect use of p-values with incorrect p-values. The formal
 ```{block, type = 'stattip'}
 - Even when everything is done correctly and assumptions are met, we are expected to make errors in hypothesis testing. We will reject true null hypothesis and fail to reject false ones. Statistics gives us methods to estimate and set the approximate rates at which we makes different types of mistakes. If assumptions are not valid, or methods are applied incorrectly we will make mistakes with unknown frequency.
 ```
-
-## Exercises and Solutions
-
-Exercises for lecture
-
-Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value. Count how many people reject the true null.
-
-Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value + $\delta$. Count how many people reject the true null. Then, make a graph on the board showing the proportion of students that rejected Ho as delta increases. What should the graph look like? Plot against the theoretical t-distribution.
 
 ## Pitfalls to avoid
 
@@ -308,6 +300,14 @@ Avoid the following statements or concepts:
 - Originally, statistical significance was designed to be an indicator that there was probably something interesting warranting further investigation. Statistical significance was the start of the work, not the end. Cure: Value and promote replication of experiments in multiple labs.
 
 - Data are fact, except for errors of measurement or transcription. Interpretations and models are ephemeral; they can be disproved and improved.
+
+## Exercises and Solutions
+
+Exercises for lecture
+
+Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value. Count how many people reject the true null.
+
+Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value + $\delta$. Count how many people reject the true null. Then, make a graph on the board showing the proportion of students that rejected Ho as delta increases. What should the graph look like? Plot against the theoretical t-distribution.
 
 
 ## Homework
@@ -340,7 +340,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-### Normal Distribution Part 1. [10 points]
+### Part 1. Normal Distribution R functions [10 points]
 
 Normal Distribution
 
@@ -352,7 +352,7 @@ In the R code section below, we will read the help for "Normal" and list the fun
 
 ```{r}
 help("Normal")
-#Note, dnorm gives the probability density, pnorm gives the probability distribution function, qnorm gives the quantile function, and rnorm generates random values from the distribution.
+# Note, dnorm gives the probability density, pnorm gives the probability distribution function, qnorm gives the quantile function, and rnorm generates random values from the distribution.
 
 set.seed(39)
 
@@ -366,7 +366,7 @@ Y50 <- rnorm(n = 50,
              mean = 0, 
              sd = 1) # obtain 50 random numbers
 
-#obtain the variances
+# obtain the variances
 (var5 <- var(Y5))
 (var50 <- var(Y50)) 
 ```
@@ -375,7 +375,7 @@ Is the relationship of the sample variances what you should have expected? What 
 Answers here: 
 
 
-### Normal Distribution Part 2  [10  points]
+### Part 2. Normal PDF [10  points]
 
 Plot the pdf for a standard normal distribution. Modify the code and produce a graph of the pdf for a normal distribution with mean = 2 and sd = 0.7. 
 
@@ -395,7 +395,7 @@ plot(function(x) dnorm(x, mean = 2, sd = 0.7),
 ```
 
 
-### Student's t distribution Part 1 [20 points]
+### Part 3. Students's t Distribution [20 points]
 
 When your sample size is small, and the true population standard deviation is unknown for a continuous probability distribution that you assume is normal, we use the t distribution instead.  
 
@@ -449,7 +449,9 @@ alpha95 <- 0.05 # set the alpha level to 0.05 (95% CI)
 
 library(plotrix) ## needed for plotCI() function
 
-# The text() function adds text to the plot you just printed.  In Rmarkdown, you have to run all relevant lines at once or else you will get an error. Highlight and run plotCI() and text() together to avoid this error.  
+# The text() function adds text to the plot you just printed. 
+# You have to run all relevant lines at once or else you will 
+# get an error. Highlight and run plotCI() and text() together to avoid this error.  
 
 plotCI(x = myiris.mean, 
        uiw = myiris.se * t.crit95, 
@@ -465,6 +467,7 @@ text(x = 1.05,
      y = UB95, 
      labels = "Upper 95% CL")
 ### add labels to "mean" and "Lower 95% CL"###
+
 text(x = 1.05, 
      y = LB95, 
      labels = "Lower 95% CL")
@@ -516,7 +519,7 @@ text(2, 5.6, "95% CI")
 
 
 
-### Student's t distribution Part 2. [20 points]
+### Part 4. Effect of sample size on CI width [20 points]
 Confidence interval in relation to sample size: Use R to determine the mean, standard deviation, standard error, and 95% confidence interval (CI) for sepal length for varying sample sizes (n = 50, 150) in the iris data.
 
 ```{r}
@@ -597,13 +600,13 @@ text(2, 5.45, "n = 150")
 
 
 
-### Student's t distribution Part 3 [10 points]
+### Part 5. Interpretation of the CI [10 points]
 Express in words the meaning of the confidence intervals for sepal length at an alpha = 0.05.
 
 
 
 
-### Student's t distribution Part 4 [20 points]	
+### Part 6. Test of null hypothesis [20 points]	
 
 Using the statistics calculated in the above section, perform tests of hypotheses to determine if the population from which the samples were taken could have the following means:
 
@@ -727,7 +730,7 @@ Were the results what you expected for (a) and (b)?  Why or why not? (answer her
 
 
 
-### Student's t distribution Part 5.  [10 points]
+### Part 7. Knit report [10 points]
 
 Knit this file into html. [10 points]
 

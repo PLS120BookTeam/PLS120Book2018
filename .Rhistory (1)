@@ -1,188 +1,3 @@
-rhino.pop
-sample(rhino.pop$Yi, size = 1, replace = TRUE)
-sample(rhino.pop$Yi, size = 1, replace = TRUE)
-sample(rhino.pop$Yi, size = 3, replace = TRUE)
-samples1 <- sample(rhino.pop$Yi, size = 1*10000, replace = TRUE)
-hist(samples1)
-plot(table(samples1))
-samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
-plot(table(samples1))
-samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
-samples1 <- matrix(samples1, 2)
-dim(samples1)
-samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 2))
-dim(samples1)
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans))
-samples1 <- sample(rhino.pop$Yi, size = 3*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 3))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans))
-samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 4))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans))
-samples1 <- sample(rhino.pop$Yi, size = 5*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 5))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans))
-samples1 <- sample(rhino.pop$Yi, size = 10*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 10))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans))
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
-plot(table(samples1)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 2))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 4))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 5*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 5))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
-plot(table(samples1)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 2))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 4))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 8*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 5))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-samples1 <- sample(rhino.pop$Yi, size = 16*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 10))
-smeans <- apply(samples1, 1, mean)
-plot(table(smeans)/9000)
-plot(table(smeans)/9000, add = true)
-plot(table(smeans)/9000, add = TRUE)
-samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
-samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
-ftable <- as.data.frame(table(samples1)/9000)
-ftable
-samples1 <- sample(rhino.pop$Yi, size = 1*9000, replace = TRUE)
-ftable <- as.data.frame(table(samples1)/9000)
-ftable$samples1 <- as.numeric(as.character(ftable$samples1))
-plot(ftable$samples1, ftable$Freq, xlim = c(1.5, 7.5))
-samples1 <- sample(rhino.pop$Yi, size = 2*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 2))
-smeans <- apply(samples1, 1, mean)
-hist(smeans, breaks = seq(from = 1.5, to = 7.5, by = 0.25))
-hist(smeans, breaks = seq(from = 1.5, to = 7.5, by = 0.2))
-samples1 <- sample(rhino.pop$Yi, size = 4*9000, replace = TRUE)
-samples1 <- t(matrix(samples1, 4))
-smeans <- apply(samples1, 1, mean)
-hist(smeans, breaks = seq(from = 1.5, to = 7.5, by = 0.25))
-par(mfrow = c(2, 3))
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages")
-}
-par(mfrow = c(2, 3))
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab",
-density = 100)
-}
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab",
-density = 10)
-}
-par(mfrow = c(1, 1))
-par(mfrow = c(2, 3))
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab")
-}
-par(mfrow = c(1, 1))
-par(mfrow = c(2, 3))
-opar=par(ps=18)  # Make text 18 point
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab")
-}
-opar
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab")
-}
-opar
-par(mfrow = c(1, 1))
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab")
-}
-par(mfrow = c(2, 3))
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
-smeans <- apply(samples1, 1, mean)
-hist(smeans,
-breaks = seq(from = 1.5, to = 7.5, by = 0.25),
-main = "",
-xlab = "Sample averages",
-col = "olivedrab")
-}
-paste("r = ", i)
-ss <- paste("r =", i)
-paste("r =", i)
-par(mfrow = c(2, 3))
-opar = par(ps=18)  # Make text 18 point
-for(i in c(1, 2, 4, 8, 16, 32)){
-samples1 <- sample(rhino.pop$Yi, size = i * 9000, replace = TRUE)
-samples1 <- t(matrix(samples1, i))
 smeans <- apply(samples1, 1, mean)
 ss <- paste("r =", i)
 hist(smeans,
@@ -510,3 +325,188 @@ bookdown:::serve_book()
 install.packages("servr")
 bookdown:::serve_book()
 servr::daemon_stop("4747113896")
+mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
+Door2 = c("Aldebaran", "Car", "Casiopeia"),
+Door3 = c("Aldebaran", "Casiopeia", "Car"))
+mhGoats
+mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
+Door2 = c("Aldebaran", "Car", "Casiopeia"),
+Door3 = c( "Casiopeia", "Aldebaran","Car"),
+ResultIfSwitch = c("Goat", "Car", "Car"))
+mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
+Door2 = c("Aldebaran", "Car", "Casiopeia"),
+Door3 = c( "Casiopeia", "Aldebaran","Car"),
+ResultIfSwitch = c("Goat", "Car", "Car"))
+mhGoats
+mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
+Door2 = c("Casiopeia", "Car", "Aldebaran"),
+Door3 = c( "Casiopeia", "Aldebaran","Car"),
+ResultIfSwitch = c("Goat", "Car", "Car"))
+mhGoats
+mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
+Door2 = c("Casiopeia", "Car", "Aldebaran"),
+Door3 = c("Aldebaran", "Casiopeia", "Car"),
+ResultIfSwitch = c("Goat", "Car", "Car"))
+mhGoats
+mhGoats <- data.frame(Door1 = c("Car", "Goat", "Goat"),
+Door2 = c("Goat", "Car", "Goat"),
+Door3 = c("Goat", "Goat", "Car"),
+ResultIfSwitch = c("Goat", "Car", "Car"))
+mhGoats <- data.frame(Door1 = c("Car", "Goat", "Goat"),
+Door2 = c("Goat", "Car", "Goat"),
+Door3 = c("Goat", "Goat", "Car"),
+ResultIfSwitch = c("Goat", "Car", "Car"))
+mhGoats
+mhGoats
+knitr::include_graphics("images/CH2Windows.png")
+knitr::include_graphics("images/CH2Windows.png")
+knitr::include_graphics("images/CH2Windows.png")
+knitr::include_graphics("images/CH2Console.png")
+knitr::include_graphics("images/CH2Console2.png")
+knitr::include_graphics("images/CH2IncompleteError.png")
+knitr::include_graphics("images/CH2Error.png")
+knitr::include_graphics("images/CH2RunChunk.png")
+knitr::include_graphics("images/CH2RmdSave.png")
+```{r BasicFunctions, echo=FALSE}
+#two ways to calculate the sum of 1 and 5
+1 + 5
+sum(c(1,5))
+#two ways to calculate the mean of 8, 4, and 6
+(8 + 4 + 6) / 3
+mean(c(8,4,6))
+knitr::include_graphics("images/CH2RmdSave.png")
+knitr::include_graphics("images/CH2htmlSave.png")
+knitr::include_graphics("images/CH2WD.png")
+knitr::include_graphics("images/CH2Plot.png")
+knitr::include_graphics("images/CH2Packages.png")
+mymatrix <- cbind(myvector, myvector2)
+mymatrix
+mymatrix <- cbind(myvector, myvector2)
+myvector <- c(1,2,3)
+myvector
+myvector2 <- c("one","two","three")
+myvector2
+help(c) #help() allows you to search for a description of a given function
+mymatrix <- cbind(myvector, myvector2)
+mymatrix
+help(cbind)
+mydataframe <- as.data.frame(cbind(myvector, myvector2))
+mydataframe
+help(as.data.frame)
+knitr::include_graphics("images/CH2Import2.png")
+plotPoly <- function(b0, b1, b2, b3, xmin, xmax){ # name function and arguments
+x <- seq(from = xmin, to = xmax, length.out = 100) # create x values
+y <- b0 + b1 * x + b2 * x^2 + b3 * x^3 # calculate y values
+plot(y ~ x, type = "l") # plot the results
+}
+plotPoly(b0 = 1, b1 = 0.5, b2 = 0.03, b3 = -0.01, xmin = -5, xmax = 10)
+plotPoly(b0 = 1, b1 = 0.5, b2 = 0.03, b3 = -0.01, xmin = -10, xmax = 10)
+a <- c(1, 2, 3, 4, 5)
+b <- c(10, 20, 30, 40, 50)
+a + 100
+## [1] 101 102 103 104 105
+a + b
+## [1] 11 22 33 44 55
+(a + b) / 10
+a <- 1:5
+b <- 1:5
+ab.sum <- a + b
+ab.diff <- a - b
+ab.prod <- a * b
+ab.sum
+## [1]  2  4  6  8 10
+ab.diff
+## [1] 0 0 0 0 0
+ab.prod
+mydata <- data.frame(Y1 = c("treatment 1", "treatment 2", "treatment 3"), Y2 = c(35, 23, 30)) # Create data frame with 2 columns and 3 rows
+mydata # see the contents of the data frame
+str(mydata) # see the structure of the data frame
+class(mydata) # see the class of the data frame
+library(pander) # we need to install pander first
+pander(mydata, caption = "Table showing my data.") #pander() creates a table for the data
+clover <- read.csv("Datasets/Lab01clover.txt", header = TRUE) # read in data.
+help(clover) # Read about the nature of the data set.
+(avg.lnwt <- mean(clover$lnwt)) # obtain the average lnwtance; note the use of $ to select parts of an object and the outer parentheses to display the result.
+(med.lnwt <- median(clover$lnwt)) # median or 50th percentile
+quantile(clover$lnwt, 0.5) # 50th percentile is the same as the median
+(var.lnwt <- var(clover$lnwt)) # variance
+(std.lnwt <- sd(clover$lnwt)) # standard deviation
+sum(clover$lnwt)/length(clover$lnwt) # manual calculation of average
+sum( (clover$lnwt - avg.lnwt) ^ 2 ) / (length(clover$lnwt) - 1)
+(rng.lnwt <- range(clover$lnwt)) # output is a vector of lenght 2
+min(clover$lnwt) # minimum braking lnwtance
+max(clover$lnwt) # maximum braking lnwtance
+(cv.lnwt <- std.lnwt / avg.lnwt) # coefficient of variation
+```{r ps freqhist, echo = TRUE, include = TRUE}
+(sample.size <- length(clover$lnwt))
+(nbins <- max(8, (1 + log(sample.size, 2)))) # we round down for bins
+clover$bin <- cut(clover$lnwt, breaks = nbins) # create column with bin
+(freq.table <- as.data.frame(xtabs( ~clover$bin))) # creates frequency table
+pander(freq.table) # format the table a little better
+plot(freq.table, xlim = c()) # make histogram "by hand"
+hist(clover$lnwt) # by default it uses Sturges rule for bins.
+summary(clover$lnwt) # summary of a numeric variable or vector
+class(clover$lnwt) # a numeriv vector contains real numbers
+summary(clover$bin) # this is a character variable coded as a factor
+class(clover$bin)
+summary(clover) # gives the summary for all variables
+class(summary(clover)) # This is functional programming; nested functions
+mode(summary(clover))
+str(summary(clover)) # See the inside of an object!!
+summary(clover)[1,1] # get the first element of the table
+summary(clover)[1,] # get the first row of the summary table
+summary(clover)[,1] #  get the first column of the summary table
+myrange.factor = 1.5 # save number in a named object for later use
+boxplot(clover$lnwt, range = myrange.factor)
+text(x = 0.70, y = median(clover$lnwt), label = "Median")
+boxplot(clover$lnwt, range = myrange.factor)
+clover$lnwt
+plot(clover$lnwt)
+boxplot(clover$lnwt)
+boxplot(clover$lnwt, range = 1)
+boxplot(clover$lnwt, range = 1)
+boxplot(clover$lnwt, range = 1.5)
+boxplot(clover$lnwt, range = 1.5)
+myrange.factor
+boxplot(clover$lnwt, range = myrange.factor)
+boxplot(clover$lnwt, range = myrange.factor)
+boxplot(clover$lnwt, range = 1.5)
+boxplot(clover$lnwt, range = 1.5)
+boxplot(clover$lnwt, range = 1.5)
+boxplot(clover$lnwt, range = 1.5)
+boxplot(clover$lnwt, range = 1.5)
+boxplot(clover$lnwt, range = 1.5)
+myrange.factor <- 1.5
+boxplot(clover$lnwt, range = myrange.factor)
+text(x = 0.70, y = median(clover$lnwt), label = "Median")
+boxplot(clover$lnwt, range = myrange.factor)
+myrange.factor = 1.5 # save number in a named object for later use
+boxplot(heifer$Birth_Wt, range = myrange.factor)
+myrange.factor <- 1.5
+boxplot(clover$lnwt, range = myrange.factor)
+text(x = 0.70, y = median(clover$lnwt), label = "Median")
+text(x = 0.65, y = quantile(clover$lnwt, 0.75), label = "3rd quartile or 75% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.75), label = "Upper Hinge")
+text(x = 0.65, y = quantile(clover$lnwt, 0.25), label = "1st quartile or 25% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.25), label = "Lower Hinge")
+myrange.factor = 0.5
+boxplot(clover$lnwt, range = myrange.factor)
+text(x = 0.70, y = median(clover$lnwt), label = "Median")
+text(x = 0.65, y = quantile(clover$lnwt, 0.75), label = "3rd quartile or 75% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.75), label = "Upper Hinge")
+text(x = 0.65, y = quantile(clover$lnwt, 0.25), label = "1st quartile or 25% quantile")
+text(x = 1.30, y = quantile(clover$lnwt, 0.25), label = "Lower Hinge")
+(iqrange <- IQR(clover$lnwt)) # Calculate the interquartile range
+(uplimit <- quantile(clover$lnwt, 0.75) + myrange.factor * iqrange)
+(rows.where.lt.uplimit <- which(clover$lnwt <= uplimit)) # gives row numbers of those that are less than uplimit
+clover$lnwt[rows.where.lt.uplimit] # gives lnwt in those rows
+(up.fence <- max(clover$lnwt[rows.where.lt.uplimit])) # gives the value we seek
+(outl <- clover$lnwt[clover$lnwt > up.fence]) # We have outliers!
+text(x = 0.65, y = up.fence, label = "Upper Fence")
+sumry.by.temp
+sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summary
+)
+sumry.by.temp
+pander(sumry.by.temp)
+class(sumry.by.temp)
+str(sumry.by.temp)
