@@ -33,7 +33,7 @@ In both tests, we calculate a $\chi^2$ test statistic based the differences betw
 
 ADD: PLOT OF CHI SQUARE HERE
 
-##Goodness of Fit: Discrete distributions
+## Goodness of Fit: Discrete distributions
 
 In goodness of fit tests for discrete distributions, we are dealing with a single random variable with discrete classes.  Supposed we take a sample from a population with k different classes for the random variable.  We have an expected theoretical probability distribution across the k classes and want to test the "goodness of fit" of the population to the theoretical distribution using our sample.  
 Our data would consist of k observed frequencies ($O_1:O_k$), which we would compare to k expected frequencies ($E_1:E_k$).  Then we can calculate $\chi^2$ as
@@ -181,7 +181,7 @@ chisq.test(x = x, p = p)
 
 You can see that all results from the chisq.test() function match our calculations exactly.  
 
-##Goodness of Fit: Continuous distributions
+## Goodness of Fit: Continuous distributions
 
 We often wish to know if our data follows a particular continuous probability distribution.  One common application of a $\chi^2$ goodness of fit test for a continuous distribution is to test if continuous data follows a normal distribution.  
 
@@ -364,7 +364,7 @@ pchisq(chiSq, k-3, lower.tail = F)
 
 We can see that our $\chi^2$ test statistic is much smaller than the critical value and that p > 0.05, so we fail to reject the null hypothesis that the log of the cat heart weight data is normally distributed.
 
-##The $\chi^2$ Test of Independence: Contingency Tables
+## The $\chi^2$ Test of Independence: Contingency Tables
 
 The test of independence is related to the goodness of fit test. Just as in goodness of fit tests, we are concerned with observed frequencies versus expected frequencies under a theoretical model.  The theoretical model in the case of the test of independence is specifically that two categorical variables are independent. The categorical variables each have a number of classes. When we classify our observations according to the two variables in a two way table with j rows and k columns, then we create a **contingency table**.  For such a contingency table, $df = (j-1)(k-1)$.
 
@@ -510,7 +510,7 @@ We can use the $\chi^{2}$ distribution to test for a relationship between two ca
 
 To perform this test of independence, we will (1) create a contingency table, (2) calculate the frequencies we would expect to observe if cultivar type and number of seeds are independent, (3) calculate a $\chi^{2}$ test statistic that contains information about the deviation of our observations from what is expected under $H_{0}$ , and finally (4) compare the $\chi^{2}$ test statistic against the critical $\chi^{2}$ value to decide if we reject or fail to reject $H_{0}$
 
-###Part 1 Create contingency table
+#### Part 1. Create contingency table
 
 The first step in performing a test of independence is to build a **contingency table** with j rows and k columns. One variable is classed into j factor levels in the rows, and the second variable is classed into k factor levels in the columns.  The frequencies of each combination of attributes between the two variables fill the table and are used to calculate the marginal totals for each attribute.
 
@@ -536,7 +536,7 @@ olives <- read.csv("./Datasets/olives.csv")
 1D) State the null and alternative hypotheses.
 
 
-###Part 2: Expected Frequencies
+#### Part 2. Expected Frequencies
 
 We have a table of our observed frequencies, but how do we calculate what we would have expected if No.Seeds is independent of cultivar type? Under the $H_{0}$, we would expect the joint probability of each cell in our contingency table to be based on the probability of two independent "events" (represented by the row and column categories) happening together. The probability of two independent events occuring simultaneously is simply the multiplication of the probabilities of each independent event. For example, if $H_{0}$ is true, the probability that an olive fruit randomly sampled from this population of olive plants is both an Ascolana Tenera cultivar **and** contains 2 seeds is equal to the probability of being an Ascolana Tenera cultivar type multiplied by the probability of having 2 seeds.  We estimate these probabilities using the marginal totals we calculated above divided by the total number of plants we sampled.
 
@@ -589,7 +589,7 @@ jprobs["Picholine", ] <- cultp["Picholine"] * seedp
 
 2D) Explain in your own words how we use probability theory to calculate expected frequencies if number of seeds was independent of cultivar type.
 
-###Part 3 Calculate $\chi^{2}$
+#### Part 3. Calculate $\chi^{2}$
 
 The $\chi^{2}$ values are calculated from the square of the differences between the observed and expected frequencies, weighted by the expected frequencies.  
 
@@ -616,7 +616,7 @@ $$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$
 3C) What was the direction of difference between the observed and expected frequencies in the the cells you named for 3B? Based on this observation, if it is desirable to have more seeds per olive because this yields a larger fruit with a higher pulp/pit ratio [@PierantozziPierluigi2012PaCI], what cultivar(s) would you recommend to olive farmers to maximize profits? 
 
 
-###Part4 Results
+#### Part 4. Results
 
 4A) Calculate the degrees of freedom
 4B) Calculate the critical $\chi^{2}$ value
@@ -627,7 +627,7 @@ $$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$
 
 #Calculate the degrees of freedom
 j <- nrow(olivect); k  = ncol(olivect)
-df <- (j-1)*(k-1)
+df <- (j - 1) * (k - 1)
 
 #Calculate the critical value
 (crit <- qchisq(0.95, df))
@@ -652,7 +652,7 @@ chisq.test(olivect)
 
 
 
-###Animal Sciences
+### Animal Sciences
 
 
 We can use the $\chi^{2}$ distribution to test for a relationship between two categorical variables.  This type of test is called a *test of independence*. We specifically test the null hypothesis that there is statistical independence between the two categorical variables.  A sample of 111 mice was divided into three groups, 57 that received a standard dose of pathogenic bacteria followed by antiserum, 58 that received the same dose of bacteria, followed by an experimental treatment, and a control group of 54 that received the bacteria, but no treatment. After sufficient time had elapsed for an incubation period and for the disease to run its course, 45 dead mice and 124 survivors were counted. Of those that died, 13 had received bacteria and antiserum, 7 had received the experimental treatment, while 25 had received bacteria only. A question of interest is if the antiserum had in any way protected the mice so that there were proportionally
@@ -660,7 +660,7 @@ more survivors in that group.
 
 To perform this test of independence, we will (1) create a contingency table, (2) calculate the frequencies we would expect to observe if cultivar type and number of seeds are independent, (3) calculate a $\chi^{2}$ test statistic that contains information about the deviation of our observations from what is expected under $H_{0}$ , and finally (4) compare the $\chi^{2}$ test statistic against the critical $\chi^{2}$ value to decide if we reject or fail to reject $H_{0}$
 
-###Part 1 Create contingency table
+#### Part 1. Create contingency table
 
 The first step in performing a test of independence is to build a *contingency table* with j rows and k columns. One variable is classed into j factor levels in the rows, and the second variable is classed into k factor levels in the columns.  The frequencies of each combination of attributes between the two variables fill the table and are used to calculate the marginal totals for each attribute.
 
@@ -686,7 +686,7 @@ mice <- read.csv("./Datasets/mice.csv")
 1D) State the null and alternative hypotheses.
 
 
-###Part 2: Expected Frequencies
+#### Part 2. Expected Frequencies
 
 We have a table of our observed frequencies, but how do we calculate what we would have expected if the survival of mice is independent of treatment? Under the $H_{0}$, we would expect the joint probability of each cell in our contingency table to be based on the probability of two independent "events" (represented by the row and column categories) happening together. The probability of two independent events occuring simultaneously is simply the multiplication of the probabilities of each independent event. For example, if $H_{0}$ is true, the probability that a mice randomly sampled from this population of olive plants would receive the control treatment *and* remain alive is equal to the probability of receiving the control treatment multiplied by the probability of remaining alive.  We estimate these probabilities using the marginal totals we calculated above, divided by the total number of mice we sampled.
 
@@ -740,7 +740,7 @@ jprobs["control", ] <- treatp["control"] * survp
 
 2D) Explain in your own words how we use probability theory to calculate expected frequencies if survival outcome was independent of treatment type.
 
-###Part 3 Calculate $\chi^{2}$
+#### Part 3. Calculate $\chi^{2}$
 
 The $\chi^{2}$ values are calculated from the square of the differences between the observed and expected frequencies, weighted by the expected frequencies.  
 
@@ -752,7 +752,7 @@ $$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$
 
 ```{r}
 
-#Calculate chi square values for each cell:
+# Calculate chi square values for each cell:
 
 (chisqtable <- (micect - miceExp)^2 / miceExp)
 
@@ -767,7 +767,7 @@ $$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$
 3C) What was the direction of difference between the observed and expected frequencies in the the cells you named for 3B? Based on this observation, what treatment type would you recommend to control the pathogenic bacteria? 
 
 
-###Part4 Results
+#### Part 4. Results
 
 4A) Calculate the degrees of freedom
 4B) Calculate the critical $\chi^{2}$ value
@@ -776,21 +776,22 @@ $$\chi^{2} = \Large\Sigma \space\small\frac{(observed - expected)^2} {expected}$
 
 ```{r}
 
-#Calculate the degrees of freedom
+# Calculate the degrees of freedom
 j <- nrow(micect); k  = ncol(micect)
-df <- (j-1)*(k-1)
+df <- (j - 1) * (k - 1)
 
-#Calculate the critical value
+# Calculate the critical value
 (crit <- qchisq(0.95, df))
 
-#Is our test statistic equal to or greater than our critical value?
+# Is our test statistic equal to or greater than our critical value?
 chisq >= crit
 
-#You could also simply get the p value to use as your decision rule:
+# You could also simply get the p value to use as your decision rule:
 (pvalue <- pchisq(chisq, df, lower.tail = F))
 
 
-#We just performed a test of independence by hand, but R actually has a single function that will do it all at once for you:
+# We just performed a test of independence by hand, but R actually has a single 
+# function that will do it all at once for you:
 chisq.test(micect)
 
 
@@ -799,8 +800,5 @@ chisq.test(micect)
 **ANSWER THE FOLLOWING QUESTIONS:**
 
 4E) Write a conclusion. Include the test statistic, p value, whether or not you reject the null hypothesis, and a statement or two about what recommendations you would make based your results.  
-
-
-
 
 

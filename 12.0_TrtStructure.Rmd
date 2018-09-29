@@ -1581,7 +1581,7 @@ df.num <- 1
 
 ```
 
-**Trends**
+## Trends {#Trends}
 
 In the nitrogen by irrigation fertilization experiment (Table \@ref(tab:IxNAnova)) there are 9 df for treatments that are partitioned into 1 df for irrigation, 4 df for nitrogen and 4 df for the irrigation x nitrogen interaction. Thus, the corresponding SS can be partitioned into a total of 9 orthogonal contrasts: 1 for irrigation, 4 for nitrogen and 4 for the interaction. The specific contrasts are not unique, and we can design them to answer specific biological questions. A natural way to partition SS and df in the nitrogen by irrigation factorial is as follows:
 
@@ -1757,9 +1757,9 @@ In this exercise we analyze the data resulting from an experiment at the UC Davi
 Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observations in blocks 1, 2 and 3 to show block effects. Blocks were defined areas that were more or less homogeneous in soil and plant properties and that were contiguous. We will assume that the variances of the errors or residuals are the same in all treatments. Each observation represents the average mass of seeds produced by 4-5 medusahead plants (logMass). Data were log transformed as $logMass = log(SeedMass + 0.2)$ to achieve normality and equality of variances.
 
 
-#### Part 1. Factorial ANOVA using R functions [ points]
+#### Part 1. Factorial ANOVA using R functions [45 points]
 
-##### 1a. Random assignment of treatments to plots
+##### 1a. Random assignment of treatments to plots [15 points]
 
 In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block. Because we ignore the water factor, treatments will have 2 replicate plots in each block, one for each original level of the water factor. There are a total of 6 treatments that resulf from the combination each level of the factor "nitrogen" (n and N) with each of the three levels of the factor "seeding" (s, S and E). The treatments are identified by the two letters together. For example. NE is the treatment with addition of nitrogen and at the egde between naturalized annual and seeded native perennial grasses.
 
@@ -1803,7 +1803,7 @@ In the second step, plots in each block are labeled with the numbers 1 through 1
 
 ```
 
-##### 1.b Add columns with factor levels to the data
+##### 1.b Add columns with factor levels to the data [15 points]
 
 Treatments were applied, plantts grown and measured. Data were collected and organized, and we enter them below. Because the data have the labels for the original treatments, we need to split the labels into the columns that correspond to nitrogen and seeding treatment. In order to analyze the experiment as a factorial of nitrogen x seeding, each factor has to be in a separate column.
 
@@ -1871,7 +1871,7 @@ seedF$NStreat <- factor(paste(seedF$nitro, seedF$seeding, sep = ""))
 ```
 
 
-##### 1.c Perform a test of the Ho that all treatment means are equal.
+##### 1.c Perform a test of the Ho that all treatment means are equal [15 points]
 
 For this part you need to test the null hypotheses that:
 - there are no interactions between nitrogen and seeding,
@@ -1919,7 +1919,7 @@ c) Do we reject or fail to reject the following null hypothesis for the RCBDF mo
 Ho: There is no interaction between nitrogen and seeding affecting medusahead seed mass?
 
 
-#### Part 2. Factorial ANOVA detailed calculations [ points]
+#### Part 2. Factorial ANOVA detailed calculations [30 points]
 
 Create a new column in the data for each of the following:
 - overall average
@@ -2027,7 +2027,7 @@ pander(anova(rcbdF.mod))
 ```
 
 
-#### Part 3. Multiple comparison of means using Fisher's PLSD [ points]
+#### Part 3. Multiple comparison of means using Fisher's PLSD [25 points]
 
 Fisher’s Protected Least Significant Difference is the LSD that is applied only if the overall F test is significant. In this section you need to calculate the Least Significant differences for nitro, seeding and nitro x seeding levels. For each one, construct a table that shows the means that are NOT significantly different connected by a common letter.
 

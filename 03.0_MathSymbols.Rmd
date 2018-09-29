@@ -10,7 +10,7 @@ output:
 
 # Required Math Skills and Symbols {#chMath}
 
-In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we explore ito equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc. and the formulation of specific models are not the main points, and they will be presented later in more detail.
+In this chapter we introduce most of the mathematics and symbols that are used in the book. We start with the concept and symbols for summation used to represent sums of many numbers generally and succinctly. We use simple numerical examples for which we give the mathematical equations and the corresponding R code to perform the operations. In order to present the symbols in a context that is relevant for the rest of the book, we explore equations for averages and variances, and we present models. At this point, the definitions of mean, variance, etc., and the formulation of specific models are not the main focus, and they will be presented later in more detail.
 
 A **key point** in this chapter is that 
 
@@ -18,7 +18,7 @@ A **key point** in this chapter is that
 - In statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.
 ```
 
-The chapter develops a couple of models of increasing complexity and uses those to present the equations, symbols and mathematical concepts that are used throughout the rest of the book.
+This chapter develops models of increasing complexity and uses them to present the equations, symbols, and mathematical concepts that are used throughout the rest of the book.
 
 A second **key point**, related to the first one, is that 
 
@@ -28,7 +28,7 @@ A second **key point**, related to the first one, is that
 
 We do not know parameter values because we rarely know or even have access to the whole population, which would be necessary to "measure" a parameter like the true mean. Even if we had access to the whole population to measure each individual, we would not know parameter values with certainty, because measurements always have "errors." Measurements are imperfect because measuring instruments have limited precision, and because they are used by "imperfect" humans that make all sorts of errors. The imperfection of measurements should rarely be an issue for the topics covered in this course, and our focus is on estimation of unknown parameters. However, when dealing with chaotic systems, for example in weather forecasting, the imprecision of the measurements is a major limitation, because even minute errors in measurement grow exponentially over time. Although the physical properties of the atmosphere are well known, the imperfection of measurements prevent long-term prediction of specific weather with high confidence.
 
-In reading this chapter, focus on the symbols and concepts. In addition to --and better before-- doing the exercises, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend that you write down the equations as as you read them, and then try to reproduce them from memory and a description of the calculation (e.g. sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate attention to the symbols and details of each equation, and will reveal those aspects that are not yet clear to you.
+In reading this chapter, focus on the symbols and concepts. Before doing the exercises for this chapter, students should make sure that they can reproduce the tables of symbols with subscripts, and the symbols for specific table elements and sums of elements. We recommend that you write down the equations as you read them, and then try to reproduce them from memory and a description of the calculation (e.g., sum of all moisture values for corn in fields 3 through 7). This will greatly facilitate understanding and interpretation of the symbols and details of each equation, and will reveal those aspects that are not yet clear to you.
 
 ## Learning Objectives for Chapter {#mathObj}
 
@@ -36,8 +36,7 @@ In reading this chapter, focus on the symbols and concepts. In addition to --and
 1. Read and interpret mathematical equations.
 1. Identify random and fixed components of statistical models.
 1. Pair symbols with corresponding concepts or definitions.
-1. Express sums using summation symbol and expand sums defined with the summation symbol.
-1. Calculate sum of squared deviations for a set of numbers.
+1. Express sums using the summation symbol and expand sums defined with the summation symbol.
 1. Identify the symbols that correspond to standard deviation, variance, population mean, and sample average.
 1. List different strategies we can use to find the optimal value for an unknown parameter.
 1. Identify and write down polynomials and linear combinations of parameters.
@@ -45,75 +44,89 @@ In reading this chapter, focus on the symbols and concepts. In addition to --and
 
 ## Data Columns and Summation {#mathSum}
 
-Summations, the sum of several numbers that are organized with subscripts, is used all the time in statistics. In order to be able to read equations and understand the concepts in them, you have to be familiar with summations. The Greek letter capital sigma $\Sigma$ is used to represent summation. For example, $\sum_{i=1}^{4} Y_i$ represents the sum $Y_1 + Y_2 + Y_3 + Y_4$. Sometimes, for simplicity, when we want to sum over all possible values of the subscript $i$ from $i = 1$ to the maximum but unspecified value of $i = k$, we write $\sum_{i=1}^k Y_i$, meaning "sum of all values of $Y_i$."
+Summations, the sum of several numbers that are organized with subscripts, are used frequently in statistics. To be able to read equations and understand the concepts in them, you have to be familiar with summations. The Greek letter for capital sigma, $\Sigma$, is used to represent summation. For example, $\sum_{i=1}^{4} Y_i$ represents the sum $Y_1 + Y_2 + Y_3 + Y_4$. Sometimes, for simplicity, when we want to sum over all possible values of the subscript $i$ from $i = 1$ to the maximum but unspecified value of $i = k$, we write $\sum_{i=1}^k Y_i$, meaning "sum of all values of $Y_i$."
 
 We can write a symbol for all the $Y_i$ to avoid having to write each one of them. All the values of $Y$ in the correct order constitute a *vector* of values. We use bold letters to refer to vectors. Suppose we have a vector with the numbers 7, 5, 9 and 6. We write this as:
 
+<br>
 \begin{equation}
 \mathbf{Y} = \begin{pmatrix} Y_1 & Y_2 & Y_3 & Y_4 \end{pmatrix} = \begin{pmatrix} 7 & 5 & 9 & 6 \end{pmatrix} = \left( Y_i \right) \quad i = 1, \dots, 4
 (\#eq:math01)
 \end{equation}
+<br>
 
 
-where it is implied that $Y_1 = 7$, $Y_2 = 5$, $Y_3 = 9$ and $Y_4 = 6$. There are no calculations or concepts here other than the fact that vectors are sets of numbers with order, and that we can refer to them with symbols. In R we can define the vector and give it values using the `c` function, which stands for "combine."
+where it is implied that $Y_1 = 7$, $Y_2 = 5$, $Y_3 = 9$ and $Y_4 = 6$. There are no calculations or concepts here other than the fact that vectors are sets of numbers with order, and that we can refer to them with symbols. In R we can define the vector and give it values using the `c` function, which stands for "combine," as follows:
 
-```{r}
+```{r, message=FALSE}
 Y <- c(7, 5, 9, 6)
 print(Y)
-# The "[1]" on the left simply indicates that 7 is the first element in the vector.
+# The "[1]" on the left simply indicates that 7 is the first element in the output.
 ```
 
-These summation equations have parallels in R code. In R, we put all values of Y in a vector, and the subscripts are automatically assigned based on the position of each value of Y. You can think of the vector being a column, so the positions of the vector elements are the row numbers.
+These summation equations have parallels in R code. In R, we put all values of Y in a vector, and the subscripts are automatically assigned based on the position of each value of Y.
 
-We can refer to each element in Y by using its row number or index number inside brackets and right next to the name of the vector. For example, `Y[2]` is the second element of Y, which is the number 5. Using different expressions instead of a single number we can extract any parts of Y we need to operate with.
+We can refer to each element in the vector Y by using its index number inside brackets and right next to the name of the vector. For example, `Y[2]` is the second element of Y, which is the number 5. Using different expressions instead of a single number, we can extract any parts of Y we need to operate with.
 
-```{r}
+```{r, message=FALSE}
 # Extract the third element of Y
 Y[3]
 # The "[1]" on the left simply indicates that 3 is the first element 
-# in the vector represented by the third element of Y.
+# in the requested output.
 
 # Extract elements 2 to 3 of Y
 Y[2:3]
 # The "[1]" on the left simply indicates that 5 is the first element 
-# in the vector represented by the third and forth elements of Y.
+# in the requested output 
+# The ":" symbol indicates that you would like to retrieve
+# the 2nd to the 3rd elements of Y. "2:4" would retrieve
+# elements 2, 3, and 4.
+
 
 # Extract elements 1, 3 and 4 of Y
 Y[c(1, 3:4)]
+# We used the c() function again to combine elements.
+# In this case, we combined the index numbers 1, 3, and 4.
 
 ```
 
 
 Consider the following to get an idea of what the symbols mean and how they work.
 
+<br>
 \begin{equation} 
 \sum\mathbf{Y} = \sum_{i=1}^{i=4} Y_i = Y_1 + Y_2 + Y_3 + Y_4 = 7 + 5 + 9 + 6 = 27
 (\#eq:math02)
 \end{equation} 
+<br>
 
-Because most R operations are vectorized, if we want to use the whole vector we do not need to specify subscripts, R takes `sum(Y)` to mean "sum all elements of Y." To sum parts of a vector we need to use the extraction method.
+Because most R operations are vectorized, if we want to use the whole vector, we do not need to specify subscripts, R takes `sum(Y)` to mean "sum all elements of Y." To sum parts of a vector we need to use the extraction methods described above.
 
-```{r}
+```{r, message=FALSE}
 sum(Y)
 ```
 
+<br>
 \begin{equation} 
 \displaystyle\sum_{i=2}^{i=4} Y_i = Y_2 + Y_3 + Y_4 = 5 + 9 + 6 = 20
 (\#eq:math03)
 \end{equation} 
+<br>
 
-```{r}
+```{r, message=FALSE}
 sum(Y[2:4])
 ```
 
 The subscripts for summations can themselves be equations, which makes these formulas very versatile, although in this course we will not be using many complicated subscripts.
 
+<br>
 \begin{equation} 
 \displaystyle\sum_{i=1}^{i=3} Y_{i} = \displaystyle\sum_{i=2}^{i=4} Y_{i-1} = Y_1 + Y_2 + Y_3 = 7 + 5 + 9 = 21
 (\#eq:math04)
 \end{equation} 
+<br>
 
-
+<br>
 \begin{equation} 
 \begin{aligned}
 \displaystyle\sum_{i=1}^{i=3} \left( Y_{i} + Y_{i+1} \right) &= \left( Y_1 + Y_2 \right) + \left( Y_2 + Y_3 \right) + \left( Y_3 + Y_4 \right) \\ &= 
@@ -122,10 +135,11 @@ Y_1 + Y_2 + Y_2 + Y_3 + Y_3 + Y_4 \\ \\ &=
 \end{aligned}
 (\#eq:math05)
 \end{equation} 
+<br>
 
 As usual, there are many ways to achieve a task in R. To perform the sum above we can use the following alternatives:
 
-```{r}
+```{r, message=FALSE}
 sum(Y[1:3] + Y[2:4])
 sum(Y[1:3]) + sum(Y[2:4])
 i <- 1:3
@@ -133,14 +147,16 @@ sum(Y[i] + Y[i + 1])
 
 ```
 
-In order to explain further properties of the summation, let's use a second vector represented by the letter $\mathbf{X}$, where
+In order to explain further properties of the summation notation, let's use a second vector represented by the letter $\mathbf{X}$, where
 
+<br>
 \begin{equation} 
 \mathbf{X} = \begin{pmatrix} X_1 & X_2 & X_3 & X_4 \end{pmatrix} = \begin{pmatrix} 3 & 2 & 4 & 5 \end{pmatrix} = \left( X_i \right) \quad i = 1, \dots, 4
 (\#eq:math06)
 \end{equation} 
+<br>
 
-```{r}
+```{r, message=FALSE}
 X <- c(3, 2, 4, 5)
 print(X)
 ```
@@ -148,6 +164,7 @@ print(X)
 
 The notation is very general and can be used to express sums like the following sum of products of corresponding elements in $\mathbf{X}$ and $\mathbf{Y}$:
 
+<br>
 \begin{equation} 
 \begin{aligned}
 \displaystyle\sum_{i=1}^{i=4} (X_{i} \ Y_{i}) 
@@ -156,13 +173,17 @@ The notation is very general and can be used to express sums like the following 
 \end{aligned}
 (\#eq:math07)
 \end{equation}
+<br>
 
-```{r}
+```{r, message=FALSE}
 sum(X * Y) # R understands what you mean
 
 # Optional learning:
 
-X %*% Y # the same operation in matrix algebra yields a 1x1 matrix
+X %*% Y 
+# the same operation in matrix algebra yields a 1x1 matrix. You can see the output 
+# has a row [1,] and column index [,1] for the single number, indicating it is a matrix, 
+# an R object class that is described below.
 
 
 ```
@@ -170,13 +191,14 @@ X %*% Y # the same operation in matrix algebra yields a 1x1 matrix
 
 ## Two-dimensional Data Tables and Summation {#math2Dtbl}
 
-The vectors $\mathbf{X}$ and $\mathbf{Y}$ used above are 1-dimensional; they are single columns of numbers. Frequently, data are organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its "address" in the table given by the row and column numbers, always in that order.
+The vectors $\mathbf{X}$ and $\mathbf{Y}$ used above are 1-dimensional; they are single columns of numbers. Frequently, data are organized in more than one dimension, as in a 2-dimensional table with rows and columns. A conventional and very clear way to represent those tables is a matrix where each element is identified by its "address" in the table, given by the row and column numbers, always in that order [row, column].
 
 > In matrices, subscripts are always row, column. \
 > $Y_{3,7}$ is the value in row 3 and column 7
 
-The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for crop and columns for fields. Note that the subscripts are not numbers with 2 digits, but two single-digit integer written together; subscript 26 does **not** mean 2 times 10 plus 6 times 1, but simply the second row and sixth column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if $Y_{162}$ is row 1 column 62 or row 16 column 2 we use $Y_{1,62}$ or $Y_{16,2}$. The comma can be omitted when neither subscript is ever greater than 9.
+The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this with an example in which soil moisture was measured under wheat, corn, and tomatoes in each of 7 fields (numbers are fictitious). The matrix is built by using rows for crop and columns for fields. Note that the subscripts are not numbers with 2 digits, but two single-digit integers written together; subscript 26 does **not** mean 2 times 10 plus 6 times 1, but simply the second row and sixth column. For situations when there are more than 9 rows and or columns, we use a separator between the row and column numbers to avoid ambiguity (for example, to be able to tell if $Y_{162}$ is row 1 column 62 or row 16 column 2 we use $Y_{1,62}$ or $Y_{16,2}$. The comma can be omitted when neither subscript is ever greater than 9. The following is an example of a 3 row x 7 column matrix filled with the soil moisture data:
 
+<br>
   \
   \
 \begin{equation} 
@@ -193,17 +215,21 @@ The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this w
  \end{pmatrix}
  (\#eq:math08)
 \end{equation}
-  \
-  \
-In R we can define a matrix or a dataframe with rows and columns. We use a dataframe because it is the most common form for data in R and in science in general. Instead of Y, in the code below we call the data "Ydata" to avoid conflicts with the names of the vectors used above. First we make vectors of data for each crop and then we join them into a data frame with the `rbind` function, which stands for "row bind."
+  
 
-```{r}
+<br>
+In R we can define a matrix or a data frame with rows and columns. We use a data frame because it is the most common form for data in R and in science in general. Instead of Y, in the code below we call the data "Ydata" to avoid conflicts with the names of the vectors used above. First we make vectors of data for each crop and then we join them into a data frame with the `rbind` function, which stands for "row bind."
+
+
+In R we can specify that 2 dimensional data (rows and columns) is either a matrix or a dataframe. In a matrix, all values in the array must be the same type of data. In a dataframe, columns can differ in the type of value they contain. For example, column 1 can contain integer numbers, while column 2 can contain character values (e.g., "wheat", "corn", etc), and column 3 can contain factor levels. We often use dataframes even when the data are all the same type of values, because dataframes are more versatile, and are the most common form of data in R and science in general. Instead of Y, in the code below we call the data "Ydata" to avoid conflicts with the names of the vectors used above. First, we make vectors of data for each crop, and then we join them into a data frame with the `rbind` function, which stands for "row bind."
+
+```{r, message=FALSE}
 wheat <- c(34, 32, 27, 37, 25, 23, 30)
 corn <- c(30, 26, 26, 33, 24, 22, 27)
-tomat <- c(29, 27, 24, 34, 23, 20, 26)
+tomato <- c(29, 27, 24, 34, 23, 20, 26)
 
 Ydata <- as.data.frame(
-   rbind(wheat, corn, tomat)
+   rbind(wheat, corn, tomato)
 )
 
 names(Ydata) <- c("field1", 
@@ -216,25 +242,29 @@ names(Ydata) <- c("field1",
 
 Ydata
 
-Ydata[5, 2] # Soil moisture for field 5 with corn
-
+Ydata[2, 5] # Soil moisture for field 5 with corn
+Ydata["corn", "field5"] # You can also directly use the row and column names to extract values.
 ```
 
-In general, for a table of values with k rows and r columns we write:
+In general, for a table of values with k rows and r columns, we write:
 
+<br>
 \begin{equation} 
 \mathbf{Y}_{k,r} = 
  \begin{pmatrix}
   Y_{1,1} & Y_{1,2} & \cdots & Y_{1,r} \\
   Y_{2,1} & Y_{2,2} & \cdots & Y_{2,r} \\
   \vdots  & \vdots  & \ddots & \vdots  \\
-  Y_{k,1} & Y_{k,2} & \cdots & Y_{k,r} 
+  Y_{i,1} & Y_{i,2} & \cdots & Y_{k,r} 
  \end{pmatrix}
 (\#eq:math09)
  \end{equation} 
+<br>
 
-If we want to average all values in the table we need to use a double summation to indicate that the sum is supposed to proceed over rows and columns (Equation \@ref(eq:math10)). As an exercise to make sure you understand the subscripts, write down the matrix $\mathbf{Y}$ with all subscripts without looking at the book.
+As an exercise to make sure you understand the subscripts, write down the matrix $\mathbf{Y}$ with all subscripts without looking at the book.  
+If we want to average all values in the table, we need to use a double summation to indicate that the sum is supposed to proceed over both rows and columns (Equation \@ref(eq:math10)). 
 
+<br>
 \begin{equation} 
 \begin{aligned}
 &\sum_{i=1}^{i=3} \displaystyle\sum_{j=1}^{j=7} \frac{Y_{ij}} {3 \times 7} = 
@@ -247,16 +277,17 @@ If we want to average all values in the table we need to use a double summation 
 &= \frac{1}{3 \times 7} \ (Y_{11} + Y_{12} + Y_{13} + Y_{14} + Y_{15} + Y_{16} + Y_{17} \\
 & \qquad \qquad + Y_{21} + Y_{22} Y_{23} + Y_{24} + Y_{25} + Y_{26} + Y_{27} \\[8pt]
 & \qquad \qquad + Y_{31} + Y_{32} + Y_{33} + Y_{34} + Y_{35} + Y_{36} + Y_{37}) \\[20pt] 
-& = \frac{1}{7 \times 3} \ (34 + 32 + 27 + 37 + 25 + 23 + 30 \\
+& = \frac{1}{3 \times 7} \ (34 + 32 + 27 + 37 + 25 + 23 + 30 \\
 & \qquad \qquad + 30 + 26 + 26 + 33 + 24 + 22 + 27 \\
 & \qquad \qquad + 29 + 27 + 24 + 34 + 23 + 20 + 26) = \frac{579}{21} = 27.57
 \end{aligned}
 (\#eq:math10)
 \end{equation}
+<br>
 
-Using R we can calculate the sums and the average very easily. Note that the functions `nrow` and `ncol` extract the number of rows and columns of a data frame or  matrix. The function `mean` yields the average for the whole table.
+Using R, we can calculate sums and averages very easily. Note that the functions `nrow` and `ncol` extract the number of rows and columns of a data frame or matrix. The function `mean` yields the average for the whole table.
 
-```{r, }
+```{r, message=FALSE}
 
 sum(Ydata) # Sums all values in table. Double summation.
 # (Works only when all columns are numeric.)
@@ -273,8 +304,9 @@ mean(as.matrix(Ydata)) # Average of all values in table
 ```
 
 
-If we just want the average for corn we specify just the row for corn (row 2) and sum over all columns for row 2. If we want the results for a field or a set of fields, we specify the corresponding column numbers. Let's calculate the average moisture for corn and then the average for fields 3, 4, 5 and 7.
+If we just want the average for corn, we extract just the row for corn (row 2) and sum over all columns for row 2. If we want the results for a field or a set of fields, we specify the corresponding column numbers. Let's calculate the average moisture for corn and then the average for fields 3, 4, 5 and 7.
 
+<br>
 \begin{equation} 
 \begin{aligned}
 &corn \ average = \frac{1}{7} \left( \sum_{j=1}^{i=7}Y_{2j} \right) \\[15pt] 
@@ -295,18 +327,21 @@ If we just want the average for corn we specify just the row for corn (row 2) an
 \end{aligned}
 (\#eq:math12)
 \end{equation}
+<br>
 
 We obtain those averages in R with the following code. Note that when we leave the place for row (or column) number empty, it is interpreted as all rows (or columns).
 
-```{r}
+```{r, message=FALSE}
 
 mean(as.numeric(Ydata[2, ])) # Average for corn across fields
-# Note that the row has to be transformed into a numeric vector
+# Note that the row has to be transformed into a numeric vector using as.numeric()
 # before it can be used with the function "mean."
 
-sum(Ydata[2, ]) # This sums all values for row 2 which is corn
+# Alternatively, you can calculate the corn row mean using the following functions:
+   
+sum(Ydata[2, ]) # This sums all values for row 2, which is corn
 
-length(Ydata[2, ]) # This calculates the value of r for corn
+length(Ydata[2, ]) # This calculates the value for r for corn
 
 sum(Ydata[2, ]) / length(Ydata[2, ]) # Average for corn
 ```
@@ -314,14 +349,14 @@ sum(Ydata[2, ]) / length(Ydata[2, ]) # Average for corn
 
 ## Models {#mathModl}
 
-In statistics we use models all the time, and it is necessary to make those models explicit. Explicit models make it easier to understand and critically evaluate the use of statistics. Specifically, we can determine what parts of the model may be inadequate to solve the problem at hand, and we can modify the model to improve it. This section of the book present a brief overview of the role of modeling in statistics. I strongly recommend <a href="http://r4ds.had.co.nz/model-basics.html" target="_blank">Chapter 24</a> of *R for Data Science* by Grolemund and Wickham [@r4ds] for a more extensive treatment of the topic.
+In statistics we use models all the time, and it is necessary to make those models explicit. Explicit models make it easier to understand and critically evaluate the use of statistics. Specifically, we can determine what parts of the model may be inadequate to solve the problem at hand, and we can modify the model to improve it. This section of the book presents a brief overview of the role of modeling in statistics. I strongly recommend <a href="http://r4ds.had.co.nz/model-basics.html" target="_blank">Chapter 24</a> of *R for Data Science* [@r4ds] for a more extensive treatment of the topic.
 
 
 ### The simplest model{#mathSmplMod}
 
 Say that we are interested in studying the milk production per dairy cow in $kg \ day^{-1}$ for all dairy cows in the US today. For example, we want to estimate what proportion of cows produce less than $24 \ kg \ day^{-1}$ to gauge the number of cows that could be targets of a program to increase productivity. One way to do this is to create a *model* for the statistical distribution of milk production, take a sample to estimate the parameters of the model and then use the model with estimated parameters to make the estimation of the proportion of cows for which production is less than $24 \ kg \ day^{-1}$ or any other quantity.
 
-A first attempt to estimate the needed proportion is to *model* milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter $Y$ to represent milk production of a cow we write $Y \sim N(\mu, \sigma^2)$, which is read "Y is a random variable with normal distribution, with mean $\mu$ and variance $\sigma^2$." Sometimes we write $\sigma$, the standard deviation, instead of $\sigma^2$. Obviously, the standard deviation is the square root of the variance.
+A first attempt to estimate the needed proportion is to *model* milk production per cow as a normal distributed random variable with unknown mean and variance. Using the letter $Y$ to represent milk production of a cow, we write $Y \sim N(\mu, \sigma^2)$, which is read "Y is a random variable with normal distribution, with mean $\mu$ and variance $\sigma^2$." Sometimes we write $\sigma$, the standard deviation, instead of $\sigma^2$. Obviously, the standard deviation is the square root of the variance. 
 
 The model is not correct, and it could not be correct, for a number of reasons. First, normal distributions can take any values between $-\infty$ and $+\infty$, whereas milk production is zero or positive, but it cannot be negative. Moreover, if we are considering the population to be all the dairy cows in the US, although there are many dairy cows in the US (USDA estimated 9.3 million cows and heifers in 2014), the number is finite, whereas the normal distribution is for infinite populations. Yet, these flaws of our model are **not** important!
 
@@ -332,12 +367,11 @@ they are supposed to be **useful** representations of reality.
 ```
 
 
-Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the normal distribution used is below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.
+Assuming that the variance of milk production is small relative to the mean, the fact that production has to be positive is not a problem, because a tiny and irrelevant piece of the normal distribution used will fall below zero. The fact the the number of cows is finite is not a problem because we can either think of the total population as a very, very large sample of a truly infinite theoretical cow population or simply use the normal as an approximation to the truly discrete and finite real population.
 
 The simple model that we are using can also be written as:
 
 <br>
-
 \begin{equation} 
 \begin{aligned}
 Y_i = \mu + \epsilon_i \\[10pt]
@@ -345,14 +379,13 @@ Y_i = \mu + \epsilon_i \\[10pt]
 \end{aligned}
 (\#eq:math13)
 \end{equation} 
-
 <br>
 
-where $Y_i$ is the milk produced by cow number $i$, $\mu$ is the population mean and $\epsilon$ is a random variable with a normal distribution with mean 0 and variance $\sigma^2$. This is exactly the same model as before, but now we have isolated the deviations of each cow from the mean for the whole population which we call "errors" not because there is anything wrong, but because we choose not to be interested in why cows differ in milk production per day. In this model, milk production is partitioned into an overall mean and a random "error."
+where $Y_i$ is the milk produced by cow number $i$, $\mu$ is the population mean and $\epsilon$ is a random variable with a normal distribution with mean 0 and variance $\sigma^2$. This is exactly the same model as before, but now we have isolated the deviations of each cow from the mean for the whole population using the random variable $\epsilon$, which we call "errors," not because there is anything wrong, but because we choose not to be interested in why cows differ in milk production per day. In this model, milk production for cow i is partitioned into an overall mean for the population of cows and a random "error."
 
-The equation $\epsilon_i \sim N(0, \sigma^2)$ is actually a simplified version of $\epsilon_i \sim iid \quad N(0, \sigma^2) \quad \forall \ i$, which means that the errors for all^[$\forall$ means "for all" in math] observations have independent and identical normal distributions with mean 0 and variance $\sigma^2$. Why is it necessary to state this?! Isn't $\epsilon$ just one random variable? Actually, it does not have to be, so we need to specify how we are modeling the errors. In reality, it is possible for the error for each observation to come from a different distribution, although a model with such complexity would probably not be useful. Errors can also come from distributions that are not independent. The potential differences in error distributions and their correlations are topics for a more advanced course. At this point, you should just keep in mind that in real-world applications of statistics one frequently finds errors that are not normal, have unequal variances, and/or are correlated. The more advanced models necessary to deal with those situations include parts and parameters to deal with lack of normality, heterogeneity of variance and lack of independence.
+The equation $\epsilon_i \sim N(0, \sigma^2)$ is actually a simplified version of $\epsilon_i \sim iid \quad N(0, \sigma^2) \quad \forall \ i$, which means that the errors for all^[$\forall$ means "for all" in math] observations have independent and identical normal distributions with mean 0 and variance $\sigma^2$. Why is it necessary to state that the errors come from "identical"" distributions?! Isn't $\epsilon$ just one random variable? Actually, in reality, it is possible for the error for each observation to come from a different distribution, so we need to specify how we are modeling the errors. However, a model with such complexity would probably not be useful. Errors can also come from distributions that are not independent, so we need to explicitly state that the errors among observations are independent. At this point, you should just keep in mind that in real-world applications of statistics, one frequently finds errors that are not normal, have unequal variances, and/or are correlated. More advanced models exist that include parts and parameters to deal with lack of normality, heterogeneity of variances and lack of independence, but they are beyond the scope of this course.
 
-In order to use the simple model to estimate the proportion of cows that produce less than $24 \ kg \ day^{-1}$ we can get a random sample of r cows and, based on that sample, estimate the mean as
+In order to use the simple model to estimate the proportion of cows that produce less than $24 \ kg \ day^{-1}$, we can get a random sample of r cows and, based on that sample, estimate the mean as
 
 <br>
 \begin{equation} 
@@ -382,11 +415,11 @@ where $e = \hat{\epsilon} = (Y_i-\hat{\mu})$ are the deviations of each cow from
 \end{equation} 
 <br>
 
-Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016. a href="https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf" target="_blank">See report here.</a>. The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (Figure \@ref(fig:propLtMean)) is calculated in R as follows (note how the code is written in several lines and indented for better readability):
+Suppose that the estimated mean and variance were $28.3 \ kg \ day^{-1}$ and $25 \ kg^2 \ day^{-2}$. USDA reported an average production of $28.3 \ kg \ day^{-1}$ of milk per milking cow in 2016. <a href="https://www.nass.usda.gov/Publications/Ag_Statistics/2017/Chapter08.pdf" target="_blank">See report here</a>. The variance was not reported, so we use a fictitious number: $\hat\sigma^2 = 25$. The area under the curve (Figure \@ref(fig:propLtMean)) is calculated in R as follows (note how the code is written in several lines and indented for better readability):
 
-```{r}
+```{r, message=FALSE}
 
-pnorm(           # function that calculates areas unde the normal
+pnorm(           # function that calculates areas under the normal
    q = 24,       # quantile desired, max. milk production in set
    mean = 28.3,    # mean of the normal distribution
    sd = 5        # standard distribution of the normal distribution
@@ -394,7 +427,7 @@ pnorm(           # function that calculates areas unde the normal
 
 ```
 
-
+<br>
 ```{r propLtMean, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap="Simplest model for daily milk production per cow. The blue line is the probability density function (pdf) for a normal distribution with mean 28.3 and variance 25. According to this model, the area under the curve between any two values of Y (horizontal axis) represents the proportion of cows that have production between those values. The light blue area is the estimated proportion of cows that produce less than 24 kg per day. This is an estimated proportion because the actual mean and variance of the cow population are not known and were estimated based on a sample."}
 
 library(plotrix)
@@ -436,8 +469,9 @@ arrows(x0 = 13.5, y0 = 0.030, x1 = 20, y1 = 0.02,
        length = 0.15, lwd = 2)
 
 ```
+<br>
 
-We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the "fixed" or non-random parts, and the error is the "random" component. When we use statistics and create models we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter $\epsilon$ (epsilon) for it.
+We used a very simple model for milk production with just two parameters, mean and variance. Mean and variance are called the "fixed" or non-random parts, and the error is the "random" component. When we use statistics and create models, we need to choose what will be represented with fixed parameters and what parts will be represented with random variables or components. Except for the case where we consider sub-sampling, this course will only deal with models that have a single random component and we use the Greek letter $\epsilon$ (epsilon) for it.
 
 
 <br>
@@ -558,11 +592,11 @@ where $\mu_{i.}$ is the mean for state $i$ and $\tau_{i.}$ is called the "effect
 
 ### Grouping or Indicator Variables {#mathGroups}
 
-The model above can be written in a different form that is useful for further understanding of more advanced linear models, and to be used in the formulation of contrasts and custom comparisons an linear combinations of parameters presented in the chapter about [treatment structure and comparisons](#chTrtstr). This form is presented here to prepare students for that topic and for further studies that require writing down the models in matrix notation. Keep in mind that the use of matrix notation does not have to involve any more complicated concepts than the understanding that we are working with strings and tables of numbers, instead of single numbers at a time.
+The model above can be written in a different form that is useful for understanding of more advanced linear models. This form will be used in the formulation of contrasts, custom comparisons, and linear combinations of parameters, which are presented in the chapter on [treatment structure and comparisons](#chTrtstr). It is presented here to prepare students for that topic and for more advanced studies that require writing down the models in matrix notation. Keep in mind that the use of matrix notation does not have to involve any more complicated concepts than the understanding that we are working with vectors and tables of numbers, instead of single numbers at a time.
 
-Grouping or indicator variables are variables that take a value of 0 or 1 and are used to multiply parameters to determine if the parameters are included in the model for any given observation. The trick is that the equation includes all the parameters and then the values of the grouping variable are used to apply each parameter to the right rows of data. There are as many grouping variables as there are groups. For example, if an experiment has 3 treatment, there will be 3 grouping variables. Essentially, each variable "marks" each observation that belongs to a group.
+Grouping or indicator variables take a value of 0 or 1. We multiply these binary variables by parameters to determine if the parameters are included in the model for a given observation. The trick is that the equation includes all the parameters, but grouping variables are used to apply each parameter to the right rows of data. There are as many grouping variables as there are groups. For example, if an experiment has 3 treatments, there will be 3 grouping variables. Essentially, each variable "marks" each observation that belongs to a group.
 
-Perhaps an analogy helps clarify the concept before we show the equations. Think of a model as a recipe where the parameters are the ingredients and the grouping variables indicate if the ingredient is or not in the recipe. For example, consider a simple recipe that can be made either with chicken, tofu or beef,  and with mild or spicy chili peppers. The recipe will have a list of amounts and ingredients ^[For this simple example we merged the units with the ingredients. Explicit use of units it always necessary. Measure twice cut once! One of many costly examples: NASA lost a Mars Explorer due to confusion between metric and imperial units.]:
+Perhaps an analogy will help clarify the concept before we show the equations. Think of a model as a recipe where the parameters are the ingredients and the grouping variables indicate if the ingredient is included in the recipe. Consider a simple recipe that can be made with chicken, tofu or beef, and with mild or spicy chili peppers. The recipe will have a list of amounts and ingredients ^[For this simple example we merged the units with the ingredients. Explicit use of units is always necessary. Measure twice, cut once! One of many costly examples: NASA lost a Mars Explorer due to confusion between metric and imperial units.]:
 
 
 <br>
@@ -587,8 +621,6 @@ knitr::kable(cbind(amounts, ingredient),
 
 ```
 <br>
-
-
 
 This looks like a single recipe, but it can yield 6 different dishes depending on whether you use beef, tofu or chicken, and jalapeños or poblano peppers. It is a lot simpler and shorter to write the recipe as above than to write 6 different recipes that are almost the same, at least in structure. The same happens with models. In fact, theoretically, any recipe can be expressed with this format if all ingredients are listed separately. With one row per ingredient we can decide how much (possibly none) of each ingredient to add. Let's look at the ingredients in the example. The idea can be extended to any number of ingredients, and it is based on having a list of ingredients, so we know what the quantities refer to.
 
@@ -632,7 +664,8 @@ knitr::kable(cbind(ingredient,
 
 Now, the table represents each recipe with a set of numbers, and all recipes use the same list of potential ingredients. Note that when we want the chicken, the row for chicken shows a 1 and the rows for tofu and beef **must** show 0's. The same happens with jalapeños and poblano peppers. The amounts for those ingredients are the grouping or indicator variables that indicate which recipe type or group we want.
 
-We can easily show that the statistical models are like recipes ^[In reality, linear statistical models are *almost* like recipes because in statistical models we can have negative values for the amounts of a parameter put into the combination, but in recipes we cannot have negative amounts of ingredients.] by chaging the symbols we use. We can simplify by noting that all recipes we are considering take eggs, salt, pepper, onions, curry paste and cabbage in the same amounts across recipes. We will refer to all of those ingredients together in the specified quantities as "common" ingredients, and to conform with the usual mathematical notation, we transpose the recipe table and put the dishes in rows and ingredients in columns with shortened names.
+
+We can easily show that the statistical models are like recipes ^[In reality, linear statistical models are *almost* like recipes because in statistical models we can have negative values for the amounts of a parameter put into the combination, but in recipes we cannot have negative amounts of ingredients.]  by changing the symbols we use. We can simplify things by noting that all recipes we are considering take eggs, salt, pepper, onions, curry paste, and cabbage in the same amounts across recipes. We will refer to all of those ingredients together in the specified quantities as "common" ingredients, and to conform with the usual mathematical notation, we transpose the recipe table and put the dishes in rows and ingredients in columns with shortened names.
 
 <br>
 
@@ -668,9 +701,9 @@ knitr::kable(curries,
 
 
 ```
+<br>
 
-
-For example, the first row of the table indicates that to make the spicy hot chicken version you add all common ingredients plus the chicken plus none of the tofu plus none of the beef, plus the jalapeño plus none of the poblanos. Note that we have three columns for protein type and two for pepper type, there is one column per option or group in each category. This is because any protein option can be combined with any pepper option, however only one protein and only one pepper type is allowed in any one dish. Additionally, whatever the dish you make, it must have a protein source and a pepper type. As a consequence of this, if you add the columns for protein or the columns for chili peppers you always get 1, regardless of the row.
+For example, the first row of the table indicates that to make the hot chicken version you add all common ingredients plus the chicken plus none of the tofu plus none of the beef, plus the jalapeño plus none of the poblanos. Note that we have three columns for protein type and two for pepper type; there is one column per option or group in each category. This is because any protein option can be combined with any pepper option, but only one protein and only one pepper type is allowed in any one dish. Additionally, whatever dish you make, it must have a protein source and a pepper type. As a consequence of this, if you add the columns for protein or the columns for chili peppers, you always get 1, regardless of the row.
 
 The column for chicken is the grouping variable that groups all recipes with chicken protein. Its value is defined as follows:
 
@@ -713,20 +746,21 @@ beef \ group = G_3 =
 
 <br>
 
-The same sort of concepts are involved with the choice of pepper. For simplicity, now we consider only the recipes that differ in protein source and assume that all recipes are with poblanos and that poblanos are now included in the common ingredients. We can write the recipes as follows:
+The same sort of concepts are involved with the choice of pepper. For simplicity, now we consider only the recipes that differ in protein source and assume that all recipes are with poblanos, which are now included in the common ingredients. We can write the recipes as follows:
 
 <br>
 
 $$dish = 1 \times common + G_1 \times chicken + G_2 \times tofu + G_3 \times beef$$
 <br>
 
-We can think of this equation/recipe as follows: if we want the chicken version then $G1 = 1$, $G_2 = 0$ and $G_3 = 0$. The result indicates to include the common ingredients, plus the chicken plus none of the tofu plus none of the beef, which is is simply: common ingredients and chicken. The common ingredients are like the overall mean, and chicken, tofu and beef are the effects of each of the protein choices; think of them as treatments. In which case the equation becomes:
+We can think of this equation/recipe as follows: if we want the chicken version, then $G1 = 1$, $G_2 = 0$ and $G_3 = 0$. The result indicates to include the common ingredients, plus the chicken plus none of the tofu plus none of the beef, which is simply: common ingredients plus chicken. The common ingredients are like an overall mean, and chicken, tofu and beef are the effects of each of the protein choices; think of them as treatments. In which case the equation becomes:
 
 <br>
 
 $$\mu + G_1 \ \tau_1 + G_2 \ \tau_2 + G_3 \ \tau_3 = \mu + \sum_{i=1}^3G_i \ \tau_i$$
 <br>
-Therefore, the model is a recipe where the amounts are 1, $G_1$, $G_2$ and $G_3$, and the ingredients are $\mu$, $\tau_1$, $\tau_2$ and $\tau_3$. **The $G$'s are grouping or indicator variables.**
+
+Therefore, the model is like a recipe where the amounts before each ingredient are 1, $G_1$, $G_2$ and $G_3$, and the ingredients are $\mu$, $\tau_1$, $\tau_2$ and $\tau_3$. **The $G$'s are grouping or indicator variables.**
 
 
 ## Deviations, Errors and Residuals {#mathDevs}
@@ -736,21 +770,21 @@ The difference between an observation and the mean is called a *deviation*, *res
 <br>
 \begin{equation} 
 \begin{aligned}
-&error = \epsilon &\textrm{a random variable}\\[15pt]
 &total \ deviation = Y_{ij} - \mu{..} &\textrm{difference between observation and mean} \\[15pt]
-&residual = e = \hat{\epsilon} = Y_{ij} - \hat{Y_{ij}} &\textrm{estimated error based on sample}
+&residual = e = \hat{\epsilon} = Y_{ij} - \hat{Y_{ij}} &\textrm{estimated error based on sample}\\[15pt]
+&error = \epsilon &\textrm{a random variable}
 \end{aligned}
 (\#eq:math18)
 \end{equation}
 <br>
 
-The symbol $\hat{Y}_{ij}$ is read "Y hat sub i j" and it represents the value that would be expected for that observation if the experiment were repeated many, many times. Intuitively, it is the best guess that you have for the value that would be observed if a new measurement were done for $Y_{ij}$, based on data and model. Keep in mind that the subscripts depend on the organization of the data. For the simple model we only need one subscript because there are no groups.
+The symbol $\hat{Y}_{ij}$ is read "Y hat sub i j" and it represents the value that would be expected for that observation if the experiment were repeated many, many times. Intuitively, it is the best guess that you have for the value that would be observed if a new measurement were done for $Y_{ij}$, based on the data and model. Keep in mind that the subscripts depend on the organization of the data. For the simple model, we only need one subscript because there are no groups.
 
-Unfortunately, the terms *error*, *deviation* and *residual* are frequently used interchangeably, but the good news is that the meaning can be easily derived from the context. **Errors** $\epsilon$ are usually not observable and unknown, unless we create them in a computer simulation (see [Simulation](#mathSimu) section). The main reason for this is that all measurements include some sort of random component that we cannot control, and that we usually do not know all the values in the population of interest; we only have a sample.
+Unfortunately, the terms *error*, *deviation* and *residual* are frequently used interchangeably in practice, but the good news is that the meaning can be easily derived from the context. **Errors** $\epsilon$ are usually not observable and are unknown, unless we create them in a computer simulation (see [Simulation](#mathSimu) section). The main reason for this is that all measurements include some sort of random component that we cannot control, and we usually do not know all the values in the population of interest; we only have a sample.
 
-Usually, population parameters are unknown and have to be estimated using samples, which is a main focus in statistics. With a model and a sample we can estimate parameter values, such as $\hat{\mu}$ and then by the difference we can estimate the errors. Estimated errors are called **residuals** in part because they are the parts of the observations that remain after all other parts accounted for by the model are subtracted. The total **deviation** is the difference between the value observed $Y_{ij}$ and the overall mean $\mu_{..}$, typically estimated with the overall average $\bar{Y}_{..}$.
+Usually, population parameters are unknown and have to be estimated using samples, which is a main focus in statistics. With a model and a sample we can estimate parameter values, such as $\hat{\mu}$, and then estimate the errors by the difference between the model and our observations. Estimated errors are called **residuals** in part because they are the parts of the observations that remain after all other parts accounted for by the model are subtracted. The total **deviation** is the difference between the observed $Y_{ij}$ and the overall mean $\mu_{..}$, typically estimated using the overall sample average $\bar{Y}_{..}$.
 
-In the two models above (equations \@ref(eq:math13) and \@ref(eq:math17) the equations to calculate the residuals are different, because observations are modeled differently. For the simple model, the best guess or estimate that we have for the production of a randomly selected cow (observation) is the overall average given in equation \@ref(eq:math19). Because we are considering all cows **not** grouped by state, the overall average is equal to the weighted average of state averages, or more simply, the average of all cows, regardless of state:
+In the two models above (equations \@ref(eq:math13) and \@ref(eq:math17)), the equations to calculate the residuals are different, because observations are modeled differently. For the simple model, the best guess or estimate that we have for the production of a randomly selected cow (observation) is the overall average given in equation \@ref(eq:math19). Because we are considering all cows **not** grouped by state, the overall average is equal to the weighted average of state averages, or more simply, the average of all cows, regardless of state:
 
 <br>
 \begin{equation}
@@ -761,7 +795,7 @@ e = \hat{\epsilon} = Y_i - \hat{Y}_i  = Y_i - \hat{\mu} = Y_i - \bar{Y}_. \\[10p
 \end{equation}
 <br>
 
-In this case of the simplest model, the error is equal to the total deviation, because the model does not have any other fixed component beyond the overall mean.
+In the case of the simplest model, the error is equal to the total deviation, because the model does not have any other fixed component beyond the overall mean.
 
 For the better model in equation \@ref(eq:math17), the fixed part of the model includes both an overall mean and a state effect $\tau_{i.}$ where $i$ is the subscript that specifies what state is being considered. The estimation for any given observation includes both components. Thus, the residual is the observed value $Y_{ij}$ minus the estimated overall mean $\hat{\mu}_{..}$ minus the estimated state effect $\hat{\tau}_{i.}$.
 
@@ -775,17 +809,21 @@ e = \hat{\epsilon} = Y_{ij} - \hat{Y}_{ij}  = Y_{ij} - \bar{Y}_{i.} = Y_{ij} - \
 
 Keep in mind that the effect of state will be a negative number for those states that have mean milk production that is lower than the average of all states. We can use the values reported by USDA (2017) to determine the state effects for all states.
 
-The dataframe `milk` has the data, including the state name, average number of milking cows in 2016 (in thousands), total milk production per year (in millions of kg) and average production per cow (in kg per day). First, we calculate the overall average to estimate $\mu$. Then, the effect of each state is obtained by subtracting the overal mean from the average for each state. (Residuals cannot be calculated because the data reported is at the state level, not for individual cows.)
+The data frame `milk` has the data, including the state name, average number of milking cows in 2016 (in thousands), total milk production per year (in millions of kg) and average production per cow (in kg per day). First, we calculate the overall average to estimate $\mu$. Then, the effect of each state is obtained by subtracting the overall mean from the average for each state. (Residuals cannot be calculated because the data reported is at the state level, not for individual cows.)
+
+<br>
+```{r, message=FALSE}
+
+str(milk) # str() shows the structure of the dataframe
+(mu.hat <- mean(milk$kg.cow.day)) # mean of milk production
 
 
-```{r}
+milk$state.effect <- milk$kg.cow.d - mu.hat # subtract the overall mean (mu.hat) from 
+# the average for each state (milk$kg.cow.d) 
+```
 
-str(milk)
-(mu.hat <- mean(milk$kg.cow.day))
-
-
-milk$state.effect <- milk$kg.cow.d - mu.hat
-
+<br>
+```{r, echo = F, message=F}
 knitr::kable(
    list(
       milk[1:25, c("State", "state.effect")], 
@@ -798,15 +836,15 @@ knitr::kable(
 )
 
 ```
-
+<br>
 
 ### Simulation: Population is Known {#mathSimu}
 
-A simulation consists of making up a model with known parameters and generatign data by taking random samples from the theoretical distribution specified in the model. Then, the data are analyzed as if the model were not known and results compared to the known model values. This is an empirical method to check if the method of analysis leads to good estimates. By repeating the random sampling many times, we can get simulated distributions of the estimated parameters.
+A simulation consists of making up a model with known parameters and generating data by taking random samples from the theoretical distribution specified in the model. Then, the data are analyzed as if the model were not known and results compared to the known model values. This is an empirical method to check if the method of analysis leads to good estimates. By repeating the random sampling many times, we can get simulated distributions of the estimated parameters.
 
-Here, we simply use a simulation to show how sample results and estimated quantities are different from the real values. We cannot do this with real data because we tpically do not know the true parameter values.
+Here, we will use a simulation to show how sample results and estimated quantities are different from the "real values." We cannot do this with real data because we typically do not know the true parameter values.
 
-The simulation will create data analogous to the US milk production data. For simplicity, we will use a sample of 100 cows per state. Thus, the weighted and unweighted averages will be the same. We will use the same values as above for state means. Note that here we use the averages reported by USDA as if they were the known means for each state. Because the variance within each state is not known, we use $\sigma = 4$ for all states. The model used to generate data is:
+The simulation will create data analogous to the US milk production data. For simplicity, we will use a sample of 100 cows per state. Thus, the weighted and unweighted averages will be the same. We will use the same values as above for state means. Note that here we use the averages reported by USDA as if they were the known means for each state. Because the variance within each state is not known, we use $\sigma = 4$ for all states. The model used to generate the data is:
 
 
 <br>
@@ -817,27 +855,38 @@ Y_{ij} = \mu_{i.} + \epsilon_{ij} = \mu_{..} + \tau_{i.} + \epsilon_{ij} \\
 \end{equation}
 <br>
 
-For each state, we simulate 100 observations by generating 100 random draws from a normal distribution with mean 0 standard deviation 4 and to each we add the state average. Figure \@ref(fig:resdl.vs.error) shows that residuals are not equal to the true errors, but they are related.
+For each state, we simulate 100 observations by generating 100 random draws from a normal distribution with mean 0 and standard deviation 4, and to each draw, we add the state average to simulate the effect of being in that state. Figure \@ref(fig:resdlVsError) shows that residuals are not equal to the true errors, but they are related.
 
-```{r resdl.vs.error, fig.cap="Plot of estimated error or residuals vs. the true errors based on a simulation. The true errors come from a normal distribution, whereas the residuals were estimated as the difference between each observation and the corresponding group average. The green line is Y = X."}
+<br>
+```{r resdlVsError, fig.cap="Plot of estimated error or residuals vs. the true errors based on a simulation. The true errors come from a normal distribution, whereas the residuals were estimated as the difference between each observation and the corresponding group average. The green line is Y = X.", message=FALSE}
 
 set.seed(39)
 
 milk.sim.dat <- data.frame(State = rep(milk$State, 100), 
                            state.mean = rep(milk$kg.cow.day, 100),
                            epsilon = rnorm(5000, mean = 0, sd = 4))
+# Construct a data frame with a column for 
+# state names, the mean for each state, and 
+# a random draw from the normal distribution 
+# using rnorm() to simulate residuals
 
 milk.sim.dat$Y <- with(milk.sim.dat, state.mean + epsilon)
+
+# Add the state mean and the residual to simulate 
+# random observations
 
 state.avg <- aggregate(Y ~ State, 
                        data = milk.sim.dat,
                        FUN = mean)
+# Obtain the simulated sample averages for each state
 
 names(state.avg)[2] <- "state.average"
 
 milk.sim.dat <- merge(milk.sim.dat, state.avg, by = "State", all = TRUE)
 
 milk.sim.dat$residual = with(milk.sim.dat, Y - state.average)
+# Substract the simulated state averages from each
+# simulated observation i
 
 str(milk.sim.dat)
 
@@ -845,7 +894,7 @@ plot(residual ~ epsilon, milk.sim.dat, pch = ".")
 abline(0,1, col = "green")
 
 ```
-
+<br>
 
 ## Optimization {#mathOptim}
 
@@ -855,7 +904,7 @@ In many cases, the optimal value for a parameter can be found analytically, whic
 
 ## Linear Models
 
-Linear models are models that can be represented by a linear combination of parameters, it is like a recipe where the ingredients are the parameters. For example, to make a cup of swet tea with milk you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.
+Linear models are models that can be represented by a linear combination of parameters. THey are like recipes where the ingredients are the parameters. For example, to make a cup of sweet tea with milk, you combine 1 teaspoon of tea, 1 cup of hot water, 1 tablespoon of honey and 0.25 cups of milk.
 
 <br>
 \begin{equation}
@@ -864,7 +913,7 @@ Y = X_1 \beta_1 + X_2 \beta_2 + X_3 \beta_3 + X_4 \beta_4
 \end{equation}
 <br>
 
-What makes the equation *linear in the parameters* is that the parameters represented by the $\beta$'s are not in exponents, powers, quotients or operations other than multiplication and addition. Even if the variables that multiply the parameters are involved in any kind of function, for as long as the complicated function does not involve a paramters, the equation is linear *_*in the parameters_*. For example, the following equations are linear in the parameters represented by the $beta$'s.
+What makes the equation *linear in the parameters* is that the parameters represented by the $\beta$'s are not in exponents, powers, quotients or operations other than multiplication and addition. Even if the variables that multiply the parameters are involved in any kind of function, as long as that function does not involve any parameters, the equation is linear *_*in the parameters*_*. For example, the following equations are linear in the parameters represented by the $beta$'s.
 
 <br>
 \begin{equation}
@@ -873,8 +922,9 @@ Y = X_1^0 \beta_0 + X_1^1 \beta_1 + X_1^2 \beta_2 + X_1^3 \beta_2
 \end{equation}
 <br>
 
-The second equation is called a **polynomial** because it only involves powers of the variable $X_1$ multiplying the parameters. Because the highest power of X is 3, the polynomial is said to be of *3rd degree* or a *cubic* polynomial. Polynomials of 2nd degree are called *quadratic*. All polynomials are linear combinations of parameters. Typical polynomials of order or degree 0 to 3 are plottled in Figure \@ref(fig:mathPolys).
+The second equation is called a **polynomial** because it only involves powers of the single variable $X_1$. Because the highest power of X is 3, the polynomial is said to be of *3rd degree* or a *cubic* polynomial. Polynomials of 2nd degree are called *quadratic*. All polynomials are linear combinations of parameters. Typical polynomials of order or degree 0 to 3 are plotted in Figure \@ref(fig:mathPolys).
 
+<br>
 ```{r mathPolys, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, fig.cap="Types of shapes that can be produced by polynomials of first (black), second (blue) and third (orange) degree. Note that all have ranges where they are almost straight lines. The orientation, location and range of each shape can be changed by changing the values of the parameters of the polynomial."}
 
 plot((-20:20)/2, poly((-20:20)/2), 
@@ -896,7 +946,7 @@ lines((-20:20)/2,
 
 <br>
 
-Linear combinations are used throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different [Chapter 8](ch.2pops).
+Linear combinations are used throughout this book and are important to understand where the basic equations that we use come from. For example, we refer to linear combinations to derive the statistical properties of the sample average, and again to determine if two averages are significantly different [(see Chapter 8)](ch.2pops).
 <br>
 
 ```{block, type = "stattip"}
@@ -909,44 +959,100 @@ The shape of polynomials can be modified by changing their parameter values. The
 
 ## Symbols and Terms{#mathSymbls}
 
-Term or symbol| Explanation
+<br>
+Term or symbol | Explanation
+<br>
 ------------| ----------------------------------------------------------
+<br>
+
 Observation | Result of measuring one or several variables in one unit of experimental material. For example, the milk production of one cow in a day.
+<br>
+
 Expectation | The mean of a random variable. For example the expectation of number of dots when rolling a cubic die is 3.5.
+<br>
+
 Variance | The expected value of the squared total deviation of a random variable. For a die the variance is 2.9166667
+<br>
+
 Mean | Expectation
 Average | Sum of sample values divided by sample size. For example, the average of a sample of 4 rolls of a die {5, 5, 5, 4} is (5 + 5 + 5 + 4)/4 = 4.75. The average is usually used to estimate the mean.
+<br>
+
 Sample Variance | Estimated variance based on a sample. Average of the square deviations from observation to average, but divided by sample size minus the number of other parameters estimated. In the simplest case, the only estimated parameter is the mean so the divisor is n-1.
+<br>
+
 Model | Sets of equations that describe the components of each observation.
+<br>
+
 White noise | Random variation with unstructured normal distribution. Independent errors with normal distribution and equal variance.
+<br>
+
 Random | Describes a process or experiment whose result is not known with certainty beforehand.
+<br>
+
 $Y_i$ | Value taken by the *ith* instance of the variable Y. One observation of Y. 
+<br>
+
 $Y_{ij}$ | Y sub i j; value taken by the *jth* instance of the variable Y in the *ith* group. One observation of Y when there are groups in one dimension. Value of variable Y in row *i* and column *j*. 
+<br>
+
 $\hat{Y}_{ij}$ | Y hat sub i j; estimated expected value of Y for row i and column j.
+<br>
+
 $Y_{ijh}$ |Y sub i j h. Value taken by the *hth* instance of the variable Y in the *ijth* group . One observation of Y when there are groups in two dimensions. Value of variable Y in row *i*, column *j* and page *h*. 
+<br>
+
 $\epsilon$ |Epsilon. Random error component of a model. Usually modelled itself as having a normal distribution with mean 0 and variance $\sigma^2$.
+<br>
+
 $\bar{Y}_{i.}$ | Y bar sub i dot; average of all Y values observed in group i.
+<br>
+
 $\bar{Y}_{..}$ | Y bar dot dot; average of all values.
 $\mu$ | Population mean; a parameter of the normal distribution.
-$\bar{Y}$ | Sample average.
-$\hat{\mu}$ | Mu hat; estimated mean.
-$\hat{\tau}_{i.}$ | Tau hat sub i; estimated effect of treatment i.
-$\tau_{i.}$ | Tau sub i; effect of treatment i.
-$\mu_{i.}$ | Mu sub i; mean for group (usually treatment) i.
-$\hat{\sigma^2}$ | Sigma squared hat; estimated variance of something, usually variance of epsilon.
-$\sigma^2$ | Sigma squared; variance of something, usually variance of epsilon.
-$\sigma$ | Sigma, standard deviation; square root of variance.
-$N(0, \sigma^2)$ | Normal distribution with mean 0 and variance $\sigma^2$
-$\sim$ | In R formulas: "is modeled as"; in math equations: "is distributed as."
-$\sum_{i=1}^{i=4} Y_i$ | Sum of Y sub i for i equal 1 to 4; 
-$\sum$ | Capital Sigma, summation symbol
+<br>
 
+$\bar{Y}$ | Sample average.
+<br>
+
+$\hat{\mu}$ | Mu hat; estimated mean.
+<br>
+
+$\hat{\tau}_{i.}$ | Tau hat sub i; estimated effect of treatment i.
+<br>
+
+$\tau_{i.}$ | Tau sub i; effect of treatment i.
+<br>
+
+$\mu_{i.}$ | Mu sub i; mean for group (usually treatment) i.
+<br>
+
+$\hat{\sigma^2}$ | Sigma squared hat; estimated variance of something, usually variance of epsilon.
+<br>
+
+$\sigma^2$ | Sigma squared; variance of something, usually variance of epsilon.
+<br>
+
+$\sigma$ | Sigma, standard deviation; square root of variance.
+<br>
+
+$N(0, \sigma^2)$ | Normal distribution with mean 0 and variance $\sigma^2$
+<br>
+
+$\sim$ | In R formulas: "is modeled as"; in math equations: "is distributed as."
+<br>
+
+$\sum_{i=1}^{i=4} Y_i$ | Sum of Y sub i for i equal 1 to 4; 
+<br>
+
+$\sum$ | Capital Sigma, summation symbol
+<br>
 
 ## Exercises and Solutions {#mathExe}
 
 ### Exercise 1
 
-Write pseudo-code (set of logical instructions in natural language) for an algorithm to find out what integer between 0 and 1000 I am thinking of just by asking if it is larger than a value that you choose for each question (or to numerically approximate a root of a polynomial).
+Write pseudo-code (a set of logical instructions in natural language) for an algorithm to find out what integer between 0 and 1000 I am thinking of just by asking if it is larger than a value that you choose for each part of the algorithm (or to numerically approximate a root of a polynomial).
 
 **Solution:**
 
@@ -963,24 +1069,33 @@ Write pseudo-code (set of logical instructions in natural language) for an algor
 
 Expand the following summations with symbols, then with numbers and calculate it using the data in the table:
 
+<br>
 $$\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})$$
-$$\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2$$
 
+<br>
+$$\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2$$
+<br>
+
+<br>
 ```{r, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 library(knitr)
 table.math.ex.02 <- data.frame(i = 1:4, Y_i = c(6, 2, 3, 5))
 kable(table.math.ex.02) %>% kable_styling(full_width = FALSE)
 
 ```
-
+<br>
 
 **Solution:**
 
+<br>
 $$\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..}) = (Y_1 - \bar{Y}_{..}) + (Y_2 - \bar{Y}_{..}) + (Y_3 - \bar{Y}_{..}) + (Y_4 - \bar{Y}_{..})\\[15pt]
 = (6 - 4) + (2 - 4) + (3 - 4) + (5 - 4) = 0$$
+<br>
 
+<br>
 $$\sum_{i=1}^{i=4}(Y_i - \bar{Y}_{..})^2 = (Y_1 - \bar{Y}_{..})^2 + (Y_2 - \bar{Y}_{..})^2 + (Y_3 - \bar{Y}_{..})^2 + (Y_4 - \bar{Y}_{..})^2\\[15pt]
 = (6 - 4)^2 + (2 - 4)^2 + (3 - 4)^2 + (5 - 4)^2 = 4 + 4 + 1 + 1 = 10$$
+<br>
 
 ### Exercise 3
 
@@ -996,9 +1111,9 @@ Calculate the averages by state and then all the residuals.
 
 Calculate all estimated state effects.
 
-Write down the partition of three observations into overall average, state effect and residual.
+For three observations, write down the overall average, state effect and residual.
 
-
+<br>
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 
 set.seed(39)
@@ -1022,6 +1137,7 @@ colnames(tbl.exer3.math) <- c("cow1", "cow2", "cow3", "cow4", "cow5")
 kable(tbl.exer3.math) %>% kable_styling(full_width = FALSE)
 
 ```
+<br>
 
 **Solution**
 
@@ -1031,10 +1147,13 @@ k is the number of rows. There are 4 states in rows, so k = 4.
 
 Alabama is in row 1, thus i = 1. We need to sum over j from j=1 to j=5.
 
+<br>
 $$\frac{1}{5} \sum_{j=1}^{j=5} Y_{1j} = 15.59 + 11.42 + 14.62 + 13.95 + 18.20 = 14.76$$
+<br>
+
 The rest of the calculations are performed in R to save time.
 
-```{r}
+```{r, message=FALSE}
 # Data are in the matrix called "tbl.exer3.math"
 tbl.exer3.math
 
@@ -1080,7 +1199,7 @@ a. $p^n + p^{n-1} \ q^1 + + p^{n-2} \ q^2 +\dots + p^{n-r} \ q^r + \dots +  q^n$
 
 ### Homework Exercise
 
-Imagine you studied the effects of probiotic supplement on white cell count in rats. Five rats selected randomly from a set of 15 received a base diet, 5 received a based diet with sterilized probiotic and 5 received the base diet with the live probiotic. White cells were counted and averaged over 7 days for each rat before the treatments and again during second week after starting the diets.
+Imagine you studied the effects of probiotic supplements on white cell count in rats. Five rats selected randomly from a set of 15 received a base diet, 5 received a base diet with a sterilized probiotic and 5 received the base diet with a live probiotic. White cells were counted and averaged over 7 days for each rat before the treatments, and again during the second week after starting the diets.
 
 a. Formulate a statistical model for this experiment and describe each component. Identify fixed and random components. Use subscripts and define their ranges and meaning.
 
