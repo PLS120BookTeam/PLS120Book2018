@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Applied Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#ch2pops"><i class="fa fa-check"></i><b>1</b> Two Populations Means</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#LearnObj8"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives for Chapter</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#two-populations"><i class="fa fa-check"></i><b>1.2</b> Two Populations</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#hypothesis-testing"><i class="fa fa-check"></i><b>1.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#independent-vs.paired-samples"><i class="fa fa-check"></i><b>1.4</b> Independent vs. Paired Samples</a><ul>
+<li class="chapter" data-level="1.4.1" data-path=""><a href="#independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path=""><a href="#paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#equal-vs.unequal-variances"><i class="fa fa-check"></i><b>1.5</b> Equal vs. Unequal Variances</a><ul>
+<li class="chapter" data-level="1.5.1" data-path=""><a href="#f-test-for-equality-of-variances."><i class="fa fa-check"></i><b>1.5.1</b> F test for Equality of Variances.</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#calculating-the-standard-error-of-the-difference-and-the-t-statistic"><i class="fa fa-check"></i><b>1.6</b> Calculating the Standard Error of the Difference and the t-statistic</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#cases"><i class="fa fa-check"></i><b>1.7</b> Cases</a><ul>
+<li class="chapter" data-level="1.7.1" data-path=""><a href="#Case1"><i class="fa fa-check"></i><b>1.7.1</b> Case 1: Independent samples with equal population variances</a></li>
+<li class="chapter" data-level="1.7.2" data-path=""><a href="#Case2"><i class="fa fa-check"></i><b>1.7.2</b> Case 2: Independent samples with unequal population variances</a></li>
+<li class="chapter" data-level="1.7.3" data-path=""><a href="#Case3"><i class="fa fa-check"></i><b>1.7.3</b> Case 3: Paired samples</a></li>
+<li class="chapter" data-level="1.7.4" data-path=""><a href="#two-populations-equation-summary"><i class="fa fa-check"></i><b>1.7.4</b> Two Populations Equation Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#confidence-intervals"><i class="fa fa-check"></i><b>1.8</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#decision-to-reject-or-fail-to-reject-the-null-hypothesis"><i class="fa fa-check"></i><b>1.9</b> Decision to Reject or Fail to Reject the Null Hypothesis</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#bean-drought-example"><i class="fa fa-check"></i><b>1.10</b> Bean Drought Example</a><ul>
+<li class="chapter" data-level="1.10.1" data-path=""><a href="#stating-the-hypotheses"><i class="fa fa-check"></i><b>1.10.1</b> Stating the Hypotheses</a></li>
+<li class="chapter" data-level="1.10.2" data-path=""><a href="#sampling-method"><i class="fa fa-check"></i><b>1.10.2</b> Sampling Method</a></li>
+<li class="chapter" data-level="1.10.3" data-path=""><a href="#calculating-sample-averages-and-the-mean-difference"><i class="fa fa-check"></i><b>1.10.3</b> Calculating Sample Averages and the Mean Difference</a></li>
+<li class="chapter" data-level="1.10.4" data-path=""><a href="#calculating-sample-variances"><i class="fa fa-check"></i><b>1.10.4</b> Calculating Sample Variances</a></li>
+<li class="chapter" data-level="1.10.5" data-path=""><a href="#calculating-the-standard-error-of-the-difference"><i class="fa fa-check"></i><b>1.10.5</b> Calculating the Standard Error of the Difference</a></li>
+<li class="chapter" data-level="1.10.6" data-path=""><a href="#calculating-the-t-statistic"><i class="fa fa-check"></i><b>1.10.6</b> Calculating the t-statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path=""><a href="#bean-drought-example---paired"><i class="fa fa-check"></i><b>1.11</b> Bean Drought Example - Paired</a><ul>
+<li class="chapter" data-level="1.11.1" data-path=""><a href="#stating-the-hypotheses-1"><i class="fa fa-check"></i><b>1.11.1</b> Stating the Hypotheses</a></li>
+<li class="chapter" data-level="1.11.2" data-path=""><a href="#sampling-method-1"><i class="fa fa-check"></i><b>1.11.2</b> Sampling Method</a></li>
+<li class="chapter" data-level="1.11.3" data-path=""><a href="#calculating-sample-averages-and-the-average-of-the-difference"><i class="fa fa-check"></i><b>1.11.3</b> Calculating Sample Averages and the Average of the Difference</a></li>
+<li class="chapter" data-level="1.11.4" data-path=""><a href="#calculating-the-variance-of-the-difference"><i class="fa fa-check"></i><b>1.11.4</b> Calculating the Variance of the Difference</a></li>
+<li class="chapter" data-level="1.11.5" data-path=""><a href="#calculating-the-standard-error-of-the-difference-1"><i class="fa fa-check"></i><b>1.11.5</b> Calculating the Standard Error of the Difference</a></li>
+<li class="chapter" data-level="1.11.6" data-path=""><a href="#calculating-the-t-statistic-1"><i class="fa fa-check"></i><b>1.11.6</b> Calculating the t-statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path=""><a href="#Ex8"><i class="fa fa-check"></i><b>1.12</b> Exercises</a></li>
+<li class="chapter" data-level="1.13" data-path=""><a href="#Hwk8"><i class="fa fa-check"></i><b>1.13</b> Homework : Two Population Means</a><ul>
+<li class="chapter" data-level="1.13.1" data-path=""><a href="#walking-spiders"><i class="fa fa-check"></i><b>1.13.1</b> Walking Spiders</a></li>
+<li class="chapter" data-level="1.13.2" data-path=""><a href="#rat-life"><i class="fa fa-check"></i><b>1.13.2</b> Rat Life</a></li>
+</ul></li>
+<li class="chapter" data-level="1.14" data-path=""><a href="#laboratory-exercises"><i class="fa fa-check"></i><b>1.14</b> Laboratory Exercises</a><ul>
+<li class="chapter" data-level="1.14.1" data-path=""><a href="#Lab8PLS"><i class="fa fa-check"></i><b>1.14.1</b> Plant Sciences</a></li>
+<li class="chapter" data-level="1.14.2" data-path=""><a href="#Lab8ANS"><i class="fa fa-check"></i><b>1.14.2</b> Animal Sciences</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="ch2pops" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Two Populations Means</h1>
+<div id="LearnObj8" class="section level2">
+<h2><span class="header-section-number">1.1</span> Learning Objectives for Chapter</h2>
+<ol style="list-style-type: decimal">
+<li>Compare two population means based on two samples</li>
+<li>Determine if samples are paired or unpaired (“independent”) when comparing two means</li>
+<li>State the null and alternative hypothesis for a two sample t-test</li>
+<li>Calculate the sample averages and the difference of the sample averages</li>
+<li>Perform an F-test of homogeneity of variance by calculating sample variances, and determine if you can “pool” the sample variances</li>
+<li>Calculate the standard error of the difference</li>
+<li>Describe the three cases for comparing two populations means and determine when each one is appropriate</li>
+<li>Calculate the t-statistic and identify the appropriate critical t-value</li>
+<li>After performing a two sample t test, sketch the t distribution, with the following parts labeled:
+<ul>
+<li>the critical t value</li>
+<li>the test statistic</li>
+<li>the p value area under the curve.</li>
+<li>the alpha level area under the curve.</li>
+<li>where the CI bounds would lie on the X axis (approximately)</li>
+</ul></li>
+<li>Draw appropriate conclusions from a t test. In other words, interpret the results in terms of the original scientific question</li>
+</ol>
+</div>
+<div id="two-populations" class="section level2">
+<h2><span class="header-section-number">1.2</span> Two Populations</h2>
+<p>We have learned in the previous chapters how to determine if a population mean is significantly different from a hypothetical population mean. However, researchers may want to know if two population means are significantly different from each other. For example, researchers might conduct an experiment comparing a fertilized field to an unfertilized field to determine a significant difference in yield, or an experiment comparing a high-carbohydrate diet to a high-protein diet to determine a significant difference in milk quality among cows. The researcher would take samples from each of the two treatment groups and test for a difference between the means to make inferences about the larger populations from which the samples were taken.</p>
+<div class="stattip">
+<h2 id="steps-to-test-two-population-means">
+Steps to Test Two Population Means
+</h2>
+<p>
+<br>
+</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>
+State the null and alternative hypotheses for the two populations
+</p>
+</li>
+<li>
+<p>
+Collect samples from each population
+</p>
+</li>
+<li>
+<p>
+Calculate the sample averages, <span class="math inline"><span class="math inline">\(\bar{Y}_1\)</span></span> and <span class="math inline"><span class="math inline">\(\bar{Y}_2\)</span></span>, the difference of the averages,<span class="math inline"><span class="math inline">\(\bar{d}\)</span></span>, and the sample variances, <span class="math inline"><span class="math inline">\(s^2_1\)</span></span> and <span class="math inline"><span class="math inline">\(s^2_2\)</span></span>
+</p>
+</li>
+<li>
+<p>
+If you do not know if the two population variances are equal, <span class="math inline"><span class="math inline">\(\sigma_1 = \sigma_2\)</span></span>, perform an F-test to determine if you can pool the sample variances.
+</p>
+</li>
+<li>
+<p>
+Calculate the standard error of the difference, <span class="math inline"><span class="math inline">\(s_{\bar{d}}\)</span></span>, between the two samples (<strong>it is important to identify the appropriate Case equations to use in this step</strong>)
+</p>
+</li>
+<li>
+<p>
+Calculate the t-statistic using the calculated <span class="math inline"><span class="math inline">\(\bar{d}\)</span></span> and <span class="math inline"><span class="math inline">\(s_{\bar{d}}\)</span></span>
+</p>
+</li>
+<li>
+<p>
+Compare the calculated t-statistic to the critical t-value, and decide to reject or fail to reject the null hypothesis
+</p>
+</li>
+</ol>
+</div>
+</div>
+<div id="hypothesis-testing" class="section level2">
+<h2><span class="header-section-number">1.3</span> Hypothesis Testing</h2>
+<p>Before all the calculations have begun, it is important to understand the scientific question being asked. The purpose of testing two population means is to understand if there is a statistically significant difference between two populations or two treatment groups. Thus, our null hypothesis and alternative hypothesis can be stated, respectively, as</p>
+<p><br></p>
+<p><span class="math display">\[\text{ Null hypothesis: the mean of population 1 is equal to the mean of population 2, } \\
+\text{ or there is no difference between the two population means } \\[15pt]
+H_0 : \mu_1 = \mu_2 \quad \text{or} \quad \mu_{\bar{d}} = 0 \\[15pt]
+\text{ Alternative hypothesis: the mean of population 1 is not equal to the mean of population 2, } \\
+\text{ or there is a difference between the two population means } \\[15pt]
+H_1 : \mu_1 \neq \mu_2 \quad \text{or}  \quad \mu_{\bar{d}} \neq 0\]</span></p>
+<p><br></p>
+</div>
+<div id="independent-vs.paired-samples" class="section level2">
+<h2><span class="header-section-number">1.4</span> Independent vs. Paired Samples</h2>
+<p>There are two different methods of sampling when comparing treatment means: <strong>independent</strong> samples and <strong>paired</strong>, or dependent samples. It is important to understand how the two populations are sampled to decide which equations are appropriate for the experiment. Using the wrong equations may lead to incorrect calculations and conclusions.</p>
+<div id="independent-samples" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Independent Samples</h3>
+<p>Samples are considered <strong>independent</strong> when there is no relationship between the observations in one treatment group and the observations in the other treatment group, and the samples are randomly assigned to each treatment. For example, pigs are randomly assigned to two different diets to determine if they result in different mean body weights. In this case, we are interested in the difference between the two average weights resulting from each diet treatment. Since the pigs are randomly assigned to each diet, the assumption is that these samples (pigs) are independent of each other.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:IndSamples"></span>
+<img src="images/CH8IndSamp.png" alt="Independent samples of eight pigs are randomly placed into two treatments.  Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where $r = 4$ is the number of samples per treatment, and $i = 1, 2, 3, 4$ is the sample number for a given treatment" width="60%" />
+<p class="caption">
+Figure 1.1: Independent samples of eight pigs are randomly placed into two treatments. Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where <span class="math inline">\(r = 4\)</span> is the number of samples per treatment, and <span class="math inline">\(i = 1, 2, 3, 4\)</span> is the sample number for a given treatment
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="paired-samples" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Paired Samples</h3>
+<p>Samples are considered <strong>paired</strong>, or dependent, when there is a relationship between the observations in one treatment and the observations in the other treatment. Paired samples are made from the direct comparisons of two measurements made on the same <strong>experimental unit</strong>. One situation in which individual pigs can be treated as the same experimental units is if two measurements are collected from the same individual. For example, before-and-after measurements on the same individuals are considered paired. To understand the effect of two different diets on pigs, an initial body weight measurement is collected from all pigs on a standard, high-carbohydrate diet, then following a set period of time on a high-protein diet, a second body weight measurement is taken from all pigs. In the paired sample case, we are interested in calculating the <em>average of the paired differences</em> between the two diet groups:</p>
+<p><br> <span class="math display">\[\bar{d} = \dfrac{\sum{d_i}}{r}\]</span> <br></p>
+<p>Contrast this with the independent sample case, where we are interested in the <em>difference between the averages</em> of the two groups.</p>
+<p><br> <span class="math display">\[\bar{d} = \bar{x_1} - \bar{x_2}\]</span> <br></p>
+<div class="figure" style="text-align: center"><span id="fig:PairedMeasurements"></span>
+<img src="images/CH8PairSamp2Measurements.png" alt="Paired samples of eight pigs under two treatments.  Each of the eight pigs has two measurements recorded for each treatment, where $r = 8$ is the number of samples per treatment, and $i = 1, 2, ..., 7, 8$ is the sample number for a given treatment" width="60%" />
+<p class="caption">
+Figure 1.2: Paired samples of eight pigs under two treatments. Each of the eight pigs has two measurements recorded for each treatment, where <span class="math inline">\(r = 8\)</span> is the number of samples per treatment, and <span class="math inline">\(i = 1, 2, ..., 7, 8\)</span> is the sample number for a given treatment
+</p>
+</div>
+<p><br></p>
+<p>In the above example, the samples were paired because the same individual pigs were used for each treatment. Paired sampling is not limited to before-and-after experiments on the same individuals, however. It can be extended to situations where there is some relationship or dependency between the replicates across treatment groups. For example, pigs that are from the same pen share genetic and environmental effects that are unique to that pen, and we can therefore treat the pens (and the pigs that come from them) as our experimental units. Imagine there are three different pig pens. From each pen, two pigs are randomly selected and assigned to different diets. The pigs that come from the same pen are “paired” and the differences between weights from each of the paired samples are measured. In this example, the experimental unit is not individual pigs but the pens that the pair of pigs come from.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:PairedSamples"></span>
+<img src="images/CH8PairSamp.png" alt="Paired samples of pigs from the same pen under two treatments.  Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2. Each pig pen has two measurements recorded for each treatment, where r = 3 is the number of samples per treatment, and i = 1,2,3 is the sample number for a given treatment" width="60%" />
+<p class="caption">
+Figure 1.3: Paired samples of pigs from the same pen under two treatments. Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2. Each pig pen has two measurements recorded for each treatment, where r = 3 is the number of samples per treatment, and i = 1,2,3 is the sample number for a given treatment
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="equal-vs.unequal-variances" class="section level2">
+<h2><span class="header-section-number">1.5</span> Equal vs. Unequal Variances</h2>
+<p>For independent samples, we must estimate the variances of both populations to calculate the standard error of the difference (<span class="math inline">\(s^2_{\bar{d}}\)</span>), and perform a t test. We estimate the population variances (<span class="math inline">\(\sigma_i^2\)</span>) from the sample variances (<span class="math inline">\(s_i^2\)</span>). If the population variances are equal, we can pool the sample variances to obtain a better estimate of <span class="math inline">\(\sigma_i^2\)</span>. To determine whether or not they are equal, we perform an F-test for equality of variances.</p>
+<div id="f-test-for-equality-of-variances." class="section level3">
+<h3><span class="header-section-number">1.5.1</span> F test for Equality of Variances.</h3>
+<p>First, we state our null and alternative hypotheses for the F test:</p>
+<p><br></p>
+<p><span class="math display">\[\text{Null hypothesis: the variance of population 1 is equal to the variance of population 2} \]</span> <span class="math display">\[H_0 : \sigma_1^2 = \sigma_2^2 \\[25pt]\]</span></p>
+<p><span class="math display">\[\text{Alternative hypothesis: the variance of population 1 is not equal to the variance of population 2} \]</span> <span class="math display">\[H_1 : \sigma_1^2 \neq \sigma_2^2 \]</span> <br></p>
+<p>To test for the equality of the population variances, we use a two-tailed F-test.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:FCurve"></span>
+<img src="images/CH8FCurve.png" alt="F-Distribution for determining the equality of variances (image from www.mtstatic.com)" width="60%" />
+<p class="caption">
+Figure 1.4: F-Distribution for determining the equality of variances (image from www.mtstatic.com)
+</p>
+</div>
+<p><br></p>
+<p>To calculate the F-ratio, we use the larger of the two sample variances (<span class="math inline">\(s_1\)</span>) as the numerator, and the smaller of the two sample variances (<span class="math inline">\(s_2\)</span>) as the denominator.</p>
+<p><br></p>
+<p><span class="math display">\[F = \frac { \ s_1^2}{ \ s_2^2} \qquad \text{with}  \qquad df_{1} = r_{1} -1 , \ df_{2} = r_{2} -1\]</span></p>
+<p><br></p>
+<p>This F-ratio can be compared to the critical F-value on the F-distribution table (Appendix XXX), given the degrees of freedom of the numerator and denominator. Since this is a two-tailed F-test, the <span class="math inline">\(\alpha\)</span> value to determine the critical F-value, <span class="math inline">\(F_{crit}\)</span>, will be divided by two, <span class="math inline">\(\frac{\alpha}{2}\)</span>.</p>
+<p>The results of the F-test will help identify which case to use for calculating the standard error of the difference for our samples.</p>
+<p>If <span class="math inline">\(F_{calc} &gt; F_{crit, \frac{\alpha}{2}}\)</span>, then the null hypothesis, <span class="math inline">\(H_0 : \sigma_1 = \sigma_2\)</span>, is rejected and the population variances are not equal.</p>
+<p>If <span class="math inline">\(F_{calc} &lt; F_{crit, \frac{\alpha}{2}}\)</span>, then the null hypothesis, <span class="math inline">\(H_0 : \sigma_1 = \sigma_2\)</span>, is not rejected and the population variances are assumed to be equal.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:FTestDec"></span>
+<img src="images/CH8FTestDec.png" alt="F-Test Decision Table from www.statistics4u.info" width="60%" />
+<p class="caption">
+Figure 1.5: F-Test Decision Table from www.statistics4u.info
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="calculating-the-standard-error-of-the-difference-and-the-t-statistic" class="section level2">
+<h2><span class="header-section-number">1.6</span> Calculating the Standard Error of the Difference and the t-statistic</h2>
+<p>In the case of equal variances, the next step would be to calculate the pooled sample variance, <span class="math inline">\(s^2\)</span>, which is the best estimate of <span class="math inline">\(\sigma_i^2\)</span>. If the variances are unequal, then the best estimates of the population variances are the individual sample variances. We use the estimates of the population variances to calculate the standard error of the difference, <span class="math inline">\(S_{\bar{d}}\)</span>. The <span class="math inline">\(S_{\bar{d}}\)</span>, will be calculated differently depending on (1) if the samples are independent or paired, and in the case of independent samples, (2) if the population variances are equal or unequal, and (3) if the sample sizes are equal or unequal. Finally, we can use <span class="math inline">\(S_{\bar{d}}\)</span> to calculate the t-statistic, <span class="math inline">\(t\)</span> and perform the t-test, which is the final step to determine if the two populations means are significantly different from each other. <em>We have previously used t-tests to evaluate if there is a significant difference between a population and a hypothetical population; now we can also use t-tests to evaluate if two populations are significantly different from each other.</em></p>
+<p>Note, for paired samples, the number of replicates, r, is equal to the number of pairs and the sample variance of the difference, <span class="math inline">\(s^2_{d}\)</span> is simply the variance of the paired differences.</p>
+<p>To appropriately identify which equations to use and when, there are three general “Case” scenarios.</p>
+</div>
+<div id="cases" class="section level2">
+<h2><span class="header-section-number">1.7</span> Cases</h2>
+<div id="Case1" class="section level3">
+<h3><span class="header-section-number">1.7.1</span> Case 1: Independent samples with equal population variances</h3>
+<p>When the two sample groups are independent and the two population variances are equal, then the two sample variances are estimates of the same population variance. To calculate a better estimate of the population variance, we can average the two sample variances to calculate the pooled sample variance <span class="math inline">\(( s^2 )\)</span></p>
+<p><br></p>
+<p><span class="math display">\[s^2 = \frac{({{s_1}^2})({r_1-1})+({{s_2}^2})({r_2-1})}{(r_1+r_2-2)} \qquad \text{with} \qquad df = r_1+r_2-2\]</span></p>
+<p><br></p>
+<p>The standard error of the difference is then:</p>
+<p><br> <span class="math display">\[\bar{d} = \bar{x_1} - \bar{x_2}\]</span> <br></p>
+<p>When <strong>the two sample sizes are equal</strong>, the pooled variance and the standard error of the difference can more simply be calculated as</p>
+<p><br></p>
+<p><span class="math display">\[s^2 = \frac{{{s_1}^2}+{{s_2}^2}}{2} \qquad \text{with} \qquad df = 2(r-1)\]</span></p>
+<p><span class="math display">\[s_{\bar{d}} = \sqrt{\frac{{2s}^2}{r}}\]</span> <br></p>
+<p>The test statistic can be calculated as:</p>
+<p><span class="math display">\[t = \frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}\]</span> <br></p>
+<p>where,</p>
+<p><span class="math display">\[\bar{d} = \bar{x_1} - \bar{x_2}\]</span></p>
+<p><br></p>
+</div>
+<div id="Case2" class="section level3">
+<h3><span class="header-section-number">1.7.2</span> Case 2: Independent samples with unequal population variances</h3>
+<p>When the population variances are unequal, we calculate the standard error of the difference using the two sample variances as our best estimates of the population variances.</p>
+<p><br></p>
+<p><span class="math display">\[s_{\bar{d}} = \sqrt{\frac{{s_1}^2}{r_1}+\frac{{s_2}^2}{r_2}} \qquad \text{with}  \qquad df = r_1+r_2-2\]</span> <br></p>
+<p>The test statistic is calculated as</p>
+<p><br></p>
+<p><span class="math display">\[t = \frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}\]</span> <br></p>
+<p>where,</p>
+<p><span class="math display">\[\bar{d} = \bar{x_1} - \bar{x_2}\]</span> <br></p>
+<p>Since the population variances are unequal, we cannot use the Student’s t-table to identify the critical t-value (<span class="math inline">\(t_\alpha\)</span>). The critical t-value is calculated instead as:</p>
+<p><br></p>
+<p><span class="math display">\[t_\alpha = \frac{(t_1 s_{\bar{Y_1}}^2+t_2 s_{\bar{Y_2}}^2)}{(s_{\bar{Y_1}}^2+s_{\bar{Y_2}}^2)}\]</span> <br></p>
+<p>where <span class="math inline">\(t_1\)</span> and <span class="math inline">\(t_2\)</span> are calculated with <span class="math inline">\(r_1 -1\)</span> and <span class="math inline">\(r_2 -1\)</span> degrees of freedom, respectively.</p>
+</div>
+<div id="Case3" class="section level3">
+<h3><span class="header-section-number">1.7.3</span> Case 3: Paired samples</h3>
+<p>When observations are made on the same experimental unit (e.g., adjacent plots in the same field, pigs from the same pen, etc.) and are assigned to different treatments, they are considered <strong>paired samples</strong>. The average of paired differences, <span class="math inline">\(\bar{d}\)</span>, the variance of the difference, <span class="math inline">\(s_d^2\)</span>, the standard error of the difference, <span class="math inline">\(s_\bar{d}\)</span>, and the test statistic, <span class="math inline">\(t\)</span>, are calculated as follows:</p>
+<p><br></p>
+<p><span class="math display">\[\bar{d} = \frac{\sum{d_i}}{r}\]</span></p>
+<p><br></p>
+<p><span class="math display">\[s_d^2 = \frac{\sum(d_i-\bar{d})^2}{r-1} \qquad \text{with} \qquad  = r-1\]</span></p>
+<p><br></p>
+<p><span class="math display">\[s_\bar{d} = (\frac{s_d^2}{r})^{1/2}\]</span></p>
+<p><br></p>
+<p><span class="math display">\[t = \frac{(\bar{d}-\mu_{\bar{d}})}{s_{\bar{d}}}\]</span> <br></p>
+</div>
+<div id="two-populations-equation-summary" class="section level3">
+<h3><span class="header-section-number">1.7.4</span> Two Populations Equation Summary</h3>
+<table>
+<caption><span id="tab:CaseEquations">Table 1.1: </span></caption>
+<colgroup>
+<col width="2%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="25%" />
+<col width="20%" />
+<col width="5%" />
+<col width="17%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Case</th>
+<th align="center">Pop Variances</th>
+<th align="center">Sample Size</th>
+<th align="center">Paired / Independent</th>
+<th align="center">Pooled Sample Variance</th>
+<th align="center">Standard Error of the Difference</th>
+<th align="center">df</th>
+<th align="center">t-statistic</th>
+<th align="center">Confidence Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="center">Equal</td>
+<td align="center">Equal/ Not Equal</td>
+<td align="center">Independent</td>
+<td align="center"><span class="math inline">\(\frac{({{s_1}^2})({r_1-1})+({{s_2}^2})({r_2-1})}{(r_1+r_2-2)}\)</span></td>
+<td align="center"><span class="math inline">\((\frac{s^2}{r_1 + r_2})^{1/2}\)</span></td>
+<td align="center"><span class="math inline">\(r_1+r_2-2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}\)</span></td>
+<td align="center"><span class="math inline">\({L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}\)</span></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="center">Equal</td>
+<td align="center">Equal</td>
+<td align="center">Independent</td>
+<td align="center"><span class="math inline">\(\frac{{{s_1}^2}+{{s_2}^2}}{2}\)</span></td>
+<td align="center"><span class="math inline">\((\frac{{2S}^2}{r})^{1/2}\)</span></td>
+<td align="center"><span class="math inline">\(2(r-1)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{(\bar{d}-\mu_{\bar{d}})}{s_{\bar{d}}}\)</span></td>
+<td align="center"><span class="math inline">\({L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="center">Not Equal</td>
+<td align="center">Equal/ Not Equal</td>
+<td align="center">Independent</td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\((\frac{{s_1}^2}{r_1}+\frac{{s_2}^2}{r_2})^{1/2}\)</span></td>
+<td align="center"><span class="math inline">\(r_1+r_2-2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}\)</span></td>
+<td align="center"><span class="math inline">\({L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}\)</span></td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="center">Equal</td>
+<td align="center">Equal</td>
+<td align="center">Paired</td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\((\frac{s_d^2}{r})^{1/2}\)</span></td>
+<td align="center"><span class="math inline">\(r-1\)</span></td>
+<td align="center"><span class="math inline">\(\frac{(\bar{d}-\mu_{\bar{d}})}{s_{\bar{d}}}\)</span></td>
+<td align="center"><span class="math inline">\({L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="confidence-intervals" class="section level2">
+<h2><span class="header-section-number">1.8</span> Confidence Intervals</h2>
+<p>After calculating the difference between the two sample averages (<span class="math inline">\(\bar{d}\)</span>) and the standard error of the difference (<span class="math inline">\(s_{\bar{d}}\)</span>), a confidence interval for the mean difference can be calculated to understand the level of confidence associated with the estimated mean difference.</p>
+<p><span class="math display">\[{L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}\]</span></p>
+<p>Note that for Case 2, independent samples with unequal variances, you will need to calculate the critical t-value, however for Case 1 and 3 you can find this value on the Student’s t-table (Appendix XXX) with the appropriate degrees of freedom (see appropriate Case for equation). Depending on which Case is used to calculate the standard error of the difference, the degrees of freedom to identify the critical t-value (<span class="math inline">\(t_\alpha\)</span>) will vary when calculating your confidence intervals.</p>
+</div>
+<div id="decision-to-reject-or-fail-to-reject-the-null-hypothesis" class="section level2">
+<h2><span class="header-section-number">1.9</span> Decision to Reject or Fail to Reject the Null Hypothesis</h2>
+<p>After all of the steps and calculations, the calculated t-value and the critical t-value, <span class="math inline">\(t_{\alpha}\)</span>, can be used in the final decision to reject or fail to reject the null hypothesis. <strong>The null hypothesis is never “accepted”, rather the decision is to fail to reject.</strong> Remember, the null hypothesis when testing two population means is that the two populations are equal, <span class="math inline">\(H_0 : \mu_1 = \mu_2 \ \ \text{or} \ \ \bar{d} = 0\)</span></p>
+<p><br></p>
+<p><span class="math display">\[\text{If} \ \ t &gt; t_{\alpha} \ \text{and} \ P (t) &lt; \alpha \ \text{then we reject the null hypothesis} \]</span><br />
+<span class="math display">\[\text{If} \ \ t &lt; t_{\alpha} \ \text{and} \ P (t) &gt; \alpha \ \text{then we fail to reject the null hypothesis}\]</span></p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:DecisionMaking"></span>
+<img src="images/CH8Strategy.png" alt="General Procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis" width="60%" />
+<p class="caption">
+Figure 1.6: General Procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="bean-drought-example" class="section level2">
+<h2><span class="header-section-number">1.10</span> Bean Drought Example</h2>
+<p>Below is data collected on common bean plots that were randomly assigned to two different irrigation treatments: drought and normal irrigation. Yield data was collected from these plots and recorded in the table below.<br />
+<br></p>
+<table>
+<caption>
+<span id="tab:BeanDrought">Table 1.2: </span>Common bean yield (kg/ha) is measured under drought treatment and irrigation in Quilichao, Columbia (Sponchiado, 1985)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Yield
+</th>
+<th style="text-align:right;">
+Drought
+</th>
+<th style="text-align:right;">
+Irrigated
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Yield 1
+</td>
+<td style="text-align:right;">
+590
+</td>
+<td style="text-align:right;">
+2990
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yield 2
+</td>
+<td style="text-align:right;">
+720
+</td>
+<td style="text-align:right;">
+2950
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yield 3
+</td>
+<td style="text-align:right;">
+720
+</td>
+<td style="text-align:right;">
+2660
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yield 4
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+2120
+</td>
+</tr>
+</tbody>
+</table>
+<div id="stating-the-hypotheses" class="section level3">
+<h3><span class="header-section-number">1.10.1</span> Stating the Hypotheses</h3>
+<p>This experiment features two treatments: drought and irrigated. The researchers aimed to identify if there was a significant difference in bean yield (kg/ha) between the two treatments. The null and alternative hypotheses can be stated, respectively, as</p>
+<p><br></p>
+<p><span class="math display">\[\text{Null hypothesis: the mean of the drought treatment is equal to the mean of the irrigated treatment,} \\ \text{ or there is no difference between drought and irrigated treatments on common bean yield} \\\]</span> <span class="math display">\[\mu_1 = \mu_2   \quad  \text{or} \quad \mu_{\bar{d}} = 0\]</span> <br></p>
+<p><span class="math display">\[\text{Alternative hypothesis: the mean of the drought treatment is not equal to the mean of the irrigated treatment,} \\ \text{ or there is a difference between drought and irrigated treatments on common bean yield} \\\]</span> <span class="math display">\[\mu_1 \neq \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} \neq 0\]</span></p>
+<p><br></p>
+</div>
+<div id="sampling-method" class="section level3">
+<h3><span class="header-section-number">1.10.2</span> Sampling Method</h3>
+<p>Since the samples were randomly assigned to the treatment and there was no additional information provided on how each sample was assigned to a given treatment, we can assume that the samples are independent of one another.</p>
+</div>
+<div id="calculating-sample-averages-and-the-mean-difference" class="section level3">
+<h3><span class="header-section-number">1.10.3</span> Calculating Sample Averages and the Mean Difference</h3>
+<p>As the calculations begin on the two treatments of this experiment, we will designate <strong>sample 1 as the drought treatment and sample 2 as the irrigated treatment</strong> to simplify labeling of our statistical terms. Be careful to maintain consistency of this designation throughout the complete set of calculations.</p>
+<p>Since the samples are independent, the averages of each sample are calculated as</p>
+<span class="math display">\[\begin{equation}
+
+\bar{Y}_1 = \frac{\sum Y_{i1}}{r_1} \\[20pt]
+= \frac{590 + 720 + 720 + 190}{4} \\[20pt]
+= 555 \\[25pt]
+\bar{Y}_2 = \frac{\sum Y_{i2}}{r_2} \\[20pt]
+= \frac{2990 + 2950 + 2660 + 2120}{4} \\[20pt]
+= 2680
+
+\end{equation}\]</span>
+<p><br></p>
+<p>and the difference between the two averages is calculated as</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+
+\bar{d} = \bar{Y}_2 - \bar{Y}_1 \\[20pt]
+=  2680 - 555 \\[20pt]
+= 2125
+
+\end{equation}\]</span>
+<p><br></p>
+<p>We can do these calculations in R, as follows: <br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the sum of the samples in each treatment</span>
+sum.Y1 &lt;-<span class="st">  </span><span class="kw">sum</span>(bean.yield<span class="op">$</span>Drought)
+sum.Y2 &lt;-<span class="st">  </span><span class="kw">sum</span>(bean.yield<span class="op">$</span>Irrigated)
+
+<span class="co"># the number of samples in each treatment</span>
+r1 &lt;-<span class="st"> </span><span class="kw">length</span>(bean.yield<span class="op">$</span>Drought)
+r2 &lt;-<span class="st"> </span><span class="kw">length</span>(bean.yield<span class="op">$</span>Irrigated)
+
+<span class="co"># calculate the sample averages by dividing the sample sums </span>
+<span class="co"># by the number of samples for each treatment &quot;by hand&quot;</span>
+(Ybar1 &lt;-<span class="st"> </span>sum.Y1 <span class="op">/</span><span class="st"> </span>r1)</code></pre></div>
+<pre><code>## [1] 555</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Ybar2 &lt;-<span class="st"> </span>sum.Y2 <span class="op">/</span><span class="st"> </span>r2)</code></pre></div>
+<pre><code>## [1] 2680</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a simpler method to calculate the sample averages</span>
+(Ybar1 &lt;-<span class="st"> </span><span class="kw">mean</span>(bean.yield<span class="op">$</span>Drought))</code></pre></div>
+<pre><code>## [1] 555</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Ybar2 &lt;-<span class="st"> </span><span class="kw">mean</span>(bean.yield<span class="op">$</span>Irrigated))</code></pre></div>
+<pre><code>## [1] 2680</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the average of the difference between the two treatments</span>
+(dbar &lt;-<span class="st"> </span>Ybar2 <span class="op">-</span><span class="st"> </span>Ybar1)</code></pre></div>
+<pre><code>## [1] 2125</code></pre>
+<p><br></p>
+</div>
+<div id="calculating-sample-variances" class="section level3">
+<h3><span class="header-section-number">1.10.4</span> Calculating Sample Variances</h3>
+<div id="calculate-the-individual-sample-variances" class="section level4">
+<h4><span class="header-section-number">1.10.4.1</span> Calculate the Individual Sample Variances</h4>
+<p>Now, we need to determine if the population variances are equal. Information on the equality of the population variances may be provided for a given experiment. However, in the absence of this information, the equality of the sample variances can be tested using an F test. First, we calculate each sample variance:</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+
+s^2_1 = \frac{\sum (Y_{i1} - \bar{Y}_1)^2}{r_1 - 1} \\[20pt]
+= \frac{(590 - 555)^2 + (720 - 555)^2 + (720-555)^2 + (190-555)^2}{4 - 1} \\[20pt]
+= 62966.67 \\[25pt]
+
+s^2_2 = \frac{\sum (Y_{i2} - \bar{Y}_2)^2}{r_2 - 1} \\[20pt]
+= \frac{(2990 - 2680)^2 + (2950 - 2680)^2 + (2660 - 2680)^2 + (2120 - 2680)^2}{4 -1} \\[20pt]= 161000
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the sample variances for each treatment &quot;by hand&quot;</span>
+(var1 &lt;-<span class="st"> </span><span class="kw">sum</span>((bean.yield<span class="op">$</span>Drought <span class="op">-</span><span class="st"> </span>Ybar1)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(r1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 62966.66667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(var2 &lt;-<span class="st"> </span><span class="kw">sum</span>((bean.yield<span class="op">$</span>Irrigated <span class="op">-</span><span class="st"> </span>Ybar2)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(r2 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 161000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a simpler way to calculate the sample variances</span>
+(var1 &lt;-<span class="st"> </span><span class="kw">var</span>(bean.yield<span class="op">$</span>Drought))</code></pre></div>
+<pre><code>## [1] 62966.66667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(var2 &lt;-<span class="st"> </span><span class="kw">var</span>(bean.yield<span class="op">$</span>Irrigated))</code></pre></div>
+<pre><code>## [1] 161000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># both methods yield the same answers</span></code></pre></div>
+</div>
+<div id="using-an-f-test-to-determine-if-population-variances-are-equal" class="section level4">
+<h4><span class="header-section-number">1.10.4.2</span> Using an F-test to determine if Population Variances are Equal</h4>
+<p>The F-test helps us determine if the population variances are equal. The null hypothesis is that the population variance of the drought treatment is equal to the population variance of the irrigated treatment. If the population variances are equal, the two sample variances can be pooled to provide a more accurate estimate of the population variance.</p>
+<p>The calculated F-value is simply the ratio of the larger sample variance divided by the smaller sample variance</p>
+<p><br></p>
+<p><span class="math display">\[F_{calc} = \frac{ \text{larger} \ s^2 }{\text{smaller} \ s^2} = \frac{161000}{62966.67} = 2.56\]</span> <br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># since var2 is greater than var1, var2 will be used </span>
+<span class="co"># as the numerator and var1 will be used as the denominator </span>
+Fcalc &lt;-<span class="st"> </span>var2 <span class="op">/</span><span class="st"> </span>var1</code></pre></div>
+<p>Next, compare the calculated F-value, <span class="math inline">\(F_{calc}\)</span>, to the critical F-value, <span class="math inline">\(F_{crit}\)</span>, which can be found in F-Distribution Table. With <span class="math inline">\(df_{numerator} = 3\)</span>, <span class="math inline">\(df_{denominator} = 3\)</span>, and <span class="math inline">\(\alpha_{two-tailed} = \frac{0.05}{2}\)</span>, it is determined <span class="math inline">\(F_{crit_\frac{\alpha}{2}} = 15.44\)</span> and <span class="math inline">\(F_{crit_\frac{1-\alpha}{2}} = 0.06\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculation of F-critical value using alpha = 0.05 /2 </span>
+<span class="co"># since the F-test is two-tailed, and the two degrees of freedom </span>
+<span class="co"># for the numerator and denominator</span>
+alpha &lt;-<span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="dv">2</span>
+(Fcrit.upper &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, r1<span class="op">-</span><span class="dv">1</span>, r2<span class="op">-</span><span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>## [1] 15.43918238</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Fcrit.lower &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, r1<span class="op">-</span><span class="dv">1</span>, r2<span class="op">-</span><span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## [1] 0.06477026927</code></pre>
+<p>Since the F-statistic falls within the two critical F-values, we fail to reject the null hypothesis that the two population variances are equal.</p>
+<p><br></p>
+<p><span class="math display">\[F_{calc} = 2.56 &lt; F_{crit_\alpha} = 9.28\]</span> and <span class="math display">\[F_{calc} = 2.56 &gt; F_{crit_{1-\alpha}} = 0.11\]</span></p>
+<p><br></p>
+<p>Therefore, the population variances can be treated as equal and the sample variances can be pooled.</p>
+<br>
+<div class="figure"><span id="fig:FDistInd"></span>
+<img src="08.0_TwoPops_files/figure-html/FDistInd-1.png" alt="F distribution for df1 = 3, df2 = 3, with the calculated F-ratio and the lower and upper F critical values shown from the bean drought example." width="672" />
+<p class="caption">
+Figure 1.7: F distribution for df1 = 3, df2 = 3, with the calculated F-ratio and the lower and upper F critical values shown from the bean drought example.
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="pooling-sample-variances" class="section level4">
+<h4><span class="header-section-number">1.10.4.3</span> Pooling Sample Variances</h4>
+<p>Since the F-test concluded that the two population variances are equal, the sample variances can be pooled to provide a more accurate estimate of the true variance.</p>
+<p>Since the two sample sizes are the same, <span class="math inline">\(r_1 = 4\)</span> and <span class="math inline">\(r_2 = 4\)</span>, the following equation from Case 2 is used to pool the sample variances:</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+
+s^2 = \frac{s_1^2 + s_2^2}{2} \\[20pt]
+= \frac{62966.67 + 161000}{2} \\[20pt]
+= 111983.33
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the pooled variance can be calculated by taking the average </span>
+<span class="co"># of the two sample variances, since they have the same sample size</span>
+pooled.var &lt;-<span class="st"> </span>( var1 <span class="op">+</span><span class="st"> </span>var2 ) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<p>since our two sample sizes are equal, the degrees of freedom are</p>
+<p><br></p>
+<p><span class="math display">\[df = 2(r-1) = 6\]</span> <br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Number of replicates in each bean yield treatment group</span>
+(r &lt;-<span class="st"> </span><span class="kw">length</span>(bean.yield<span class="op">$</span>Yield))</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the degrees of freedom are calculated as</span>
+(df &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>(r<span class="op">-</span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 6</code></pre>
+</div>
+</div>
+<div id="calculating-the-standard-error-of-the-difference" class="section level3">
+<h3><span class="header-section-number">1.10.5</span> Calculating the Standard Error of the Difference</h3>
+<p>The standard error of the difference is calculated using the pooled variance <span class="math inline">\(s^2\)</span> and our sample size <span class="math inline">\(r\)</span>, where <span class="math inline">\(r_1 = r_2 = r\)</span></p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+
+s_{\bar{d}} = \sqrt{ \frac{2s^2}{r\mathstrut}} \\[20pt]
+=  \sqrt{\frac{2 \times  111983.33}{4\mathstrut}} \\[20pt]
+= 236.63
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the standard error of the difference is calculated by taking </span>
+<span class="co"># the square root of 2 times the pooled variance,</span>
+<span class="co"># and dividing by the number of replicates, r</span>
+
+se.dbar &lt;-<span class="st"> </span><span class="kw">sqrt</span>( (<span class="dv">2</span><span class="op">*</span>pooled.var) <span class="op">/</span><span class="st"> </span>r)</code></pre></div>
+</div>
+<div id="calculating-the-t-statistic" class="section level3">
+<h3><span class="header-section-number">1.10.6</span> Calculating the t-statistic</h3>
+<p>The t-statistic is used to determine if we reject or fail to reject the null hypothesis that the population means are equal, <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> or that there is no difference between our population means, <span class="math inline">\(H_0: \mu_{\bar{d}} = 0\)</span>.</p>
+<p>The t-statistic, <span class="math inline">\(t_{calc}\)</span>, is calculated by using the difference of the averages, <span class="math inline">\(\bar{d}\)</span> and the standard error of the difference, <span class="math inline">\(s_{\bar{d}}\)</span>.</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+t_{calc} = \frac{(\bar{d} -  \mu_{\bar{d}})}{s_{\bar{d}}} \\[20pt]
+= \frac{2125 - 0}{236.63} \\[20pt]
+= 8.98
+
+\end{equation}\]</span>
+<p><br></p>
+<p><span class="math inline">\(\mu_{\bar{d}} = 0\)</span> because our null hypothesis is that there is no difference between the two population means, <span class="math inline">\(H_0: \mu_{\bar{d}} = 0\)</span></p>
+<p>We can do the same calculations in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the t-statistic by subtracting our hypothesized difference</span>
+<span class="co"># between the means, which is 0, from the sample difference, and </span>
+<span class="co"># dividing by the standard error of the difference.</span>
+(t.calc &lt;-<span class="st"> </span>( dbar <span class="op">-</span><span class="st"> </span><span class="dv">0</span> ) <span class="op">/</span><span class="st"> </span>se.dbar)</code></pre></div>
+<pre><code>## [1] 8.980432168</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a quicker method to calculate the t-statistic </span>
+(t.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(bean.yield<span class="op">$</span>Irrigated, bean.yield<span class="op">$</span>Drought,
+                  <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="dt">paired =</span> <span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  bean.yield$Irrigated and bean.yield$Drought
+## t = 8.9804322, df = 5.0352742, p-value = 0.0001377008
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  1648.924873         Inf
+## sample estimates:
+## mean of x mean of y 
+##      2680       555</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># both calculations yield the same value</span></code></pre></div>
+<p>We compare the calculated t-statistic to the critical t-value, <span class="math inline">\(t_{crit}\)</span>, which can be found in the Student’s t-Distribution Table. With the degrees of freedom of our pooled samples, <span class="math inline">\(df = 2(r-1) = 6\)</span>, and <span class="math inline">\(\alpha_{two-tailed} = \frac{0.05}{2}\)</span>, it is determined that <span class="math inline">\(t_{crit} = 2.447\)</span></p>
+<p>Since <span class="math inline">\(t_{calc} = 9.33 &gt; t_{crit} = 2.447\)</span>, we reject the null hypothesis that there is no difference between the drought treatment and the irrigated treatment.</p>
+<div class="figure"><span id="fig:tBeanInd"></span>
+<img src="08.0_TwoPops_files/figure-html/tBeanInd-1.png" alt="Student's t distribution for df = 6, with the calculated t value and the upper and lower t critical values from the bean drought example." width="672" />
+<p class="caption">
+Figure 1.8: Student’s t distribution for df = 6, with the calculated t value and the upper and lower t critical values from the bean drought example.
+</p>
+</div>
+</div>
+</div>
+<div id="bean-drought-example---paired" class="section level2">
+<h2><span class="header-section-number">1.11</span> Bean Drought Example - Paired</h2>
+<p>Below is same data collected on common bean plots from the previous example. <em>However, it is revealed that there are 4 unique varieties of common bean that were tested under both drought and normal irrigation</em>. Yield data was collected from these plots and recorded in the table below.<br />
+<br></p>
+<p><br></p>
+<table>
+<caption>
+<span id="tab:BeanDroughtPaired">Table 1.3: </span>Common bean yield (kg/ha) is measured under drought treatment and irrigation in four varieties in Quilichao, Columbia (Sponchiado, 1985).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variety
+</th>
+<th style="text-align:right;">
+Drought
+</th>
+<th style="text-align:right;">
+Irrigated
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Var1
+</td>
+<td style="text-align:right;">
+590
+</td>
+<td style="text-align:right;">
+2990
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Var2
+</td>
+<td style="text-align:right;">
+720
+</td>
+<td style="text-align:right;">
+2950
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Var3
+</td>
+<td style="text-align:right;">
+720
+</td>
+<td style="text-align:right;">
+2660
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Var4
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+2120
+</td>
+</tr>
+</tbody>
+</table>
+<div id="stating-the-hypotheses-1" class="section level3">
+<h3><span class="header-section-number">1.11.1</span> Stating the Hypotheses</h3>
+<p><strong>Our null and alternative hypotheses will be the same as before</strong></p>
+<p><span class="math display">\[\text{Null hypothesis: there is no difference between drought and irrigated treatments.} \\[15pt]\]</span></p>
+<p><span class="math display">\[\mu_1 = \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} = 0\]</span></p>
+<p><span class="math display">\[\text{Alternative hypothesis: there is a difference between drought and irrigated treatments.}\\\]</span> <span class="math display">\[\mu_1 \neq \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} \neq 0\]</span></p>
+</div>
+<div id="sampling-method-1" class="section level3">
+<h3><span class="header-section-number">1.11.2</span> Sampling Method</h3>
+<p><strong>The sampling method is now different</strong>. Since there are four known common bean varieties planted in both drought and irrigated treatments, each variety is considered an experimental unit and the samples are paired.</p>
+</div>
+<div id="calculating-sample-averages-and-the-average-of-the-difference" class="section level3">
+<h3><span class="header-section-number">1.11.3</span> Calculating Sample Averages and the Average of the Difference</h3>
+<p>For paired samples, we take the difference of each experimental unit (i.e., each variety) between the two treatments, then take the average of the differences.</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+
+\bar{d} =  \frac{\sum{d_i}}{r} \\[20pt]
+=\frac{\sum|Y_{i2} - Y_{i1}|}{r} \\[20pt]
+= \frac{|2990-590| + |2950 -720| + |2660-720| + |2120-190|}{4} \\[20pt]
+= 2125
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a new column of the difference between the drought </span>
+<span class="co"># and irrigated treatment columns</span>
+
+bean.paired<span class="op">$</span>d_i &lt;-<span class="st">  </span>bean.paired<span class="op">$</span>Irrigated <span class="op">-</span><span class="st"> </span>bean.paired<span class="op">$</span>Drought 
+
+<span class="co"># calculate sum(d_i) by adding the column containing the differences </span>
+<span class="co"># of the two treatments</span>
+
+sum.d_i &lt;-<span class="st"> </span><span class="kw">sum</span>(bean.paired<span class="op">$</span>d_i)
+
+<span class="co"># calculate r as the number of varieties (pairs of treatments)</span>
+
+r.pair &lt;-<span class="st">  </span><span class="kw">length</span>(bean.paired<span class="op">$</span>Variety)
+
+<span class="co"># calculate d_bar</span>
+
+(dbar.pair &lt;-<span class="st"> </span>sum.d_i <span class="op">/</span><span class="st"> </span>r.pair)</code></pre></div>
+<pre><code>## [1] 2125</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># alternatively:</span>
+
+<span class="kw">mean</span>(bean.paired<span class="op">$</span>d_i)</code></pre></div>
+<pre><code>## [1] 2125</code></pre>
+</div>
+<div id="calculating-the-variance-of-the-difference" class="section level3">
+<h3><span class="header-section-number">1.11.4</span> Calculating the Variance of the Difference</h3>
+<p>We do not need to calculate individual sample variances, since we will directly calculate the variance of the paired differences:</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+s^2_{d} = \frac{\sum( d_i - \bar{d})^2}{r-1} \\[20pt]
+= \frac{(2400-2125)^2 + (2230-2125)^2 + (1940-2125)^2 + (1930-2125)^2}{3} [20pt]
+= 52966.67
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the variance of the differences by summing the paired </span>
+<span class="co"># differences and dividing by r - 1 </span>
+
+<span class="co"># var.d.pair = variance of the differences</span>
+
+(var.d.pair &lt;-<span class="st"> </span><span class="kw">sum</span>((bean.paired<span class="op">$</span>d_i <span class="op">-</span><span class="st"> </span>dbar.pair) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(r.pair <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 52966.66667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># alternatively:</span>
+
+<span class="kw">var</span>(bean.paired<span class="op">$</span>d_i)</code></pre></div>
+<pre><code>## [1] 52966.66667</code></pre>
+</div>
+<div id="calculating-the-standard-error-of-the-difference-1" class="section level3">
+<h3><span class="header-section-number">1.11.5</span> Calculating the Standard Error of the Difference</h3>
+<p>The standard error of the difference is calculated using the variance of the differences <span class="math inline">\(s^2_d\)</span> and our sample size <span class="math inline">\(r\)</span></p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+s_{\bar{d}} = \sqrt{\frac{s_d^2}{r}} \\[20pt]
+= \sqrt{\frac{52966.67}{4}} \\[20pt]
+= 115.07
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the standard error of the difference by taking </span>
+<span class="co"># the square root of the variance of the difference divided by r</span>
+
+se.dbar.pair &lt;-<span class="st"> </span><span class="kw">sqrt</span>(var.d.pair <span class="op">/</span><span class="st"> </span>r.pair)</code></pre></div>
+</div>
+<div id="calculating-the-t-statistic-1" class="section level3">
+<h3><span class="header-section-number">1.11.6</span> Calculating the t-statistic</h3>
+<p>The t-statistic is calculated using the same equation as in the independent sampling example</p>
+<p><br></p>
+<span class="math display">\[\begin{equation}
+
+t_{calc} = \frac{(\bar{d} -  \mu_{\bar{d}})}{s_{\bar{d}}} \\[20pt]
+= \frac{2125 - 0}{115.07} \\[20pt]
+= 18.47
+
+\end{equation}\]</span>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the t-statistic by dividing the difference of the </span>
+<span class="co"># averages by the standard error of the difference</span>
+
+t.calc.pair &lt;-<span class="st"> </span>(dbar.pair <span class="op">-</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span>se.dbar.pair
+
+<span class="co"># a simpler way to calculate the t-statistic</span>
+
+(t.test.pair &lt;-<span class="st"> </span><span class="kw">t.test</span>(bean.paired<span class="op">$</span>Irrigated, bean.paired<span class="op">$</span>Drought, 
+                       <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="dt">paired =</span> <span class="ot">TRUE</span>)) </code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  bean.paired$Irrigated and bean.paired$Drought
+## t = 18.466628, df = 3, p-value = 0.0001732655
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  1854.192725         Inf
+## sample estimates:
+## mean of the differences 
+##                    2125</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note, we specified &quot;paired = TRUE&quot; this time.</span></code></pre></div>
+<p>The calculated t-statistic is compared to the critical t-value, <span class="math inline">\(t_{crit}\)</span>, which can be found in the Student’s t-Distribution Table. With the degrees of freedom of our pooled samples, <span class="math inline">\(df = r-1 = 3\)</span>, and <span class="math inline">\(\alpha_{two-tailed} = \frac{0.05}{2}\)</span>, it is determined <span class="math inline">\(t_{crit} = 3.182\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we can calculate the critical t-value in r by using the qt() function and inputting alpha = 0.05</span>
+<span class="co"># and the df = r - 1.  Since this is a two-tailed t-test, alpha is</span>
+<span class="co"># divided by 2 for calculations</span>
+
+alpha &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+t.crit.pair &lt;-<span class="st"> </span><span class="kw">qt</span>(alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> r.pair <span class="op">-</span><span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Since <span class="math inline">\(t_{calc} = 18.47 &gt; t_{crit} = 3.182\)</span>, we reject the null hypothesis that there is no difference between the drought treatment and the irrigated treatment.</p>
+<div class="figure"><span id="fig:tBeanDroughtPaired"></span>
+<img src="08.0_TwoPops_files/figure-html/tBeanDroughtPaired-1.png" alt="Student's t distribution for df = 3, with the calculated t value, and upper and lower critical t values for the paired bean drought example shown." width="672" />
+<p class="caption">
+Figure 1.9: Student’s t distribution for df = 3, with the calculated t value, and upper and lower critical t values for the paired bean drought example shown.
+</p>
+</div>
+</div>
+</div>
+<div id="Ex8" class="section level2">
+<h2><span class="header-section-number">1.12</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Another three samples have been submitted from the irrigation study on common bean; two samples for the irrigated treatment, and one sample for the drought treatment<br />
+<br></li>
+</ol>
+<table>
+<caption><span id="tab:BeanDrought">Table 1.2: </span> Common bean yield (kg/ha) is measured under drought treatment and irrigation in Quilichao, Columbia (Sponchiado, 1985)</caption>
+<thead>
+<tr class="header">
+<th align="right">Treatment</th>
+<th align="center">Yield 1</th>
+<th align="center">Yield 2</th>
+<th align="center">Yield 3</th>
+<th align="center">Yield 4</th>
+<th align="center">Yield 5</th>
+<th align="center">Yield 6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Drought</td>
+<td align="center">590</td>
+<td align="center">720</td>
+<td align="center">720</td>
+<td align="center">190</td>
+<td align="center">1010</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="right">Irrigated</td>
+<td align="center">2990</td>
+<td align="center">2950</td>
+<td align="center">2660</td>
+<td align="center">2120</td>
+<td align="center">1870</td>
+<td align="center">1560</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Assuming these samples are independent of one another and are from the same bean variety, calculate the</p>
+<ul>
+<li>sample averages</li>
+<li>difference of the averages</li>
+<li>sample variances<br />
+</li>
+<li>difference of the sample variances</li>
+<li>t-statistic</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Data is collected on the birth weight (lb) of calves at a single farm and grouped according to gender. The sample size, averages and standard deviation for each group is provided in the table below</li>
+</ol>
+<p><br></p>
+<table>
+<caption><span id="tab:CalfBirthWeight">Table 1.4: </span> Average birth weight of calves (lb)</caption>
+<thead>
+<tr class="header">
+<th align="right">Gender</th>
+<th align="center">Calves</th>
+<th align="center">Mean</th>
+<th align="center">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Male</td>
+<td align="center">30</td>
+<td align="center">60</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="right">Female</td>
+<td align="center">25</td>
+<td align="center">50</td>
+<td align="center">7</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Is there a significant difference in the average birth weight of male and female calves, under the following conditions</p>
+<ul>
+<li>the two populations have equal variances</li>
+<li>the two populations have unequal variances</li>
+<li>the two populations have equal variances and equal sample sizes of 20</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Data is collected on the average amount of protein in milk (g/cup) from dairy cows under two different diets</li>
+</ol>
+<p><br></p>
+<table>
+<caption><span id="tab:MilkProtein">Table 1.5: </span> Average Protein Content (g/cup) in Milk</caption>
+<thead>
+<tr class="header">
+<th align="right">Diet</th>
+<th align="center">Cow 1</th>
+<th align="center">Cow 2</th>
+<th align="center">Cow 3</th>
+<th align="center">Cow 4</th>
+<th align="center">Cow 5</th>
+<th align="center">Cow 6</th>
+<th align="center">Cow 7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">High-Carb</td>
+<td align="center">7.56</td>
+<td align="center">8.04</td>
+<td align="center">7.14</td>
+<td align="center">7.68</td>
+<td align="center">7.8</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="right">High-Protein</td>
+<td align="center">7.86</td>
+<td align="center">8.04</td>
+<td align="center">7.68</td>
+<td align="center">8.1</td>
+<td align="center">7.98</td>
+<td align="center">7.62</td>
+<td align="center">7.44</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Is there a significant difference in the average protein content for the two diets?</p>
+<p>Is the average protein for the high-protein diet significantly greater than that for high-carbohydrate diet?</p>
+<p>What is the 95% confidence interval of the difference between the sample averages?</p>
+</div>
+<div id="Hwk8" class="section level2">
+<h2><span class="header-section-number">1.13</span> Homework : Two Population Means</h2>
+<div id="walking-spiders" class="section level3">
+<h3><span class="header-section-number">1.13.1</span> Walking Spiders</h3>
+<p><span class="citation">@wilder2004</span> examined the effect of praying mantis excrement on the behavior of wolf spiders to test whether cues from an introduced predator (the praying mantis) would change the movement rate of the native wolf spider. They put 15 wolf spiders in individual containers; inside each container there were two semicircles of filter paper. One semicircle was smeared with praying mantis excrement and one circle was without excrement. The researchers observed each spider for one hour and calculated spider mean walking speed while it moved across the excrement circle and the non-excrement circle. (Each of the 15 spiders was exposed to both treatments). Data were modified for the purpose of homework and are not the original true data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">walking.spiders &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="st">&#39;Spider Number&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>),
+  <span class="st">&#39;no excrement (cm/sec)&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">5.5</span>, <span class="fl">1.1</span>, <span class="fl">2.7</span>, <span class="fl">2.8</span>, <span class="fl">1.6</span>, <span class="fl">3.2</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">6.9</span>, <span class="fl">2.2</span>, <span class="fl">3.9</span>, <span class="fl">3.8</span>, <span class="fl">3.5</span>, <span class="fl">5.7</span>),
+  <span class="st">&#39;excrement (cm/sec)&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">1.9</span>, <span class="fl">1.2</span>, <span class="fl">2.6</span>, <span class="fl">4.3</span>, <span class="fl">0.3</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">3.3</span>, <span class="fl">2.6</span>, <span class="fl">0.7</span>, <span class="fl">1.4</span>, <span class="fl">2.1</span>, <span class="fl">3.4</span>, <span class="fl">2.3</span>),
+  <span class="st">&#39;difference&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.1</span>, <span class="fl">3.6</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.3</span>, <span class="fl">2.2</span>, <span class="fl">3.0</span>, <span class="fl">1.7</span>, <span class="fl">4.3</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">0.1</span>, <span class="fl">3.4</span>)) </code></pre></div>
+<p><br></p>
+<table>
+<caption><span id="tab:WalkingSpiders">Table 1.6: </span> The mean walking speed of 15 wolf spiders inside a container in the presence and absence of praying mantis excrement.</caption>
+<thead>
+<tr class="header">
+<th align="right">Spider Number</th>
+<th align="center">no excrement (cm/sec)</th>
+<th align="center">excrement (cm/sec)</th>
+<th align="center">difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="center">2.5</td>
+<td align="center">0.4</td>
+<td align="center">2.1</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="center">5.5</td>
+<td align="center">1.9</td>
+<td align="center">3.6</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="center">1.1</td>
+<td align="center">1.2</td>
+<td align="center">-0.1</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="center">2.7</td>
+<td align="center">2.6</td>
+<td align="center">0.1</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="center">2.8</td>
+<td align="center">4.3</td>
+<td align="center">-1.5</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="center">1.6</td>
+<td align="center">0.3</td>
+<td align="center">1.3</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="center">3.2</td>
+<td align="center">1.0</td>
+<td align="center">2.2</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="center">4.5</td>
+<td align="center">1.5</td>
+<td align="center">3.0</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="center">5.0</td>
+<td align="center">3.3</td>
+<td align="center">1.7</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="center">6.9</td>
+<td align="center">2.6</td>
+<td align="center">4.3</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="center">2.2</td>
+<td align="center">0.7</td>
+<td align="center">1.5</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="center">3.9</td>
+<td align="center">1.4</td>
+<td align="center">2.5</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="center">3.8</td>
+<td align="center">2.1</td>
+<td align="center">1.7</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="center">3.5</td>
+<td align="center">3.4</td>
+<td align="center">0.1</td>
+</tr>
+<tr class="odd">
+<td align="right">15</td>
+<td align="center">5.7</td>
+<td align="center">2.3</td>
+<td align="center">3.4</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li><p>Calculate the average speed and sample variance for each treatment.</p></li>
+<li><p>Calculate the difference in speed between treatments for each spider. Report the average difference.</p></li>
+<li><p>Calculate the sample variance for the difference between treatments.</p></li>
+<li><p>Calculate the estimated variance of the averages of difference between treatments.</p></li>
+<li><p>Is this a paired or independent sample case?</p></li>
+<li><p>Calculate the t-value that corresponds to the observed difference.</p></li>
+<li><p>Calculate the critical t value to determine if the difference is significant at the 5% level.</p></li>
+<li><p>Calculate a 95% confidence interval for the difference between treatment means.</p></li>
+<li><p>Can you conclude with 95% confidence that mean spider walking speed differed based on cue (praying mantis excrement)?</p></li>
+</ol>
+</div>
+<div id="rat-life" class="section level3">
+<h3><span class="header-section-number">1.13.2</span> Rat Life</h3>
+<p><span class="citation">@carlson1946</span> looked at the average lifespan of a rats based on gender. Below is lifespan (days) data from 14 male and 14 female rats, you may assume rat lifespan is distributed normally. Data were modified and are not the original true data. Assume variances are the same for males and females.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rat.life &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="st">&#39;males&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">825</span>, <span class="dv">425</span>, <span class="dv">500</span>, <span class="dv">575</span>, <span class="dv">725</span>, <span class="dv">800</span>, <span class="dv">475</span>, <span class="dv">575</span>, <span class="dv">725</span>, <span class="dv">500</span>, <span class="dv">700</span>, <span class="dv">575</span>, <span class="dv">775</span>),
+  <span class="st">&#39;females&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">450</span>, <span class="dv">725</span>, <span class="dv">675</span>, <span class="dv">725</span>, <span class="dv">750</span>, <span class="dv">850</span>, <span class="dv">690</span>, <span class="dv">725</span>, <span class="dv">475</span>, <span class="dv">700</span>, <span class="dv">725</span>, <span class="dv">475</span>, <span class="dv">825</span>, <span class="dv">725</span>))
+
+sample.avg &lt;-<span class="st"> </span><span class="kw">sapply</span>(rat.life, mean)
+
+sample.var &lt;-<span class="st"> </span><span class="kw">sapply</span>(rat.life, var)</code></pre></div>
+<p><br></p>
+<table>
+<caption><span id="tab:InterSteps">Table 1.7: </span></caption>
+<thead>
+<tr class="header">
+<th align="right">rat</th>
+<th align="center">males</th>
+<th align="center">females</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="center">700</td>
+<td align="center">450</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="center">825</td>
+<td align="center">725</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="center">425</td>
+<td align="center">675</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="center">500</td>
+<td align="center">725</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="center">575</td>
+<td align="center">750</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="center">725</td>
+<td align="center">850</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="center">800</td>
+<td align="center">690</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="center">475</td>
+<td align="center">725</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="center">575</td>
+<td align="center">475</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="center">725</td>
+<td align="center">700</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="center">500</td>
+<td align="center">725</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="center">700</td>
+<td align="center">475</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="center">575</td>
+<td align="center">825</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="center">775</td>
+<td align="center">725</td>
+</tr>
+<tr class="odd">
+<td align="right">——–:</td>
+<td align="center">:————-:</td>
+<td align="center">:—————–:</td>
+</tr>
+<tr class="even">
+<td align="right">average</td>
+<td align="center">633.928</td>
+<td align="center">679.642</td>
+</tr>
+<tr class="odd">
+<td align="right">s.var</td>
+<td align="center">17269.917</td>
+<td align="center">15571.016</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Test the hypothesis that lifespan does not differ between sexes.</p>
+<ol start="10" style="list-style-type: decimal">
+<li><p>Write the corresponding null and alternative hypothesis.</p></li>
+<li><p>Assume homogeneous variance and calculate the pooled sample variance for rat lifespan.</p></li>
+<li><p>Calculate the estimated variance of the difference between sample averages.</p></li>
+<li><p>Calculate the t value to test for difference between sexes in lifespan. Subtract males from females.</p></li>
+<li><p>Calculate the degrees of freedom of the t value.</p></li>
+<li><p>Calculate the probability of observing a larger absolute value of t if Ho were true.</p></li>
+<li><p>What do you conclude based on whether the calculated p is greater than alpha = 0.05.</p></li>
+</ol>
+</div>
+</div>
+<div id="laboratory-exercises" class="section level2">
+<h2><span class="header-section-number">1.14</span> Laboratory Exercises</h2>
+<div id="Lab8PLS" class="section level3">
+<h3><span class="header-section-number">1.14.1</span> Plant Sciences</h3>
+<p><strong>Submit BOTH files for your lab report using the appropriate Canvas tool</strong></p>
+<p>For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area.</p>
+<div id="part-1.-equality-of-variances-25-points" class="section level4">
+<h4><span class="header-section-number">1.14.1.1</span> Part 1. Equality of variances [25 points]</h4>
+<p>Mass per mature seed (mg) of an invasive grass (medusahead, <em>Taeniatherum caput-medusae</em>) was measured when plants were grown in several randomly selected plots of perennial or annual grasses typical of the California Grasslands. The data are included in the R block below. ‘A’ stands for annual and ‘P’ for perennial.</p>
+<p>Does the variance of seed mass differ between treatments (perennial vs. annual)? Perform a test of hypothesis at the 5% level (<span class="math inline">\(\alpha = 0.05\)</span>) using the F-statistic. Look up the critical F value in Table A.7 and by using the qf(p = 0.05, df1 = , df2 = ) function.</p>
+<p>Complete the calculations “by hand”, using only basic R functions like var(). Then, use the var.test () R function to test for difference of variances.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seedMassA &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.02</span>, <span class="fl">4.34</span>, <span class="fl">4.17</span>, <span class="fl">7.07</span>, <span class="fl">5.92</span>, <span class="fl">5.33</span>, <span class="fl">5.48</span>, <span class="fl">4.59</span>, <span class="fl">5.47</span>, <span class="fl">5.88</span>, <span class="fl">4.1</span>, <span class="fl">5.14</span>, <span class="fl">4.98</span>, <span class="fl">4.47</span>, <span class="fl">4.26</span>, <span class="fl">5.02</span>, <span class="fl">5.38</span>, <span class="fl">5.3</span>, <span class="fl">4.92</span>, <span class="fl">4.96</span>, <span class="fl">5.86</span>, <span class="fl">6.65</span>, <span class="fl">5.23</span>, <span class="fl">4.51</span>, <span class="fl">5.41</span>, <span class="fl">6.23</span>, <span class="fl">5.96</span>, <span class="fl">5.12</span>, <span class="fl">5.43</span>, <span class="fl">4.98</span>, <span class="fl">5.15</span>, <span class="fl">5.81</span>, <span class="fl">6.14</span>, <span class="fl">5.87</span>, <span class="fl">6.16</span>, <span class="fl">5.97</span>, <span class="fl">6.39</span>, <span class="fl">6.25</span>, <span class="fl">5.3</span>, <span class="fl">5.43</span>, <span class="fl">4.81</span>, <span class="fl">4.76</span>, <span class="fl">6.11</span>, <span class="fl">4.18</span>, <span class="fl">5.59</span>, <span class="fl">5.26</span>, <span class="fl">5.23</span>, <span class="fl">5.9</span>, <span class="fl">6.27</span>, <span class="fl">5.31</span>, <span class="fl">5.17</span>, <span class="fl">4.93</span>, <span class="fl">5.24</span>, <span class="fl">4.96</span>)
+
+seedMassP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">4.9</span>, <span class="fl">4.17</span>, <span class="fl">4.47</span>, <span class="fl">6.3</span>, <span class="fl">4.52</span>, <span class="fl">4.81</span>, <span class="fl">4.4</span>, <span class="fl">2.98</span>, <span class="fl">4.75</span>, <span class="fl">5.17</span>, <span class="fl">4.64</span>, <span class="fl">4.7</span>, <span class="fl">5.13</span>, <span class="fl">5.11</span>, <span class="fl">5.33</span>, <span class="fl">4.3</span>, <span class="fl">4.24</span>, <span class="fl">4.49</span>, <span class="fl">4.46</span>, <span class="fl">5.06</span>, <span class="fl">4.62</span>, <span class="fl">5.58</span>, <span class="fl">4.39</span>, <span class="fl">4.77</span>, <span class="fl">5.18</span>, <span class="fl">4.38</span>, <span class="fl">4.76</span>, <span class="fl">4.38</span>, <span class="fl">4.95</span>, <span class="fl">5.71</span>, <span class="fl">3.03</span>, <span class="fl">4.2</span>, <span class="fl">4.78</span>, <span class="fl">5.04</span>, <span class="fl">4.76</span>, <span class="fl">4.72</span>, <span class="fl">4.87</span>, <span class="fl">4.58</span>, <span class="fl">4.69</span>, <span class="fl">4.27</span>, <span class="fl">5.17</span>, <span class="fl">4.93</span>, <span class="fl">3.51</span>, <span class="fl">5.11</span>, <span class="fl">5.38</span>, <span class="fl">5.1</span>, <span class="fl">3.2</span>, <span class="fl">4.8</span>, <span class="fl">4.17</span>, <span class="fl">5.01</span>, <span class="fl">3.95</span>, <span class="fl">5.62</span>, <span class="fl">5.44</span>, <span class="fl">3.7</span>, <span class="fl">4.08</span>, <span class="fl">4.36</span>, <span class="fl">4.68</span>, <span class="fl">4.24</span>)
+
+(varA &lt;-<span class="st"> </span><span class="kw">var</span>(seedMassA))
+
+(varP &lt;-<span class="st"> </span><span class="kw">var</span>(seedMassP))
+
+<span class="kw">var.test</span>(seedMassA, seedMassP) <span class="co"># R function that does the complete test</span>
+
+(Fcalc &lt;-<span class="st">              </span>)
+
+(r1 &lt;-<span class="st"> </span><span class="kw">length</span>(seedMassA))
+
+(r2 &lt;-<span class="st"> </span><span class="kw">length</span>(         ))
+
+(df1 &lt;-<span class="st"> </span>r1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+
+(df2 &lt;-<span class="st">       </span>)
+
+alpha &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+(Ftable &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, df1, df2, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>))
+
+(p.of.Fcalc &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pf</span>(Fcalc, df1, df2, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>))
+
+<span class="co"># The probability is multiplied by 2 because the test is two-tailed.</span></code></pre></div>
+<p>ANSWER. Write the interpretation and conclusion from the test here:</p>
+</div>
+<div id="part-2.-difference-between-means-with-independent-samples-30-points" class="section level4">
+<h4><span class="header-section-number">1.14.1.2</span> Part 2. Difference between means with independent samples [30 points]</h4>
+<p>Calculate the 95% confidence interval for the difference between the mean mass per seed of plants grown in annual and perennial grass plots. <em>Ignore the possibility of using the z-approximation due to the large sample size and use the t distribution.</em></p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Based on the results of the test of equality of variances, determine what case (SG pg. 88) applies and estimate the variance of the difference between averages. Then compute the confidence interval.</p></li>
+<li><p>Perform a t-test of the null hypothesis that the mass per seed does not differ between plants grown in annual or perennial grass plots. Perform all calculations “by hand” and compare to the results from using the t.test() function.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(varAP &lt;-<span class="st"> </span>(df1 <span class="op">*</span><span class="st"> </span>varA <span class="op">+</span><span class="st"> </span>df2 <span class="op">*</span><span class="st"> </span>varP) <span class="op">/</span><span class="st"> </span>(df1 <span class="op">+</span><span class="st"> </span>df2))
+
+varDbar &lt;-<span class="st"> </span>varAP <span class="op">/</span><span class="st"> </span>r1 <span class="op">+</span><span class="st"> </span>
+
+(tcalc &lt;-<span class="st"> </span>(<span class="kw">mean</span>(seedMassA) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(seedMassP)) <span class="op">/</span><span class="st">              </span>)
+
+(ttable &lt;-<span class="st"> </span><span class="kw">qt</span>(alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span>          , <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)) <span class="co"># test is two-tailed</span>
+
+(CI.lo &lt;-<span class="st"> </span>(<span class="kw">mean</span>(seedMassA) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(seedMassP)) <span class="op">-</span><span class="st"> </span>ttable <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(varDbar))
+(CI.hi &lt;-<span class="st">                                                            </span>)
+
+(t.test.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">t.test</span>(seedMassA, seedMassP, <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="dt">paired =</span>      , <span class="dt">var.equal =</span>     )) <span class="co"># complete code</span></code></pre></div>
+<p>ANSWER. State the extremes of the confidence interval and interpret the result of the test of hypothesis here:</p>
+</div>
+<div id="part-3.-difference-between-means-with-paired-samples-30-points" class="section level4">
+<h4><span class="header-section-number">1.14.1.3</span> Part 3. Difference between means with paired samples [30 points]</h4>
+<p>Twelve plants were used in an experiment to study the effectiveness of using praying mantises to control aphid populations. Aphid density was measured before and after the addition of a mantis to the plant. Perform a test to determine if the mantis reduces aphid density. (Note that these are fictitious data and that the experimental design is simplified for teaching purposes. A real experiment should include a series of control plants to make sure that the potential change in aphid density is not due to other uncontrolled causes besides the addition of the mantis).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aphids &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Datasets/Aphids.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+
+before &lt;-<span class="st"> </span>aphids<span class="op">$</span>before
+
+after &lt;-<span class="st"> </span>aphids<span class="op">$</span>after
+
+(t.test.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">t.test</span>(before, after, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="dt">paired =</span>       )) <span class="co"># complete code</span>
+
+<span class="co"># repeat the test using &quot;hand&quot; calculations as in part 2 above. Add lines of code below.</span>
+
+d &lt;-<span class="st"> </span>after <span class="op">-</span><span class="st"> </span>before
+
+var.d &lt;-<span class="st"> </span>
+
+se.d.bar &lt;-<span class="st"> </span><span class="kw">sqrt</span>(var.d <span class="op">/</span><span class="st">            </span>)
+
+<span class="co"># since the denominator (r) represents the number of pairs, and the number of individuals in the &quot;before&quot;&quot; population is the sampe as the number of individuals in the &quot;after&quot; population, you could also use the code se.d.bar &lt;- sqrt(var.d / length(after))</span>
+
+dfs &lt;-<span class="st"> </span><span class="kw">length</span>(before) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+
+t.calc.d &lt;-<span class="st"> </span>(<span class="kw">mean</span>(d) <span class="op">-</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span>se.d.bar
+
+ttable &lt;-<span class="st"> </span><span class="kw">qt</span>(alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span>     , <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>ANSWER. Interpret the result of the test of hypothesis here:</p>
+</div>
+<div id="part-4-paired-or-independent-15-points" class="section level4">
+<h4><span class="header-section-number">1.14.1.4</span> Part 4: Paired or independent? [15 points]</h4>
+<p>For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers! In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.</p>
+<div id="a.-aphids-on-soybeans" class="section level5">
+<h5><span class="header-section-number">1.14.1.4.1</span> A. Aphids on soybeans</h5>
+<p>A researcher is interested in whether the presence of natural enemies significantly reduces herbivory from the invasive pest soybean aphid (<em>Aphis glycines</em>). She randomly chooses 36 individual soybean plants in 4 fields to measure. As a proxy for herbivory, she counts the number of soybean aphids on each plant. She then encloses half of the plants with a mesh exclusion cage, through which aphids can pass but large predatory insects cannot. After two weeks, she counts aphids on all 36 plants again, and determines the net change in aphid abundance under each treatment.</p>
+<p>Answer here:</p>
+</div>
+<div id="b.-compost-for-broccoli" class="section level5">
+<h5><span class="header-section-number">1.14.1.4.2</span> B. Compost for broccoli</h5>
+<p>A master gardener wants to know whether his decision to use organic compost instead of synthetic fertilizer is going to change the yield of his broccoli. To test this, he applies a consistent amount of fertilizer or compost to the soil in each of six plots in a random design (3 receive compost, 3 receive fertilizer). He then plants the same variety of broccoli in all plots and measures the average yield (grams of broccoli head per plant) at harvest for each treatment.</p>
+<p>Answer here:</p>
+</div>
+<div id="c.-habanero-chili" class="section level5">
+<h5><span class="header-section-number">1.14.1.4.3</span> C. Habanero chili</h5>
+<p>You have developed a new cultivar of habanero chili (Capsicum chinense) that you have named “Screaming Siren”. You are curious if the chilies produced at your breeding facility differ in spice from a colleague’s farm in New Mexico. Both you and your colleague gather a sample of 10 random chilies and send the chilies to a lab to have their capsaicin, the compound in chilies that cause their piquancy, concentration measured.</p>
+<p>Answer here:</p>
+</div>
+<div id="d.-fish-oil-and-triglycerides" class="section level5">
+<h5><span class="header-section-number">1.14.1.4.4</span> D. Fish oil and triglycerides</h5>
+<p>A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day. After 30 days the patients had their blood triglyceride level measured.</p>
+<p>Answer here:</p>
+</div>
+<div id="e.-botanical-composition-after-restoration" class="section level5">
+<h5><span class="header-section-number">1.14.1.4.5</span> E. Botanical composition after restoration</h5>
+<p>A researcher is interested in determining the difference in plant species composition after seeding with native perennial seeds. Before seeding they sample quadrats within the field at random to determine the initial plant species composition. At the end of the second growing season they sample quadrats within the field at random to determine the new plant species composition.</p>
+<p>Answer here:</p>
+</div>
+</div>
+</div>
+<div id="Lab8ANS" class="section level3">
+<h3><span class="header-section-number">1.14.2</span> Animal Sciences</h3>
+<p><strong>Submit BOTH files for your lab report using the appropriate Canvas tool</strong></p>
+<p>For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area.</p>
+<div id="part-1-25-points" class="section level4">
+<h4><span class="header-section-number">1.14.2.1</span> Part 1 [25 points]</h4>
+<p>Milk production (lb), milk composition and body weights of UCD lactating dairy cows was collected in August of 2000. The cows are classified in two groups, Herd1 and Herd2, based on their genotype.</p>
+<p>Does the variance of milk production differ between the two herds (Herd1 vs. Herd2)? Perform a test of hypothesis at the 5% level (<span class="math inline">\(\alpha = 0.05\)</span>) using the F-statistic. Look up the critical F value in Table A.7 and by using the qf(p = 0.05, df1 = , df2 = ) function.</p>
+<p>Complete the calculations “by hand”, using only basic R functions like var(). Then, use the var.test () R function to test for difference of variances.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
+MilkData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Datasets/MilkEx5_data.csv&quot;</span>)
+
+herd1 &lt;-<span class="st"> </span><span class="kw">subset</span>(MilkData, HERD <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+milkherd1 &lt;-<span class="st"> </span>herd1<span class="op">$</span>TOTmilk
+herd2 &lt;-<span class="st"> </span><span class="kw">subset</span>(MilkData, HERD <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)
+milkherd2 &lt;-<span class="st"> </span>herd2<span class="op">$</span>TOTmilk
+
+## Test for the difference of variances &quot;by hand&quot;
+
+<span class="co">#calculate the variance for each treatment (Herd1 and Herd2)</span>
+(var1 &lt;-<span class="st"> </span><span class="kw">var</span>(milkherd1))
+(var2 &lt;-<span class="st">               </span>) <span class="co">#complete code</span>
+
+<span class="co">#calculate the F-value for our treatments (the larger variance will always be the numerator)</span>
+(Fcalc &lt;-<span class="st">              </span>) <span class="co"># complete code</span>
+
+<span class="co">#number of samples in each treatment</span>
+(r1 &lt;-<span class="st"> </span><span class="kw">length</span>(milkherd1))
+(r2 &lt;-<span class="st">                  </span>) <span class="co">#complete code</span>
+
+<span class="co">#degrees of freedom: number of samples - 1</span>
+(df1 &lt;-<span class="st"> </span>r1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+(df2 &lt;-<span class="st"> </span>r2 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+
+alpha &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+<span class="co">#calculate the critical F-value (for our given alpha and degrees of freedom)</span>
+(Ftable &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, df1, df2, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>))
+
+<span class="co">#Calculate the p-value of our treatment variances being equal (the probability is multiplied by 2 because the test is two-tailed)</span>
+<span class="co"># complete the code to get the observed significance</span>
+(p.of.Fcalc &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pf</span>(Fcalc, df1, df2, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)) 
+
+
+##R function that does the complete test
+<span class="kw">var.test</span>(milkherd1, milkherd2) </code></pre></div>
+<p>ANSWER 1. Write the interpretation and conclusion from the test here:</p>
+</div>
+<div id="part-2-30-points" class="section level4">
+<h4><span class="header-section-number">1.14.2.2</span> Part 2 [30 points]</h4>
+<p>Calculate the 95% confidence interval for the difference between the milk production of dairy cows between the two herds. <em>Ignore the possibility of using the z-approximation due to the large sample size and use the t distribution.</em></p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Based on the results of the test of equality of variances, determine what case (SG pg. 88) applies and estimate the variance of the difference between averages. Then compute the confidence interval.</p></li>
+<li><p>Perform a t-test of the null hypothesis that milk production does not differ between diary cows from Herd1 and Herd2. Perform all calculations “by hand” and compare to the results from using the t.test() function.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Calculate the pooled variance of Herd1 and Herd2</span>
+(var12 &lt;-<span class="st"> </span>(df1 <span class="op">*</span><span class="st"> </span>var1 <span class="op">+</span><span class="st"> </span>df2 <span class="op">*</span><span class="st"> </span>var2) <span class="op">/</span><span class="st"> </span>(df1 <span class="op">+</span><span class="st"> </span>df2))
+
+<span class="co">#Calculate the difference in variances between Herd1 and Herd2</span>
+varDbar &lt;-<span class="st"> </span>var12 <span class="op">/</span><span class="st"> </span>r1 <span class="op">+</span><span class="st"> </span>var12 <span class="op">/</span><span class="st"> </span>r2
+
+<span class="co">#calculate the t-value for our treatments (Herd1 and Herd2)</span>
+(tcalc &lt;-<span class="st"> </span>(<span class="kw">mean</span>(milkherd2) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(milkherd1)) <span class="op">/</span><span class="st">               </span>) <span class="co">#complete code</span>
+
+<span class="co">#calculate the critical t-value (for our given alpha and degrees of freedom) </span>
+<span class="co">#complete code</span>
+(ttable &lt;-<span class="st"> </span><span class="kw">qt</span>(alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span>           ,  <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)) <span class="co"># test is two-tailed</span>
+
+<span class="co">#calculate the bounds of the critical intervals for the difference between our two treatments</span>
+(CI.lo &lt;-<span class="st"> </span>(<span class="kw">mean</span>(milkherd1) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(milkherd2)) <span class="op">-</span><span class="st"> </span>ttable <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(varDbar))
+(CI.hi &lt;-<span class="st">                                                              </span>) <span class="co">#complete code</span>
+
+
+(t.test.herd &lt;-<span class="st"> </span><span class="kw">t.test</span>(milkherd1, milkherd2, <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="dt">paired =</span> <span class="ot">FALSE</span>, <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)) <span class="co"># complete code</span></code></pre></div>
+<p>ANSWER. State the extremes of the confidence interval and interpret the result of the test of hypothesis here:</p>
+</div>
+<div id="part-3-30-points" class="section level4">
+<h4><span class="header-section-number">1.14.2.3</span> Part 3 [30 points]</h4>
+<p>Milk production was measured in the morning (AM) and again in the evening (PM). Perform a test to determine if there is a difference in milk production between the AM and PM. (Note that this is a paired t-test since the same sample of cows is being milk at two separate times).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milkAM &lt;-<span class="st"> </span>MilkData<span class="op">$</span>AMmilk
+
+milkPM &lt;-<span class="st"> </span>MilkData<span class="op">$</span>PMmilk
+
+<span class="co"># repeat the test using &quot;hand&quot; calculations as in part 2 above. Add lines of code below.</span>
+
+<span class="co">#difference between the means of milk treatments (AM vs PM)</span>
+d &lt;-<span class="st"> </span>milkPM <span class="op">-</span><span class="st"> </span>milkAM
+
+<span class="co">#difference between the variances of milk treatments</span>
+var.d &lt;-<span class="st"> </span><span class="kw">var</span>(d)
+
+<span class="co">#standard error of the difference between milk treatments </span>
+se.d.bar &lt;-<span class="st"> </span><span class="kw">sqrt</span>(var.d <span class="op">/</span><span class="st">             </span>) <span class="co">#complete code</span>
+
+<span class="co"># since the denominator (r) represents the number of pairs, and the number of individuals in the &quot;milkAM&quot;&quot; population is the sampe as the number of individuals in the &quot;milkPM&quot; population, you could also use the code se.d.bar &lt;- sqrt(var.d / length(milkPM))</span>
+
+dfs &lt;-<span class="st"> </span><span class="kw">length</span>(milkAM) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+
+<span class="co">#calculated t-value for the difference between milk treatments</span>
+t.calc.d &lt;-<span class="st"> </span>(<span class="kw">mean</span>(d) <span class="op">-</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st">           </span><span class="co">#complete code</span>
+
+<span class="co">#critical t-value (for a given alpha and degrees of freedom)</span>
+ttable &lt;-<span class="st"> </span><span class="kw">qt</span>(alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span>   , <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co">#complete code</span>
+
+
+<span class="co">#complete missing code for t-test between milking times (AM vs PM)</span>
+(t.test.time &lt;-<span class="st"> </span><span class="kw">t.test</span>(milkPM, milkAM, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="dt">paired =</span>      )) </code></pre></div>
+<p>ANSWER. Interpret the result of the test of hypothesis here:</p>
+</div>
+<div id="part-4-paired-or-independent-15-points-1" class="section level4">
+<h4><span class="header-section-number">1.14.2.4</span> Part 4: Paired or independent? [15 points]</h4>
+<p>For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers! In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.</p>
+<div id="a.-high-protein-diet" class="section level5">
+<h5><span class="header-section-number">1.14.2.4.1</span> A. High protein diet</h5>
+<p>A researcher is interested in whether a high protein diet for dairy cows will significantly increase the protein content in milk. 36 dairy cows are randomly chosen in 4 fields to measure and the protein content of their milk is measured. Half of the cows are chosen to receive a high protein diet and half recieve the standard diet. After two weeks, protein content of milk production is measured again, and the change in protein content is calculated for each treatment.</p>
+<p>Answer here:</p>
+</div>
+<div id="b.-organic-dairy-feed" class="section level5">
+<h5><span class="header-section-number">1.14.2.4.2</span> B. Organic dairy feed</h5>
+<p>A researcher wants to know whether using organic diary feed will change the milk production of his cows. To test this, organic feed and non-organic feed is given to six cows of the same breed in a random design (3 receive organic feed, 3 receive non-organic feed) and dairy production is measured for each treatment.</p>
+<p>Answer here:</p>
+</div>
+<div id="c.-cowabunga" class="section level5">
+<h5><span class="header-section-number">1.14.2.4.3</span> C. Cowabunga</h5>
+<p>You have developed a new breed of dairy cows that you have named “Cowabunga”. You are curious if the milk produced from these cows at your facility in Davis differ in lactose content from a colleague’s farm in Fresno. Both you and your colleague gather a sample of 10 random cows and send the milk to a lab to have their lactose content measured.</p>
+<p>Answer here:</p>
+</div>
+<div id="d.-fish-oil-and-blood-triglycerides" class="section level5">
+<h5><span class="header-section-number">1.14.2.4.4</span> D. Fish oil and blood triglycerides</h5>
+<p>A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3) on blood triglyceride level in diary cows. You wish to know if the ingredients differ in effect on blood triglycerides. Forty cows had their blood triglyceride levels measured before the experiment began. The forty cows were divided into two treatment groups of twenty cows. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day. After 30 days the cows had their blood triglyceride level measured.</p>
+<p>Answer here:</p>
+</div>
+<div id="e.-rumen-flora" class="section level5">
+<h5><span class="header-section-number">1.14.2.4.5</span> E. Rumen flora</h5>
+<p>A researcher is interested in determining the difference in bacteria species composition in the rumen of a cow after changing the grazing location from one year to the next. At the first grazing location, they sample gut bacteria within a herd at random to determine the initial rumen bacteria composition. At the end of the year at the second grazing location they sample rumen bacteria within the herd at random to determine the new bacteria species composition.</p>
+<p>Answer here:</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
