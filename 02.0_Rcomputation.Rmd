@@ -70,7 +70,7 @@ When RStudio is opened, four windows that appear :
 
 - the Terminal or Console window, which is where R computes the command line code you enter,
 
-- the Markdown File window, which is where you can edit and save lines of code and send code to the console to calculate, 
+- the Source or Markdown File window, which is where you can edit and save lines of code and send code to the console to calculate, 
 
 - the Environment and History window, which is where working datasets and objects are listed, and
 
@@ -131,7 +131,7 @@ knitr::include_graphics("images/CH2Error.png")
 To clear the history in the Console, you can click on the broom button or press "Ctrl" + "L".
 
 
-### Markdown (Source) Window
+### Source (Markdown) Window
 
 The Markdown window is similar to a notepad; this is where you can input and save command line code, include instructions and attach notes.  All of the computer labs for this class will have you working with instructions provided in R Markdown, saved in .rmd files.  These files will contain written instructions and then "chunks" within the R Markdown file where you can input and send command line code to the Terminal window for computation.  The "chunks" will appear as gray lines that always start with three ticks and a lowercase r in brackets and end with another three ticks. See the example below of an empty chunk.  
 
@@ -193,7 +193,7 @@ This pane will includes all of the files that are currently available in your wo
 
 In the Files tab, you can click on "More" and set your working directory to the desired location on your computer.  
 
-```{r Working Directory}
+```{r WorkingDirectory}
 
 knitr::include_graphics("images/CH2WD.png")
 
@@ -254,7 +254,7 @@ The Environment and History window shows you data and objects that are loaded in
 
 ### Vectors and Data Frames
 
-```{r Vectors and Data Frames}
+```{r VectorsAndDataFrames}
 
 knitr::include_graphics("images/CH2VectorDataFrame.png")
 
@@ -282,7 +282,7 @@ One of the most common way to have data in R is using objects called data frames
 Another data structure is a matrix, which is a two-dimensional table.  Matrices may look like data frames in their structure, but they are different in that it can only contain one type of data, i.e. a table of numeric values only.  Due to this limitation, we will primarily be working with data frames throughout the class. 
 
 
-```{r Data Frames}
+```{r DataFrames}
 
 mymatrix <- cbind(myvector, myvector2)
 mymatrix
@@ -315,13 +315,13 @@ read.table() imports .txt files into your Environment
 read_excel() imports .xls and .xlsx files into your Environment
 
 
-```{r Importing Data}
+```{r ImportingData}
 
 knitr::include_graphics("images/CH2Import2.png")
 
 ```
 
-Another option is to click on the Import Dataset button at the top of the Environment Window tab and to manually select the location of the file.   Here you can designate if the file is from Excel or from a Text (readr); the latter will also give you the option to designate if your file is comma (.csv) or tab (.txt) delineated.  This will also provide you with code for importing the data, including the complete file path. The code will be provided at the beginning of each lab for how to import the dataset we will be working with. 
+Another option is to click on the Import Dataset button at the top of the Environment Window tab and to manually select the location of the file.   Here you can designate if the file is from Excel or from a Text (readr); the latter will also give you the option to designate if your file is comma (.csv) or tab (.txt) separated.  This will also provide you with code for importing the data, including the complete file path. The code will be provided at the beginning of each lab for how to import the dataset we will be working with. 
 
 
 

@@ -1,0 +1,555 @@
+---
+title: "Lab02: Probability and distributions"
+author: "YourFirstName YourLastName"
+date: "Today's date"
+output: html_document
+---
+
+```{r loadPackagesLab, message = FALSE, warning=FALSE}
+
+# install.packages("prob")
+library(prob)
+library(arrangements)
+library(knitr)
+library(kableExtra)
+```
+
+
+### 1. Labels with letters [5]
+
+You are preparing to perform an experiment that will result in the collection of no more than 10,000 laboratory specimens. Each specimen has to be labeled uniquely. What is the minimum number of characters that you can use in the labels if you use 26 letters? Perform the calculation adding one character at a time until you have a set that will work.
+
+```{r LabelsLetters}
+
+x <- # fill in this number!
+unique_labs <- x^(1:5) # if you pull between 1 and 5 times from x options, how many combinations can you get?
+min(which(unique_labs >= 10000))
+
+```
+
+What is the minimum number of characters needed? 
+
+> Your answer here:
+
+
+
+Is the selection of letters with or without replacement? 
+
+> Your answer here:
+
+Does order matter?
+
+> Your answer here:
+
+What Combinatorics case is this? 
+
+> Your answer here:
+
+
+
+### 2. Poker hands [5]
+
+How many possible 5-card poker hands are possible from a 52-card deck?
+What Combinatorics case is this? Use the equation given in the notes and then use the `ncombinations` function of the `arrangements` package.
+
+
+```{r PokerHands}
+
+# look up the ncombinations function. What do "k" and "n" represent?
+?ncombinations # means the same thing as help(ncombinations)
+
+# fill in the values of "k" and "n" to identify the number of possible outcomes
+ncombinations( k =  , n =  , replace =   )
+
+```
+
+What Combinatorics case is this? 
+
+> Your answer here:
+
+
+### 3. Tagged fish recapture [10]^[This is the Hypergeometric distribution]
+
+A manager needs to estimate the population of trout in a small Sierra Nevada lake. She catches 10 trout, tags them, and releases them back into the lake. After trout return to normal, the manager returns to the lake and catches 7 trout. She does not release the trout until she is done with the catching and counting. What is the probability of getting 2 tagged out of 7 trout if the lake has a total of 50, including the 10 marked ones?
+
+
+The total number of possible sets of 7 trout from the lake is $C^{50}_7$. This can be better visualized if you think that each trout is a different individual, or a different person and the question is how many different groups of people can you make choosing from 50 people (it is a large number, so do not try to list all possibilities). Once a person (e.g. Peter) is selected, he cannot be selected again (no replacement), and it does not matter if Peter is selected first , second or 7th. It just matters whether he is in the group (order does not matter).
+
+Repeating the rationale for the 10 tagged trout, there are $C^{10}_2$ ways to get 2 out of the 10 tagged trout. Thus, there are $C^{40}_5$ ways to get the other 5 untagged trout out of the 40 untagged ones available. Each set of tagged trout can be combined with each set of untagged trout, so the total number of possible sets of 2 tagged with 5 untagged trout is the product of the number of tagged and untagged sets: $C^{10}_2 \times C^{40}_5$
+
+```{r TaggedFishRecapture}
+
+total50 <- ncombinations(k = 7, n = 50, replace = FALSE) #the combinations of 7 trout caught of 50 total trout without replacement
+
+tagged50 <- ncombinations(k = 2, n = 10, replace = FALSE) #of the 10 tagged trout, 2 tagged trout are caught
+
+untagged50 <- ncombinations(k = 5 , n = 40 , replace = FALSE) #of the 40 untagged trout, 5 untagged trout are caught
+
+tag.untag50 <- tagged50 * untagged50 #total possible combinations of 2 tagged trout and 5 untagged trout out of 50 total trout (10 tagged/40 untagged)
+
+prob50 <- tag.untag50 / total50 #probability of 2 tagged trout and 5 untagged trout out of 50 total trout (10 tagged/40 untagged)
+
+
+
+#total possible combinations of 2 tagged trout in the set of 7 caught if there were 40 total trout
+
+total40 <- ncombinations(k = 7, n = 40, replace = FALSE)
+
+tagged40 <- ncombinations(k = 2, n = 10 , replace =  FALSE )
+  
+untagged40 <- ncombinations(k = 5, n = 30  , replace =  FALSE )
+
+tag.untag40 <- tagged40 * untagged40
+
+prob40 <- 
+
+#total possible combinations of 2 tagged trout in the set of 7 caught if there were 34 total trout
+
+total34 <- ncombinations(k = 7 , n =   , replace = FALSE  )
+
+tagged34 <- ncombinations(k =  , n = 10  , replace = FALSE  )
+  
+untagged34 <- ncombinations(k = 5 , n =  , replace = FALSE  )
+
+tag.untag34 <- tagged34 * untagged34
+
+prob34 <- tag.untag34 / total34
+
+
+```
+
+
+What is then, the probability of getting exactly 2 tagged in the set of 7 caught if there were 50 total in the lake?
+
+> Your answer here:
+
+What is then, the probability of getting exactly 2 tagged in the set of 7 caught if there were 40 total in the lake?
+
+> Your answer here:
+
+What is then, the probability of getting exactly 2 tagged in the set of 7 caught if there were 34 total in the lake?
+
+> Your answer here:
+
+Based on these results, which of these three options is the manager's guess of the total number of trout?
+
+> Your answer here:
+
+### 4. Probability of one-card events [10]
+
+Use the `prob` package to perform the following calculations. Corroborate your results using basic calculations instead of the high-level R functions.
+
+
+
+What is the sample space for the random experiment: draw a random card from a deck?
+
+> Your answer here:
+
+What is P(Heart & even)?
+
+> Your answer here:
+
+What is P(Heart or even)?
+
+> Your answer here:
+
+```{r}
+help(prob)
+
+# Make the sample space with all outcomes and equal probabilities
+
+(Scard <- cards(makespace = TRUE))
+
+# Define Heart event.
+(Heart <- subset(Scard, suit == "Heart"))
+
+# Define even event
+(Even <- subset(Scard, rank %in% c(1:5 * 2)))
+
+Prob(Heart) # probability of a Heart
+
+Prob(Even) # probability of an even cards
+#complete code below
+
+Prob(Heart, given = ) # conditional probability of Heart given 
+
+Prob(Even, given = ) # conditional probability of Even given 
+
+#calculate by hand
+PHGE <- 
+
+# Applying the definition of conditional probability:
+Prob(intersect(Heart, Even)) / Prob(Even)
+
+Prob(intersect(Heart, Even)) # 5 cards out of 52
+
+Prob(union(Heart, Even))
+
+# Using the equation for either one of two events:
+Prob(Heart) + Prob(Even) - Prob(intersect(Heart, Even))
+
+```
+
+
+Define an event "Odd" for odd numbered card.
+
+Define an event "G7" for rank greater than 7. Note that rank is a factor and cannot be treated as a number. You have to specify each element in the subset, for example `c("10", "Q", "A")`.
+
+
+Calculate P(Odd), P(G7), P(G7 & Odd), P(G7 OR Odd), P(Odd | G7) and P(G7 | Odd).
+
+Are the events “Odd” and “G7” independent? Why?
+
+
+
+
+```{r}
+
+# Define event odd
+(Odd <- subset(Scard, rank %in% c(3,5,7,9)))
+
+#Cards greater than 7
+(G7 <- subset(Scard, rank %in% c(8, 9, 10, "J", "Q", "K", "A")))
+
+#Probability of card greater than 7
+Prob(G7)
+
+#Probability of G7 and odd
+#complete code below
+
+
+
+#Probability of G7 or odd
+#complete code below
+
+#Probability of Odd given G7 and G7 given odd
+
+((Prob(Odd, given = G7)) * (Prob(G7, given = Odd)))
+
+
+
+```
+
+### 5. Rolling the dice [10 points]
+
+A random experiment consists of rolling a die three times.
+
+What is the sample space? How many outcomes are there?
+
+What is the probability of observing the ordered sequence 2, 3 in the three rolls?
+
+What is the probability of observing a 2 and a 3 regardless of order?
+
+
+```{r}
+
+# Make and view the sample space; 6^3 = 216
+(S <- rolldie(times = 3, makespace = TRUE))
+
+# This function checks if a sequence or subset appears inside another sequence
+
+sum(TwoThreeOrdered <- isin(S, c(2,3), ordered = TRUE))
+sum(TwoThreeNoOrder <- isin(S, c(2,3), ordered = FALSE))
+
+# Subsets or events are made according to whether they have the sequence or values
+# We reuse the names
+TwoThreeOrdered <- subset(S, TwoThreeOrdered)
+TwoThreeNoOrder <- subset(S, TwoThreeNoOrder)
+
+Prob(TwoThreeOrdered) # 16/216
+Prob(TwoThreeNoOrder) # 30/216
+
+```
+<br>
+
+
+### 6. Conditional probability, independence and Bayes' rule. [15]
+
+A very large sample of deer mice were tested for presence of a genetic marker and Hantavirus. The total proportion of mice with Hantavirus (H) is 0.17, whereas 63% of the mice carry the genetic marker (M). Five percent of the mice carried the marker and were positive for Hantavirus (H M).
+
+Make a data frame with the joint probabilities for all cases. Hint:
+
+
+$$P(+H) = 0.17 = P(+H\cap+M) + P(+H\cap-M) = 0.05 + P(+H\cap-M)$$
+$$P(+H\cap-M) = 0.17 - 0.05 = 0.12$$
+
+```{r Hantavirus}
+
+# Create a data frame with the probabilities for each event
+hvirus <- expand.grid(Hanta = c("h", "H"), marker = c("m", "M"))
+
+P.H <- 0.17
+P.h <- 1 - P.H
+P.M <- 0.63
+P.m <- 1 - P.M
+P.HM <-       #complete code
+P.Hm <- P.H - P.HM
+P.hM <- P.M - P.HM
+P.hm <- 1 - P.HM - P.Hm - P.hM
+
+hvirus$probs <- c(P.hm, P.Hm, P.hM, P.HM)
+
+```
+
+Calculate the marginal probabilities for presence of marker and Hantavirus.
+
+```{r hmarginals}
+
+marginal(hvirus, vars = "marker")
+
+marginal(hvirus, vars = "Hanta")
+
+```
+
+Determine if marker and hantavirus are independent.
+
+```{r hmIndep}
+
+# Is the product of the marginals equal to the joint probability?
+P.H * P.M == P.HM
+P.h * P.m == P.hm
+
+```
+
+
+Calculate the probability that a mouse known to have the marker has Hantavirus.
+
+```{r hmConditional}
+
+# Create events for virus and marker
+H <- subset(hvirus, Hanta == "H")
+M <- subset(hvirus, marker == "M")
+
+
+#Complete code below
+Prob(...)
+
+# Corroborate that sum of conditionals is 1
+
+h <- subset(hvirus, Hanta == "h")
+
+Prob(h, given = M)
+
+Prob(H, given = M) + Prob(h, given = M)
+
+
+```
+
+
+
+The relationship between marker and Hantavirus remains constant across mice populations. This means that the probability that a mouse known to have the marker has Hantavirus is the same across populations. A random mouse is selected from a new population where Hantavirus incidence is 30% and it is determined that it has the marker. What is the probability that it has Hantavirus? Use Bayes' rule. For the denominator, use the law of total probability. You are asked to calculate the posterior P(H | M) with prior P(H) = 0.30.
+
+
+```{r HvPosterior}
+
+P.H <- 0.30 # New prior probability
+
+# make sure to use P.H and 1 - P.h
+P.H * Prob(M, given = H)/(P.H * Prob(M, given = H) + (1 - P.H) * Prob(M, given = h))
+
+```
+
+
+### 7. Binomial Distribution. [10]
+
+You want to have 10 tomato seedlings to transplant. You place 50 seeds in germinations trays. It is known that the probability that the seeds will germinate and become seedlings is 0.20. What is the probability that you will have enough seedlings? Keep in mind that if 10 or more than 10 seeds germinate, you will have enough seedlings.
+
+We assume that the probability of germination is constant, and that seeds behave independently.
+
+
+
+```{r BinomLab}
+
+help(pbinom)
+
+# Use pbinom() because it gives the cumulative probability
+# Keep in mind that the lower tail includes the q specified
+# Complete the code below
+pbinom(q = 9, size = , prob = , lower.tail = FALSE)
+
+```
+
+> Your answer here:
+
+Plot the binomial distribution for p = 0.20 and n = 50.
+
+
+```{r BinomPlotLab}
+# Complete the code below
+plot(dbinom(x = 0:50, size = , prob = ) ~ c(0:50), type = "h")
+
+```
+
+
+What is the smallest number of seeds you need to start with if you want to have at least 95% probability of having enough seedlings? You can add seeds to the calculation until you get the probability needed.
+
+
+```{r numberSeeds}
+# Complete the code below
+# For 50 seeds the probability of 10 or more is
+pbinom(q = , size = , prob =  lower.tail = FALSE)
+
+# Graphical solution
+plot(
+   pbinom(q = ,
+      	size = 60:80,
+      	prob = ,
+      	lower.tail = FALSE) ~
+  	c(),
+   type = "S",
+   ylab = "P(10 or more seeds germinating)")
+
+
+# Numerical solution
+c(60:80)[which(
+   pbinom(q = ,
+      	size = ,
+      	prob = ,
+      	lower.tail = FALSE) >=
+  	0.95)]
+
+```
+
+> Your answer here
+
+### 8. Poisson Distribution. [10]
+
+High tensile wire wire for fences can have weak points where it breaks when fencing tension is applied. Wire is sold in 1000 ft rolls. Assuming that the number of weak points has a Poisson distribution with $\lambda = 0.00015$ weak spots per foot, what is the probability of getting a roll with no weak spots?
+
+
+```{r PoissonWire1}
+
+lambda <- 0.00015 # per foot
+
+s = 1000 # feet per roll
+
+#complete the code below
+rate <-     	# rate per roll
+
+
+dpois(x = , lambda = rate)# Hint: use help(dpois)!
+
+```
+
+> Your answer here:
+
+How low should be the rate of weak spots, as controlled by the manufacturing process, to make sure that less than five rolls per 100 have one or more weak spots?
+
+Recall $$P(0) = \frac{e^{-\mu} \ \mu^{-0}}{0!}$$, therefore,
+
+```{r PoissonWire2}
+
+# Desired P(0) >= 0.95
+
+ 
+
+-log(0.95)/s # analytical solution using Poisson distribution equation
+
+dpois(x = 0, lambda = 100:1/200)
+
+max(c(100:1/200)[which(dpois(x = 0, lambda = 100:1/200) >= 0.95)])
+
+# finer numerical search for solution
+
+guesses <- seq(from = 0.05, to = 0.055, by = 0.001)
+
+max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])/s
+
+```
+
+> Your answer here:
+
+### 9. Normal distribution. [10]
+
+Plot three normal distributions on the same axes. One with mean 0 and variance 1, one with mean 0 and variance 2 and one with mean 1 and variance 1. Describe the effects of mean and variance on the shape and location of the curve.
+
+```{r normDist1}
+
+# check the help file of the dnorm function to see which arguments are set by default.
+curve(dnorm, from = -5.5, to = 5.5)
+
+curve(dnorm(x, sd = 2), from = -5.5, to = 5.5, add = TRUE, col = "chocolate", lwd = 2)
+
+curve(dnorm(x, mean = 1), from = -5.5, to = 5.5, add = TRUE, col = "skyblue", lwd = 2)
+
+```
+
+> Your answer here:
+
+
+What is the probability that a normal random variable with mean 5 and variance 2 has values that are either below 2 or above 7? Between 1 and 4? Between 1 and 4 or more than 7? Between 1 and 4 or more than 3?
+
+
+```{r  normDist2}
+# P(Z < 2 or Z > 7)
+# Mutually exclusive events. Add the separate probabilities.
+# Complete the code below
+left.area <- pnorm(q = 2 , mean = 5, sd = sqrt(2))
+right.area <- pnorm(q = , mean = , sd = sqrt(), lower.tail = FALSE)
+left.area + right.area
+
+# Now for other values:
+
+# P(1 < Z < 4)
+
+# P(1 < Z < 4 or Z > 7)
+
+# P(1 < Z < 4 or Z > 3)
+
+
+
+```
+
+> Your answers here:
+
+Make and print a table of probabilities for the Standard Normal distribution. Make z values vary between 0 and 3.5 in steps of 0.01. This will be a table of probabilities representing the area in the right tail of the curve. Bring it to the tests.
+
+
+```{r  normDist3}
+
+zTable <- matrix(1 - pnorm(seq(0, 3.49, 0.01)), nrow = 35, ncol = 10, byrow = T)
+
+row.names(zTable) <- 0:34 / 10
+
+colnames(zTable) <- 0:9 / 100
+
+kable(zTable, digits = 6, caption = "Right tail areas under the standard normal distribution. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
+   kable_styling(full_width = FALSE )
+
+```
+
+
+
+### 10. Student's t distribution [10]
+
+Make and print a table of quantiles for Student's t distribution. The table should have those values of t that leave areas under the right tail equal to 0.15, 0.10. 0.05. 0.025, 0.01, and 0.005, for 1 to 30 degrees of freedom in steps of 1 and 30 to 42 df in steps of 2.
+
+
+
+```{r tTable}
+# insert the p-values (areas under the right tail of the curve)
+p.values <- c( )
+
+df <- c(1:30, 16:21*2)
+
+tTable <- matrix(nrow = length(df), ncol = length(p.values))
+
+
+for (j in 1:6) { #do the instructions below for j = 1, 2, 3, and so on
+  tTable[,j] <- qt(p.values[j], df = df) #fill the column with the values for this p-value.
+}
+
+row.names(tTable) <- df
+
+colnames(tTable) <- p.values
+
+kable(tTable, digits = 5, caption = "Values of Student's t with row degrees of freedom that have the column probability under the right tail. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
+   kable_styling(full_width = FALSE )
+
+```
+
+> **Remember to save the table, print it and bring it to the test!**
+
+
+
+### Knit this file into html. [5]

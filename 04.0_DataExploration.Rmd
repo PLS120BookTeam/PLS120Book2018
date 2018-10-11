@@ -1,11 +1,13 @@
 ---
-output: 
-  html_document: 
+output:
+  html_document:
     fig_caption: yes
     number_sections: yes
     theme: readable
     toc: yes
     toc_depth: 3
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup0, include=FALSE}
@@ -31,52 +33,78 @@ library(car)
 library(tidyr)
 
 ```
-# Data Manipulation, Exploration and Summaries {#ch.data}
+# Data Manipulation, Exploration and Summaries {#chData}
+
+One of the goals of statistics is to summarize and display data in ways that are easily understood. Data are the basis of much knowledge and advancement, and they are more permanent than models. As we gather more data, models change, but data remain the same and models should have good agreement with all data. Therefore, it is essential for data to be obtained in valid manner, well organized, and properly preserved and curated. This chapter has two main sections, the first gives a very brief but practical introduction to data curation. The main point there is to help students get started with their own data in a way that will avoid major pitfalls and waste of time. The second and larger section of the chapter shows the basic methods to summarize and display data, including a preliminary and intuitive introduction to the concepts of population, parameter, sample and statistic. The main point of the second section is to learn those basic methods, such as the calculation of sample average and  standard deviation. The concepts will be formalized in [Chapter 6](#chSampling).
 
 ## Learning Objectives for Chapter
 
+1. Create well organized and documented data files.
 1. Distinguish between population parameters and sampling statistics.
 1. List, define and calculate measures of central tendency for data and populations.
 1. List, define and calculate measures of dispersion for data and populations.
 1. Explain organization of one- and two-way data using subscripts.
 1. Make histograms for sample data, explain histogram parts and interpret it.
 1. Calculate the 5-number summary and make a box and whisker plot with all elements labeled.
-1. Asses the normality of data using the histogram and boxplot.  
+1. Asses the normality of data using the histogram and boxplot.
 1. Calculate the coefficient of variation and describe its weaknesses.
 
 ## Data curation
 
-See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>.
 
-
-See message from Duncan Lang and Vessela Ensberg:
-
-The content that you want to cover is very similar to one of my seminars on keeping data tidy and organized (slides here) and data sharing (slides attached). If you prefer, I can adapt this content for your class. I have presented data management sessions for a number of graduate seminar classes.
- 
 <!-- See wikipedia entry on <a href="https://en.wikipedia.org/wiki/Data_curation" target = "_blank">Data Curation</a>. -->
 
 
 <!-- See message from Duncan Lang and Vessela Ensberg: -->
 
-<!-- The content that you want to cover is very similar to one of my seminars on keeping data tidy and organized (slides here) and data sharing (slides attached). If you prefer, I can adapt this content for your class. I have presented data management sessions for a number of graduate seminar classes. -->
 
-Data analysis depends completely on having good data that is correclty organized. The data curation is a new discipline that has become extremely important. We have the ability to gather and store very, very large amounts of data, but those data are useful only if the are well organized, maintained and validated. Most of us work with data and use our senses, hands and brains to organize and check the data. For example, we look at two numbers on the screen and decide if the are equal or not. This may work when we handle a few numbers and pieces of information, but not for more than that, even if it feels that it works. We must use computers and validated logic and programs to manage data.
+Data analysis depends completely on having good data that is correctly organized. The data curation is a new discipline that has become extremely important. We have the ability to gather and store very, very large amounts of data, but those data are useful only if the are well organized, maintained and validated. Most of us work with data and use our senses, hands and brains to organize and check the data. For example, we look at two numbers on the screen and decide if the are equal or not. This may work when we handle a few numbers and pieces of information, but not for more than that, even if it feels that it works. We must use computers and validated logic and programs to manage data.
 
-### Entering data
 
-There are several rules for data entry, and we mention a few.
+There are several guidelines and trick for data entry and curation, and we mention a few here.
 
-- Format data area as a rectangular set of cells.
+**Entry and validation**
 
 - Only one point of entry and storage for each piece of information or data. No data should be entered more than at one point or stored in more than one place (except for backups, of course).
 
-- Include metadata. Where does data come from? Methods? Who entered it? When? Where? Units. Contact info.
+If the same datum can be entered in different places, it is possible to have inconsistent values. When data have to be corrected, many locations have to be accessed for the correction, which is not desirable. Moreover, multiple entries increase the probability of making a mistake. There should be a single entry and redundant validation and checkpoints.
 
-- Keep data in a format that is open, widely adopted, widely supported and stored without loss (this last part is particularly important for media).
+**Metadata**
+
+Metadata is data about data. It is the information that allows one to understand and interpret the data. Metadata should include:
+
+1. Who
+1. What
+1. Where
+1. When
+1. Why
+
+- Do not mix data and metadata in the same portion of the file.
+
+
+- Metadata. Where does data come from? Methods? Who entered it? When? Where? Units. Contact info. Does the data come from a larger time series? Describe experimental conditions.
+
+**Format**
+
+- Keep data in a format that is open, widely adopted, widely supported and stored without loss (this last part is particularly important for media). Data should be uncompressed and unencrypted.
+
+1. Open and free formats.
+1. Video: MOV, MPEG
+1. Sound: WAVE, MP3
+1. Numbers and text: ASCII (.txt and .csv)
+1. Images: TIFF, JPEG 2000
+
+Word, Excel, and other proprietary formats are not suitable because they are not free and widely interpretable. Software updates will make data in those formats obsolete and unreadable.
+
+**Naming conventions**
+
+Data require that we have identifiers for many categories. Identifying names have to be short to be useful, for example, as filenames. They have to be unique and they must allow enough values to account for all possible names necessary. Name and labels should be informative and easily readable, and they should not include non-ASCII characters or spaces.
 
 - Use a validated file naming convention. You will have to handle files as if each were a datapoint.
 
-- Do not mix data and metadata in the same portio of the file.
+**Data organization**
+
+- Format data area as a rectangular set of cells.
 
 - One row per observation or number. Nothing unrelated to the observation in the row.
 
@@ -84,7 +112,7 @@ There are several rules for data entry, and we mention a few.
 
 - One column per variable. Specify units. A column is analogous to a FIELD in a relational database structure.
 
-- Short column names without spaces or non-ASCII characters. Styles that work wiht R can be my.col.name.cm, my_col_name_cm or MyColNameCm.
+- Short column names without spaces or non-ASCII characters. Styles that work with R can be my.col.name.cm, my_col_name_cm or MyColNameCm.
 
 - Never enter values that can be calculated based on other primary values.
 
@@ -94,408 +122,414 @@ There are several rules for data entry, and we mention a few.
 
 - No spaces before or after visible characters. No leading or trailing spaces.
 
-The followng figure shows a messy data file created in Excel. See if you can spot all the problems and errors in the file. Interestingly, some errors are not visible at all. Can you guess which ones are those?
-
-```{r messyExcelData, echo=FALSE, message=FALSE, fig.cap="Example of what NOT TO DO with data. This file has multiple errors and violations of the principles listed above."}
-
-```
-
->>>>>>> EAL18Sep18
-For references, I’d recommend starting with FAIR data:
-https://www.nature.com/articles/sdata201618
-https://www.force11.org/group/fairgroup/fairprinciples
- 
-For tidy data, Data carpentry has some good guidelines:
-http://www.datacarpentry.org/semester-biology/materials/tidy-data/
- 
-New England Collaborative Data Management Curriculum has extensive material and lesson plans on data management:
-https://library.umassmed.edu/necdmc/modules
- 
-
-
-## Data comes from samples
-
-Within a statistical framework, the term population refers to an entire set of measurments or a specific characteristic that is being examined. A descriptive measure for a population is refered to as a parameter. For example, popualtion parameters can be the number of all diary cows in California (population size = N) or the mean body weight of all diary cow calves in California. To determine these parameters a survey would need to be conducted, which is often not fesible. In such cases, inferential statistics is used by taking representative, random samples, of the popualtion and infering conclusions about the entire popualtion.
-
-When conducting random samples from a population, collected parameters from a sample are refered to as statistics. Using the example above where *N* (captial letter) referred to the entire population of dairy cows in California, a random sample of dairy cows in California can be designated with the variable *n* (lower-case). 
-
-In the figure below (\@ref(fig:Map_cows)) two random samples were drawn from the California dairy cow population to infer the average weight of newborn calves for the entire population. In this example the sample statistic is weight of newborn dairy cow calves.  
+The following figure shows a messy data file created in Excel. See if you can spot all the problems and errors in the file. Interestingly, some errors are not visible at all. Can you guess which ones are those?^[There are invisible leading and trailing spaces in several fields]
 
 <br>
+```{r messyExcelData, echo=FALSE, message=FALSE, fig.cap="Example of what NOT TO DO with data. This file has multiple errors and violations of the principles listed above."}
 
-```{r MapCows, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Example of random samples of newborn calf weight collected from dairy cows in northern and southern California."}
-
-knitr::include_graphics("images/MapCows.pdf")
+include_graphics("images/messyData.png")
 
 ```
+<br>
 
+In contrast with the data organization above, the data shown in the figure below has proper formating and it is ready for being transferred to R or other statistical packages.
+
+<br>
+```{r TidyExcelData, echo=FALSE, message=FALSE, fig.cap="Example of how data can be properly formatted and organized in a spreadsheet."}
+
+include_graphics("images/ProperlyFormattedData.png")
+
+```
+<br>
+
+### Other Resources for Data Sciences
+
+The Data Carpentry web site has some good guidelines.
+http://www.datacarpentry.org/semester-biology/materials/tidy-data/
+
+New England <a href = "https://library.umassmed.edu/resources/necdmc/modules" target = "_blank">Collaborative Data Management Curriculum</a> has extensive material and lesson plans on data management:
+
+
+## Populations and samples
+
+Within a statistical framework, the term population refers to the entire set objects we are interested on for a particular question or study. Although we are usually interested in populations whose membership is at least partially determined prior to the study, we mist explicitly define the population we are referring to and we can define it in the best way for the study. Suppose that we are studying the damage that rust causes to wheat production. Our clientele is in a specific region that has certain type of soils and climate. In that case it is a lot more practical and useful to define the population as all the fields with wheat in that region within certain dates. It would not be useful or practical to define the population as all of the wheat fields in the world.
+
+<br>
+```{block ChoosingPopulation, type='stattip'}
+
+- The population or universe being studied and from which data are obtained has to be explicitly and unambiguously defined.
+
+- The definition of the population can be arbitrary, but it should be consistent with the goals of the study.
+
+```
+<br>
+
+As we will see in more detail in the next chapter, the set of objects and the population of values are not the same thing, and we should use the proper names for them. The set of all California Condors is the **universe** of interest and the set of all of their weights is the **population**. A given universe of interest may contain many populations because each object has multiple interesting characteristics. Usually, no confusion is created by using the term "population" to mean both the universe and the populations for a specific characteristic of interest.
+
+If we observe or measure all of the members of a population we have done a *census* and we know the complete distribution of the variables measured. Frequently, even if we measure every *available* object from a population, we do not have the whole population about which we want to make statistical statements. The population may be a virtual construct from which the realized set can observe originated. Think, for example, of the population of California condors. When we study the biology of the few individuals that are left (170 in captivity and 280 in the wild in 2016) we are not interested exclusively in those individuals, but we want to know how the class "California Condor" works, both in captivity and in the wild and including future individuals. Thus, the present population can be considered a sample or realization of the virtual class or populations "California Condor." If we measure all of them, we will not have the mean for all Condors, past and future. The same idea applies to most populations that are though of as abstract classes, such as humans, UCD students, polar bears, delta smelt, etc.
+
+Data come from observing samples from populations. The concepts of sample and sampling are main topics in Chapter 6 about [Random Variables, Sampling and Distributions](#chSampling). For now just think of a sample as a subset of a population. We explore data from samples and calculate summary and descriptive statistics to paint a picture of what the population might be like. These are called "descriptive" because there is no attempt to make general statements or statistical statements about the population At this point the statistics are just different ways to look at the data collected. One of the main purposes is to give depictions that can be communicated ans understood quickly and succinctly, as opposed to having ot look at all data points at once. Data description and summaries are obtained with statistics, tables and graphical representations.
+
+
+For example, the population of interest may be the weight newborn dairy calves in California. In the figure below (\@ref(fig:MapCows)) two random samples were drawn from the California newborn dairy calf population to study the weight of newborn calves. The sample mean, more correctly referred to as **average** was calculated for each sample.
+
+<br>
+```{r MapCows, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Example of random samples of newborn calf weight collected from dairy cows in northern and southern California."}
+
+knitr::include_graphics("images/Map_cows.png")
+
+```
 <br>
 
 ## Measures of central tendency
 
-The measure of central tendency is a summary measure that represents the center point of a whole data set and indicates the typical value of the data. The three measures of central tendency are the mean, median, and mode. 
+A measure of central tendency is a summary measure that represents the center point of a whole data set and indicates central location of the data. The central tendency can be calculated for quantitative variables. "Central" does not have any meaning for characteristics that are unordered categorical variables, such as color, brand, model, species, coat pattern, etc. The three measures of central tendency we consider are mean, median, and mode. Thee term "mean" is reserved for the whole population, so we should use either "sample mean" or "average" when referring to the calculation for a sample. The other two terms have to be preceded by either "sample" or "population" to be clear about what they are. In the rest of this chapter we will be talking about samples, unless we specifically indicate that we are referring to population values.
 
-In the above example the mean weight of newborn dairy cows in California was collected from a random sample of the entire popualtion. In statistics, the **mean** is the average value from the collected data set. Advantages of using the mean are that most other statitcs such as variance and standard deviations can be determined algebraically using the mean. The symbol that represents the mean for a popualtion is 
+The **average** is a central tendency measure that represents the center of mass of a set of values. It is calculated by summing all values and dividing by the number of values or sample size. We usually use the letter "r" to refer to sample size, but it is also common to use the letter "n" for it, in both instances in lower case.
 
-$$\mu$$ 
-
-and for a sample:
-
-$$\bar{x}$$.
-
-The **median** of a sample data set is the middle value when the data are arranged in ascending or descending order. The median is simple to calcuate as it is the middle value and is not influenced by extreme values. 
-
-The **mode** of a sample data set is the value that occurs most frequently. Since multiple values can occur several times, one or more mode may be present for a data set. Alternatively, there may not be a most frequent value in a data set and, thus, no mode value. 
-
-For the sample data set in table \@ref(fig:PhotoRateSeagrass) the average, sample median, and sample mode can be calculated as:
-
-$$ \bar{X} = \frac{Y_1 + Y_2 + Y_3 + Y_4 + Y_5 + \ldots + Y_{10}} {n}$$
-For the data in table :
-
-```{r}
-# R code
-# Functions: 
-# combine numbers into a vector (c)
-# mean (calculates mean value)
-
-x = c(180, 166, 226, 206, 197, 180, 108, 243, 289, 154)
-
-mean(x)
-
-```
+<br>
+$$\bar{Y} = \frac{1}{r} \ \sum_{i =1}^r \ Y_i$$
+<br>
 
 
-For the data in table:
-$${180, 166, 226, 206, 197, 180, 108, 243, 289, 154}$$
+Characteristics of the average:
 
-$$median = \frac{197 + 180}{2}.$$
-```{r}
-# R code
-# Functions: 
-# median (calculates median value)
-median(x)
+1. Easy to calculate and to operate with in equations.
+1. Highly susceptible to change due to extreme values.
+1. Unbiased estimator of the population mean.
+1. Minimizes the sum of squared deviations.
 
-```
+Let's get a random sample from a $\chi^2$ distribution with 3 degrees of freedom and explore the properties for the average.
 
-$$ mode = {y_1, y_6}$$
-For the data in table 1.1:
-$$ mode = 180$$
-```{r}
-# R code
-# Functions: 
-#mode (calculates mode value)
-mode(x)
+<br>
+```{r AverageProperties, message=FALSE, out.width='70%', fig.align='center', fig.cap="Numerical calculation of sum of squared deviations from sample values to each X value. The sum is minimized when X equals the average for the sample."}
+
+set.seed(1221) # To always make the same random sample.
+
+# Random sample os size 100 from Chi-sq distribution
+# with 3 degrees of freedom.
+
+smpl <- rchisq(n = 100, df = 2)
+
+# Get average and save into object called "avg"
+
+(avg <- mean(smpl))
+
+# What happens when we add the extreme value 1200?
+
+mean(c(smpl, 200))
+
+# Calculate the sum of squared deviations for values from 0 to 10
+# and view the results in a plot.
+
+plot(sapply(sort(c(-20:80/10, mean(smpl))), FUN = function(i) sum((smpl - i)^2)) ~ 
+        sort(c(-20:80/10, mean(smpl))),
+     type = "l",
+     lwd = 4,
+     col = "chocolate",
+     ylab = "Sum of squared deviations",
+     xlab = "Value to calculate deviation to")
+
+arrows(x0 = mean(smpl) , y0 = 1500, 
+       x1 = mean(smpl), y1 = sum((smpl - mean(smpl))^2), 
+       angle = 25, length = 0.2,
+       lwd = 2)
+
+text(x = mean(smpl) , y = 1900 ,
+     labels = c("Sum of squared deviations \n is minimized when \n X equals the average"))
 
 ```
 <br>
 
-```{r PhotoRateSeagrass, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Sample data set of photosynthetic rate for 10 different shoots of the seagrass *Zostera marina*. Reference: Miller et al. 2016 Master's thesis"}
+The **median** of a sample data set is the middle value when the data are arranged in ascending or descending order. The median is the value that leaves 50% of the data below and 50% above it. The median is simple to calculate as it is the average of the two middle values when observations are ranked and r is even. If r is odd, then the median is the observation that leaves (r-1)/2 values below and above.
 
-knitr::include_graphics("images/PR_seagrass.pdf")
+Characteristics of the median:
 
-```
+1. Very hard to operate with in equations, as most "order" statistics.
+1. Robust and resistant against extreme values; useful for skewed distributions.
+1. It minimizes the sum of absolute deviations.
 
 <br>
+```{r MedianProperties, message=FALSE, out.width='70%', fig.align='center', fig.cap="Numerical calculation of sum of absolute deviations from sample values to each X value. The sum is minimized when X equals the median for the sample."}
+
+plot(sapply(sort(c(-20:80/10, median(smpl))), FUN = function(i) sum(abs(smpl - i))) ~ 
+        sort(c(-20:80/10, median(smpl))),
+     type = "l",
+     lwd = 4,
+     col = "chocolate",
+     ylab = "Sum of absolute deviations",
+     xlab = "Value to calculate deviation to")
+
+arrows(x0 = median(smpl) , y0 = 350, 
+       x1 = median(smpl), y1 = sum(abs(smpl - median(smpl))), 
+       angle = 25, length = 0.2,
+       lwd = 2)
+
+text(x = median(smpl) , y = 400 ,
+     labels = c("Sum of absolute deviations \n is minimized when \n X equals the median"))
+
+
+
+```
+<br>
+
+The **mode** of a sample data set is the value that occurs most frequently, or the central value of a histogram's tallest bar. Since multiple values can occur several times, one or more modes may be present for a data set. Alternatively, there may not be a most frequent value in a data set and, thus, no mode value.
+
+Sometimes, data are referred as being bimodal because they have two values that are clearly more frequent than the rest, although one of the two is the true mode. Using "mode" in this lax manner is useful because it pinpoints distributions for which it may be tricky to make confidence intervals with a single central location. In cases of bimodal distributions we should look for ways to classify the data or the population into strata or groups such that each group has a unimodal distribution. Then we can provide measures of central tendency and dispersion for each group.
+
+<br>
+```{r Bimodal, message=FALSE, echo=FALSE, out.width='70%', fig.align='center', fig.cap="Example of bimodal distribution. A single central confidence interval would not be very useful. These data should be explored to find a way to stratify into groups."}
+
+set.seed(1333)
+
+smpl2 <- c(rnorm(n = 50, mean = 10, sd = 1), rnorm(n = 50, mean = 20, sd = 2))
+
+plot(density(smpl2, adjust = 0.5),
+     type = "l",
+     lwd = 4,
+     col = "chocolate",
+     ylab = "Probability density",
+     xlab = "Random variable value",
+     main = "")
+
+arrows(x0 = median(smpl2) , y0 = 0.10, 
+       x1 = median(smpl2), y1 = 0, 
+       angle = 25, length = 0.2,
+       lwd = 2)
+
+text(x = median(smpl2) , y = 0.11 ,
+     labels = c("Median"), cex = 1.5)
+
+arrows(x0 = mean(smpl2) , y0 = 0.07, 
+       x1 = mean(smpl2), y1 = 0, 
+       angle = 25, length = 0.2,
+       lwd = 2,
+       col = "blue")
+
+text(x = mean(smpl2) , y = 0.08 ,
+     labels = c("Mean"), cex = 1.5, col = "blue")
+
+
+```
+<br>
+
 
 ## Measures of dispersion
 
-Measures of dispersion are important parameters and statistics that describe the spread of the data around its central measure (e.g., mean). Knowing the variability in conjunction with the measure if central tendency, a more clear and better inference can be made about a given popualtion from a random sample. 
+Measures of dispersion are important parameters and statistics that describe the spread of the data around its central measure (e.g., mean). Knowing the variability in conjunction with the measure if central tendency, we get a more complete summary of the data or population.
 
-The most important measure of dispersion is the **variance** which numerically describes the variability of values in a data set. The **standard deviation** is ther square root of the variance and it evaluates dispersion in the same units as the random variable, while the variance is in the units squared. For example, the random variable defined as the girth growth rate of a randomly selected valley oak tree in California during the spring of 2018 has units of mm day^-1^, its variance has units of mm^2^ days^-2^ and its standar deviation has units of mm day^-1^. The population variance of random variable $X$ is denoted by $\sigma^2_X = V\{X\}$ and its standard deviation is $\sigma_X$.
+The most important measure of dispersion is the **variance** which numerically describes the variability of values in a data set. The **standard deviation** is the square root of the variance and it evaluates dispersion in the same units as the random variable, while the variance is in the units squared. For example, the random variable defined as the girth growth rate of a randomly selected valley oak tree in California during the spring of 2018 has units of mm day^-1^, its variance has units of mm^2^ days^-2^ and its standar deviation has units of mm day^-1^. The population variance of random variable $X$ is denoted by $\sigma^2_X = V\{X\}$ and its standard deviation is $\sigma_X$.
 
-The variance is estimated from a sample with the following equation, where $S^2$ stands for *sample variance*.
+The variance is estimated from a sample with the following equation, where $S^2$ stands for *sample variance*. Note that the numerator is the sum of squared deviations about the average.
 
-$$S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n-1}$$
+<br>
+
+$$S^2 = \frac{1}{r-1} \ \sum_{i=1}^r \ (Y_i - \bar{Y})^2$$
+<br>
 
 ```{r}
 # R code
 # Functions:
 #var (calculates variance)
-var(x)
+
+var(smpl)
 
 ```
 
-and for the standard deviation, which is the square root of the variance:
+For the standard deviation, which is the square root of the variance, we use:
 
-$$s = \sqrt{\frac{{\sum_{i=1}^n(x_i - \bar{x})^2}}{n-1}}.$$
+<br>
+
+$$S = \sqrt{\frac{{\sum_{i=1}^r(Y_i - \bar{Y})^2}}{r-1}}$$
+<br>
+
+
 ```{r}
 # R code
 # Functions:
 #sd (calculates standard deviation)
-sd(x)
 
-```
-One final measure of dispersion is the range. The **range** is the difference between the largest and smallest values in a data set. The range is the most ambiguous measure of dispersion and is not suited for determing data dispersion when dealing with large data sets. 
+sd(smpl)
 
-
-## Frequency distributions and histograms
-
-Sample data sets from a population can be summerized in a frequency table as a first step in data analysis Table \@ref(tab:Freq). In the example below, the number of leaves per one shoot of seagrass were put into classes: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7 in order to identify the frequency of occurences found in the data set. In this case, the data set was leaves counted per shoot in a 3x3 m plot and the observations were then catagorized into classes.
-
-In the figure below (\@ref(fig:Map_cows)) two random samples were drawn from the California dairy cow population to infer the average weight of newborn calves for the entire popualtion. In this example the sample statistic is weight of newborn dairy cow calves.  
-
-<br>
-
-```{r Map_cows, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of random samples of newborn calf weight collected from dairy cows in northern and southern California."}
-
-knitr::include_graphics("images/Map_cows.pdf")
+sqrt(var(smpl))
 
 ```
 
-<br>
+Another measure of dispersion that is useful when we want to avoid excessive influence of extreme data values is the *MAD* or mean absolute deviation. As shown in Figure \@ref(fig:MedianProperties) the MAD is the average of the sum of absolute deviations with respect to the median. 
 
-## Measures of central tendency
+The final measure of dispersion is the range. The **range** is the difference between the largest and smallest values in a data set. The range is the most ambiguous measure of dispersion and is not suited for determining data dispersion when dealing with large data sets, because it only depends on two values of the sample.
 
-The measure of central tendency is a summary measure that represents the center point of a whole data set and indicates the typical value of the data. The three measures of central tendency are the mean, median, and mode. 
 
-$$\mu$$ 
+## Frequency tables and histograms
 
-and for a sample:
-
-$$\bar{x}$$.
-
-The **median** of a sample data set is the middle value when the data are arranged in ascending or descending order. The median is simple to calcuate as it is the middle value and is not influenced by extreme values. 
-
-The **mode** of a sample data set is the value that occurs most frequently. Since multiple values can occur several times, one or more mode may be present for a data set. Alternatively, there may not be a most frequent value in a data set and, thus, no mode value. 
-
-For the sample data set in table \@ref(tab:PR_seagrass)) the mean, median, and mode can be calculated as:
-
-$$ \bar{x} = \frac{y_1 + y_2 + y_3 + y_4 + y_5 ... y_{10}} {n}$$
-For the data in table 1.1:
-$$mean = \frac{180 + 166 + 226 + 226 + 206 ... 154}{10}.$$
-
-$${y_1 , y_2 , y_3 , y_4, y_5, y_6, y_7}$$
-
-$${median = y_4}$$
-
-For the data in table 1.1:
-$${180, 166, 226, 206, 197, 180, 108, 243, 289, 154}$$
-
-$$median = \frac{197 + 180}{2}.$$
-$$ mode = {y_1, y_6}$$
-For the data in table 1.1:
-$$ mode = 180$$
+Sample data sets from a population can be summarized in a **frequency table** as a first step in data summary and analysis (Table \@ref(tab:FreqTable)). A frequency table classifies all observations into a reasonable number of classes and reports the number of observations that fall within each class. Classes must be non-oevrlapping, and it is best to avoid observations falling exactly on the boundary between two classes. We will use data on the percent of sucrose in 100 beets sampled by F. J. Hills in Woodland, CA in 1949. The `hist` function creates a histogram and frequency table automatically. We will use the function with the default arguments first and then we will modify the number and width of classes.
 
 <br>
+```{r SucroseHist01, echo=FALSE, message=FALSE, fig.cap="Histogram of sucrose percentage in 100 beets. The horizontal axis is the percentage of sucrose in each beet. Height of bars represents the number of observations that falls within the base of each bar."}
+# Read in data
 
-```{r PR_seagrass, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Sample data set of photosynthetic rate for 10 different shoots of the seagrass *Zostera marina*."}
+beets <- read.csv(file = "Datasets/BeetSucrose.csv", strip.white = TRUE,
+                  header = TRUE)
 
-knitr::include_graphics("images/PR_seagrass.pdf")
+# Check structure of data frame
+str(beets)
 
-```
+# Plot histogram and save all numerical data used for it.
+beet.hist <- hist(beets$sucrose.pcnt, xlab = "Percentage of sucrose",
+                  ylab = "Frequency or number of beets represented by each bar",
+                  main = "",
+                  col = "skyblue")
 
-<br>
-
-## Measures of dispersion
-
-Measures of dispersion are important parameters and statistics that describe the spread of the data around its central measure (e.g., mean). Knowing the variability in conjunction with the measure if central tendency, a more clear and better inference can be made about a given popualtion from a random sample. 
-
-The two most important measure of dispersion are the **variance** which numerically describes the variability of values in a data set, and the **standard deviation** which  quantifies how spread out your data is around the central measure. That is, how much your data deviates from your most common value (e.g., mean). The variance of a popualtion can be calculated as the summation (\sum) of all observations (*i*) minus the mean (\mu) squared, over the sample size (N) minus 1: 
-
-$$\sigma^2 = \frac{\sum_{i=1}^N (x_i - \mu)^2}{N-1}.$$
-Different variables are used when determining the variance of a sample:
-
-$$s^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}.$$
-To calcuate the standard deviation of the popualtion (\sigma) take the square root of the variance, or calculate:
-
-$$\sigma = \sqrt{\frac{1}{N}{\sum_{i=1}^N (x_i - \mu)^2}}.$$
-Again, the variables differ when calcuating for a sample:
-
-$$s = \sqrt{\frac{1}{n}{\sum_{i=1}^Nn(x_i - \bar{x})^2}}.$$
-
-One final measure of dispersion is the range. The **range** is the difference between the largest and smallest values in a data set. The range is the most ambiguous measure of dispersion and is not suited for determing data dispersion when dealing with large data sets. 
-
-
-```{block, type = 'stattip'}
-- Variance: How far values in a group are spreadout. 
-- Standard deviation: How much values of a data set deviate from the central measure of tendency.
-```
-
-##Frequency distributions and histograms
-
-Sample data sets from a population can be summerized in a frequency table as a first step in data analysis (Table \@ref(tab:Freq)). In the example below, the number of leaves per one shoot of seagrass were put into classes: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7 in order to identify the frequency of occurences found in the data set. In this case, the data set was leaves counted per shoot in a 3x3 m plot and the observations were then catagorized into classes.      
-
-<br><br>
-
-Table: (\#tab:Freq) Number of leaves per shoot counted in a 3x3 m plot of seagrass in a northern California estuary. 
-
-| # Leaves| Frequency|
-|--------:|---------:|
-|    1-2  |     10   |  
-|    2-3  |     23   |  
-|    3-4  |     55   |    
-|    4-5  |     67   |   
-|    5-6  |     57   |   
-|    6-7  |     18   |
-
-<br><br>
-
-A good way to visualize the distribution of frequencies in a data set is to construct a histogram. A **histogram** uses the height of adjacent bars to display frequency of a value and the center of the bar as the midpoint of each class (\@ref(fig:Hist)). 
-
-<br>
-```{r Hist, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap = "Histogram constructed from frequency of leaves per shoot ."}
-
-knitr::include_graphics("images/Hist.png")
+# Look at the structure of the results R used to create the histogram
+str(beet.hist)
 
 ```
 <br>
 
-Observing the histogram, the frequency of each class is easy to identify, with 4-5 leaves being the most frequent observation in the 3x3 m plot. The distribution of the data is such that there is a peak around the middle classes and lower frequencies to the left and right of the peak (i.e., the left and right tails). The red curve fit over the historgam highlights the distribuution of frequencies (\@ref(fig:Hist_curve)). This type of distribution with a peak in the middle and approximately equal length tails on each end is referred to as a normal distribution. A **normal distribution** takes the shape of a bell curve. This informs that the data are normally distributed. That is, it is not skewed to the left or right.
+The component `breaks` in `beet.his` has the list of class or bar boundaries, whereas `counts` has the frequencies fro each bar and `mids` has the bar midpoints. If we want to make sure no observation falls on a boundary we proceed as follows. Determine the precision of the measurements. By inspecting the data we see that sugarbeet sucrose concentration was measured with a precision of 0.1\%, because values have only one figure to the right of the decimal point. Then, define the lowest boundary as the "floor" or integer part of the smallest sucrose value plus half of the precision. The smallest value in the data is `min(beets$sucrose.pcnt)` = `r min(beets$sucrose.pcnt)` so we choose `floor(min(beets$sucrose.pcnt)) + 0.05` = `r floor(min(beets$sucrose.pcnt)) + 0.05` as the lowest boundary. We also define the class width with the same precision as the measurements. To get class width wi first determine class number k using Sturges rule:
+
+$$ k = 1 + 3.3 \times log_{10}(r)$$
+
+where k is the number of classes (i.e., bins), r is the sample size (100) and the log is in base 10. In this case the equation yields 7.6, which R rounded to 7, as shown by the number of bars in the graph and the number of counts in the beet.host$counts vector. Then the width of each bar can be gauged by dividing the range of values by the number of classes. By setting our class number k = 9 we will use a class width smaller than what R selected by default. 
+
+
+`(max(beets$sucrose.pcnt) -min(beets$sucrose.pcnt)) / 9` = `r (max(beets$sucrose.pcnt) -min(beets$sucrose.pcnt)) / 9`
+
+We round up to the nearest number with the same precision as the original data, 1.5. This yields classes starting ag 4.05 and in increments of 1.5. R has a very handy function for creating the classes and assigning the observations to each class: `cut`, where `breaks` is the list of class boundaries, which we create with the `seq` function.
 
 <br>
-```{r Hist_curve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Histogram constructed from frequency of leaves per shoot with fit curve over frequency distribution."}
+```{r FreqTable, message=FALSE}
 
-knitr::include_graphics("images/Hist_curve.png")
+# Create class boundaries
+(breaks <- seq(from = 4.05, to = 18, by = 1.5))
+
+# Add a variable with the class to which each observation belongs
+(beets$class <- cut(beets$sucrose.pcnt, 
+                    breaks = breaks, 
+                    dig.lab = 4))
+
+# Compute the frequency table
+beet.freq.table <- as.data.frame(table(beets$class))
+
+# Change the name of the first column
+names(beet.freq.table)[1] <- "Class"
+
+# Calculate the relative frequencies
+beet.freq.table$Rel.Freq <- beet.freq.table$Freq / sum(beet.freq.table$Freq)
+
+# Display table
+kable(beet.freq.table, caption = "Absolute and relative frequency distribution of sucrose content in a sample for 100 sugarbeets.") %>%
+   kable_styling(full_width = FALSE)
 
 ```
 <br>
 
-##Five-number summary 
-Another form of initial data analysis can be conducted by computing a five-number summary. The **five-number summary** is a set of descriptive statistics that provides information about the frequency distribution of a data set when values are arranged in ascending order. These descriptive statistics are as follows:
-
-Minimum (Min.): Smallest value in the data set.
-
-Lower quartile (Q_1): The median for the lower half of the data set that seperates the first 25% of the values from the other 75%. 
-
-Median: The value that falls in the middle of the data set.
-
-Upper Quartile (Q_3): The median for the upper half of the data set that seperates the last 25% of the values from the lower 75%. 
-
-Maximum (Max.): Largest value in the data set.
-
-The five-number summary can be graphically represented with a boxplot, sometimes referred to as a box and wisker plot (\@ref(fig:boxplot)). The median (red line in (\@ref(fig:boxplot)) is shifted slightly to the left, but close to center. Since there is not a large observable skew to the distribution, the data are said to be normally distributed. 
+The table is best graphed into a histogram using the `hist` function. Instead of using the default classes calculated by R, we use the `breaks` we calculated.
 
 <br>
-```{r boxplot, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Boxplot and five-number summary of the photosynthetic rates presented in from seagrass leaves."}
+```{r SucroseHist02, echo=FALSE, message=FALSE, fig.cap="Histogram of sucrose percentage in 100 beets with classes specified manually suing the 'breaks' argument."}
 
-knitr::include_graphics("images/boxplot.png")
+
+beet.hist2 <- hist(beets$sucrose.pcnt, xlab = "Percentage of sucrose",
+                   breaks = breaks, 
+                   ylab = "Frequency or number of beets represented by each bar",
+                   main = "",
+                   col = "skyblue")
 
 ```
 <br>
 
-The output from the five-number summary for the 10 observations (i.e., values) of photosynthetic rate describe a minimum value of 108, Q_1 of 166, median of 188.5, Q_3 of 226, and a maximum of 289  \mumol TCO_2 gDW^-^1 h^-^1. The descriptive statistics help inform about the spread of data while providing a measure of central tendency and a way to visually assess the normality of the data set. That is, whether or not the data are normally distributed. 
+## Grouped data
 
-##Coefficient of variation 
-
-The final topic to be discussed in this chapter is the parameter or, statsitic, known as the coefficient of variation. The **coefficient of variation (CV)** is simply the ratio of the standard deviation to the mean. 
-
-$$ CV_{population} = \frac{SD}{\mu}$$
-Or
-$$ CV_{sample} = \frac{SD}{\bar{x}}$$
-
-The CV then describes the variability---in the form of the standard deviation---relative to the mean. For example, the CV is a beneficial when determining the variability or, spread, of a data set paticularliy when you are comparing data from two or more different surveys or samples that used different measures. Thus, the CV is independent of the unit of measurment scale.  
-
-It should be noted that the CV should only be used when the measurement scale of a data set is on the ratio scale rather than the interval scale. Interval scasles can have arbitrary zero values which can produce nonsensical CV values. In addition, the CV is sensitive to mean values close to zero potentially resulting in an inflated CV value. 
-
-## Data curation
-
-input
-output
-formatting
-variable types
-naming variables
->>>>>>> Cale_edits
-
-When breaking a data set into classes, an approximation for the number of classes can be determined by using sturges rule:
-
-$$ k = 1 + 3.3 log(n)$$
-
-where k is the number of classes (i.e., bins).
-
-<br><br>
-
-Table: (\#tab:Freq) Number of leaves per shoot counted in a 3x3 m plot of seagrass in a northern California estuary. 
-
-| # Leaves| Frequency|
-|--------:|---------:|
-|    1-2  |     10   |  
-|    2-3  |     23   |  
-|    3-4  |     55   |    
-|    4-5  |     67   |   
-|    5-6  |     57   |   
-|    6-7  |     18   |
-
-<br><br>
-
-A good way to visualize the distribution of frequencies in a data set is to construct a histogram. A **histogram** uses the height of adjacent bars to display frequency of a value and the center of the bar as the midpoint of each class (\@ref(fig:Hist)). 
+Some times data are reported as histograms only and we are interested in getting the average and variance for the sample the histogram represents. We can use the following formulas for data grouped in such a way. If we have all data we do not need to use these formulas. These formulas give approximations to the sample mean and variance when the only information available is a frequency table.
 
 <br>
-```{r Hist, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap = "Histogram constructed from frequency of leaves per shoot ."}
 
-knitr::include_graphics("images/Hist.png")
-
-```
-<br>
-
-Observing the histogram, the frequency of each class is easy to identify, with 4-5 leaves being the most frequent observation in the 3x3 m plot. The distribution of the data is such that there is a peak around the middle classes and lower frequencies to the left and right of the peak (i.e., the left and right tails). The red curve fit over the historgam highlights the distribuution of frequencies (\@ref(fig:Histcurve). This type of distribution with a peak in the middle and approximately equal length tails on each end is referred to as a normal distribution. A **normal distribution** takes the shape of a bell curve. This informs that the data are normally distributed. That is, it is not skewed to the left or right.
+$$ \bar{X} = \sum_{i=1}^k \ X_{m \ i} \ f(i) \\[25pt]
+S^2 = \sum_{i=1}^k \ (X_{m \ i} - \bar{X})^2 \ f(i) $$
 
 <br>
-```{r Histcurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Histogram constructed from frequency of leaves per shoot with fit curve over frequency distribution."}
 
-knitr::include_graphics("images/Hist_curve.png")
+where $X_{m \ i}$ is the midpoint and $f(i)$ is the relative frequency of class $i$.
 
-```
+For the sugrabeet example we extract necessary data from the `beet.hist2` object:
+
 <br>
-
 ```{r}
-# R code
-# Functions:
-#create a data object (<-)
-#Create a histogram (hist)
-PRrate<-c(180, 166, 226, 206, 197, 180, 108, 243, 289, 154)
-hist(PRrate)
-```
 
+# Get midpoints
+Xmi <- beet.hist2$mids
 
-## Five-number summary 
-Another form of initial data analysis can be conducted by computing a five-number summary. The **five-number summary** is a set of descriptive statistics that provides information about the frequency distribution of a data set when values are arranged in ascending order. These descriptive statistics are as follows:
+# Get relative frequencies
+fi <- beet.hist2$counts / sum(beet.hist2$counts)
 
-Minimum (Min.): Smallest value in the data set.
+# Calculate average
+(Xbar <- sum(Xmi * fi))
 
-Lower quartile (Q_1): The median for the lower half of the data set that seperates the first 25% of the values from the other 75%. 
-
-Median: The value that falls in the middle of the data set.
-
-Upper Quartile (Q_3): The median for the upper half of the data set that seperates the last 25% of the values from the lower 75%. 
-
-Maximum (Max.): Largest value in the data set.
-
-Not included in the five-number summary is the interquartile range (IQR), which may be useful in determining the middle 50% values in the data set. The IQR is calculated:
-
-$$IQR = Q3 - Q1.$$
-
-The five-number summary can be graphically represented with a boxplot, sometimes referred to as a box and wisker plot (\@ref(fig:boxplot)). The median (red line in \@ref(fig:boxplot) is shifted slightly to the left, but close to center. Since there is not a large observable skew to the distribution, the data are said to be normally distributed. 
-
-<br>
-```{r boxplot, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Boxplot and five-number summary of the photosynthetic rates presented in from seagrass leaves."}
-
-knitr::include_graphics("images/boxplot.png")
+# Calculate sample variance
+sum((Xmi - Xbar)^2 * fi)
 
 ```
 <br>
 
-The output from the five-number summary for the 10 observations (i.e., values) of photosynthetic rate describe a minimum value of 108, Q~1~ of 166, median of 188.5, Q~3~ of 226, and a maximum of 289 $\mu$mol TCO~2~ gDW^-1^ h^-1^. The descriptive statistics help inform about the spread of data while providing a measure of central tendency and a way to visually assess the normality of the data set. That is, whether or not the data are normally distributed. 
 
-```{r}
-# R code
-# Functions:
-#Create a boxplot (boxplot)
-#Get five-number summary (fivenum)
-boxplot(PRrate)
-fivenum(PRrate)
+## Five-number summary
+
+
+Another form of initial data analysis can be conducted by computing a five-number summary. The **five-number summary** is a set of descriptive statistics that provides information about the frequency distribution of a data. These descriptive statistics are as follows:
+
+- Minimum (Min.): Smallest value in the data set.
+
+- Lower quartile (Q~1~): The median for the lower half of the data set that separates the first 25% of the values from the other 75%.
+
+- Median: The value that falls in the middle of the data set.
+
+- Upper Quartile (Q~3~): The median for the upper half of the data set that separates the last 25% of the values from the lower 75%.
+
+- Maximum (Max.): Largest value in the data set.
+
+- Not included in the five-number summary is the interquartile range (IQR), which may be useful in determining the middle 50% values in the data set. The IQR is calculated:
+
+$$IQR = Q_3 - Q_1$$
+
+The five number summary can be displayed graphically in a box-and-whisker plot using the `boxplot` function in R. By default, the bosplot calculates the fences or whiskers as the most extreme data point which is no more than 1.5 times the interquartile range from the box. In this case the boxplot can show points beyond the whisker, which are called *outliers*. Figure \@ref(fig:boxplot) shows the boxplot using the R default. Therefore, the in the boxplot shown the whiskers are not the maximum and minimum of the data.
+
+<br>
+```{r boxplot, message=FALSE, warning=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Boxplot for sugarbeet sucrose content."}
+# Min - Q1 - Q2 - Q3 - Max
+fivenum(beets$sucrose.pcnt)
+
+boxplot(beets$sucrose.pcnt)
+
+text(x = 0.70, y = median(beets$sucrose.pcnt), label = "Median")
+
+text(x = 0.65, y = quantile(beets$sucrose.pcnt, 0.75), label = "3rd quartile or 75% quantile")
+
+text(x = 1.30, y = quantile(beets$sucrose.pcnt, 0.75), label = "Upper Hinge")
+
+text(x = 0.65, y = quantile(beets$sucrose.pcnt, 0.25), label = "1st quartile or 25% quantile")
+
+text(x = 1.30, y = quantile(beets$sucrose.pcnt, 0.25), label = "Lower Hinge")
+
+text(x = 0.8, y = 17.2, label = "Upper Fence")
+
+text(x = 0.8, y = 6.3, label = "Lower Fence")
+
 ```
+<br>
 
-## Coefficient of variation 
 
-The final topic to be discussed in this chapter is the statistic, known as the coefficient of variation. The **coefficient of variation (CV)** is simply the ratio of the standard deviation to the mean. 
+## Coefficient of variation
+
+The final topic to be discussed in this chapter is the statistic known as the coefficient of variation. The **coefficient of variation (CV)** is simply the ratio of the standard deviation to the mean.
 
 $$ CV_{population} = \frac{\sigma}{\mu}$$
 
 Or
 
-$$ CV_{sample} = \frac{s}{\bar{x}}$$
+$$ CV_{sample} = \frac{S}{\bar{X}}$$
 
- 
+
 ```{r}
 # R code
 # Assigning values
@@ -506,7 +540,7 @@ PRsd =   50.29
 
 What is the use of the coefficient of variation? The CV provides a dimensionless value that permits comparison of variability between random variables that are in different dimensions (i.e., have different types of units) or that have ranges of values that are very different from each other.
 
-For example, in some cases, we may be interested in determining if the seed mass produced by an individual plant is more or less variable than the variability of leaf area. Mass and area are different dimensions, so it makes no sense to compare the values of their variances or standard deviations directly. The question "is 1 g greater than 1 m^2^?" is not answerable, and therefore it is not a meaningful question. If we divide the standard deviation of each variable by its average, the units cancel out and we obtain a dimensionless coefficient that can now be compared. 
+For example, in some cases, we may be interested in determining if the seed mass produced by an individual plant is more or less variable than the variability of leaf area. Mass and area are different dimensions, so it makes no sense to compare the values of their variances or standard deviations directly. The question "is 1 g greater than 1 m^2^?" is not answerable, and therefore it is not a meaningful question. If we divide the standard deviation of each variable by its average, the units cancel out and we obtain a dimensionless coefficient that can now be compared.
 
 <!-- Include figure with example of CV comparison. -->
 
@@ -533,55 +567,55 @@ Wilder and Rypstra (2004) examined the effect of praying mantis excrement on the
 
 4. Calculate the estimated variance of the averages of difference between treatments.
 
-5. What is the median, first and third quartile for difference bewteen treatments?
+5. What is the median, first and third quartile for difference between treatments?
 
 6. What is the coefficient of variation for both treatments?
 
 **Data**
 
-```{r} 
+```{r}
 
-Spider<-(1:1:15)
+Spider<-(1:15)
 Nexc<-c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7)
 Wexc<-c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3)
 Diff<-c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4)
 ```
 
 **Solutions**
-  
+
 1. Average speed No excrement: 3.66; Variance: 2.63 cm/s
    Average speed with excrement: 1.93; Variance: 1.36 cm/s
 ```{r}
-Nomean<-mean(Nexc) #Mean value for no excrement treatment
-Novar<-var(Nexc) #Variance for no excrement treatment
-Wmean<-mean(Wexc) #Mean value for excrement treatment
-Wvar<-var(Wexc) #Variance for excrement treatment
+Nomean<-mean(Nexc) # Mean value for no excrement treatment
+Novar<-var(Nexc) # Variance for no excrement treatment
+Wmean<-mean(Wexc) # Mean value for excrement treatment
+Wvar<-var(Wexc) # Variance for excrement treatment
 ```
-   
+
 2. Average difference in speed between treatments: 1.73 cm/s
 ```{r}
-Difmean<-mean(Diff)
+DifAvg<-mean(Diff)
 ```
 
-3. Sample variance for differnec between treatments: 2.48 cm/s
+3. Sample variance for difference between treatments: 2.48 cm/s
 
 ```{r}
-Difvar<-var(Diff)
+DifVar<-var(Diff)
 ```
 
 4. Estimated variance of averages of difference between treatments: 0.166 cm/s
 
 ```{r}
-Estvar = Difvar/length(Diff) #Variance of difference divided by the number of observations (n)
+Estvar = DifVar/length(Diff) # Variance of difference divided by the number of observations (n)
 ```
 
-5. Median, first and third quartiles for difference bewteen treatments: -1.50, 1.70, 2.75 cm/s
+5. Median, first and third quartiles for difference between treatments: -1.50, 1.70, 2.75 cm/s
 
 ```{r}
-sum<-fivenum(Diff) #Get five-bumber summary
+sum<-fivenum(Diff) # Get five-number summary
 ```
 
-6. CV for both treatments: 
+6. CV for both treatments:
    No excrement: 0.443
    With excrement: 0.604
 
@@ -591,7 +625,7 @@ CVWexc = (sqrt(Wvar))/Wmean
 ```
 <br><br>
 
-Table: (\#spider) Wolf spider walking speed with and without mantis excrement. 
+Table: (\#spider) Wolf spider walking speed with and without mantis excrement.
 
 | Spider #| cm/sec no|cm/sec with| difference|
 |         | excrement| excrement |           |
@@ -614,7 +648,7 @@ Table: (\#spider) Wolf spider walking speed with and without mantis excrement.
 <br><br>
 
 
-### Homework
+## Homework
 
 1. Samples are taken from a population of heifers with known mean and variance of weight gains equal to 80 kg and 324 kg, respectively.
 
@@ -624,7 +658,7 @@ n = ?
 Mean = ?
 Variance = ?
 
-b. What are the mean and variance of the average weight  gain of random samples of 30 heifers? 
+b. What are the mean and variance of the average weight  gain of random samples of 30 heifers?
 
 n = ?
 Mean = ?
@@ -638,7 +672,7 @@ c. How many heifers have to be sampled for the variance of the average weight to
 soil A	 3000	   450
 soil B	 4000	   600
 
-a. What are the mean and variance of the differences between sample averages (average of B - average of A) when independent  samples of size 9 are taken from fields 
+a. What are the mean and variance of the differences between sample averages (average of B - average of A) when independent  samples of size 9 are taken from fields
 in soil A and samples of size 16 are taken from fields in soil B?
 
 n (soil A) = ?
@@ -647,7 +681,7 @@ Mean = ?
 Variance = ?
 
 3. Heights of many individual plants were measured for  plants of two varieties. Find summary statistics for both plant varieties.
- 
+
 
 **variety 1**	 **variety 2**
    14.9	           3.1
@@ -699,13 +733,12 @@ a. r = ?
 
 b. Create a boxplot for both plant varieties.
 
-## Homework
 
 ## Laboratory Exercises
 
 ### Plant Sciences Lab
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 
 ```
@@ -714,7 +747,7 @@ title: "Lab01: Data Exploration and Summaries"
 author: "YourFirstName YourLastName"
 date: "today's date here"
 output: html_document
---- 
+---
 ```
 
 ```{r setup, include=FALSE}
@@ -723,7 +756,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-### Instructions
+#### Instructions
 
 For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
 
@@ -733,7 +766,7 @@ This is a markdown document. You will type your code and run it one line at a ti
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. A completed example follows.
 
-### Example Question with Answer
+#### Example Question with Answer
 
 Create a vector with 5 random numbers from the standard normal distribution. Call it "x." Calculate the average and variance of the values in x. Create a second 5-number vector using the same procedure. Call it "y." Calculate the sum of the elements in y. Make a nicely formatted table showing x and y as columns. Calculate x + y and then sum(x) + sum(y). Discuss the difference between the last two calculations.
 
@@ -761,7 +794,7 @@ sum(x) + sum(y)
 The x + y and sum(x) + sum(y) are totally different. The former results in a vector of five numbers, each number being the sum of the corresponding elements in x and y. The latter results in a single number that is the sum of the 5 numbers in x plus the 5 numbers in y. (Full credit!)
 
 
-### Part 1. Data input [10 points]
+#### Part 1. Data input [10 points]
 
 Load the iris data that comes with R into a data frame called myiris, and get its structure. Use help() to learn what the iris data are about. When were the data first published? Hint: you need help. [5 points]
 
@@ -936,15 +969,15 @@ help(iris)
 When were the data first published? Your answer here:.
 
 
-### Part 2. Coefficient of variation [15 points]
+#### Part 2. Coefficient of variation [15 points]
 
 Do a web search and explain the use of the coefficient of variation and one of its main disadvantages. Hint: what happens when your mean is zero or close to zero? [15 points]
 
-Your answer here: 
+Your answer here:
 
 
 
-### Part 3. Five number summary table of iris data [15 points]
+#### Part 3. Five number summary table of iris data [15 points]
 
 Make a data frame and a nicely formatted table containing the following statistics: mean, median, range, minimum, maximum, standard deviation, coefficient of variation and sample size for each of the measurements (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) in myiris data. What variable has the most variation relative to the average? [15 points]
 
@@ -972,13 +1005,13 @@ myNs <- sapply(X = myiris[, 1:4], FUN = length) # calculate sample size
 
 # Put all columns together into a data frame object called "Table1"
 
-Table1 <- data.frame(Mean = mymeans, 
-                     Median = mymedians, 
-                     Min = mymins, 
-                     Max = mymaxs, 
-                     Range = myranges, 
-                     SD = mysds, 
-                     CV = mycvs, 
+Table1 <- data.frame(Mean = mymeans,
+                     Median = mymedians,
+                     Min = mymins,
+                     Max = mymaxs,
+                     Range = myranges,
+                     SD = mysds,
+                     CV = mycvs,
                      N = myNs)
 
 pander(Table1) # use pander to create a nicely formatted table.
@@ -989,7 +1022,7 @@ pander(Table1) # use pander to create a nicely formatted table.
 What variable has the most variation relative to the average? Your answer here:
 
 
-### Part 4. Frequency table and histogram [15 points]
+#### Part 4. Frequency table and histogram [15 points]
 
 Make and print a nicely formatted frequency table for the sepal length of the flowers. Calculate the number of classes (bins) using the formula in the LabO1 instructive. Make a histogram using your calculations "by-hand" and then a new histogram using the hist() function. [15 points]
 
@@ -1012,7 +1045,7 @@ hist(myiris$Sepal.Length) # by default it uses Sturges rule for bins.
 ```
 
 
-### Part 5. Box and whisker plot [15 points]
+#### Part 5. Box and whisker plot [15 points]
 
 Create two box and whisker plots for the sepal length. Label at least three of the elements in the plot. Create a new box and whisker plot with a *range* argument value of 0.5. [15 points]
 
@@ -1032,15 +1065,15 @@ text(x = 0.6, y = 4.4, labels = "Lower")
 
 ```
 
-### Part 6. fivenum() function [10 points]
+#### Part 6. fivenum() function [10 points]
 
 What does the fivenum() function do? [5 points]
 
-Your answer here: 
+Your answer here:
 
 
 
-### Part 7. Making a vector [10 points]
+#### Part 7. Making a vector [10 points]
 
 What function allows you to **combine** numbers to make numeric vectors? Use the function to make a vector with the numbers 1, 3, 4, 9 and call it "sa.vector." [5 points]
 
@@ -1051,9 +1084,9 @@ What function allows you to **combine** numbers to make numeric vectors? Use the
 
 ```
 
-What function allows you to **combine** numbers to make numeric vectors? Your answer here: 
+What function allows you to **combine** numbers to make numeric vectors? Your answer here:
 
-### Part 8. Knitting [10 points]
+#### Part 8. Knitting [10 points]
 
 Knit this file into html. [10 points]
 
@@ -1061,7 +1094,7 @@ Knit this file into html. [10 points]
 
 ### Animal Sciences Lab
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 "---" Unquote the three dashes
 title: "Lab01: Data Exploration and Summaries"
@@ -1076,7 +1109,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-### Instructions
+#### Instructions
 
 For this lab you will modify this file and submit this file with the file name changed so it has your email ID (the part before @) in lower case instead of "email." Do not add spaces to the file name.
 
@@ -1086,7 +1119,7 @@ This is a markdown document. You will type your code and run it one line at a ti
 
 For each part and question below, type your code in the grey area below, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers below the corresponding grey area. A completed example follows.
 
-### Example Question with Answer
+#### Example Question with Answer
 
 Create a vector with 5 random numbers from the standard normal distribution. Call it "x." Calculate the average and variance of the values in x. Create a second 5-number vector using the same procedure. Call it "y." Calculate the sum of the elements in y. Make a nicely formatted table showing x and y as columns. Calculate x + y and then sum(x) + sum(y). Discuss the difference between the last two calculations.
 
@@ -1114,7 +1147,7 @@ sum(x) + sum(y)
 The x + y and sum(x) + sum(y) are totally different. The former results in a vector of five numbers, each number being the sum of the corresponding elements in x and y. The latter results in a single number that is the sum of the 5 numbers in x plus the 5 numbers in y. (Full credit!)
 
 
-### Part 1.  [10 points]
+#### Part 1.  [10 points]
 
 Load the Heifer data into a data frame called myheifer, and get its structure. Use help() to learn about the structure function. The heifer data is a report from all heifers born in 2005. [5 points]
 
@@ -1281,7 +1314,7 @@ Birth_weight	Wean_weight	Yearling_weight
 80	536	802
 ")
 
-## add code to ask for information about the str function 
+## add code to ask for information about the str function
 
 
 help(str)
@@ -1291,15 +1324,15 @@ help(str)
 What do the heifer data describe? Your answer here:
 
 
-### Part 2.  [15 points]
+#### Part 2.  [15 points]
 
 Do a web search and explain the use of the coefficient of variation and one of its main disadvantages. Hint: what happens when your mean is zero or close to zero? [15 points]
 
-Your answer here: 
+Your answer here:
 
 
 
-### Part 3.  [15 points]
+#### Part 3.  [15 points]
 
 Make a data frame and a nicely formatted table containing the following statistics: mean, median, range, minimum, maximum, standard deviation, coefficient of variation and sample size for each of the measurements (Birth_weight, Wean_weight, Yearling_weight) in myheifer data. What variable has the most variation relative to the average? [15 points]
 
@@ -1328,13 +1361,13 @@ myNs <- sapply(X = myheifer[, 1:3], FUN = length) # calculate sample size
 
 # Put all columns together into a data frame object called "Table1"
 
-Table1 <- data.frame(Mean = mymeans, 
-                     Median = mymedians, 
-                     Min = mymins, 
-                     Max = mymaxs, 
-                     Range = myranges, 
-                     SD = mysds, 
-                     CV = mycvs, 
+Table1 <- data.frame(Mean = mymeans,
+                     Median = mymedians,
+                     Min = mymins,
+                     Max = mymaxs,
+                     Range = myranges,
+                     SD = mysds,
+                     CV = mycvs,
                      N = myNs)
 
 pander(Table1) # use pander to create a nicely formatted table.
@@ -1345,7 +1378,7 @@ pander(Table1) # use pander to create a nicely formatted table.
 What variable has the most variation relative to the average? Your answer here:
 
 
-### Part 4.  [15 points]
+#### Part 4.  [15 points]
 
 Make and print a nicely formatted frequency table for the birth weight of the heifers. Calculate the number of classes (bins) using the formula in the LabO1 instructive. Make a histogram using your calculations "by-hand" and then a new histogram using the hist() function. [15 points]
 
@@ -1368,7 +1401,7 @@ hist(myheifer$Birth_weight) # by default it uses Sturges rule for bins.
 ```
 
 
-### Part 5.  [15 points]
+#### Part 5.  [15 points]
 
 Create two box and whisker plots for the heifer birth weight. Label at least three of the elements in the plot. Create a new box and whisker plot with a *range* argument value of 0.5. [15 points]
 
@@ -1388,13 +1421,13 @@ text(x = 0.6, y = 52, labels = "Lower")
 
 ```
 
-### Part 6.  [10 points]
+#### Part 6.  [10 points]
 
 What does the fivenum() function do? [5 points]
 
-Your answer here: 
+Your answer here:
 
-### Part 7.  [10 points]
+#### Part 7.  [10 points]
 
 What function allows you to **combine** numbers to make numeric vectors? Use the function to make a vector with the numbers 1, 3, 4, 9 and call it "sa.vector." [5 points]
 
@@ -1405,9 +1438,9 @@ What function allows you to **combine** numbers to make numeric vectors? Use the
 
 ```
 
-What function allows you to **combine** numbers to make numeric vectors? Your answer here: 
+What function allows you to **combine** numbers to make numeric vectors? Your answer here:
 
-###Part 8.  [10 points]
+#### Part 8.  [10 points]
 
 Knit this file into html. [10 points]
 

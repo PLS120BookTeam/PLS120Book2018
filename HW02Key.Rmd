@@ -1,0 +1,178 @@
+---
+title: "Homework02"
+author: "Key"
+date: "10/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Homework 02
+
+### Soccer teams [10]
+
+1. How many different soccer teams with 11 players can be made from a team of 15, assuming that all players can play any position?
+
+This is a case for combinations without replacement because the order does not matter and one player cannot appear twice in the team.
+
+library(arrangements)
+ncombinations()
+
+2. How many teams can be made if there are only 3 players that can be goalies?
+
+### Four aces [5]
+
+What is the probability of getting 4 aces in a hand of poker with 5 cards?
+
+### Coin flips [25]
+
+The R package `prob` has a function `tosscoin` that allows us to simulate coin tosses. By specifying the argument `makespace = TRUE` we get all the set of possible outcomes (sample space) and their probabilities using the principle of symmetry. All outcomes have equal probability if the coin has equal probability 0.50 of heads or tails.
+
+We show an example where we toss 4 coins and then you are asked to repeat the calculations for 5 coins. The argument `times` in the `tosscoin` function refers to how many coins are tossed each time. Each set of 4 tosses is an ordered set with 4 elements selected with replacement from a set of two elements, H and T.
+
+Because H and T can be "reused" the selection is with replacement, and order matters. The nature and number of the outcomes can be listed with the `tosscoin` function.
+
+<br>
+```{r HwCoinToss1}
+library(prob)
+
+(SampleSpace <- tosscoin(times = 4, makespace = TRUE))
+
+# Number of rows is number of outcomes.
+nrow(SampleSpace)
+
+# Number of H's in each outcome
+SampleSpace$nH <- as.numeric(SampleSpace$toss1 == "H") + 
+   as.numeric(SampleSpace$toss2 == "H") + 
+   as.numeric(SampleSpace$toss3 == "H") + 
+   as.numeric(SampleSpace$toss4 == "H")
+
+# Define event NoHeads, OneHead, TwoHeads, etc.
+NoHeads <- subset(SampleSpace, nH == 0)
+OneHead <- subset(SampleSpace, nH == 1)
+TwoHeads <- subset(SampleSpace, nH == 2)
+ThreeHeads <- subset(SampleSpace, nH == 3)
+
+# Calculate probabilities
+Prob(NoHeads) # simply the number of rows without Head over the total 1/16
+Prob(OneHead)
+Prob(TwoHeads)
+
+# Make frequency table for all events
+
+nHfreq <- as.data.frame(table(SampleSpace$nH))
+
+# Rename columns
+names(nHfreq) <- c("nHeads", "AbsFreq")
+
+nHfreq$RelFreq <- nHfreq$AbsFreq / sum(nHfreq$AbsFreq)
+
+pander::pander(nHfreq)
+
+```
+<br>
+
+
+Five coins labeled A-E are flipped together and the results are listed in order A-E. For example A=H, B=H, C=T, D=H, E=H, would be listed as HHTHH.
+
+Follow the code in the example above to answer the following questions. You may want to copuy parts of the code, paste it below and modify it to adjust for the number of coins tossed.
+
+1. What Combinatorics case is this? How many different outcomes are there for tossing 5 coins?
+
+
+
+2. List all possible outcomes of the random experiment.
+
+```{r}
+
+
+
+```
+
+
+3. For each outcome, calculate the number of H's in the sequence and add to the table.
+
+```{r}
+
+
+
+```
+
+
+4. Make a frequency table that shows the number of H's and the absolute and relative frequency for each of all possible outcomes.
+
+```{r}
+
+
+
+```
+
+
+5. How many different ways can you get exactly 3 H's in 5 tosses? Answer both using the frequency table and the correct Combinatorics formula. Consider that there are 5 "slots" or positions where the 3 heads can occur. Think that you are choosing three slots out of 5, and that once a slot is taken, it's taken.
+
+```{r}
+
+
+
+```
+
+
+
+### Marginal and Joint probabilities [24]
+
+A large number of zebu (*Bos indicus*) and taurine (*Bos taurus*) cattle were tested under high temperature conditions. Their body temperature was classified as Normal, Moderately high and Very high. The following table represents the probabilities of each species and condition for the population.
+
+<br>
+
+| Body Temp. | B. indicus | B. taurus |
+|-----------:|:----------:|:---------:|
+|     Normal |    0.30    |    0.20   |
+|   Moderate |    0.15    |    ____   |
+|  Very High |    0.05    |    0.10   |
+
+<br>
+
+Answer the following questions using R as a calculator or type in the calculations and the result you geyt using a regular calculator.
+
+1. Calculate the missing probability
+
+
+
+2. Calculate the marginal probabilities for species and temperature.
+
+
+
+3. What is the probability that a randomly chosen animal has very high temperature?
+
+
+
+4. Are body temperature and species independent? Why? Show calculation.
+
+
+
+
+### Conditional Probability and Bayes' rule [15]
+
+
+Use the table for cattle temperature above.
+
+1. What is the probability that a randomly selected animal from that population is *B. indicus*?
+
+2. What is the probability that a randomly selected animal from that population who has very high temperature is *B. indicus*?
+
+3. Assuming that the propensity to have elevated temperatures under stress remains the same, but that we now have a population with 80% *B.indicus*, what is the probability that a randomly selected animal from that population who has very high temperature is *B. indicus*? Hint: P(B. indicus = 0.80, but the conditional probabilities remain the same).
+
+
+
+
+### Answer 14 questions in Top Hat [14]
+
+Go to the Top hat site and answer the 14 questions assigned as part of Homework02. Each question in Top Hat is worth 1 point.
+
+
+
+### Knit this file [7]
+
+Knit the file and submit both the .Rmd and the .html files created.

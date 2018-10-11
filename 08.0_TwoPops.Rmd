@@ -107,7 +107,7 @@ Samples are considered **independent** when there is no relationship between the
 
 <br>
 
-```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of eight pigs are randomly placed into two treatments.  Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where $r = 4$ is the number of samples per treatment, and $i = 1, 2, 3, 4$ is the sample number for a given treatment"}
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of eight pigs are randomly placed into two treatments.  Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where $r = 4$ is the number of samples per treatment, and $i = 1, 2, 3, 4$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8IndSamp.png")
 
@@ -130,7 +130,7 @@ $$\bar{d} = \bar{x_1} - \bar{x_2}$$
 <br>
 
 
-```{r PairedMeasurements, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of eight pigs under two treatments.  Each of the eight pigs has two measurements recorded for each treatment, where $r = 8$ is the number of samples per treatment, and $i = 1, 2, ..., 7, 8$ is the sample number for a given treatment"}
+```{r PairedMeasurements, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of eight pigs under two treatments.  Each of the eight pigs has two measurements recorded for each treatment, where $r = 8$ is the number of samples per treatment, and $i = 1, 2, ..., 7, 8$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8PairSamp2Measurements.png")
 
@@ -142,7 +142,7 @@ In the above example, the samples were paired because the same individual pigs w
 
 <br>
 
-```{r PairedSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen under two treatments.  Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2. Each pig pen has two measurements recorded for each treatment, where r = 3 is the number of samples per treatment, and i = 1,2,3 is the sample number for a given treatment"}
+```{r PairedSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen under two treatments.  Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2.  Each pig pen has two measurements recorded for each treatment, where $r = 3$ is the number of samples per treatment, and $i = 1,2,3$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8PairSamp.png")
 
@@ -192,6 +192,8 @@ This F-ratio can be compared to the critical F-value on the F-distribution table
 
 The results of the F-test will help identify which case to use for calculating the standard error of the difference for our samples. 
 
+```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Distribution for determining the equality of variances (image from www.mtstatic.com)"}
+
 If $F_{calc} > F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$, is rejected and the population variances are not equal.
 
 If $F_{calc} < F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$, is not rejected and the population variances are assumed to be equal.
@@ -212,7 +214,11 @@ In the case of equal variances, the next step would be to calculate the pooled s
 
 Note, for paired samples, the number of replicates, r, is equal to the number of pairs and the sample variance of the difference, $s^2_{d}$ is simply the variance of the paired differences.  
 
+
 To appropriately identify which equations to use and when, there are three general "Case" scenarios.  
+
+```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
+
 
 ## Cases
 ### Case 1: Independent samples with equal population variances {#Case1}
@@ -337,7 +343,8 @@ $$\text{If} \ \ t < t_{\alpha} \ \text{and} \ P (t) > \alpha \ \text{then we fai
 
 <br> 
 
-```{r DecisionMaking, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="General Procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis"}
+```{r DecisionMaking, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '70%', fig.align='center', echo=FALSE, fig.cap ="General procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis"}
+
 
 knitr::include_graphics("images/CH8Strategy.png")
 
