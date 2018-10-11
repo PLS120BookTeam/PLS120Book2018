@@ -101,7 +101,7 @@ Samples are considered **independent** when there is no relationship between the
 
  (Figure \@ref(fig:IndSamples))
 
-```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of eight pigs are randomly placed into two treatments.  Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where $r = 4$ is the number of samples per treatment, and $i = 1, 2, 3, 4$ is the sample number for a given treatment"}
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of eight pigs are randomly placed into two treatments.  Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where $r = 4$ is the number of samples per treatment, and $i = 1, 2, 3, 4$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8IndSamp.png")
 
@@ -114,7 +114,7 @@ Samples are considered **paired** or dependent when there is a relationship betw
 
 
 
-```{r PairedMeasurements, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of eight pigs under two treatments.  Each of the eight pigs has two measurements recorded for each treatment, where $r = 8$ is the number of samples per treatment, and $i = 1, 2, ..., 7, 8$ is the sample number for a given treatment"}
+```{r PairedMeasurements, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of eight pigs under two treatments.  Each of the eight pigs has two measurements recorded for each treatment, where $r = 8$ is the number of samples per treatment, and $i = 1, 2, ..., 7, 8$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8PairSamp2Measurements.png")
 
@@ -126,7 +126,7 @@ In some examples, restrictions make it difficult to test two treatments on the s
 
 
 
-```{r PairedSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen under two treatments.  Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2.  Each pig pen has two measurements recorded for each treatment, where $r = 3$ is the number of samples per treatment, and $i = 1,2,3$ is the sample number for a given treatment"}
+```{r PairedSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen under two treatments.  Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2.  Each pig pen has two measurements recorded for each treatment, where $r = 3$ is the number of samples per treatment, and $i = 1,2,3$ is the sample number for a given treatment"}
 
 knitr::include_graphics("images/CH8PairSamp.png")
 
@@ -167,7 +167,7 @@ $$H_1 : \sigma_1 \neq \sigma_2 $$
 
 Since we may not always know the population variances, we use the sample variances to infer the equality of the population variances using a two-tailed F-test.  
 
-```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Distribution for determining the equality of variances (image from www.mtstatic.com)"}
+```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Distribution for determining the equality of variances (image from www.mtstatic.com)"}
 
 knitr::include_graphics("images/CH8FCurve.png")
 
@@ -188,7 +188,7 @@ If $F_{calc} > F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \si
 
 If $F_{calc} < F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$), is not rejected and the population variances are assumed to be equal.
 
-```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
+```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
 
 knitr::include_graphics("images/CH8FTestDec.png")
 
@@ -290,7 +290,7 @@ After all of the steps and calculations, the calculated t-value and the critical
 $$\text{If} \ \ t > t_{\alpha} \ \text{and} \ P (t) < \alpha \ \text{then we reject the null hypothesis} $$  
 $$\text{If} \ \ t < t_{\alpha} \ \text{and} \ P (t) > \alpha \ \text{then we fail to reject the null hypothesis}$$ 
 
-```{r DecisionMaking, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="General Procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis"}
+```{r DecisionMaking, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '70%', fig.align='center', echo=FALSE, fig.cap ="General procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis"}
 
 knitr::include_graphics("images/CH8Strategy.png")
 

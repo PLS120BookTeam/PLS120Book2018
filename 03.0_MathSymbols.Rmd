@@ -6,7 +6,15 @@ output:
     theme: readable
     toc: yes
     toc_depth: 3
+editor_options: 
+  chunk_output_type: console
 ---
+
+```{r setup, echo=FALSE, message=FALSE}
+library(kableExtra)
+library(knitr)
+```
+
 
 # Required Math Skills and Symbols {#chMath}
 
@@ -14,7 +22,7 @@ In this chapter we introduce most of the mathematics and symbols that are used i
 
 A **key point** in this chapter is that 
 
-```{block, type = 'stattip'}
+```{block StatModels, type = 'stattip'}
 - In statistics we are always using models, and making those models explicit by writing them down completely is essential to understanding and communicating what we are doing.
 ```
 
@@ -22,7 +30,7 @@ This chapter develops models of increasing complexity and uses them to present t
 
 A second **key point**, related to the first one, is that 
 
-```{block, type = 'stattip'}
+```{block UnknownParameters, type = 'stattip'}
 - We rarely, if ever, know the actual "true" value of parameters, variables or quantities in the real world (as opposed to simulations).
 ```
 
@@ -137,7 +145,7 @@ Y_1 + Y_2 + Y_2 + Y_3 + Y_3 + Y_4 \\ \\ &=
 \end{equation} 
 <br>
 
-As usual, there are many ways to achieve a task in R. To perform the sum above we can use the following alternatives:
+As usual, there are many ways to complete a task in R. To perform the sum above we can use the following alternatives:
 
 ```{r, message=FALSE}
 sum(Y[1:3] + Y[2:4])
@@ -204,9 +212,9 @@ The subscript $i$ refers to rows and $j$ refers to columns. We illustrate this w
 \begin{equation} 
 \mathbf{Y} = 
  \begin{pmatrix}
-  Y_{1,1} & Y_{1,2} & Y_{1,3} & Y_{1,4}  & Y_{1,5}  & Y_{1,6}  & Y_{1,7} \\
-  Y_{2,1} & Y_{2,2} & Y_{2,3} & Y_{2,4}  & Y_{2,5}  & Y_{2,6}  & Y_{2,7} \\
-  Y_{3,1} & Y_{3,2} & Y_{3,3} & Y_{3,4}  & Y_{3,5}  & Y_{3,6}  & Y_{3,7} 
+  Y_{1,1} & Y_{1,2} & Y_{1,3} & Y_{1,4} & Y_{1,5}  & Y_{1,6}  & Y_{1,7} \\
+  Y_{2,1} & Y_{2,2} & Y_{2,3} & Y_{2,4} & Y_{2,5}  & Y_{2,6}  & Y_{2,7} \\
+  Y_{3,1} & Y_{3,2} & Y_{3,3} & Y_{3,4} & Y_{3,5}  & Y_{3,6}  & Y_{3,7} 
   \end{pmatrix} \\[35pt] = 
   \begin{pmatrix}
 34 & 32 & 27 & 37 & 25 & 23 & 30 \\
@@ -275,7 +283,7 @@ If we want to average all values in the table, we need to use a double summation
 \sum_{j=1}^{j=7}Y_{3j} \right) \\[18pt]
 
 &= \frac{1}{3 \times 7} \ (Y_{11} + Y_{12} + Y_{13} + Y_{14} + Y_{15} + Y_{16} + Y_{17} \\
-& \qquad \qquad + Y_{21} + Y_{22} Y_{23} + Y_{24} + Y_{25} + Y_{26} + Y_{27} \\[8pt]
+& \qquad \qquad + Y_{21} + Y_{22} + Y_{23} + Y_{24} + Y_{25} + Y_{26} + Y_{27} \\[8pt]
 & \qquad \qquad + Y_{31} + Y_{32} + Y_{33} + Y_{34} + Y_{35} + Y_{36} + Y_{37}) \\[20pt] 
 & = \frac{1}{3 \times 7} \ (34 + 32 + 27 + 37 + 25 + 23 + 30 \\
 & \qquad \qquad + 30 + 26 + 26 + 33 + 24 + 22 + 27 \\
@@ -314,19 +322,22 @@ If we just want the average for corn, we extract just the row for corn (row 2) a
 &= \frac{1}{7} (30 + 26 + 26 + 33 + 24 + 22 + 27) = 26.86
 \end{aligned}
 (\#eq:math11)
-\end{equation} \\
-\begin{equation} 
+\end{equation} 
+<br>
+
+<br>
+$$\begin{equation} 
 \begin{aligned}
-&fields \ 3, \ 4, \ 5 \ \& \ 7 \ average = \frac{1}{4 \times 3} \left( \sum_{j=1}^{j=3}Y_{3j} + 
-\sum_{j=1}^{j=3}Y_{4j} + 
-\sum_{j=1}^{j=3}Y_{5j} + 
-\sum_{j=1}^{j=3}Y_{7j} \right) \\[20pt]
-&= \frac{1}{4 \times 3} (Y_{31} + Y_{32} + Y_{33} + Y_{41} + Y_{42} + Y_{43} + Y_{51} + Y_{52} + Y_{53} + Y_{71} + Y_{72} + Y_{73}) \\[20pt]
+&fields \ 3, \ 4, \ 5 \ \& \ 7 \ average = \frac{1}{4 \times 3} \left( \sum_{i=1}^{i=3}Y_{i3} + 
+\sum_{i=1}^{i=3}Y_{i4} + 
+\sum_{i=1}^{i=3}Y_{i5} + 
+\sum_{i=1}^{i=3}Y_{i7} \right) \\[20pt]
+&= \frac{1}{4 \times 3} (Y_{13} + Y_{23} + Y_{33} + Y_{14} + Y_{24} + Y_{34} + Y_{15} + Y_{25} + Y_{35} + Y_{17} + Y_{27} + Y_{37}) \\[20pt]
 &= \frac{1}{4 \times 3} (27 + 26 + 24 + 37 + 33 + 34 + 25 + 24 + 23 + 30 + 27 + 26) \\[20pt]
 &= \frac{336}{12} = 28.0
 \end{aligned}
 (\#eq:math12)
-\end{equation}
+\end{equation}$$
 <br>
 
 We obtain those averages in R with the following code. Note that when we leave the place for row (or column) number empty, it is interpreted as all rows (or columns).
@@ -1207,9 +1218,23 @@ a. What is the response variable of interest? What is the predictor variable of 
 
 ### Homework Exercise
 
+Qo'noS, the planet of Klingons had an abundant population of targ, which were both wild and domesticated for food. In his highschool years, Worf took a weekend and did a complete census of the Targ population to determine their mass determined by groups. His results are in Table \@ref(tab:TargMass), all expressed in chebs.
 
+<br>
+```{r TargMass, echo=FALSE, message=FALSE}
 
-### Homework Exercise
+targs <- data.frame(i = 1:6, Group = c("AdultFemale", "AdultMale", "JuvenileFemale", "JuvenileMale", "Yearlings", "Pups"), Mass = c(123, 157, 85, 100, 55, 25))
+
+kable(targs, caption = "Mass per individual of different groups of the population of targs in Qo'noS when Worf did the census.") %>%
+   kable_styling(full_width = FALSE)
+
+````
+<br>
+
+1. Calculate the effect of age-sex group on mass for each group.
+1. Compute the sum of square deviations frome each group mean to the overall mean.
+1.Write down a model that expresses the mass of a randomly selected targ as a function of a fixed or structural component and a random component. You can include an overall mean if you wish. Use the same type of symbols used in this chapter.
+1. Using the overall mean and the group effects as ingredients in columns, construct a table that has the recipies for the mean mass of each group.
 
 
 

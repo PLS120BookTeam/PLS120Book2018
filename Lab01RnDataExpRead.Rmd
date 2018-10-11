@@ -1,7 +1,7 @@
 ---
-title: "Lab01. R Introduction, Data Exploration and Data Summaries"
+title: "Lab01 Preparation. R Introduction, Data Exploration and Data Summaries"
 author: "Emilio A. Laca"
-date: "September 20, 2016"
+date: "`r date()`"
 output: html_document
 ---
 
@@ -75,7 +75,7 @@ Summary statistics are classified as measures of central tendency and measures o
 We use the *clover.txt* data set provided in the first assignment. These data represent the mass of clover plants grown for different periods at three different temperatures. Temperatures are in the first column coded as 1 for 5-15 C, 2 for 10-20 C and 3 for 15-25 C. The second column contains the number of days of growth and the last column contains the log of the plant mass in g. Column names are in the first row of the file, so we specify *header = TRUE* in the line of code to read the data. Data are placed in a data frame named "clover.
 
 ```{r summarystats1, echo = TRUE}
-clover <- read.csv("../PLS120Fall2016/LabFiles/Lab01clover.txt", header = TRUE) # read in data.
+clover <- read.csv("Datasets/Lab01clover.txt", header = TRUE) # read in data.
 help(clover) # Read about the nature of the data set.
 (avg.lnwt <- mean(clover$lnwt)) # obtain the average lnwtance; note the use of $ to select parts of an object and the outer parentheses to display the result.
 (med.lnwt <- median(clover$lnwt)) # median or 50th percentile
@@ -93,7 +93,7 @@ max(clover$lnwt) # maximum braking lnwtance
 The **coefficient of variation** is the standard deviation in units of the average. A value greater than 1 is high and indicates that there is a large amount of variation unexplained. Values below 0.30 are very low and indicate that there is little unexplained variation. For laboratory or controlled field experiments the CV should be below 0.5, whereas for observational studies an acceptable CV can be up to 1.0.
 
 
-###Frequency Table and Histogram###
+### Frequency Table and Histogram
 We can create a frequency table by dividing the range of lnwt into bins according to a general guideline: number of bins = 1 + 3.3 log(sample size). For this we use the cut() function. Then we create the frequency table using the xtabs() function and plot the histogram. All of this is done automatically by R using the hist() function. We will worry about making the graphs look pretty later on.
 
 ```{r freqhist, echo = TRUE, include = TRUE}
@@ -130,7 +130,7 @@ summary(clover)[,1] #  get the first column of the summary table
 The function str() is really important to see what objects are composed of and to use parts of those objects. Any part of an object can be referenced and modified using its "address."
 
 
-###Box-and-Whisker Plot and 5-Number Summary
+### Box-and-Whisker Plot and 5-Number Summary
 Data can be summarized using a boxplot and or the 5-number summary. These contain information about the average, median, first quartile, third quartile, range and outliers. The *range* argument determines how far the plot whiskers extend out from the box. If range is positive, the whiskers extend to the most extreme data point which is no more than *range* times the interquartile range (IQR) from the box. Data points that fall outside the whiskers are plotted and can be interpreted as "outliers" or values more extreme than expected. Outliers are so only on the basis of some preconceived expectation, usually a more or less normal distribution. A range value of zero causes the whiskers to extend to the data extremes, so no outliers are shown.
 
 ```{r boxplot1, echo = TRUE, include = TRUE}
@@ -181,7 +181,7 @@ pander(cbind(c("min", "lower hinge", "median", "upper hinge", "max"), fivenum(cl
 
 ```
 
-###Analyses by Groups###
+### Analyses by Groups
 
 The clover data has groups defined by the temperature treatments. Because the group numbers are just lables, we need to transform them into what is called "factor" class in R. This way, we can apply functions that obtain summaries and figures for each group. In the case of the clover, we expect that plants to grow faster at higher temperature; let's see what the data say.
 
@@ -202,5 +202,3 @@ pander(sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summ
 
 
 
-
-= =======================================================================
