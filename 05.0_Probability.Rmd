@@ -4,6 +4,14 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r proSetup, echo = FALSE, include=FALSE}
+library(knitr)
+library(prob)
+library(kableExtra)
+
+```
+
+
 # Probability in Applied Statistics {#chProb}
 
 This chapter introduces the concept of and a semi-formal theory for probability. The rules of probability are applied to random variables defined in the next chapter. We explain the fact that there are at least two ways of thinking about the interpretation of probability in the empirical world, Bayesian and Frequentist, but that in the "mathematical world" probability is just one thing and it follows a single set of rules (at least for the purpose of this course).
@@ -30,10 +38,8 @@ For most of this chapter we will do calculations that assume that we know all th
 1. Calculate the probability of 1 of 2 mutually exclusive events, two independent events, one event occurring, given that another event has already occurred.
 1. Write down Bayes rule and define each of its components.
 1. Apply Bayes rule in a classification problem.
-1. Plot and describe the main features of the statistical distributions.
 1. Give examples of processes that generate random variables with the most important distributions.
 1. State the central limit theorem and show its effects with a simulation.
-1. State the relationship among normal, Student's t, $\chi^2$ and F distributions.
 
 
 
@@ -97,7 +103,7 @@ Further, consider the number of tweets so that each student has sent in the last
 
 ### Probability
 
-Gambling with dice motivated the early development of the concept and theory of probability, with the practical purpose of determining bets. One such problem, addressed by Blaise Pascal and Pierre de Fermat in France in the seventeenth century, was to determine the probability of obtaining at least one six in four rolls of one die, or of obtaining at least two sixes in 24 rolls or two dice. The problem was posed by a gambler, Chevalier de Méré. More generally, the question was how to assign probabilities to the different possible outcomes of experiments whose results were not certain.
+Gambling with dice motivated the early development of the concept and theory of probability, with the practical purpose of determining bets. One such problem, addressed by Blaise Pascal and Pierre de Fermat in France in the seventeenth century, was to determine the probability of obtaining at least one six in four rolls of one die, or of obtaining at least one pair of sixes in 24 rolls or two dice. The problem was posed by a gambler, Chevalier de Méré. More generally, the question was how to assign probabilities to the different possible outcomes of experiments whose results were not certain.
 
 We need to use the concept of probability in order to be able to express and quantify uncertainty. Significance and confidence levels used in statistical statements are measures of probability, and they must be assigned or calculated in a manner that is consistent with the theory of probability. The theory of probability is a branch of mathematics that provides all the tools we need to operate with probabilities. By linking a real-world phenomenon with a probability model, we can use probability theory to derive new practical results that help us in the real world. For example, we can calculate the probability of incorrectly rejecting a null hypothesis, or the probability that an investment will yield a return greater than inflation, or the probability that a person will live more than 10 years after retirement.
 
@@ -534,7 +540,7 @@ $$P(preg|A_1) = 0.20 \quad \quad P(A_1) = 0.10 \\[15pt]
 <br>
 
 
-### Bayes Rule
+## Bayes Rule {#BayesRule}
 
 Imagine that you are randomly screened for a trait using a test that detects the trait when present with 99% accuracy. The test comes back positive. This may lead you to think that you have the trait. If it is a desirable trait you might become ecstatic. If it is deleterious you might become extremely worried. In reality, you do not have enough information to get too excited. Consider the following excerpt from [@Westbury2010]:
 
@@ -569,13 +575,14 @@ The total (marginal) probability of having a positive test is the sum of all ind
 
 $$ \text{Total or marginal probability of positive test result:} \\[15pt]
 P(+) = P(True+) + P(False+) \\[15pt]
-= P(+|D) \cdot P(D) + P(+|\tilde{D}) \cdot P(\tilde{D})$$
+= P(+|D) \cdot P(D) + P(+|\tilde{D}) \cdot P(\tilde{D}) \\[15pt]
+1.0 \times 0.001 + \frac{500}{9990} \times 0.999 = `r 1 * 0.001 +(500/9990) * 0.999`$$
 <br>
 
 Thus, the probability of having the disorder given that one was selected at random and had a positive test results is:
 
 <br>
-$$P(D|+) = \frac{1.0 \cdot 0.001}{1.0 \cdot 0.001 + 0.05 \cdot 0.999} = 0.01962709$$
+$$P(D|+) = \frac{1.0 \cdot 0.001}{1.0 \cdot 0.001 + 0.05005 \cdot 0.999} = 0.01960786$$
 <br>
 
 
@@ -628,6 +635,16 @@ In doing so, the Bayesian method weighs the merit for a particular hypothesis ag
 ```
 <br>
 
+Suppose that the same test for the disease is now used in a different population that is knonw to have a total incidence of 1 in 100. A randomly selected individual tests positive. What is the probability that the individual has the disease? Once again, we are trying to calculate $P(D|+)$, but now the prior probability of disease is much greater; $P(D) = 0.01$. WE apply Bayes' rule with the new incidence value
+
+<br>
+$$\begin{equation}
+P(D|+) = \frac{P(D) \ P(+|D)}{P(+|D) \ P(D) + P(+|\tilde{D}) \ P(\tilde{D})}
+\end{equation} \\[35pt]
+= \frac{0.01 \times 1.00}{0.01 \times 1.00 + \frac{500}{9990} \times 0.99} = `r 0.01*1/(0.01*1+500*0.99/9990)`$$
+<br>
+
+
 ### Frequentist data analysis
 
 The frequentist approach does not consider the relative merit of all possible hypothesis but it estimates the probability of observing the data when the chosen hypothesis is true, which in Equation \@ref(eq:BayesDataEq) is $P(data|H_{0})$. If the probability is very low, it rejects the hypothesis. It is very important to remember that the frequentist approach DOES NOT estimate the probability of the hypothesis being true or false. It only estimates the conditional probability for the data given the null hypothesis.
@@ -668,7 +685,7 @@ To complete the transition from probability to statistics, we need to learn abou
 
 1. The random experiments considered will be more complicated and relevant for things other than gambling and games of chance, where sample space and probability are intuitive and easily defined.
 
-1. Unlike the random experiments considered so far, where the probability of each outcome was assumed to be known (e.g. P(Ace) = 1/52), probabilities will not be known.
+2. Unlike the random experiments considered so far, where the probability of each outcome was assumed to be known (e.g. P(Ace) = 1/52), probabilites will not be known.
 
 In a way in this chapter we learned to answer the following types of questions:
 
@@ -730,7 +747,28 @@ d. more than 3 will die?
 If the probability that it will rain on any given day is 1/5, what is the probability that during a 7-day period it will rain
 
 a. on at least 4 days?
+
 b. on the first 4 days and not on the other 3 days?
+
+### Exercise
+
+A plant breeder created a population of 10,000 alfalfa seedlings where 10\% of the plants have a desirable gene that gives them resistance to a fungal disease. Plants that have the gene have a 5\% chance of getting the disease when exposed to the pathogen, whereas plants that do not have the gene have a 90% probability of getting the disease.
+
+Solution
+
+To solve this problem, think that in this case the presence of the gene is analogous to the presence of the health disorder in the example presented in section about [Bayes Rule]. The result to being exposed to the disease is equivalent to the test for the disorder.
+
+- Make a table with the expected proportion of plants in each category of presence of gene and resistance to pathogen. This table makes it really easy to read the conditional probabilities directly from the table.
+
+We know that the marginal probabilities for gene presence are $P(G) = 0.10$ and $P(\tilde{G}) = 0.90$.
+
+We know the conditional probabilities for resistance: $P(R|G) = 0.95$ and $P(\tilde{R}|\tilde{G}) = 0.90$.
+
+Out of the 10\% that have the gene, 95\% is resistant. Thus, a 0.95 * 0.10 of the plants have the gene and are resistant.
+
+- What is the probability that a randomly selected plant will be resistant?
+
+- Plants are randomly selected and exposed to the disease until a collection of 100 resistant plants is obtained. What proportion of these plants is expected to have the resistant gene?
 
 
 ## Homework
@@ -738,7 +776,112 @@ b. on the first 4 days and not on the other 3 days?
 <!-- Complete assigned questions from module Probability Homework in TopHat site. -->
 <!-- Select questions from Introductory Statistics I and II and Probability-->
 
-### Outcomes and events
+### Soccer teams [5]
+
+1. How many different socccer teams with 11 players can be made from a team of 15, assuming that all players can play any position?
+
+2. How many teams can be made if there are only 3 players that can be goalies?
+
+### Four aces [5]
+
+What is the probability of getting 4 aces in a hand of poker with 5 cards?
+
+### Coin flips [25]
+
+The R package `prob` has a function `tosscoin` that allows us to simulate coin tosses. By specifying the argument `makespace = TRUE` we get all the set of possible outcomes (sample space) and their probabilities using the principle of symmetry. All outcomes have equal probability if the coin has equal probability 0.50 of heads or tails.
+
+We present an example where we toss 4 coins and then you are asked to repeat the calculations for 5 coins. The argument `times` in the `tosscoin` function refers to how many coins are tossed each time. Each set of 4 tosses is an ordered set with 4 elements selected with replacement from a set of two elements, H and T.
+
+What Combinatorics case is this? How many different outcomes are there for tossing 4 coins?
+
+Because H and T can be "reused" the selection is with replacement, and order matters. The nature and number of the outcomes can be listed with the `tosscoin` function.
+
+<br>
+```{r HwCoinToss1}
+
+(SampleSpace <- tosscoin(times = 4, makespace = TRUE))
+
+# Number of rows is number of outcomes.
+nrow(SampleSpace)
+
+# Number of H's in each outcome
+SampleSpace$nH <- as.numeric(SampleSpace$toss1 == "H") + 
+   as.numeric(SampleSpace$toss2 == "H") + 
+   as.numeric(SampleSpace$toss3 == "H") + 
+   as.numeric(SampleSpace$toss4 == "H")
+
+# Define event NoHeads, OneHead, TwoHeads, etc.
+NoHeads <- subset(SampleSpace, nH == 0)
+OneHead <- subset(SampleSpace, nH == 1)
+TwoHeads <- subset(SampleSpace, nH == 2)
+ThreeHeads <- subset(SampleSpace, nH == 3)
+
+# Calculate probabilities
+Prob(NoHeads) # simply the number of rows without Head over the total 1/16
+Prob(OneHead)
+Prob(TwoHeads)
+
+# Make frequency table for all events
+
+nHfreq <- as.data.frame(table(SampleSpace$nH))
+
+# Rename columns
+names(nHfreq) <- c("nHeads", "AbsFreq")
+
+nHfreq$RelFreq <- nHfreq$AbsFreq / sum(nHfreq$AbsFreq)
+
+pander::pander(nHfreq)
+
+```
+<br>
+
+
+1. Five coins labeled A-E are flipped together and the results are listed in order A-E. For example A=H, B=H, C=T, D=H, E=H, would be listed as HHTHH.
+
+2. List all possible outcomes of the random experiment.
+
+3. For each outcome, calculate the number of H's in the sequence.
+
+4. Make a frequency table that shows the number of H's and the absolute and relative frequency for each of all possible outcomes.
+
+5. How many different ways can you get exactly 3 H's in 5 tosses? Answer both using the frequency table and the correct Combinatorics formula. Consider that there are 5 "slots" or positions where the 3 heads can occur. Think that you are choosing three slots out of 5, and that once a slot is taken, it's taken.
+
+
+### Marginal and Joint probabilities [20]
+
+A large number of zebu (*Bos indicus*) and taurine (*Bos taurus*) cattle were tested under high temperature conditions. Their body temperature was classified as Normal, Moderately high and Very high. The following table represents the probabilities of each species and condition for the population.
+
+<br>
+
+| Body Temp. | B. indicus | B. taurus |
+|-----------:|:----------:|:---------:|
+|     Normal |    0.30    |    0.20   |
+|   Moderate |    0.15    |    ____   |
+|  Very High |    0.05    |    0.10   |
+
+<br>
+
+1. Calculate the missing probability
+
+2. Calculate the marginal probabilities.
+
+3. What is the probability that a randomly chosen animal has very high temperature?
+
+4. Are body temperature and species independent? Why? Show calculation.
+
+
+### Conditional Probability and Bayes' rule [15]
+
+Use the table for cattle temperature above.
+
+1. What is the probability that a randomly selected animal from that population is *B. indicus*?
+
+2. What is the probability that a randomly selected animal from that population who has very high temperature is *B. indicus*?
+
+3. Assuming that the propensity to have elevated temperatures under stress remains the same, but that we now have a population with 80% *B.indicus*, what is the probability that a randomly selected animal from that population who has very high temperature is *B. indicus*? Hint: P(B. indicus = 0.80)
+
+
+### Outcomes and events [Not assigned]
 
 Consider the three-door game described in [Chapter 1](#LearnStats). If the player chooses first the door with the car, the host will open one of the other two doors with equal probability. If the player picks a door with a goat, the host will open the other door with a goat with probability 1. List all possible sequences of outcomes of the whole process. Assume that all outcomes have equal probability at each step and calculate the following probabilities:
 
@@ -781,7 +924,6 @@ xtabs(~ switch + result, carOrGoat)
 carOrGoat[with(carOrGoat, order(carDoor, choice1, goatShown, switch, finalDoor)), ]
 
 ```
-
 ```{r, echo=FALSE, include=FALSE, message=FALSE}
 
 # Assignment of probabilities
@@ -803,11 +945,457 @@ sum(carOrGoat$pTot[carOrGoat$switch == "Stay" &
                       carOrGoat$result == "Car"])
 
 ```
+<br>
 
 
-## Laboratory Exercises
+## Laboratory Exercises. Animal and Plant Sciences
 
-### Plant Sciences
 
-### Animal Sciences
+```
+---
+title: "Lab02: Probability and distributions"
+author: "YourFirstName YourLastName"
+date: 
+output: html_document
+---
+```
+
+```{r loadPackagesLab}
+
+# install.packages("prob")
+library(prob)
+library(arrangements)
+library(knitr)
+library(kableExtra)
+```
+
+
+
+### Labels with letters [5]
+
+You are preparing to perform an experiment that will result in the collection of no more than 10,000 laboratory specimens. Each specimen has to be labeled uniquely. What is the minimum number of characters that you can use in the labels if you use 26 letters? Perform the calculation adding one character at a time until you have a set that will work.
+
+Is the selection of letters with or without replacement?
+
+Does order matter?
+
+What Combinatorics case is this?
+
+
+
+### Poker hands [5]
+
+How many possible 5-card poker hands are possible from a 52-card deck?
+What Combinatorics case is this? Use the equation given in the notes and then use the `ncombinations` function of the `arrangements` package.
+
+<>br>
+```{r PokerHands}
+
+library(arrangements)
+
+?ncombinations
+
+
+
+```
+<br>
+
+
+
+### Tagged fish recapture [10]^[This is the Hypergrometric distribution]
+
+A manager needs to estimate the population of trout in small Sierra Nevada lake. She catches 10 trout, tags them and releasese them back into the lake. After trout return to normal, the manager returns to the lake and catches 7 trout. She does not release the trout until she is done with the catching and counting. What is the probability of getting 2 tagged out of 7 trout if the lake has a total of 50, including the 10 marked ones?
+
+The total number of possible sets of 7 trout from the lake is $C^{50}_7$. This can be better visualized if you think that each trout is a different individual, or a different person and the question is how many different groups of people can you make choosing from 50 people (it is a large number, so do not try to list all possibilities). Once a person (e.g. Peter) is selected, he cannot be selected again (no replacement), and it does not matter if Peter is selected first , second or 7th. It just matters wheter he is in the group (order does not matter).
+
+Repeating the rationale for the 10 tagged trout, there are $C^{10}_2$ ways to get 2 out of the 10 tagged trout. Thus, there are $C^{40}_5$ wasy to get the other 5 untagged trout out of the 40 untagged ones available. Each set of tagged trout can be combined wiht each set of untagged trout, so the total number of possible sets of 2 tagged with 5 untagged trout is the product of the number of tagged and untagged sets: $C^{10}_2 \times C^{40}_5$
+
+What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 50 total in the lake?
+
+What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 40 total in the lake?
+
+What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 34 total in the lake?
+
+Based on these results, what should be the manager's guess of the total number of trout? 
+
+
+
+### Probability of one-card events [10]
+
+Use the `prob` package [@Kerns2018] to perform the following calculations. Corroborate your results using basic calculations instead of the high-level R functions.
+
+What is the sample space for the random experiment: draw a random card from a deck?
+
+What is P(Heart & even)?
+
+What is P(Heart or even)?
+
+
+```{r}
+
+# Make the sample space with all outcomes and equal probabilities
+
+(Scard <- cards(makespace = TRUE))
+
+# Define Heart event.
+(Heart <- subset(Scard, suit == "Heart"))
+
+# Define even event
+(Even <- subset(Scard, rank %in% c(1:5 * 2)))
+
+Prob(Heart) # probability of a Heart
+
+Prob(Even) # probability of an even cards
+
+Prob(Heart, given = Even) # conditional probability of Heart given Even
+
+Prob(Even, given = Heart) # conditional probability of Even given Heart
+
+# Applying the definition of conditional probability:
+Prob(intersect(Heart, Even)) / Prob(Even)
+
+Prob(intersect(Heart, Even)) # 5 cards out of 52
+
+Prob(union(Heart, Even))
+
+# Using the equation for either one of two events:
+Prob(Heart) + Prob(Even) - Prob(intersect(Heart, Even))
+
+```
+
+
+Define an event "Odd" for odd numbered card.
+
+Define an event "BetterThan7" for rank greater than 7. Note that rank is a factor and cannot be treated as a number. You have to specify each element in the subset, for example `c("10", "Q", "A")`.
+
+Calculate P(Odd), P(BetterThan7), P(BetterThan7 & Odd), P(BetterThan7 OR Odd), P(Odd | BetterThan7) and P(BetterThan7 | Odd).
+
+Are the events Odd and BetterThan7 independent? Why?
+
+
+### Rolling the dice [10 points]
+
+A random experiment consists of rolling a die three times.
+
+What is the sample space? How many outcomes are there?
+
+What is the probability of observing the ordered sequence 2, 3 in the three rolls?
+
+What is the probability of observing a 2 and a 3 regardless of order?
+
+
+```{r}
+
+# Make and view the sample space; 6^3 = 216
+(S <- rolldie(times = 3, makespace = TRUE))
+
+# This function checks if a sequence or subset appears inside another sequence
+
+sum(TwoThreeOrdered <- isin(S, c(2,3), ordered = TRUE))
+sum(TwoThreeNoOrder <- isin(S, c(2,3), ordered = FALSE))
+
+# Subsets or events are made according to whether the have the sequence or values
+# We reuse the names
+TwoThreeOrdered <- subset(S, TwoThreeOrdered)
+TwoThreeNoOrder <- subset(S, TwoThreeNoOrder)
+
+Prob(TwoThreeOrdered) # 16/216
+Prob(TwoThreeNoOrder) # 30/216
+
+```
+<br>
+
+
+### Conditional probability, independence and Bayes' rule. [20]
+
+A very large sample of deer mice were tested for presence of a genetic marker and Hantavirus. The total proportion of mice with Hantavirus (H) is 0.17, whereas 63% of the mice carry the genetic marker (M). Five percent of the mice carried the marker and were positive for Hantavirus (H M). 
+
+Make a data frame with the joint probabilities for all cases. Hint:
+
+
+$$P(+H) = 0.17 = P(+H\cap+M) + P(+H\cap-M) = 0.05 + P(+H\cap-M)$$
+$$P(+H\cap-M) = 0.17 - 0.05 = 0.12$$
+
+```{r Hantavirus}
+
+# Create a data frame with the probabilities for each event
+hvirus <- expand.grid(Hanta = c("h", "H"), marker = c("m", "M"))
+
+P.H <- 0.17
+P.h <- 1 - P.H
+P.M <- 0.63
+P.m <- 1 - P.M
+P.HM <- 0.05
+P.Hm <- P.H - P.HM
+P.hM <- P.M - P.HM
+P.hm <- 1 - P.HM - P.Hm - P.hM
+
+hvirus$probs <- c(P.hm, P.Hm, P.hM, P.HM)
+
+```
+
+Calculate the marginal probabilities for presence of marker and Hantavirus.
+
+```{r hmarginals}
+
+marginal(hvirus, vars = "marker")
+
+marginal(hvirus, vars = "Hanta")
+
+```
+
+Determine if marker and hantavirus are independent.
+
+```{r hmIndep}
+
+# Is the product of the marginals equal to the joint probability?
+P.H * P.M == P.HM
+P.h * P.m == P.hm
+
+```
+
+
+Calculate the probability that a mouse known to have the marker has Hantavirus.
+
+```{r hmConditional}
+
+# Create events for virus and marker
+H <- subset(hvirus, Hanta == "H")
+M <- subset(hvirus, marker == "M")
+
+
+Prob(H, given = M)
+
+# Corroborate that sum of conditionals is 1
+
+h <- subset(hvirus, Hanta == "h")
+
+Prob(h, given = M)
+
+Prob(H, given = M) + Prob(h, given = M)
+
+
+```
+
+
+
+The relationship between marker and Hantavirus remains constant across mice populations. This means that the probability that a mouse known to have the marker has Hantavirus is the same across populations. A random mouse is selected from a new population where Hantavirus incidence is 30% and it is determined that it has the marker. What is the probability that it has Hantavirus? Use Bayes' rule. For the denominator, use the law of total probability. You are asked to calculate the posterior P(H | M) with prior P(H) = 0.30.
+
+
+```{r HvPosterior}
+
+P.H <- 0.30 # New prior probability
+
+# make sure to use P.H and 1 - P.h
+P.H * Prob(M, given = H)/(P.H * Prob(M, given = H) + (1 - P.H) * Prob(M, given = h))
+
+```
+
+
+### Binomial Distribution. [10]
+
+You want to have 10 tomato seedlings to transplant. You place 50 seeds in germinations trays. It is known that the probability that the seeds will germinate and become seedlings is 0.20. What is the probability that you will have enough seedlings? Keep in mind that if 10 or more than 10 seeds germinate, you will have enough seedlings.
+
+We assume that the probability of germination is constant, and that seeds behave independently.
+
+
+<br>
+```{r BinomLab}
+
+?pbinom # lower.tail = FALSE, q = 9, size = 50, prob = 0.20
+
+# Use pbinom() because it gives the cumulative probability
+# Keep in mind that the lower tail includes the q specified
+
+pbinom(q = 9, size = 50, prob = 0.20, lower.tail = FALSE)
+
+```
+<br>
+
+
+
+Plot the binomial distribution for p = 0.20 and n = 50.
+
+<br>
+```{r BinomPlotLab}
+
+plot(dbinom(x = 0:50, size = 50, prob = 0.20) ~ c(0:50), type = "h")
+
+```
+<br>
+
+What is the smallest number of seeds you need to start with if you want to have at least 95% probability of having enough seedlings? You can add seeds to the calculation until you get the probability needed.
+
+<br>
+```{r numberSeeds}
+# For 50 seeds the probability of 10 or more is
+pbinom(q = 9, size = 50, prob = 0.20, lower.tail = FALSE)
+
+# Graphical solution
+plot(
+   pbinom(q = 9, 
+          size = 60:80, 
+          prob = 0.20, 
+          lower.tail = FALSE) ~ 
+      c(60:80), 
+   type = "S",
+   ylab = "P(10 or more seeds germinating)")
+
+
+# Numerical solution
+c(60:80)[which(
+   pbinom(q = 9, 
+          size = 60:80, 
+          prob = 0.20, 
+          lower.tail = FALSE) >= 
+      0.95)]
+
+```
+<br>
+
+
+### Poisson Distribution. [10]
+
+High tensile wire wire for fences can have weak points where it breaks when fencing tension is applied. Wire is sold in 1000 ft rolls. Assuming that the number of weak points has a Poisson distribution with $\lambda = 0.00015$ weak spots per foot, what is the probability of getting a roll with no weak spots?
+
+<br>
+```{r PoissonWire1}
+
+lambda <- 0.00015 # per foot
+
+s = 1000 # feet per roll
+
+rate <- s * lambda # per roll
+
+dpois(x = 0, lambda = rate)
+
+```
+<br>
+
+How low should be the rate of weak spots, as controlled by the manufacturing process, to make sure that less than five rolls per 100 have one or more weak spots?
+
+<br>
+```{r PoissonWire2}
+
+# Desired P(0) >= 0.95
+
+-log(0.95)/s
+
+dpois(x = 0, lambda = 100:1/200)
+
+max(c(100:1/200)[which(dpois(x = 0, lambda = 100:1/200) >= 0.95)])
+
+# finer numerical search for solution
+
+guesses <- seq(from = 0.05, to = 0.055, by = 0.001)
+
+max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])/s
+
+```
+<br>
+
+### Normal distribution. [10]
+
+Plot three normal distributions on the same axes. One with mean 0 and variance 1, one with mean 0 and variance 2 and one with mean 1 and variance 1. Describe the effects of mean and variance on the shape and location of the curve.
+
+<br>
+```{r normDist1}
+
+curve(dnorm, from = -5.5, to = 5.5)
+
+curve(dnorm(x, sd = 2), from = -5.5, to = 5.5, add = TRUE, col = "chocolate", lwd = 2)
+
+curve(dnorm(x, mean = 1), from = -5.5, to = 5.5, add = TRUE, col = "skyblue", lwd = 2)
+
+```
+<br>
+
+
+What is the probability that a normal random variable with mean 5 and variance 2 has values that are either below 2 or above 7? Between 1 and 4? Between 1 and 4 or more than 7? Between 1 and 4 or more than 3?
+
+<br>
+```{r  normDist2}
+# P(Z < 2 or Z > 7)
+# Mutually exclusive events. Add the separate probabilities.
+left.area <- pnorm(q = 2, mean = 5, sd = sqrt(2))
+right.area <- pnorm(q = 7, mean = 5, sd = sqrt(2), lower.tail = FALSE)
+left.area + right.area
+
+# As shaded areas:
+
+# P(1 < Z < 4)
+
+# P(1 < Z < 4 or Z > 7)
+
+# P(1 < Z < 4 or Z > 3)
+
+
+
+```
+<br>
+
+
+Make and print a table of probabilities for the Standard Normal distribution. Make z values vary between 0 and 3.5 in steps of 0.01. This will be a table of probabilities representing the area in the right tail of the curve. Bring it to the tests.
+
+<br>
+```{r  normDist3}
+
+zTable <- matrix(NA, nrow = 34, ncol = 10)
+
+for (i in 1:34) {
+   for (j in 1:10) {
+      zTable[i, j]  <- 1 - pnorm(q = (i - 1)/10 + (j - 1)/100)
+   }
+}
+
+row.names(zTable) <- 0:33/10
+
+colnames(zTable) <- 0:9/100
+
+kable(zTable, digits = 6, caption = "Right tail areas under the standard normal distribution. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
+   kable_styling(full_width = FALSE, )
+
+```
+<br>
+
+
+### Student's t distribution [10]
+
+Make and print a table of quantiles for Students's t distribution. The table should have those values of t that leave areas under the right tail equal to 0.15, 0.10. 0.05. 0.025, 0.01, and 0.005, for 1 to 30 degrees of freedom in steps of 1 and 30 to 42 df in steps of 2.
+
+
+<br>
+```{r tTable}
+
+p.values <- c(0.15, 0.10, 0.05, 0.025, 0.01, 0.005)
+
+df <- c(1:30, 16:21*2)
+
+tTable <- matrix(nrow = length(df), ncol = length(p.values))
+
+for (i in 1:36) {
+   for (j in 1:6) {
+      tTable[i, j] <- qt(p = p.values[j], df = df[i])
+   }
+}
+
+row.names(tTable) <- df
+
+colnames(tTable) <- p.values
+
+kable(tTable, digits = 5, caption = "Values of Student's t with row degrees of freedom that have the column probability under the right tail. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
+   kable_styling(full_width = FALSE, )
+
+```
+
+
+
+
+
+
+
+
+
+
+
 

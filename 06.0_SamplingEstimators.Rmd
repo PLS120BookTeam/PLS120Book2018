@@ -60,7 +60,7 @@ In reality, a random variable is a real-valued function defined over the sample 
 
 ```
 
-Do not confuse this function property with the posibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it give a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
+Do not confuse this function property with the posibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it gives a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
 
 A more formal definition and an intuitive physical model of random variable is given in [@286171]. Make sure to also explore the explanations given by W. Huber in [@54894].
 
@@ -114,7 +114,7 @@ Table: (\#tab:deriveBinomialExmpl) Calculation of the probability of obtaining Y
 | 5 | GGGGG                                                                |  1  = $C_5^5$ | $0.20^5 \cdot 0.80^0 = `r 0.20^5`$          |
 <br>
 
-There are many ways to get any number, say r, G's in a sequence. That number equals the number of different sets of r positions or slots that can be chosen from the 5 slots available, without replacement. This is a case where the order in which the slots are chosen does not matter (having G's in positions 1 and 3 is the same as having G's in postions 3 and 1) and there is no replacement (one a slot is occupied it cannot be selected again). Therefore, we can use combinations of 5 slots taken in sets of r = Y to see to determine the number of ways that a given number of successes can be obtained. Notice that whenever you get r slots with G's you also 5-r slots for O's. That's why the number of sequences is symmetric from top to bottom of the table.
+There are many ways to get any number, say r, G's in a sequence. That number equals the number of different sets of r positions or slots that can be chosen from the 5 slots available, without replacement. This is a case where the order in which the slots are chosen does not matter (having G's in positions 1 and 3 is the same as having G's in postions 3 and 1) and there is no replacement (once a slot is occupied it cannot be selected again). Therefore, we can use combinations of 5 slots taken in sets of r = Y to determine the number of ways that a given number of successes can be obtained. Notice that whenever you get r slots with G's you also get 5-r slots for O's. That's why the number of sequences is symmetric from top to bottom of the table.
 
 If we use the letters $p$ for the probability of G or "success," $q = 1-p$ for failure or O and $n$ for the total number of trials we can write a compact equation for the probability that we obtain Y = r successes. We use the letter $Y$ for the random variable "number of successes" to emphasize that it is a response variable, but we also use the letter $r$ to link this to Equation \@ref(eq:combinations) for combinations and to designate a specific realization of Y.
 
@@ -226,7 +226,7 @@ knitr::include_graphics("images/Sum2Integral.png")
 
 ## Parameters and Moments
 
-Distribution functions are usually functions that can be written down with equations that have certain constant values for all values of the random variable. The set of all possible values of the random variable is called the *support*. In the example about breeding animals above, Equation \@ref(eq:binomialPMF) has two parameters: n, the number of trials and p, the probability of success; q does not count as a different parameter because it is simply $1-p$. All distributions will be characterized by their parameters and other properties such as the mean or expected value and variance. The mean, variance, skeweness and kurtosis are called ther **moments** of a distribution, because they all arise from variations of the same equation.
+Distribution functions are usually functions that can be written down with equations that have certain constant values for all values of the random variable. The set of all possible values of the random variable is called the *support*. In the example about breeding animals above, Equation \@ref(eq:binomialPMF) has two parameters: n, the number of trials and p, the probability of success; q does not count as a different parameter because it is simply $1-p$. All distributions will be characterized by their parameters and other properties such as the mean or expected value and variance. The mean, variance, skeweness and kurtosis are called the **moments** of a distribution, because they all arise from variations of the same equation.
 
 This section presents the definitions of the expectation, variance and parameters of distributions using equations that may be a little scary at first. Students are not expected to be able to derive these equations, and in many cases not even to memorize them. The main point in presenting them is for students to realize and remember that moments and parameters are characteristics of the whole distribution, or of populations, whereas averages and sample variances are calculated from samples and use **different equations**. Moreover, for any given random variable, the parameters and moments of its distribution are *constants*, whereas averages and variances estimated with samples from the distribution are themselves random variables that change from sample to sample. This is a very important concept.
 
@@ -282,7 +282,7 @@ f(y) =
 \end{equation}
 <br>
 
-This pdf is zero outside the interval $[a,b]$ and constant in the interval Because the area has to be 1.0, then, the height of the rectangle and the value of the function are constant at $1/(b-a)$. Using a bit of calculus or intuition we obtain the expectation:
+This pdf is zero outside the interval $[a,b]$ and constant in the interval because the area has to be 1.0, then, the height of the rectangle and the value of the function are constant at $1/(b-a)$. Using a bit of calculus or intuition we obtain the expectation:
 
 
 <br>
@@ -316,7 +316,7 @@ This definition is short and easy to remember, and it will also remind us of the
 ```
 <br>
 
-An important property of the expectation is that the expected value of a function $g(Y)$ of a random variable can be obtained simply by using the definition of expectation where instead of Y we plug in $g(Y)$. This is called the *Law of the Unconscious Statistician* or LOTUS. The application of Equation \@ref(eq:VarDef) and the LOTUS, with $g(Y) = (Y - \mu)^2$ to discrete distributions yields the definition of variance for discrete distributions:
+An important property of the expectation is that the expected value of a function $g(Y)$ of a random variable can be obtained simply by using the definition of expectation, where instead of Y, we plug in $g(Y)$. This is called the *Law of the Unconscious Statistician* or LOTUS. The application of Equation \@ref(eq:VarDef) and the LOTUS, with $g(Y) = (Y - \mu)^2$ to discrete distributions yields the definition of variance for discrete distributions:
 
 <br>
 \begin{equation}
@@ -527,7 +527,7 @@ The point is that parameters are not necessarily the same as mean and variance. 
 
 ### Properties of Mean and Variance
 
-The following properties can be easily derived directly from the definitions of mean and variance, and they are very useful when working with samples. Consider that $X$, $Y$ and $Z$ are random variable with any distributions that has mean and variance^[Amazingly, some distributions do not have mean or variance, for example because the mean or variance involve sum of series that do not converge.].
+The following properties can be easily derived directly from the definitions of mean and variance, and they are very useful when working with samples. Consider that $X$, $Y$ and $Z$ are random variables with any distribution that has mean and variance^[Amazingly, some distributions do not have mean or variance, for example because the mean or variance involve sum of series that do not converge.].
 
 <br>
 \begin{align}
@@ -579,7 +579,7 @@ The function of X used to get x is a *linear* function, where $\mu_X$ and $\sigm
 
 The list of distribution functions is infinite. In theory, random variables can have any distribution, for as long as they comply with the definition, which is rather general. In practice, we manage to make useful models of the world with very few prototypical families of distributions. Loosely, a family of distributions is a set of distributions that differ only in the values of their parameters, but have the same functional form. For example, the Bernoulli distribution, which has value 1 with probability $p$ and 0 with probability $1-p$, is a Binomial distribution where $n = 1$.
 
-Some distributions can be derived on the basis of a few facts or assumptions. For example, the Binomial distribution results from performing a set number of independent trials with constant probability of success. Other distributions may be the result of complicated combinations of basic ones.
+Some distributions can be derived on the basis of a few facts or assumptions. For example, the Binomial distribution results from performing a set number of independent trials with constant probability of success. Other distributions may be the result of complicated combinations of basic ones random experiments.
 
 In this section we describe the distributions that we will use in the rest of the book. Wikipedia has entries for about 30 discrete and 100 continuous distributions, where they are nicely organized and described.
 
@@ -692,7 +692,7 @@ $$\mu_Y = n \ p$$
 $$V\{Y\} = \sigma^2_Y = n \ p \ (1 - p)$$
 <br>
 
-In the binomial calculations, the combinations are combinations of positions where "success" happens. We use combinations because having "success" in positions 1 and 5 for example, is exactly the same as having success in position 5 and 1. Just note that the order of successes and failures matters but the order of the positions of the successes and failures does not! Coins tosses HHTT are not the same as HTHT. However, having H in positions 1 and 2 is the same as having H in positions 2 and 1.
+In the binomial calculations, the combinations are combinations of positions where "success" happens. We use combinations because having "success" in positions 1 and 5 for example, is exactly the same as having success in position 5 and 1. Just note that the order of successes and failures matters but the order of the positions of the successes and failures does not! Coin tosses HHTT are not the same as HTHT. However, having H in positions 1 and 2 is the same as having H in positions 2 and 1.
 
 
 There are four basic functions in R to do calculations reletd to the Binomial distribution:
@@ -722,7 +722,7 @@ plot(df, type = "h", col = "skyblue", lwd = 4)
 
 # Cumulative distribution function for number of 5's in 10 die rolls
 (df <- data.frame(k = 0:10, P = pbinom(q = 0:10, size = 10, prob = 1/6)))
-plot(df, type = "h", col = "skyblue", lwd = 4)
+plot(df, type = "S", col = "skyblue", lwd = 4)
 
 # P(> 1) infected animals in a sample of 20 from a population where p = 0.02
 # One way; note that q is included in the lower tail
@@ -790,7 +790,7 @@ $$P(Y \gt 3) = 1 - P(Y \le 2) = 1 - P(Y = 0) - P(Y = 1) - P(Y = 2) \\[15pt]
 Obviously, the probability that there are more than 3 plants in a 1-$m^2$ quadrat is going to be larger than in a smaller quadrat. Both distributions are plotted in Figure \@ref(fig:PoissonPmfPlot)
 
 <br>
-```{r PoissonPmfPlot, message=FALSE, fig.cap="Poisson distributions for number of plants per quadrat in a population where the average number of plants per square meter is 6. Both distributions have probabilities that are positive for any positive integer, the distributions are truncated at values of Y for which the probability is too small to be seen in the plot. Abscissa values have been slightly offset so both distributions can be seen without overlap.", out.width = '70%'}
+```{r PoissonPmfPlot, message=FALSE, fig.cap="Poisson distributions for number of plants per 0.25 and 1 m^2^ quadrat in a population where the average number of plants per square meter is 6. Both distributions have probabilities that are positive for any positive integer, the distributions are truncated at values of Y for which the probability is too small to be seen in the plot. Abscissa values have been slightly offset so both distributions can be seen without overlap.", out.width = '70%'}
 
 plot(0:20 + 0.05, dpois(x = 0:20, lambda = 1.5), type = "h", lwd = 4, col = "orange", ylab = "PROBABILITY", xlab = "NUMBER OF PLANTS IN QUADRAT")
 points(0:20 - 0.05, dpois(x = 0:20, lambda = 6), type = "h", lwd = 4, col = "black")
@@ -826,7 +826,7 @@ plot(df, type = "h", lwd = 4)
 
 # Cumulative distribution function for number of crossovers
 (df <- data.frame(y = 0:7, P = ppois(q = 0:7, lambda = 0.8)))
-plot(df, type = "h", col = "skyblue", lwd = 4)
+plot(df, type = "S", col = "skyblue", lwd = 4)
 
 # Expected proportion of gametes with 3 or more crossovers
 # One way; note that q is included in the lower tail
@@ -842,7 +842,7 @@ ppois(q = 3, lambda = 0.8, lower.tail = FALSE)
 
 ### Normal Distribution {#NormDist}
 
-The Normal or Gaussian distribution is most important in statistics and science, because it is an accurate model for a multitude of variables measured. As sample size increases, many estimated parameters tend to have a normal distribution, regardless of the original distribution from where the sample is obtained. The normal distribution describes difussion of gas particles in a volume, noise in electromagnetic signal, values in chaotic systems, and all sorts of variables measured in the empirical sciences.
+The Normal or Gaussian distribution is most important in statistics and science, because it is an accurate model for a multitude of variables measured. As sample size increases, many estimated parameters tend to have a normal distribution, regardless of the original distribution from where the sample is obtained. The normal distribution describes diffussion of gas particles in a volume, noise in an electromagnetic signal, values in chaotic systems, and all sorts of variables measured in the empirical sciences.
 
 For any given variance and mean, the Normal distribution is the continous distribution with maximum entropy. This means that when one knows the mean and variance of a continuous distribution but nothing else about it, assuming that it has a Normal distribution is the choice that imposes or adds the least prior information.
 
@@ -878,7 +878,7 @@ $$V\{Y\} = \sigma^2_Y$$
 <br>
 
 
-Although the Normal pdf has positive values for all real numbers, we frequently use it as a approximation for random variables that are strictly positive such as mass, length, and other biophysical quantities that cannot be negative. For the approximation to be a good one, the mean has to be at least 4 times the standard deviation. This way, less than 1/30,000 of the distribution is expected to be below zero, making errors of little practical consequence. In cases when the mean is closer to zero than 3-4 standard deviations, we should consider other distributions that have the positive reak numbers as support, including 0. The log-normal and members of the Gamma family of distributions would be good choices.
+Although the Normal pdf has positive values for all real numbers, we frequently use it as a approximation for random variables that are strictly positive such as mass, length, and other biophysical quantities that cannot be negative. For the approximation to be a good one, the mean has to be at least 4 times the standard deviation. This way, less than 1/30,000 of the distribution is expected to be below zero, making errors of little practical consequence. In cases when the mean is closer to zero than 3-4 standard deviations, we should consider other distributions that have the positive real numbers as support, including 0. The log-normal and members of the Gamma family of distributions would be good choices.
 
 **Calculations with the Normal distribution**
 
@@ -921,12 +921,12 @@ lines(x = 0, y = pnorm(0), type = "h", lty = 2)
 lines(x = c(-3.75, 0), y = rep(pnorm(0), 2), lty = 2)
 
 text(x = 2, y = 0.12, 
-     labels ="f(Y)", 
+     labels = "f(Y)", 
      col = "blue", 
      cex = 1.5)
 
 text(x = 2, y = 0.90, 
-     labels =TeX("$\\Phi(Y)$"), 
+     labels = TeX("$\\Phi(Y)$"), 
      col = "black", 
      cex = 1.5)
 
@@ -944,7 +944,7 @@ text(x = 0.85, y = 0.5,
 ```
 <br>
 
-Any Normal RV can be mapped to the Standard Normal Distribution (SND) by the linear transformation consisting in subtracting the mean and dividing by the standard deviation.
+Any Normal RV can be mapped to the Standard Normal Distribution (SND) by the linear transformation consisting in subtracting the mean and dividing by the standard deviation. The standard normal distribtuion is a normal distribution with mean equal to 0 ($\mu = 0$) and variance equal to 1 ($\sigma^2 = 1$). 
 
 $$P(Y \le y) = P\left ( Z = \frac{Y - \mu}{\sigma} \le \frac{y - \mu}{\sigma} = z \right )$$
 
@@ -952,7 +952,7 @@ If Y has a Normal distribution with mean $\mu$ and variance $\sigma^2$ and Z has
 
 $$P(y_1 \le Y \le y_2) = P \left( \frac{y_1 - \mu}{\sigma} \le Z \le \frac{y_2 - \mu}{\sigma} \right)$$
 
-What is the probability that $Y \sim N(5, 4)$ takes values between 6 and 9, or that it takes values lower than3? Those probabilities are represented as areas under the curve of $Y \sim N(5,4)$ and under the SND $Z \sim N(0,1)$ in Figure \@ref(fig:normDistFig2).
+What is the probability that $Y \sim N(5, 4)$ takes values between 6 and 9, or that it takes values lower than 3? Those probabilities are represented as areas under the curve of $Y \sim N(5,4)$ and under the SND $Z \sim N(0,1)$ in Figure \@ref(fig:normDistFig2).
 
 <br>
 ```{r normDistFig2, echo=FALSE, message=FALSE, fig.cap="Equivalence of areas under curve in a normal distribution with mean 5 and standard deviation 4, and the standard Normal Distribution.", fig.height=10}
@@ -1082,19 +1082,19 @@ par(mfrow = c(1,1))
 <br>
 
 
-The areas under the curve are used to represent  proportions of the population with values between the specified extremes. Imagine that the length of Hass avocados received for sorting and packing at a plant has has a normal distribution with mean 9 cm and variance 1.21.cm^2^. The following are questions that we can answer using the normal distribution (data and situations described are fictitious).
+The areas under the curve are used to represent proportions of the population with values between the specified extremes. Imagine that the length of Hass avocados received for sorting and packing at a plant has a normal distribution with mean 9 cm and variance 1.21.cm^2. The following are questions that we can answer using the normal distribution (data and situations described are fictitious).
 
 (@) A buyer wants avocados that are longer than 8 cm. What proportion of the avocados received could go to that buyer?
 
 We are given a set value of the random variable Y and are asked to find a proportion, which we interpret as a probability. The set value $y = 8$ is called a **quantile**. We look up the value of the quantile in the graph and then calculate the probability. Because the total ara under the curve is 1.0, the answer can be calculated in two different ways. The different ways were more relevant when we had to use printed tables to find quantiles and probabilities, because tables usually included only one half of the distribution. The other half is the mirror image and can be derived as such.
 
-$$Y \sim N(9, 1.21) \implies \ P(Y \leq 8) = 1 -  P(Y \geq 8)$$
+$$Y \sim N(9, 1.21) \implies \ P(Y \geq 8) = 1 -  P(Y \leq 8)$$
 
 The R function to go from normal quantiles to probabilities is `pnorm` and it corresponds to the cumulative function $\Phi$. 
 
 ```{r}
 
-# probability that Y is less than 8
+# probability that Y is greater than 8
 
 1 - pnorm(q = 8, mean = 9, sd = sqrt(1.21), lower.tail = TRUE)
 
@@ -1102,7 +1102,7 @@ pnorm(q = 8, mean = 9, sd = sqrt(1.21), lower.tail = FALSE)
 
 # The lower tail and standard normal distribution are the defaults.
 
-1- pnorm(q = (8-9)/sqrt(1.21))
+1 - pnorm(q = (8 - 9) / sqrt(1.21))
 
 ```
 
@@ -1150,7 +1150,7 @@ pM <- pnorm(9.5, mean = 9, sd = sqrt(1.21)) - pS
 pL <- pnorm(11, mean = 9, sd = sqrt(1.21)) - pS - pM
 
 # proportion small < 8 cm
-pXL <-1 - pS - pM - pL
+pXL <- 1 - pS - pM - pL
 
 (PMF <- data.frame(
    price = c(1, 1.5, 2, 1.25), 
@@ -1201,7 +1201,7 @@ Real numbers between $0$ and $\infty$ (it's a continuous distribution).
 
 **PMF:** 
 
-Both the PMF and CDF involve gamma functions, which are not in the typical toolbox. These are extremely useful functions, but they are used in the background. They are mention here just as a general math culture point, but we will not use or study them further.
+Both the PMF and CDF involve gamma functions, which are not in the typical toolbox. These are extremely useful functions, but they are used in the background. They are mentioned here just as a general math culture point, but we will not use or study them further.
 
 $$f_Y(y) = P(Y = y) = \frac{y^{\nu/2-1} \ e^{-y/2}} {2^{\nu/2} \ \Gamma(\nu/2)} \quad \quad y > 0$$
 
@@ -1334,7 +1334,7 @@ This distribution is perhaps the second most used one after the SND. t-distribut
 $$\text{If} \quad Z \sim N(0,1) \quad \text{and } \quad V \sim \chi^2(\nu) \quad \text{are independent} \\[15pt]
 \implies T = \frac{Z}{\sqrt{V/\nu}} \sim t(\nu)$$
 
-The t distribution is symmetric and approaches the SND as as degrees of freedom increase. For degrees of freedom less than 30, the PDF of the t distribution has more variance, or "heavier"tails than the normal. We can think of the additional variance comes from the uncertainty due to the independent variable V in the denominator of T.
+The t distribution is symmetric and approaches the SND as degrees of freedom increase. For degrees of freedom less than 30, the PDF of the t distribution has more variance, or "heavier" tails than the normal. We can think of the additional variance as coming from the uncertainty due to the independent variable V in the denominator of T.
 
 ```{r tdistPlot, message=FALSE, echo=FALSE, fig.cap="Comparison of t distributions with increasing degrees of freedom and the standard Normal distribution. The SND is drawn with the thin dashed line."}
 
@@ -1448,7 +1448,7 @@ run `help("Distributions")` or type "Distributions" in the search field of the H
 
 ## Sampling and samples
 
-Applied statistics for plant, animal and environmental sciences deals almost exclusively with making probabilistic statements about unknown and unknowlable population parameters and functions of those parameters. We make estimations and give objective measure of the certainty we have about the statements. Instead of simply calculating probabilities for events or values taken by realizations of random variables with known distributions, as emphasized in the chapter about probability and in the introduction of random variables, we take samples and derive data that are realizations of random variables of unknown distributions and guess the characteristics of the populations where the samples cames from.
+Applied statistics for plant, animal and environmental sciences deals almost exclusively with making probabilistic statements about unknown and unknowlable population parameters and functions of those parameters. We make estimations and give objective measure of the certainty we have about the statements. Instead of simply calculating probabilities for events or values taken by realizations of random variables with known distributions, as emphasized in the chapter about probability and in the introduction of random variables, we take samples and derive data that are realizations of random variables of unknown distributions and guess the characteristics of the populations where the samples come from.
 
 
 ### Universe, population and sample
@@ -1479,7 +1479,7 @@ You may have noticed that in the exercises and examples about probability and di
 
 The phrase "representative sample" is found frequently in books and articles, but in the vast majority of cases the term is used incorrectly. Statistics deals with random samples, not with "representative" samples. Excluding some very specific methods of sampling, there is no such thing as a "representiative" sample. Most importantly, the validity of a sample should be based on the method used to obtain the sample and the methods and models used to make estimations and inferences based on the sample. In general, the validity of a sample should not be based on the characteristics of the sample assessed after the sample is obtained. Beware of "representative" samples. All the equations we will use in this book apply to random samples, not representative ones.
 
-It is possible that some authors use the term "representative" to characterize samples that were selected following a proper method and whose elements are processed using the correct formulas specifically derived for the sampling method used. In this case, of course that we want "representative" samples. Here, the term is simply used to mean "properly obtained and analyzed" samples.
+It is possible that some authors use the term "representative" to characterize samples that were selected following a proper method and whose elements are processed using the correct formulas specifically derived for the sampling method used. In this case, of course we want "representative" samples. Here, the term is simply used to mean "properly obtained and analyzed" samples.
 
 [@Pietra1926] Wrote *A particular case of non-representative sampling* to point out that randomly sampling persons and averaging their family sizes is not a "representative" sampling process. Intuitively, one should suspect that something might be amiss when we sample objects type A (individuals) and use the formulas for A to make statements about objects type B (families). By sampling individuals randomly, the probability of a family being selected is proportional to its size. Simply using the average to estimate the mean does not work, because a direct use of the average to estimate the mean assumes equal-probability sampling. Presumably, the author of the paper used the term non-representative to mean "unequal probability" sampling. These days there are multiple sampling methods and corresponding formulas that do not use simple random sampling and do use unequal probability sampling.
 
@@ -1489,7 +1489,7 @@ Incidentally, and to remark the importance of formulating questions carefully, t
 
 "Biased" is another term unfortunately used to describe samples. The best scenario would be to define biased samples as samples obtained using a method that does not assign equal probability to all elements of the population. But there is a better term that does not have the negative connotation: Unequal probability sampling. It is probably best not to use the term "bias" to talk about samples or sampling methods and to reserve it to be used as a property of some estimators.
 
-There are many sampling methods that use unequal probability. If they are used in conjunction with the proper estimators and analysis procedures, there should not be a problem. As a matter of fact, unequal sampling probability may be the only approach in some situations and it is not a problem for as long as the probabilities of any unit being selected is known and greater than 0. Assigning a zero probability to some elements of the population is equivalent to defining a new populations without them. Obviously, the samples will not have information about the original but about the reduced population. Therefor, another interpretation of the phrase "biased sample" would be that the sample does not come from the population about which we want to make statements.
+There are many sampling methods that use unequal probability. If they are used in conjunction with the proper estimators and analysis procedures, there should not be a problem. As a matter of fact, unequal sampling probability may be the only approach in some situations and it is not a problem for as long as the probabilities of any unit being selected is known and greater than 0. Assigning a zero probability to some elements of the population is equivalent to defining a new populations without them. Obviously, the samples will not have information about the original but about the reduced population. Therefore, another interpretation of the phrase "biased sample" would be that the sample does not come from the population about which we want to make statements.
 
 ```{block NoZeroP, type='statip'}
 - Samples have to be obtained using a random process in which all units of the population have a strictly positive and known probability of being selected, even if the probabilites differ among units.
@@ -1516,8 +1516,6 @@ When populations are infinite, as in most of the cases we treat in the rest of t
 
 
 ### Estimators
-
-<!-- **MOVE TO BETTER PLACE** One way to think of the difference between Probability and Statistics is that in Probability we know the populations and their parameters and we calculate the probabilities of getting different kinds of samples. In Statistics we know samples and we try to estimate the parameters of the populations from which they come. Frequentist statistics gives estimates of parameters and the ability to reject certain hypothesized parameter values. Bayesian statistics give us parameter estimates and the probability that they have any hypothesized value. -->
 
 
 Populations are characterized by parameters. Parameters are constant values that are typically unknown. Samples are used to estimate parameters or to make statements about differences in parameters. Although for the Normal distribution the parameters are the same as the mean and the variance, for other distributions this is not the case. The question arises then: how do we estimate parameters based on samples??? There are several methods to estimate parameters, some of which are:
@@ -1668,9 +1666,9 @@ o.pop.size <- length(rhino.pop$Yi)
 
 s.pop.size <- length(all.samples$s.avg)
 
-(o.var <- var(rhino.pop$Yi) * (o.pop.size-1) / o.pop.size)
+(o.var <- var(rhino.pop$Yi) * (o.pop.size - 1) / o.pop.size)
 
-(s.var <- var(all.samples$s.avg) * (s.pop.size-1) / s.pop.size)
+(s.var <- var(all.samples$s.avg) * (s.pop.size - 1) / s.pop.size)
 
 o.var/s.var
 
@@ -1764,14 +1762,14 @@ Therefore, for sample sizes large enough and independent observations we can ass
 
 par(mfrow = c(2, 3))
 
-opar = par(ps=18)  # Make text 18 point
+opar = par(ps = 18)  # Make text 18 point
 
 set.seed(91)
 
 r <- c(1, 2, 4, 8, 16, 32)
 w <- c(rep(0.25, 4), 0.20, 0.15)
 
-for(i in 1:6){
+for (i in 1:6) {
 samples1 <- sample(rhino.pop$Yi, size = r[i] * 9000, replace = TRUE)
 samples1 <- t(matrix(samples1, r[i]))
 smeans <- apply(samples1, 1, mean)
@@ -1799,23 +1797,15 @@ par(mfrow = c(1, 1))
 <br>
 
 
-## Sampling distributions
-
-
-Statistic: a function of the values observed in a sample.
-Estimator: a statistic that is used to estimate a parameter.
-Estimate: the value of a statistic for a given sample.
-
-
-Example: a sample of 3 values is drawn from the standard normal distribution. Those values are `r (xs <- rnorm(3))`. the sample average or simply "average" is a statistic that consists of averaging all observed values `r mean(xs)` and the sample variance is `r var(xs)`
-
 ## Estimation vs. inference and prediction
 
-Recall the use of the binomial or Poisson distributions to calculate probabilities of events. In those cases we used models whose parameters were known to calculate exact probabilities for certain events of interest. For example, we calculated the probability that at least 5 seeds germinate in a sample of 10 seeds. If the germination actually follows the distribution used, then the probability calculated is correct and known with certainty. We could say that before we put a set of seeds to germinate, that we "predit that 5 seeds will germinate with a probability equal to xx." We make what is called a PREDICTION for the results of a random experiment (germinating the seeds). If we repeat the experiment a large number of times, we should be able to corroborate that the number of times 5 seeds germinate divide by the number of experiments is xx.
+Recall the use of the binomial or Poisson distributions to calculate probabilities of events. In those cases we used models whose parameters were known to calculate exact probabilities for certain events of interest. For example, we calculated the probability that at least 5 seeds germinate in a sample of 10 seeds. If the germination actually follows the distribution used, then the probability calculated is correct and known with certainty. We could say that before we put a set of seeds to germinate, that we "predict that 5 seeds will germinate with a probability equal to xx." We make what is called a PREDICTION for the results of a random experiment (germinating the seeds). If we repeat the experiment a large number of times, we should be able to corroborate that the number of times 5 seeds germinate divided by the number of experiments is xx.
 
 **A PREDICTION is a statement about the value that a random variable will take in a (future) random experiment.**
 
-The situation above is very different from a situation in which we do not know the parameter $p$ or probability of success of the binomial distribution. In this case we need to ESTIMATE the parameter in orer to be able to make any predictions. Parameters can be estimated by using data. For example, we could test 1000 seeds and calculate the proportion that germinate. This estimate is called $\hat{p}$. Now this estimate $\hat{p}$ of $p$ is itself a random variable and it has a variance and expected values that can be estimated.
+The situation above is very different from a situation in which we do not know the parameter $p$ or probability of success of the binomial distribution. In this case we need to ESTIMATE the parameter in order to be able to make any predictions. Parameters can be estimated by using data. For example, we could test 1000 seeds and calculate the proportion that germinate. This estimate is called $\hat{p}$. Now this estimate $\hat{p}$ of $p$ is itself a random variable and it has a variance and expected values that can be estimated.
+
+One way to think of the difference between Probability and Statistics is that in Probability we know the populations and their parameters and we calculate the probabilities of getting different kinds of samples. In Statistics we know samples and we try to estimate the parameters of the populations from which they come. Frequentist statistics gives estimates of parameters and the ability to reject certain hypothesized parameter values. Bayesian statistics give us parameter estimates and the probability that they have any hypothesized value.
 
 **An ESTIMATION is a statement about the current unknown value of a parameter or function of parameters.**
 
@@ -1826,14 +1816,14 @@ In traditional frequentist statistics, ESTIMATION is the process of obtaining es
 
 Leaving names aside, some of the various types of statements we can make are:
 
-1. Predict the outcome of a random experiment or the value of random variable.
-2. Estimate the unknown value of a parameter.
-3. Make a confidence interval for the parameter.
+1. Estimate the unknown value of a parameter that is a fixed number.
+1. Make a confidence interval for the parameter.
+1. Predict the realized value of a random variable and state how certain we are about it.
 
 For statement 1 we need to know the parameters (or their estimates) and the distribution of the random variable. For statement 2 we only need to estimate the parameter using some estimator. For statement 3 we need to have the estimate and the sampling variance of the estimator. An example will make this clearer.
 
-Suppose that we are interested in the square of people's height. This quantitiy is used in the calculation of the Body Mass Index. Further suppose that height follows a normal distribution with mean $\mu$ and variance $\sigma^2$. ****TO BE COMPLETED**** 
 
+**EXAMPLE OF PREDICTION, ESTIMATION AND INFERENCE**
 
 
 
@@ -1887,12 +1877,25 @@ The estimated probabilities of failure will underestimate the actual risk of fai
 
 ### Exercise
 
-Find processes that could be described with the more common distribution functions, sample them amd create histograms for the results. Determine if the results look like the hypothesized distribution.
+Find processes that could be described with the more common distribution functions, sample them and create histograms for the results. Determine if the results look like the hypothesized distribution. For example, measure the width of leaves of a species of plant in your garden.
 
 ### Exercise
 
-This is a game. Each player starts with 10 cents in pennies. The bank (instructor) chooses with probability p1 to either roll a die or flip a coin 5 times and reports the number of dots or the number of heads + 1. Students bet on whether the bank used the coin or the die. This can be extended to increasing number of "draws" before stoping the bet. Use Bayes rule to calculate the posterior for coin and die.
+A field has a population of weeds that are distributed randomly over the area. The presence of a weed in a point does not affect the probability that there is a weed in another point. The average weed density is 5 plants per m^2^.
 
+1. What distribution can be used to describe the number of weeds that fall in a randomly placed 0.5 m^2^ hoop?
+
+2. What is the probability of finding 3 weed plants in a hoop?
+
+3. An AI (artificial intelligence) sprayer detects individual weed plants with a probability of 0.90. If 3 or more plants are detected, it sprays an area equal to the size of the hoop and moves to the next area. What proportion of the area with 3 weed plants/hoop will be sprayed? Assume that detection of any individual plant is independent from dtection of other plants.
+
+Solution: 
+
+The number of weeds has a Poisson distribution.
+
+The mean number of weeds per hoop is 0.5 m^2^ * 5 plants m^-2^. P(Y = 3) is `dpois(x = 3, lambda = 2.5)`.
+
+Each of the three plants has a probability of being detected that is constant. Each hoop area consists of 3 trials, each with P(detection) = 0.90. Only hoops with 3 detections are sprayed. The number of detections given that there are 3 plants has a binomial distribution with n = 3 and p = 0.90. The probability that a hoop area is sprayed is the probability of detecting 3 out of 3: `dbinom(x = 3, size = 3, prob = 0.90)`. 72\% of the area with 3 plants per hoop is sprayed.
 
 
 ## Homework
