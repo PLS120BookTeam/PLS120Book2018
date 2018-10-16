@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Lab02 Presentation</title>
+  <meta name="description" content="Lab02 Presentation">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Lab02 Presentation" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab02 Presentation" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Applied Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="0.1" data-path=""><a href="#probability"><i class="fa fa-check"></i><b>0.1</b> Probability</a></li>
+<li class="chapter" data-level="0.2" data-path=""><a href="#combinatrics-cases"><i class="fa fa-check"></i><b>0.2</b> Combinatrics Cases</a></li>
+<li class="chapter" data-level="0.3" data-path=""><a href="#conditional-probability-and-independence"><i class="fa fa-check"></i><b>0.3</b> Conditional Probability and Independence</a></li>
+<li class="chapter" data-level="0.4" data-path=""><a href="#binomial-distribution"><i class="fa fa-check"></i><b>0.4</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="0.5" data-path=""><a href="#normal-distribution"><i class="fa fa-check"></i><b>0.5</b> Normal Distribution</a></li>
+<li class="chapter" data-level="0.6" data-path=""><a href="#normal-distribution-1"><i class="fa fa-check"></i><b>0.6</b> Normal Distribution</a></li>
+<li class="chapter" data-level="0.7" data-path=""><a href="#normal-distribution-2"><i class="fa fa-check"></i><b>0.7</b> Normal Distribution</a></li>
+<li class="chapter" data-level="0.8" data-path=""><a href="#student-t-distribution"><i class="fa fa-check"></i><b>0.8</b> Student T-Distribution</a></li>
+<li class="divider"></li>
+<li><a href="https://" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Lab02 Presentation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Lab02 Presentation</h1>
+</div>
+<div id="probability" class="section level2">
+<h2><span class="header-section-number">0.1</span> Probability</h2>
+<p>Permutation vs Combination</p>
+<p>If the sequence AB is NOT the same as BA (order matters) use <strong>Permutations</strong></p>
+<p>If the sequence AB is the same as BA (order does not matter) use <strong>Combinations</strong></p>
+</div>
+<div id="combinatrics-cases" class="section level2">
+<h2><span class="header-section-number">0.2</span> Combinatrics Cases</h2>
+<p>There are four cases for getting sequences of r objects taken from a set of n. The cass and symbols used to represent their sizes are:</p>
+<ul>
+<li>permutations without replacement <span class="math inline">\(P(n,r) = P^n_r\)</span>,</li>
+<li>permutations with replacement <span class="math inline">\(PR(n,r) = PR^n_r\)</span>,</li>
+<li>combinations without replacement <span class="math inline">\(C(n,r) = C^n_r = (^n_r)\)</span>,</li>
+<li>combinations with replacement <span class="math inline">\(CR(n,r) = CR^n_r\)</span>.</li>
+</ul>
+</div>
+<div id="conditional-probability-and-independence" class="section level2">
+<h2><span class="header-section-number">0.3</span> Conditional Probability and Independence</h2>
+<p><strong>Conditional Probability</strong>: The conditional probability of one event given that another event is known to have happened is defined as the probability of the intersection of the two events divided by the probability of the event known to have happened.</p>
+<br>
+<span class="math display">\[\begin{equation}
+P(E_1|E_2) = \frac{P(E_1 \cap E_2)} {P(E_2)}
+\end{equation}\]</span>
+<p><br></p>
+<p><strong>Independent events</strong>: Two events are independent if the probability of observing both events simultaneously is the product of the probabilities of each event separately.</p>
+<p><span class="math display">\[P(E_1 \cap E_2) = P(E_1) * P(E_2)\]</span></p>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2><span class="header-section-number">0.4</span> Binomial Distribution</h2>
+<ol style="list-style-type: decimal">
+<li>The experiment involves n identical trials.</li>
+<li>Each trial has only two possible outcomes denoted as success or failure.</li>
+<li>Each trial is independent of the previous trials.</li>
+<li>The terms p and q remain constant throughout the experiment, where p is the probability of getting a success on any one trial and q = (1 ??? p) is the probability of getting a failure on any one trial.</li>
+</ol>
+<p><span class="math display">\[P(x) = [{n \atop x }] p^xq^{n-x} = \frac{n!}{(n-x)!x!} p^x q^{n-x}\]</span></p>
+<div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Pascal%27s_triangle%3B_binomial_distribution.svg/420px-Pascal%27s_triangle%3B_binomial_distribution.svg.png" alt="https://en.wikipedia.org/wiki/Binomial_distribution" />
+<p class="caption"><a href="https://en.wikipedia.org/wiki/Binomial_distribution" class="uri">https://en.wikipedia.org/wiki/Binomial_distribution</a></p>
+</div>
+</div>
+<div id="normal-distribution" class="section level2">
+<h2><span class="header-section-number">0.5</span> Normal Distribution</h2>
+<ol style="list-style-type: decimal">
+<li><p>Normal distributions are symmetric around their mean.</p></li>
+<li><p>Mean = median = mode</p></li>
+<li><p>The area under the normal curve = 1.0.</p></li>
+<li><p>Defined by two parameters: mean (????) and the standard deviation (????).</p></li>
+<li><p>95% of the area of a normal distribution is within ~ 2 ???? of the mean.</p></li>
+</ol>
+</div>
+<div id="normal-distribution-1" class="section level2">
+<h2><span class="header-section-number">0.6</span> Normal Distribution</h2>
+<p>Standard normal: ???? = 0, ???? = 1</p>
+<div class="figure">
+<img src="https://www.mathsisfun.com/data/images/standardizing.svg" alt="https://www.mathsisfun.com" />
+<p class="caption"><a href="https://www.mathsisfun.com" class="uri">https://www.mathsisfun.com</a></p>
+</div>
+<p>z =(X-????)/????</p>
+</div>
+<div id="normal-distribution-2" class="section level2">
+<h2><span class="header-section-number">0.7</span> Normal Distribution</h2>
+<p>For a continuous variable (<em>x</em>), the probability of obtaining <em>x</em> is the area below the curve of the <strong>pdf</strong> (in calculus terms, it is the integral across the interval of interest)</p>
+<p>The total area under a pdf is equal to 1</p>
+<div class="figure">
+<img src="http://www.math.armstrong.edu/statsonline/5/curve4.gif" alt="Area below the curve" />
+<p class="caption">Area below the curve</p>
+</div>
+</div>
+<div id="student-t-distribution" class="section level2">
+<h2><span class="header-section-number">0.8</span> Student T-Distribution</h2>
+<p>When to use the Studen t-distribution over the Normal distribution:</p>
+<p>-when the population standard deviation is not known -when the sample size is less than 30</p>
+<div class="figure">
+<img src="http://ci.columbia.edu/ci/premba_test/c0331/images/s7/6317178747.gif" alt="ci.columbia.edu" />
+<p class="caption">ci.columbia.edu</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

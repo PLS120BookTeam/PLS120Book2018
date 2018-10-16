@@ -51,7 +51,7 @@ In reality, a random variable is a real-valued function defined over the sample 
 
 ```
 
-Do not confuse this function property with the posibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it give a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
+Do not confuse this function property with the posibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it gives a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
 
 A more formal definition and an intuitive physical model of random variable is given in [@286171]. Make sure to also explore the explanations given by W. Huber in [@54894].
 
@@ -105,7 +105,7 @@ Table: (\#tab:deriveBinomialExmpl) Calculation of the probability of obtaining Y
 | 5 | GGGGG                                                                |  1  = $C_5^5$ | $0.20^5 \cdot 0.80^0 = `r 0.20^5`$          |
 <br>
 
-There are many ways to get any number, say r, G's in a sequence. That number equals the number of different sets of r positions or slots that can be chosen from the 5 slots available, without replacement. This is a case where the order in which the slots are chosen does not matter (having G's in positions 1 and 3 is the same as having G's in postions 3 and 1) and there is no replacement (one a slot is occupied it cannot be selected again). Therefore, we can use combinations of 5 slots taken in sets of r = Y to see to determine the number of ways that a given number of successes can be obtained. Notice that whenever you get r slots with G's you also 5-r slots for O's. That's why the number of sequences is symmetric from top to bottom of the table.
+There are many ways to get any number, say r, G's in a sequence. That number equals the number of different sets of r positions or slots that can be chosen from the 5 slots available, without replacement. This is a case where the order in which the slots are chosen does not matter (having G's in positions 1 and 3 is the same as having G's in postions 3 and 1) and there is no replacement (one a slot is occupied it cannot be selected again). Therefore, we can use combinations of 5 slots taken in sets of r = Y to see to determine the number of ways that a given number of successes can be obtained. Notice that whenever you get r slots with G's you also get 5-r slots for O's. That's why the number of sequences is symmetric from top to bottom of the table.
 
 If we use the letters $p$ for the probability of G or "success," $q = 1-p$ for failure or O and $n$ for the total number of trials we can write a compact equation for the probability that we obtain Y = r successes. We use the letter $Y$ for the random variable "number of successes" to emphasize that it is a response variable, but we also use the letter $r$ to link this to Equation \@ref(eq:combinations) for combinations and to designate a specific realization of Y.
 
@@ -192,7 +192,7 @@ F_Y(y) = P(Y \le y) = \int_{-\infty}^{y} f_Y(y) \ dy
 \end{align}
 <br>
 
-The symbol $\int_\mathbb{R}$ represents the *integral* of the function over all real values of Y, and $\int_{\mathbb{R}} f(y) \ dy$ is the integral between $Y = a$ and $Y = b$. If you are not familiar with the concept of integral, no worries. Imagine that $f(y)$ is an abolutely continuous function of the value $y$. The integral between any two $y$ values a and b is the area under the curve between the two points (Figure \@ref(fig:Sum2Integral)). One way to calculate the area approximately is to divide the interval [a, b] into $(b-a)/dy$ little segments. The area of each segment is the base $dy$ times the height, which can be set at $f(y_{lo} + dy/2)$ where $y_{lo}$ is the left end of each segment.¬
+The symbol $\int_\mathbb{R}$ represents the *integral* of the function over all real values of Y, and $\int_{\mathbb{R}} f(y) \ dy$ is the integral between $Y = a$ and $Y = b$. If you are not familiar with the concept of integral, no worries. Imagine that $f(y)$ is an absolute continuous function of the value $y$. The integral between any two $y$ values a and b is the area under the curve between the two points (Figure \@ref(fig:Sum2Integral)). One way to calculate the area approximately is to divide the interval [a, b] into $(b-a)/dy$ little segments. The area of each segment is the base $dy$ times the height, which can be set at $f(y_{lo} + dy/2)$ where $y_{lo}$ is the left end of each segment.¬
 
 <br>
 ```{r Sum2Integral, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="The integral of a continuous probability density function (pdf) can be though of as the limit of the sum of rectangles with base width $dy$ and height equal to the height of the pdf function at the center of the base, as $dx$ approaches zero. The area of each rectangle is an approximation of the probability that Y takes values within the base of the rectangle."}
@@ -488,7 +488,7 @@ knitr::include_graphics("images/bivariateNormal.png")
 
 **Correlation**
 
-The covariance has a drawback to representt the degree of association between two random variables because it is a quantity with units and its numerical value depends on the magnitude of the random variables and the units. Therefore, covariances cannot be compared when variables have different units or when they have different means. The **correlation** coefficient is a better measure of association between two variables because it has no units and can be compared across variables and situations.
+The covariance has a drawback to represent the degree of association between two random variables because it is a quantity with units and its numerical value depends on the magnitude of the random variables and the units. Therefore, covariances cannot be compared when variables have different units or when they have different means. The **correlation** coefficient is a better measure of association between two variables because it has no units and can be compared across variables and situations.
 
 
 ```{block corBlock, type='mydef'}
@@ -1457,7 +1457,7 @@ Applied statistics for plant, animal and environmental sciences deals almost exc
 
 **Sample** A set of students from the PLS120 universe is a sample, and the values of their characteristics (number of devices, etc.) are samples of the corresponding populations.
 
-Frequently, we use the terms population and universe as if they were the same, and this does not cause much confusion. But keep in mind that a unverse of objects can have as many populations as variables we can define in that universe. The distincion is relevant because we will have to use different distribution functions for the different populations. The number of electronic devices might be modeled with a Poisson distribution, but not with a normal distribution, because it is discrete and has a mean that is close to zero.
+Frequently, we use the terms population and universe as if they were the same, and this does not cause much confusion. But keep in mind that a universe of objects can have as many populations as variables we can define in that universe. The distincion is relevant because we will have to use different distribution functions for the different populations. The number of electronic devices might be modeled with a Poisson distribution, but not with a normal distribution, because it is discrete and has a mean that is close to zero.
 
 
 
@@ -1515,9 +1515,6 @@ When populations are infinite, as in most of the cases we treat in the rest of t
 
 ### Estimators
 
-<!-- **MOVE TO BETTER PLACE** One way to think of the difference between Probability and Statistics is that in Probability we know the populations and their parameters and we calculate the probabilities of getting different kinds of samples. In Statistics we know samples and we try to estimate the parameters of the populations from which they come. Frequentist statistics gives estimates of parameters and the ability to reject certain hypothesized parameter values. Bayesian statistics give us parameter estimates and the probability that they have any hypothesized value. -->
-
-
 Populations are characterized by parameters. Parameters are constant values that are typically unknown. Samples are used to estimate parameters or to make statements about differences in parameters. Although for the Normal distribution the parameters are the same as the mean and the variance, for other distributions this is not the case. The question arises then: how do we estimate parameters based on samples??? There are several methods to estimate parameters, some of which are:
 
 - Least-squares
@@ -1558,7 +1555,7 @@ Estimator: a statistic that is used to estimate a parameter.
 Estimate: the value of a statistic for a given sample.
 
 
-Example: a sample of 3 values is drawn from the standard normal distribution. Those values are `r (xs <- rnorm(3))`. the sample average or simply "average" is a statistic that consists of averaging all observed values `r mean(xs)` and the sample variance is `r var(xs)`
+Example: a sample of 3 values is drawn from the standard normal distribution. Those values are `r (xs <- rnorm(3))`. The sample average or simply "average" is a statistic that consists of averaging all observed values `r mean(xs)` and the sample variance is `r var(xs)`.
 
 ## Estimation vs. inference and prediction
 
@@ -1566,7 +1563,9 @@ Recall the use of the binomial or Poisson distributions to calculate probabiliti
 
 **A PREDICTION is a statement about the value that a random variable will take in a (future) random experiment.**
 
-The situation above is very different from a situation in which we do not know the parameter $p$ or probability of success of the binomial distribution. In this case we need to ESTIMATE the parameter in orer to be able to make any predictions. Parameters can be estimated by using data. For example, we could test 1000 seeds and calculate the proportion that germinate. This estimate is called $\hat{p}$. Now this estimate $\hat{p}$ of $p$ is itself a random variable and it has a variance and expected values that can be estimated.
+The situation above is very different from a situation in which we do not know the parameter $p$ or probability of success of the binomial distribution. In this case we need to ESTIMATE the parameter in order to be able to make any predictions. Parameters can be estimated by using data. For example, we could test 1000 seeds and calculate the proportion that germinate. This estimate is called $\hat{p}$. Now this estimate $\hat{p}$ of $p$ is itself a random variable and it has a variance and expected values that can be estimated. 
+
+One way to think of the difference between Probability and Statistics is that in Probability we know the populations and their parameters and we calculate the probabilities of getting different kinds of samples. In Statistics we know samples and we try to estimate the parameters of the populations from which they come. Frequentist statistics gives estimates of parameters and the ability to reject certain hypothesized parameter values. Bayesian statistics give us parameter estimates and the probability that they have any hypothesized value.
 
 **An ESTIMATION is a statement about the current unknown value of a parameter or function of parameters.**
 
@@ -1583,7 +1582,19 @@ Leaving names aside, some of the various types of statements we can make are:
 
 For statement 1 we need to know the parameters (or their estimates) and the distribution of the random variable. For statement 2 we only need to estimate the parameter using some estimator. For statement 3 we need to have the estimate and the sampling variance of the estimator. An example will make this clearer.
 
-Suppose that we are interested in the square of people's height. This quantitiy is used in the calculation of the Body Mass Index. Further suppose that height follows a normal distribution with mean $\mu$ and variance $\sigma^2$. ****TO BE COMPLETED**** 
+Suppose that we are interested in the square of people's height. This quantity is used in the calculation of the Body Mass Index. Further suppose that height follows a normal distribution with mean $\mu$ and variance $\sigma^2$. We can define the *population* in this example as all University of California Davis students. We can, therefore, assume that PLS120 is a random sample of UCD students as the course draws students from multpile disciplines. In a class of 150 students (n=150), the mean and variance can be calculated providing an estimate for the popualtion parameter \mu and \sigma^2. 
+
+```{r}
+
+n = (150 min =149, max = 160)
+sample = rnorm(length(n), n, 2) # Generate 150 random observations within approximately realistic bounds
+
+hist(n) #display histogram of random generated samples
+
+
+
+```
+****TO BE COMPLETED**** 
 
 
 

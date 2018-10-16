@@ -1,0 +1,92 @@
+---
+title: "Lab02 Presentation"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Probability
+
+Permutation vs Combination
+
+If the sequence AB is NOT the same as BA (order matters) use **Permutations**
+
+If the sequence AB is the same as BA (order does not matter) use **Combinations** 
+
+## Combinatrics Cases
+
+There are four cases for getting sequences of r objects taken from a set of n. The cass and symbols used to represent their sizes are:
+
+- permutations without replacement $P(n,r) = P^n_r$,
+- permutations with replacement $PR(n,r) = PR^n_r$,
+- combinations without replacement $C(n,r) = C^n_r = (^n_r)$,
+- combinations with replacement $CR(n,r) = CR^n_r$.
+
+
+## Conditional Probability and Independence
+
+**Conditional Probability**: The conditional probability of one event given that another event is known to have happened is defined as the probability of the intersection of the two events divided by the probability of the event known to have happened.
+
+<br>
+\begin{equation}
+P(E_1|E_2) = \frac{P(E_1 \cap E_2)} {P(E_2)}
+\end{equation}
+<br>
+
+
+**Independent events**: Two events are independent if the probability of observing both events simultaneously is the product of the probabilities of each event separately.
+
+$$P(E_1 \cap E_2) = P(E_1) * P(E_2)$$
+
+## Binomial Distribution
+
+1. The experiment involves n identical trials.
+2. Each trial has only two possible outcomes denoted as success or failure.
+3. Each trial is independent of the previous trials.
+4. The terms p and q remain constant throughout the experiment, where p is the probability of getting a success on any one trial and q = (1 ??? p) is the probability of getting a failure on any one trial.
+
+$$P(x) = [{n \atop x }] p^xq^{n-x} = \frac{n!}{(n-x)!x!} p^x q^{n-x}$$
+
+![https://en.wikipedia.org/wiki/Binomial_distribution](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Pascal%27s_triangle%3B_binomial_distribution.svg/420px-Pascal%27s_triangle%3B_binomial_distribution.svg.png)
+  
+
+## Normal Distribution
+
+1. Normal distributions are symmetric around their mean.
+
+2. Mean = median = mode
+
+3. The area under the normal curve = 1.0.
+
+4. Defined by two parameters: mean (????) and the standard deviation (????).  
+
+5. 95% of the area of a normal distribution is within ~ 2 ???? of the mean.
+
+## Normal Distribution
+Standard normal: ???? = 0, ???? = 1 
+
+![https://www.mathsisfun.com](https://www.mathsisfun.com/data/images/standardizing.svg)  
+
+
+z =(X-????)/????
+
+## Normal Distribution
+For a continuous variable (*x*), the probability of obtaining *x* is the area below the curve of the **pdf** (in calculus terms, it is the integral across the interval of interest)
+
+The total area under a pdf is equal to 1
+
+![Area below the curve](http://www.math.armstrong.edu/statsonline/5/curve4.gif)
+
+## Student T-Distribution
+
+When to use the Studen t-distribution over the Normal distribution:
+
+-when the population standard deviation is not known
+-when the sample size is less than 30
+
+![ci.columbia.edu](http://ci.columbia.edu/ci/premba_test/c0331/images/s7/6317178747.gif)
