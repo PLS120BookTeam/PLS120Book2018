@@ -56,9 +56,9 @@ See CRDwithSS in Explain Everything
 
 ## Introduction to ANOVA
 
-In the previous chapter we used t-tests to test the null hypothesis that two means are equal. The general idea was that if sample means differ a lot more than expected if true means were equal, we conclude that means were not equal. In each test we incurred a risk of making a mistake, either by rejecting a true null hypothesis of by failing to reject a false one. People are particularly keen on making sure that they do not reject true null hypotheses^[There may be some reasons to favor concern about error type I vs. II, but neither error is inherently more troubling. It is more useful to assess the relative importance of errors by thinking about their consequences. What happens if you fail to reject a false hypothesis? What happens if you reject one that is true?]. This means that we want to make sure that we control the probability or making an error type I, called $\alpha$ and that we kwep it at the selected value, usually 0.05.
+In the previous chapter we used t-tests to test the null hypothesis that two means are equal. The general idea was that if sample means differ a lot more than expected if true means were equal, we conclude that means were not equal. In each test we incurred a risk of making a mistake, either by rejecting a true null hypothesis of by failing to reject a false one. People are particularly keen on making sure that they do not reject true null hypotheses^[There may be some reasons to favor concern about error type I vs. II, but neither error is inherently more troubling. It is more useful to assess the relative importance of errors by thinking about their consequences. What happens if you fail to reject a false hypothesis? What happens if you reject one that is true?]. This means that we want to make sure that we control the probability or making an error type I, called $\alpha$ and that we keep it at the selected value, usually 0.05.
 
-However, there are stuations when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least one error type I is $1 - 0.95^{45} = 0.90$!
+However, there are situations when researchers want to test more than two treatments at the same time. For example, a researcher may want to test the effects of four different fertilizers on grain yield, or of four different diets on milk quality. If we used independent t-tests to assess the hypothesis that all means are equal, with four treatments (A, B, C, D) we would have to do 6 tests (AB, AC, AD, BC, BD, CD), with a probability of making a mistake in any one of them equal to 0.05. If the tests are independent, the probability of making at least one error in the set of comparisons is $1 - 0.95^6 = `r round(1-0.95^6, 3)`$, which is much greater than the nominal 0.05. In an experiment with 10 treatments, one can make 45 comparisons. If the comparisons are independent, which is the worse case scenario, the probability of making at least one error type I is $1 - 0.95^{45} = 0.90$!
 Analysis of variance helps correct this problem by performing a single test of the null hypothesis, regardless of the number of treatments. Preview: the remedy is limited if the null hypothesis is rejected (Be the first to ask why in lecture and get an Easter egg!! Make sure to mention that you want your Easter egg.)
 
 ```{block, type='mydef'}
@@ -211,7 +211,7 @@ When we do not know the parameters of the actual distributions, which is usually
 Based on the model above, each observation is partitioned into components:
 - overall mean, which is estimated with the average of treatment averages,
 - treatment effects, which are estimated as the differences between treatment averages and overall average,
-- error, which is estimated with the residual or difference bewtween observation and treatment average.
+- error, which is estimated with the residual or difference between observation and treatment average.
 
 <br>
 \begin{align}
@@ -241,7 +241,7 @@ SSE &= \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{ij} - \bar{Y}_{i.})^2\\[15pt]
 
 Degrees of freedom are quantities associated with sums of squares. Each sum of squares has an associated number that is called its degrees of freedom. We operationally define **degrees of freedom** associated with a sum of squares as the number of different terms in the sum minus the number of independent parameters estimated to be used in the calculation.
 
-In reality, degrees of freedom refers to the number of dimensions in which vectors can vary. The basic mathematics of statistics involves large-dimensional spaces and subspaces. In short, and for those who are curious, a sample of size N is a vector in N dimensions and has N degrees of freedom because it can vary freely over N dimensions. Once a sample is set, the overall average is a vector in N dimensions with each coordinate value equal to the average of the observations. The average vector and the observation vector form a hyperplane in N-1 dimensions where the difference bewteen observation and average reside. The difference $Y_{i} - \bar{Y}_{.}$ is the vector of deviations or residuals (for the simplest model $Y_i = \mu + \epsilon_i$) from observation to average. Given a set sample, this vector of residuals has only N-1 degrees of freedom, because it must stay in the subspace spanned by the observation and the overall average. The restriction comes from the fact that given the overall average and N-1 of the observation coordinates, the last one can be calculated as $Y_N = N \ \bar{Y}_. - \sum_{i=1}^{N-1} Y_i$. 
+In reality, degrees of freedom refers to the number of dimensions in which vectors can vary. The basic mathematics of statistics involves large-dimensional spaces and sub spaces. In short, and for those who are curious, a sample of size N is a vector in N dimensions and has N degrees of freedom because it can vary freely over N dimensions. Once a sample is set, the overall average is a vector in N dimensions with each coordinate value equal to the average of the observations. The average vector and the observation vector form a hyper plane in N-1 dimensions where the difference between observation and average reside. The difference $Y_{i} - \bar{Y}_{.}$ is the vector of deviations or residuals (for the simplest model $Y_i = \mu + \epsilon_i$) from observation to average. Given a set sample, this vector of residuals has only N-1 degrees of freedom, because it must stay in the subspace spanned by the observation and the overall average. The restriction comes from the fact that given the overall average and N-1 of the observation coordinates, the last one can be calculated as $Y_N = N \ \bar{Y}_. - \sum_{i=1}^{N-1} Y_i$. 
 
 This concept is illustrated for a sample consisting of three observations, so we can plot them in a 3D figure.
 
@@ -297,7 +297,7 @@ arrows3D(x0 = xyz.orig[, 1],
 
 ```
 
-Note that the three arrows form a square triangle with the observation vector being the hypothenuse, and the other two sides being the average and the residual. Therefore the length of the observation vector equals the length of the average vector plus the lenght of the residual vector. Using the Pythagoras theorem repeatedly, we can see that the length of the observation vector is the sum of squares of individual observations; the length of the average vector is 3 times the squared average and the length of the residual vector is the sum of squares of the residuals or deviations. The length of the average vector is called "correction factor" because it is used to calculate the total variation about the average by subtracting it from the length of the observation vector.
+Note that the three arrows form a square triangle with the observation vector being the hypotenuse, and the other two sides being the average and the residual. Therefore the length of the observation vector equals the length of the average vector plus the length of the residual vector. Using the Pythagoras theorem repeatedly, we can see that the length of the observation vector is the sum of squares of individual observations; the length of the average vector is 3 times the squared average and the length of the residual vector is the sum of squares of the residuals or deviations. The length of the average vector is called "correction factor" because it is used to calculate the total variation about the average by subtracting it from the length of the observation vector.
 
 A really good reading to understand the concept of degrees of freedom is Walker [@Walker1940]. The following quote is taken from that paper:
 
@@ -306,11 +306,11 @@ A really good reading to understand the concept of degrees of freedom is Walker 
 >
 > --- Walker (1940)
 
-Thus, the car and canoe move in a 4-dimensional space but they have only 3 degrees of freedom, because they must move on a preset surface. Given the surface, their position on the surface and time is completely determined by 3 numbers. Analogously, the residuals exist in an N-dimensional space, but they must be on the hyperplane defined by the observation and the mean vector, which has N-1 dimensions or degrees of freedom. The geometric interpretation of sums of squares is applicable to all linear models, and in particular to the few that we study in this course. Although graphical representations that are realistic can only be done for the simplest models, graphical analogies are valid for all models. If you think you understand the geometric interpretation or concepts more easily than the equations, let your instructors know and they will be able to help you pursue better understanding using the geometric approach.
+Thus, the car and canoe move in a 4-dimensional space but they have only 3 degrees of freedom, because they must move on a preset surface. Given the surface, their position on the surface and time is completely determined by 3 numbers. Analogously, the residuals exist in an N-dimensional space, but they must be on the hyper plane defined by the observation and the mean vector, which has N-1 dimensions or degrees of freedom. The geometric interpretation of sums of squares is applicable to all linear models, and in particular to the few that we study in this course. Although graphical representations that are realistic can only be done for the simplest models, graphical analogies are valid for all models. If you think you understand the geometric interpretation or concepts more easily than the equations, let your instructors know and they will be able to help you pursue better understanding using the geometric approach.
 
 **Total degrees of freedom**
 
-Consider an experiment where r plots are assigned randomly to each of k treatments (i is for treatments and j is for replicates or plots). Such experiment is a completely randomized design and has a total of N = r k plots or experimental units. The concept of experimental unit is explained in detail in the [Chapter about Experimental Design](#chEdesign). For now, just think of an experimental unit as a unit of experimental material (e.g.animal, group of animals, pot, land plot, petri dish, etc.) that yields an observation independent of the rest of the observations.
+Consider an experiment where r plots are assigned randomly to each of k treatments (i is for treatments and j is for replicates or plots). Such experiment is a completely randomized design and has a total of N = r k plots or experimental units. The concept of experimental unit is explained in detail in the [Chapter about Experimental Design](#chEdesign). For now, just think of an experimental unit as a unit of experimental material (e.g.animal, group of animals, pot, land plot, Petri dish, etc.) that yields an observation independent of the rest of the observations.
 
 When we use the average to estimate the overall mean, the set of deviations from the overall average has only rk-1 degrees of freedom (df). Thus, the total sum of squares or length of the vector of residuals has rk-1 df. This is called the total degrees of freedom associated with the total sum of squares of a set of samples.
 
@@ -370,7 +370,7 @@ The equations above show how each observation and the total variation are partit
 |Among Treatments  | k - 1    |     SST             |        MST        |   MST / MSE  |
 |Within Treatments | k (r-1)  |     SSE             |        MSE        |              |
 
-Sums of squares, mean squares and calculated F are all statistics. The values basd on one sample are specific realized values of the random variables, which have their own expected values variances and distributions. If the null hypothesis that all treatment means are the same is true and all assumptions are correct, the calculated F has an F distribution with mean or expectation equal to $dfe/(dfe - 2)$, where dfe is the residual or error degrees of freedom.
+Sums of squares, mean squares and calculated F are all statistics. The values based on one sample are specific realized values of the random variables, which have their own expected values variances and distributions. If the null hypothesis that all treatment means are the same is true and all assumptions are correct, the calculated F has an F distribution with mean or expectation equal to $dfe/(dfe - 2)$, where dfe is the residual or error degrees of freedom.
 
 ```{block, type = 'stattip'}
 - When MST is much greater than MSE, calculated F will be much greater than expected if treatment means were equal.
@@ -402,7 +402,7 @@ ANOVA involves two tests of equality of variances:
 
 We will study the ANOVA procedure with an example. First, the analysis is presented with the theory but as concisely as possible, from research question to conclusion, using R functions. Then, each step is explained in detail and calculations are presented step by step.
 
-This is a fictitious example with elements based on actual research. Alfalfa geneticists and breeders created two transgenic varieties with genetic modifications of the metabolic pathways that synthesize ligning. Lignin is undigestible fiber that reduces the nutritional quality of forages. A common, unmodified variety and the two GMO varieties need to be compared to determine if the modification leads to better nutrition of cattle. Twelve animals were randomly selected from a large herd of beef cattle for the experiment. Varieties were labeled A, B and C, where A is the unmodified one. Twelve identical ping-pong balls were used for the randomization of treatment assignment to experimental units (animals). Four balls were labelled "A," four "B" and four "C." Balls were put into a bucket and mixed, then a blindfolded operator drew them randomly, one at a time and without replacement. The random sequence of letters was writen down. Animals were lined up haphazardly and assigned the treatments from left to right in the order given by the random sequence. Each animal was housed in an individual pen and fed the corresponding variety of alfalfa for 30 days. Weight gain in lbs per day was calculated for the last 10 days of the experiment and used as the response variable.
+This is a fictitious example with elements based on actual research. Alfalfa geneticists and breeders created two transgenic varieties with genetic modifications of the metabolic pathways that synthesize ligning. Lignin is indigestible fiber that reduces the nutritional quality of forages. A common, unmodified variety and the two GMO varieties need to be compared to determine if the modification leads to better nutrition of cattle. Twelve animals were randomly selected from a large herd of beef cattle for the experiment. Varieties were labeled A, B and C, where A is the unmodified one. Twelve identical ping-pong balls were used for the randomization of treatment assignment to experimental units (animals). Four balls were labelled "A," four "B" and four "C." Balls were put into a bucket and mixed, then a blindfolded operator drew them randomly, one at a time and without replacement. The random sequence of letters was written down. Animals were lined up haphazardly and assigned the treatments from left to right in the order given by the random sequence. Each animal was housed in an individual pen and fed the corresponding variety of alfalfa for 30 days. Weight gain in lbs per day was calculated for the last 10 days of the experiment and used as the response variable.
 
 <br>
 ```{r TblAnovaExmpl1, echo=FALSE, warning=FALSE}
@@ -482,7 +482,7 @@ qqp(residuals(transg.aa.m1), id = FALSE)
 ```
 <br>
 
-The graph on the left shows that the vertical variation of points does not differ extremely among treatments, which are depicted as diferent values in the horizontal axis. Therefore, we do not have sufficient information to question the assumption of homogeneity of variance. The graph on the right shows that the observed quantiles do not deviate significantly (they are within the dashed curves) from the normal quantiles, so we cannot question the assumption of normality. In this data we do not have enough information to assess the independence of the obervations, so that assumption is based on the way that animals were treated and kept separately, and it is not challenged. One possible way to challenge the idependence of residuals would be to determine if observations have more similar residuals when animals are in closer pens, but the spatial distribution of pens is not known (the data are fictitious and no spatial distribution was created)^[It is strongly recommended that experimenters always record the operator ID, date, time and spatial location of all observations. For lab experiments, location on benches, batches, runs etc. should be recorded with each observation. The time-place-set-group information will allow experimenters to test for lack of homogeneity in variance and lack of independence in the residuals, as well as for nuisance effects of groupings or batches]. 
+The graph on the left shows that the vertical variation of points does not differ extremely among treatments, which are depicted as different values in the horizontal axis. Therefore, we do not have sufficient information to question the assumption of homogeneity of variance. The graph on the right shows that the observed quantiles do not deviate significantly (they are within the dashed curves) from the normal quantiles, so we cannot question the assumption of normality. In this data we do not have enough information to assess the independence of the observations, so that assumption is based on the way that animals were treated and kept separately, and it is not challenged. One possible way to challenge the independence of residuals would be to determine if observations have more similar residuals when animals are in closer pens, but the spatial distribution of pens is not known (the data are fictitious and no spatial distribution was created)^[It is strongly recommended that experimenters always record the operator ID, date, time and spatial location of all observations. For lab experiments, location on benches, batches, runs etc. should be recorded with each observation. The time-place-set-group information will allow experimenters to test for lack of homogeneity in variance and lack of independence in the residuals, as well as for nuisance effects of groupings or batches]. 
 
 Although there are other more formal tests to assess whether assumptions are met, a visual inspection of the residuals is usually sufficient. Formal methods to test for deviation from assumptions are beyond the scope of this course. This data set is very small and the residuals do not show major problems, so the analysis is pursued. Note that when doing real data analysis, this step should be more detailed.
 
@@ -497,7 +497,7 @@ The analysis of variance table has columns for source of variations, degrees of 
 
 Because the probability associated with the calculated F-value is larger than 0.05, we cannot reject the null hypothesis and the study is inconclusive. This is the same as to say that the calculated F is smaller than the critical $F$. We do not have enough evidence to say that the varieties lead to different weight gains, because the variation among treatment means is not sufficiently larger than that within treatments, due to experimental error (variation among experimental units due to other, unmeasured causes).
 
-Keep in mind that not being able to reject the null hypothesis is not the same as accepting it. The reason for this is that *it is very easy not to reject a null hypothesis*: all you have to do is not try hard enough, for example by obtaining a very samll sample. If not being able to reject the null meant that you accept it, then you would be able to accept any null hypothesis, which obviosuly is not very useful. It would simply lead you to be wrong most of the time.
+Keep in mind that not being able to reject the null hypothesis is not the same as accepting it. The reason for this is that *it is very easy not to reject a null hypothesis*: all you have to do is not try hard enough, for example by obtaining a very small sample. If not being able to reject the null meant that you accept it, then you would be able to accept any null hypothesis, which obviously is not very useful. It would simply lead you to be wrong most of the time.
 
 If the above is not clear, consider the following. Say you took a a multiple choice test and obtained 75% correct. The questions are a sample of your knowledge. Your professor hypothesizes that your real knowledge of the material is at 73%. With the sample size available, he cannot reject his null hypothesis. Will you accept a grade of 73%?
 
@@ -505,7 +505,7 @@ If the above is not clear, consider the following. Say you took a a multiple cho
 - Failure to reject the null hypothesis DOES NOT mean that you accept it. It means the study is inconclusive, unless you did a calculation of power.
 ```
 
-Even though treatments were not significanlty different, we can calculate confidence intervals for the means and we can estimate the minimum difference between means that could be detected with the present variance and sample size. In all cases, the best estimate of the variance of the error we have is the MSE with dfe degrees of freedom.
+Even though treatments were not significantly different, we can calculate confidence intervals for the means and we can estimate the minimum difference between means that could be detected with the present variance and sample size. In all cases, the best estimate of the variance of the error we have is the MSE with dfe degrees of freedom.
 
 **Confidence interval for a treatment mean**
 
@@ -538,7 +538,7 @@ emmeans(transg.aa.m1, "variety") %>%
 ```
 <br>
 
-Table \@ref(tab:aaAnovaTbl) shows that all estimated treatment means have the same SE and df of the error, which leads to identical confidence interval widths. The t-value for the confidence intervals, known as "critical" t or colloquialy "t from table" (as opposed to calculated t) is $t_{\ 0.975, \ 9} =$ `r qt(0.975,9)`
+Table \@ref(tab:aaAnovaTbl) shows that all estimated treatment means have the same SE and df of the error, which leads to identical confidence interval widths. The t-value for the confidence intervals, known as "critical" t or colloquially "t from table" (as opposed to calculated t) is $t_{\ 0.975, \ 9} =$ `r qt(0.975,9)`
 
 
 **Comparing two treatment means**
@@ -559,7 +559,7 @@ As we saw in [Chapter 8: Two populations](#ch2pops), when we test the $H_0$ that
 \end{align}
 <br>
 
-The decision rule is to compare the calculated t with the critical "two-tailed" t for $\alpha$. If the calculated t is greater than the critical t, then $H_0$ is rejected and the treatment means are said to be "significantly different." Note that if $$\bar{d}/S_{\bar{d}} \gt t_{(1-\alpha/2)}$$ then $$\bar{d} \gt t_{(1-\alpha/2)} \ S_{\bar{d}}$$ so the product of the critial t times the standard error of the difference between to averages is the smallest difference that will lead to a rejection of the null hypothesis.
+The decision rule is to compare the calculated t with the critical "two-tailed" t for $\alpha$. If the calculated t is greater than the critical t, then $H_0$ is rejected and the treatment means are said to be "significantly different." Note that if $$\bar{d}/S_{\bar{d}} \gt t_{(1-\alpha/2)}$$ then $$\bar{d} \gt t_{(1-\alpha/2)} \ S_{\bar{d}}$$ so the product of the critical t times the standard error of the difference between to averages is the smallest difference that will lead to a rejection of the null hypothesis.
 
 ```{r}
 
@@ -579,7 +579,7 @@ The output reports:
 - least significant difference,
 - table with treatment averages connected with letters.
 
-The last part of the ouput, a table of averages followed with letters is a standard way to present the results. Means that are followed by at least one letter in common are not significnatly different from each other. In this case there is only one letter following all the means because there are no significant differences.
+The last part of the output, a table of averages followed with letters is a standard way to present the results. Means that are followed by at least one letter in common are not significantly different from each other. In this case there is only one letter following all the means because there are no significant differences.
 
 ### Detailed calculations
 
@@ -588,7 +588,7 @@ In this section we will repeat some of the analysis above in more detail. We wil
 There are two principal goals for the calculations:
 
 1. get the calculated-F to compare to the "F from table," and
-1. get the standard error of estimated means and differences between estiamted means to test pairs of means or make confidence intervals.
+1. get the standard error of estimated means and differences between estimated means to test pairs of means or make confidence intervals.
 
 To obtain the calculated F we need to complete the ANOVA table, which contains the MSE. The standard error of estimated means and of their differences is calculated using the MSE.
 
@@ -706,7 +706,7 @@ The probability associated with the calculated t is found in R taking into accou
 The LSD is the product of the critical t and $S_{\bar{d}}$
 
 $$ LSD = 2.262157 \cdot 0.5270463 = 1.192262$$
-We cannot reject the null hypothesis that themeans for varieties A and C are equal because of three equivalent facts (in addition to the nonsignifcant ANOVA test):
+We cannot reject the null hypothesis that the means for varieties A and C are equal because of three equivalent facts (in addition to the non-significant ANOVA test):
 
 1. The probability associated with calculated t is greater than 0.05.
 1. Calculated t is smaller than critical t.
@@ -929,7 +929,7 @@ Now we recall that the variance of averages for samples from a population is the
 
 ### Plant Sciences {#LabCh09PLS}
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 
 "---" Unquote the three dashes
@@ -962,11 +962,11 @@ In this exercise we analyze the data resulting from an experiment at the UC Davi
 
 Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas). Based on previous experience and plant biology, we expect medusahead seed production to be lowest without water or fertilizer and when exposed to competition by native perennial grasses.
 
-This exercise has four parts. First, we read in and explore the data with some descriptive statistics. We will use a transformation to normalize the distribution of the response variable. Second, each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. The ANOVA table and tests are done with the resulting values of SS and dfe. Third, we repeat the analysis using pre-existing R functions to do the ANOVA tables and tests direclty. Finally, we calculate confidence intervals for treatment means an back-transform them to be able to interpret results in the original units of grams of seed produced per plant.
+This exercise has four parts. First, we read in and explore the data with some descriptive statistics. We will use a transformation to normalize the distribution of the response variable. Second, each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degrees of freedom (df) are computed. The ANOVA table and tests are done with the resulting values of SS and dfe. Third, we repeat the analysis using pre-existing R functions to do the ANOVA tables and tests directly. Finally, we calculate confidence intervals for treatment means an back-transform them to be able to interpret results in the original units of grams of seed produced per plant.
 
 #### Part 1. Inspection and summary of data [25 points]
 
-Get a histogram of the data. Make a graph showing boxplots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. Create a new column called logSmass that contains the log of seed mass after adding 0.3 to the mass. We add 0.3 to avoid problems with the zeroes, because log(0) is not defined. Plot histograms and boxplots of the new variable. Inspect the boxplots and determine if there appear to be any effects of treatments on the seed production of the invasive exotic weed. Create a table of averages and standard errors by treatment.
+Get a histogram of the data. Make a graph showing box-plots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. Create a new column called logSmass that contains the log of seed mass after adding 0.3 to the mass. We add 0.3 to avoid problems with the zeroes, because log(0) is not defined. Plot histograms and box-plots of the new variable. Inspect the box-plots and determine if there appear to be any effects of treatments on the seed production of the invasive exotic weed. Create a table of averages and standard errors by treatment.
 
 In the first R chunk we read in the data.
 ```{r}
@@ -1138,7 +1138,7 @@ seed$Treatment <- factor(as.character(seed$Treatment), levels = c("wns", "wnE", 
 
 ```
 
-The last line of code changes the order of the treatment levels such that treatmens s, E and S appear in that sequence for each combination of water and nitrogen. This order facilitates the detection of patterns of response.
+The last line of code changes the order of the treatment levels such that treatments s, E and S appear in that sequence for each combination of water and nitrogen. This order facilitates the detection of patterns of response.
 
 We then look at the structure of the data frame to make sure the data were read correctly, and we make a boxplot and a histogram of the seed mass in grams produced by each plant.
 
@@ -1220,9 +1220,9 @@ The descriptive statistics for these data are augmented by with a table of avera
 
 $$\bar{Y}_i. = \exp(\bar{Z}_i.) - 1.0$$
 
-where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of reponse and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that inference ([see Chapter about inference](#)) means to make statistical statements about populations and their parameters based on samples.
+where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of response and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that inference ([see Chapter about inference](#)) means to make statistical statements about populations and their parameters based on samples.
 
-To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a dataframe that has two columns: one for treatment names and the other with the mean `logSmass` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logSmass) and what variable to use as grouping factor (Treatment). These variables are to be found in the dataframe specified by `data = `. Each group will be processed with the function `mean` as specified in `FUN = `. Note that the parentheses are not necessary to refer to the function that calculates the averages.
+To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a data frame that has two columns: one for treatment names and the other with the mean `logSmass` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logSmass) and what variable to use as grouping factor (Treatment). These variables are to be found in the data frame specified by `data = `. Each group will be processed with the function `mean` as specified in `FUN = `. Note that the parentheses are not necessary to refer to the function that calculates the averages.
 
 ```{r}
 # Read help about aggregate() function.
@@ -1245,7 +1245,7 @@ sserrors <- aggregate(logSmass ~ Treatment,
 
 For the calculation of the standard errors (the square root of the variance of each group average) we had to use a custom function defined inside `agregate` and using the `function` function where x is the set of values in each group.
 
-Part 1 is completed by creating a table with the values calculated above and the back-transformed treatment averages. In the first line of code, the separate dataframes created for averages, standard errors and medians are joined as columns with `cbind`, and only columns 1, 2, 4 and 6 are kept. This removes the redundant column for treatments, which is present in each original dataframe. If you want to see the redundant column, see what happens if you remove the `[, c(1, 2, 4, 6)]` part of the code.
+Part 1 is completed by creating a table with the values calculated above and the back-transformed treatment averages. In the first line of code, the separate data frames created for averages, standard errors and medians are joined as columns with `cbind`, and only columns 1, 2, 4 and 6 are kept. This removes the redundant column for treatments, which is present in each original data frame. If you want to see the redundant column, see what happens if you remove the `[, c(1, 2, 4, 6)]` part of the code.
 
 ```{r}
 
@@ -1262,7 +1262,7 @@ pander(table.seed.mass)
 
 ```
 
-The same information can be displayed graphically with a bar plot, where the hight of the bars represents seed production for each treatment, with error bars at the top.
+The same information can be displayed graphically with a bar plot, where the height of the bars represents seed production for each treatment, with error bars at the top.
 
 ```{r}
 
@@ -1290,7 +1290,7 @@ What does `aggregate` do?
 
 #### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points]
 
-Now, we use basic functions to partition the total sum of squares of logSmass into treatments and residual or error. The purpose of doing this is for you to undersand the calculations in some detail, without having to actually use a calculator.  Start by creating a column with treatment averages for each observation. This column will have a repeating number for all observations in a treatment. We calculate the total sum of squares as the sum of squares of deviations from each observation to the overall average:
+Now, we use basic functions to partition the total sum of squares of logSmass into treatments and residual or error. The purpose of doing this is for you to understand the calculations in some detail, without having to actually use a calculator.  Start by creating a column with treatment averages for each observation. This column will have a repeating number for all observations in a treatment. We calculate the total sum of squares as the sum of squares of deviations from each observation to the overall average:
 
 $$total \ deviation = Y_{ij} - \bar{Y}_{..}$$
 $$total \ sum \ of \ squares = TSS = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \ \left(Y_{ij} - \bar{Y}_{..} \right)^2 $$
@@ -1394,7 +1394,7 @@ Do the results differ among functions? Compare to the results from Part 2 and Pa
 
 #### Part 4. Confidence intervals for treatment means [25 points]
 
-Create 95% confidence intervals for all the treatment means, back-transform to see mass in g by exponentiating and subtracting 0.3, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
+Create 95% confidence intervals for all the treatment means, back-transform to see mass in g by exponentiation and subtracting 0.3, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
 
 
 ```{r}
@@ -1438,7 +1438,7 @@ ANSWER THE FOLLOWING QUESTIONS.
 ### Animal Sciences {#LabCh09ANS}
 
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 "---" Unquote the three dashes
 title: "Lab05 CRD Anova"
@@ -1465,13 +1465,13 @@ This is a markdown document. You will type your code and run it one line at a ti
 
 For each part and question below, type your code in the grey areas, between the sets of back-ticks (```) to perform the desired computation and get output. Type your answers **below** the corresponding grey area.
 
-In this exercise we analyze the data resulting from an experiment that measured the concentration of protein in cow's milk as a function of diet and period of lactation. Period of lactation are sets of 5 weeks starting on the date of the calf's birth, and are labeled A-D. The data are modified from the `Milk` dataset that comes with Base R. For the purpose of this exercise we assume that each row of data comes from a different cow.
+In this exercise we analyze the data resulting from an experiment that measured the concentration of protein in cow's milk as a function of diet and period of lactation. Period of lactation are sets of 5 weeks starting on the date of the calf's birth, and are labeled A-D. The data are modified from the `Milk` data set that comes with Base R. For the purpose of this exercise we assume that each row of data comes from a different cow.
 
-This exercise has four parts. First, we read in and explore the data with some descriptive statistics. We check if we need to use a transformation to normalize the distribution of residuals. Second, each observation is partitioned into the components indicated by the ANOVA model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. The ANOVA table and tests are done with the resulting values of SS and dfe. Third, we repeat the analysis using pre-existing R functions to do the ANOVA tables and tests direclty. Finally, we calculate confidence intervals for treatment means an back-transform them to be able to interpret results in the original units of milk protein.
+This exercise has four parts. First, we read in and explore the data with some descriptive statistics. We check if we need to use a transformation to normalize the distribution of residuals. Second, each observation is partitioned into the components indicated by the ANOVA model and then the corresponding sums of squares (SS) and degrees of freedom (df) are computed. The ANOVA table and tests are done with the resulting values of SS and dfe. Third, we repeat the analysis using pre-existing R functions to do the ANOVA tables and tests directly. Finally, we calculate confidence intervals for treatment means an back-transform them to be able to interpret results in the original units of milk protein.
 
 #### Part 1. Inspection and summary of data [25 points]
 
-Get a histogram of the data. Make a graph showing boxplots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. We will create a new column called logProt that contains the log of milk protein content after subtracting 2.64%. Then we will plot histograms and boxplots of the new variable, inspect the boxplots and determine if there appear to be any effects of treatments (lactation period and diet) the concentration of protein in the milk. We create a table of averages and standard errors by treatment.
+Get a histogram of the data. Make a graph showing box-plots of the data for each treatment. Notice that the data have a highly skewed distribution, so a logarithmic transformation is necessary. We will create a new column called logProt that contains the log of milk protein content after subtracting 2.64%. Then we will plot histograms and box-plots of the new variable, inspect the box-plots and determine if there appear to be any effects of treatments (lactation period and diet) the concentration of protein in the milk. We create a table of averages and standard errors by treatment.
 
 In the first R chunk we read in the data.
 
@@ -1853,9 +1853,9 @@ The descriptive statistics for these data are augmented with a table of averages
 
 $$\bar{Y}_i. = \exp(\bar{Z}_i.) + 2.64$$
 
-where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of reponse and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that [inference](#InferenceEstimation) means to make statistical statements about populations and their parameters based on samples.
+where $\bar{Z}_i.$ is the treatment average for the transformed variable. Transformations of response and predictor variables can be extremely useful to statistical modeling in general and in particular to meet the assumptions necessary to do inference in ANOVA. Recall that [inference](#InferenceEstimation) means to make statistical statements about populations and their parameters based on samples.
 
-To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a dataframe that has two columns: one for treatment names and the other with the mean `logProt` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logProt) and what variable to use as grouping factor (Treatment). These variables are to be found in the dataframe specified by `data = `. Each group will be processed with the functions `mean`, `median` and a function created inside the `aggregate` call to calculate the standard error, as specified in `FUN = ` ardument. Recall that the standard error is the square root of the variance of an average, and that the variance of an average is the variance of the original random variable (logProt) divided by the sample size.
+To obtain descriptive statistics we will use the `aggregate` function. This is a versatile function that aggregates the data into groups defined by a formula and applies a predefined or a custom-built formula to obtain one result for each group. The custom function can be specified directly inside `aggregate`. Below, `smeans` is a data frame that has two columns: one for treatment names and the other with the mean `logProt` for each treatment. The `formula = ` argument tells R what variable is to be aggregated (logProt) and what variable to use as grouping factor (Treatment). These variables are to be found in the data frame specified by `data = `. Each group will be processed with the functions `mean`, `median` and a function created inside the `aggregate` call to calculate the standard error, as specified in `FUN = ` argument. Recall that the standard error is the square root of the variance of an average, and that the variance of an average is the variance of the original random variable (logProt) divided by the sample size.
 
 $$V[\bar{X}] = \frac{V[X]}{n}$$
 
@@ -1881,7 +1881,7 @@ sserrors <- aggregate(logProt ~ Treatment,
 
 For the calculation of the standard errors (the square root of the variance of each group average) we had to use a custom function defined inside `agregate` and using the `function` function where x is the set of values for protein in each treatment group.
 
-Part 1 is completed by creating a table with the values calculated above and the back-transformed treatment averages. In the first line of code, the separate dataframes created for averages, standard errors and medians are joined as columns with `cbind`, and only columns 1, 2, 4 and 6 are kept. This removes the redundant column for treatments, which is present in each original dataframe. If you want to see the redundant column, see what happens if you remove the `[, c(1, 2, 4, 6)]` part of the code.
+Part 1 is completed by creating a table with the values calculated above and the back-transformed treatment averages. In the first line of code, the separate data frames created for averages, standard errors and medians are joined as columns with `cbind`, and only columns 1, 2, 4 and 6 are kept. This removes the redundant column for treatments, which is present in each original data frame. If you want to see the redundant column, see what happens if you remove the `[, c(1, 2, 4, 6)]` part of the code.
 
 ```{r}
 
@@ -1898,7 +1898,7 @@ pander(table.milk.prot)
 
 ```
 
-The same information can be displayed graphically with a bar plot, where the hight of the bars represents milk proteni content for each treatment, with error bars at the top.
+The same information can be displayed graphically with a bar plot, where the height of the bars represents milk protein content for each treatment, with error bars at the top.
 
 ```{r}
 
@@ -1926,7 +1926,7 @@ What does `aggregate` do?
 
 #### Part 2. Partition of Sum of Squares and Degrees of Freedom [30 points]
 
-Now, we use basic functions to partition the total sum of squares of logProt into treatments and residual or error. The purpose of doing this is for you to undersand the calculations in some detail, without having to actually use a calculator.  Start by creating a column with treatment averages for each observation. This column will have a repeating number for all observations in a treatment. We calculate the total sum of squares as the sum of squares of deviations from each observation to the overall average:
+Now, we use basic functions to partition the total sum of squares of logProt into treatments and residual or error. The purpose of doing this is for you to understand the calculations in some detail, without having to actually use a calculator.  Start by creating a column with treatment averages for each observation. This column will have a repeating number for all observations in a treatment. We calculate the total sum of squares as the sum of squares of deviations from each observation to the overall average:
 
 $$total \ deviation = Y_{ij} - \bar{Y}_{..}$$
 $$total \ sum \ of \ squares = TSS = \displaystyle\sum_{i=1}^{k} \displaystyle\sum_{j=1}^{r} \ \left(Y_{ij} - \bar{Y}_{..} \right)^2 $$
@@ -1963,7 +1963,7 @@ ssRes <- sum((milk.prot$logProt - milk.prot$AvgLogProt) ^ 2)
 
 ```
 
-Degrees of freedom are calculates as the total number of independent (different) terms in each sum, minus the number of parameters estimated for each sum. In the case of total sum of square, there are as many different terms are there are observations, because each observation is potentially different. Only the overall mean is estimated with the overall average. For the sum of squares of treatments we have as maby different terms as there are treatments, and we use the overall average as estiamate of the overall mean. Because the total degrees of freedom equal the sum of the components, the residual df can be calculated as the total df (n-1) minus treatment df.
+Degrees of freedom are calculates as the total number of independent (different) terms in each sum, minus the number of parameters estimated for each sum. In the case of total sum of square, there are as many different terms are there are observations, because each observation is potentially different. Only the overall mean is estimated with the overall average. For the sum of squares of treatments we have as many different terms as there are treatments, and we use the overall average as estimate of the overall mean. Because the total degrees of freedom equal the sum of the components, the residual df can be calculated as the total df (n-1) minus treatment df.
 
 ```{r}
 
@@ -2029,7 +2029,7 @@ Do the results differ among functions? Compare to the results from Part 2 and Pa
 
 #### Part 4. Confidence intervals for treatment means [25 points]
 
-Create 95% confidence intervals for all the treatment means, back-transform to see milk protein content by exponentiating and adding 2.64, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
+Create 95% confidence intervals for all the treatment means, back-transform to see milk protein content by exponentiation and adding 2.64, then add them to the table created in Part 1. Explain how the line to add the CI's to the ci.data works.
 
 
 ```{r}

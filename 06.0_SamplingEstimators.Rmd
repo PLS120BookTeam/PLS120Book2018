@@ -60,7 +60,7 @@ In reality, a random variable is a real-valued function defined over the sample 
 
 ```
 
-Do not confuse this function property with the posibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it gives a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
+Do not confuse this function property with the possibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it gives a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
 
 A more formal definition and an intuitive physical model of random variable is given in [@286171]. Make sure to also explore the explanations given by W. Huber in [@54894].
 
@@ -99,7 +99,7 @@ There are several ways to classify variables, but the following is perhaps the m
 
 ### Using random variables
 
-Once we define a useful random variable, we can apply the rules of probability to calculate the probability of any event in terms of the random variable, but first we have to know the statisticsl distribution of the random variable. Imagine that you are breeding animals and need to get at least three individuals with a specific genotype of class G that is expected to appear in 20% of the offspring. What are the chances (probability) that you will get the 3 G's if you get 5 offspring? We can *model* this situation assuming that the genotypes of all individuals are independent, and that the probability for each individual having G is 0.20. Let's use the letter "O" for "other" to designate individuals that are not G. You will have the 3 you need if you get 3, 4 or all 5 with G. We define the random variable Y as "number of G's in five offsping." If you get 3 you do not get 4 or five. This means that the events are disjoint and that we sum their probabilities to get the probability of at least 3 G's. To calculate the probability of each of the events, we recall that individuals are independent, so the probability of a given set, like GGGOO is the product of the individual probabilities, in this case $0.20^3 \cdot 0.80^2$. Finally, we take into account that the event GGGOO is not the same as GGOOG, but each has probability $0.20^3 \cdot 0.80^2$. The ennumeration of the combinations and probabilities show how a pattern emerges:
+Once we define a useful random variable, we can apply the rules of probability to calculate the probability of any event in terms of the random variable, but first we have to know the statistical distribution of the random variable. Imagine that you are breeding animals and need to get at least three individuals with a specific genotype of class G that is expected to appear in 20% of the offspring. What are the chances (probability) that you will get the 3 G's if you get 5 offspring? We can *model* this situation assuming that the genotypes of all individuals are independent, and that the probability for each individual having G is 0.20. Let's use the letter "O" for "other" to designate individuals that are not G. You will have the 3 you need if you get 3, 4 or all 5 with G. We define the random variable Y as "number of G's in five offspring." If you get 3 you do not get 4 or five. This means that the events are disjoint and that we sum their probabilities to get the probability of at least 3 G's. To calculate the probability of each of the events, we recall that individuals are independent, so the probability of a given set, like GGGOO is the product of the individual probabilities, in this case $0.20^3 \cdot 0.80^2$. Finally, we take into account that the event GGGOO is not the same as GGOOG, but each has probability $0.20^3 \cdot 0.80^2$. The enumeration of the combinations and probabilities show how a pattern emerges:
 
 <br>
 Table: (\#tab:deriveBinomialExmpl) Calculation of the probability of obtaining Y successes in 5 independent trials with constant probability of success.
@@ -114,7 +114,7 @@ Table: (\#tab:deriveBinomialExmpl) Calculation of the probability of obtaining Y
 | 5 | GGGGG                                                                |  1  = $C_5^5$ | $0.20^5 \cdot 0.80^0 = `r 0.20^5`$          |
 <br>
 
-There are many ways to get any number, say r, G's in a sequence. That number equals the number of different sets of r positions or slots that can be chosen from the 5 slots available, without replacement. This is a case where the order in which the slots are chosen does not matter (having G's in positions 1 and 3 is the same as having G's in postions 3 and 1) and there is no replacement (once a slot is occupied it cannot be selected again). Therefore, we can use combinations of 5 slots taken in sets of r = Y to determine the number of ways that a given number of successes can be obtained. Notice that whenever you get r slots with G's you also get 5-r slots for O's. That's why the number of sequences is symmetric from top to bottom of the table.
+There are many ways to get any number, say r, G's in a sequence. That number equals the number of different sets of r positions or slots that can be chosen from the 5 slots available, without replacement. This is a case where the order in which the slots are chosen does not matter (having G's in positions 1 and 3 is the same as having G's in positions 3 and 1) and there is no replacement (once a slot is occupied it cannot be selected again). Therefore, we can use combinations of 5 slots taken in sets of r = Y to determine the number of ways that a given number of successes can be obtained. Notice that whenever you get r slots with G's you also get 5-r slots for O's. That's why the number of sequences is symmetric from top to bottom of the table.
 
 If we use the letters $p$ for the probability of G or "success," $q = 1-p$ for failure or O and $n$ for the total number of trials we can write a compact equation for the probability that we obtain Y = r successes. We use the letter $Y$ for the random variable "number of successes" to emphasize that it is a response variable, but we also use the letter $r$ to link this to Equation \@ref(eq:combinations) for combinations and to designate a specific realization of Y.
 
@@ -201,7 +201,7 @@ F_Y(y) = P(Y \le y) = \int_{-\infty}^{y} f_Y(y) \ dy
 \end{align}
 <br>
 
-The symbol $\int_\mathbb{R}$ represents the *integral* of the function over all real values of Y, and $\int_{\mathbb{R}} f(y) \ dy$ is the integral between $Y = a$ and $Y = b$. If you are not familiar with the concept of integral, no worries. Imagine that $f(y)$ is an abolutely continuous function of the value $y$. The integral between any two $y$ values a and b is the area under the curve between the two points (Figure \@ref(fig:Sum2Integral)). One way to calculate the area approximately is to divide the interval [a, b] into $(b-a)/dy$ little segments. The area of each segment is the base $dy$ times the height, which can be set at $f(y_{lo} + dy/2)$ where $y_{lo}$ is the left end of each segment.¬
+The symbol $\int_\mathbb{R}$ represents the *integral* of the function over all real values of Y, and $\int_{\mathbb{R}} f(y) \ dy$ is the integral between $Y = a$ and $Y = b$. If you are not familiar with the concept of integral, no worries. Imagine that $f(y)$ is an absolutely continuous function of the value $y$. The integral between any two $y$ values a and b is the area under the curve between the two points (Figure \@ref(fig:Sum2Integral)). One way to calculate the area approximately is to divide the interval [a, b] into $(b-a)/dy$ little segments. The area of each segment is the base $dy$ times the height, which can be set at $f(y_{lo} + dy/2)$ where $y_{lo}$ is the left end of each segment.¬
 
 <br>
 ```{r Sum2Integral, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="The integral of a continuous probability density function (pdf) can be though of as the limit of the sum of rectangles with base width $dy$ and height equal to the height of the pdf function at the center of the base, as $dx$ approaches zero. The area of each rectangle is an approximation of the probability that Y takes values within the base of the rectangle."}
@@ -267,7 +267,7 @@ E\{Y\} = \int_\mathbb{R} y \ f_Y(y) \ dy
 \end{equation}
 <br>
 
-The integral appears again. In this case, think of it as weighted average of values of Y at the center of a large number of small intervals that cover the whole horizontal axis. The weigthing factor is the area under the curve inside each narrow column, which is approximated by the product of the width of the interval and height if the curve at the center. As you make the intervals $dy$ smaller and smaller, the calculation approaches the integral.
+The integral appears again. In this case, think of it as weighted average of values of Y at the center of a large number of small intervals that cover the whole horizontal axis. The weighting factor is the area under the curve inside each narrow column, which is approximated by the product of the width of the interval and height if the curve at the center. As you make the intervals $dy$ smaller and smaller, the calculation approaches the integral.
 
 As an example for the calculation of the mean of a continuous variable, let's use the continuous uniform distribution between real numbers a and b. The probability density function of this function is rather simple:
 
@@ -497,7 +497,7 @@ knitr::include_graphics("images/bivariateNormal.png")
 
 **Correlation**
 
-The covariance has a drawback to representt the degree of association between two random variables because it is a quantity with units and its numerical value depends on the magnitude of the random variables and the units. Therefore, covariances cannot be compared when variables have different units or when they have different means. The **correlation** coefficient is a better measure of association between two variables because it has no units and can be compared across variables and situations.
+The covariance has a drawback to represent the degree of association between two random variables because it is a quantity with units and its numerical value depends on the magnitude of the random variables and the units. Therefore, covariances cannot be compared when variables have different units or when they have different means. The **correlation** coefficient is a better measure of association between two variables because it has no units and can be compared across variables and situations.
 
 
 ```{block corBlock, type='mydef'}
@@ -520,7 +520,7 @@ When random variables are standardized (see below), their covariance and correla
 
 ### Parameters are not necessarily the moments
 
-Distribution functions have constant values that are part of the function called **parameters**. In order to know everything about any given distribution, one must know all the parameters. The Uniform distribution seen before has two parameters, a and b. The Binomial distribution also has two paramters, n and p. As we will see in more detail below, the Poisson distribution has a single parameter. In the case of the Uniform and Binomial distributions, their means and variances are not the same as the parameters. In the case of the Poisson distribution, the mean and the variance both are equal to the single parameter. Other distributions, like the Gamma distribution have more than two parameters. The Normal distribution has two parameters, its mean and its variance; it is a very special case.
+Distribution functions have constant values that are part of the function called **parameters**. In order to know everything about any given distribution, one must know all the parameters. The Uniform distribution seen before has two parameters, a and b. The Binomial distribution also has two parameters, n and p. As we will see in more detail below, the Poisson distribution has a single parameter. In the case of the Uniform and Binomial distributions, their means and variances are not the same as the parameters. In the case of the Poisson distribution, the mean and the variance both are equal to the single parameter. Other distributions, like the Gamma distribution have more than two parameters. The Normal distribution has two parameters, its mean and its variance; it is a very special case.
 
 The point is that parameters are not necessarily the same as mean and variance. The Normal distribution is a special case in which there are only two parameters and they happen to be the mean and the variance. Therefore, in order to know everything about a Normal distribution one only needs two numbers: mean and variance.
 
@@ -543,7 +543,7 @@ The following properties can be easily derived directly from the definitions of 
 \end{align}
 <br>
 
-The last equation is extremely important in statistics. In most real applications of statistics we have to use models that involve estimation of more parameters than just mean and variance. For example, in linear regression we will estimate intercept and slope. **Estimated parameters** are based on samples of random variables, so they are themselves random variables. When we use the estimated intercept and slope to make a prediction, we are using a linear combination of estimated parameters. The last line in Equation \@ref(eq:propertiesOfMean) allows us to estimate the variance of the prediction and thus make confidence intervals or test hypothesese that involve linear combinations of estimated parameters.
+The last equation is extremely important in statistics. In most real applications of statistics we have to use models that involve estimation of more parameters than just mean and variance. For example, in linear regression we will estimate intercept and slope. **Estimated parameters** are based on samples of random variables, so they are themselves random variables. When we use the estimated intercept and slope to make a prediction, we are using a linear combination of estimated parameters. The last line in Equation \@ref(eq:propertiesOfMean) allows us to estimate the variance of the prediction and thus make confidence intervals or test hypotheses that involve linear combinations of estimated parameters.
 
 <br>
 ```{block LCofEstimatedParameters, type='stattip'}
@@ -654,7 +654,7 @@ $$V\{Y\} = \sigma^2_Y = \frac{(b - a)^2}{12}$$
 
 ### Binomial Distribution {#BinDist}
 
-This is the distribution of a random variable obtained by summing n independent Bernoulli random variables. The binomial random variable is the number of "successes" in a set of n independent trials with constant probability of success p. The folloiwng random variables are usually modeled with a Binomial distribution:
+This is the distribution of a random variable obtained by summing n independent Bernoulli random variables. The binomial random variable is the number of "successes" in a set of n independent trials with constant probability of success p. The following random variables are usually modeled with a Binomial distribution:
 
 - Number of heads in n coin tosses.
 
@@ -695,7 +695,7 @@ $$V\{Y\} = \sigma^2_Y = n \ p \ (1 - p)$$
 In the binomial calculations, the combinations are combinations of positions where "success" happens. We use combinations because having "success" in positions 1 and 5 for example, is exactly the same as having success in position 5 and 1. Just note that the order of successes and failures matters but the order of the positions of the successes and failures does not! Coin tosses HHTT are not the same as HTHT. However, having H in positions 1 and 2 is the same as having H in positions 2 and 1.
 
 
-There are four basic functions in R to do calculations reletd to the Binomial distribution:
+There are four basic functions in R to do calculations related to the Binomial distribution:
 
 - `dbinom(x, size, prob)` returns the value of the PMF.
 
@@ -800,7 +800,7 @@ points(0:20 - 0.05, dpois(x = 0:20, lambda = 6), type = "h", lwd = 4, col = "bla
 
 Note that when asked for the probability of values greater than something in a Poisson, you have to use the probability of the complement, otherwise you would have to sum an infinite number of terms.
 
-There are four basic functions in R to do calculations reletd to the Poisson distribution:
+There are four basic functions in R to do calculations related to the Poisson distribution:
 
 - `dpois(x, lambda)` returns the value of the PMF.
 
@@ -842,9 +842,9 @@ ppois(q = 3, lambda = 0.8, lower.tail = FALSE)
 
 ### Normal Distribution {#NormDist}
 
-The Normal or Gaussian distribution is most important in statistics and science, because it is an accurate model for a multitude of variables measured. As sample size increases, many estimated parameters tend to have a normal distribution, regardless of the original distribution from where the sample is obtained. The normal distribution describes diffussion of gas particles in a volume, noise in an electromagnetic signal, values in chaotic systems, and all sorts of variables measured in the empirical sciences.
+The Normal or Gaussian distribution is most important in statistics and science, because it is an accurate model for a multitude of variables measured. As sample size increases, many estimated parameters tend to have a normal distribution, regardless of the original distribution from where the sample is obtained. The normal distribution describes diffusion of gas particles in a volume, noise in an electromagnetic signal, values in chaotic systems, and all sorts of variables measured in the empirical sciences.
 
-For any given variance and mean, the Normal distribution is the continous distribution with maximum entropy. This means that when one knows the mean and variance of a continuous distribution but nothing else about it, assuming that it has a Normal distribution is the choice that imposes or adds the least prior information.
+For any given variance and mean, the Normal distribution is the continuous distribution with maximum entropy. This means that when one knows the mean and variance of a continuous distribution but nothing else about it, assuming that it has a Normal distribution is the choice that imposes or adds the least prior information.
 
 <br>
 **Parameters:** 
@@ -944,7 +944,7 @@ text(x = 0.85, y = 0.5,
 ```
 <br>
 
-Any Normal RV can be mapped to the Standard Normal Distribution (SND) by the linear transformation consisting in subtracting the mean and dividing by the standard deviation. The standard normal distribtuion is a normal distribution with mean equal to 0 ($\mu = 0$) and variance equal to 1 ($\sigma^2 = 1$). 
+Any Normal RV can be mapped to the Standard Normal Distribution (SND) by the linear transformation consisting in subtracting the mean and dividing by the standard deviation. The standard normal distribution is a normal distribution with mean equal to 0 ($\mu = 0$) and variance equal to 1 ($\sigma^2 = 1$). 
 
 $$P(Y \le y) = P\left ( Z = \frac{Y - \mu}{\sigma} \le \frac{y - \mu}{\sigma} = z \right )$$
 
@@ -1082,11 +1082,11 @@ par(mfrow = c(1,1))
 <br>
 
 
-The areas under the curve are used to represent proportions of the population with values between the specified extremes. Imagine that the length of Hass avocados received for sorting and packing at a plant has a normal distribution with mean 9 cm and variance 1.21.cm^2. The following are questions that we can answer using the normal distribution (data and situations described are fictitious).
+The areas under the curve are used to represent proportions of the population with values between the specified extremes. Imagine that the length of  avocados received for sorting and packing at a plant has a normal distribution with mean 9 cm and variance 1.21.cm^2. The following are questions that we can answer using the normal distribution (data and situations described are fictitious).
 
 (@) A buyer wants avocados that are longer than 8 cm. What proportion of the avocados received could go to that buyer?
 
-We are given a set value of the random variable Y and are asked to find a proportion, which we interpret as a probability. The set value $y = 8$ is called a **quantile**. We look up the value of the quantile in the graph and then calculate the probability. Because the total ara under the curve is 1.0, the answer can be calculated in two different ways. The different ways were more relevant when we had to use printed tables to find quantiles and probabilities, because tables usually included only one half of the distribution. The other half is the mirror image and can be derived as such.
+We are given a set value of the random variable Y and are asked to find a proportion, which we interpret as a probability. The set value $y = 8$ is called a **quantile**. We look up the value of the quantile in the graph and then calculate the probability. Because the total area under the curve is 1.0, the answer can be calculated in two different ways. The different ways were more relevant when we had to use printed tables to find quantiles and probabilities, because tables usually included only one half of the distribution. The other half is the mirror image and can be derived as such.
 
 $$Y \sim N(9, 1.21) \implies \ P(Y \geq 8) = 1 -  P(Y \leq 8)$$
 
@@ -1170,7 +1170,7 @@ sum(PMF$Prob) # should be exactly 1
 
 <br>
 ```{block probQuantBlock, type='rtip'}
-- When you are asked for a probability, for continous RV's use the R function starting with "p", as in `pnorm`.
+- When you are asked for a probability, for continuous RV's use the R function starting with "p", as in `pnorm`.
 
 - When you are asked for a critical value or a value of the random variable, use the R function that starts with "q" as in `qt`.
 
@@ -1408,9 +1408,9 @@ This distribution is the workhorse of hypothesis testing when using analysis of 
 
 $$Y = \frac{U_1/\nu_1}{U_2/\nu_2} \sim \mathcal{F_{\nu_1, \nu_2}} $$
 
-As we will see in a later chapter, if treatments means are not different, the quotient of mean squares in analysis of variance is supposed to have an $\mathcal{F}$ distribuion.
+As we will see in a later chapter, if treatments means are not different, the quotient of mean squares in analysis of variance is supposed to have an $\mathcal{F}$ distribution.
 
-The PDF and CDF for the $\mathcal{F}$ distribuion are complicated and not presented here.
+The PDF and CDF for the $\mathcal{F}$ distribution are complicated and not presented here.
 
 <br>
 **Parameters:** 
@@ -1448,18 +1448,18 @@ run `help("Distributions")` or type "Distributions" in the search field of the H
 
 ## Sampling and samples
 
-Applied statistics for plant, animal and environmental sciences deals almost exclusively with making probabilistic statements about unknown and unknowlable population parameters and functions of those parameters. We make estimations and give objective measure of the certainty we have about the statements. Instead of simply calculating probabilities for events or values taken by realizations of random variables with known distributions, as emphasized in the chapter about probability and in the introduction of random variables, we take samples and derive data that are realizations of random variables of unknown distributions and guess the characteristics of the populations where the samples come from.
+Applied statistics for plant, animal and environmental sciences deals almost exclusively with making probabilistic statements about unknown and unknowable population parameters and functions of those parameters. We make estimations and give objective measure of the certainty we have about the statements. Instead of simply calculating probabilities for events or values taken by realizations of random variables with known distributions, as emphasized in the chapter about probability and in the introduction of random variables, we take samples and derive data that are realizations of random variables of unknown distributions and guess the characteristics of the populations where the samples come from.
 
 
 ### Universe, population and sample
 
 **Universe** Refers to the collection of objects or units in the population. For example, all people enrolled in PLS120 constitute a universe of interest to the instructor.
 
-**Population** Is the set of all values of a specific characteristics of all units in the universe. For example, the number of electronic devices owned by each student, or the interpupillary distance of all students in PLS120. Other populations could be the number of days between ovulations in dairy cattle in the US, where "dairy cattle in the US" means either all dairy cattle individuals in the US at some point in time (it is chaging constantly) or all animals that came and will come from a theoretical population of "eternal dairy cattle."
+**Population** Is the set of all values of a specific characteristics of all units in the universe. For example, the number of electronic devices owned by each student, or the interpupillary distance of all students in PLS120. Other populations could be the number of days between ovulations in dairy cattle in the US, where "dairy cattle in the US" means either all dairy cattle individuals in the US at some point in time (it is changing constantly) or all animals that came and will come from a theoretical population of "eternal dairy cattle."
 
 **Sample** A set of students from the PLS120 universe is a sample, and the values of their characteristics (number of devices, etc.) are samples of the corresponding populations.
 
-Frequently, we use the terms population and universe as if they were the same, and this does not cause much confusion. But keep in mind that a unverse of objects can have as many populations as variables we can define in that universe. The distincion is relevant because we will have to use different distribution functions for the different populations. The number of electronic devices might be modeled with a Poisson distribution, but not with a normal distribution, because it is discrete and has a mean that is close to zero.
+Frequently, we use the terms population and universe as if they were the same, and this does not cause much confusion. But keep in mind that a universe of objects can have as many populations as variables we can define in that universe. The distinction is relevant because we will have to use different distribution functions for the different populations. The number of electronic devices might be modeled with a Poisson distribution, but not with a normal distribution, because it is discrete and has a mean that is close to zero.
 
 
 
@@ -1474,16 +1474,16 @@ The link between population characteristics such as its parameter values and the
 You may have noticed that in the exercises and examples about probability and distributions we always stated (or should have!) "... a randomly selected ..." or something like that. We did no state things like "... a representative unit from ..." or "... selected based on how much I liked them ..." The random selection of the observed units is what allowed us to use the distribution being considered to make statements about the probabilities associated with different values of the random variable. In particular, we never stated that some of the possible values of the random variable would be excluded. For example, we never stated things like "We flip a coin 10 times, but if we get 10 heads we ignore it and try again." The experiments were random and no elements in the sample space were excluded from the possible results.
 
 ```{block RandomSampling, type='stattip'}
-- The assignment of probabilities to events and random variables is strictly dependent on the details of the random experiment. We deal exclusively whith random experiments where all unitary outcomes have equal probability, and where no events are rejected due to not being "representative."
+- The assignment of probabilities to events and random variables is strictly dependent on the details of the random experiment. We deal exclusively with random experiments where all unitary outcomes have equal probability, and where no events are rejected due to not being "representative."
 ```
 
-The phrase "representative sample" is found frequently in books and articles, but in the vast majority of cases the term is used incorrectly. Statistics deals with random samples, not with "representative" samples. Excluding some very specific methods of sampling, there is no such thing as a "representiative" sample. Most importantly, the validity of a sample should be based on the method used to obtain the sample and the methods and models used to make estimations and inferences based on the sample. In general, the validity of a sample should not be based on the characteristics of the sample assessed after the sample is obtained. Beware of "representative" samples. All the equations we will use in this book apply to random samples, not representative ones.
+The phrase "representative sample" is found frequently in books and articles, but in the vast majority of cases the term is used incorrectly. Statistics deals with random samples, not with "representative" samples. Excluding some very specific methods of sampling, there is no such thing as a "representative" sample. Most importantly, the validity of a sample should be based on the method used to obtain the sample and the methods and models used to make estimations and inferences based on the sample. In general, the validity of a sample should not be based on the characteristics of the sample assessed after the sample is obtained. Beware of "representative" samples. All the equations we will use in this book apply to random samples, not representative ones.
 
 It is possible that some authors use the term "representative" to characterize samples that were selected following a proper method and whose elements are processed using the correct formulas specifically derived for the sampling method used. In this case, of course we want "representative" samples. Here, the term is simply used to mean "properly obtained and analyzed" samples.
 
 [@Pietra1926] Wrote *A particular case of non-representative sampling* to point out that randomly sampling persons and averaging their family sizes is not a "representative" sampling process. Intuitively, one should suspect that something might be amiss when we sample objects type A (individuals) and use the formulas for A to make statements about objects type B (families). By sampling individuals randomly, the probability of a family being selected is proportional to its size. Simply using the average to estimate the mean does not work, because a direct use of the average to estimate the mean assumes equal-probability sampling. Presumably, the author of the paper used the term non-representative to mean "unequal probability" sampling. These days there are multiple sampling methods and corresponding formulas that do not use simple random sampling and do use unequal probability sampling.
 
-Incidentally, and to remark the importance of formulating questions carefully, the sampling mentioned by [@Pietra1926] was not suitable to estimate average family size by simply taking the sample average for the individuals selected by simple random sampling. However, it was correct to take the simple average to estimate the average size of family *experienced by individuals*. To futher understand this issue, think about the average class size in UCD vs. the average class attended by students. How would you go about calculating each one if you had the complete database of courses and enrollments?
+Incidentally, and to remark the importance of formulating questions carefully, the sampling mentioned by [@Pietra1926] was not suitable to estimate average family size by simply taking the sample average for the individuals selected by simple random sampling. However, it was correct to take the simple average to estimate the average size of family *experienced by individuals*. To further understand this issue, think about the average class size in UCD vs. the average class attended by students. How would you go about calculating each one if you had the complete database of courses and enrollments?
 
 ### No Biased samples allowed
 
@@ -1492,7 +1492,7 @@ Incidentally, and to remark the importance of formulating questions carefully, t
 There are many sampling methods that use unequal probability. If they are used in conjunction with the proper estimators and analysis procedures, there should not be a problem. As a matter of fact, unequal sampling probability may be the only approach in some situations and it is not a problem for as long as the probabilities of any unit being selected is known and greater than 0. Assigning a zero probability to some elements of the population is equivalent to defining a new populations without them. Obviously, the samples will not have information about the original but about the reduced population. Therefore, another interpretation of the phrase "biased sample" would be that the sample does not come from the population about which we want to make statements.
 
 ```{block NoZeroP, type='statip'}
-- Samples have to be obtained using a random process in which all units of the population have a strictly positive and known probability of being selected, even if the probabilites differ among units.
+- Samples have to be obtained using a random process in which all units of the population have a strictly positive and known probability of being selected, even if the probabilities differ among units.
 ```
 
 Statistics deals with sampling where the probability of any unit being included in the sample is greater than zero (e.g., no units are categorically excluded) and known. This is the only way one can calculate the statistical properties of estimators, particularly their variance and bias.
@@ -1500,7 +1500,7 @@ Statistics deals with sampling where the probability of any unit being included 
 
 ### Sampling methods
 
-We get samples to estimate somethig about the whole population. Sampling or survey design methods are particularly important when we are not doing manipulative studies but observational ones. In manipulative experiments we will always assume that treatments are assigned at random to the experimental units, with certain simple modifications or restrictions applied to designs more advanced than those treated in this text. Experimental units should be selected as a proper sample of the population whose response to treatments we want to estimate. Unfortunately, most designed experiments DO NOT use randomly selected experimental units, so their results have to be taken with caution. For example, medical research is based on either patients that seek medical treatment or volunteers. Neither constitutes a random sample of the population. Agricultural experimentation is conducted with animals either maintained or bred for experimentation, or selected haphazardly from what is available (sample of convenience). Therefore, there is a real and potentially large gap between the samples for which theory and formulas were derived, and actual samples used.
+We get samples to estimate something about the whole population. Sampling or survey design methods are particularly important when we are not doing manipulative studies but observational ones. In manipulative experiments we will always assume that treatments are assigned at random to the experimental units, with certain simple modifications or restrictions applied to designs more advanced than those treated in this text. Experimental units should be selected as a proper sample of the population whose response to treatments we want to estimate. Unfortunately, most designed experiments DO NOT use randomly selected experimental units, so their results have to be taken with caution. For example, medical research is based on either patients that seek medical treatment or volunteers. Neither constitutes a random sample of the population. Agricultural experimentation is conducted with animals either maintained or bred for experimentation, or selected haphazardly from what is available (sample of convenience). Therefore, there is a real and potentially large gap between the samples for which theory and formulas were derived, and actual samples used.
 
 **Sampling design** is the procedure used to select the units for the sample from the population, such that each possible sample has a positive and known probability of being selected.
 
@@ -1729,7 +1729,7 @@ $$\begin{equation}
 \end{equation}$$
 <br>
 
-For the sample shown in Figure \@ref(fig:InferenceExample) the estimated variance of sample averages is obtainedd by first estimating the variance of the original population and then dividing by the sample size.:
+For the sample shown in Figure \@ref(fig:InferenceExample) the estimated variance of sample averages is obtained by first estimating the variance of the original population and then dividing by the sample size.:
 
 <br>
 $$\begin{equation}
@@ -1738,7 +1738,7 @@ $$\begin{equation}
 \end{equation}$$
 <br>
 
-Assume that the original population is not known, which is usually the case, but that you have the one sample $Y = \{4, 6, 5\}$. The estimated population mean is $\bar{Y} = 5$ and the estiamted variance of the estimate is $\hat{\sigma}^2_{\bar{Y}} = 1/3$. With this information, if we knew the shape of the sampling distribution we could make inferences about the original population. The Central Limit Theorem is what we need!
+Assume that the original population is not known, which is usually the case, but that you have the one sample $Y = \{4, 6, 5\}$. The estimated population mean is $\bar{Y} = 5$ and the estimated variance of the estimate is $\hat{\sigma}^2_{\bar{Y}} = 1/3$. With this information, if we knew the shape of the sampling distribution we could make inferences about the original population. The Central Limit Theorem is what we need!
 
 
 ## Central Limit Theorem
@@ -1833,7 +1833,7 @@ Most exercises with solutions in the book *Probability and Statistics Applicatio
 
 ### Exercise
 
-Objective: understand that we use theoretical probabilities as models that approximate reality but that are not reality. Models are based on specific knowledge or assumptions. One model assumes that a parameter is constant, but in reality the parameter might change. More complicated models can accomodate changing parameters.
+Objective: understand that we use theoretical probabilities as models that approximate reality but that are not reality. Models are based on specific knowledge or assumptions. One model assumes that a parameter is constant, but in reality the parameter might change. More complicated models can accommodate changing parameters.
 
 Assume that the electric motor of a water pump has a constant probability of failing in any time interval, and that on average the failure rate is once every 10,000 hours and independent of previous or future failures after repairs. 
 
@@ -1841,7 +1841,7 @@ What distribution can be used to model the number of failures in any given 1000 
 
 Solution
 
-A good candidate distribution would be the Poisson because the number of failures is a discrete number that can only be 0 or take positive values. The assumption of constant probabiliyt and independence of events meets the characteristics of the Poisson distribution.
+A good candidate distribution would be the Poisson because the number of failures is a discrete number that can only be 0 or take positive values. The assumption of constant probability and independence of events meets the characteristics of the Poisson distribution.
 
 What is the probability that the motor will fail exactly once in 1000 hours?
 
@@ -1887,7 +1887,7 @@ A field has a population of weeds that are distributed randomly over the area. T
 
 2. What is the probability of finding 3 weed plants in a hoop?
 
-3. An AI (artificial intelligence) sprayer detects individual weed plants with a probability of 0.90. If 3 or more plants are detected, it sprays an area equal to the size of the hoop and moves to the next area. What proportion of the area with 3 weed plants/hoop will be sprayed? Assume that detection of any individual plant is independent from dtection of other plants.
+3. An AI (artificial intelligence) sprayer detects individual weed plants with a probability of 0.90. If 3 or more plants are detected, it sprays an area equal to the size of the hoop and moves to the next area. What proportion of the area with 3 weed plants/hoop will be sprayed? Assume that detection of any individual plant is independent from detection of other plants.
 
 Solution: 
 
@@ -1895,7 +1895,7 @@ The number of weeds has a Poisson distribution.
 
 The mean number of weeds per hoop is 0.5 m^2^ * 5 plants m^-2^. P(Y = 3) is `dpois(x = 3, lambda = 2.5)`.
 
-Each of the three plants has a probability of being detected that is constant. Each hoop area consists of 3 trials, each with P(detection) = 0.90. Only hoops with 3 detections are sprayed. The number of detections given that there are 3 plants has a binomial distribution with n = 3 and p = 0.90. The probability that a hoop area is sprayed is the probability of detecting 3 out of 3: `dbinom(x = 3, size = 3, prob = 0.90)`. 72\% of the area with 3 plants per hoop is sprayed.
+Each of the three plants has a probability of being detected that is constant. Each hoop area consists of 3 trials, each with P(detection) = 0.90. Only hoops with 3 plants detected are sprayed. The number of plants detected given that there are 3 plants has a binomial distribution with n = 3 and p = 0.90. The probability that a hoop area is sprayed is the probability of detecting 3 out of 3: `dbinom(x = 3, size = 3, prob = 0.90)`. 72\% of the area with 3 plants per hoop is sprayed.
 
 
 ## Homework

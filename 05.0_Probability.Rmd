@@ -206,7 +206,7 @@ Based in the model of symmetry that assigns equal probability to all cards we ca
 1. Red or Even
 1. Red and Even, or prime
 
-In each case, the probability equals the total number of favorable cases divided by the total number of possible cases, which is 52. P(Ace) = 4/52, P(Even) = 20/52, P(Red or Even) = P(Red) + P(Even) - P(Red and Even) = (13 + 20 - 10)/52. In the last case we subtracted Red and Even to avoid double-counting them as Red and as Even. Two difficulties may arise in trying to calculate the probabilities of these events: calculation of the total number of outcomes, calculation of the total number of favorable events. For these concepts and calculations it is useful to learn about Combinatorics and Set Theory.
+In each case, the probability equals the total number of favorable cases divided by the total number of possible cases, which is 52. P(Ace) = 4/52, P(Even) = 20/52, P(Red or Even) = P(Red) + P(Even) - P(Red and Even) = (26 + 20 - 10)/52. In the last case we subtracted Red and Even to avoid double-counting them as Red and as Even. Two difficulties may arise in trying to calculate the probabilities of these events: calculation of the total number of outcomes, calculation of the total number of favorable events. For these concepts and calculations it is useful to learn about Combinatorics and Set Theory.
 
 ### Combinatorics
 
@@ -985,25 +985,7 @@ library(arrangements)
 
 
 
-### Tagged fish recapture [10]^[This is the Hypergrometric distribution]
-
-A manager needs to estimate the population of trout in small Sierra Nevada lake. She catches 10 trout, tags them and releasese them back into the lake. After trout return to normal, the manager returns to the lake and catches 7 trout. She does not release the trout until she is done with the catching and counting. What is the probability of getting 2 tagged out of 7 trout if the lake has a total of 50, including the 10 marked ones?
-
-The total number of possible sets of 7 trout from the lake is $C^{50}_7$. This can be better visualized if you think that each trout is a different individual, or a different person and the question is how many different groups of people can you make choosing from 50 people (it is a large number, so do not try to list all possibilities). Once a person (e.g. Peter) is selected, he cannot be selected again (no replacement), and it does not matter if Peter is selected first , second or 7th. It just matters wheter he is in the group (order does not matter).
-
-Repeating the rationale for the 10 tagged trout, there are $C^{10}_2$ ways to get 2 out of the 10 tagged trout. Thus, there are $C^{40}_5$ wasy to get the other 5 untagged trout out of the 40 untagged ones available. Each set of tagged trout can be combined wiht each set of untagged trout, so the total number of possible sets of 2 tagged with 5 untagged trout is the product of the number of tagged and untagged sets: $C^{10}_2 \times C^{40}_5$
-
-What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 50 total in the lake?
-
-What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 40 total in the lake?
-
-What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 34 total in the lake?
-
-Based on these results, what should be the manager's guess of the total number of trout? 
-
-
-
-### Probability of one-card events [10]
+### Probability of one-card events [20]
 
 Use the `prob` package [@Kerns2018] to perform the following calculations. Corroborate your results using basic calculations instead of the high-level R functions.
 
@@ -1056,7 +1038,7 @@ Calculate P(Odd), P(BetterThan7), P(BetterThan7 & Odd), P(BetterThan7 OR Odd), P
 Are the events Odd and BetterThan7 independent? Why?
 
 
-### Rolling the dice [10 points]
+### Rolling the dice [20 points]
 
 A random experiment consists of rolling a die three times.
 
@@ -1089,7 +1071,7 @@ Prob(TwoThreeNoOrder) # 30/216
 <br>
 
 
-### Conditional probability, independence and Bayes' rule. [20]
+### Conditional probability, independence and Bayes' rule. [30]
 
 A very large sample of deer mice were tested for presence of a genetic marker and Hantavirus. The total proportion of mice with Hantavirus (H) is 0.17, whereas 63% of the mice carry the genetic marker (M). Five percent of the mice carried the marker and were positive for Hantavirus (H M). 
 
@@ -1277,6 +1259,30 @@ max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])/s
 ```
 <br>
 
+
+### Optional if you are interested in mark-recapture.
+
+Tagged fish recapture ^[This is the Hypergrometric distribution]
+
+A manager needs to estimate the population of trout in small Sierra Nevada lake. She catches 10 trout, tags them and releasese them back into the lake. After trout return to normal, the manager returns to the lake and catches 7 trout. She does not release the trout until she is done with the catching and counting. What is the probability of getting 2 tagged out of 7 trout if the lake has a total of 50, including the 10 marked ones?
+
+The total number of possible sets of 7 trout from the lake is $C^{50}_7$. This can be better visualized if you think that each trout is a different individual, or a different person and the question is how many different groups of people can you make choosing from 50 people (it is a large number, so do not try to list all possibilities). Once a person (e.g. Peter) is selected, he cannot be selected again (no replacement), and it does not matter if Peter is selected first , second or 7th. It just matters wheter he is in the group (order does not matter).
+
+Repeating the rationale for the 10 tagged trout, there are $C^{10}_2$ ways to get 2 out of the 10 tagged trout. Thus, there are $C^{40}_5$ wasy to get the other 5 untagged trout out of the 40 untagged ones available. Each set of tagged trout can be combined wiht each set of untagged trout, so the total number of possible sets of 2 tagged with 5 untagged trout is the product of the number of tagged and untagged sets: $C^{10}_2 \times C^{40}_5$
+
+What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 50 total in the lake?
+
+What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 40 total in the lake?
+
+What is then, the probability of getting exaclty 2 tagged in the set of 7 caught if there were 34 total in the lake?
+
+Based on these results, what should be the manager's guess of the total number of trout? 
+
+
+
+
+
+## Next Year we will move these sections to Lab 03
 ### Normal distribution. [10]
 
 Plot three normal distributions on the same axes. One with mean 0 and variance 1, one with mean 0 and variance 2 and one with mean 1 and variance 1. Describe the effects of mean and variance on the shape and location of the curve.
@@ -1358,7 +1364,7 @@ tTable <- matrix(nrow = length(df), ncol = length(p.values))
 
 for (i in 1:36) {
    for (j in 1:6) {
-      tTable[i, j] <- qt(p = p.values[j], df = df[i])
+      tTable[i, j] <- qt(p = p.values[j], df = df[i], lower.tail = FALSE)
    }
 }
 

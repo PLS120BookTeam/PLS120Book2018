@@ -1,512 +1,512 @@
-z1 = xyz.tips[, 3],
-xlim = c(0, 10),
-ylim = c(0, 10),
-zlim = c(0, 10),
-phi = 35,
-theta = 450,
-lwd = 2,
-d = 3,
-bty = "g",
-ticktype = "detailed")
-bookdown:::serve_book()
-install.packages("servr")
-bookdown:::serve_book()
-servr::daemon_stop("4747113896")
-<<<<<<< HEAD
-=======
-mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
-Door2 = c("Aldebaran", "Car", "Casiopeia"),
-Door3 = c("Aldebaran", "Casiopeia", "Car"))
-mhGoats
-mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
-Door2 = c("Aldebaran", "Car", "Casiopeia"),
-Door3 = c( "Casiopeia", "Aldebaran","Car"),
-ResultIfSwitch = c("Goat", "Car", "Car"))
-mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
-Door2 = c("Aldebaran", "Car", "Casiopeia"),
-Door3 = c( "Casiopeia", "Aldebaran","Car"),
-ResultIfSwitch = c("Goat", "Car", "Car"))
-mhGoats
-mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
-Door2 = c("Casiopeia", "Car", "Aldebaran"),
-Door3 = c( "Casiopeia", "Aldebaran","Car"),
-ResultIfSwitch = c("Goat", "Car", "Car"))
-mhGoats
-mhGoats <- data.frame(Door1 = c("Car", "Aldebaran", "Casiopeia"),
-Door2 = c("Casiopeia", "Car", "Aldebaran"),
-Door3 = c("Aldebaran", "Casiopeia", "Car"),
-ResultIfSwitch = c("Goat", "Car", "Car"))
-mhGoats
-mhGoats <- data.frame(Door1 = c("Car", "Goat", "Goat"),
-Door2 = c("Goat", "Car", "Goat"),
-Door3 = c("Goat", "Goat", "Car"),
-ResultIfSwitch = c("Goat", "Car", "Car"))
-mhGoats <- data.frame(Door1 = c("Car", "Goat", "Goat"),
-Door2 = c("Goat", "Car", "Goat"),
-Door3 = c("Goat", "Goat", "Car"),
-ResultIfSwitch = c("Goat", "Car", "Car"))
-mhGoats
-mhGoats
-knitr::include_graphics("images/CH2Windows.png")
-knitr::include_graphics("images/CH2Windows.png")
-knitr::include_graphics("images/CH2Windows.png")
-knitr::include_graphics("images/CH2Console.png")
-knitr::include_graphics("images/CH2Console2.png")
-knitr::include_graphics("images/CH2IncompleteError.png")
-knitr::include_graphics("images/CH2Error.png")
-knitr::include_graphics("images/CH2RunChunk.png")
-knitr::include_graphics("images/CH2RmdSave.png")
-```{r BasicFunctions, echo=FALSE}
-#two ways to calculate the sum of 1 and 5
-1 + 5
-sum(c(1,5))
-#two ways to calculate the mean of 8, 4, and 6
-(8 + 4 + 6) / 3
-mean(c(8,4,6))
-knitr::include_graphics("images/CH2RmdSave.png")
-knitr::include_graphics("images/CH2htmlSave.png")
-knitr::include_graphics("images/CH2WD.png")
-knitr::include_graphics("images/CH2Plot.png")
-knitr::include_graphics("images/CH2Packages.png")
-mymatrix <- cbind(myvector, myvector2)
-mymatrix
-mymatrix <- cbind(myvector, myvector2)
-myvector <- c(1,2,3)
-myvector
-myvector2 <- c("one","two","three")
-myvector2
-help(c) #help() allows you to search for a description of a given function
-mymatrix <- cbind(myvector, myvector2)
-mymatrix
-help(cbind)
-mydataframe <- as.data.frame(cbind(myvector, myvector2))
-mydataframe
-help(as.data.frame)
-knitr::include_graphics("images/CH2Import2.png")
-plotPoly <- function(b0, b1, b2, b3, xmin, xmax){ # name function and arguments
-x <- seq(from = xmin, to = xmax, length.out = 100) # create x values
-y <- b0 + b1 * x + b2 * x^2 + b3 * x^3 # calculate y values
-plot(y ~ x, type = "l") # plot the results
-}
-plotPoly(b0 = 1, b1 = 0.5, b2 = 0.03, b3 = -0.01, xmin = -5, xmax = 10)
-plotPoly(b0 = 1, b1 = 0.5, b2 = 0.03, b3 = -0.01, xmin = -10, xmax = 10)
-a <- c(1, 2, 3, 4, 5)
-b <- c(10, 20, 30, 40, 50)
-a + 100
-## [1] 101 102 103 104 105
-a + b
-## [1] 11 22 33 44 55
-(a + b) / 10
-a <- 1:5
-b <- 1:5
-ab.sum <- a + b
-ab.diff <- a - b
-ab.prod <- a * b
-ab.sum
-## [1]  2  4  6  8 10
-ab.diff
-## [1] 0 0 0 0 0
-ab.prod
-mydata <- data.frame(Y1 = c("treatment 1", "treatment 2", "treatment 3"), Y2 = c(35, 23, 30)) # Create data frame with 2 columns and 3 rows
-mydata # see the contents of the data frame
-str(mydata) # see the structure of the data frame
-class(mydata) # see the class of the data frame
-library(pander) # we need to install pander first
-pander(mydata, caption = "Table showing my data.") #pander() creates a table for the data
-clover <- read.csv("Datasets/Lab01clover.txt", header = TRUE) # read in data.
-help(clover) # Read about the nature of the data set.
-(avg.lnwt <- mean(clover$lnwt)) # obtain the average lnwtance; note the use of $ to select parts of an object and the outer parentheses to display the result.
-(med.lnwt <- median(clover$lnwt)) # median or 50th percentile
-quantile(clover$lnwt, 0.5) # 50th percentile is the same as the median
-(var.lnwt <- var(clover$lnwt)) # variance
-(std.lnwt <- sd(clover$lnwt)) # standard deviation
-sum(clover$lnwt)/length(clover$lnwt) # manual calculation of average
-sum( (clover$lnwt - avg.lnwt) ^ 2 ) / (length(clover$lnwt) - 1)
-(rng.lnwt <- range(clover$lnwt)) # output is a vector of lenght 2
-min(clover$lnwt) # minimum braking lnwtance
-max(clover$lnwt) # maximum braking lnwtance
-(cv.lnwt <- std.lnwt / avg.lnwt) # coefficient of variation
-```{r ps freqhist, echo = TRUE, include = TRUE}
-(sample.size <- length(clover$lnwt))
-(nbins <- max(8, (1 + log(sample.size, 2)))) # we round down for bins
-clover$bin <- cut(clover$lnwt, breaks = nbins) # create column with bin
-(freq.table <- as.data.frame(xtabs( ~clover$bin))) # creates frequency table
-pander(freq.table) # format the table a little better
-plot(freq.table, xlim = c()) # make histogram "by hand"
-hist(clover$lnwt) # by default it uses Sturges rule for bins.
-summary(clover$lnwt) # summary of a numeric variable or vector
-class(clover$lnwt) # a numeriv vector contains real numbers
-summary(clover$bin) # this is a character variable coded as a factor
-class(clover$bin)
-summary(clover) # gives the summary for all variables
-class(summary(clover)) # This is functional programming; nested functions
-mode(summary(clover))
-str(summary(clover)) # See the inside of an object!!
-summary(clover)[1,1] # get the first element of the table
-summary(clover)[1,] # get the first row of the summary table
-summary(clover)[,1] #  get the first column of the summary table
-myrange.factor = 1.5 # save number in a named object for later use
-boxplot(clover$lnwt, range = myrange.factor)
-text(x = 0.70, y = median(clover$lnwt), label = "Median")
-boxplot(clover$lnwt, range = myrange.factor)
-clover$lnwt
-plot(clover$lnwt)
-boxplot(clover$lnwt)
-boxplot(clover$lnwt, range = 1)
-boxplot(clover$lnwt, range = 1)
-boxplot(clover$lnwt, range = 1.5)
-boxplot(clover$lnwt, range = 1.5)
-myrange.factor
-boxplot(clover$lnwt, range = myrange.factor)
-boxplot(clover$lnwt, range = myrange.factor)
-boxplot(clover$lnwt, range = 1.5)
-boxplot(clover$lnwt, range = 1.5)
-boxplot(clover$lnwt, range = 1.5)
-boxplot(clover$lnwt, range = 1.5)
-boxplot(clover$lnwt, range = 1.5)
-boxplot(clover$lnwt, range = 1.5)
-myrange.factor <- 1.5
-boxplot(clover$lnwt, range = myrange.factor)
-text(x = 0.70, y = median(clover$lnwt), label = "Median")
-boxplot(clover$lnwt, range = myrange.factor)
-myrange.factor = 1.5 # save number in a named object for later use
-boxplot(heifer$Birth_Wt, range = myrange.factor)
-myrange.factor <- 1.5
-boxplot(clover$lnwt, range = myrange.factor)
-text(x = 0.70, y = median(clover$lnwt), label = "Median")
-text(x = 0.65, y = quantile(clover$lnwt, 0.75), label = "3rd quartile or 75% quantile")
-text(x = 1.30, y = quantile(clover$lnwt, 0.75), label = "Upper Hinge")
-text(x = 0.65, y = quantile(clover$lnwt, 0.25), label = "1st quartile or 25% quantile")
-text(x = 1.30, y = quantile(clover$lnwt, 0.25), label = "Lower Hinge")
-myrange.factor = 0.5
-boxplot(clover$lnwt, range = myrange.factor)
-text(x = 0.70, y = median(clover$lnwt), label = "Median")
-text(x = 0.65, y = quantile(clover$lnwt, 0.75), label = "3rd quartile or 75% quantile")
-text(x = 1.30, y = quantile(clover$lnwt, 0.75), label = "Upper Hinge")
-text(x = 0.65, y = quantile(clover$lnwt, 0.25), label = "1st quartile or 25% quantile")
-text(x = 1.30, y = quantile(clover$lnwt, 0.25), label = "Lower Hinge")
-(iqrange <- IQR(clover$lnwt)) # Calculate the interquartile range
-(uplimit <- quantile(clover$lnwt, 0.75) + myrange.factor * iqrange)
-(rows.where.lt.uplimit <- which(clover$lnwt <= uplimit)) # gives row numbers of those that are less than uplimit
-clover$lnwt[rows.where.lt.uplimit] # gives lnwt in those rows
-(up.fence <- max(clover$lnwt[rows.where.lt.uplimit])) # gives the value we seek
-(outl <- clover$lnwt[clover$lnwt > up.fence]) # We have outliers!
-text(x = 0.65, y = up.fence, label = "Upper Fence")
-sumry.by.temp
-sumry.by.temp <- by(data = clover$lnwt, INDICES = clover$temp, FUN = summary
-)
-sumry.by.temp
-pander(sumry.by.temp)
-class(sumry.by.temp)
-str(sumry.by.temp)
->>>>>>> EAL18Sep18
-bookdown:::serve_book()
-servr::daemon_stop("4559906504")
-pander(freq.table) # format the table a little better
-set.seed(1221) # To always make the same random sample.
-set.seed(1221) # To always make the same random sample.
-smpl <- rchisq(n = 100, df = 2)
-smpl
-mean(c(smpl, 200))
-smpl <- rchisq(n = 100, df = 2)
-(avg <- mean(smpl))
-mean(c(smpl, 200))
-plot(sapply(sort(c(-20:80/10, mean(smpl))), FUN = function(i) sum((smpl - i)^2)) ~
-sort(c(-20:80/10, mean(smpl))),
-type = "l",
-lwd = 4,
-col = "chocolate",
-ylab = "Sum of squared deviations",
-xlab = "Value to calculate deviation to")
-arrows(x0 = mean(smpl) , y0 = 1500,
-x1 = mean(smpl), y1 = sum((smpl - mean(smpl))^2),
-angle = 25, length = 0.2,
-lwd = 2)
-text(x = mean(smpl) , y = 1900 ,
-labels = c("Sum of squared deviations \n is minimized when \n X equals the average"))
-median(smpl)
-median(c(smpl, 200))
-plot(sapply(sort(c(-20:80/10, median(smpl))), FUN = function(i) sum(abs(smpl - i))) ~
-sort(c(-20:80/10, median(smpl))),
-type = "l",
-lwd = 4,
-col = "chocolate",
-ylab = "Sum of absolute deviations",
-xlab = "Value to calculate deviation to")
-arrows(x0 = median(smpl) , y0 = 350,
-x1 = median(smpl), y1 = sum(abs(smpl - median(smpl))),
-angle = 25, length = 0.2,
-lwd = 2)
-text(x = median(smpl) , y = 400 ,
-labels = c("Sum of absolute deviations \n is minimized when \n X equals the median"))
-```{r Bimodal, message=FALSE, echo=FALSE, out.width='70%', fig.align='center', fig.cap="Example of bimodal distribution. A single central confidence interval would not be very useful. These data should be explored to find a way to stratify into groups."}
-set.seed(1333)
-smpl2 <- c(rnorm(n = 50, mean = 10, sd = 1), rnorm(n = 50, mean = 20, sd = 2))
-plot(density(smpl2, adjust = 0.5),
-type = "l",
-lwd = 4,
-col = "chocolate",
-ylab = "Probability density",
-xlab = "Random variable value",
-main = "")
-var(c(1, 2, 3))
-mean(c(1, 2, 3))
-hvirus <- expand.grid(marker = c("-M", "+M"), Hanta = c("-H", "+H"))
-hvirus
-str(cards)
-str(S)
-ProbH <- 0.17
-ProbNoH <- 1 - ProbH
-ProbM <- 0.63
-ProbNoM <- 1 - ProbM
-ProbHM <- 0.05
-ProbHNoM <- ProbH - ProbHM
-ProbHNoM
-ProbNoHM <- ProbM - ProbHM
-ProbNoHM
-P.H <- 0.17
-P.h <- 1 - P.H
-P.M <- 0.63
-P.m <- 1 - P.M
-P.HM <- 0.05
-P.Hm <- P.H - P.HM
-P.hM <- P.M - P.HM
-P.hm <- 1 - P.h - P.Hm - P.hM
-hvirus
-# Create a data frame with the probabilities for each event
-hvirus <- expand.grid(marker = c("m", "M"), Hanta = c("h", "H"))
-# Create a data frame with the probabilities for each event
-hvirus <- expand.grid(Hanta = c("h", "H"), marker = c("m", "M"))
-hvirus
-hvirus$probs <- c(P.hm, P.Hm, P.hM, P.HM)
-hvirus
-P.hm <- 1 - P.HM - P.Hm - P.hM
-hvirus$probs <- c(P.hm, P.Hm, P.hM, P.HM)
-hvirus
-sum(hvirus$probs)
+sd = 18,
+p = 0.10,
+lblx = "what is this value \n if area is 0.10?",
+cex = 0.95)
+pnorm(q = 180, mean = 200, sd = 18)
+left.tail(mean = 200,
+sd = 18,
+p = 0.10,
+lblx = "what is this value \n if area is 0.10?",
+cex = 0.95)
+left.tail(mean = 200,
+left.tail(mean = 200,
+sd = 18,
+p = 0.10,
+lblx = "what is this value?")
+left.tail(mean = 200,
+sd = 18,
+p = 0.10,
+lblx = "what is this value?")
+qnorm(p = 0.1, mean = 200, sd = 18)
+knitr::opts_chunk$set(echo = TRUE)
+library(arrangements)
+ncombinations(k = 11, n = 15, replace = FALSE)
+ncombinations(k = 10, n = 14) * ncombinations(k = 1, n = 3)
+ncombinations(k = 1, n = 3)
+ncombinations(k = 10, n = 14)
+=14*13*12*11/4*3*2
+14*13*12*11/4*3*2
+14*13*12*11/(4*3*2)
+ncombinations(k = 10, n = 14) * ncombinations(k = 1, n = 3)
+ncombinations(k = 5, n = 52)
+ncombinations(k = 1, n = 48)
+(P4Aces <- ncombinations(k = 1, n = 48) * ncombinations(k = 4, n = 4) / ncombinations(k = 5, n = 52))
+(SampleSpace <- tosscoin(times = 5, makespace = TRUE))
+library(prob)
 install.packages("prob")
 library(prob)
-marginal(hvirus, vars = "marker")
-marginal(hvirus, vars = "Hanta")
-P.H * P.M == P.HM
-P.h * P.m == P.hm
-hvirus
-hv.event <- subset(hvirus, Hanta = "H")
-M.event <- subset(hvirus, marker = "M")
-Prob(hvirus, given = M.event)
-M.event
-H.event
-# Create events for virus and marker
-H.event <- subset(hvirus, Hanta = "H")
-H.event
-# Create events for virus and marker
-H.event <- subset(hvirus, Hanta == "H")
-M.event <- subset(hvirus, marker == "M")
-H.event
-M.event
-Prob(hvirus, given = M.event)
-H.event
-M.event
-Prob(H.event, given = M.event)
-Prob(!H.event, given = M.event)
-m.event <- subset(hvirus, marker == "m")
-Prob(H.event, given = m.event)
-m.event
-h.event <- subset(hvirus, Hanta == "h")
-Prob(h.event, given = m.event)
-Prob(H.event, given = M.event) + Prob(h.event, given = m.event)
-Prob(h.event, given = M.event)
-Prob(H.event, given = M.event) + Prob(h.event, given = M.event)
-Prob(h.event, given = M.event)
-P.H <- 0.30
-?pbinom # lower.tail = FALSE, q = 9, size = 30, prob = 0.10
-Prob(H) * Prob(M, given = H)/(Prob(H) * Prob(M, given = H) + Prob(h) * Prob(M, given = h))
-library(prob)
-P.H <- 0.17
-P.h <- 1 - P.H
-P.M <- 0.63
-P.m <- 1 - P.M
-P.HM <- 0.05
-P.Hm <- P.H - P.HM
-P.hM <- P.M - P.HM
-P.hm <- 1 - P.HM - P.Hm - P.hM
-hvirus$probs <- c(P.hm, P.Hm, P.hM, P.HM)
-marginal(hvirus, vars = "marker")
-marginal(hvirus, vars = "Hanta")
-# Is the product of the marginals equal to the joint probability?
-P.H * P.M == P.HM
-P.h * P.m == P.hm
-# Create events for virus and marker
-H <- subset(hvirus, Hanta == "H")
-M <- subset(hvirus, marker == "M")
-Prob(H, given = M)
-h <- subset(hvirus, Hanta == "h")
-Prob(h, given = M)
-Prob(H, given = M) + Prob(h, given = M)
-P.H <- 0.30 # New prior probability
-P.H * Prob(M, given = H)/(P.H * Prob(M, given = H) + (1 - P.H) * Prob(M, given = h))
-pbinom(q = 9, size = 30, prob = 0.10, lower.tail = FALSE)
-pbinom(q = 9, size = 50, prob = 0.20, lower.tail = FALSE)
-plot(dbinom, x = 0:50, size = 50, prob = 0.20)
-plot(dbinom(x = 0:50, size = 50, prob = 0.20) ~ 0:50)
-plot(dbinom(x = 0:50, size = 50, prob = 0.20) ~ c(0:50))
-plot(dbinom(x = 0:50, size = 50, prob = 0.20) ~ c(0:50), type = "h")
-plot(pbinom(q = 9, size = 60:80, prob = 0.20, lower.tail = FALSE) ~ c(60:80))
-plot(pbinom(q = 9, size = 60:80, prob = 0.20, lower.tail = FALSE) ~ c(60:80), type = "v")
-plot(pbinom(q = 9, size = 60:80, prob = 0.20, lower.tail = FALSE) ~ c(60:80), type = "S")
-c(60:80)[which(pbinom(q = 9, size = 60:80, prob = 0.20, lower.tail = FALSE) >= 0.95)]
-# Graphical solution
-plot(
-pbinom(q = 9,
-size = 60:80,
-prob = 0.20,
-lower.tail = FALSE) ~
-c(60:80),
-type = "S",
-ylab = "P(10 or more seeds germinating)")
-rate <- 0.0001 # per foot
-lambda <- 1000 * rate # per roll
-dpois(q = 0, lambda = lambda)
-dpois(x = 0, lambda = lambda)
-lambda <- 0.0001 # per foot
-s = 1000 # feet per roll
-rate <- s * lambda # per roll
-dpois(x = 0, lambda = rate)
--log(0.999)
--log(0.99)
--log(0.99)/s
--log(0.95)/s
-lambda <- 0.00015 # per foot
-s = 1000 # feet per roll
-rate <- s * lambda # per roll
-dpois(x = 0, lambda = rate)
--log(0.95)/s
--log(0.95)
-rate
-dpois(x = 0, lambda = 100:1/200)
-c(100:1/200)[which(dpois(x = 0, lambda = 100:1/200) <= 0.95)]
-c(100:1/200)[which(dpois(x = 0, lambda = 100:1/200) >= 0.95)]
-0.050/1000
-max(c(100:1/200)[which(dpois(x = 0, lambda = 100:1/200) >= 0.95)])
-0.05*100
-max(c(100:1/200)[which(dpois(x = 0, lambda = seq(from = 0.05, to = 0.045, by = 0.001)) >= 0.95)])
-max(c(100:1/200)[which(dpois(x = 0, lambda = seq(from = 0.05, to = 0.045, by = -0.001)) >= 0.95)])
-max(c(100:1/200)[which(dpois(x = 0, lambda = seq(from = 0.05, to = 0.055, by = 0.001)) >= 0.95)])
--log(0.95)/s
-max(c(seq(from = 0.05, to = 0.055, by = 0.001))[which(dpois(x = 0, lambda = seq(from = 0.05, to = 0.055, by = 0.001)) >= 0.95)])
-max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])
-guesses <- seq(from = 0.05, to = 0.055, by = 0.001)
-max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])
--log(0.95)/s
-max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])
-max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])/s
-curve(dnorm, from = -3.5, to = 4.5)
-curve(dnorm(x, sd = 2), from = -3.5, to = 4.5, add = TRUE, col = "chocolate", lwd = 2)
-curve(dnorm, from = -5.5, to = 5.5)
-curve(dnorm(x, sd = 2), from = -3.5, to = 4.5, add = TRUE, col = "chocolate", lwd = 2)
-curve(dnorm(x, sd = 2), from = -5.5, to = 5.5, add = TRUE, col = "chocolate", lwd = 2)
-curve(dnorm(x, mean = 1), from = -5.5, to = 5.5, add = TRUE, col = "skyblue", lwd = 2)
-# Mutually exclusive events. Add the separate probabilities.
-pnorm(q = 1, mean = 5, sd = sqrt(2))
-# Mutually exclusive events. Add the separate probabilities.
-pnorm(q = 2, mean = 5, sd = sqrt(2))
-pnorm(q = 7, mean = 5, sd = sqrt(2), lower.tail = FALSE)
-# Mutually exclusive events. Add the separate probabilities.
-left.area <- pnorm(q = 2, mean = 5, sd = sqrt(2))
-right.area <- pnorm(q = 7, mean = 5, sd = sqrt(2), lower.tail = FALSE)
-left.area + right.area
-zTable <- matrix(NA, nrow = 33, ncol = 10)
-for (j in 0:9) {
-zTable[i, j] <- 1 - pnorm(q = 1/10 + j/100)
-}
-zTable[i, j+1] <- 1 - pnorm(q = 1/10 + j/100)
-zTable[i, j] <- 1 - pnorm(q = 1/10 + (j - 1)/100)
-str(zTable)
-for (i in 1:33) {
-for (j in 1:10) {
-print(zTable[i, j])
-}
-}
-for (i in 1:33) {
-for (j in 1:10) {
-zTable[i, j]  <- 1 - pnorm(q = i/10 + (j - 1)/100)
-}
-}
-zTable
-row.names(zTable)
-row.names(zTable) <- 1:33
-row.names(zTable)
-colnames(zTable) <- 0:9/10
-colnames(zTable)
-print(zTable, digits = 7)
-kable(zTable, digits = 7)
-library(knitr)
-kable(zTable, digits = 7)
-library(knitr)
-library(kableExtra)
-kable(zTable, digits = 7, caption = "Right tail areas under the standard normal distribution. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
-kable_styling(full_width = TRUE, )
-zTable <- matrix(NA, nrow = 34, ncol = 10)
-for (i in 1:34) {
-for (j in 1:10) {
-zTable[i, j]  <- 1 - pnorm(q = (i - 1)/10 + (j - 1)/100)
-}
-}
-row.names(zTable) <- 1:33
-row.names(zTable) <- 0:33/10
-colnames(zTable) <- 0:9/10
-kable(zTable, digits = 7, caption = "Right tail areas under the standard normal distribution. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
-kable_styling(full_width = TRUE, )
-colnames(zTable) <- 0:9/100
-kable(zTable, digits = 7, caption = "Right tail areas under the standard normal distribution. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
-kable_styling(full_width = TRUE, )
-p.values <- c(0.15, 0.10, 0.05, 0.025, 0.01, 0.005)
-df <- c(1:30, 16:21*2)
-df
-tTable <- matrix(nrow = length(df), ncol = length(p.values))
-length(p.values)
-length(df)
-tTable[i, j] <- qt(p = p.values[j], df = df[i])
-for (i in 1:36) {
-for (j in 1:6) {
-tTable[i, j] <- qt(p = p.values[j], df = df[i])
-}
-}
-row.names(tTable) <- p.values
-colnames(tTable) <- df
-row.names(tTable) <- df
-colnames(tTable) <- p.values
-kable(tTable, digits = 5, caption = "Values of Student's t with row degrees of freedom that have th eolumn probability under the right tail. For left-tail areas and other calculations consider that the function is symmetric about 0.") %>%
-kable_styling(full_width = TRUE, )
-install.packages("arrangements")
-5 +20+10+15+10+10+30
-# Cumulative distribution function for number of 5's in 10 die rolls
-(df <- data.frame(k = 0:10, P = pbinom(q = 0:10, size = 10, prob = 1/6)))
-plot(df, type = "S", col = "skyblue", lwd = 4)
-plot(0:20 + 0.05, dpois(x = 0:20, lambda = 1.5), type = "h", lwd = 4, col = "orange", ylab = "PROBABILITY", xlab = "NUMBER OF PLANTS IN QUADRAT")
-points(0:20 - 0.05, dpois(x = 0:20, lambda = 6), type = "h", lwd = 4, col = "black")
-# Probability of y crossovers
-(df <- data.frame(y = 0:7, P = dpois(x = 0:7, lambda = 0.8)))
-plot(df, type = "h", lwd = 4)
-plot(df, type = "S", col = "skyblue", lwd = 4)
-# Cumulative distribution function for number of crossovers
-(df <- data.frame(y = 0:7, P = ppois(q = 0:7, lambda = 0.8)))
-plot(df, type = "S", col = "skyblue", lwd = 4)
-# Cumulative distribution function for number of 5's in 10 die rolls
-(df <- data.frame(k = 0:10, P = pbinom(q = 0:10, size = 10, prob = 1/6)))
-plot(df, type = "S", col = "skyblue", lwd = 4)
-# Probability of k heads in 5 tosses
-(df <- data.frame(k = 0:5, P = dbinom(x = 0:5, size = 5, prob = 0.5)))
-plot(df, type = "h", col = "skyblue", lwd = 4)
-# Probability of k heads in 5 tosses
-(df <- data.frame(k = 0:5, P = pbinom(x = 0:5, size = 5, prob = 0.5)))
-# Probability of k heads in 5 tosses
-(df <- data.frame(k = 0:5, P = pbinom(q = 0:5, size = 5, prob = 0.5)))
-plot(df, type = "h", col = "skyblue", lwd = 4)
-plot(df, type = "S", col = "skyblue", lwd = 4)
-curve(pnorm(x),
-from = -3.5,
-to = 3.5,
-lwd = 2,
-xlab = "Y",
+(SampleSpace <- tosscoin(times = 5, makespace = TRUE))
+nrows(tosscoin(times = 5, makespace = TRUE))
+nrow(tosscoin(times = 5, makespace = TRUE))
+# Number of H's in each outcome
+SampleSpace$nH <- as.numeric(SampleSpace$toss1 == "H") +
+as.numeric(SampleSpace$toss2 == "H") +
+as.numeric(SampleSpace$toss3 == "H") +
+as.numeric(SampleSpace$toss4 == "H") +
+as.numeric(SampleSpace$toss5 == "H")
+(nHfreq <- as.data.frame(table(SampleSpace$nH)))
+# Rename columns
+names(nHfreq) <- c("nHeads", "AbsFreq")
+nHfreq$RelFreq <- nHfreq$AbsFreq / sum(nHfreq$AbsFreq)
+pander::pander(nHfreq)
+ncombinations(k = 3, n = 5)
+1 - 0.30 - 0.20 - 0.15 - 0.05 - 0.10
+0.80*0.05/0.50
+0.08+(0.10/0.50)*0.20
+0.08/0.12
+SampleSpace
+(5000 - 3500)/500
+pnorm(q = 4500, mean = 3500, sd = 500)
+pnorm(q = 1)
+pnorm(q = 1)1-
+1-pnorm(q = 1)
+0.9772499 - 0.1586553
+pnorm(q = 4500, mean = 3500, sd = 500) - pnorm(3000, mean = 3500, sd = 500)
+qnomr(p=0.10, mean = 3500, sd = 500)
+qnorm(p=0.10, mean = 3500, sd = 500)
+rnorm(9, 97, 8)
+round(rnorm(9, 97, 10), 1)
+# Two tails
+curve(df(x, df1 = 3, df2 = 5),
+from = 0,
+to = 35,
+lwd = 2.5,
+xlab = "",
 ylab = "")
+# Two tails
+curve(df(x, df1 = 5, df2 = 5),
+from = 0,
+to = 35,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+# Two tails
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 35,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+# Two tails
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 10,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+# Two tails
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 6,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+abline(h = 0)
+# Two tails
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+abline(h = 0)
+cord.x <- c(qf(0.975, df1 = 5, df2 = 15), seq(qf(0.975, df1 = 5, df2 = 15), 35, 0.01), qf(0.975, df1 = 5, df2 = 15))
+cord.y <- c(0, qf(seq(qf(0.975, df1 = 5, df2 = 15), 35, 0.01), df = 15), 0)
+cord.y <- c(0, qf(seq(qf(0.975, df1 = 5, df2 = 15), 35, 0.01) df1 = 5, df2 = 15), 0)
+cord.y <- c(0, qf(seq(qf(0.975, df1 = 5, df2 = 15), 35, 0.01), df1 = 5, df2 = 15), 0)
+cord.x <- c(qf(0.975, df1 = 5, df2 = 15), seq(qf(0.975, df1 = 5, df2 = 15), 6, 0.01), qf(0.975, df1 = 5, df2 = 15))
+cord.y <- c(0, qf(seq(qf(0.975, df1 = 5, df2 = 15), 6, 0.01), df1 = 5, df2 = 15), 0)
+qf(0.975, df1 = 5, df2 = 15)
+seq(qf(0.975, df1 = 5, df2 = 15), 6, 0.01)
+cord.y <- c(0, pf(seq(qf(0.975, df1 = 5, df2 = 15), 6, 0.01), df1 = 5, df2 = 15), 0)
+polygon(cord.x, cord.y, col = "orange")
+qf(0.975, df1 = 5, df2 = 15)
+qf(0.95, df1 = 5, df2 = 15)
+qf(0.95, df1 = 5, df2 = 15), 5, 0.01)
+qf(0.95, df1 = 5, df2 = 15)
+seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.01)
+qf(0.95, df1 = 5, df2 = 15)
+cord.x <- c(qf(0.95, df1 = 5, df2 = 15), seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.02), qf(0.95, df1 = 5, df2 = 15))
+cord.y <- c(0, pf(seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.02), df1 = 5, df2 = 15), 0)
+polygon(cord.x, cord.y, col = "orange")
+pf(seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.02), df1 = 5, df2 = 15)
+cord.y <- c(0, df(seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.02), df1 = 5, df2 = 15), 0)
+polygon(cord.x, cord.y, col = "orange")
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = 5, df2 = 15), seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.02), qf(0.95, df1 = 5, df2 = 15))
+cord.y <- c(0, df(seq(qf(0.95, df1 = 5, df2 = 15), 5, 0.02), df1 = 5, df2 = 15), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = 5, df2 = 15),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE)
+### F()
+df1 <- 15
+df2 <- 15
+# Two tails on the right
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "")
+abline(h = 0)
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE)
+df1 <- 15
+df2 <- 15
+# Two tails on the right
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+ylim = c(-0.05, 0.9))
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+qf(0.95, df1 = df1, df2 = df2)
+text(x = -0.025, y = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances")
+text(x = 0, y = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances")
+text(y = -0.025, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances")
+text(y = -0.03, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances")
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances")
+# Two tails on the right
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+ylim = c(-0.05, 0.9))
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances")
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances", col = "red")
+qf(0.95, df1 = df1, df2 = df2)
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(latex2exp)
+text(y = 0.20, x = 2.85, pos = 4,
+labels = unname(TeX("$\alpha/2")), col = "blue")
+text(y = 0.20, x = 2.85, pos = 4,
+labels = unname(TeX("$\alpha/2$")), col = "blue")
+text(y = 0.20, x = 2.85, pos = 4,
+labels = unname(TeX("$\alpha/2")), col = "blue")
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances", col = "red")
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(latex2exp)
+text(y = 0.20, x = 2.85, pos = 4,
+labels = unname(TeX("$\alpha/2")), col = "blue")
+### F()
+df1 <- 15
+df2 <- 15
+# Two tails on the right
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+ylim = c(-0.05, 0.9))
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances", col = "red")
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(latex2exp)
+text(y = 0.20, x = 2.85, pos = 4,
+labels = unname(TeX("$\alpha/2")), col = "blue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+ylim = c(-0.05, 0.9))
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances", col = "red")
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(latex2exp)
+text(y = 0.20, x = 2.85, pos = 4,
+labels = TeX("$\alpha/2"), col = "blue")
+text(y = 0.20, x = 2.85, pos = 4,
+labels = TeX("\alpha/2"), col = "blue")
+# Two tails on the right
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+ylim = c(-0.05, 0.9))
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances", col = "red")
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(latex2exp)
+text(y = 0.20, x = 2.85, pos = 4,
+labels = TeX("$\\alpha/2"), col = "blue")
+text(y = 0.20, x = 2.85, pos = 4,
+labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
+text(y = 0.19, x = 2.80, pos = 4,
+labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+ylim = c(-0.05, 0.9))
+abline(h = 0)
+# Add the shaded area.
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+qf(0.95, df1 = df1, df2 = df2))
+cord.y <- c(0,
+df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+df1 = df1, df2 = df2), 0)
+polygon(cord.x, cord.y, col = "skyblue")
+curve(df(x, df1 = df1, df2 = df2),
+from = 0,
+to = 5,
+lwd = 2.5,
+xlab = "",
+ylab = "",
+add = TRUE,
+ylim = c(-0.05, 0.9))
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+labels = "Reject equality of variances", col = "red")
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(latex2exp)
+text(y = 0.19, x = 2.80, pos = 4,
+labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
+bean.yield <- data.frame(
+yield = c("yield 1", "yield 2", "yield 3", "yield 4"),
+drought = c(590, 720, 720, 190 ),
+irrigated = c(2990, 2950, 2660, 2120))
+bean.yield
+t.test(x=bean.yield$drought, y = bean.yield$irrigated)
+var(bean.yield$drought)
+var(bean.yield$irrigated)
+# calculate the sample variances for each treatment "by hand"
+var1 <- sum((bean.yield$drought - Ybar1)^2) / (r1 - 1)
+t.test(x=bean.yield$drought, y = bean.yield$irrigated, var.equal = TRUE)
+qf(p = 0.95, df1 = 3, df2 = 3)
+# calculation of F-critical value using alpha = 0.10 /2 since the F-test is two-tailed
+p <- 0.10/2
+Fcrit.upper <- qf(p, r1-1, r2-1, lower.tail = FALSE)
+x <- seq(0.000001,16, 0.25)
+pd <- df(x, df1 = 3, df2 = 3, ncp = 0)
+plot(x, pd,
+type = "l",
+xlab = "F-Value", ylab = "Probability Distribution",
+main = "the F-Distribution Curve",
+lwd = 1.5)
+abline(v = Fcrit.upper,
+col = "chartreuse3",
+lty = 3)
+(2*var(bean.yield$drought) + 2*var(bean.yield$irrigated)/4
+(2*var(bean.yield$drought) + 2*var(bean.yield$irrigated))/4
+# the pooled variance can be calculated from taking the average of the to sample variances, since they have the same sample size
+pooled.var <- ( var1 + var2 ) / 2
+(3*var(bean.yield$drought) + 3*var(bean.yield$irrigated))/6
+2*(r-1)
+# since r1 = r2 = 4, we can just use r = 4 for continued calculations
+r <- length(bean.yield$yield)
+2*(r-1)
+#a quicker method to calculate the t-statistic
+bean.test <- t.test(bean.yield$irrigated, bean.yield$drought,
+alternative = "two.sided", paired = FALSE,
+var.equal = TRUE)
+bean.test
+#a quicker method to calculate the t-statistic
+bean.test <- t.test(bean.yield$irrigated, bean.yield$drought,
+alternative = "two.sided", paired = FALSE,
+var.equal = FALSE)
+bean.test
+#a quicker method to calculate the t-statistic
+bean.test <- t.test(bean.yield$irrigated, bean.yield$drought,
+alternative = "greater", paired = FALSE,
+var.equal = TRUE)
+bean.test
+qt(0.025, df = 6)
+qt(p = 0.975, df = r1 - 1)
+qt(p = 0.975, df = r - 1)
+var(bean.yield$drought)
+var(bean.yield$irrigated)
+sqrt(var(bean.yield$drought)/4 + var(bean.yield$irrigated))
+2125/420.4065
+qt(0.975, 3)
+(bean.test.unequal <- t.test(bean.yield$irrigated, bean.yield$drought,
+alternative = "two.sided", paired = FALSE,
+var.equal = FALSE))
+bean.yield$irrigated
+bean.yield$drought
+2125 -3.182446 * 420.41
+pt(5.055, df = 3)
+1-pt(5.055, df = 3)
+d1 <- rnorm(5, mean = 200, sd = 18)
+d1
+d1 <- round(rnorm(5, mean = 200, sd = 18),1)
+d1
+d1 <- round(rnorm(5, mean = 200, sd = 18), 0)
+d1
+mean(d1)
+var(d1)
+sd(d1)
+df1 = length(d1) - 1
+df1
+mu0 <- 210
+var.hat.ybar <- var(d1)/df1
+var.hat.ybar
+sd.hat.ybar <- sqrt(var.hat.ybar)
+sd.hat.ybar
+confint(lm(d1 ~1))
+(204.962 - 177.838)/2
+tcrit <- qt(0.975, df = df1)
+tcrit
+tcrit * sd.hat.ybar
+summary(lm(d1 ~1))
+var.hat.ybar <- var(d1)/length(d1)
+sd.hat.ybar <- sqrt(var.hat.ybar)
+tcrit * sd.hat.ybar
+d1
+mean(d1)
+sd(d1)
+sd.hat.ybar
+(191.4 - 210)/sd.hat.ybar
+qt(0.025, df = df1)
+tcrit
+df1
+qt(0.025, df1)

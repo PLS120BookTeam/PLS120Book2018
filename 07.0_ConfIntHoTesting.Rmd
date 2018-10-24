@@ -8,7 +8,7 @@ output:
     toc_depth: 3
 ---
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+```{r setup0, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
 # load packages for chapter
 
 options(digits = 10)
@@ -22,15 +22,44 @@ library(tidyr)
 library(ggplot2)
 library(latex2exp)
 library(plotrix)
+library(animation)
 options(scipen = 999)
 ```
+
+```{r ShadeLeftTail, message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+left.tail <- function(mean = 0, sd = 1, p = 0.025, lblx = "", ...){
+   x <- qnorm(p = p, mean = mean, sd = sd)
+   from <- mean - 3.5 * sd
+   to <- mean + 3.5 * sd
+   curve(dnorm(x, mean = mean, sd = sd),
+         from = from,
+         to = to,
+         lwd = 2.5,
+         xlab = "",
+         ylab = "",
+         ylim = c(-0.10 * dnorm(x = mean, mean = mean, sd = sd),
+                  dnorm(x = mean, mean = mean, sd = sd)))
+
+   # Add the shaded area.
+
+   cord.x <- c(from, seq(from = from, to = x, length.out = 50), x)
+   cord.y <- c(0, dnorm(x = seq(from = from, to = x, length.out = 50),
+                        mean = mean, sd = sd), 0)
+
+   polygon(cord.x, cord.y, col = "orange")
+
+   text(x = x, y = -0.05 * dnorm(x = mean, mean = mean, sd = sd), labels = lblx)
+}
+
+```
+
 
 # Confidence intervals and Hypothesis testing {#chHotest}
 
 
 ## Learning Objectives for Chapter
 
-1. Describe the purpose of hypothesis testing, and in what situation it would be unecessary.
+1. Describe the purpose of hypothesis testing, and in what situation it would be necessary.
 1. State null and alternative hypotheses in words and equations.
 1. Calculate and explain the meaning of level of significance in words and with a graph.
 1. Calculate power of a test and explain it with a graph.
@@ -43,13 +72,13 @@ options(scipen = 999)
 
 ## Introduction to inference
 
-With this chapter we enter the topic of **Inference**. Statistical inference consists of making statements about population characteristics based on information obtained from samples. We aim at presenting a general idea that in order to answer interesting practical questions we need to estimate parameters or other unknown and unknowable quantities, and we need to determine how confident we are about the estimated values. Frequently, the topics of estimation and inference are separated in textbooks, because estimation methods can be treated independently of the statitical distributions of the estimators and associated probabilities. Many important properties of estimators, like expected value and variance, can be worked out without assuming any particular distribution for the random components of models. One estimation method we mentioned before is called *least-squares*, another one is *maximum likelihood*.
+With this chapter we enter the topic of **Inference**. Statistical inference consists of making statements about population characteristics based on information obtained from samples. We aim at presenting a general idea that in order to answer interesting practical questions we need to estimate parameters or other unknown and unknowable quantities, and we need to determine how confident we are about the estimated values. Frequently, the topics of estimation and inference are separated in textbooks, because estimation methods can be treated independently of the statistical distributions of the estimators and associated probabilities. Many important properties of estimators, like expected value and variance, can be worked out without assuming any particular distribution for the random components of models. One estimation method we mentioned before is called *least-squares*, another one is *maximum likelihood*.
 
-The main point of this chapter is to present methods to test hypotheses where unknown parameters, typically the mean of normal distributions are estimated and hypothesized to have specific known values. The mean is unkown so we estimate it with the average of a sample. Using the mathematical "trick" that is the most important equation in this course, we also use a single sample to estimate the sampling variance of the sample average. Armed with a known distribution shape (Normal), an estimate of its mean, and an estimate of the variance of sample average we make inferences about the population. We test hypotheses of specific values of the mean by calculating how likely it would be to observed the data in hand if indeed the hypothesis were true. In later chapters we expand the test to two and then several means.
+The main point of this chapter is to present methods to test hypotheses where unknown parameters, typically the mean of normal distributions, are estimated and hypothesized to have specific known values. The mean is unknown so we estimate it with the average of a sample. Using the mathematical "trick" that is the most important equation in this course, we also use a single sample to estimate the sampling variance of the sample average. Armed with a known distribution shape (Normal), an estimate of its mean (the sample average), and an estimate of the variance of sample average, we make inferences about the population. We test hypotheses of specific values of the mean by calculating how likely it would be to observe the data in hand or more extreme data if indeed the hypothesis were true. In later chapters we expand the test to two and then several means.
 
 <br>
 ```{block StatementCertainty, type='stattip'}
-- A main goal of statistics is to estimate unknown parameters or quantities and state the estimates anf our degree of certainty about the estimate. Confidence intervals are the primary tool for this and have a simple structure that is the same across apparently diverse statistical tests:
+- A main goal of statistics is to estimate unknown parameters or quantities and state the estimates and our degree of certainty about the estimate. Confidence intervals are the primary tool for this and have a simple structure that is the same across apparently diverse statistical tests:
 
 $$CI = \text{estimate} \ \pm \ \text{margin of error}$$
 
@@ -58,11 +87,11 @@ $$CI = \text{estimate} \ \pm \ \text{margin of error}$$
 
 ## Testing a hypothesis
 
-A **statistical hypothesis** is an assertion made about some parameter or aspect of a population. By testing a statistical hypothesis we are making a statistical inference, which consists of making a statement about population characteristics based on information obtained from samples. Keep in mind that statistics, like science in general, is not meant to lead to "the truth." The scientific method and its direct implementation in statistical inference only allow us to make good guesses about which model of reality is better. Other things being equal, the models that agree more with the data are preferred.
+A **statistical hypothesis** is an assertion made about some parameter or characteristic of a population. By testing a statistical hypothesis we are making a statistical inference, which consists of making a statement about population characteristics based on information obtained from samples. Keep in mind that statistics, like science in general, is not meant to lead to "the truth." The scientific method and its direct implementation in statistical inference only allow us to make good guesses about which model of reality is better. Other things being equal, the models that agree more with the data are preferred.
 
-Perfoming a hypothesis test consists of posing a statement about a population parameters or a "model" of some aspect or phenomenon. Then, we gather data and calculate the probability of observing such data under the assumption that the statement or model is true. If the probability is too low, we guess that the statement is not correct, we reject it. Obviously, the whole process is a random process, and we never know for sure if our conclusion is correct or not. We just know that the probability of incorrectly rejecting the statement is low. This is the logic of frequentists hypothesis testing. We will come back to this in more detail.
+Performing a hypothesis test consists of posing a statement about a population parameters or a "model" of some aspect or phenomenon. Then, we gather data and calculate the probability of observing such data under the assumption that the statement or model is true. If the probability is too low, we guess that the statement is not correct,and we reject it. Obviously, the whole testing procedure is a random process because it is based on a random sample, and we never know for sure if our conclusion is correct or not. We just know that the probability of incorrectly rejecting the statement is low. This is the logic of frequentists hypothesis testing. We will come back to this in more detail.
 
-We insist in the understanding of the logic behind hypothesis testing in an overt attempt to correct the widespread misunderstanding and misuse of hypothesis testing in science. One of the most important points of this chapter is to understand the elogic behind hypothesis testing and to be able to spot its misuse and misinterpretation. Correctly used and interpreted, hypothesis testing can be a useful tool in science and business. First, let's show the mechanics of hypothesis testing. Then we will point out pitfalls and things to watch out for.
+We insist in the understanding of the logic behind hypothesis testing in an overt attempt to correct the widespread misunderstanding and misuse of hypothesis testing in science. One of the most important points of this chapter is to understand the logic behind hypothesis testing and to be able to spot its misuse and misinterpretation. Correctly used and interpreted, hypothesis testing can be a useful tool in science and business. First, let's show the mechanics of hypothesis testing. Then we will point out pitfalls and things to watch out for.
 
 
 The steps involved for conducting a hypothesis test are:
@@ -72,9 +101,6 @@ The steps involved for conducting a hypothesis test are:
 3) Determine/state the decision rule
 4) Calculate test-statistic
 5) Interpret the decision and state conclusion
-
-
-A hypothesis is stated about a population, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay.
 
 
 ### State null and alternative hypotheses
@@ -100,35 +126,44 @@ $$H_a: \mu_{south} \neq \mu_{all}$$
 
 Above, the **alternative hypothesis** states that the mean photosynthetic rate of the south quadrant population is *not equal* to the mean photosynthetic rate of the all quadrant population. An important aspect of this statement is that it is not specified how the two population means are different;l it does not say how different they are or which one is expected to be greater. The null hypothesis might be rejected regardless of which one is greater, and the test is said to be **two-tailed**. In general, null hypotheses like this one, where means are hypothesized to be different, are not very useful. Unless we are sampling exactly the same population in the same conditions, it is unlikely that means are truly equal to an infinitesimal degree. It is more useful and informative to hypothesize that means differ by a biologically or practically relevant amount in a given direction.
 
-A more potentially more useful and informative test is whether the mean of one population is greater than the other by a biologically or practically significant amount. This would be referred to as a **one-tailed** test. The "tails" refer to left and right areas under the statistical distribution of sample averages, which represent extreme values relative to what would be expected if the null hypothesis were true.
+The more useful and informative test of whether the mean of one population is greater than the other by a biologically or practically significant amount is referred to as a **one-tailed** test. The "tails" refer to left and right areas under the statistical distribution of sample averages, which represent extreme values relative to what would be expected if the null hypothesis were true.
+
+Inference is strongest when the null hypothesis is rejected. Failure to reject a null hypothesis is not as strong, because it may just mean that we simply do not have enough data to "see" the difference. Because of this, the statement of equality should always be part of the null hypothesis, not of the alternative one.
 
 
 
-```{block, type = 'stattip'}
+
 - Two-tailed test:
-$$H_o: \mu = \mu_0 $$
+
+$$H_o: \mu = \mu_0$$
 $$H_a: \mu \neq \mu_0$$
 
 - One-tailed test:
+
 $$H_o: \mu \le \mu_0$$
 $$H_a: \mu \gt \mu_0$$
 
 - One-tailed test:
+
 $$H_o: \mu \ge \mu_0$$
-$$H_o: \mu \lt \mu_0$$
-```
+$$H_a: \mu \lt \mu_0$$
+
 
 ### Level of significance $\alpha$ and the p-value
 
-Informally, the level of significance is a measure of how unusual the result has to be to reject the null hypothesis. It is a measure of how consistent the data are with the null hypothesis. That measure is the probability of observing the data in the sample or more extreme data if the null hypothesis were actually true. The details of the logic behind this **frequentist** hypothesis testing scheme is explore in further down.
+Informally, the level of significance is a measure of how unusual the result has to be to reject the null hypothesis. It is a measure of how consistent the data are with the null hypothesis. This measure is the probability of observing the data in the sample or more extreme data if the null hypothesis were actually true. The details of the logic behind this **frequentist** hypothesis testing scheme is explored further down.
 
-Setting the level of significance $(\alpha)$ determines at what calculated probability value the null hypothesis is either rejected or not rejected. The desired level must be set prior to the experiment and cannot be changed to avoid the introduction of subjective bias in the tests. Typical values are 0.05 and 0.01 or 5 and 1\%.
+Setting the level of significance $(\alpha)$ determines at what calculated probability value the null hypothesis is either rejected or not rejected. The desired level must be set prior to the experiment and should not be changed to avoid the introduction of subjective bias in the tests. Typical values are 0.05 and 0.01 or 5 and 1\%. If we changed the p-value after the data are known, we could control the results of the tests by simply choosing a very low $\alpha$ for hypotheses that we do not want to reject, and a larger one for those that we feel like rejecting.
 
-By definition, $\alpha$ is the probability of obtaining a sample with "extreme" data for a given parameter value (usually the mean of the normal distribution). Those extreme samples may actually come from a population with the hypothesized mean, but the method establishes that in those cases the null hypothesis is rejected. Therefore, $\alpha$ is the probability that a true null hypothesis will be rejected in error. The rejection of a true null hypothesis is called **Error Type I**, and it is expected to happen 5 or 1 times out of 100 tests. The problem is that we will never know for sure which conclusions were incorrect.
+By definition, $\alpha$ is the probability of obtaining a sample with "extreme" data for a given parameter value (usually the mean of the normal distribution). Those extreme samples may actually come from a population with the hypothesized mean, but the method establishes that in those cases the null hypothesis is rejected. Therefore, $\alpha$ is the probability that a true null hypothesis will be rejected in error. The rejection of a true null hypothesis is called **Error Type I**, and it is expected to happen 5 or 1 times out of 100 tests when $\alpha$ is 0.05. The problem is that we will never know for sure which conclusions were incorrect.
 
 #### What is the meaning of the p-value?
 
 We use the term p-value to refer to the probability of observing a test statistic of equal or greater value than the one actually observed, given or assuming that the null hypothesis is correct. This is a conditional probability.
+
+**Frequentist test of hypothesis**
+
+If $P(\text{calculated } t \ | \ \text{True } H_0) < \alpha$ then, reject $H_0$.
 
 Thus, the test of hypothesis is based on a conditional probability, the probability that the summary statistics or calculated t value is greater than or equal to the one observed, given that the distribution of the observations is normal and independent with mean equal to that hypothesized. For this to make more sense formally we need to distinguish between the random function or variable calculated, call it $s = (\bar{Y} - \mu_0)/S_{\bar{Y}}$ (s for "statistic") and any specific value that it takes for a sample, say $t_{calc}$ (because it is the name we generally use). In symbols:
 
@@ -156,9 +191,9 @@ Do not confuse the incorrect use of p-values with incorrect p-values. The formal
 
 There are three main problems with the p-value:
 
-1. Misunderstanding. The meaning of the p-value is widely misunderstood. It's correct meaning is stated above. Th p-value **is not** the probability that the null hypothesis is true.
+1. Misunderstanding. The meaning of the p-value is widely misunderstood. Its correct meaning is stated above. Th p-value **is not** the probability that the null hypothesis is true.
 
-1. Irrelevant significance. The "culture" of science established that small p-values and "significant" results are more interesting than results that have larger p-values. In general, they should not be. But the idea of "statistically significant" became conflated with that of biological or practical significance. In realtiy they are different. A difference of 10 g in body mass of mature cattle may be significant, but it is not biologically or practically significant.
+1. Irrelevant significance. The "culture" of science established that small p-values and "significant" results are more interesting than results that have larger p-values. In general, they should not be. But the idea of "statistically significant" became conflated with that of biological or practical significance. In reality they are different. A difference of 10 g in body mass of mature cattle may be statistically significant, but it is not biologically or practically significant.
 
 1. Cherry-picking of results. Researchers became keen on getting "significant" results, because journals and peers want to have significant results. Because of this, the papers that are published are heavily biased to report only those experiments that show significant results. The problem is that any random experiment will always result in significant results and rejection of any null hypothesis if repeated sufficient number of times. In the logic of null hypothesis testing (see below) this is equivalent to hypothesizing that an urn with 80 blue and 20 yellow marbles has 80% blue marbles and then taking samples of 5 marbles with replacement until one gets a sample with more than 4 yellow marbles. A that point one has a "significant" result that is published. This is not good because publications do not usually state how many times the experiment was repeated. By "cherry-picking" only the significant results for publication we contribute to a weakening of science.
 
@@ -169,27 +204,27 @@ In order to assess the probability of observing the data in the sample or more e
 
 The **sampling distribution** of a statistics is the distribution of the values that the statistic takes over infinitely many samples obtained exactly in the same manner. For example, the sample average is a statistic that has a normal distribution if the original distribution is normal, or if sample size is large, regardless of the original distribution. The sample variance is a statistic that is proportional to a $\chi^2$, whereas the ratio of two independent estimates of the sample variance has an F distribution.
 
-For tests about population means the test-statistic is the z-score. When the data are normally distributed, or approximately normal given a large sample size (e.g., n >30), the **z-statistic** is calculated as follows:
+When the data are normally distributed, or approximately normal given a large sample size (e.g., n >30), tests about population means with **known variance** use the z-score as the statistic. The **z-statistic** is calculated as follows:
 
 <br>
 
-$$z_{calc} = \frac{\bar{Y} - \mu}{\sigma / \sqrt{r}}$$
+$$z_{calc} = \frac{\bar{Y} - \mu_0}{\sigma / \sqrt{r}}$$
 
 <br>
 
-where z is the calculated *z-statistic*, $\bar{Y}$ is the sample mean, $\mu$ is the hypothesized population mean, $\sigma$ is the known population standard deviation and r is the sample size. If the calculated z is greater than the value of the standard normal distribution that leaves 5 or 1\% in the tails, the hypothesized mean is rejected.
+where z is the calculated *z-statistic*, $\bar{Y}$ is the sample mean, $\mu_0$ is the hypothesized population mean, $\sigma$ is the known population standard deviation and r is the sample size. If the calculated z is greater than the value of the standard normal distribution that leaves 5 or 1\% in the tails, the hypothesized mean is rejected.
 
 
-If the population variance is unknown, it can be estimated with the sample variance and the t-statistic can used to peform the hypothesis test:
-
-<br>
-
-$$t_{calc} = \frac{\bar{Y} - \mu}{S / \sqrt{r}}$$
+If the population variance is unknown, it can be estimated with the sample variance. When the data are normally distributed, or approximately normal given a large sample size (e.g., n >30), tests about population means with **unknown variance** use the t-score as the statistic. The t-statistic is calculated as follows:
 
 <br>
 
+$$t_{calc} = \frac{\bar{Y} - \mu_0}{S / \sqrt{r}}$$
 
-where t is the calculated statistic that under a true null hypothesis should have a Student's t distribution, and S is the sample standard deviation. The t-distribution is necessary because the unknown variance increases the uncertainty in the test. The t distribution accounts for this by having more variance as the number of observations used to estimate the variance declines. This is in addition to the effect through the $\sqrt{r}$.
+<br>
+
+
+where $t_calc$ is the calculated statistic, which under a true null hypothesis should have a Student's t distribution, and S is the sample standard deviation. The t-distribution is necessary because the unknown variance increases the uncertainty in the test. The t distribution accounts for this by having more variance than the normal, and its variance increases as the number of observations used to estimate the mean declines. This is in addition to the effect through the $\sqrt{r}$.
 
 
 ## Decision rule
@@ -200,56 +235,328 @@ Once the test statistic is calculated it has to be inspected to make a decision 
 
 1. If the tail probability associated with the calculated statistic is smaller than $\alpha$, reject the null hypothesis, otherwise, fail to reject it.
 
+The decision rules depend on the nature of the hypothesis, because the error rate $\alpha$ has to be distributed on the tails. If the test is one tails, the area under the curve on the side of rejection is 0.05, but when the test is two-tailed, only 0.025 is in each tail.
+
 <br>
 ````{block,, type='stattip'}
 - Never accept the null hypothesis (unless your power is very large, but that is another story).
 ````
 <br>
 
+```{r NormalTails, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Decision rules for test of hypothesis about an unknown mean using an estimated variance."}
+
+knitr::include_graphics("images/NormalTails.png")
+
+```
+
 
 <!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
 
+## Test of hypothesis about a mean when variance is known
 
+Suppose that methane production per unit milk production for US cows in the last 5 decades has a mean of 13 g/kg with variance of 9 g^2^/kg^2^. A new feed additive was tested in 16 randomly selected cows and resulted in emissions of 11.5 g/kg. Assuming that the treated population has the same variance as the untreated one, is there evidence that the treatment reduces emissions relative to the mean of the untreated population?
 
-## Confidence Intervals
+$$H_0: \mu \ge \mu_0 = 13 \ g/kg \qquad H_a: \mu < \mu_0 = 13 \ g/kg$$
 
-<!-- Include simulation or figure with known population parameters. Show 100 Ci's and how they distribute around the known mean. Include a comparison that shows the effect of sample size on the width of the CI's but not on the % correct. This is by design: the width is reduced to maintain the rate of correct statements. -->
+The population variance is known, therefore we use a z-test.
 
+$$\mu_0 = 13 \quad g/kg \qquad \bar{Y} = 11.5 \quad g/kg \qquad \sigma^2 = 9 \qquad r = 16\\[25pt]
+z_{calc} = \frac{\bar{Y} - \mu_0}{\sigma / \sqrt{r}} = \frac{11.5 - 13}{\sqrt{\frac{9}{16}}} = `r (11.5 - 13) / sqrt(9/16)`$$
 
-Another way to make statistical statements without conducting a hypothesis test is to use confidence intervals. A **confidence interval** is a range of values that has a known probability of containing the true value of an unkown parameter. Just like sample averages, confidence intervals vary from sample to sample. The level of confidence selected, or the probability that a randomly selected (because the sample is random) confidence interval (CI) contains the actual value of the parameter is the complement of the p-value: $1 - \alpha$. Thus, we use and refer to 95% and 99% confidence intervals. The confidence refers to the probability that any given sample yields an interval that actually brackes the parameter value. Once an interval is calculated, the parameter either is or is not in it, but we will never know.
 <br>
 
-For example, if you have known population parameters such as mean and standard deviation (i.e. $\sqrt \sigma^2$) the confidence intervals are calculated:
+The calculated z value of `r (11.5 - 13) / sqrt(9/16)` has to be checked for "significance." We can do this in two ways that are equivalent, shown in Figure \@ref(fig:LeftTailTestFig). First, the null hypothesis indicated a two-tailed test where the rejection region is the range of z values that have 5% of the area under the curve in the left of the normal distribution. Since we hypothesize that the new mean is greater than or equal to the untreated population mean, we reject it only if the calculated value is too low to be consistent with the null. The calculated z is compared to the standard normal quantile that corresponds to 0.05 on the left: `qnorm(p = 0.05)` = `r qnorm(p = 0.05)`. Because the calculated z = ` r (11.5 - 13) / sqrt(9/16)` is lower than the critical value of `r qnorm(p = 0.05)` we reject the null hypothesis.
 
-$$Lower Bound = \bar{Y} - z* \frac{\sigma}{\sqrt n}$$
-$$Upper Bound = \bar{Y} + z* \frac{\sigma}{\sqrt n}$$
-where *z** is the z-critical value, and at 95% confidence, equal to 1.96.
+Second, we can calculate the p-value or area under the curve on the left side of the calculated z. In R code that is `pnorm(q = -2)` = `r pnorm(q = -2)`. Because the probability is smaller than $\alpha$, we reject the null hypothesis and accept the alternative one.
 
-Say you want to estimate the mean length of the oldest leaf on a seagrass shoot collected from a nearby estuary. You collect 100 samples of seagrass shoots were with a mean length of 30 cm and a standard deviation of 3.2 cm. The confidence interval for these samples can then be calculated:
+<br>
+```{r LeftTailTestFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '70%', fig.align='center', echo=FALSE, fig.cap ="Area of rejection for a left-tailed test. Calculated z is less than the critical z, therefore, the null hypothesis is rejected."}
 
-$$\pm 1.96*(3.2\ cm\ /10) = 0.63 \ cm$$
+knitr::include_graphics("images/LeftTailTestFig.png")
 
-With a lower bound of 29.37 cm and an upper bound of 30.63 cm. We can state that there is a 95% chance that the confidence interval will contain the true mean of the population. Because we are using a frequentist approach, the rationale is that the average of samples of size 100 falls within 0.63 cm of the mean 95% of the time. If we extend "arms" that are 0.63 cm long from each average we calculate, the segment encompassed should contain the mean 95% of the time, in the long, long run. Just like when drawing marbles from a urn with white an dblue marbles there is a certain probability that it is blue, when we "draw" confidence intervals, there is a certain probability that they contain the mean. We make the confidence intervals such that the probability is 95% or other desired degree of certainty.
+```
+<br>
 
-Given the equation above either decreasing the standard deviation or incresing the sample size would reduce the margin of error (the lenght of the "arm" on each side of the average) and give a narrower range within which the true population mean lies. For any given standard deviation and sample size, the margin of error depends on the degree of certainty. The greater the certainty desired, the larger the z and the wider the CI. Obviously, the CI looks for a balance between width and certainty. One can be immediatley certain that the true mean is something between 0 and $+\infty$, but that would not be very helpful. By observing the sample we can eliminate values that are extremely unlikely and concentrate our guess of the mean value within a narrow section of the positive real numbers.
+Note that when the population variance is known, the test of the mean does not require that we know the individual values in the sample. We just need to know their averages.
 
-If you have a small sample size (e.g., <30), you would calculate a confidence interval based on the *t*-critical value which varies based on sample size and level of confidence (see z-table in appendix... ).
+## Test of hypothesis about a mean when variance is unknown
 
-The formula would be the same as above but replacing the *z*-critical value with the *t*-critical value:
+We will use the same example as above, except that we will not assume that the variance is known. Instead, we will use the following values from a sample of 16 cows that received the food additive: 
 
-$$CI = \bar{Y} \pm t* \frac{\sigma}{\sqrt n}$$.
+```{r cowMeth, echo=FALSE, message=FALSE}
 
+set.seed(121023)
+
+cow.meth <- data.frame(cow = 1:16, 
+                       methane = round(rnorm(16, mean = 11.5, sd = 4), 1), 
+                       ".    " = "")
+
+names(cow.meth)[3] <- ""
+
+methane <- cow.meth$methane
+
+kable(cow.meth, caption = "Grams of methane produced per kg of milk by a sample of US dairy cows that received a new feed supplement (fictitious data).") %>%
+   kable_styling(full_width = FALSE, position = "float_left", 
+                 bootstrap_options = c("striped", "condensed"),
+                 font_size = 12)
+
+```
+
+
+The sample standard deviation is used to estimate the population standard deviation. Because we are using an estimate of the standard deviation we need to use Student's t distribution.
+
+
+$$\bar{Y} = `r round(mean(methane), 2)`$$
+$$S_Y = `r round(sd(methane), 2)`$$
+$$t_{calc} = \frac{\bar{Y} - \mu_0}{S_y / \sqrt{r}} = \frac{`r round(mean(methane), 2)` - 13.0}{`r round(sd(methane), 2)` / \sqrt{16}} = `r (mean(methane) - 13)/(sd(methane)/sqrt(16))`$$
+
+This calculated t has to be compared to the critical value for a 5% left tail in a Student's t distribution with 16 - 1 = 15 degrees of freedom, $t_{critical} = `r qt(0.05, df = 15)`$. Because the calculated t is smaller than the critical t, we reject the null hypothesis.
+
+## Test of hypothesis about an unknown variance
+
+First of all, make sure that you understand that it would not make sense to talk about a test for the variance when the variance is known! For this example we hypothesize that the variance of the population that receives the feed additive is the same as the known variance of the untreated population. We use the same sample of 16 cows above.
+
+$$H_0: \ \sigma^2 = \sigma_0^2 = 9 \\[25pt]
+H_a: \ \sigma^2 \ne \sigma_0^2 = 9$$
+
+Under the assumption that sampling was random, that each observation is independent from the others and that the null hypothesis is true, the sum of squared deviations of a sample divided by the variance has a $\chi^2$ distribution with r-1 degrees of freedom. Because the null is an equality, the test is two-tailed and there is an area equal to 0.25 in each side of the curve.
+
+$$\chi^2_{calc} = \sum_{i = 1}^{16} \ \frac{(Y_i - \bar{Y})^2}{\sigma_0^2} = `r round(sum((methane - mean(methane)) ^ 2) / 9, 2)`$$
+
+The lower critical value is the 0.025 quantile of a $\chi^2$ with 15 df: $\chi^2_{Lcritical} = `r qchisq(p = 0.025, 15)`$, whereas the upper critical value is $\chi^2_{Ucritical} = `r qchisq(p = 0.975, 15)`$. Because the calculated value falls between the critical levels, we *cannot reject* the null hypothesis.
+
+<br>s
+```{r TwoTailedChisqFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="Area of rejection for a two-tailed test of an unknown variance. Calculated statistic value is greater than the lower critical level and less than the upper critical level, therefore, the null hypothesis cannot be rejected."}
+
+knitr::include_graphics("images/TwoTailedChisq.png")
+
+```
+<br>
+
+
+## Confidence Intervals for the Mean
+
+
+Another way to make statistical statements without conducting a hypothesis test is to use confidence intervals. A **confidence interval** is a range of values that has a known probability of containing the true value of an unknown parameter. Just like sample averages, confidence intervals vary from sample to sample. The level of confidence selected, or the probability that a randomly selected (because the sample is random) confidence interval (CI) contains the actual value of the parameter is the complement of the p-value: $1 - \alpha$. Thus, we use and refer to 95% and 99% confidence intervals. The confidence refers to the probability that any given sample yields an interval that actually brackets the parameter value. Once an interval is calculated, the parameter either is or is not in it, but we will never know.
+
+One way to visualize the relationship between confidence interval and population mean is to use a simulation with a population of known mean and variance. We simulate samples from the population and for each random sample we calculate a 95% confidence interval for the mean.
+
+
+<br>
+
+When the variance of the population is known the confidence intervals are calculated as follows:
+
+$$\text{Lower Boundary} = \bar{Y} - z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt r}$$
+$$\text{Upper Boundary} = \bar{Y} + z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt r}$$
+
+<br>
+
+where *z* is the z-critical value, which for a 95% confidence equals 1.96.
+
+We simulate a population of horseshoe wear, where the amount of horseshoe wear has a mean of 2 mm with standard deviation equal to 0.4 mm. We pretend that we do not know the mean and take random samples of size 9 from the population using the `rnorm` R function. For each sample we calculate the average and create a 95\% confidence interval. Those intervals are plotted about the true mean to determine the proportion that actually contains the true mean. This proportion is called "coverage" and it is expected to be equal to the confidence. The actual proportion may be different due to the random component in sampling, but it should approach the confidence level as the number of samples increases. In real samples, the difference between expected and real coverage is also affected by deviations from normality and independence assumptions.
+
+<br>
+```{r zCiCoverage, message=FALSE, fig.cap="Location of 100 confidence intervals about the true mean of a population. Population standard deviation is 0.4 and sample size = 9. Each CI is a vertical line. Red CI's do not include the true mean."}
+
+mean <- 2
+sd <- 0.4
+ssize <- 9
+
+set.seed(141149)
+
+samples <- matrix(rnorm(n = 900, mean = mean, sd = sd),
+                  byrow = TRUE, nrow = 100, ncol = 9)
+
+averages <- apply(samples, 1, mean)
+
+# Calculate CI boundaries using z distribution
+# because variance is known.
+ci.lo <- averages + qnorm(0.025) * sd / sqrt(ssize)
+ci.hi <- averages + qnorm(0.975) * sd / sqrt(ssize)
+
+ymin <- 0.90 * min(ci.lo)
+ymax <- 1.10 * max(ci.hi)
+
+ci.colors <- c("red", "blue")
+ci.color <- ci.colors[as.numeric(ci.lo < 2 & ci.hi > 2) + 1]
+
+plot(averages, xlab = "Sample", ylab = "95% CI", 
+     ylim = c(ymin, ymax), col = ci.color, pch = 16)
+
+abline(h = mean, col = "grey")
+
+segments(x0 = 1:100, y0 = ci.lo, y1 = ci.hi, col = ci.color)
+
+coverage <-  paste("Coverage = ", as.character(sum(ci.lo < 2 & ci.hi > 2)), "%", sep = "")
+
+text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
+
+```
+
+
+Given that the population standard deviation of the horseshoe wear is known to be 0.4 mm, and given that it is known that wear follows a normal distribution, then, we know that averages of samples of size r = 9 will have a normal distribution with mean equal to the true wear mean and standard deviation equal to 0.4/3. This means that, in the long run, 95% of the sample averages will fall within $1.96 \times 0.4/3 =$ mm (margin of error) of the true mean. Thus, if we extend "arms" that are 0.63 cm long from each average we calculate, the segment encompassed should contain the mean 95% of the time, in the long, long run. Just like when drawing marbles from a urn with white and blue marbles there is a certain probability that it is blue, when we "draw" confidence intervals, there is a certain probability that they contain the mean. We make the confidence intervals such that the probability is 95% or other desired degree of certainty.
+
+**Margin of Error of estimated mean when variance is known:**
+
+$$MOE = z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt r}$$
+
+Given the equation above either decreasing the standard deviation or increasing sample size would reduce the margin of error (the length of the "arm" on each side of the average) and give a narrower range within which the true population mean lies. For any given standard deviation and sample size, the margin of error depends on the degree of certainty $1-\alpha$ selected. The greater the certainty desired, the larger the z and the wider the CI. Obviously, the CI looks for a balance between width and certainty. One can be immediately certain that the true mean is something between $-\infty$ and $+\infty$, but that is not be very helpful. By observing the sample we can eliminate values that are extremely unlikely and concentrate our guess of the mean value within a narrow section of the real numbers.
+
+**Margin of Error of estimated mean when variance is NOT known:**
+
+$$MOE = t_{r-1, \ 1-\alpha/2} \cdot \frac{S}{\sqrt r}$$
+When the variance is not known, the test statistic has a Student's t distribution that depends on sample size. The t distribution has degrees of freedom that are equal to the divisor used to estimate the variance, r-1. In this cases, an increase in sample size has a positive impact in reducing the margin of error through two effects:
+
+- as before, increasing r reduces the $S / \sqrt{r}$ factor, and 
+- as r increases, degrees of freedom increase and the critical t value decreases.
+
+the impact of not knowing the variance on the Ci is illustrated by repeating the calculations for Figure \@ref(fig:zCiCoverage), but using each samples standard deviation and the t distribution instead of the known variance and the z distribution. Because of the additional uncertainty introduced due to not knowing the population variance, confidence intervals in Figure \@ref(fig:tCiCoverage) are wider than in Figure \@ref(fig:zCiCoverage).
+
+```{r tCiCoverage, message=FALSE, fig.cap="Location of 100 confidence intervals about the true mean of a population. Population variance is NOT known and sample size = 9. Each CI is a vertical line. Red CI's do not include the true mean."}
+
+mean <- 2
+sd <- 0.4
+ssize <- 9
+
+set.seed(141149)
+
+samples <- matrix(rnorm(n = 900, mean = mean, sd = sd),
+                  byrow = TRUE, nrow = 100, ncol = 9)
+
+averages <- apply(samples, 1, mean)
+ses <- apply(samples, 1, sd) / sqrt(ssize)
+
+# Calculate CI boundaries using z distribution
+# because variance is known.
+ci.lo <- averages + qt(p = 0.025, df = ssize - 1) * ses
+ci.hi <- averages + qt(p = 0.975, df = ssize - 1) * ses
+
+ci.colors <- c("red", "blue")
+ci.color <- ci.colors[as.numeric(ci.lo < 2 & ci.hi > 2) + 1]
+
+plot(averages, xlab = "Sample", ylab = "95% CI", 
+     ylim = c(ymin, ymax), col = ci.color, pch = 16)
+
+abline(h = mean, col = "grey")
+
+segments(x0 = 1:100, y0 = ci.lo, y1 = ci.hi, col = ci.color)
+
+coverage <-  paste("Coverage = ", as.character(sum(ci.lo < 2 & ci.hi > 2)), "%", sep = "")
+
+text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
+
+```
+
+## Confidence Intervals for the Variance
+
+In the section about [$\chi^2$ distribution](#chisqDist) we noted that the $\chi^2$ distribution is the distribution of a random variable created by summing the squares of multiple standard normal random variables. A little of work on the formula for the estimated variance using the sample variance shows that the estimated variance is a random variable with a distribution related to the $\chi^2$.
+
+<br>
+
+\begin{align}
+&\hat{\sigma}^2 = S^2 = \sum_{i = 1}^r \ \frac{(Y_i - \bar{Y})^2}{r - 1} \implies S^2 \ (r - 1) = \sum_{i = 1}^r \ (Y_i - \bar{Y})^2 \\[25pt]
+&\text{Because } Y_i \sim N(\mu, \sigma^2),\qquad (Y_i - \bar{Y}) \sim N(0, \sigma^2) \ \text{ and} \\[25pt]
+&\frac{(Y_i - \bar{Y})}{\sigma} \sim N(0, 1) \ \text{ is a standard normal random variable, and} \\[25pt]
+&\frac{S^2 \ (r - 1)}{\sigma^2} = \sum_{i = 1}^r \ \frac{(Y_i - \bar{Y})^2}{\sigma^2} \sim \ \chi^2_{r-1}
+\end{align}
+
+<br>
+
+Based on this result, we use the $chi^2_{r-1}$ distribution to make confidence intervals for the true variance based on the sample variance. By definition
+
+<br>
+
+$$P \left (\chi^2_{r-1, \ \alpha/2} \ \lt \frac{S^2 \ (r - 1)}{\sigma^2} \lt \chi^2_{r-1, \ 1 - \alpha/2} \right ) = 0.95$$
+
+<br>
+
+therefore, after taking the reciprocal of the expression, changing the direction of the inequalities to preserve their validity, and multiplying all parts by $S^2 \ (r - 1)$, we get
+
+<br>
+
+
+$$P \left (\frac{S^2 \ (r - 1)}{\chi^2_{r-1, \ 1 - \alpha/2}} \ \lt \sigma^2 \lt \frac{S^2 \ (r - 1)}{\chi^2_{r-1, \ \alpha/2}} \right ) = 0.95 \\[35pt]
+\text{Lower Boundary} = \frac{S^2 \ (r - 1)}{\chi^2_{r-1, \ 1 - \alpha/2}} \\[35pt]
+\text{Upper Boundary} = \frac{S^2 \ (r - 1)}{\chi^2_{r-1, \ \alpha/2}}$$
+
+
+<br>
+
+The construction of confidence intervals for the variance is illustrated with R and a plot of coverage is produced below. Note the asymmetry of confidence intervals, which stems from the asymmetry of the $\chi^2$ distribution.
+
+
+<br>
+```{r chiCiCoverage, message=FALSE, fig.cap="Location of 100 confidence intervals about the true variance of a population. Population variance is NOT known and sample size = 9. Each CI is a vertical line. Red CI's do not include the true variance"}
+
+mean <- 2
+sd <- 0.4
+ssize <- 9
+nsamples <- 100
+
+set.seed(141307)
+
+samples <- matrix(rnorm(n = ssize * nsamples, mean = mean, sd = sd),
+                  byrow = TRUE, nrow = nsamples, ncol = ssize)
+
+averages <- apply(samples, 1, mean)
+vars <- apply(samples, 1, var)
+
+# Calculate CI boundaries using z distribution
+# because variance is known.
+lo.chisq <- qchisq(p = 0.025, df = ssize - 1)
+hi.chisq <- qchisq(p = 0.975, df = ssize - 1)
+
+ci.lo <- vars * (ssize - 1) / hi.chisq
+ci.hi <- vars * (ssize - 1) / lo.chisq
+
+ci.colors <- c("red", "blue")
+ci.color <- ci.colors[as.numeric(ci.lo < sd^2 & ci.hi > sd^2) + 1]
+
+ymin <- 0.90 * min(ci.lo)
+ymax <- 1.10 * max(ci.hi)
+
+plot(vars, xlab = "Sample", ylab = "95% CI", 
+     ylim = c(ymin, ymax), col = ci.color, pch = 16)
+
+abline(h = sd^2, col = "grey")
+
+segments(x0 = 1:200, y0 = ci.lo, y1 = ci.hi, col = ci.color)
+
+coverage <-  paste("Coverage = ", 
+                   as.character(
+                      sum(ci.lo < sd^2 & ci.hi > sd^2) * 100 / nsamples), 
+                   "%", sep = "")
+
+text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
+
+```
+<br>
+
+
+We use the first sample obtained above to illustrate the calculation for a CI.
+
+<br>
+
+$$ Y = \{`r round(samples[1, ], 2)`\} \\[30pt]
+S^2 = `r round(var(samples[1, ]), 4)` \\[30pt]
+df = r-1 = 9 - 1 = 8 \\[30pt]
+\chi^2_{8, \ 0.975} = `r round(qchisq(p = 0.975, df = ssize - 1), 3)` \\[30pt]
+\chi^2_{8, \ 0.025} = `r round(qchisq(p = 0.025, df = ssize - 1), 3)` \\[30pt]
+\text{Lower Boundary } = `r round(var(samples[1, ]) * (ssize - 1) / qchisq(p = 0.975, df = ssize - 1), 3)` \\[30pt]
+\text{Upper Boundary } = `r round(var(samples[1, ]) * (ssize - 1) / qchisq(p = 0.025, df = ssize - 1), 3)` $$
+
+<br>
 
 ### Correct and incorrect interpretation of the Confidence Interval
 
 Example of a published incorrect interpretation of a confidence interval:
 
-"Owing to variation, we know the sample point estimate is not the true population value. Consequently, we add to it a statment indicating how far the point estimate is likely to be from the true value. One way is to supplement the point estimate by interval estimate. We can say, for example, that from the sample evidence we are confident that the number of farmers in Boone County who sprayed was between 345 and 736. By "confident" we mean that the probability is 95 chances in 100 that the interval from 345 to 736 contains the true but unknown number of farmers in Boone County who sprayed."
+"Owing to variation, we know the sample point estimate is not the true population value. Consequently, we add to it a statement indicating how far the point estimate is likely to be from the true value. One way is to supplement the point estimate by interval estimate. We can say, for example, that from the sample evidence we are confident that the number of farmers in Boone County who sprayed was between 345 and 736. By "confident" we mean that the probability is 95 chances in 100 that the interval from 345 to 736 contains the true but unknown number of farmers in Boone County who sprayed."
 
-This is incorrect because it takes the CI as constant and the mean as variable. The boundary values of the CI will change from one sample to another, they will not be fixed ar 345 and 736. The CI is the random range that changes. We know that based on the theory we expect 95 out of 100 confidence intervals to bracket the fixed true mean, and we know that the CI we actually calculated is one of those 100. Therefore, there is a 95% chance that the one we calculated brackets the mean.
+This is incorrect because it takes the CI as constant and the mean as variable. The boundary values of the CI will change from one sample to another, they will not be fixed at 345 and 736. The CI is the random range that changes. We know that based on the theory we expect 95 out of 100 confidence intervals to bracket the fixed true mean, and we know that the CI we actually calculated is one of those 100. Therefore, there is a 95% chance that the one we calculated brackets the mean.
 
-Correct interptretation of the confidence interval found in another page in the same statistics book [@SnedecorCochran1989]:
+Correct interpretation of the confidence interval found in another page in the same statistics book [@SnedecorCochran1989]:
 
 "When we make a 95% confidence interval statement, the population mean $\mu$ has a fixed but unknown value. The uncertainty attached to a confidence interval for $\mu$ comes from the variability in the sampling process. We do not know whether the confidence interval constructed from the data from any particular sample includes $\mu$ or not. We do know that in the long run 95% of the intervals will include $\mu$, and similarly, 95% of the statements that "$\mu$ lies between the lower and the upper limit"" will be correct"
 
@@ -263,7 +570,7 @@ The structure of decision making when testing of null hypotheses within a freque
 
 The logic behind test of null hypothesis is analogous to the following situation. Imagine that there are two jars with blue and yellow marbles. These jars represent the two possible cases: jar "Different" on the left is the case where we have different treatment means, whereas jar "Equal" on the right represents the case where all means are the same. One of the jars is the true situation available to be observed, the jar from which the marbles are selected at random, representing the process of collecting data. However, we do not know which one is being observed. We just know what the jars have inside, which represents the two possible states of reality, means equal or means different. The observation/experimentation process does not allow us to see the "real" jar, but we get a sample of what it has inside. Of course, we can only sample or partially observe the "real" situation. You can think that the hypothesis being "The jar sampled (the real situation) has mostly yellow marbles." This is equivalent, in the example, to hypothesizing that the means are equal, because the jar "Equal" has 80% yellow marbles.
 
-On the outside, the jars are identical and you cannot see inside. The "Different" jar has 90% blue marbles, whereas the "Equal" jar has only 20% blue marbles. Suppose that the number of marbles is large enough that the probabilities are not affected by the removal of marbles, or that the marbles are returned to the jar after observing them. Only one jar is available to sample from, depending on whether the true but unknonw means are different or not, but you do not know which one. You sample 5 marbles and they are all blue. Did you sample from "Different" or "Equal?" The null hypothesis is that the means are equal, which in the analogy signifies that the hypothesis is that we sampled the jar on the right labeled E for "Equal." We cannot know for sure where the marbles came from, because there are both blue and yellow marbles in both jars.
+On the outside, the jars are identical and you cannot see inside. The "Different" jar has 90% blue marbles, whereas the "Equal" jar has only 20% blue marbles. Suppose that the number of marbles is large enough that the probabilities are not affected by the removal of marbles, or that the marbles are returned to the jar after observing them. Only one jar is available to sample from, depending on whether the true but unknown means are different or not, but you do not know which one. You sample 5 marbles and they are all blue. Did you sample from "Different" or "Equal?" The null hypothesis is that the means are equal, which in the analogy signifies that the hypothesis is that we sampled the jar on the right labeled E for "Equal." We cannot know for sure where the marbles came from, because there are both blue and yellow marbles in both jars.
 
 <br>
 <br>
@@ -304,23 +611,57 @@ Essentially, we say that events with low probability did not occur.
 
 <!-- ** Add shiny for students to run simulations of draws from randomly selected urns and the be shown the true urn. Use probabilities such that they can explore both types of errors. Assign homework where they explore the rates of errors as a function sample size and probabilities.** -->
 
+<!-- A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is used when whe have more than one pair of parameters, comparison of two population means is used when we have just two parameters, and a single population test is used when one of the values is a known number. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption). -->
 
 
-+++++++++++++++++++++++++++++
-A lot of the course contents can be reduced to comparing two unknown parameters. ANOVA is used when whe have more than one pair of parameters, comparison of two population means is used when we have just two parameters, and a single population test is used when one of the values is a known number. Therefore, the concept of comparing two means generalizes to ANOVA and becomes more specific in one population mean. The equations are all versions of the same general concept: from two random variables (one for each parameter estimate) we build a single random variable (the difference between estimates) and estimate its variance. In all cases the best estimate of the variance of the experimental error is the MSE, the pooled within group variance. The variance of the new single random variable is derived directly from the MSE. For example, in one-population one of the estimated parameters has variance 0 ($\mu$ is known) and there is a single group for the other one, so the MSE is equal to the sample variance, and the variance of the estimated parameter follows direclty from the most important formula for PLS 120, which is simply a rehash of the variance for the sum of independent random variables, where independence is obtained by sampling (assumption).
 
-+++++++++++++++++++++++++++++
 ## Types of Errors in Hypothesis testing
 
 ```{block, type = 'stattip'}
 - Even when everything is done correctly and assumptions are met, we are expected to make errors in hypothesis testing. We will reject true null hypothesis and fail to reject false ones. Statistics gives us methods to estimate and set the approximate rates at which we makes different types of mistakes. If assumptions are not valid, or methods are applied incorrectly we will make mistakes with unknown frequency.
 ```
 
+Two types of errors can be made when properly testing hypotheses in with frequentist methods (Figure \@ref(fig:TypesOfErrors)). A true null hypothesis may be incorrectly rejected (Error type I) or a false null hypothesis may not be rejected (Error type II). The probability of making an Error type I is $\alpha$, because alpha is the probability of observing calculated statistics in the rejection range of values *when the null hypothesis is TRUE*. Therefore, by setting the value of $\alpha$ we are setting the rate of Error type I.
+
+<br>
+```{r TypesOfErrors, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Error types in hypothesis testing. Errors can be though of as analogous to trial decisions where the consequence of convicting an innocent person is highly undesirable."}
+
+knitr::include_graphics("images/TypesOfErrors.png")
+
+```
+<br>
+
+
+The probability of making an Error type II is called $\beta$. Its complement, the probability of NOT making an error type II is called "power." Thus, power = $1 - \beta$. Unlike $\alpha$, modifying $1 - \beta$ is harder. Power in a test of the null hypothesis that a mean is equal to a present number depends on four factors:
+
+1. Variance of the population.
+
+2. Sample size.
+
+3. Difference between the true and the hypothesized mean.
+
+4. Selected value for $\alpha$.
+
+Power decreases with increasing variance and it increases with increasing sample size, difference between true and hypothesized mean, and $\alpha$.
+
+
+<br>
+```{r PowerFigure1, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '100%', fig.align='center', echo=FALSE, fig.cap ="Effect of sample size on power of a test that the mean of a population equals 50 or less when variance is known and the true mean is 60. The orange area represents the probability of error type I and the blue area is the probability of error type II."}
+
+knitr::include_graphics("images/PowerFigure1.png")
+
+```
+<br>
+
+
+
 ## Pitfalls to avoid
 
 Avoid the following statements or concepts:
 
 "The probability that the null hypothesis is correct is 0.95."
+
+"The probability that the null hypothesis is correct is 0.05."
 
 "We accept the null hypothesis."
 
@@ -338,34 +679,192 @@ Avoid the following statements or concepts:
 
 ## Exercises and Solutions
 
-Exercises for lecture
+### Exercise
 
-Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value. Count how many people reject the true null.
+Generate 200 random samples from the same population and test the null hypothesis that the mean is equal to the true value. How many time is the null hypothesis incorrectly rejected? What is the expected number of times that it will be rejected?.
 
-Generate a random sample from the same population for each student and have them test the null hypothesis that the mean is equal to the true value + $\delta$. Count how many people reject the true null. Then, make a graph on the board showing the proportion of students that rejected Ho as delta increases. What should the graph look like? Plot against the theoretical t-distribution.
+Solution:
 
-## Pitfalls to avoid
+We choose to select samples of size 4 from a population with normal distribution, mean equal to 50 and variance equal to 16. We set $alpha$ to 0.05 and make a two-tailed test.
 
-Avoid the following statements or concepts:
+<br>
+```{r}
 
-"The probability that the null hypothesis is correct is 0.95."
+# Calculate the critical z value.
+zcrit <- qnorm(p = 0.05/2)
 
-"We accept the null hypothesis."
+# Generate 200 samples of size 4, or 800 random normal numbers
+# and format as a matrix with one column per observation and
+# one row per sample.
+set.seed(131649) # set seed to get always the same random numbers.
+samples <- matrix(
+   rnorm(n = 800, mean = 50, sd = sqrt(16)), 
+   nrow = 200, byrow = TRUE)
 
-"There is a statistically significant difference, therefore there is something interesting and important to discuss and or report."
+# Apply a function to each row. The function finds the calculated
+# z score for each row and compares it to the critical z.
+results <- apply(samples, 1, FUN = function(x) {
+   abs((mean(x) - 50) / sqrt(16/4)) > abs(zcrit)
+})
 
-## Facts to remember
+# Show the vector of tests. TRUE means Ho was rejected.
+results
 
-- Any null hypothesis will be rejected if it is tested enough times, because there are always samples for which the null is rejected. Cure: look at all studies done, not just those published, which are heavily biased towards significance. At least, look at many published studies. Publish negative results. Publish data.
+# Print results in normal English.
+print(paste("The true null hypothesis was rejected in ", as.character(sum(results) / 2), " % of the tests"))
 
-- With enough sample size almost any null hypothesis of equality will be rejected, because no two parts of the world are exactly the same. Of course, if we sample exactly the same population, then we will not reject $H_0$. Cure: Test whether differences are greater than a value that has practical, theoretical or biological significance.
+```
+<br>
 
-- Originally, statistical significance was designed to be an indicator that there was probably something interesting warranting further investigation. Statistical significance was the start of the work, not the end. Cure: Value and promote replication of experiments in multiple labs.
+By definition, the probability of rejecting a true null hypothesis is $alpha$. We expect the number of rejections to be 5% of the tests. 
 
-- Data are fact, except for errors of measurement or transcription. Interpretations and models are ephemeral; they can be disproved and improved.
+
+
+### Exercise
+
+Generate 200 random samples from the same population and test the null hypothesis that the mean is equal to the true value $\pm \delta$ for each one of them. Count how many times the true null is rejected. Plot the proportion of times that Ho is rejected as delta increases. What should the graph look like? Plot against the theoretical t-distribution.
+
+Solution
+
+The probability of rejecting the false null hypothesis is the power of the test. When the true mean is almost equal to the hypothesized mean, the probability of rejection tends to equal $\alpha$. As the difference $\delta$ increases in absolute value, power increases and approaches 1.0. The shape of the curve should be the same as distribution function for the normal, because power is the area under the right side of a normal as it slides away from a critical value.
+
+<br>
+```{r}
+
+# Prepare a data frame to receive results
+plot.data <- data.frame(delta = (1:200)/20, prop.rejected = NA)
+
+# Calculate the critical z value.
+zcrit <- qnorm(p = 0.05/2)
+
+# Repeat for many values of delta
+for (i in 1:200) {
+# Generate 200 samples of size 4, or 800 random normal numbers
+# and format as a matrix with one column per observation and
+# one row per sample.
+samples <- matrix(
+   rnorm(n = 800, mean = 50 + i / 20, sd = sqrt(16)), 
+   nrow = 200, byrow = TRUE)
+
+# Apply a function to each row. The function finds the calculated
+# z score for each row and compares it to the critical z.
+plot.data$prop.rejected[i] <-
+   sum(apply(samples, 1, 
+      FUN = function(x) {abs((mean(x) - 50) / sqrt(16/4)) > abs(zcrit)}))/200
+}
+
+plot(plot.data$prop.rejected ~ plot.data$delta, type = "l",
+     xlab = "Difference between Ho and true mean.",
+     ylab = "Power or probability of rejecing the false Ho.")
+
+```
+<br>
+
+### Exercise
+
+A population of pears is known to have individual pear mass with a normal distribution with mean of 200 g and standard deviation equal to 18 g. Pears that weigh less than 180 g are used for processing and the larger ones are sold fresh. What proportion of the pears is used for processing?
+
+<br>
+```{r PearRejects1, message=FALSE, warning=FALSE, out.width = '60%', fig.align='center', fig.cap ="Proportion of pears that are used for processing because they are too small."}
+
+left.tail(mean = 200, 
+          sd = 18, 
+          p = pnorm(q = 180, mean = 200, sd = 18), 
+          lblx = "180 g")
+
+# Proportion rejected is:
+
+pnorm(q = 180, mean = 200, sd = 18)
+
+```
+<br>
+
+### Exercise
+
+A population of pears is known to have individual pear mass with a normal distribution with mean of 200 g and standard deviation equal to 18 g. What should be the lightest pear accepted if the lowest 10% is to be rejected?
+
+<br>
+```{r PearRejects2, message=FALSE, warning=FALSE, out.width = '60%', fig.align='center', fig.cap ="Left 10% of pears that are to be rejected."}
+
+left.tail(mean = 200, 
+          sd = 18, 
+          p = 0.10, 
+          lblx = "what is this value?")
+
+# The value that leaves 10% below is:
+
+qnorm(p = 0.1, mean = 200, sd = 18)
+
+```
+<br>
+
+### Exercise
+
+Ten pears are selected at random from the same population. What is the probability that 3 or more will be rejected if all pears lighter than `r round(qnorm(p = 0.1, mean = 200, sd = 18), 3)` g are rejected?
+
+Solution
+
+The probability of rejection is constant, and pears are selected independently from each other. Therefore, the number of rejected pears in a set number of 10 trials should follow a binomial distribution. It is simpler to calculate the complement probability of rejecting 0, 1 or 2 and subtract from 1 than to calculate and sum the probabilities of 3, 4, ... 10.
+
+$$P(r \ge 3) = 1 - P(r \le 2) = 1 - \sum_{i = 0}^2 \ C^{10}_i \ 0.10^i \ q^{10-i} \\[25pt]
+= 1 - 1 \times 0.10^0 \times 0.90^{10} + 10 \times 0.10^1 \times 0.90^{9} + 45 \times 0.10^2 \times 0.90^{8} \\[25pt]
+= `r round(1 - pbinom(q = 2, prob = 0.10, size = 10), 4)`$$
+
 
 
 ## Homework
+
+
+### Calculate a normal probability
+
+A population of soybean yields in fields in Southern Brazil is known to have a normal distribution with mean equal to 3500 kg/ha and standard deviation equal to 500 kg/ha. What is the proportion of fields that have yields between 3000 and 4500 kg/ha?
+
+This is the area under a normal pdf with mean 3500 and sd 500 and between 3000 and 4500. In R, I calculate this as the area under the curve for values lower than 4500 minus the area under the curve for values lower than 3000: `pnorm(q = 4500, mean = 3500, sd = 500) - pnorm(q = 3500, mean = 3500, sd = 500)`. If I have to use a z table where only right tail areas are given for the SND, I reason as follows: the area below 4500 in a normal with mean 3500 and sd 500 equals the area under the SND below (4500 - 3500)/500 = 2, which is equal to 1 - area above 2. Find the area above 2 in the table and subtract it from 1. The result is 0.9772499. Then I find the area under the curve to the left of 3000. Standardized, 3000 become (3000 - 3500)/500 = -1. Because of the symmetry of the standard normal distribution, the area under the curve to the left of -1 (which is not shown in the table) is the same as the area under the curve above +1, which you can look up in the table, and is equal to 0.1586553.
+
+Therefore, the answer to the question is 0.9772499 - 0.1586553 = 0.8185946.
+
+What is the proportion of fields that have yields between 2500 and 4000 kg/ha? You can use R, a table or any other method to get the answer. Specify how you obtained the answer.
+
+```{r eval=FALSE}
+answer1 <-  # <- type your answer there, to the left of the # symbol; use 4 decimals
+```
+
+
+### Calculate a normal quantile
+
+Fields in the lower 10-percentile are eligible for subsidies. What is the highest yield that a field can have to qualify for a subsidy?
+
+This can be solve by direclty asking R for the quantile that corresponds the lowest 10 percentile:
+`qnorm(p = 0.10, mean = 3500, sd = 500)` = 2859.224
+
+What is the highest yield that a field can have to qualify for a subsidy?
+
+```{r}
+answer2 <- NA # <- delete the NA and type your answer there,
+# on the left of the # symbol; use 4 decimals
+```
+
+
+### Calculate a Student's t probability
+
+Nine rats were randomly selected from a population of laboratory rats. Each rat was tested in a spatial memory maze and the time necessary for the rat to exit the maze was recorded. Maze times recorded for the 9 rats in seconds were: 94.5, 104.7, 97.9, 103.4, 99.1, 95.2, 88.3, 105.1, 98.0.
+
+A vector with the values can be made in R using the `c()` function. For example, 
+`v1 <- c(1 ,4 , 2)`
+makes a vector with the numbers 1, 4, 2 and puts it into an object called "v1."
+
+With the R code `t. avg <- mean(v1)` we obtain the sample average and put it into `t.avg`.
+
+
+### Calculate a Student's t quantile
+
+### Test a hypothesis about a mean when variance is known
+
+### Test a hypothesis about a mean when variance is unknown
+
+### Make a confidence interval for the mean with known variance
+
+### Make a confidence interval for the mean with known variance
 
 ## Laboratory Exercises
 
@@ -841,7 +1340,7 @@ Y5 <- rnorm(n = 5,
             sd = 1)
 
 # obtain 50 random numbers
-Y50 <- rnorm(n=50,
+Y50 <- rnorm(n = 50,
              mean = 0,
              sd = 1) # obtain 50 random numbers
 
