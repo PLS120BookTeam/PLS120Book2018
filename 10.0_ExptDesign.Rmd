@@ -22,9 +22,23 @@ See "TeachingExperimentalDesign2014.pdf"
 >
 >Gary W. Oehlert, 2010
 
-Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments were not assigned independently of other characteristics of experimental units. For example, consider the comparison of susceptibility to the common cold between people who exercise regularly and sedentary people. Any difference detected cannot be attributed to exercise, because it may be that colds and exercise are unrelated but have a common cause. It may be that people who have to work more indoors exposed to contagion also have less time to exercise. Work indoors causes both more colds and less time to exercise. Changing the level of exercise will not change the incidence of colds unless it also reduces the time people spend indoors exposed to contagion.
+
+## Estimators and Sampling Bias
+
+In chapter 6 **estimators** were introduced as stastitics that estimate parameters. When collecting samples from a popualtion, this data is then used to calculate estimators such as mean and variance (calculation of moments: see Chapter 6), which can then be used to infer population paramters and draw conclusions about the popualtion based on the calculated estimators from the sample. When calculating a sample mean, this should be an *unbiased* estimator and truley represent the true popualtion mean. A biased estimator would be if the *expected value* is not equal to *true* parameter, and either under- or overestimates the true parameter. When collecting samples from a popualtion, specific biases can be introduced and result in the estimators calculated from the sample being biased. Some are as follows:
+
+*Selection bias* When samples are selected in a non-random way or when a specific subset of the popualtion is sampled. Either of these methods introduces nonrepresentative samples of the true popualtion. When sampling, it is crucial that the sample represents the popualtion and, therefore, a random sample is an appropriate method when collecting samples as a way to avoid selection bias.
+
+*Observer bias* When an individual evaluates or collects the data and imposes a subconscience expectation on what the pattern or result(s) should be. When an indiviual projects their expectations on how the data is collected, recorded, or interpreted, observer bias interfers with an estimator truely representing the population parameter. 
+
+*Survivorship bias* When the sample data being evaluated has already been filtered through a selection process of some sort. This could be a subset of the true popualtion where only the "survivors" are selected or analyized. For example, say you were trying to determine the average weight of adult chinook salmon that inhabit a certain range of the Northern Oregon coast. A fishing weir (sbarrier built across a stream to trap fish) is setup at the river head and fish are weighed as they cross the weir. The issue here is that you are only sampling surviving adults before they breed while you are trying to estimate the weight of all adult chinook salmon in this region. It is likely that the fish weighed at the head of the river have lost quite a bit of weight during migration and are therefore not representative of all adult chinook. 
+
+Ways to avoid estimator bias are by taking a true random sample, having a large sample size, and/or taking multiple random samples. To insure a true random sample is selected, a randomizing mechanism is needed. This could simply be a random number generator. There are built-in functions in R and Excel that will perform the task. 
+
 
 ## Experimental Design and Treatment Structure
+
+Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments were not assigned independently of other characteristics of experimental units. For example, consider the comparison of susceptibility to the common cold between people who exercise regularly and sedentary people. Any difference detected cannot be attributed to exercise, because it may be that colds and exercise are unrelated but have a common cause. It may be that people who have to work more indoors exposed to contagion also have less time to exercise. Work indoors causes both more colds and less time to exercise. Changing the level of exercise will not change the incidence of colds unless it also reduces the time people spend indoors exposed to contagion.
 
 Experimental design in the narrow sense refers to the arrangement of experimental units and the manner in which treatments are assigned to experimental units. Experimental design determines the sources of errors and the apportioning of variance to typically uninteresting sources such as blocks.
 
@@ -40,6 +54,8 @@ Oehlert (2010) provides the following definitions which are presented here with 
 *Treatments* are the different procedures we want to compare. These could be different kinds or amounts of fertilizer in agronomy, different long-distance rate structures in marketing, or different temperatures in a reactor vessel in chemical engineering.
 
 *Experimental units* are the things to which we apply the treatments. These could be plots of land receiving fertilizer, groups of customers receiving different rate structures, or batches of feedstock processing at different temperatures.
+
+*Replication* is the replication of the experimental condition, and is accomplished by repeating the experiment or having multiple replicates of the experimental unit. This is not to be confused by making multiple measurements on the same experimental unit, which referred to as reapeated measures. Rather, replication accounts for *variability* across individual experimental units and which will have intrinsic differences. Thus, replication is a way to avoid concluding a result based on the random variation of one experimental unit. 
 
 *Responses* are outcomes that we observe after applying a treatment to an experimental unit. That is, the response is what we measure to judge what happened in the experiment; we often have more than one response. Responses for the above examples might be nitrogen content or biomass of corn plants, profit by customer group, or yield and quality of the product per ton of raw material.
 
@@ -61,8 +77,153 @@ Oehlert (2010) provides the following definitions which are presented here with 
 
 *Confounding* occurs when the effect of one factor or treatment cannot be distinguished from that of another factor or treatment. The two factors or treatments are said to be confounded. Except in very special circumstances, confounding should be avoided. Consider planting corn variety A in Minnesota and corn variety B in Iowa. In this experiment, we cannot distinguish location effects from variety effects—the variety factor and the location factor are confounded.
 
+## Designing and Experiment
+
+Putting all the components togther with respect to randomized design, control, replication, and factors, the below examples show some of the multiple ways to properly and improperly design an experiment (\@ref(fig:NO_rep)) - (\@ref(fig:Random)). Say you want to run an experiment that examines the effetcs of elevated temperature on adult hard clam feeding rates. For the experiment clams are held in individual tanks and the temperature is either raised by 5 \deg C or not manipulated at all (ambient). In this design, raising the temperature by 5 \deg C is the treatment and the clam inside the tank (including the tank) is the experimental unit. The tanks held at ambient temperatures are the controls, and the three tanks at ambient or + 5\deg C are the replicates.       
+
+<br>
+
+```{r NO_rep, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of an experimental design without replication."}
+
+knitr::include_graphics("images/NO_rep.pdf")
+
+```
+
+<br>
+
+<br>
+
+```{r Clump_and_seg, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of an experimental design that is clumped and segregated."}
+
+knitr::include_graphics("images/Clump_and_seg.pdf")
+
+```
+
+<br>
+
+<br>
+
+```{r systematic, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of an experimental design that is completely randomized."}
+
+knitr::include_graphics("images/systematic.pdf")
+
+```
+
+<br>
+
+<br>
+
+```{r Random, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Example of an experimental design that is completely randomized."}
+
+knitr::include_graphics("images/Random.pdf")
+
+```
+
+<br>
+
+In the above examples, the two poorly designed experiments are the "no replication" and the "clumped and segregated design." Without replication, it is unclear whether the the response of the experimental unit was due to inherent variability among clams, or a response to the treatment. The clumped and segregated design is unclear as well. Say you placed all tanks in a large sea table with a shallow layer of flowing water around the individual tanks. The segregated design permits for the possibility of the experimental unit to respond different across space. That is, if there is an inherent difference in the temperature, light, or some other factor that varies across space (across the length of the sea table), there is no way to determine if the observed response was due to the potential spatial variability in the design setup, or from the treatment. In order to resolve this potential issue, experimental units must be interspersed. This is accomplished by either the systematic design, or the completely randomized design. There is a small possibility that the spacing between experimental units in the systematic design is prone to a periodic variability of the experimental area, but this probability is very small. Due to this minor flaw in the systematic design, a completely randomized design is the best approach for an experimental setup. 
+
+While the above examples only show one treatment and a control, it would be simple to add more treatments to this design. Say we were interested in looking at the progressive inincrease of temperature on adult clam feeding rates. In this case you could add a plus 2.5 \deg C and 7.5 \deg C treatment. This would give a better idea of response to the increase of 2.5 \deg C and allow for the comparsion of among treatment variability by conducting an ANOVA (see chapter 9). 
 
 ## Exercises and Solutions
+
+1) The following data resulted from an experiment with 4 treatments and 3  replicates per treatment. The experimental design was a completely randomized design. Treatments were 4 levels of P fertilization, and the response was grain yield in tons per acre.
+
+
+|  Trt    |  rep. 1  |  rep. 2  |  rep. 3  |  Trt avg | 
+|--------:|:--------:|:--------:|:--------:|:--------:|
+| 10 kgP  |   1.05   |   1.13   |   1.04   |   1.07   |
+| 20 kgP  |   1.82   |   1.51   |   1.23   |   1.52   |
+| 30 kgP  |   1.99   |   1.73   |   2.07   |   1.93   |
+| 40 kgP  |   2.12   |   2.25   |   2.13   |   2.17   |
+
+|  Trt    |  True mean |   Sigma  |     
+|--------:|:----------:|:--------:|
+| 10 kgP  |    1.00    |   0.03   |    
+| 20 kgP  |    1.60    |   0.03   |     
+| 30 kgP  |    1.90    |   0.03   |      
+| 40 kgP  |    2.00    |   0.03   |    
+
+
+Get Average of all observations $\bar{Y}_{..}$ from the table above.
+```{r}
+
+Trt.avg <- c(1.073, 1.523, 1.93, 2.167) # Mean values of each treatment 
+Overall.mean <- mean(Trt.avg) # Mean of treatment means 
+```
+
+```{r}
+Trt <- c("10kgP","20kgP", "30kgP", "40kgP" )
+
+Y11 <- 1.05 #Value for ith row (1) and jth column (1) in above table
+Y12 <- 1.13 #Value for ith row (1) and jth column (2) in above table
+Y13 <- 1.04 #Value for ith row (1) and jth column (3) in above table
+
+Y21 <- 1.82 #Value for ith row (2) and jth column (1) in above table
+Y22 <- 1.51 #Value for ith row (2) and jth column (2) in above table
+Y23 <- 1.23 #Value for ith row (2) and jth column (3) in above table
+
+Y31 <- 1.99 #Value for ith row (3) and jth column (1) in above table
+Y32 <- 1.73 #Value for ith row (3) and jth column (2) in above table
+Y33 <- 2.07 #Value for ith row (3) and jth column (3) in above table
+
+Y41 <- 2.12 #Value for ith row (4) and jth column (1) in above table
+Y42 <- 2.25 #Value for ith row (4) and jth column (2) in above table
+Y43 <- 2.13 #Value for ith row (4) and jth column (3) in above table
+
+```
+Create vector of all observations ordered by replicate
+```{r}
+Yijs <- c(Y11, Y21, Y31, Y41, Y12, Y22, Y32, Y42, Y13, Y23, Y33, Y43) #Use combine function to create obersvation vector
+```
+
+Calculate total sum of squares: $(Y_{ij} - \bar{Y}_{..})^2$
+```{r}
+Yij.minus.Ybar.. <- (Yijs - Overall.mean)^2
+TSS <- sum(Yij.minus.Ybar..)
+```
+Calculate sum of squares for treatment $(\bar{Y_i}_{.} - \bar{Y}_{..})^2$
+
+```{r}
+Ybari.minus.Ybar.. <- (c(Trt.avg, Trt.avg, Trt.avg) - Overall.mean)^2
+SST <- sum(Ybari.minus.Ybar..)
+
+```
+Calculate mean square of treatments: $SST/(k-1)$
+```{r}
+MST <- SST/(4-1) # k equals the number of treatments
+```
+Calculate sum of squres error: $(Y_{ij} - \bar{Y_i}_{.})$
+```{r}
+Yij.minus.Ybari. <- (Yijs - c(Trt.avg, Trt.avg, Trt.avg) )^2
+SSE <- sum(Yij.minus.Ybari.)
+```
+Calculate mean square of the error: $SSE/k(r-1)$
+```{r}
+MSE <- SSE/(4*(3-1)) #  k equals the number of treatments and r eqauls the number of replicates
+```
+Create ANOVA Table
+
+```{r}
+# define degrees of freedom
+dftr <-3 #Treatment
+dfe <- 8 #Error
+dft <- 11 #Total
+
+dfs <- c(dftr,dfe,dft)
+
+Labels <- c("Treatments", "Error", "Total")
+P<- pf((MST/MSE), dftr, dfe, lower.tail = FALSE)
+Fstat <-MST/MSE
+
+Table <- data.frame(Source = Labels, 
+                    df = dfs, 
+                    SS = c(SST, SSE, TSS), 
+                    MS = c(MST, MSE,""),
+                    Fcalc = c(Fstat, "",""),
+                    PValue = c(P,"",""))
+pander(Table) 
+```
 
 ## Homework
 
