@@ -1,8 +1,33 @@
 ---
-output: html_document
-editor_options: 
+editor_options:
   chunk_output_type: console
+output:
+  html_document: default
+  pdf_document: default
 ---
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
+# load packages for chapter
+options(scipen = 999)
+options(digits = 10)
+library(bookdown)
+library(emmeans)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(tables)
+library(pander)
+library(multcomp)
+library(agricolae)
+library(nlme)
+library(car)
+library(tidyr)
+
+```
+
+
+
 # ANOVA with Blocks {#chRcbd}
 
 See RCBD_Equations in Notability.
@@ -20,6 +45,136 @@ See RCBD&ExpDesign in ExplainEverything
 1. Calculate F ratios for the groups and blocks.  
 1. Compare the effects of analyzing data with and without blocks.
 1. Interpret the results of the RCBD ANOVA and answer the relevant research questions.
+
+##Randomized Complete Block Design
+
+In chapter 9 we discussed the approach of using an Analysis of Variance (ANVOA) when comparing multiple treatments from a complete randomized experimental design (CRD). This chapter will look at the experimental design referred to as a randomized complete block design (RCBD). The objective of the block design is to account for outside variability that may affect the experiment, but is not controlled for in the orgiinal design. For example, say a *two-way* ANOVA (i.e., examination of two independent factors on a dependent variable) aapproach was applied to examine the effects of fertilizer and irrigation on  plots of wildgrass growth in a large field. Given the intrinsic variability of differences in the feild (e.g., soil composition, slope, irradiance), blocks may be used to minimize these exteraneous factors of variability among the plots within groups (i.e., blocks). The main objective is to reduce the experimental error within each block, thus providing a more robust treatment effect as external confounding effects are reduced by the design.
+
+In **Randomized Complete Block Design** (RCBD) each block will contain a complete set of treatments (e.g., one replicate from *each* treatment in one block), thus any difference among blocks will not be a result of a specific treatment. The variability associated with each block can then be estimated as a seperate source of variation for the complete design. The advantage here is that by accounting for this sepertae "block variation" from the design, a significant portion of experimental error will be removed, and treatment effects may be pronounced during analysis. That is, the greater variability among blocks, the more robust the design becomes. However, if there is no indication of the field having a significant source of intrinsic variability--as in the example stated above--a completely randomized design (CRD) would be more efficent. This is becasue the CRD without blocks has more degrees of freedom applied to the within treatment differences. 
+
+When designing an experiment with blocks, the goal is to provide uniformity of the experimental unit within blocks. For example, if performing an experiment on clams, grouping clams according to size class would be an appropriate characteristic to group. Alternatively, for plants, a grouping characteristic may be equal-sized plots within the field that span a known variation in the topography, such as gradual slope. Once experimental units have been seperated into blocks, treatments are assigned randomly within a block, for each block. For example, say juvenile clams at three different size classes (1--2, 4--5, 8--9 mm in shell length) were blocked and three treatment levels of temperature were appllied to examine feeding rates. In this design, 1 replicate at each treatment level (a-c) was randomly assinged to a block (\@ref(fig:blockdesign)).  
+
+<br>
+
+```{r blockdesign, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Juvenile clam feeding rates examined at (a) ambient temperature, (b) +2 °C, and (c) +5 °C."}
+
+knitr::include_graphics("images/blockdesign.pdf")
+
+```
+
+<br>
+
+## Model and Partitioning of Variance with Blocks
+
+In analysis of variance we use data to calculate the total variation among observations: variation between groups and variation within groups. When we incorporate blocks into an ANOVA, variability *within* is now split between "blocks" and "within" (\@ref(fig:SSblock)). 
+
+<br>
+
+```{r SSblock, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '50%', fig.align='center', echo=FALSE, fig.cap ="Sum of squares breakdwon for ANOVA with randomized complete block design."}
+
+knitr::include_graphics("images/SSblock.pdf")
+
+```
+
+<br>
+
+Recall that we can use a linear equation to calculate the value of any observation in the experiment. When we assign each r replicate of each k treatment randomly to each b block, we have constructed a "Randomized Complete Block Design." The model for this design states that each observation is a random draw from a normal distribution and the linear model is additive where the treatment mean is the overall mean plus a treatment and block effect. The model is written as follows:
+
+<br>
+\begin{align}
+&Y_{ij} = \mu_{..} + \tau_i + \beta_j + \epsilon_{ij} \quad \quad i = 1, \dots, k, \quad j = 1, \dots, r \\[10pt]
+&\epsilon_{ij} \sim iid \ N(0, \sigma^2) \\[15pt]
+&\quad \quad \text{where} \\[15pt]
+&\mu_{..} \quad \text{is the overall mean} \quad \mu_{..} = \frac{1}{k}\sum_{i = 1}^{k} \mu_{i.}\\[15pt]
+&\tau_i \quad \text{is the effect of treatment i } \\[15pt]
+&\beta_j \quad \text{is the effect of blocks j } \\[15pt]
+&\epsilon_{ij} \quad \text{is the experimental error for treatment i and replicate j} \\[15pt]
+& iid \quad \text{means "independent and identically distributed"}
+(\#eq:modelCRD)
+\end{align}
+<br>
+
+
+When we do not know the parameters of the actual distributions, which is usually the case, parameters are estimated and each observation is partitioned as follows:
+
+<br>
+\begin{align}
+&Y_{ij} = \hat{\mu}_{..} + \hat{\tau}_i + \hat{\beta}_j + \hat{\epsilon}_{ij} \\[10pt]
+&= \bar{Y}_{..} + \bar{Y}_{i.} + \bar{Y}_{j.} + e_{ij} \\[15pt]
+{where} \\[15pt]
+
+&\bar{Y}{..} \quad \text{is the overall average calculated as } \frac{1}{k}\sum_{i = 1}^{k} \bar{Y}_{i.}\ \\[15pt]
+&\bar{Y}_{i.} \quad \text{is the average for treatment i} \\[15pt]
+&\bar{Y}_{j.} \quad \text{is the average for blocks j} \\[15pt]
+&e_{ij} \quad \text{is the residual error for treatment i and repetition j} \\[15pt]
+(\#eq:estModelCRD)
+\end{align}
+<br>
+
+
+Based on the model above, each observation is partitioned into components:
+
+-overall mean, which is estimated with the average of treatment averages,
+
+- treatment effects, which are estimated as the differences between treatment averages and overall average,
+
+- block effects, which are estimated as the differences between block averages and overall average,
+
+- error, which is estimated with the residual or difference bewtween observation and treatment average.
+
+<br>
+\begin{align}
+Y_{ij} &= \bar{Y}_{..} + \hat{\tau}_i + \hat{\beta}_j + \hat{\epsilon}_{ij} \\[15pt]
+Y_{ij}- \bar{Y}_{..} &= \hat{\tau}_i + \hat{\beta}_j + \hat{\epsilon}_{ij} \\[15pt]
+Y_{ij}- \bar{Y}_{..} &= (\bar{Y}_{i.} - \bar{Y}_{..})+ (\bar{Y}_{j.} - \bar{Y}_{..}) + (\bar{Y}_{ij} - \bar{Y}_{i.} - \bar{Y}_{j.} ) \\[15pt]
+(\#eq:obsPartCRD)
+\end{align}
+<br>
+
+The total deviation from observation to overall average is partitioned into the deviation from treatment and block averages to overall average plus residual, where the residual is the difference between observation, treatment average and block average. It can be shown that the sum of all total deviations squared equals the sum of squared estimated treatment effects, plus block effects, plus the sum of squared residuals: total sum of squares equals treatment sum of squares plus block sum of squares plus residual sum of squares.
+
+
+<br>
+\begin{align}
+\sum_{i=1}^k \sum_{j=1}^r (Y_{ij}- \bar{Y}_{..})^2 &= \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{i.} - \bar{Y}_{..})^2 + \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{j.} - \bar{Y}_{..})^2 + \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{ij} - \bar{Y}_{i.} - \bar{Y}_{j.})^2 \\[15pt]
+TSS &= SST + SSB + SSE\\[15pt]
+\text{where} \\[15pt]
+TSS &= \sum_{i=1}^k \sum_{j=1}^r (Y_{ij}- \bar{Y}_{..})^2 \\[15pt]
+SST &= \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{i.} - \bar{Y}_{..})^2 = \ r \ \sum_{i=1}^k (\bar{Y}_{i.} - \bar{Y}_{..})^2\\[15pt]
+SSB &= \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{j.} - \bar{Y}_{..})^2 = \ k \ \sum_{i=1}^k (\bar{Y}_{j.} - \bar{Y}_{..})^2\\[15pt]
+SSE &= \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{ij} - \bar{Y}_{i.} - \bar{Y}_{j.})^2\\[15pt]
+(\#eq:ssPartCRD)
+\end{align}
+<br>
+
+## Degrees of Freedom and ANOVA Table
+
+Recall the calculation of the degrees of freedom for a **CRD**:
+
+<br>
+Total df $$rk - 1$$ 
+Treatment df $$k - 1$$ 
+Residual df $$k(r-1)$$ 
+
+
+And now for a **RCBD**:
+Total df $$rk - 1$$ 
+Treatment df $$k - 1$$ 
+Block df $$r-1$$
+Residual df $$(k-1)(r-1)$$ 
+
+
+The equations above show how each observation and the total variation are partitioned into treatments, blocks, and residuals. The total sum of squares is partitioned into SS of treatments, blocks, and SS of residual or error, and dividing the SS by each respective df, we obtain **mean squares** which provides an estimator of variance based on each source of variation. 
+
+
+|Source            |  df      | Sum of Squares (SS) | Mean Squares (MS) | Calculated F |
+|:----------------:|:--------:|:-------------------:|:-----------------:|:------------:|
+|Total             | k r - 1  |       TSS           |                   |              |
+|Blocks            | r - 1    |       SSB           |        MSB        |   MSB / MSE  |
+|Treatments        | k - 1    |       SST           |        MST        |   MST / MSE  |
+|Within Treatments |(k-1)(r-1)|       SSE           |        MSE        |              |
+
+Similar to how an ANOVA for a CRD, the table above now has a block source of variation (RCBD), and the sums of squares, mean squares and calculated F are all statistics. The values basd on one sample are specific realized values of the random variables, which have their own expected values variances and distributions. If the null hypothesis that all treatment means are the same is true and all assumptions are correct, the calculated F has an F distribution with mean or expectation equal to $dfe/(dfe - 2)$, where dfe is the residual or error degrees of freedom.
 
 ## Exercises and Solutions
 
