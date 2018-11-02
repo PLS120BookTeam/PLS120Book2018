@@ -1,11 +1,13 @@
 ---
 output: 
-  html_document: 
-    fig_caption: yes
-    number_sections: yes
-    theme: readable
-    toc: yes
-    toc_depth: 3
+ html_document: 
+  fig_caption: yes
+  number_sections: yes
+  theme: readable
+  toc: yes
+  toc_depth: 3
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup0, include=FALSE}
@@ -46,68 +48,78 @@ library(latex2exp)
 1. Calculate the standard error of the difference
 1. Describe the three cases for comparing two populations means and determine when each one is appropriate
 1. Calculate the t-statistic and identify the appropriate critical t-value
-1. After performing a two sample t test, sketch the t distribution, with the following parts labeled: 
-      + the critical t value
-      + the test statistic
-      + the p value area under the curve.
-      + the alpha level area under the curve. 
-      + where the CI bounds would lie on the X axis (approximately)
-1. Draw appropriate conclusions from a t test. In other words, interpret the results in terms of the original scientific question
+1. Interpret the results of a t-test in terms of the original scientific question
+1. Sketch the t distribution, with the following parts labeled: 
+ - the critical t value
+ - the test statistic value for the sample
+ - the p value area under the curve
+ - the alpha level area under the curve
+ - where the CI bounds would lie on the X axis (approximately)
 
 ## Two Populations 
 
-We have learned in the previous chapters how to determine if a population mean is significantly different from a hypothetical population mean. However, researchers may want to know if two population means are significantly different from each other. For example, researchers might conduct an experiment comparing a fertilized field to an unfertilized field to determine a significant difference in yield, or an experiment comparing a high-carbohydrate diet to a high-protein diet to determine a significant difference in milk quality among cows. The researcher would take samples from each of the two treatment groups and test for a difference between the means to make inferences about the larger populations from which the samples were taken.  
+We have learned in the previous chapters how to determine if the mean of a population sampled is significantly different from a hypothesized value. However, researchers may want to know if two populations are significantly different from each other when both populations are sampled and neither of the means are known. In research experiments, population means are hypothesized to differ when they represent different treatments that are applied to them. For example, one could conduct an experiment comparing a fertilized field to an unfertilized field to determine if they differ in yield, or an experiment comparing a high-carbohydrate diet to a high-protein diet to determine if diet affects cow's milk quality. These experiments are conducted by taking samples from each of the populations and using the difference between the two samples to make inferences about the difference between the two treatments or the two populations.
 
 
 ```{block, type = 'stattip'}
+# Steps to Test Two Population Means
 
-##Steps to Test Two Population Means
-<br> 
+1. State the null and alternative hypotheses about the two populations.
 
-1. State the null and alternative hypotheses for the two populations
+2. Collect samples from each population.
 
-2. Collect samples from each population
+3. Calculate the sample averages, $\bar{Y}_1$ and $\bar{Y}_2$, the difference between the averages,$\bar{d}$, and the sample variances, $S^2_1$ and $S^2_2$.
 
-3. Calculate the sample averages, $\bar{Y}_1$ and $\bar{Y}_2$, the difference of the averages,$\bar{d}$, and the sample variances, $s^2_1$ and $s^2_2$
+4. If you do not know whether the two population variances are equal, $\sigma_1 = \sigma_2$, perform an F-test to determine if you can pool the sample variances. 
 
-4. If you do not know if the two population variances are equal, $\sigma_1 = \sigma_2$, perform an F-test to determine if you can pool the sample variances. 
-
-5. Calculate the standard error of the difference, $s_{\bar{d}}$, between the two samples (**it is important to identify the appropriate Case equations to use in this step**)
+5. Calculate the standard error of the difference $S_{\bar{d}}$ between the two samples accordingly. 
 
 6. Calculate the t-statistic using the calculated $\bar{d}$ and $s_{\bar{d}}$
 
-7. Compare the calculated t-statistic to the critical t-value, and decide to reject or fail to reject the null hypothesis
+7. Compare the calculated t-statistic to the critical t-value, and decide whether to reject or fail to reject the null hypothesis
 ```
-
 
 
 
 ## Hypothesis Testing
 
-Before all the calculations have begun, it is important to understand the scientific question being asked. The purpose of testing two population means is to understand if there is a statistically significant difference between two populations or two treatment groups. Thus, our null  hypothesis and alternative hypothesis can be stated, respectively, as 
+Before starting calculations for the test of hypothesis, it is important to understand the scientific question being asked. The purpose of testing two population means is to determine if there is a statistically significant difference between two populations or two treatments. Thus, our null and alternative hypotheses can be stated as 
 
 <br>
 
-$$\text{ Null hypothesis: the mean of population 1 is equal to the mean of population 2, } \\
-\text{ or there is no difference between the two population means } \\[15pt]
-H_0 : \mu_1 = \mu_2 \quad \text{or} \quad \mu_{\bar{d}} = 0 \\[15pt]
-\text{ Alternative hypothesis: the mean of population 1 is not equal to the mean of population 2, } \\
-\text{ or there is a difference between the two population means } \\[15pt]
-H_1 : \mu_1 \neq \mu_2 \quad \text{or}  \quad \mu_{\bar{d}} \neq 0$$
+$$\text{Null hypothesis: the mean of population 1 is equal to the mean of population 2} \\[15pt]$$
+$$H_0 : \mu_1 = \mu_2 \quad \text{or} \quad \mu_{\bar{d}} = 0 \\[15pt]$$
+
+$$\text{Alternative hypothesis: the mean of population 1 is not equal to the mean of population 2} \\[15pt]$$
+$$H_1 : \mu_1 \neq \mu_2 \quad \text{or} \quad \mu_{\bar{d}} \neq 0$$
 
 <br>
 
-## Independent vs. Paired Samples
 
-There are two different methods of sampling when comparing treatment means: **independent** samples and **paired**, or dependent samples. It is important to understand how the two populations are sampled to decide which equations are appropriate for the experiment. Using the wrong equations may lead to incorrect calculations and conclusions.  
-
-### Independent Samples
-
-Samples are considered **independent** when there is no relationship between the observations in one treatment group and the observations in the other treatment group, and the samples are randomly assigned to each treatment. For example, pigs are randomly assigned to two different diets to determine if they result in different mean body weights. In this case, we are interested in the difference between the two average weights resulting from each diet treatment. Since the pigs are randomly assigned to each diet, the assumption is that these samples (pigs) are independent of each other.  
+As it turns out, it is a lot better to pose hypotheses as inequalities, for example:
 
 <br>
 
-```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="Independent samples of eight pigs are randomly placed into two treatments.  Half of the eight pigs received treatment 1 and half of the eight pigs received treatment 2, where $r = 4$ is the number of samples per treatment, and $i = 1, 2, 3, 4$ is the sample number for a given treatment"}
+$$H_0 : \mu_2 \le \mu_1 + PSD \quad \text{or} \quad \mu_2 - \mu_1 \le PSD$$
+$$H_0 : \mu_2 \gt \mu_1 + PSD \quad \text{or} \quad \mu_2 - \mu_1 \gt PSD$$
+
+<br>
+
+The reason for this is that just testing whether two means are different is not very informative. Presumably, all means are different, even if by an infinitesimal amount. So we already know that and it is not informative to test it. If we have large enough samples, the difference will always be detected. But by posing the hypothesis as a statement that says in which direction the difference goes and whether it is larger than a Practically Significant Difference, we have the opportunity to learn much more. In addition to that, we can use the PSD and the variances from the samples and we can calculate the *power* of the test, the probability of detecting a difference that is that large with the sample size available. If power is low, the inability to reject the null hypothesis does not mean much. The main point here is that we should pose hypotheses that give us the chance to learn more than what we already know. We know the means are different; but how different are they and which one is larger?
+
+## Types of samples to compare two populations
+
+There are two different methods of sampling to compare treatment means: **independent** observations and **paired** or dependent observations. It is important to understand how the two populations are sampled to decide which equations are appropriate for the experiment. If observations are paired, where each pair consists of one observation from one population and one observation from the other population, it is as if each pair were a block.
+
+### Two samples of Independent Observations
+
+Samples are considered **independent** when there is no relationship between the observations in one treatment and the observations in the other treatment, and the experimental units are randomly and independently assigned to a given treatment. For example, suppose that 8 pigs are available to determine the effects of two diets on weight gain. Individual pigs can be randomly assigned to one of the two different diets and their weight gain recorded after some time. In such case, each pig would be an experimental unit. There would be no reason to link the weight gain of any pig in one of the diets with any specific pig in the other diet. Weight gains in the two treatments are independent from each other.
+
+Another way to understand the idea of independence of observations in this case is to think that the actual weight gain of each individual pig will have two important causes or sources of variation among pigs: diet and individual pig differences. Individual pigs will differ from each other because of their "personal" body type and composition and their "personal" level of activity and food use efficiency. These individual effects can potentially be different for all 8 pigs. The number of "individual pig"" effects and the number of observations would be the same. Assuming that the pigs were randomly selected from a relevant population, their individual effects would not be related to each other in any way (Figure \@ref(fig:IndSamples)).
+
+<br>
+
+```{r IndSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="A set of 8 independent pigs is randomly split into two treatments. Half of the eight pigs received Treatment 1 and half of the eight pigs received Treatment 2, where $r = 4$ is the sample size per treatment, and $i = 1, 2, 3, 4$ is the observation index for a given treatment. In this case, the random variable that estimates the difference between means is the difference between averages, where each average comes from 4 observations."}
 
 knitr::include_graphics("images/CH8IndSamp.png")
 
@@ -115,22 +127,17 @@ knitr::include_graphics("images/CH8IndSamp.png")
 
 <br>
 
-### Paired Samples
+### One sample of Paired Observations
 
-Samples are considered **paired**, or dependent, when there is a relationship between the observations in one treatment and the observations in the other treatment. Paired samples are made from the direct comparisons of two measurements made on the same **experimental unit**. One situation in which individual pigs can be treated as the same experimental units is if two measurements are collected from the same individual. For example, before-and-after measurements on the same individuals are considered paired. To understand the effect of two different diets on pigs, an initial body weight measurement is collected from all pigs on a standard, high-carbohydrate diet, then following a set period of time on a high-protein diet, a second body weight measurement is taken from all pigs. In the paired sample case, we are interested in calculating the *average of the paired differences* between the two diet groups:
+
+Observations are considered **paired** or dependent when there is a relationship between observations in one treatment and observations in the other treatment. Each observation in one treatment is associated with one and only one observation in the other treatment by some grouping or pairing factor that can potentially affect weight gain. For example, observations that are made on the same experimental unit are obviously paired by the experimental unit. Observations that are made in the same area could also be considered to be paired. Many factors that can group observations, such as class, size, age, paddock, pen, furrow, etc.
+
+Following the example of pig diets, instead of using 8 pigs measured once each, we could have used 8 pigs and measured their performance under each of the diets during two different periods. Suppose that in period 1, pigs 1-4 received the high protein diet and pigs 5-84 received the high carbohydrate diet. Then, after a period of equalization, diets were switched during period 2. In this case we would obtain a sample with 16 weight gains, but there would be only 8 individual pig effects, and each observation in one diet would be paired to an observation in the other diet because they were both obtained from the same pig. The number of observations would be twice the number of individual pig effects, which means that each pig effect would enter in two observations, thus introducing a correlation or lack of independence between observations.
+
 
 <br>
-$$\bar{d} = \dfrac{\sum{d_i}}{r}$$ 
-<br>
 
-Contrast this with the independent sample case, where we are interested in the *difference between the averages* of the two groups.  
-
-<br>
-$$\bar{d} = \bar{x_1} - \bar{x_2}$$ 
-<br>
-
-
-```{r PairedMeasurements, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of eight pigs under two treatments.  Each of the eight pigs has two measurements recorded for each treatment, where $r = 8$ is the number of samples per treatment, and $i = 1, 2, ..., 7, 8$ is the sample number for a given treatment"}
+```{r PairedMeasurements, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired observations of eight pigs under two treatments. Each of the eight pigs has one measurement recorded for each treatment, where $r = 8$ is the number of observations per treatment. In this case, the random variable that estimates the difference between means is the average of differences between members of each pair, which comes from 8 pairs of observations."}
 
 knitr::include_graphics("images/CH8PairSamp2Measurements.png")
 
@@ -140,9 +147,13 @@ knitr::include_graphics("images/CH8PairSamp2Measurements.png")
 
 In the above example, the samples were paired because the same individual pigs were used for each treatment. Paired sampling is not limited to before-and-after experiments on the same individuals, however. It can be extended to situations where there is some relationship or dependency between the replicates across treatment groups. For example, pigs that are from the same pen share genetic and environmental effects that are unique to that pen, and we can therefore treat the pens (and the pigs that come from them) as our experimental units. Imagine there are three different pig pens. From each pen, two pigs are randomly selected and assigned to different diets. The pigs that come from the same pen are "paired" and the differences between weights from each of the paired samples are measured. In this example, the experimental unit is not individual pigs but the pens that the pair of pigs come from. 
 
+
+Pairing of observations can result from other experimental procedures, and those pairings may have to be incorporated in the analysis. Pigs that are from the same litter and pen share genetic and environmental effects that are unique to that pen, and we can treat pairs of individuals from the same pen as associated by the common pen effect. Observations on twins are paired due to common genetic makeup, common womb environment and potentially common rearing environment.
+
+
 <br>
 
-```{r PairedSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired samples of pigs from the same pen under two treatments.  Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2.  Each pig pen has two measurements recorded for each treatment, where $r = 3$ is the number of samples per treatment, and $i = 1,2,3$ is the sample number for a given treatment"}
+```{r PairedSamples, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Paired observations of pigs from the same pen under two treatments. Only one pig from each of the three pens received treatment 1, while the remaining pig from each of the three pens recieved treatment 2. Each pen has two measurements recorded for each treatment, where $r = 3$ is the number of observations per treatment, and $i = 1,2,3$ is the observation number for a given treatment."}
 
 knitr::include_graphics("images/CH8PairSamp.png")
 
@@ -150,399 +161,404 @@ knitr::include_graphics("images/CH8PairSamp.png")
 
 <br>
 
-## Equal vs. Unequal Variances
-
-For independent samples, we must estimate the variances of both populations to calculate the standard error of the difference ($s^2_{\bar{d}}$), and perform a t test. We estimate the population variances ($\sigma_i^2$) from the sample variances ($s_i^2$). If the population variances are equal, we can pool the sample variances to obtain a better estimate of $\sigma_i^2$. To determine whether or not they are equal, we perform an F-test for equality of variances.
-
-### F test for Equality of Variances.  
-
-First, we state our null and alternative hypotheses for the F test:
-
-<br> 
-
-$$\text{Null hypothesis: the variance of population 1 is equal to the variance of population 2} $$
-$$H_0 : \sigma_1^2 = \sigma_2^2 \\[25pt]$$
-
-$$\text{Alternative hypothesis: the variance of population 1 is not equal to the variance of population 2} $$
-$$H_1 : \sigma_1^2 \neq \sigma_2^2 $$
-<br> 
 
 
-To test for the equality of the population variances, we use a two-tailed F-test.  
+### Advantages and disadvantages of paired observations
+
+Why use independent or paired procedures? Each has advantages and disadvantages, and the best choice depends on many factors, but particularly on the cost of using each experimental unit, on the amount of variation among units (e.g. pigs) and the degree to which individual unit effects remain constant from one observation to another.
+
+- Independent observations may require more units (pigs) than paired ones for the same total number of observations.
+
+- Paired observations remove the individual effects from the errors, because each unit is observed under both treatments and values subtracted from each other. By subtracting, the error due to individual (pig) cancels out.
+
+- If individual effects are small relative to other sources of error, treating the observations as pairs is inefficient and reduces the power of the test.
+
+
+
+## Comparing Sample Variances {#compare2Variances}
+
+When observations are independent, we will have two estimated variances, one for each sample. In some cases we may have previous information indicating that the population variances are equal or unequal and we use that information to determine if we can pool the estimates of the variance from each sample. When there is no information about the equality of the variances we can use an F-test to determine if variances estimates can be pooled. Pooling variance estimates is very desirable because it increases the degrees of freedom and results in tests that have lower probability of error Type II.
+
+Population variances are estimated with the sample variances, $S^2_i$, for each of the populations or treatments. 
 
 <br>
 
-```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Distribution for determining the equality of variances (image from www.mtstatic.com)"}
+$$S^2_i = \frac{\sum (Y_{ij} - \bar{Y}_i)^2}{r_i - 1}$$
 
-knitr::include_graphics("images/CH8FCurve.png")
+<br>
+
+<br>
+
+
+To perform a test of equality of variances we need a statistics that has a known distribution to be able to associate probabilities with sample results. It turns out that, as seen in the [F Distribution section of Chapter 6](#FDist), a quotient of independent estimates of the same variance has an F distribution. Therefore, we use the F distribution to determine the probability of obtaining variance estimates that are as different as or more than observed when indeed the population variance is the same. If the probability is too small (we use $\alpha = 0.10$ for this test), we reject the equality of variances.
+
+When the variances are found to be different, we clearly need to estimate two different variances. However, when we cannot reject the hypothesis of equality, it may simply be due to lack of power, which usually results from small sample size. Therefore, the decision to pool variances because of a failure to reject the proposed equality may not be a good decision. In the end, what really matters is how much the variances differ. For practical purposes, in this course we test the equality of variances with $\alpha = 0.10$, and if we fail to reject the equality, we pool the variance estimates from the two samples.
+
+
+<br>
+
+$$\text{Null hypothesis: the variance of population 1 is equal to the variance of population 2} \\[20pt]$$
+$$H_0 : \sigma_1 = \sigma_2  \\[20pt]$$
+
+$$\text{Alternative hypothesis: the variance of population 1 is not equal to the variance of population 2} \\[25pt]$$
+$$H_1 : \sigma_1 \neq \sigma_2  \\[20pt]$$
+
+<br>
+
+**Calculated F**
+
+<br>
+
+```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Distribution for testing the equality of variances. The shaded area on the right is $\alpha/2$. Calculated F values in the right tail lead to rejection of the hypothesis of equality of variances."}
+
+### F()
+df1 <- 15
+df2 <- 15
+
+# Two tails on the right
+curve(df(x, df1 = df1, df2 = df2),
+      from = 0,
+      to = 5,
+      lwd = 2.5,
+      xlab = "",
+      ylab = "",
+      ylim = c(-0.05, 0.9))
+
+abline(h = 0)
+
+# Add the shaded area.
+
+cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
+            seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+            qf(0.95, df1 = df1, df2 = df2))
+
+cord.y <- c(0,
+            df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
+               df1 = df1, df2 = df2), 0)
+
+polygon(cord.x, cord.y, col = "skyblue")
+
+curve(df(x, df1 = df1, df2 = df2),
+      from = 0,
+      to = 5,
+      lwd = 2.5,
+      xlab = "",
+      ylab = "",
+      add = TRUE,
+      ylim = c(-0.05, 0.9))
+
+text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
+     labels = "Reject equality of variances", col = "red")
+
+lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+
+library(latex2exp)
+
+text(y = 0.19, x = 2.80, pos = 4,
+     labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
+
 
 ```
 
 <br>
 
-To calculate the F-ratio, we use the larger of the two sample variances ($s_1$) as the numerator, and the smaller of the two sample variances ($s_2$) as the denominator.
-
-<br> 
-
-$$F = \frac { \ s_1^2}{ \ s_2^2} \qquad \text{with}  \qquad df_{1} = r_{1} -1 , \ df_{2} = r_{2} -1$$
-
-<br> 
-
-This F-ratio can be compared to the critical F-value on the F-distribution table (Appendix XXX), given the degrees of freedom of the numerator and denominator. Since this is a two-tailed F-test, the $\alpha$ value to determine the critical F-value, $F_{crit}$, will be divided by two, $\frac{\alpha}{2}$.
-
-The results of the F-test will help identify which case to use for calculating the standard error of the difference for our samples. 
-
-```{r FCurve, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Distribution for determining the equality of variances (image from www.mtstatic.com)"}
-
-If $F_{calc} > F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$, is rejected and the population variances are not equal.
-
-If $F_{calc} < F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1 = \sigma_2$, is not rejected and the population variances are assumed to be equal.
+In the calculation, the larger of the two variances is used as the numerator and the smaller of the two variances as the denominator.
 
 <br>
 
-```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '60%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
+$$F = \frac { \text{larger} \ S^2}{\text{smaller} \ S^2} \qquad \text{with} \qquad df_{\text{numerator}} = r_{\text{larger}} -1 , df_{\text{denominator}} = r_{\text{smaller}} -1$$
+
+<br>
+
+This calculated F-value can be tested for significance against the critical F-value on the F-distribution table. The degrees of freedom for the two samples are needed to identify the critical F-value on the F-distribution table to determine if the calculated F-value is significant and if our sample variances are equal. Since this is a two-tailed F-test, the $\alpha$ value to determine the critical F-value, $F_{crit}$, will be divided by two, $\frac{\alpha}{2}$.
+
+The results of the F-test will help identify which case to use for calculating the standard error of the difference for our samples. 
+
+
+
+**Decision rule**
+
+If $F_{calc} > F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma^2_1 = \sigma_2^2$), is rejected and the population variances are not equal.
+
+If $F_{calc} < F_{crit, \frac{\alpha}{2}}$, then the null hypothesis, $H_0 : \sigma_1^2 = \sigma_2^2$), is not rejected and the population variances are assumed to be equal.
+
+<br>
+
+```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
 
 knitr::include_graphics("images/CH8FTestDec.png")
 
 ```
 
-<br>
-
-## Calculating the Standard Error of the Difference and the t-statistic
-
-In the case of equal variances, the next step would be to calculate the pooled sample variance, $s^2$, which is the best estimate of $\sigma_i^2$. If the variances are unequal, then the best estimates of the population variances are the individual sample variances. We use the estimates of the population variances to calculate the standard error of the difference, $S_{\bar{d}}$. The $S_{\bar{d}}$, will be calculated differently depending on (1) if the samples are independent or paired, and in the case of independent samples, (2) if the population variances are equal or unequal, and (3) if the sample sizes are equal or unequal. Finally, we can use $S_{\bar{d}}$ to calculate the t-statistic, $t$ and perform the t-test, which is the final step to determine if the two populations means are significantly different from each other.  *We have previously used t-tests to evaluate if there is a significant difference between a population and a hypothetical population; now we can also use t-tests to evaluate if two populations are significantly different from each other.*
-
-Note, for paired samples, the number of replicates, r, is equal to the number of pairs and the sample variance of the difference, $s^2_{d}$ is simply the variance of the paired differences.  
-
-
-To appropriately identify which equations to use and when, there are three general "Case" scenarios.  
-
-```{r FTestDec, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '80%', fig.align='center', echo=FALSE, fig.cap ="F-Test Decision Table from www.statistics4u.info"}
-
-
-## Cases
-### Case 1: Independent samples with equal population variances {#Case1}
-
-When the two sample groups are independent and the two population variances are equal, then the two sample variances are estimates of the same population variance. To calculate a better estimate of the population variance, we can average the two sample variances to calculate the pooled sample variance $( s^2 )$ 
 
 <br>
 
-$$s^2 = \frac{({{s_1}^2})({r_1-1})+({{s_2}^2})({r_2-1})}{(r_1+r_2-2)} \qquad \text{with} \qquad df = r_1+r_2-2$$
+## Cases to test the difference between two population means
 
-<br> 
+There are 3 cases to perform this test. When observations are independent, we can have two cases. Case 1 is the case when variances are known to be equal or the test results in non-rejection of equality of variances. Case 2 applies when variances are known to be unequal or the test results in the rejection of equality of variances. Paired observations are called Case 3, where there is only one variance, because the original set of paired observations reduces to a single set of differences that are treated as a single mean to be tested against 0. The equations for Cases 1 and 2 are the same up to the point where we either pool variances or not. The main subdivision between Cases 1 & 2 vs, Case 3 is depicted with formulas and a numerical example in Figure \@ref(fig:PairedIndepCalcFig)
 
-The standard error of the difference is then:
-
-<br> 
-$$\bar{d} = \bar{x_1} - \bar{x_2}$$ 
-<br> 
-
-When **the two sample sizes are equal**, the pooled variance and the standard error of the difference can more simply be calculated as
-
-<br> 
-
-$$s^2 = \frac{{{s_1}^2}+{{s_2}^2}}{2} \qquad \text{with} \qquad df = 2(r-1)$$
-
-$$s_{\bar{d}} = \sqrt{\frac{{2s}^2}{r}}$$ 
-<br> 
-
-The test statistic can be calculated as:
-
-$$t = \frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}$$
-<br>
-
-where,
-
-$$\bar{d} = \bar{x_1} - \bar{x_2}$$ 
 
 <br>
 
-### Case 2: Independent samples with unequal population variances {#Case2}
+```{r PairedIndepCalcFig, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '90%', fig.align='center', echo=FALSE, fig.cap ="Test of differences between two population means when observations are paired (top) and independent (bottom). The independent case is further divided into Case 1 and Case 2 depending on whether the variance estimates can be pooled or not, respectively. When variances can be pooled, the equation for the variance of the difference between averages is further simplified by using the same pooled variance for both samples."}
 
-When the population variances are unequal, we calculate the standard error of the difference using the two sample variances as our best estimates of the population variances.
-
-<br> 
-
-$$s_{\bar{d}} = \sqrt{\frac{{s_1}^2}{r_1}+\frac{{s_2}^2}{r_2}} \qquad \text{with}  \qquad df = r_1+r_2-2$$
-<br> 
-
-The test statistic is calculated as 
-
-<br> 
-
-$$t = \frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}$$
-<br>
-
-where,
-
-$$\bar{d} = \bar{x_1} - \bar{x_2}$$ 
-<br>
-
-Since the population variances are unequal, we cannot use the Student's t-table to identify the critical t-value ($t_\alpha$).  The critical t-value is calculated instead as:
-
-<br> 
-
-$$t_\alpha = \frac{(t_1 s_{\bar{Y_1}}^2+t_2 s_{\bar{Y_2}}^2)}{(s_{\bar{Y_1}}^2+s_{\bar{Y_2}}^2)}$$
-<br> 
-
-where $t_1$ and $t_2$ are calculated with $r_1 -1$ and $r_2 -1$ degrees of freedom, respectively.
-
-### Case 3: Paired samples {#Case3}
-
-When observations are made on the same experimental unit (e.g., adjacent plots in the same field, pigs from the same pen, etc.) and are assigned to different treatments, they are considered **paired samples**. The average of paired differences, $\bar{d}$, the variance of the difference, $s_d^2$, the standard error of the difference, $s_\bar{d}$, and the test statistic, $t$, are calculated as follows:
-
-<br> 
-
-$$\bar{d} = \frac{\sum{d_i}}{r}$$
-
-<br> 
-
-$$s_d^2 = \frac{\sum(d_i-\bar{d})^2}{r-1} \qquad \text{with} \qquad  = r-1$$
-
-<br> 
-
-$$s_\bar{d} = (\frac{s_d^2}{r})^{1/2}$$
-
-<br> 
-
-$$t = \frac{(\bar{d}-\mu_{\bar{d}})}{s_{\bar{d}}}$$
-<br> 
-
-```{block}
-### Two Populations Equation Summary
-
-
-Table: (\#tab:CaseEquations) 
-
-| Case | Pop Variances |  Sample Size  | Paired / Independent |                 Pooled Sample Variance                     |        Standard Error of the Difference           |      df     |          t-statistic          |         Confidence Interval     |
-|-----:|:-------------:|:-------------:|:------------------:|:---------------------------------------------------------------:|:-------------------------------------------------:|:-----------:| :-------------------------------------------:|:----------------:|
-|  1  |     Equal     |Equal/ Not Equal|    Independent      | $\frac{({{s_1}^2})({r_1-1})+({{s_2}^2})({r_2-1})}{(r_1+r_2-2)}$ |        $(\frac{s^2}{r_1 + r_2})^{1/2}$            | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}$  |   ${L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}$   |
-|  1  |     Equal     |     Equal     |     Independent      |              $\frac{{{s_1}^2}+{{s_2}^2}}{2}$                    |           $(\frac{{2S}^2}{r})^{1/2}$              |   $2(r-1)$  | $\frac{(\bar{d}-\mu_{\bar{d}})}{s_{\bar{d}}}$|   ${L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}$   |
-|  2  |   Not Equal   |Equal/ Not Equal|     Independent      |                                                                 | $(\frac{{s_1}^2}{r_1}+\frac{{s_2}^2}{r_2})^{1/2}$ | $r_1+r_2-2$ |  $\frac{\bar{d}-\mu_{\bar{d}}}{s_{\bar{d}}}$  |   ${L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}$   |
-|  3  |     Equal     |     Equal     |       Paired         |                          |            $(\frac{s_d^2}{r})^{1/2}$              |     $r-1$   | $\frac{(\bar{d}-\mu_{\bar{d}})}{s_{\bar{d}}}$|   ${L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}$   |
+knitr::include_graphics("images/PairedIndepCalcFig.png")
 
 ```
 
-
-## Confidence Intervals
-
-After calculating the difference between the two sample averages ($\bar{d}$) and the standard error of the difference ($s_{\bar{d}}$), a confidence interval for the mean difference can be calculated to understand the level of confidence associated with the estimated mean difference. 
-
-$${L\atop U} = \bar{d} \pm t_\alpha s_\bar{d}$$
-
-Note that for Case 2, independent samples with unequal variances, you will need to calculate the critical t-value, however for Case 1 and 3 you can find this value on the Student's t-table (Appendix XXX) with the appropriate degrees of freedom (see appropriate Case for equation). Depending on which Case is used to calculate the standard error of the difference, the degrees of freedom to identify the critical t-value ($t_\alpha$) will vary when calculating your confidence intervals. 
-
-## Decision to Reject or Fail to Reject the Null Hypothesis
-
-After all of the steps and calculations, the calculated t-value and the critical t-value, $t_{\alpha}$, can be used in the final decision to reject or fail to reject the null hypothesis.  **The null hypothesis is never "accepted", rather the decision is to fail to reject.**  Remember, the null hypothesis when testing two population means is that the two populations are equal, $H_0 : \mu_1 = \mu_2 \ \ \text{or} \ \ \bar{d} = 0$
-
-<br> 
-
-$$\text{If} \ \ t > t_{\alpha} \ \text{and} \ P (t) < \alpha \ \text{then we reject the null hypothesis} $$  
-$$\text{If} \ \ t < t_{\alpha} \ \text{and} \ P (t) > \alpha \ \text{then we fail to reject the null hypothesis}$$ 
-
-<br> 
-
-```{r DecisionMaking, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '70%', fig.align='center', echo=FALSE, fig.cap ="General procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis"}
-
-
-knitr::include_graphics("images/CH8Strategy.png")
-
-
-```
- 
-<br> 
-
-## Bean Drought Example
-
-Below is data collected on common bean plots that were randomly assigned to two different irrigation treatments: drought and normal irrigation. Yield data was collected from these plots and recorded in the table below.  
 <br>
 
 
 
-```{r BeanDrought, echo = FALSE, message=FALSE}
+### Case 1: Independent samples with equal population variances (#Case1)
+
+When samples are independent, the random variable of interest is the difference between two independent means. We apply the [Properties of Mean and Variance] of random variables to obtain an estimate of the variance of $\bar{d} = \bar{Y_2} - \bar{Y_1}$. Because the averages are independently obtained, the variance of the difference between averages is the sum of the variances of each average. Using the symbols "$V\{\text{random variable}\}$" to represent the variance of a random variable, we have:
+
+sample averages, $\bar{Y_i}$, for each of the populations or treatments and the difference between these two averages, $\bar{d}$ are
+
+<br>
+
+$$\bar{Y}_i = \frac{1}{r_i} \sum_{j=1}^{r_i} Y_{ij} \qquad \text{where} \ i \ \text{is the population, 1 or 2, and } \ j \ \text{is the observation number} \\[20pt]$$
+
+$$\bar{d} = \bar{Y}_1-\bar{Y}_2$$
+
+<br>
+
+$$V\{\bar{d}\} = V\{\bar{Y_2} - \bar{Y_1}\} = V\{\bar{Y_2}\} + V\{\bar{Y_1}\} \\[20pt]
+= \frac{V\{Y_2\}}{r_2} + \frac{V\{Y_1\}}{r_1}$$
+
+<br>
+
+
+Those variances are estimated from the samples, so we use capital S to refer to the estimates:
+
+<br>
+
+$$S_{\bar{d}}^2 = \frac{S_{Y_2}^2}{r_2} + \frac{S_{Y_1}^2}{r_1}$$
+
+<br>
+
+
+In this case when the two population variances are equal, then the two sample variances are estimates of the same population variance. To get a better estimate of this single population variance we can pool the deviations about each average and obtained a pooled sample variance $(S_Y^2)$ that has more degrees of freedom.
+
+<br>
+
+
+$$S_Y^2 = \frac{S_{Y_1}^2 \ (r_1-1) + S_{Y_2}^2 \ (r_2-1)}{(r_1 + r_2-2)} \qquad \text{with} \qquad df = r_1+r_2-2$$
+
+<br>
+
+The pooled variance is now applied to the equation for $S_{\bar{d}}^2$ to obtain 
+
+$$S_{\bar{d}}^2 = \frac{S_Y^2}{r_1} + \frac{S_Y^2}{r_2} \qquad \text{with} \qquad df = r_1+r_2-2$$ 
+
+
+<br>
+
+
+The test statistic for the hypothesis $H_0: \mu_{\bar{d}} = 0$ can be calculated as
+
+<br>
+
+$$t_{calc} = \frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}} = \frac{\bar{d}}{S_{\bar{d}}}$$
+
+<br>
+
+The decision rule is as before, for a single population when variance was unknown (Figure \@ref(fig:NormalTails)).
+
+
+### Bean Drought Example: independent observations, equal variances
+
+Below is data collected on common bean plots that were randomly assigned to two different irrigation treatments: drought and normal irrigation. Yield data was collected from these plots and recorded in the table below. 
+
+<br>
+
+|  Treatment  | Yield 1 | Yield 2 | Yield 3 | Yield 4 |  Total  |  Mean  | 
+|------------:|:-------:|:-------:|:-------:|:-------:|:-------:|:------:|
+|  Drought    |   590   |    720  |   720   |   190   |   2220  |   555  | 
+|  Irrigated  |  2990   |   2950  |  2660   |  2120   |  10720  |  2680  |
+
+<br>
+
+```{r}
 
 bean.yield <- data.frame(
-  "Yield" = c("Yield 1", "Yield 2", "Yield 3", "Yield 4"), 
-  "Drought" = c(590, 720, 720, 190 ), 
-  "Irrigated" = c(2990, 2950, 2660, 2120))
-
-knitr::kable(bean.yield, format = "html", caption = "Common bean yield (kg/ha) is measured under drought treatment and irrigation in Quilichao, Columbia (Sponchiado, 1985)")
+ yield = c("yield 1", "yield 2", "yield 3", "yield 4"), 
+ drought = c(590, 720, 720, 190 ), 
+ irrigated = c(2990, 2950, 2660, 2120))
 
 ```
 
-
-
-### Stating the Hypotheses
-
-This experiment features two treatments: drought and irrigated. The researchers aimed to identify if there was a significant difference in bean yield (kg/ha) between the two treatments. The null and alternative hypotheses can be stated, respectively, as 
-
-<br> 
-
-$$\text{Null hypothesis: the mean of the drought treatment is equal to the mean of the irrigated treatment,} \\ \text{ or there is no difference between drought and irrigated treatments on common bean yield} \\$$
-$$\mu_1 = \mu_2   \quad  \text{or} \quad \mu_{\bar{d}} = 0$$
 <br>
 
-$$\text{Alternative hypothesis: the mean of the drought treatment is not equal to the mean of the irrigated treatment,} \\ \text{ or there is a difference between drought and irrigated treatments on common bean yield} \\$$
-$$\mu_1 \neq \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} \neq 0$$
 
-<br> 
+**Hypotheses**
 
-### Sampling Method
+This experiment features two distinctly defined treatments: drought and irrigated. Researchers want to determine if there is a significant difference between the two treatments, therefore, the null and alternative hypotheses can be stated as 
 
-Since the samples were randomly assigned to the treatment and there was no additional information provided on how each sample was assigned to a given treatment, we can assume that the samples are independent of one another.  
+<br>
 
-### Calculating Sample Averages and the Mean Difference
+$$\text{Null hypothesis:} \\[25pt] 
+\text{the mean of the drought treatment is equal to the mean of the irrigated treatment, or} \\[25pt] 
+\text{there is no difference between drought and irrigated treatments on common bean yield} \\[25pt]$$
+$$\mu_1 = \mu_2  \quad \text{or} \quad \mu_{\bar{d}} = 0 \\[25pt]$$
 
-As the calculations begin on the two treatments of this experiment, we will designate **sample 1 as the drought treatment and sample 2 as the irrigated treatment** to simplify labeling of our statistical terms. Be careful to maintain consistency of this designation throughout the complete set of calculations.  
+$$\text{Alternative hypothesis: } \\[15pt] 
+\text{the mean of the drought treatment is not equal to the mean of the irrigated treatment, or } \\[15pt]
+\text{there is a difference between drought and irrigated treatments on common bean yield} \\[15pt]$$
+$$\mu_1 \neq \mu_2 \quad \text{or} \quad \mu_{\bar{d}} \neq 0$$
 
-Since the samples are independent, the averages of each sample are calculated as
+
+<br>
+
+
+**Sampling Method**
+
+Since the samples are randomly assigned to the treatment and there is no additional information provided on how each sample was assigned to a given treatment, we can assume that the observations are independent of one another. 
+
+
+**Difference between averages**
+
+As the calculations begin on the two treatments of this experiment, we will designate **Sample 1** as the **drought** treatment and **sample 2** as the **irrigated** treatment to simplify labeling. Be careful to maintain consistency of this designation throughout the complete set of calculations.
+
+Since the observations are independent, the average of each sample is calculated as
+
+<br>
 
 \begin{equation}
-
 \bar{Y}_1 = \frac{\sum Y_{i1}}{r_1} \\[20pt]
 = \frac{590 + 720 + 720 + 190}{4} \\[20pt]
 = 555 \\[25pt]
 \bar{Y}_2 = \frac{\sum Y_{i2}}{r_2} \\[20pt]
 = \frac{2990 + 2950 + 2660 + 2120}{4} \\[20pt]
 = 2680
-
-\end{equation}
-
-<br> 
-
-and the difference between the two averages is calculated as
-
-<br> 
-
-\begin{equation}
-
-\bar{d} = \bar{Y}_2 - \bar{Y}_1 \\[20pt]
-=  2680 - 555 \\[20pt]
-= 2125
-
 \end{equation}
 <br>
 
-We can do these calculations in R, as follows:
+$$\bar{Y}_2 = \frac{\sum Y_{2i}}{r_2} = \frac{2990 + 2950 + 2660 + 2120}{4} = 2680$$
+
 <br>
- 
-```{r, message=FALSE}
-# the sum of the samples in each treatment
-sum.Y1 <-  sum(bean.yield$Drought)
-sum.Y2 <-  sum(bean.yield$Irrigated)
 
-# the number of samples in each treatment
-r1 <- length(bean.yield$Drought)
-r2 <- length(bean.yield$Irrigated)
+and the average difference is calculated as the difference between the two averages.
 
-# calculate the sample averages by dividing the sample sums 
-# by the number of samples for each treatment "by hand"
-(Ybar1 <- sum.Y1 / r1)
-(Ybar2 <- sum.Y2 / r2)
+
+<br>
+
+$$\bar{d} = \bar{Y}_2 - \bar{Y}_1 = 2680 - 555 = 2125$$
+
+<br>
+
+```{r, message=FALSE, warning=FALSE}
+#the sum of the observations in each treatment
+sum.Y1 <- sum(bean.yield$drought)
+sum.Y2 <- sum(bean.yield$irrigated)
+
+#the number of observations in each treatment
+r1 <- length(bean.yield$drought)
+r2 <- length(bean.yield$irrigated)
+
+# calculate the sample averages by dividing the sample sums by the number 
+# of observations for each treatment "by hand"
+Ybar1 <- sum.Y1 / r1
+Ybar2 <- sum.Y2 / r2
 
 # a simpler method to calculate the sample averages
-(Ybar1 <- mean(bean.yield$Drought))
-(Ybar2 <- mean(bean.yield$Irrigated))
+Ybar1 <- mean(bean.yield$drought)
+Ybar2 <- mean(bean.yield$irrigated)
 
 # calculate the average of the difference between the two treatments
-(dbar <- Ybar2 - Ybar1)
+dbar <- Ybar2 - Ybar1
 ```
 
 <br> 
 
-### Calculating Sample Variances
+**Sample Variances**
 
-#### Calculate the Individual Sample Variances
+Before we determine if we can pool our sample variances, we need to determine if the population variances are equal. Information on the equality of the population variances may be provided for a given question. However, in the absence of this information, the equality of the sample variances can be tested as follows.
 
-Now, we need to determine if the population variances are equal. Information on the equality of the population variances may be provided for a given experiment.  However, in the absence of this information, the equality of the sample variances can be tested using an F test. First, we calculate each sample variance:
+<br>
 
-<br> 
+$$S^2_{Y_1} = \frac{\sum (Y_{1i} - \bar{Y}_1)^2}{r_1 - 1}\\[20pt]
+= \frac{(590 - 555)^2 + (720 - 555)^2 + (720-555)^2 + (190-555)^2}{4 - 1} = 62966.67$$
 
-\begin{equation}
+<br>
 
-s^2_1 = \frac{\sum (Y_{i1} - \bar{Y}_1)^2}{r_1 - 1} \\[20pt]
-= \frac{(590 - 555)^2 + (720 - 555)^2 + (720-555)^2 + (190-555)^2}{4 - 1} \\[20pt]
-= 62966.67 \\[25pt]
 
-s^2_2 = \frac{\sum (Y_{i2} - \bar{Y}_2)^2}{r_2 - 1} \\[20pt]
-= \frac{(2990 - 2680)^2 + (2950 - 2680)^2 + (2660 - 2680)^2 + (2120 - 2680)^2}{4 -1} \\[20pt]= 161000
+$$S^2_{Y_2} = \frac{\sum (Y_{2i} - \bar{Y}_2)^2}{r_2 - 1}\\[20pt]
+= \frac{(2990 - 2680)^2 + (2950 - 2680)^2 + (2660 - 2680)^2 + (2120 - 2680)^2}{4 -1} = 161000$$
 
-\end{equation}
-<br> 
+<br>
 
-```{r, message=FALSE}
+```{r}
 
 # calculate the sample variances for each treatment "by hand"
-(var1 <- sum((bean.yield$Drought - Ybar1)^2) / (r1 - 1))
-(var2 <- sum((bean.yield$Irrigated - Ybar2)^2) / (r2 - 1))
-
+var1 <- sum((bean.yield$drought - Ybar1)^2) / (r1 - 1)
+var2 <- sum((bean.yield$irrigated - Ybar2)^2) / (r2 - 1)
 
 # a simpler way to calculate the sample variances
-(var1 <- var(bean.yield$Drought))
-(var2 <- var(bean.yield$Irrigated))
+var1 <- var(bean.yield$drought)
+var2 <- var(bean.yield$irrigated)
 
 # both methods yield the same answers
 ```
 
 
-#### Using an F-test to determine if Population Variances are Equal
+**Test of equality of variances**
 
-The F-test helps us determine if the population variances are equal. The null hypothesis is that the population variance of the drought treatment is equal to the population variance of the irrigated treatment.  If the population variances are equal, the two sample variances can be pooled to provide a more accurate estimate of the population variance.  
+The purpose of an F-test is to determine if the population variances are different, therefore the null hypothesis is that the population variance of the drought treatment is equal to the population variance of the irrigated treatment. If the population variances are not different, sample variances can be pooled to provide a more accurate estimate of the common variance.
 
-The calculated F-value is simply the ratio of the larger sample variance divided by the smaller sample variance
+The calculated F-value is simply the ratio of the larger sample variance divided by the smaller sample variance, so the critical F value will always be in the right tail. The test should be performed with $\alpha$ equal to 0.05 or 0.10 to have greater power.
 
 <br> 
 
-$$F_{calc} = \frac{ \text{larger} \ s^2 }{\text{smaller} \ s^2} = \frac{161000}{62966.67} = 2.56$$
-<br> 
+<br>
 
-```{r, message=FALSE}
-# since var2 is greater than var1, var2 will be used 
-# as the numerator and var1 will be used as the denominator 
+$$F_{calc} = \frac{ \text{larger} \ S^2 }{\text{smaller} \ S^2} = \frac{161000}{62966.67} = 2.56$$
+
+<br>
+
+```{r}
+# since var.2 is greater than var.1, var.2 will be used as the numerator 
+# and var.1 will be used as the denominator 
 Fcalc <- var2 / var1
 
 ```
 
-Next, compare the calculated F-value, $F_{calc}$, to the critical F-value, $F_{crit}$, which can be found in F-Distribution Table. With $df_{numerator} = 3$, $df_{denominator} = 3$,  and $\alpha_{two-tailed} = \frac{0.05}{2}$, it is determined $F_{crit_\frac{\alpha}{2}} = 15.44$ and $F_{crit_\frac{1-\alpha}{2}} = 0.06$ 
+Next, compare the calculated F-value, $F_{calc}$, to the critical F-values, $F_{crit}$, which can be found in F-Distribution table or simply in R. With $df_{denominator} = 3$ , $df_{numerator} = 3$ and $\alpha = 0.10$, it is determined $F_{crit} = `r qf(p = 0.95, df1 = 3, df2 = 3)`$ 
+
+<br>
 
 ```{r, message=FALSE}
 
-# calculation of F-critical value using alpha = 0.05 /2 
-# since the F-test is two-tailed, and the two degrees of freedom 
-# for the numerator and denominator
-alpha <- 0.05/2
-(Fcrit.upper <- qf(alpha, r1-1, r2-1, lower.tail = FALSE))
-(Fcrit.lower <- qf(alpha, r1-1, r2-1, lower.tail = TRUE))
+# calculation of F-critical value using alpha = 0.10 /2 since the F-test is two-tailed
+p <- 0.10 / 2
+Fcrit.upper <- qf(p, r1 - 1, r2 - 1, lower.tail = FALSE)
 
 ```
 
+<br>
+
 Since the F-statistic falls within the two critical F-values, we fail to reject the null hypothesis that the two population variances are equal. 
 
-<br> 
+<br>
 
 $$F_{calc} = 2.56 < F_{crit_\alpha} = 9.28$$ and 
-$$F_{calc} = 2.56 > F_{crit_{1-\alpha}} = 0.11$$  
 
-<br> 
-
-Therefore, the population variances can be treated as equal and the sample variances can be pooled.  
+Therefore, the population variances can be treated as equal and the sample variances can be pooled. 
 
 <br>
-```{r FDistInd, fig.cap = "F distribution for df1 = 3, df2 = 3, with the calculated F-ratio and the lower and upper F critical values shown from the bean drought example.", message=FALSE, echo = FALSE, warning=FALSE}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 x <- seq(0.000001,16, 0.25)
 pd <- df(x, df1 = 3, df2 = 3, ncp = 0)
 plot(x, pd, 
-     type = "l",
-     xlab = "F-Value", ylab = "Probability Distribution", 
-     main = "the F-Distribution Curve",
-     lwd = 1.5)
+   type = "l",
+   xlab = "F-Value", ylab = "Probability Distribution", 
+   main = "the F-Distribution Curve",
+   lwd = 1.5)
 abline(v = Fcrit.upper, 
-       col = "chartreuse3", 
-       lty = 3)
-abline(v=Fcrit.lower,
-       col = "chartreuse3",
-       lty =3)
+    col = "chartreuse3", 
+    lty = 3)
 points(0.44, 0.57, pch = 4, col = "cornflowerblue")
 text(1.5, 0.57, "F-calc", col = "cornflowerblue") 
 text(1.4,0.05, "lower F-crit", col = "chartreuse3")
@@ -550,50 +566,52 @@ text(14,0.05, "upper F-crit", col = "chartreuse3")
 text(8,0.25, "fail to reject H0")
 
 ```
+
 <br>
 
-#### Pooling Sample Variances
 
-Since the F-test concluded that the two population variances are equal, the sample variances can be pooled to provide a more accurate estimate of the true variance.  
+**Pooling Sample Variances**
 
-Since the two sample sizes are the same, $r_1 = 4$ and $r_2 = 4$, the following equation from Case 2 is used to pool the sample variances:
+Since the F-test did not reject equality of variances, sample variances are pooled to provide a more accurate estimate of the true variance. Since the two sample sizes are the same, $r_1 = 4$ and $r_2 = 4$, the following equation is used to pool the sample variances:
 
-<br> 
+<br>
 
-\begin{equation}
+$$S_Y^2 = \frac{S_{Y_1}^2 \ (r_1-1) + S_{Y_2}^2 \ (r_2-1)}{(r_1 + r_2-2)}= \frac{62966.67 \times 3 + 161000 \times 3}{4 + 4 - 2} = 111983.33$$
 
-s^2 = \frac{s_1^2 + s_2^2}{2} \\[20pt]
-= \frac{62966.67 + 161000}{2} \\[20pt]
-= 111983.33
+<br>
 
-\end{equation}
-<br> 
+```{r}
 
-```{r, message=FALSE}
-
-# the pooled variance can be calculated by taking the average 
-# of the two sample variances, since they have the same sample size
+# Because sample sizes are the same, pooled variance can be calculated 
+# by averaging the two sample variances
 pooled.var <- ( var1 + var2 ) / 2
 
 ```
+
+<br>
+
 since our two sample sizes are equal, the degrees of freedom are 
 
-<br> 
+<br>
+
+$$df = 2(r-1) = 6$$
+
+<br>
 
 $$df = 2(r-1) = 6$$
 <br> 
 
-```{r, message=FALSE}
+```{r}
 
-# Number of replicates in each bean yield treatment group
-(r <- length(bean.yield$Yield))
+# since r1 = r2 = 4, we can just use r = 4 for continued calculations
+r <- length(bean.yield$yield)
 
 # the degrees of freedom are calculated as
-(df <- 2*(r-1))
+df <- 2 * (r - 1 )
 
 ```
 
-### Calculating the Standard Error of the Difference
+**Standard Error of the Difference**
 
 The standard error of the difference is calculated using the pooled variance $s^2$ and our sample size $r$, where $r_1 = r_2 = r$
 
@@ -609,75 +627,77 @@ s_{\bar{d}} = \sqrt{ \frac{2s^2}{r\mathstrut}} \\[20pt]
 
 <br> 
 
+<br>
+
+$$S_{\bar{d}} = \sqrt{\frac{2S_Y^2}{r}} = \sqrt{\frac{2 \times 111983.33}{4}} = 236.63$$
+
+<br>
+
 ```{r}
-# the standard error of the difference is calculated by taking 
-# the square root of 2 times the pooled variance,
-# and dividing by the number of replicates, r
+# the standard error of the difference is calculated by taking the square root
+# after multiplying the pooled variance by 2 and dividing by r
 
 se.dbar <- sqrt( (2*pooled.var) / r)
 
 ```
 
-### Calculating the t-statistic
+<br>
 
-The t-statistic is used to determine if we reject or fail to reject the null hypothesis that the population means are equal, $H_0: \mu_1 = \mu_2$ or that there is no difference between our population means, $H_0: \mu_{\bar{d}} = 0$.  
+**Calculating the t-statistic**
 
-The t-statistic, $t_{calc}$, is calculated by using the difference of the averages, $\bar{d}$ and the standard error of the difference, $s_{\bar{d}}$.  
+The t-statistic is used to determine if our null hypothesis is true that the population means are equal, $H_0: \mu_1 = \mu_2$ or that there is no difference between our population means, $H_0: \mu_{\bar{d}} = 0$. 
 
-
-<br> 
-
-\begin{equation}
-t_{calc} = \frac{(\bar{d} -  \mu_{\bar{d}})}{s_{\bar{d}}} \\[20pt]
-= \frac{2125 - 0}{236.63} \\[20pt]
-= 8.98
-
-\end{equation}
-<br> 
+The t-statistic, $t_{calc}$, is calculated by using the difference of the averages, $\bar{d}$ and the standard error of the difference, $S_{\bar{d}}$. 
 
 
-$\mu_{\bar{d}} = 0$ because our null hypothesis is that there is no difference between the two population means, $H_0: \mu_{\bar{d}} = 0$  
+<br>
 
-We can do the same calculations in R:
+$$t_{calc} = \frac{\bar{d} - \mu_{\bar{d}}}{S_{\bar{d}}} = \frac{2125 - 0}{236.63} = 8.98$$
 
-```{r, message=FALSE}
-# calculate the t-statistic by subtracting our hypothesized difference
-# between the means, which is 0, from the sample difference, and 
-# dividing by the standard error of the difference.
-(t.calc <- ( dbar - 0 ) / se.dbar)
+<br>
 
-# a quicker method to calculate the t-statistic 
-(t.test <- t.test(bean.yield$Irrigated, bean.yield$Drought,
-                  alternative = "greater", paired = FALSE))
+```{r}
+# calculate the t-statistic by subtracting our hypothesized mean which is 0
+# from the average difference and dividing by the standard error of the difference
+t.calc <- (dbar - 0 ) / se.dbar
+
+#a quicker method to calculate the t-statistic 
+(bean.test.equal <- t.test(bean.yield$irrigated, bean.yield$drought, 
+                    alternative = "two.sided", paired = FALSE,
+                    var.equal = TRUE))
 
 # both calculations yield the same value
 ```
 
 
-We compare the calculated t-statistic to the critical t-value, $t_{crit}$, which can be found in the Student's t-Distribution Table. With the degrees of freedom of our pooled samples, $df = 2(r-1) = 6$, and $\alpha_{two-tailed} = \frac{0.05}{2}$, it is determined that $t_{crit} = 2.447$
+<br>
+
+The calculated t-statistic is compared to the critical t-value, $t_{crit}$, which can be found in the Student's t-Distribution Table. With the degrees of freedom of our pooled samples, $df = 2(r-1) = 6$, and $\alpha_{two-tailed} = \frac{0.05}{2}$, it is determined that $t_{crit} = `r qt(0.975, df = 6)`$
 
 
-Since $t_{calc} = 9.33 > t_{crit} = 2.447$, we reject the null hypothesis that there is no difference between the drought treatment and the irrigated treatment.   
+Since $t_{calc} = 9.33 > t_{crit} = 2.447$, we reject the null hypothesis that there is no difference between the drought treatment and the irrigated treatment.  
 
-```{r tBeanInd, warning = FALSE, echo = FALSE, fig.cap = "Student's t distribution for df = 6, with the calculated t value and the upper and lower t critical values from the bean drought example.", message=FALSE}
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 y <- seq(-6,10, 0.25)
 pfd <- dt(y, df = 6, ncp = 0)
 plot(y, pfd, 
-     type = "l",
-     xlab = "", ylab = "")
+   type = "l",
+   xlab = "", ylab = "")
 criticalt1 <- qt(p = 1 - 0.025, 
-                df = 6)
+        df = 6)
 criticalt2 <- qt(p = 0.025, 
-                df = 6)
+        df = 6)
 plot(y, pfd, 
-     type = "l",
-     xlab = "", ylab = "")
+   type = "l",
+   xlab = "", ylab = "")
 abline(v = criticalt1, 
-       col = "chartreuse3", 
-       lty = 3)
-abline(v=criticalt2,
-       col = "chartreuse3",
-       lty =3)
+    col = "chartreuse3", 
+    lty = 3)
+abline(v = criticalt2,
+    col = "chartreuse3",
+    lty = 3)
 points(8.98, 0.0001, pch = 4, col = "cornflowerblue")
 text(8.98, 0.03, "t-calc", col = "cornflowerblue") 
 text(-4,0.35, "lower t-crit", col = "chartreuse3")
@@ -687,23 +707,170 @@ text(6,0.05, "reject H0")
 ```
 
 
+<br>
+
+
+### Case 2: Independent samples with unequal population variances (#Case2)
+
+When the population variances are unequal, we calculate the standard error of the difference using the known information about the sample variances and sample sizes. This equation is the same as for Vase1, except that it cannot be further simplified because $\sigma_{Y_1}$ and $\sigma_{Y_2}$ are different and their estimates cannot be pooled.
+
+<br>
+
+$$S_{\bar{d}} = \left ( \frac{S_{Y_1}^2}{r_1}+\frac{S_{Y_2}^2}{r_2} \right) ^ {1/2}$$
+
+<br>
+
+The test statistic is calculated as 
+
+<br>
+
+$$t_{calc} = \frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$$
+
+<br>
+
+Since the population variances are unequal, we cannot use the Student's t-table to identify the critical t-value ($t_\alpha$). Therefore, the critical t-value is calculated using Satterthwaite's approximation, which is simply a weighted average of the t values for $r_1$ and $r_2$, using the corresponding estimated variances of the averages as weights:
+
+<br>
+
+$$t_{critical} = \frac{t_1 S_{\bar{Y_1}}^2+t_2 S_{\bar{Y_2}}^2}{S_{\bar{Y_1}}^2+S_{\bar{Y_2}}^2}$$
+
+<br>
+
+where $t_1$ and $t_2$ are the values "from the table" with $r_1 -1$ and $r_2 -1$ degrees of freedom, respectively. For $\alpha = 0.05$ in R code $t_1$ is `qt(p = 0.975, df = r1 - 1)` and $t_2$ is `qt(p = 0.975, df = r2 - 1)`.
+
+### Bean Drought Example: independent observations with unequal variances
+
+We use the same data as above, but we decide NOT to pool the variances. Therefore, the variance of the difference between averages is:
+
+<br>
+
+$$S_{\bar{d}} = \left ( \frac{S_{Y_1}^2}{r_1}+\frac{S_{Y_2}^2}{r_2} \right) ^ {1/2} =  \left ( \frac{62966.67}{4}+\frac{161000}{4} \right) ^ {1/2} = 420.41 \\[30pt]
+t_{calc} = \frac{2125 - 0}{420.41} = 5.055 \\[30pt]
+t_1 = t_{0.975, df = 3} = 3.182446 \qquad \qquad t_2 = t_{0.975, df = 3} = 3.182446 \\[30pt]
+t_{critical} = \frac{3.182446 \times 62966.67 + 3.182446 \times 161000} {62966.67 + 161000} = 3.182446$$
+
+<br>
+
+Because sample sizes are the same, the critical t corresponds to the critical t for common degrees of freedom and it would not be necessary to do the weighted average to arrive to the same number. The calculation is shown to remind the reader how it has to be done if sample sizes were different. The calculated t is larger than the critical t, so the null hypothesis is still rejected. However, note how the estimated standard deviation of the difference between averages is much larger than when the variances were pooled.
+
+In R, the code to compute the t-test when variances cannot be pooled and samples are independent is:
+
+```{r, message=FALSE, warning=FALSE}
+
+(bean.test.unequal <- t.test(bean.yield$irrigated, bean.yield$drought, 
+                    alternative = "two.sided", paired = FALSE,
+                    var.equal = FALSE))
+
+```
+
+The results are different from the test calculated by hand because R uses Welch's method, which instead of calculating a weighted average of t-values calculates an approximated degrees of freedom for the sum of the variances. In general, Welch's test is better than Student's t test because it has equal or better power and achieves Type I error rates closer to the nominal $\alpha$.
+
+### Case 3: Paired samples (#Case3)
+
+When observations are made on the same experimental unit (adjacent plots in the same field, pigs from the same pen) and are assigned to different treatments, they are considered **paired samples**. In this case, we treat the difference between the paired observations as the single variable of interest and we proceed as in the test for a single mean as seen in the previous chapter. The difference between paired averages, $\bar{d}$, the variance of the difference, $S_d^2$, the standard error of the difference, $S_\bar{d}$, and the test statistic, $t$, are calculated as
+
+<br>
+
+$$\bar{d} = \frac{\sum{d_i}}{r}$$
+
+<br>
+
+$$S_d^2 = \frac{\sum(d_i-\bar{d})^2}{r-1} \qquad \text{with} \qquad = r-1$$
+
+<br>
+
+$$S_\bar{d} = (\frac{S_d^2}{r})^{1/2}$$
+
+<br>
+
+$$t_{calc} = \frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$$
+
+<br>
+
+If the null hypothesis is true, the calculated t has a Student's t distribution with r-1 degrees of freedom
+
+### Two Populations Equation Summary
+
+
+```{block}
+
+Table: (\#tab:CaseEquations) 
+
+| Case | Pop Variances | Sample Size | Paired / Independent |         Pooled Sample Variance           |    Standard Error of the Difference      |   df   |     t-statistic     |     Confidence Interval   |
+|-----:|:-------------:|:-------------:|:------------------:|:---------------------------------------------------------------:|:-------------------------------------------------:|:-----------:| :-------------------------------------------:|:----------------:|
+| 1 |   Equal   |Equal/ Not Equal|  Independent   | $\frac{({{S_1}^2})({r_1-1})+({{S_2}^2})({r_2-1})}{(r_1+r_2-2)}$ |    $\left (\frac{S^2}{r_1} + \frac{S^2}{r_2} \right )^{1/2}$      | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$ |  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
+| 1 |   Equal   |   Equal   |   Independent   |       $\frac{{{S_1}^2}+{{S_2}^2}}{2}$          |      $(\frac{{2S}^2}{r})^{1/2}$       |  $2(r-1)$ | $\frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$|  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
+| 2 |  Not Equal  |Equal/ Not Equal|   Independent   |                                 | $(\frac{{S_1}^2}{r_1}+\frac{{S_2}^2}{r_2})^{1/2}$ | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$ |  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
+| 3 |   Equal   |   Equal   |    Paired     |     $S_d^2=\frac{\sum(d_i-\bar{d})^2}{r-1}$        |      $(\frac{S_d^2}{r})^{1/2}$       |   $r-1$  | $\frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$|  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
+
+```
+
+
+
+## Confidence Intervals
+
+After identifying the difference between the two samples averages ($\bar{d}$) and the standard error of the difference ($S_{\bar{d}}$), a confidence interval for the mean difference can be calculated to understand the level of confidence associated with the estimated mean difference. 
+
+<br>
+
+$${U\atop L} = \bar{d} \pm \ t_{\alpha/2} \  S_\bar{d}$$
+
+<br>
+
+Note that for Case 2, you will need to calculate the critical t-value, however for Case 1 and 3 you can identify this value from the Student's t-table with the appropriate degrees of freedom (see appropriate Case for equation). Depending on which case is used to calculate the standard error of the difference, the degrees of freedom to identify the critical t-value ($t_{critical}$) will vary when calculating your confidence intervals. 
+
+
+
+## Decision to Reject or Fail to Reject the Null Hypothesis
+
+After all of the steps and calculations, the calculated t-value and the critical t-value, $t_{\alpha}$, can be used in the final decision to reject or fail to reject the null hypothesis. **The null hypothesis is never "accepted", rather the decision is to fail to reject.** Remember, the null hypothesis when testing two population means is that the two populations are equal, $H_0 : \mu_1 = \mu_2 \ \ \text{or} \ \ \bar{d} = 0$
+
+
+
+<br>
+
+$$\text{If} \quad t_{calc} > t_{critical} \quad \text{and} \ P (t > t_{calc}) < \alpha \quad \text{ we reject the null hypothesis} $$ 
+$$\text{If} \quad t_{calc} < t_{critical} \quad \text{and} \ P (t > t_{calc}) > \alpha \quad \text{ we fail to reject the null hypothesis}$$ 
+
+<br>
+
+```{r DecisionMaking, message=FALSE, warning=FALSE, paged.print=FALSE, out.width = '70%', fig.align='center', echo=FALSE, fig.cap ="General procedure for sampling two populations to make a final decision to reject or fail to reject the null hypothesis"}
+
+knitr::include_graphics("images/CH8Strategy.png")
+
+
+```
+ 
+
+<br>
+
 
 ## Bean Drought Example - Paired
 
-Below is same data collected on common bean plots from the previous example.  *However, it is revealed that there are 4 unique varieties of common bean that were tested under both drought and normal irrigation*.  Yield data was collected from these plots and recorded in the table below.  
+Below is same data collected on common bean plots from the previous example. *However, it is revealed that there are 4 randomly selected varieties of common bean that were each tested under both drought and normal irrigation*. The yields are grouped by variety. Yield data were collected from these plots and recorded in the table below. 
+
 <br>
 
+Table: (\#tab:BeanDrought) Common bean yield (kg/ha) is measured under drought treatment and irrigation in four varieties in Quilichao, Columbia (Sponchiado, 1985). The difference is calculated by subtracting the drought yield from the irrigated yield (sample 2 - sample 1)
+
+<br>
+
+|  Treatment  |  Var 1 |  Var 2 |  Var 3  |  Var 4 |  Total  |  Mean  | 
+|------------:|:------:|:------:|:-------:|:------:|:-------:|:------:|
+|  Drought    |   590  |   720  |   720   |   190  |   2220  |   555  | 
+|  Irrigated  |  2990  |  2950  |  2660   |  2120  |  10720  |  2680  |
+| Difference  |  2400  |  2230  |  1940   |  1930  |   8500  |  2125  |
 
 <br>
 
 ```{r BeanDroughtPaired, message =FALSE, echo = FALSE}
 bean.paired <- data.frame(
-  "Variety" = c("Var1", "Var2", "Var3", "Var4"), 
-  "Drought" = c(590, 720, 720, 190), 
-  "Irrigated" = c(2990, 2950, 2660, 2120))
-
-knitr::kable(bean.paired, format = "html", caption = "Common bean yield (kg/ha) is measured under drought treatment and irrigation in four varieties in Quilichao, Columbia (Sponchiado, 1985).")
+ "variety" = c("var1", "var2", "var3", "var4"), 
+ "drought" = c(590, 720, 720, 190 ), 
+ "irrigated" = c(2990, 2950, 2660, 2120))
 ```
+
+<br>
 
 
 
@@ -711,17 +878,21 @@ knitr::kable(bean.paired, format = "html", caption = "Common bean yield (kg/ha) 
 
 **Our null and alternative hypotheses will be the same as before**
 
-$$\text{Null hypothesis: there is no difference between drought and irrigated treatments.} \\[15pt]$$
+<br>
 
-$$\mu_1 = \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} = 0$$
+$$\text{Null hypothesis: there is no difference in yield between drought and irrigated treatments on common bean} \\[15pt]$$
 
-$$\text{Alternative hypothesis: there is a difference between drought and irrigated treatments.}\\$$
-$$\mu_1 \neq \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} \neq 0$$
+$$\mu_1 = \mu_2 \quad \text{or} \quad \mu_{\bar{d}} = 0$$
+
+$$\text{Alternative hypothesis: there is a difference in yield between drought and irrigated treatments on common bean}\\$$
+$$\mu_1 \neq \mu_2 \quad \text{or} \quad \mu_{\bar{d}} \neq 0$$
+
+<br>
 
 
 ### Sampling Method
 
-**The sampling method is now different**.  Since there are four known common bean varieties planted in both drought and irrigated treatments, each variety is considered an experimental unit and the samples are paired.   
+**The sampling method is now different**. Since there are four known common bean varieties planted in both drought and irrigated treatments, each variety is considered an experimental unit and the observation can be considered paired.  
 
 
 ### Calculating Sample Averages and the Average of the Difference
@@ -729,62 +900,45 @@ $$\mu_1 \neq \mu_2 \quad  \text{or} \quad \mu_{\bar{d}} \neq 0$$
 
 For paired samples, we take the difference of each experimental unit (i.e., each variety) between the two treatments, then take the average of the differences.
 
-<br> 
+<br>
 
-\begin{equation}
+$$\bar{d} = \frac{d_i}{r} =\frac{\sum(Y_{2i} - Y_{1i})}{r} = \frac{(2990-590) + (2950 -720) + (2660-720) + (2120-190)}{4} = 2125$$
 
-\bar{d} =  \frac{\sum{d_i}}{r} \\[20pt]
-=\frac{\sum|Y_{i2} - Y_{i1}|}{r} \\[20pt]
-= \frac{|2990-590| + |2950 -720| + |2660-720| + |2120-190|}{4} \\[20pt]
-= 2125
-
-\end{equation}
-<br> 
-
-```{r, message = FALSE}
-# create a new column of the difference between the drought 
+<br>
+```{r}
+# create a new column of the difference between the drought
 # and irrigated treatment columns
 
-bean.paired$d_i <-  bean.paired$Irrigated - bean.paired$Drought 
+bean.paired$d_i <- bean.paired$irrigated - bean.paired$drought 
 
-# calculate sum(d_i) by adding the column containing the differences 
-# of the two treatments
+# calculate d_i by adding the column containing the differences
+# between the two treatments
 
 sum.d_i <- sum(bean.paired$d_i)
 
 # calculate r as the number of varieties (pairs of treatments)
 
-r.pair <-  length(bean.paired$Variety)
+r.pair <- length(bean.paired$variety)
 
 # calculate d_bar
 
-(dbar.pair <- sum.d_i / r.pair)
-
-# alternatively:
-
-mean(bean.paired$d_i)
-
 ```
+
+<br>
 
 ### Calculating the Variance of the Difference
 
 We do not need to calculate individual sample variances, since we will directly calculate the variance of the paired differences:
 
-<br> 
+<br>
 
-\begin{equation}
-s^2_{d} = \frac{\sum( d_i - \bar{d})^2}{r-1} \\[20pt]
-= \frac{(2400-2125)^2 + (2230-2125)^2 + (1940-2125)^2 + (1930-2125)^2}{3} [20pt]
-= 52966.67
+$$S^2_{d} = \frac{\sum( d_i - \bar{d})^2}{r-1} = \\[30pt]
+=\frac{(2400-2125)^2 + (2230-2125)^2 + (1940-2125)^2 + (1930-2125)^2}{3} = 52966.67$$
 
-\end{equation}
-<br> 
+<br>
 
-```{r, message=FALSE}
-# calculate the variance of the differences by summing the paired 
-# differences and dividing by r - 1 
-
-# var.d.pair = variance of the differences
+```{r}
+#calculate the variance of the differences by adding the paired differences from the average difference divided by r - 1 
 
 (var.d.pair <- sum((bean.paired$d_i - dbar.pair) ^ 2) / (r.pair - 1))
 
@@ -793,24 +947,22 @@ s^2_{d} = \frac{\sum( d_i - \bar{d})^2}{r-1} \\[20pt]
 var(bean.paired$d_i)
 ```
 
+<br>
+
 ### Calculating the Standard Error of the Difference
 
 The standard error of the difference is calculated using the variance of the differences $s^2_d$ and our sample size $r$
 
-<br> 
 
-\begin{equation}
-s_{\bar{d}} = \sqrt{\frac{s_d^2}{r}} \\[20pt]
-= \sqrt{\frac{52966.67}{4}} \\[20pt]
-= 115.07
+<br>
 
-\end{equation}
+$$S_{\bar{d}} = \sqrt{\frac{S_d^2}{r}} = \sqrt{\frac{52966.67}{4}} = 115.07$$
 
-<br> 
+<br>
 
-```{r, message = FALSE}
-# calculate the standard error of the difference by taking 
-# the square root of the variance of the difference divided by r
+```{r}
+# calculate the standard error of the difference by taking the square root
+# of the variance of the difference divided by r
 
 se.dbar.pair <- sqrt(var.d.pair / r.pair)
 ```
@@ -819,64 +971,73 @@ se.dbar.pair <- sqrt(var.d.pair / r.pair)
 
 The t-statistic is calculated using the same equation as in the independent sampling example
 
-<br> 
+<br>
 
-\begin{equation}
+$$t_{calc} = \frac{(\bar{d} - \mu_{\bar{d}})}{S_{\bar{d}}} = \frac{2125 - 0}{115.07} = 18.47$$
 
-t_{calc} = \frac{(\bar{d} -  \mu_{\bar{d}})}{s_{\bar{d}}} \\[20pt]
-= \frac{2125 - 0}{115.07} \\[20pt]
-= 18.47
+<br>
 
-\end{equation}
-<br> 
-
-```{r, message=FALSE}
-# calculate the t-statistic by dividing the difference of the 
-# averages by the standard error of the difference
+```{r}
+# calculate the t-statistic by dividing the difference of the averages
+# by the standard error of the difference
 
 t.calc.pair <- (dbar.pair - 0) / se.dbar.pair
 
 # a simpler way to calculate the t-statistic
 
-(t.test.pair <- t.test(bean.paired$Irrigated, bean.paired$Drought, 
-                       alternative = "greater", paired = TRUE)) 
-
-# Note, we specified "paired = TRUE" this time.
+(t.test.pair <- t.test(bean.paired$irrigated, 
+                       bean.paired$drought, 
+                       alternative = "two.sided", 
+                       paired = TRUE))
 ```
 
-The calculated t-statistic is compared to the critical t-value, $t_{crit}$, which can be found in the Student's t-Distribution Table. With the degrees of freedom of our pooled samples, $df = r-1 = 3$, and $\alpha_{two-tailed} = \frac{0.05}{2}$, it is determined $t_{crit} = 3.182$
+<br>
 
-```{r, message = FALSE}
-# we can calculate the critical t-value in r by using the qt() function and inputting alpha = 0.05
-# and the df = r - 1.  Since this is a two-tailed t-test, alpha is
-# divided by 2 for calculations
+The calculated t-statistic is compared to the critical t-value, $t_{crit}$, which can be found in the Student t-Distribution Table. With the degrees of freedom of our pooled samples, $df = r-1 = 3$, and 
+
+<br>
+
+$\alpha_{two-tailed} = \frac{0.05}{2}$, it is determined $t_{crit} = 3.182$
+
+<br>
+
+```{r}
+#we can calculate the critical t-value in r by inputting alpha = 0.05 and the df = r - 1. Since this is a two-tailed t-test, alpha is divided by 2 for calculations
 
 alpha <- 0.05
 
-t.crit.pair <- qt(alpha / 2, df = r.pair -1, lower.tail = FALSE)
+t.crit.pair <- qt(alpha / 2, df = r.pair -1 , lower.tail = FALSE)
 ```
 
-Since $t_{calc} = 18.47 > t_{crit} = 3.182$, we reject the null hypothesis that there is no difference between the drought treatment and the irrigated treatment.   
+<br>
 
-```{r tBeanDroughtPaired, fig.cap = "Student's t distribution for df = 3, with the calculated t value, and upper and lower critical t values for the paired bean drought example shown.", message=FALSE, echo = F}
+Since $t_{calc} = 18.47 > t_{crit} = 3.182$, we reject the null hypothesis that there is no difference between the drought treatment and the irrigated treatment.  
+
+<br>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 z <- seq(-8,20, 0.25)
 fd <- dt(z, df = 3, ncp = 0)
 plot(z, fd, 
-     type = "l",
-     xlab = "", ylab = "")
-criticalt3 <- qt(p = 1 - 0.025, 
-                df = 3)
-criticalt4 <- qt(p = 0.025, 
-                df = 3)
+   type = "l",
+   xlab = "", ylab = "")
+
+criticalt3 <- qt(p = 1 - 0.025, df = 3)
+
+criticalt4 <- qt(p = 0.025, df = 3)
+
 plot(z, fd, 
-     type = "l",
-     xlab = "", ylab = "")
+   type = "l",
+   xlab = "", ylab = "")
+
 abline(v = criticalt3, 
-       col = "chartreuse3", 
-       lty = 3)
-abline(v=criticalt4,
-       col = "chartreuse3",
-       lty =3)
+    col = "chartreuse3", 
+    lty = 3)
+
+abline(v = criticalt4,
+    col = "chartreuse3",
+    lty = 3)
+
 points(18.47, 0.0001, pch = 4, col = "cornflowerblue")
 text(18.47, 0.03, "t-calc", col = "cornflowerblue") 
 text(-6,0.35, "lower t-crit", col = "chartreuse3")
@@ -886,60 +1047,60 @@ text(10,0.025, "reject H0")
 
 ```
 
+<br>
+
 
 
 ## Exercises {#Ex8}
 
-1. Another three samples have been submitted from the irrigation study on common bean; two samples for the irrigated treatment, and one sample for the drought treatment  
+1. Another three samples have been submitted from the irrigation study on common bean; two samples for the irrigated treatment, and one sample for the drought treatment 
 <br>
 
 Table: (\#tab:BeanDrought) Common bean yield (kg/ha) is measured under drought treatment and irrigation in Quilichao, Columbia (Sponchiado, 1985) 
 
-|   Treatment   |  Yield 1  |  Yield 2  |  Yield 3  |  Yield 4  |  Yield 5  |  Yield 6  |  
+|  Treatment  | Yield 1 | Yield 2 | Yield 3 | Yield 4 | Yield 5 | Yield 6 | 
 |--------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-|    Drought    |    590    |    720    |    720    |    190    |   1010    |           |  
-|   Irrigated   |   2990    |   2950    |   2660    |   2120    |   1870    |   1560    |
+|  Drought  |  590  |  720  |  720  |  190  |  1010  |      | 
+|  Irrigated  |  2990  |  2950  |  2660  |  2120  |  1870  |  1560  |
 
 <br>
 
 Assuming these samples are independent of one another and are from the same bean variety, calculate the
- 
-* sample averages
-* difference of the averages
-* sample variances  
-* difference of the sample variances
-* t-statistic
+ -sample averages
+ -difference of the averages
+ -sample variances 
+ -difference of the sample variances
+ -t-statistic
 
-2. Data is collected on the birth weight (lb) of calves at a single farm and grouped according to gender. The sample size, averages and standard deviation for each group is provided in the table below
-  
+2. Data is collected on the birth weight (lb) of calves at a single farm and grouped according to gender. The sample size, averages and standard deviation for for each group is provided in the table below
+ 
 <br>
 
 Table: (\#tab:CalfBirthWeight) Average birth weight of calves (lb)
 
-|   Gender   |   Calves  |    Mean   |    SD     | 
+|  Gender  |  Calves |  Mean  |  SD   | 
 |-----------:|:---------:|:---------:|:---------:|
-|    Male    |     30    |     60    |    10     |   
-|   Female   |     25    |     50    |     7     | 
+|  Male  |   30  |   60  |  10   |  
+|  Female  |   25  |   50  |   7   | 
 
 <br>
 
-Is there a significant difference in the average birth weight of male and female calves, under the following conditions 
+Is there a significant difference in the average birth weight of male and female calves, under the following conditions
+ -the two populations have equal variances
+ -the two populations have unequal variances 
+ -the two populations have equal variances and equal sample sizes of 20
  
-* the two populations have equal variances 
-* the two populations have unequal variances
-* the two populations have equal variances and equal sample sizes of 20
-  
-  
+ 
 3. Data is collected on the average amount of protein in milk (g/cup) from dairy cows under two different diets
 
 <br>
 
 Table: (\#tab:MilkProtein) Average Protein Content (g/cup) in Milk
 
-|      Diet      |   Cow 1   |    Cow 2  |   Cow 3   |   Cow 4   |   Cow 5   |   Cow 6   |   Cow 7   |
+|   Diet   |  Cow 1  |  Cow 2 |  Cow 3  |  Cow 4  |  Cow 5  |  Cow 6  |  Cow 7  |
 |---------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-|   High-Carb    |    7.56   |    8.04   |    7.14   |    7.68   |    7.8    |           |           |
-|  High-Protein  |    7.86   |    8.04   |    7.68   |    8.1    |    7.98   |    7.62   |   7.44    |
+|  High-Carb  |  7.56  |  8.04  |  7.14  |  7.68  |  7.8  |      |      |
+| High-Protein |  7.86  |  8.04  |  7.68  |  8.1  |  7.98  |  7.62  |  7.44  |
 
 <br>
 
@@ -961,10 +1122,10 @@ What is the 95% confidence interval of the difference between the sample average
 ```{r}
 
 walking.spiders <- data.frame(
-  'Spider Number' = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
-  'no excrement (cm/sec)' = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
-  'excrement (cm/sec)' = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3),
-  'difference' = c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3.0, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4)) 
+ 'Spider Number' = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+ 'no excrement (cm/sec)' = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
+ 'excrement (cm/sec)' = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3),
+ 'difference' = c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3.0, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4)) 
 
 ```
 <br>
@@ -972,23 +1133,23 @@ walking.spiders <- data.frame(
 Table: (\#tab:WalkingSpiders) The mean walking speed of 15 wolf spiders inside a container in the presence and absence of praying mantis excrement.
 
 
-| Spider Number   | no excrement (cm/sec) |  excrement (cm/sec)  |    difference    |
+| Spider Number  | no excrement (cm/sec) | excrement (cm/sec) |  difference  |
 |----------------:|:---------------------:|:--------------------:|:----------------:|
-|       1         |          2.5          |         0.4          |        2.1       |
-|       2         |          5.5          |         1.9          |        3.6       |
-|       3         |          1.1          |         1.2          |       -0.1       |
-|       4         |          2.7          |         2.6          |        0.1       |
-|       5         |          2.8          |         4.3          |       -1.5       |
-|       6         |          1.6          |         0.3          |        1.3       |
-|       7         |          3.2          |         1.0          |        2.2       |
-|       8         |          4.5          |         1.5          |        3.0       |
-|       9         |          5.0          |         3.3          |        1.7       |
-|       10        |          6.9          |         2.6          |        4.3       |
-|       11        |          2.2          |         0.7          |        1.5       |
-|       12        |          3.9          |         1.4          |        2.5       |
-|       13        |          3.8          |         2.1          |        1.7       |
-|       14        |          3.5          |         3.4          |        0.1       |
-|       15        |          5.7          |         2.3          |        3.4       |
+|    1     |     2.5     |     0.4     |    2.1    |
+|    2     |     5.5     |     1.9     |    3.6    |
+|    3     |     1.1     |     1.2     |    -0.1    |
+|    4     |     2.7     |     2.6     |    0.1    |
+|    5     |     2.8     |     4.3     |    -1.5    |
+|    6     |     1.6     |     0.3     |    1.3    |
+|    7     |     3.2     |     1.0     |    2.2    |
+|    8     |     4.5     |     1.5     |    3.0    |
+|    9     |     5.0     |     3.3     |    1.7    |
+|    10    |     6.9     |     2.6     |    4.3    |
+|    11    |     2.2     |     0.7     |    1.5    |
+|    12    |     3.9     |     1.4     |    2.5    |
+|    13    |     3.8     |     2.1     |    1.7    |
+|    14    |     3.5     |     3.4     |    0.1    |
+|    15    |     5.7     |     2.3     |    3.4    |
 
 <br>
 
@@ -1017,8 +1178,8 @@ Table: (\#tab:WalkingSpiders) The mean walking speed of 15 wolf spiders inside a
 ```{r}
 
 rat.life <- data.frame(
-  'males' = c(700, 825, 425, 500, 575, 725, 800, 475, 575, 725, 500, 700, 575, 775),
-  'females' = c(450, 725, 675, 725, 750, 850, 690, 725, 475, 700, 725, 475, 825, 725))
+ 'males' = c(700, 825, 425, 500, 575, 725, 800, 475, 575, 725, 500, 700, 575, 775),
+ 'females' = c(450, 725, 675, 725, 750, 850, 690, 725, 475, 700, 725, 475, 825, 725))
 
 sample.avg <- sapply(rat.life, mean)
 
@@ -1030,25 +1191,25 @@ sample.var <- sapply(rat.life, var)
 
 Table: (\#tab:InterSteps)
 
-|   rat   |     males     |      females      |    
+|  rat  |   males   |   females   |  
 |--------:|:-------------:|:-----------------:|
-|    1    |      700      |        450        |   
-|    2    |      825      |        725        |  
-|    3    |      425      |        675        |  
-|    4    |      500      |        725        |  
-|    5    |      575      |        750        |  
-|    6    |      725      |        850        |  
-|    7    |      800      |        690        |  
-|    8    |      475      |        725        |  
-|    9    |      575      |        475        |  
-|    10   |      725      |        700        |  
-|    11   |      500      |        725        |  
-|    12   |      700      |        475        |  
-|    13   |      575      |        825        |  
-|    14   |      775      |        725        |  
+|  1  |   700   |    450    |  
+|  2  |   825   |    725    | 
+|  3  |   425   |    675    | 
+|  4  |   500   |    725    | 
+|  5  |   575   |    750    | 
+|  6  |   725   |    850    | 
+|  7  |   800   |    690    | 
+|  8  |   475   |    725    | 
+|  9  |   575   |    475    | 
+|  10  |   725   |    700    | 
+|  11  |   500   |    725    | 
+|  12  |   700   |    475    | 
+|  13  |   575   |    825    | 
+|  14  |   775   |    725    | 
 |--------:|:-------------:|:-----------------:|
-| average |     633.928   |       679.642     | 
-|  s.var  |    17269.917  |      15571.016    | 
+| average |   633.928  |    679.642   | 
+| s.var |  17269.917 |   15571.016  | 
 
 <br>
 
@@ -1212,7 +1373,7 @@ dfs <- length(before) - 1
 
 t.calc.d <- (mean(d) - 0) / se.d.bar
 
-ttable <- qt(alpha / 2, df =     , lower.tail = FALSE)
+ttable <- qt(alpha / 2, df = dfs , lower.tail = FALSE)
 
 
 ```
@@ -1223,7 +1384,7 @@ ANSWER. Interpret the result of the test of hypothesis here:
 
 #### Part 4: Paired or independent? [15 points]
 
-For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers!  In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
+For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers! In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
 
 ##### A. Aphids on soybeans
 
@@ -1253,7 +1414,7 @@ Answer here:
 
 ##### D. Fish oil and triglycerides
 
-A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the patients had their blood triglyceride level measured.
+A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3), on blood triglyceride level. You wish to know if the ingredients differ in effect on blood triglycerides. Forty patients had their blood triglyceride levels measured before the experiment began. The forty patients were divided into two treatment groups of twenty patients. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day. After 30 days the patients had their blood triglyceride level measured.
 
 
 Answer here:
@@ -1378,7 +1539,7 @@ ANSWER. State the extremes of the confidence interval and interpret the result o
 
 #### Part 3 [30 points]
 
-Milk production was measured in the morning (AM) and again in the evening (PM).  Perform a test to determine if there is a difference in milk production between the AM and PM. (Note that this is a paired t-test since the same sample of cows is being milk at two separate times).
+Milk production was measured in the morning (AM) and again in the evening (PM). Perform a test to determine if there is a difference in milk production between the AM and PM. (Note that this is a paired t-test since the same sample of cows is being milk at two separate times).
 
 
 ```{r,eval=FALSE}
@@ -1412,9 +1573,8 @@ dfs <- length(milkAM) - 1
 t.calc.d <- (mean(d) - 0) /           
    #complete code
 
-# critical t-value (for a given alpha and degrees of freedom)
-ttable <- qt(alpha / 2, df =   , lower.tail = FALSE) 
-# complete code
+#critical t-value (for a given alpha and degrees of freedom)
+ttable <- qt(alpha / 2, df = dfs , lower.tail = FALSE)
 
 
 # complete missing code for t-test between milking times (AM vs PM)
@@ -1427,11 +1587,11 @@ ANSWER. Interpret the result of the test of hypothesis here:
 
 #### Part 4: Paired or independent? [15 points]
 
-For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers!  In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
+For the following situations please determine if you should be conducting an independent or a paired t-test. Make sure to justify your answers! In some of these situations multiple pieces of information are being collected so please indicate what groups/variables are being compared.
 
 ##### A. High protein diet
 
-A researcher is interested in whether a high protein diet for dairy cows will significantly increase the protein content in milk. 36 dairy cows are randomly chosen in 4 fields to measure and the protein content of their milk is measured.  Half of the cows are chosen to receive a high protein diet and half recieve the standard diet.  After two weeks, protein content of milk production is measured again, and the change in protein content is calculated for each treatment.
+A researcher is interested in whether a high protein diet for dairy cows will significantly increase the protein content in milk. 36 dairy cows are randomly chosen in 4 fields to measure and the protein content of their milk is measured. Half of the cows are chosen to receive a high protein diet and half receive the standard diet. After two weeks, protein content of milk production is measured again, and the change in protein content is calculated for each treatment.
 
 Answer here:
 
@@ -1439,7 +1599,7 @@ Answer here:
 
 ##### B. Organic dairy feed
 
-A researcher wants to know whether using organic diary feed will change the milk production of his cows. To test this, organic feed and non-organic feed is given to six cows of the same breed in a random design (3 receive organic feed, 3 receive non-organic feed) and dairy production is measured for each treatment.  
+A researcher wants to know whether using organic diary feed will change the milk production of his cows. To test this, organic feed and non-organic feed is given to six cows of the same breed in a random design (3 receive organic feed, 3 receive non-organic feed) and dairy production is measured for each treatment. 
 
 
 Answer here:
@@ -1449,7 +1609,7 @@ Answer here:
 
 ##### C. Cowabunga
 
-You have developed a new breed of dairy cows that you have named "Cowabunga". You are curious if the milk produced from these cows at your facility in Davis differ in lactose content from a colleague's farm in Fresno. Both you and your colleague gather a sample of 10 random cows and send the milk to a lab to have their lactose content measured.  
+You have developed a new breed of dairy cows that you have named "Cowabunga". You are curious if the milk produced from these cows at your facility in Davis differ in lactose content from a colleague's farm in Fresno. Both you and your colleague gather a sample of 10 random cows and send the milk to a lab to have their lactose content measured. 
 
 Answer here:
 
@@ -1458,7 +1618,7 @@ Answer here:
 
 ##### D. Fish oil and blood triglycerides
 
-A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3) on blood triglyceride level in diary cows.  You wish to know if the ingredients differ in effect on blood triglycerides. Forty cows had their blood triglyceride levels measured before the experiment began. The forty cows were divided into two treatment groups of twenty cows. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day.  After 30 days the cows had their blood triglyceride level measured.  
+A medical research program is evaluating the efficacy of two natural ingredients, fish oil and niacin (vitamin B3) on blood triglyceride level in diary cows. You wish to know if the ingredients differ in effect on blood triglycerides. Forty cows had their blood triglyceride levels measured before the experiment began. The forty cows were divided into two treatment groups of twenty cows. One treatment group received 4 grams of fish oil per day, the other received 1 gram of niacin per day. After 30 days the cows had their blood triglyceride level measured. 
 
 Answer here:
 
@@ -1467,7 +1627,7 @@ Answer here:
 
 ##### E. Rumen flora
 
-A researcher is interested in determining the difference in bacteria species composition in the rumen of a cow after changing the grazing location from one year to the next.  At the first grazing location, they sample gut bacteria within a herd at random to determine the initial rumen bacteria composition.  At the end of the year at the second grazing location they sample rumen bacteria within the herd at random to determine the new bacteria species composition.  
+A research is interested in determining the difference in bacteria species composition in the rumen of a cow after changing the grazing location from one year to the next. At the first grazing location they sample gut bacteria within a herd at random to determine the initial rumen bacteria composition. At the end of the year at the second grazing location they sample rumen bacteria within the herd at random to determine the new bacteria species composition. 
 
 Answer here:
 
