@@ -1,96 +1,3 @@
-sd = 18,
-p = 0.10,
-lblx = "what is this value \n if area is 0.10?",
-cex = 0.95)
-pnorm(q = 180, mean = 200, sd = 18)
-left.tail(mean = 200,
-sd = 18,
-p = 0.10,
-lblx = "what is this value \n if area is 0.10?",
-cex = 0.95)
-left.tail(mean = 200,
-left.tail(mean = 200,
-sd = 18,
-p = 0.10,
-lblx = "what is this value?")
-left.tail(mean = 200,
-sd = 18,
-p = 0.10,
-lblx = "what is this value?")
-qnorm(p = 0.1, mean = 200, sd = 18)
-knitr::opts_chunk$set(echo = TRUE)
-library(arrangements)
-ncombinations(k = 11, n = 15, replace = FALSE)
-ncombinations(k = 10, n = 14) * ncombinations(k = 1, n = 3)
-ncombinations(k = 1, n = 3)
-ncombinations(k = 10, n = 14)
-=14*13*12*11/4*3*2
-14*13*12*11/4*3*2
-14*13*12*11/(4*3*2)
-ncombinations(k = 10, n = 14) * ncombinations(k = 1, n = 3)
-ncombinations(k = 5, n = 52)
-ncombinations(k = 1, n = 48)
-(P4Aces <- ncombinations(k = 1, n = 48) * ncombinations(k = 4, n = 4) / ncombinations(k = 5, n = 52))
-(SampleSpace <- tosscoin(times = 5, makespace = TRUE))
-library(prob)
-install.packages("prob")
-library(prob)
-(SampleSpace <- tosscoin(times = 5, makespace = TRUE))
-nrows(tosscoin(times = 5, makespace = TRUE))
-nrow(tosscoin(times = 5, makespace = TRUE))
-# Number of H's in each outcome
-SampleSpace$nH <- as.numeric(SampleSpace$toss1 == "H") +
-as.numeric(SampleSpace$toss2 == "H") +
-as.numeric(SampleSpace$toss3 == "H") +
-as.numeric(SampleSpace$toss4 == "H") +
-as.numeric(SampleSpace$toss5 == "H")
-(nHfreq <- as.data.frame(table(SampleSpace$nH)))
-# Rename columns
-names(nHfreq) <- c("nHeads", "AbsFreq")
-nHfreq$RelFreq <- nHfreq$AbsFreq / sum(nHfreq$AbsFreq)
-pander::pander(nHfreq)
-ncombinations(k = 3, n = 5)
-1 - 0.30 - 0.20 - 0.15 - 0.05 - 0.10
-0.80*0.05/0.50
-0.08+(0.10/0.50)*0.20
-0.08/0.12
-SampleSpace
-(5000 - 3500)/500
-pnorm(q = 4500, mean = 3500, sd = 500)
-pnorm(q = 1)
-pnorm(q = 1)1-
-1-pnorm(q = 1)
-0.9772499 - 0.1586553
-pnorm(q = 4500, mean = 3500, sd = 500) - pnorm(3000, mean = 3500, sd = 500)
-qnomr(p=0.10, mean = 3500, sd = 500)
-qnorm(p=0.10, mean = 3500, sd = 500)
-rnorm(9, 97, 8)
-round(rnorm(9, 97, 10), 1)
-# Two tails
-curve(df(x, df1 = 3, df2 = 5),
-from = 0,
-to = 35,
-lwd = 2.5,
-xlab = "",
-ylab = "")
-# Two tails
-curve(df(x, df1 = 5, df2 = 5),
-from = 0,
-to = 35,
-lwd = 2.5,
-xlab = "",
-ylab = "")
-# Two tails
-curve(df(x, df1 = 5, df2 = 15),
-from = 0,
-to = 35,
-lwd = 2.5,
-xlab = "",
-ylab = "")
-# Two tails
-curve(df(x, df1 = 5, df2 = 15),
-from = 0,
-to = 10,
 lwd = 2.5,
 xlab = "",
 ylab = "")
@@ -510,3 +417,96 @@ qt(0.025, df = df1)
 tcrit
 df1
 qt(0.025, df1)
+walking.spiders <- data.frame(
+'spider' = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+'control' = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
+'mantis' = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3),
+'dif' = c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3.0, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4))
+dif = c(2.1, 3.6, -0.1, 0.1, -1.5, 1.3, 2.2, 3.0, 1.7, 4.3, 1.5, 2.5, 1.7, 0.1, 3.4)
+mean(dif)
+var(dif)
+qt(p = 0.975, df = 14)
+spd <- data.frame(
+spider = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+control = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
+mantis = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3))
+t.test(x = spd$control,
+y = spd$mantis,
+alternative = "two.sided",
+mu = 0,
+paired = TRUE,
+conf.level = 0.95)
+rats <- data.frame(
+'males' = c(700, 825, 425, 500, 575, 725, 800, 475, 575, 725, 500, 700, 575, 775),
+'females' = c(450, 725, 675, 725, 750, 850, 690, 725, 475, 700, 725, 475, 825, 725))
+(sample.avg <- sapply(rat.life, mean))
+(sample.avg <- sapply(rat, mean))
+(sample.avg <- sapply(rats, mean))
+str(sample.avg)
+sample.avg["males"]
+sample.avg["males"]
+sample.avg[1]
+sample.avg["females"]
+sample.avg[2]
+t.test(x = rats$male,
+y = rats$females,
+alternative = "two.sided",
+mu = 0,
+paired = FALSE,
+conf.level = 0.95)
+spd <- data.frame(
+spider = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+control = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
+mantis = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3))
+(control.avg <- mean(spd$control))
+(mantis.avg <- mean(spd$mantis))
+(control.var <- var(spd$control))
+(mantis.var <- var(spd$mantis))
+(spd$dif <- spd$control - spd$mantis)
+(d.bar <- mean(spd$dif))
+(dif.var <- var(spd$dif))
+(r <- length(spd$dif))
+d.bar.var <- dif.var / r
+(d.bar.var <- dif.var / r)
+(tcalc <- d.bar / sqrt(d.bar.var))
+(tcrit <- qt(p =0.975, df = r-1))
+(CIlo <- d.bar - tcrit * sqrt(d.bar.var))
+(CIhi <- d.bar + tcrit * sqrt(d.bar.var))
+t.test(x = spd$control,
+y = spd$mantis,
+alternative = "two.sided",
+mu = 0,
+paired = TRUE,
+conf.level = 0.95)
+rats <- data.frame(
+'males' = c(700, 825, 425, 500, 575, 725, 800, 475, 575, 725, 500, 700, 575, 775),
+'females' = c(450, 725, 675, 725, 750, 850, 690, 725, 475, 700, 725, 475, 825, 725))
+(sample.avg <- sapply(rats, mean))
+(sample.var <- sapply(rats, var))
+sample.avg["males"]
+sample.avg[1]
+sample.avg["females"]
+sample.avg[2]
+r1 <- length(rats$males)
+r2 <- length(rats$females)
+(fem.var <- var(rats$females))
+(male.var <- var(rats$males))
+(pooled.var <- ((r1 - 1) * male.var + (r2 - 1) * female.var) / (r1 + r2 - 2))
+(pooled.var <- ((r1 - 1) * male.var + (r2 - 1) * fem.var) / (r1 + r2 - 2))
+(rat.d.bar.var <- pooled.var / r1 + pooled.var / r2)
+rat.d.bar <- sample.avg[1] - sample.avg[2]
+(rat.tcalc <- rat.d.bar / sqrt(rat.d.bar.var))
+t.test(x = rats$male,
+y = rats$females,
+alternative = "two.sided",
+mu = 0,
+paired = FALSE,
+conf.level = 0.95)
+pt(q = abs(rat.tcalc), df = rat.df, lower.tail = FALSE)
+(rat.df <- r1 + r2 - 2)
+pt(q = abs(rat.tcalc), df = rat.df, lower.tail = FALSE)
+2 * pt(q = abs(rat.tcalc), df = rat.df, lower.tail = FALSE)
+r1
+transg.aa.m1 <- lm(wgain ~ variety, data = aaAnovaExmpl1.dat)
+summary(transg.aa.m1)
+anova(transg.aa.m1)

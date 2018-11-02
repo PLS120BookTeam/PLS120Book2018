@@ -1,0 +1,219 @@
+---
+title: "Homework 05 Fall 2018"
+author: "YourNameHere"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+## Homework : Two Population Means
+
+DO NOT TYPE NUMBERS INTO THE CODE UNLESS YOU ARE SPECIFICALLY ASKED TO DO IT.
+USE THE NAMES OF OBJECTS TO PERFORM CALCULATIONS.
+
+For example, imagine you need to calculate the variance of `Ybar`. The variance of Y is 10 and it is stored in the object `varY`. Sample size is 4 and it is stored in object `r`. Use `(varYbar <- varY / r)`. Do not use `varYbar <- 10/4`.
+
+### Walking Spiders
+
+Wilder and Rypstra (2004) examined the effect of praying mantis excrement on the behavior of wolf spiders to test whether cues from an introduced predator (the praying mantis) would change the movement rate of the native wolf spider. They put 15 wolf spiders in individual containers; inside each container there were two semicircles of filter paper. One semicircle was smeared with praying mantis excrement and one circle was without excrement. The researchers observed each spider for one hour, and calculated spider mean walking speed while it moved across first the excrement circle and then the non-excrement circle. (Each of the 15 spiders was exposed to both treatments). Data are modified for the purpose of homework and are not the original true data.
+
+You have to complete the code and or type your answers to each question.
+
+```{r}
+
+spd <- data.frame(
+ spider = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+ control = c(2.5, 5.5, 1.1, 2.7, 2.8, 1.6, 3.2, 4.5, 5.0, 6.9, 2.2, 3.9, 3.8, 3.5, 5.7),
+ mantis = c(0.4, 1.9, 1.2, 2.6, 4.3, 0.3, 1.0, 1.5, 3.3, 2.6, 0.7, 1.4, 2.1, 3.4, 2.3)) 
+
+```
+
+1. Calculate the average speed and sample variance for each treatment. The values that you need to calculate are: $\bar{Y}_{control}$, $\bar{Y}_{mantis}$, $S^2_{Y_{control}}$ and $S^2_{Y_{mantis}}$
+
+```{r}
+
+(control.avg <- mean(spd$control))
+
+(mantis.avg <- mean(spd$mantis))
+
+(control.var <- var(spd$control))
+
+(mantis.var <- var(spd$mantis))
+
+```
+
+
+2. Calculate the difference in speed between treatments for each spider. Report the average difference. The values that you need to calculate are: $d_i = Y_{control \ i} - Y_{mantis \ i}$ and $\bar{d}$.
+
+```{r}
+
+(spd$dif <- spd$control - spd$mantis)
+
+(d.bar <- mean(spd$dif))
+
+```
+
+3. Calculate the sample variance for the difference between treatments. The value that you need to calculate is: $S^2_d$.
+
+```{r}
+
+(dif.var <- var(spd$dif))
+
+```
+
+4. Calculate the estimated variance of the averages of difference between treatments. You need to find the variance of $\bar{d}$, called $S^2_{\bar{d}}$.
+
+```{r}
+
+(r <- length(spd$dif))
+
+(d.bar.var <- dif.var / r)
+
+```
+
+5. Is this a paired or independent sample case?
+
+Paired. The same spider pairs her speed in each treatment.
+
+6. Calculate the t-value that corresponds to the observed difference. Use the equation from the book or notes.
+
+```{r}
+
+(tcalc <- d.bar / sqrt(d.bar.var))
+
+```
+
+7. Calculate the critical t value to determine if the difference is significantly diferent from 0 at the 5% level. Use the printed t table to get the first number, and then use the `qt` function to get the value in R.
+
+```{r}
+
+# table.tcrit <-        # Type number from table
+
+(tcrit <- qt(p =0.975, df = r-1))
+
+
+```
+
+8. Calculate a 95% confidence interval for the difference between treatment means. Use the equation from the book or notes.
+
+```{r}
+
+(CIlo <- d.bar - tcrit * sqrt(d.bar.var))
+
+(CIhi <- d.bar + tcrit * sqrt(d.bar.var))
+
+```
+
+9. Can you conclude with 95% confidence that mean spider walking speed differed based on the treatment of praying mantis vs. excrement? State why.
+
+Yes, because the calculated t is larger than the critical t. Accordingly, the confidence interval for the difference does not contain 0.
+
+
+10. Check your results based on the results from the R function that calculates everything at once:
+
+```{r}
+
+t.test(x = spd$control, 
+       y = spd$mantis, 
+       alternative = "two.sided", 
+       mu = 0, 
+       paired = TRUE,
+       conf.level = 0.95)
+
+```
+
+
+
+### Rat Life
+
+Carlson and Hoelzel looked at the average lifespan of a rats based on gender (1946, Journal of Nutrition). Below is lifespan (days) data from 14 male and 14 female rats, you may assume rat lifespan is distributed normally. Data are modified for this homework and may not be the original true data. Assume **variances are the same** for males and females.
+
+```{r}
+
+rats <- data.frame(
+ 'males' = c(700, 825, 425, 500, 575, 725, 800, 475, 575, 725, 500, 700, 575, 775),
+ 'females' = c(450, 725, 675, 725, 750, 850, 690, 725, 475, 700, 725, 475, 825, 725))
+
+(male.avg <- mean(rats$males))
+
+(female.avg <- mean(rats$females))
+
+```
+
+
+Answer the questions below to test the hypothesis that lifespan does not differ between sexes.
+
+10. Write the corresponding null and alternative hypothesis.
+
+Ho: mean male lifespan = mean female lifespan 
+
+
+11. Assume homogeneous variance and calculate the pooled sample variance for rat lifespan.
+
+```{r}
+
+r1 <- length(rats$males)
+
+r2 <- length(rats$females)
+
+(fem.var <- var(rats$females))
+
+(male.var <- var(rats$males))
+
+(pooled.var <- ((r1 - 1) * male.var + (r2 - 1) * fem.var) / (r1 + r2 - 2))
+
+
+```
+
+12. Calculate the estimated variance of the difference between sample averages.
+
+```{r}
+
+(rat.d.bar.var <- pooled.var / r1 + pooled.var / r2)
+
+```
+
+13. Calculate $\bar{d}$ and the t value to test for difference in lifespan between sexes. Subtract males from females.
+
+```{r}
+
+rat.d.bar <- male.avg - female.avg
+
+(rat.tcalc <- rat.d.bar / sqrt(rat.d.bar.var))
+
+```
+
+14. Calculate the degrees of freedom of the calculated t value.
+
+```{r}
+
+(rat.df <- r1 + r2 - 2)
+
+```
+
+15. Calculate the probability of observing a larger absolute value of t if Ho were true.
+
+```{r}
+
+2 * pt(q = abs(rat.tcalc), df = rat.df, lower.tail = FALSE)
+
+```
+
+16. What do you conclude based on whether the calculated p is greater than alpha = 0.05.
+
+Cannot reject the null hypothesis. The study is inconclusive.
+
+
+17. Check that your calculations are consistent with the results of the `t.test` function.
+
+```{r}
+
+t.test(x = rats$male, 
+       y = rats$females, 
+       alternative = "two.sided", 
+       mu = 0, 
+       paired = FALSE,
+       conf.level = 0.95)
+
+
+```
+

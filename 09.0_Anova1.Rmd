@@ -170,7 +170,7 @@ $$S^2_Y = \frac{1}{k \ (r - 1)} \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{ij} - \bar{Y
 
 The pooled variance is the average squared deviations from each sample average, and thus, it does not need the means to be equal to be a valid estimate of the common variance for all treatments. This pooled variance is based on the same concept used for comparing two means using independent samples in [Chapter 8](#Case1). Pooling variances is desirable because it leads to better precision and narrower confidence intervals. A pooled estimated variance is based on more observations and is therefore more stable (the variance of the estimated variance is smaller!!), moreover, the variance of Student's t distribution is also reduced as the degrees of freedom increase. Pooling leads to smaller critical t-values, which equals more power (lower probability of error type II) and narrower confidence intervals.
 
-If indeed the first estimate of the variance above, based on the variation among treatment averages, is a valid one, the quotient of the first estimate over the second one, based on the pooled variance, should have an F distribution with values about 1.0. We saw this when testing for differences between independent variance estimates in [section XXX](#addReference). The statistical distribution resulting from the quotient of two variance estimates is called an F-distribution, which was fully described in the *F Distribution* section of the [Probability chapter](#chProb). If the quotient calculated, called "calculated F-value," is too far from 1.0 we conclude that the two variances are not equal, therefore, the estimation of the variance using the averages is not a valid estimate, and the averages are considered too different to come from the same population. The means of the source populations must be different, so the null hypothesis is rejected. This is further illustrated with a numerical example below.
+If indeed the first estimate of the variance above, based on the variation among treatment averages, is a valid one, the quotient of the first estimate over the second one, based on the pooled variance, should have an F distribution with values about 1.0. We saw this when testing for [differences between independent variance estimates] (#compare2Variances). The statistical distribution resulting from the quotient of two variance estimates is called an F-distribution, which was fully described in the *F Distribution* section of the [Probability chapter](#chProb). If the quotient calculated, called "calculated F-value," is too far from 1.0 we conclude that the two variances are not equal, therefore, the estimation of the variance using the averages is not a valid estimate, and the averages are considered too different to come from the same population. Thus, one reasons, at least two means must be different, and the null hypothesis is rejected. This is further illustrated with a numerical example below.
 
 
 
@@ -237,13 +237,15 @@ SSE &= \sum_{i=1}^k \sum_{j=1}^r (\bar{Y}_{ij} - \bar{Y}_{i.})^2\\[15pt]
 \end{align}
 <br>
 
-## Degrees of freedom (The bulk of this section should be moved to the first time df are mentioned)
+## Degrees of freedom
 
 Degrees of freedom are quantities associated with sums of squares. Each sum of squares has an associated number that is called its degrees of freedom. We operationally define **degrees of freedom** associated with a sum of squares as the number of different terms in the sum minus the number of independent parameters estimated to be used in the calculation.
 
 In reality, degrees of freedom refers to the number of dimensions in which vectors can vary. The basic mathematics of statistics involves large-dimensional spaces and sub spaces. In short, and for those who are curious, a sample of size N is a vector in N dimensions and has N degrees of freedom because it can vary freely over N dimensions. Once a sample is set, the overall average is a vector in N dimensions with each coordinate value equal to the average of the observations. The average vector and the observation vector form a hyper plane in N-1 dimensions where the difference between observation and average reside. The difference $Y_{i} - \bar{Y}_{.}$ is the vector of deviations or residuals (for the simplest model $Y_i = \mu + \epsilon_i$) from observation to average. Given a set sample, this vector of residuals has only N-1 degrees of freedom, because it must stay in the subspace spanned by the observation and the overall average. The restriction comes from the fact that given the overall average and N-1 of the observation coordinates, the last one can be calculated as $Y_N = N \ \bar{Y}_. - \sum_{i=1}^{N-1} Y_i$. 
 
 This concept is illustrated for a sample consisting of three observations, so we can plot them in a 3D figure.
+
+<br>
 
 ```{r 3Dsample, echo=FALSE, warning=FALSE, fig.cap="Three-dimensional representation of a sample with 3 observations. The longest arrow (hypotenuse) represents the sample vector. The base of the triangle is the average and the third side is the vector of deviations from the average to the observation."}
 
@@ -296,6 +298,8 @@ arrows3D(x0 = xyz.orig[, 1],
          ticktype = "detailed")
 
 ```
+
+<br>
 
 Note that the three arrows form a square triangle with the observation vector being the hypotenuse, and the other two sides being the average and the residual. Therefore the length of the observation vector equals the length of the average vector plus the length of the residual vector. Using the Pythagoras theorem repeatedly, we can see that the length of the observation vector is the sum of squares of individual observations; the length of the average vector is 3 times the squared average and the length of the residual vector is the sum of squares of the residuals or deviations. The length of the average vector is called "correction factor" because it is used to calculate the total variation about the average by subtracting it from the length of the observation vector.
 
@@ -363,12 +367,16 @@ TSS &= SST + SSE \\[15pt]
 
 The equations above show how each observation and the total variation are partitioned into treatment and residual. Total sum of squares is partitioned into SS of treatments and SS of residual or error ^[We try to use the term "residual" for the calculated values, which are estimates of the unknown true errors. We mention the term "error" because most books use "SSE" to refer to the SS of residuals. The "E" comes from "error."]. Each sum of squares has an associated degrees of freedom. By dividing the SS by the df we obtain **mean squares**. The mean square of residuals (MSE) is the best estimate of the common variance for all samples, and it does not depend on treatment means being equal. The mean square of treatments (MST) has an expectation equal to the common variance PLUS a component that is directly proportional to the difference among means. Only when means are equal is the MST another estimate of the variance of the error. See the optional section of Expected Mean Squares for details.
 
+<br>
 
 |Source            |  df      | Sum of Squares (SS) | Mean Squares (MS) | Calculated F |
 |:----------------:|:--------:|:-------------------:|:-----------------:|:------------:|
 |Total             | k r - 1  |     TSS             |                   |              |
 |Among Treatments  | k - 1    |     SST             |        MST        |   MST / MSE  |
 |Within Treatments | k (r-1)  |     SSE             |        MSE        |              |
+
+<br>
+
 
 Sums of squares, mean squares and calculated F are all statistics. The values based on one sample are specific realized values of the random variables, which have their own expected values variances and distributions. If the null hypothesis that all treatment means are the same is true and all assumptions are correct, the calculated F has an F distribution with mean or expectation equal to $dfe/(dfe - 2)$, where dfe is the residual or error degrees of freedom.
 
@@ -1963,7 +1971,7 @@ ssRes <- sum((milk.prot$logProt - milk.prot$AvgLogProt) ^ 2)
 
 ```
 
-Degrees of freedom are calculates as the total number of independent (different) terms in each sum, minus the number of parameters estimated for each sum. In the case of total sum of square, there are as many different terms are there are observations, because each observation is potentially different. Only the overall mean is estimated with the overall average. For the sum of squares of treatments we have as many different terms as there are treatments, and we use the overall average as estimate of the overall mean. Because the total degrees of freedom equal the sum of the components, the residual df can be calculated as the total df (n-1) minus treatment df.
+Degrees of freedom are calculates as the total number of independent (different) terms in each sum, minus the number of parameters estimated for each sum. In the case of total sum of squares, there are as many different terms as there are observations, because each observation is potentially different. Only the overall mean is estimated with the overall average. For the sum of squares of treatments we have as many different terms as there are treatments, and we use the overall average as estimate of the overall mean. Because the total degrees of freedom equal the sum of the components, the residual df can be calculated as the total df (n-1) minus treatment df.
 
 ```{r}
 

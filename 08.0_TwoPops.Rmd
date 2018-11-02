@@ -171,7 +171,7 @@ Why use independent or paired procedures? Each has advantages and disadvantages,
 
 
 
-## Comparing Sample Variances
+## Comparing Sample Variances {#compare2Variances}
 
 When observations are independent, we will have two estimated variances, one for each sample. In some cases we may have previous information indicating that the population variances are equal or unequal and we use that information to determine if we can pool the estimates of the variance from each sample. When there is no information about the equality of the variances we can use an F-test to determine if variances estimates can be pooled. Pooling variance estimates is very desirable because it increases the degrees of freedom and results in tests that have lower probability of error Type II.
 
@@ -771,7 +771,7 @@ Table: (\#tab:CaseEquations)
 
 | Case | Pop Variances | Sample Size | Paired / Independent |         Pooled Sample Variance           |    Standard Error of the Difference      |   df   |     t-statistic     |     Confidence Interval   |
 |-----:|:-------------:|:-------------:|:------------------:|:---------------------------------------------------------------:|:-------------------------------------------------:|:-----------:| :-------------------------------------------:|:----------------:|
-| 1 |   Equal   |Equal/ Not Equal|  Independent   | $\frac{({{S_1}^2})({r_1-1})+({{S_2}^2})({r_2-1})}{(r_1+r_2-2)}$ |    $(\frac{S^2}{r_1 + r_2})^{1/2}$      | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$ |  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
+| 1 |   Equal   |Equal/ Not Equal|  Independent   | $\frac{({{S_1}^2})({r_1-1})+({{S_2}^2})({r_2-1})}{(r_1+r_2-2)}$ |    $\left (\frac{S^2}{r_1} + \frac{S^2}{r_2} \right )^{1/2}$      | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$ |  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
 | 1 |   Equal   |   Equal   |   Independent   |       $\frac{{{S_1}^2}+{{S_2}^2}}{2}$          |      $(\frac{{2S}^2}{r})^{1/2}$       |  $2(r-1)$ | $\frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$|  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
 | 2 |  Not Equal  |Equal/ Not Equal|   Independent   |                                 | $(\frac{{S_1}^2}{r_1}+\frac{{S_2}^2}{r_2})^{1/2}$ | $r_1+r_2-2$ | $\frac{\bar{d}-\mu_{\bar{d}}}{S_{\bar{d}}}$ |  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |
 | 3 |   Equal   |   Equal   |    Paired     |     $S_d^2=\frac{\sum(d_i-\bar{d})^2}{r-1}$        |      $(\frac{S_d^2}{r})^{1/2}$       |   $r-1$  | $\frac{(\bar{d}-\mu_{\bar{d}})}{S_{\bar{d}}}$|  ${L\atop U} = \bar{d} \pm t_\alpha S_\bar{d}$  |

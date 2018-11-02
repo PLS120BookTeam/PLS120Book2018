@@ -30,9 +30,18 @@ See "TeachingExperimentalDesign2014.pdf"
 
 >"An experiment is characterized by the treatments and experimental units to be used, the way treatments are assigned to units, and the responses that are measured."
 >
->Gary W. Oehlert, 2010
+>Gary W. Oehlert, 2010 [@Oehlert2010]
 
-Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments were not assigned independently of other characteristics of experimental units. For example, consider the comparison of susceptibility to the common cold between people who exercise regularly and sedentary people. Any difference detected cannot be attributed to exercise, because it may be that colds and exercise are unrelated but have a common cause. It may be that people who have to work more indoors exposed to contagion also have less time to exercise. Work indoors causes both more colds and less time to exercise. Changing the level of exercise will not change the incidence of colds unless it also reduces the time people spend indoors exposed to contagion.
+
+## Manipulative and Observational Studies
+
+There are two main types of studies involving collection, analysis and interpretation of data, manipulative and observational studies. The names given to these types of studies vary from author to author, but the fact that there are two main types doe not change. The difference is important because it determines what kind of conclusions can be derived from each type.
+
+The main difference between manipulative and observational studies is that in manipulative studies the experimental units receive treatments in a way that involved a randomization at some point. In observational studies, observed units are selected at random but they do not receive any randomly assigned treatment or manipulation whose effects we are trying to study. For example, we may be interested in the effects of exercise on the time it takes to recover from a common cold. A random sample of 1000 people are selected and their level of exercise and duration of their illness -when they get a cold- are recorded. Suppose that strong negative relationship between amount of exercise and cold duration is found. This cannot be taken as evidence of a direct cause-and-effect relationship between exercise and cold duration. It may simply be a result of the fact that generally healtier people with stronger immune systems exercise more because they feel better in general, and they also have shorter colds due to the stornger immune system. Both the level of exercise and the duration of the cold have a common cause that creates the relationship between cold duration and exercise. There are other scenarios not involving a common cause that also generate associations without causation.
+
+Conversely, if sets of 100 out of the 1000 people are randomly assigned to levels of exercise ranging from none to a lot, the randomization will break the potential associat`ion that is not causation. Each level of exercise will have people with all types of immune system and all types of any other variable that could possibly counfound the effects of exercise. If a relationship is found in this case, the argument for a causal relationship between exercise and duration of the cold is a lot stronger.
+
+Manipulative experiments are the only ones that can address questions of causation. Causality cannot be established in observational studies because the treatments are not assigned independently of other characteristics of experimental units.
 
 ## Experimental Design and Treatment Structure
 
@@ -45,7 +54,7 @@ answered.
 
 ## Elements of Experimental Design
 
-Oehlert (2010) provides the following definitions which are presented here with sligh tmodification and additions:
+Oehlert [@Oehlert2010] provides the following definitions which are presented here with slight modification and additions:
 
 *Treatments* are the different procedures we want to compare. These could be different kinds or amounts of fertilizer in agronomy, different long-distance rate structures in marketing, or different temperatures in a reactor vessel in chemical engineering.
 
@@ -71,14 +80,4 @@ Oehlert (2010) provides the following definitions which are presented here with 
 
 *Confounding* occurs when the effect of one factor or treatment cannot be distinguished from that of another factor or treatment. The two factors or treatments are said to be confounded. Except in very special circumstances, confounding should be avoided. Consider planting corn variety A in Minnesota and corn variety B in Iowa. In this experiment, we cannot distinguish location effects from variety effects—the variety factor and the location factor are confounded.
 
-
-## Exercises and Solutions
-
-## Homework
-
-## Laboratory Exercises
-
-### Plant Sciences
-
-### Animal Sciences
 
