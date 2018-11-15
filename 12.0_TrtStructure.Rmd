@@ -85,7 +85,7 @@ The variance of an estimated mean depends on the number of observations used to 
 
 ### Experiment-wise and Family-wise Error Rates
 
-When multiple means are compared sequentially, a new problem arises. To understand the solution, first we need to fully understand the problem. In testing hypotheses we are particularly interested in avoiding problemd of "false positives" where two averages appear to be significantly different while they really are not. This is called "Type I" error. The nominal probability of making a Type I error in a test is $\alpha$. This is referred to as the "test-wise" or "comparison-wise" error rate, because it is the error rate in each single comparison or test.
+When multiple means are compared sequentially, a new problem arises. To understand the solution, first we need to fully understand the problem. In testing hypotheses we are particularly interested in avoiding problems of "false positives" where two averages appear to be significantly different while they really are not. This is called "Type I" error. The nominal probability of making a Type I error in a test is $\alpha$. This is referred to as the "test-wise" or "comparison-wise" error rate, because it is the error rate in each single comparison or test.
 
 The probability of making at least one error Type I in a set of tests comparing treatments or testing other contrasts is called "family-wise" or "experiment-wise" error rate. Family-wise error rate tends to increase as the number of tests in the family increases, because an error in any of the tests is an error for the family. If tests are independent and test-wise error rate is kept constant at $\alpha$, the number of errors in a family has a Binomial distribution. The probability of not making **any** errors in n comparisons, assuming independence, is $(1-\alpha)^n$. Thus, the probability of making *at least* one error is $1-(1-\alpha)^n$.
 
@@ -98,7 +98,7 @@ $$\left(
     \end{array}
   \right) = \frac{6!}{2!(6-2)!} = 15$$
 
-With 15 comparisons, the probability of making at least one error in the set is `r 1-(1-0.05)^15`. Obviosuly, this error is much greater than the nominal rate for each comparison. Several methods are available to make sure that the family-wise error rate remains close to the nominal of 5%.
+With 15 comparisons, the probability of making at least one error in the set is `r 1-(1-0.05)^15`. Obviously, this error is much greater than the nominal rate for each comparison. Several methods are available to make sure that the family-wise error rate remains close to the nominal of 5%.
 
 
 
@@ -107,7 +107,7 @@ With 15 comparisons, the probability of making at least one error in the set is 
 
 Factorials are experiments where treatments have a special structure resulting from combining levels of different factors. The treatment structure allows us to assess the effects of several treatment factors as well as the interaction between factors. The concept of **interaction** is fundamental in statistics and in life in general and it is treated in detail below. Let's concentrate on the factorial structure for now.
 
-For a factorial set of treatments we need at least two factors or variables, each of which will take at least two values. Suppose you are trying to invite someone to have a meal with you and you want to maximize the chances of being accepted. Two main factors come into play: the type of cuisine you propose and the meal. In your town you have Mexican, Thai, Chinese, American and Japanese restaurants. You can have lunch or dinner. Therefore, you have 5 x 2 options for the invitation. For another example, imagine that you want to determine the best combination of speed and tire pressure to maximize your fuel efficiency whie commuting. The car manufacturer gives a recommendation for tire pressure, but that is not specifically adjusted for the roads in your commute, or for your typical range of speeds. You can choose several tire pressures around the manufacturers recommendation, and several speeds that are resonable around your average. Most likely, the effect of tire pressure will depend on speed because the relative importance of tire resistance and boncing depend on speed. Say you choose 32, 34 and 36 psi for tire pressure and 65, 70 and 75 mph for speed. You will have to test 3 x 3 combinations. These are called complete factorials because each level of each factor appears with each level of the other factors. Sometimes we say that the factors are *crossed* as in a table where rows are levels of one factor and columns are levels of the other factor (Table \@ref(tab:CrossedFactors))
+For a factorial set of treatments we need at least two factors or variables, each of which will take at least two values. Suppose you are trying to invite someone to have a meal with you and you want to maximize the chances of being accepted. Two main factors come into play: the type of cuisine you propose and the meal. In your town you have Mexican, Thai, Chinese, American and Japanese restaurants. You can have lunch or dinner. Therefore, you have 5 x 2 options for the invitation. For another example, imagine that you want to determine the best combination of speed and tire pressure to maximize your fuel efficiency while commuting. The car manufacturer gives a recommendation for tire pressure, but that is not specifically adjusted for the roads in your commute, or for your typical range of speeds. You can choose several tire pressures around the manufacturers recommendation, and several speeds that are reasonable around your average. Most likely, the effect of tire pressure will depend on speed because the relative importance of tire resistance and bouncing depend on speed. Say you choose 32, 34 and 36 psi for tire pressure and 65, 70 and 75 mph for speed. You will have to test 3 x 3 combinations. These are called complete factorials because each level of each factor appears with each level of the other factors. Sometimes we say that the factors are *crossed* as in a table where rows are levels of one factor and columns are levels of the other factor (Table \@ref(tab:CrossedFactors))
 
 <br><br>
 
@@ -125,7 +125,7 @@ Table: (\#tab:CrossedFactors) Treatments resulting from the factorial combinatio
 
 Statistically, a two way interaction (or simply an interaction) is present when the effect of one factor depends on the level of another. The combined effects of changes in two factors is larger (synergistic or positive interaction) or smaller (antagonistic or negative interaction) than the sum of individual effects obtained when each factors is changed at a time. Interactions are common and we are familiar with them in daily life, but we typically do not take the time to think of them as interactions. Take for example the effect of putting on a nice warm coat on your level of comfort. It is a desirable effect if it is cold and not so good if it is really hot. There is an interaction between clothing and weather on comfort.
 
-Three variables are involved in a two-way interaction, two predictor variables or treatment factors and one response variable. We say that predictor variable 1 (clothing) interacts with predictor variable 2 (ambient temperature) to determine the value of the reponse variable (level of comfort). Typical examples of interactions are:
+Three variables are involved in a two-way interaction, two predictor variables or treatment factors and one response variable. We say that predictor variable 1 (clothing) interacts with predictor variable 2 (ambient temperature) to determine the value of the response variable (level of comfort). Typical examples of interactions are:
 
 - environment by genotype interaction on phenotype;
 - drug interaction of alcohol with opiods on alertness;
@@ -210,7 +210,7 @@ To calculate the effect of increasing $CO_2$ concentration in with high light an
 
 <br>
 
-First, consider only the two graphs with high light intensity (righ column of Figure \@ref(fig:threeWayB). We have a large effect of $CO_2$ with high N ($e_1$, red vertical bar) and a smaller effect of $CO_2$ with low N ($e_2$, yellow vertical bar). Therefore, the effect of $CO_2$ depends on the level of N, which fits the definition of a significant 2-way interaction. The value of this interaction is the difference in length between the red and the yellow bars or $e_1 - e_2$, which is represented in Figure \@ref(fig:threeWayC) with a green vertical  bar.
+First, consider only the two graphs with high light intensity (right column of Figure \@ref(fig:threeWayB). We have a large effect of $CO_2$ with high N ($e_1$, red vertical bar) and a smaller effect of $CO_2$ with low N ($e_2$, yellow vertical bar). Therefore, the effect of $CO_2$ depends on the level of N, which fits the definition of a significant 2-way interaction. The value of this interaction is the difference in length between the red and the yellow bars or $e_1 - e_2$, which is represented in Figure \@ref(fig:threeWayC) with a green vertical  bar.
 
 Now consider only the two graphs with low light intensity (left column of Figure \@ref(fig:threeWayB)). By repeating the same procedure applied in the right column we get two new effects of increasing $CO_2$ ($e_3$ with high and $e_4$ with low N) and their difference, which is the value of the 2-way interaction between $CO_2$ and N with low light (dark red or maroon vertical bar).
 
@@ -248,7 +248,7 @@ Each ecotype does better than the other when grown in its original environment (
 
 ### Model and Calculations in Factorials
 
-Factorial treatments can be used with different experimental designs, because the treatment structure is independent of the experimental design that determines how treatments are assigned to experimental units. Consider an experiment in which two factors (say nitrogen fertilization and amount of irrigation) are used to create a factorial treatment structure by combining all levels of both factors. Each combination is a treatment, and we can (but some times we may not want to) ignore the treatment structure when assigning treatments to experimental units. We start with the simplest experimental design, the completely radomized design (CRD) where treatments are assigned to experimental units completely at random.
+Factorial treatments can be used with different experimental designs, because the treatment structure is independent of the experimental design that determines how treatments are assigned to experimental units. Consider an experiment in which two factors (say nitrogen fertilization and amount of irrigation) are used to create a factorial treatment structure by combining all levels of both factors. Each combination is a treatment, and we can (but some times we may not want to) ignore the treatment structure when assigning treatments to experimental units. We start with the simplest experimental design, the completely randomized design (CRD) where treatments are assigned to experimental units completely at random.
 
 To make the equations general, we will call
 
@@ -431,7 +431,7 @@ lb.compDat <- lb.compDat[
 ```
 
 
-```{r LomuBrhoCompDat, message=FALSE, warning=FALSE, paged.print=TRUE, }
+```{r LomuBrhoCompDat, message=FALSE, warning=FALSE, paged.print=TRUE, echo=FALSE}
 
 list(lb.compDat[1:30, c(1:3,5)], lb.compDat[31:60, c(1:3,5)]) %>%
    kable(caption = "Data from experiment on competition between ryegrass and softchess (Laca, unpublished data)", 
@@ -478,9 +478,9 @@ kable(anova(lb.m1),
 
 <br>
 
-All effects in the model were significant. The line items in the ANOVA table (Table \@ref(tab:aovLomuBrhoComp)) correspond to specfic hypotheses, and the fact that the probabilities, listed in the last column, are all smaller than 0.05 means that all null hypotheses are rejected. In general, hypotheses tested are that effects are all zero, but the origin of the hypotheses is a set of questions about intra and interspecific competition. Our main question whether intra and interspecific competition is the same in boh species. This is convenient because it focuses first on the interaction. In general, the interactions should be tested first in factorials. If they are significant, then specific comparisons of cell means should be performed and interpreted, because marginal means may no be interpretable (see [Section about Contrasts](#Contrasts)).
+All effects in the model were significant. The line items in the ANOVA table (Table \@ref(tab:aovLomuBrhoComp)) correspond to specific hypotheses, and the fact that the probabilities, listed in the last column, are all smaller than 0.05 means that all null hypotheses are rejected. In general, hypotheses tested are that effects are all zero, but the origin of the hypotheses is a set of questions about intra and interspecific competition. Our main question whether intra and interspecific competition is the same in both species. This is convenient because it focuses first on the interaction. In general, the interactions should be tested first in factorials. If they are significant, then specific comparisons of cell means should be performed and interpreted, because marginal means may no be interpretable (see [Section about Contrasts](#Contrasts)).
 
-**Interaction between species and competitor:** Is the effect of competition the same in both species? If competitive effects are equal, the **effect of adding competitors** will be the same in all cases. This effect is the difference between the control with no competition and each of the treatments with competitors, wthin species. To say that competitive strengths differs between species is the same as stating that the effects of competition (factor B)  differ between levels of species (factor A), which is the definition of interaction. So our first interesting hypothesis refers directly to the interaction.
+**Interaction between species and competitor:** Is the effect of competition the same in both species? If competitive effects are equal, the **effect of adding competitors** will be the same in all cases. This effect is the difference between the control with no competition and each of the treatments with competitors, within species. To say that competitive strengths differs between species is the same as stating that the effects of competition (factor B)  differ between levels of species (factor A), which is the definition of interaction. So our first interesting hypothesis refers directly to the interaction.
 
 <br>
 
@@ -532,7 +532,7 @@ $$H_0:\mu_{.None} - \mu_{.Self} = 0 \quad \text{AND} \quad \mu_{.None} - \mu_{.B
 
 <br>
 
-**Marginal species effect:** do species differ in mature size, averaged over competition treatments? Because of the significant interaction detected, the same note about caution applies here. The interaction means that the difference in mature size between species depends on competition. Ignoring the interaction for now, we test the marginal effect of species. Based on the line for `species` in the ANOVA table, we reject the null hupothesis that mature plant mass is the same for both species. 
+**Marginal species effect:** do species differ in mature size, averaged over competition treatments? Because of the significant interaction detected, the same note about caution applies here. The interaction means that the difference in mature size between species depends on competition. Ignoring the interaction for now, we test the marginal effect of species. Based on the line for `species` in the ANOVA table, we reject the null hypothesis that mature plant mass is the same for both species. 
 
 <br>
 
@@ -597,7 +597,7 @@ Table: (\#tab:SppCompTable) Estimated marginal and cell means of mature plant ma
 
 **R Code Summary**
 
-The analysis of the factorial experiment, without the code for making the pretty figues and table was very simple. It only required 5 short lines of code:
+The analysis of the factorial experiment, without the code for making the pretty figures and table was very simple. It only required 5 short lines of code:
 
 ```{r FactorialCode1, message=FALSE, warning=FALSE}
 
@@ -645,7 +645,8 @@ mean(lb.compDat[brho.self, "mass.mg"])
 
 $$\hat{\mu}_{ij.} = \bar{Y}_{ij.} = \frac{1}{r}\sum^{h=r}_{h=1}Y{ijh} \\[25pt]
 \text{For example: } \\[25pt]
-\hat{\mu}_{Brho,1.Self} = \frac{203 + 268 + 413 + 346 + 136 + 212 + 205 + 242 + 401 + 326}{10} = $$ `r mean(lb.compDat[brho.self, "mass.mg"])`
+\hat{\mu}_{Brho,1.Self} = \frac{203 + 268 + 413 + 346 + 136 + 212 + 205 + 242 + 401 + 326}{10} \\[25pt]
+= `r mean(lb.compDat[brho.self, "mass.mg"])`$$ 
 
 <br>
 
@@ -794,7 +795,7 @@ Consider that you have to study the effects of irrigation and fertilization with
 
 Here we demonstrate two main advantages of factorials:
 
-- abiliyt to detect interactions between factors, and
+- ability to detect interactions between factors, and
 - much greater efficiency than separate experiments.
 
 To show the advantage of a factorial, we first simulate two separate experiments and then a single combined experiment with both factors. By comparing the results we will be able to see that the factorial approach has advantages.
@@ -954,6 +955,7 @@ We analyze these data using the following model (Equation \@ref(eq:NitroMod1)), 
 
 <br>
 
+<<<<<<< HEAD
 \begin{equation}
 \begin{align}
 Y_{ij} &= \mu_{...} + \tau_i + B_j + \epsilon_{ij} \\[20pt]
@@ -961,8 +963,15 @@ Y_{ij} &= \mu_{...} + \tau_i + B_j + \epsilon_{ij} \\[20pt]
 B_j &= \text{ effect of block j} \\
 \epsilon_{ij} &= \text{ random error in treatment i, block j}
 \end{align}
+=======
+$$\begin{equation}
+Y_{ij} = \mu_{...} + \tau_i + B_j + \epsilon_{ij} \\[20pt]
+\tau_i = \text{ effect of nitrogen treatment with level i} \\
+B_j = \text{ effect of block j} \\
+\epsilon_{ij} = \text{ random error in treatment i, block j}
+>>>>>>> 331a8e41fcb6674025911607ffa83fa8f088ca8d
 (\#eq:NitroMod1)
-\end{equation}
+\end{equation}$$
 
 <br>
 
@@ -989,7 +998,7 @@ kable(emmeans(nitro.m1, "Nitrogen"),
 ```
 <br>
 
-The ANOVA table for the nitrogen experiment shows that there is a significant difference in yield between treatments. Table \@ref(tab:NitroEmmeans) contains the estimated means for nitrogen doses and shows that yield is highest when a dose of 160 lb N/ac is applied. Note that the reponse to nitrogen in not a straight line, and that the effect of adding 80 lb N/ac depends on how much was added already. An important part of this result is that more is not always better when it comes to nitrogen and plants. Too much nitrogen has a negative effect on plant growth, and in wheat it is known to be detrimental to the metabolism necessary for grain filling. Too much nitrogen results in reduced antioxidant ability, which lead to increased lipied peroxidation [KongEtAl2017]. Moreover, wheat is unable to absorb all the applied nitrogen, which leads to nitrogen percolating into deeper soil layers and water contamination [DongEtAl2011]. A graph of the response to nitrogen levels reveals the non-linearity of the response and the reduction of yield for high N doses (Figure \@ref(fig:nitroFig1)).
+The ANOVA table for the nitrogen experiment shows that there is a significant difference in yield between treatments. Table \@ref(tab:NitroEmmeans) contains the estimated means for nitrogen doses and shows that yield is highest when a dose of 160 lb N/ac is applied. Note that the response to nitrogen in not a straight line, and that the effect of adding 80 lb N/ac depends on how much was added already. An important part of this result is that more is not always better when it comes to nitrogen and plants. Too much nitrogen has a negative effect on plant growth, and in wheat it is known to be detrimental to the metabolism necessary for grain filling. Too much nitrogen results in reduced antioxidant ability, which lead to increased lipid peroxidation [KongEtAl2017]. Moreover, wheat is unable to absorb all the applied nitrogen, which leads to nitrogen percolating into deeper soil layers and water contamination [DongEtAl2011]. A graph of the response to nitrogen levels reveals the non-linearity of the response and the reduction of yield for high N doses (Figure \@ref(fig:nitroFig1)).
 
 <br><br>
 
@@ -1037,7 +1046,7 @@ If we base our irrigation and fertilization decisions in these two experiments w
 
 #### Combined Effects of Irrigation and Nitrogen
 
-Instead of two experiments, we could do a single one where all levels of irrigation are combined with all levels of nitrogen in a factorial treatment structure. Each treatment is replicated once in each of two blocks. The experiment has 5 levels of nitrogen x 2 levels of irrigation x 2 blocks = 20 plots or experimental units. This is 2 fewer than the two individuial experiments together.
+Instead of two experiments, we could do a single one where all levels of irrigation are combined with all levels of nitrogen in a factorial treatment structure. Each treatment is replicated once in each of two blocks. The experiment has 5 levels of nitrogen x 2 levels of irrigation x 2 blocks = 20 plots or experimental units. This is 2 fewer than the two individual experiments together.
 
 ```{r tblIxNDat, echo= FALSE}
 
@@ -1059,7 +1068,7 @@ Data from the factorial experiment are analyzed using the model in Equation \@re
 \begin{equation}
 \begin{align}
 Y_{ijh} &= \mu_{...} + \tau_{ij} + B_j + \epsilon_{ij} \\[20pt]
-\tau_{ij} &= \text{ effect of treatment with level i of nitrogen and level j of irrigation} \\
+\tau_{ij} &= \text{ effect of treatment with levels i of nitrogen and j of irrigation} \\
 &= N_i + I_j + NI_{ij} \\
 N_i &= \text{ effect of level i of nitrogen} \\
 I_j &= \text{ effect of level j of irrigation} \\
@@ -1083,7 +1092,7 @@ kable(anova(ixn.m1),
 
 <br>
 
-Because we did the experiment using a factorial arrangewment of treatments, we have three types of comparisons we can do:
+Because we did the experiment using a factorial arrangement of treatments, we have three types of comparisons we can do:
 
 - compare average yield for levels of irrigation averaged over levels of nitrogen,
 - compare average yield for levels of nitrogen averaged over levels of irrigation, and
@@ -1147,7 +1156,7 @@ Table: (\#tab:ixnTable) Estimated marginal and cell means for the irrigation by 
 
 <br>
 
-High precision, reflected in narrow confidence intervals and small LSD's are desirable because it means we have more certaint about the results of the experiment. Both the LSD and the width of confidence intervals have a factor that is the product of the critical t and the square root of the MSE divided by the number of observations averaged. Both the LSD and the CI width become smaller due of the joint effects of increased dfe and increased number of observations averaged for the marginal means.
+High precision, reflected in narrow confidence intervals and small LSD's are desirable because it means we have more certainty about the results of the experiment. Both the LSD and the width of confidence intervals have a factor that is the product of the critical t and the square root of the MSE divided by the number of observations averaged. Both the LSD and the CI width become smaller due of the joint effects of increased dfe and increased number of observations averaged for the marginal means.
 
 <br>
 
@@ -1188,7 +1197,7 @@ ggplot(data = inmm, aes(x = Nitrogen, y = emmean, group = Irrigation)) +
 
 ## Contrasts {#Contrasts}
 
-The Lomu Brho experiment (Figure \@ref(fig:LomuBrhoTrtFig)) was done because we wanted to answer specfic questions about how plants compete with each other. Based on previous observations, it looked like Lomu was a stronger competitor than Brho. This should result in an asymmetry of the interaction between species. First, we wanted to check that competition within 10 cm of a plant did have an impact on plant size, so a "control" treatment where plants were grown without competitors was included. We also wanted to test the hypothesis that intraspecific competition was greater in Lomu than in Brho, and that having half of the surrounding plants being of the other species ("2.Both" level of comptetitor) was sufficient for Lomu to experience reduced and Brho to experience increased competition relative to having only conspecifics. If indeed Brho is the weaker competitor, then Brho-1.Self should be larger than Brho-2.Both, and Lomu-1.Self should be smaller than Lomu-2.Both. These questions translate directly in contrasts that are special linear combinations of treatment means.
+The Lomu Brho experiment (Figure \@ref(fig:LomuBrhoTrtFig)) was done because we wanted to answer specific questions about how plants compete with each other. Based on previous observations, it looked like Lomu was a stronger competitor than Brho. This should result in an asymmetry of the interaction between species. First, we wanted to check that competition within 10 cm of a plant did have an impact on plant size, so a "control" treatment where plants were grown without competitors was included. We also wanted to test the hypothesis that intraspecific competition was greater in Lomu than in Brho, and that having half of the surrounding plants being of the other species ("2.Both" level of competitor) was sufficient for Lomu to experience reduced and Brho to experience increased competition relative to having only con-specifics. If indeed Brho is the weaker competitor, then Brho-1.Self should be larger than Brho-2.Both, and Lomu-1.Self should be smaller than Lomu-2.Both. These questions translate directly in contrasts that are special linear combinations of treatment means.
 
 Recall that a linear combination of means ("ingredients") is like a recipe: each ingredient is multiplied by a known constant (coefficient) and added together. Contrasts are linear combinations of parameters in which the sum of the coefficients is zero.
 
@@ -1213,7 +1222,7 @@ C_1 = \sum_{i=1}^kc_{1i}\hat{\mu}_{i} \ \text{ and } \ C_2 = \sum_{i=1}^k c_{2i}
 
 <br>
 
-- Contrasts are useful to test hypotheses because they have an expected value of 0 if the corresponding null hypothesis is true. Therefore, a contrast whose value is significantly diferent from zero leads to rejection of the null nypothesis.
+- Contrasts are useful to test hypotheses because they have an expected value of 0 if the corresponding null hypothesis is true. Therefore, a contrast whose value is significantly different from zero leads to rejection of the null hypothesis.
 
 - Each contrast has an associated sum of squares and one degree of freedom.
 
@@ -1241,13 +1250,13 @@ Treatments can have structures other than factorials. A pair of typical classes 
 
 In agricultural sciences, controls are also necessary in some experiments. In order to study the effect of a dietary additive on animal production, we would want to have a control treatment that adds the same amount of energy and nutrients, but without the specific chemical compounds whose effect we want to test. To test the effect of a chemical in a pesticide application, a control treatment should involve the application of water and other additives as in the main treatment, but without the active principle to be tested.
 
-One interesting example of necessary control is in the study of conditioned flavor aversions in animals. To test if sheep can be conditioned to avoid eating grape leaves to use them to graze between rows in vineyards, we dosed sheep with lithium chloride (Laca, unpublished work), which causes digestive discomfort. Sheep were given grape leaves and then dosed with LiCl delivered directly to the rumen with a tube. To determine if the LiCL was the cause of the aversion instead of the intubation procedure used to deliver it, we had a treatment in which sheep were intubated and given an equivalent amount of tapwater without LiCl.
+One interesting example of necessary control is in the study of conditioned flavor aversions in animals. To test if sheep can be conditioned to avoid eating grape leaves to use them to graze between rows in vineyards, we dosed sheep with lithium chloride (Laca, unpublished work), which causes digestive discomfort. Sheep were given grape leaves and then dosed with LiCl delivered directly to the rumen with a tube. To determine if the LiCL was the cause of the aversion instead of the intubation procedure used to deliver it, we had a treatment in which sheep were intubated and given an equivalent amount of tap water without LiCl.
 
 ```{block, type = 'stattip'}
 The design of proper controls is an art beyond statistics. It involves concepts and interpretations that can be highly creative. Correct experimentation and interpretation of results requires much more than formally correct statistical methods.
 ```
 
-In addition to controls and placebos, treatments may have natural classes that can be compared as such. For example, we may want to test the effects of several methods to control weeds on crop yield (fictitious example). We are not interested in isolating the effect of the chemicals' active principles, because those are already knonw to exist. The seven treatments are:
+In addition to controls and placebos, treatments may have natural classes that can be compared as such. For example, we may want to test the effects of several methods to control weeds on crop yield (fictitious example). We are not interested in isolating the effect of the chemicals' active principles, because those are already known to exist. The seven treatments are:
 
 - Control: Undisturbed control 
 - chemA: Spraying chemical A
@@ -1255,7 +1264,7 @@ In addition to controls and placebos, treatments may have natural classes that c
 - Flame: Flaming
 - Steam: Covered steaming
 - Hoe: Rotary hoe
-- Blast: Abrassive blasting
+- Blast: Abrasive blasting
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE, include=FALSE}
 
@@ -1291,7 +1300,7 @@ Weed control methods tested can also be seen as being in two **classes**: chemic
 
 - Difference between chemical and non-chemical treatments = 2 (chemA + chemB) - (Flame + Steam + Hoe + Blast)
 
-If we are interested in the difference between thermal and non-termal treatments, we can use the following contrast:
+If we are interested in the difference between thermal and non-thermal treatments, we can use the following contrast:
 
 - Difference between thermal and non-thermal methods = (Flame + Steam) - (Hoe + Blast)
 
@@ -1322,7 +1331,7 @@ chemA = \vec{c}_{chemA} . \hat{\vec{\mu}} = \\[10pt]
 
 <br>
 
-In the following R chunk we us R functions to facilitate the calculations and determine which pairs of contrasts are orthogonal and wich ones are not. First we create a vector of coefficients for each contrast and give it a name that helps us remember what it is. Then, the vectors are joined into a matrix using `rbind` and the columns are given names that indicate the average that is multiplied by each coefficient. A few pairs are tested individually and finally the matrix is used to calculate the sum of products for all possible pairs at once.
+In the following R chunk we us R functions to facilitate the calculations and determine which pairs of contrasts are orthogonal and winch ones are not. First we create a vector of coefficients for each contrast and give it a name that helps us remember what it is. Then, the vectors are joined into a matrix using `rbind` and the columns are given names that indicate the average that is multiplied by each coefficient. A few pairs are tested individually and finally the matrix is used to calculate the sum of products for all possible pairs at once.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -1389,7 +1398,7 @@ $$\begin{align}
 
 <br>
 
-Although not mandatory, orthogonal contrasts are generally considered desirable particularly if they are posed before the data are collected. These so-called **a priori** sets of hypothesis are independent form each other and account for all the variation due to experimental treatments. Because they are *a priori*, it is accepted that no corerctions are needed to account for inflation of experimentwise error rate.
+Although not mandatory, orthogonal contrasts are generally considered desirable particularly if they are posed before the data are collected. These so-called **a priori** sets of hypothesis are independent form each other and account for all the variation due to experimental treatments. Because they are *a priori*, it is accepted that no corrections are needed to account for inflation of experiment wise error rate.
 
 A complete set of orthogonal contrasts for the weed control example can be created as follows by taking a class-comparisons approach. The set has to have 6 contrasts because there are 7 treatments, and there is one orthogonal contrast per degree of freedom. This is not the only set of orthogonal contrasts possible; in fact there are 15 different possible sets of orthogonal contrasts for 7 treatment levels. The number of sets gets large very quickly as the <a href="http://www.southampton.ac.uk/~cpd/anovas/datasets/Contrast%20sets.htm" target="_blank">number of levels</a> increases.
 
@@ -1417,7 +1426,7 @@ Cmat <- rbind(TvsC,
 
 <br>
 
-In the first contrast we compare all treatments against the control. In the second one we compare the chemical vs. non chemical treatments. The rationale behind the contrasts is that we compare the average of one class vs. the averge of another class. Although not strictly necessary, the coefficients are mltiplied by the largest denominator to make them all integers. For example, the average of chemical treatments is 
+In the first contrast we compare all treatments against the control. In the second one we compare the chemical vs. non chemical treatments. The rationale behind the contrasts is that we compare the average of one class vs. the average of another class. Although not strictly necessary, the coefficients are multiplied by the largest denominator to make them all integers. For example, the average of chemical treatments is 
 $$\frac{1}{2}\hat{\mu}_{chemA} + \frac{1}{2}\hat{\mu}_{chemB}$$
 and the average of non-chemical treatments is 
 $$\frac{1}{4}\hat{\mu}_{Flame} + \frac{1}{4}\hat{\mu}_{Steam} + \frac{1}{4}\hat{\mu}_{Hoe} + \frac{1}{4}\hat{\mu}_{Blast}$$
@@ -1586,7 +1595,7 @@ df.num <- 1
 In the nitrogen by irrigation fertilization experiment (Table \@ref(tab:IxNAnova)) there are 9 df for treatments that are partitioned into 1 df for irrigation, 4 df for nitrogen and 4 df for the irrigation x nitrogen interaction. Thus, the corresponding SS can be partitioned into a total of 9 orthogonal contrasts: 1 for irrigation, 4 for nitrogen and 4 for the interaction. The specific contrasts are not unique, and we can design them to answer specific biological questions. A natural way to partition SS and df in the nitrogen by irrigation factorial is as follows:
 
 1. Does one extra irrigation increase wheat yield, averaging across levels of nitrogen?
-1. What is the simplest curve we can use to summarize the effect of nitrogen on wheat yield? Is the reponse linear, quadratic, cubic or quartic?
+1. What is the simplest curve we can use to summarize the effect of nitrogen on wheat yield? Is the response linear, quadratic, cubic or quartic?
 1. Does the shape of the response to nitrogen depend on the number of irrigations? How does it differ? 
 
 Because the levels of nitrogen are quantitative, we can create contrasts that test for the significance of increasingly complex shapes of the relationship between yield and nitrogen. The fact that N levels are equally spaced greatly facilitates the calculations because we can use the following standard formulas for contrast coefficients (Equation \@ref(eq:orthopoly)):
@@ -1596,14 +1605,19 @@ Because the levels of nitrogen are quantitative, we can create contrasts that te
 Linear: C_1&=\gamma_1 \left[ \frac{X-\bar{X}}{\Delta}\right] \\[15pt]
 Quadratic: C_2 &= \gamma_2 \left[ \left(\frac{X-\bar{X}}{\Delta}\right)^2-\left( \frac{k_f^2-1}{12} \right)\right] \\[15pt]
 Cubic: C_3 &= \gamma_3 \left[ \left(\frac{X-\bar{X}}{\Delta}\right)^3- \left(\frac{X-\bar{X}}{\Delta}\right)\left( \frac{3k_f^2-7}{20} \right)\right] \\[15pt]
+<<<<<<< HEAD
 Quartic: C_4 &= \\[10pt] 
 &=\gamma_4 \left[ \left( \frac{X - \bar{X}}{\Delta} \right)^4 - \left( \frac{X - \bar{X}}{\Delta} \right)^2 \left( \frac{3k_f^2 - 13}{14} \right)+ \frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} \right]
+=======
+Quartic: C_4 & = \\[15pt]
+&= \gamma_4 \left[ \left( \frac{X - \bar{X}}{\Delta} \right)^4 - \left( \frac{X - \bar{X}}{\Delta} \right)^2 \left( \frac{3k_f^2 - 13}{14} \right)+ \frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} \right]
+>>>>>>> 331a8e41fcb6674025911607ffa83fa8f088ca8d
 (\#eq:orthopoly)
 \end{align}
 
 <br>
 
-where $X$ are the levels of the quantitative factor, $\bar{X}$ is the average of all factor levels, $\Delta$ is the distance between levels, $k_f$ is the number of levels in the factor and $\gamma_i$ are arbitrary values used to make all contrast coefficients into integers for simplicity. In this section we will use these equations to create a complete set of orthogonal constrasts to test for trends in the irrigation by nitrogen experiment. Then we apply the contrasts and interpret the results.
+where $X$ are the levels of the quantitative factor, $\bar{X}$ is the average of all factor levels, $\Delta$ is the distance between levels, $k_f$ is the number of levels in the factor and $\gamma_i$ are arbitrary values used to make all contrast coefficients into integers for simplicity. In this section we will use these equations to create a complete set of orthogonal contrasts to test for trends in the irrigation by nitrogen experiment. Then we apply the contrasts and interpret the results.
 
 There are 5 levels of nitrogen in the experiment: `r levels(IxN$Nitrogen)`. The distance between levels is 80, and the average of levels is `r mean(as.numeric(levels(IxN$Nitrogen)))`.
 
@@ -1663,7 +1677,11 @@ C_C &= (-1, 2, 0, -2, 1)
 
 - Quartic coefficients for N:
 
+<<<<<<< HEAD
 $$\begin{align}
+=======
+\begin{align}
+>>>>>>> 331a8e41fcb6674025911607ffa83fa8f088ca8d
 k_f &= 5 \\[15pt] 
 \left( \frac{3k_f^2 - 13}{14} \right) = \left( \frac{3 \times 5^2 - 13}{14} \right) &= 31/7 \\[15pt]
 \frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} = \frac{3 \left(5^2 - 1\right) \left(5^2 - 9 \right)}{560} &= 72/35\\[15pt]
@@ -1675,7 +1693,11 @@ c_{Qt,0} = \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X 
 \text{Choose } \gamma_4 &= 35/12 \\[15pt]
 C_Qt = (1, -4, 6, -4, 1)
 (\#eq:orthoNQt)
+<<<<<<< HEAD
 \end{align}$$
+=======
+\end{align}
+>>>>>>> 331a8e41fcb6674025911607ffa83fa8f088ca8d
 
 <br>
 
@@ -1692,7 +1714,7 @@ P((I_{240,2} - I_{160,1}) \ge 100) = P((p \ \hat{\mu}_{240,2} - p \ \hat{\mu}_{1
 
 If residuals of ANOVA are normally distributed as is assumed, theory indicates that the linear combination of estimated parameters also has a normal distribution, and the ratio of the linear combination over its standard error has a Student's t distribution. These facts allow us to use the distribution to calculate the probability sought.
 
-**The big picture:** Anova tells you whether there is at least one contrast that is significantly different from zero, but it does not tell what it is. Without the restriction of orthogonality, there is an large number of contrasts that could be tested, so we need to choose crefully. When we do not choose a few contrasts *a priori* and start calculating comparisons (contrasts) looking for something significant, the probability of at least one Error Type I increases very fast and can reach 100% very quickly, so something needs to be done. One approach is to make orthogonal contrasts *before* colleting the data, during the planning of the experiment. The restriction of orthogonality will keep the number of constrasts limited to one fewer than the treatment degrees of freedom, and the *a priori* condition makes it acceptable not to have to correct for multiple comparisons. Another approach is to make a few *post-hoc* (after seeing the data) contrasts and applying some method to contain the inflation of experimentwise error rate, for example the Protected LSD, Bonferroni's correction or Tukey's HSD. In the case of quantitative treatments such as doses, rates, times, age, etc., contrasts can be used to naturally partition the shape of the response into incremental orthogonal components that increase the "wiggliness" of the reponse in an orderly way. Non-significant complexity can be ignored, which simplifies comparisons and explanations.
+**The big picture:** Anova tells you whether there is at least one contrast that is significantly different from zero, but it does not tell what it is. Without the restriction of orthogonality, there is an large number of contrasts that could be tested, so we need to choose carefully. When we do not choose a few contrasts *a priori* and start calculating comparisons (contrasts) looking for something significant, the probability of at least one Error Type I increases very fast and can reach 100% very quickly, so something needs to be done. One approach is to make orthogonal contrasts *before* collecting the data, during the planning of the experiment. The restriction of orthogonality will keep the number of contrasts limited to one fewer than the treatment degrees of freedom, and the *a priori* condition makes it acceptable not to have to correct for multiple comparisons. Another approach is to make a few *post-hoc* (after seeing the data) contrasts and applying some method to contain the inflation of experiment wise error rate, for example the Protected LSD, Bonferroni's correction or Tukey's HSD. In the case of quantitative treatments such as doses, rates, times, age, etc., contrasts can be used to naturally partition the shape of the response into incremental orthogonal components that increase the "wiggliness" of the response in an orderly way. Non-significant complexity can be ignored, which simplifies comparisons and explanations.
 
 
 ## Exercises and Solutions {#ExSol12}
@@ -1707,7 +1729,7 @@ kable(summary(wc.m2)$coefficients, caption = "Summary of t-tests for contrasts i
 
 ```
 
-Interpret the results for the last 3 contrasts in the weed control example. Include statements about the efectiveness of treatments in the real world and your certainty about them.
+Interpret the results for the last 3 contrasts in the weed control example. Include statements about the effectiveness of treatments in the real world and your certainty about them.
 
 
 ## Homework {#Hwk12}
@@ -1716,7 +1738,7 @@ Interpret the results for the last 3 contrasts in the weed control example. Incl
 
 ### Plant Sciences {#Lab12PLS}
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 
 ```
@@ -1728,7 +1750,7 @@ output: html_document
 ---
 ```
 
-```{r setup, include=FALSE}
+```{r setup1, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -1762,7 +1784,7 @@ Simulated block effects of 0.50, 0.25, and -0.75 were added to logMass observati
 
 ##### 1a. Random assignment of treatments to plots [15 points]
 
-In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block. Because we ignore the water factor, treatments will have 2 replicate plots in each block, one for each original level of the water factor. There are a total of 6 treatments that resulf from the combination each level of the factor "nitrogen" (n and N) with each of the three levels of the factor "seeding" (s, S and E). The treatments are identified by the two letters together. For example. NE is the treatment with addition of nitrogen and at the egde between naturalized annual and seeded native perennial grasses.
+In a RCBD the treatments are assigned randomly to plots within blocks such that each treatment appears at least once in each block. Because we ignore the water factor, treatments will have 2 replicate plots in each block, one for each original level of the water factor. There are a total of 6 treatments that result from the combination each level of the factor "nitrogen" (n and N) with each of the three levels of the factor "seeding" (s, S and E). The treatments are identified by the two letters together. For example. NE is the treatment with addition of nitrogen and at the edge between naturalized annual and seeded native perennial grasses.
 
 First, we pretend that the experiment is about to start and we need to assign treatments to experimental units. The random assignment of treatments to plots within blocks can be done using the '*'sample' R function. To preform the random assignment we start by creating a dataframe with a row for each treatment and a column for each factor. A new column called "Treatment" is created by pasting together the two letters that represent the corresponding level of the factor.
 
@@ -1806,7 +1828,7 @@ In the second step, plots in each block are labeled with the numbers 1 through 1
 
 ##### 1.b Add columns with factor levels to the data [15 points]
 
-Treatments were applied, plantts grown and measured. Data were collected and organized, and we enter them below. Because the data have the labels for the original treatments, we need to split the labels into the columns that correspond to nitrogen and seeding treatment. In order to analyze the experiment as a factorial of nitrogen x seeding, each factor has to be in a separate column.
+Treatments were applied, plants grown and measured. Data were collected and organized, and we enter them below. Because the data have the labels for the original treatments, we need to split the labels into the columns that correspond to nitrogen and seeding treatment. In order to analyze the experiment as a factorial of nitrogen x seeding, each factor has to be in a separate column.
 
 ```{r}
 # Read and understand the code in this part but do not type or modify anything.
@@ -1856,7 +1878,7 @@ WNS  Block3  -0.527897010482484
 
 ```
 
-The two factor columns are sufficient to perform the analysis using preexisting R functions for factorial treatment combinations, but to do the calculations using only "basic" R functions (we refer to this as "by hand") we need a new column that contain labels for all 12 treatments. We create the colkumn by pasting the letters for nitrogen and seeding levels, make it into a factor, and add it to the data frame. Recall that a factor is a special type of column in data frames that behaves as a categorical variable with a certain set of possible values. The same column of strings could be set to be a character vector, in which case it would not have recognizable levels. You can explore this by running 'levels(seedF\$NStreat)' and then 'levels(as.character(seedF\$NStreat))'
+The two factor columns are sufficient to perform the analysis using preexisting R functions for factorial treatment combinations, but to do the calculations using only "basic" R functions (we refer to this as "by hand") we need a new column that contain labels for all 12 treatments. We create the column by pasting the letters for nitrogen and seeding levels, make it into a factor, and add it to the data frame. Recall that a factor is a special type of column in data frames that behaves as a categorical variable with a certain set of possible values. The same column of strings could be set to be a character vector, in which case it would not have recognizable levels. You can explore this by running 'levels(seedF\$NStreat)' and then 'levels(as.character(seedF\$NStreat))'
 
 ```{r}
 # Add columns $nitro and $seeding to the data, to show the levels for each factor.
@@ -2089,7 +2111,281 @@ c) Do treatments “n:s” and “n:E’ differ?
 
 
 
-
 ### Animal Sciences {#Lab12ANS}
+
+```
+---
+title: "Lab07 Factorial ANOVA and LSD"
+author: "YourFirstName YourLastName"
+date: "enter date here"
+output: html_document
+---
+```
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# install.packages(c("tables", "pander","lsmeans", "multcomp","agricolae"))
+library(tables)
+library(pander)
+library(lsmeans)
+library(multcomp)
+library(agricolae)
+```
+
+#### Instructions
+
+The same instructions for completion and submission of work used in previous labs applies here. Refer to previous labs for the details. 
+
+For this lab you have to be familiar with the following sections of the textbook:
+
+8.1 RCBD without subsamples
+8.5 Factorial Experiments
+9.1 Fisher's Protected LSD
+
+
+In this exercise we analyze the milk protein data modified from the `Milk` R dataset. These are based on the **same experiment used in Lab 06**, but now we will consider that lactation period (A, B, C, D) and diet (barley, lupin, barley+lupine) are two **factors** that create the set of 12 treatments in a **factorial** treatment structure. We ignore the factor water for simplicity and because it did not cause any effects. The 12 treatments were applied in a **Completely Randomized Block Design** in which each of 12 treatments were applied randomly to cows blocked by body weight.
+
+Simulated block effects of 0.10, 0.20, and -0.30 were added to logProt observations in blocks 1, 2 and 3. We will assume that the variances of the errors or residuals are the same in all treatments. 
+
+
+#### Part 1. Factorial ANOVA using R functions [ points]
+
+##### 1a. Random assignment of treatments to plots
+
+In a RCBD the treatments are assigned randomly to cows within blocks such that each treatment appears at least once in each block. The random assignment of treatments to cows within blocks can be done using the *sample()* R function.
+
+```{r}
+# Read and understand the code in this part but do not type or modify anything.
+# Create a data frame with all combinations of levels of the 2 factors. First, create treatment names for all 6 treatments. 
+
+treat <- expand.grid(
+  diet = c("bar", "lup", "bar+lup"), 
+  period = c("A", "B", "C", "D")
+  )
+
+
+# Create a column containing the treatment name in the data frame
+
+
+treat$Treatment <- paste(
+  treat$diet, 
+  treat$period, sep = ""
+  )
+
+
+# Number the 12 plots in each block 1 through 12, then shuffle the treatment names and assign to plots of each block.
+# The sample() function is used to create a vector that has each treatment randomly assigned to each block twice, because there are two plots for each treatment in each block.
+
+
+# Plots 1-12 of each block get:
+(block1 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
+
+
+(block2 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
+
+
+(block3 <- cbind(1:12, sample(c(treat$Treatment, treat$Treatment))))
+
+
+```
+
+
+##### 1.b Add columns with factor levels to the data
+
+```{r}
+# Read and understand the code in this part but do not type or modify anything.
+# Read data (periodF for "factorial")
+
+milk.prot <- read.csv(file = "Datasets/Lab06MilkProteinData.csv", header = TRUE)
+
+
+
+# Add columns $diet and $period to the data, to show the levels for each factor.
+milk.prot$diet <- factor(gsub("[A-Z]", "", milk.prot$Treatment))
+milk.prot$period <- factor(substr(milk.prot$Treatment, 4, 4))
+milk.prot$period <- factor(substr(milk.prot$Treatment, nchar(as.character(milk.prot$Treatment)), nchar(as.character(milk.prot$Treatment))))
+
+
+```
+
+
+##### 1.c Perform a test of the Ho that all treatment means are equal.
+
+For this part you need to test the null hypotheses that:
+- there are no interactions between diet and period,
+- there are no "main effects" of diet or period.
+
+"Main effects" refers to the overall effect of a factor averaged over all levels of other factors. "Simple effects" are the effects of one factor for a given individual level of another factor.
+
+
+We do these tests with an ANOVA that partitions all variation (sum of squares) in the response variable (logProt) into Block, Treatment and Error, and then partition the Treatment variation into main effect of diet, main effect of period, and the interaction between diet and period (diet x period).
+
+
+```{r}
+# First do the ANOVA ignoring the treatment factorial structure.
+# This yields the first partition of SS
+
+rcbd.mod <- lm(formula = logProt ~ Treatment + block, data = milk.prot)
+
+pander(anova(rcbd.mod))
+
+# Now, analyze the same data, this time partitioning the Treatment SS according to a factorial treatment structure.
+
+rcbdF.mod <- lm(formula = logProt ~ diet * period + block, data = milk.prot)
+
+# complete the code below to make an ANOVA table for the same data partitioning the Treatment SS according to factorial, as above:
+pander(anova(rcbdF.mod))
+
+
+```
+
+
+Questions;
+ a) Report MSE in the RCBD and RCBDF models.
+b) State the null hypothesis for the main effects of N in the RCBDF model 
+c) State the null hypothesis for the main effects of period in in the RCBDF model.
+c) Do we reject or fail to reject the following null hypothesis for the RCBDF model?
+ Ho: There is no interaction between diet and period affecting milk production?
+
+
+#### Part 2. Factorial ANOVA detailed calculations [ points]
+
+Create a new column in the data for each of the following:
+- overall average
+- diet treatment average
+- diet effect = diet average - overall average
+- period treatment average
+- period effect = period average - overall average
+- overall average + diet effect + period effect
+- diet x period average
+- diet x period interaction = 
+  = diet x period average - (overall average + diet effect + period effect)
+- block average
+-block effect = block average - overall average
+- residual
+
+
+Then calculate the sum of squares and degrees of freedom for diet effect, period effect, interaction and residuals. Make sure that the numbers match the results from the previous section.
+
+
+```{r}
+
+
+# First calculate the average milk produced and add to a data frame
+# type the column name of the response variable after the dollar sign:
+milk.prot$overall.avg <- mean(milk.prot$logProt) 
+
+diet.avg <- aggregate(formula = logProt ~ diet, 
+                       data = milk.prot, 
+                       FUN = mean)
+names(diet.avg)[2] <- "diet.avg"
+milk.prot <- merge(milk.prot, diet.avg)
+
+#type the function for calculating averages:
+period.avg <- aggregate(formula = logProt ~ period, 
+                      data = milk.prot, 
+                      FUN = mean ) 
+names(period.avg)[2] <- "period.avg"
+milk.prot <- merge(milk.prot, period.avg)
+
+
+diet.period.avg <- aggregate(formula = logProt ~ diet + period, 
+                      data = milk.prot, 
+                      FUN = mean)
+names(diet.period.avg)[3] <- "diet.period.avg"
+milk.prot <- merge(milk.prot, diet.period.avg)
+
+
+# Create a vector called block.avg to aggregate the response variable by block and calculate the means of each block
+block.avg <- aggregate(formula = logProt ~ block, 
+                       data = milk.prot, 
+                       FUN = "mean") 
+names(block.avg)[2] <- "block.avg"
+milk.prot <- merge(milk.prot, block.avg)
+
+
+# Second, calculate the effects and residuals
+
+milk.prot$diet.fx <- milk.prot$diet.avg - milk.prot$overall.avg
+
+#type the vector name for the average of the perioded/unperioded treatment:
+milk.prot$period.fx <- milk.prot$period.avg - milk.prot$overall.avg 
+
+milk.prot$diet.period.fx <- with(milk.prot, diet.period.avg - (overall.avg + diet.fx + period.fx))
+
+milk.prot$block.fx <- milk.prot$block.avg - milk.prot$overall.avg
+
+milk.prot$resdl <- with(milk.prot, logProt - overall.avg - diet.fx - period.fx - diet.period.fx - block.fx)
+
+
+# Finally, type your equations to calculate the sum of squares.
+(SSdiet <- sum(milk.prot$diet.fx ^ 2))
+(SSperiod <- sum(milk.prot$period.fx^2))
+(SSdiet.period <- sum(milk.prot$diet.period.fx^2))
+(SSblock <- sum(milk.prot$block.fx^2))
+(SSresdl <- sum(milk.prot$resdl^2))
+
+# HINT: check your answers of the SS with the anova table in Part1. It should be the same if your calculations are correct:
+pander(anova(rcbdF.mod)) 
+
+
+```
+
+
+#### Part 3. Multiple comparison of means using Fisher's PLSD [ points]
+
+Fisher's Protected Least Significant Difference is the LSD that is applied only if the overall F test is significant. In this section you need to calculate the Least Significant differences for diet, period and diet x period levels. For each one, construct a table that shows the means that are NOT significantly different connected by a common letter.
+
+``` {r}
+# First, use the LSD.test() function of the agricolae package.
+
+
+LSD.test(rcbdF.mod, "diet", group = TRUE, console = TRUE)
+
+
+LSD.test(rcbdF.mod, "period", group = TRUE, console = TRUE)
+
+
+LSD.test(rcbdF.mod, c("diet", "period"), group = TRUE, console = TRUE)
+
+
+# Second, calculate the LSD's and CI's "by hand."
+# Hint: check your answers of LSD with the lsd test table. It should be the same if your calculations are correct.
+
+(dfe.rcbd.F <- 36 - 1 - 2 - 3 - 2 - 6)
+(t.critical <- qt(0.975, dfe.rcbd.F))
+(MSE.rcbd.F <- SSresdl / dfe.rcbd.F)
+
+
+# dietgen
+(se.diet <- sqrt(MSE.rcbd.F / (length(milk.prot$logProt) / length(levels(milk.prot$diet)))))
+(LSD.diet <- t.critical * sqrt(2) * se.diet)
+
+
+# period
+(se.period <- sqrt(MSE.rcbd.F / (length(milk.prot$logProt) / length(levels(milk.prot$period)))))
+(LSD.period <- t.critical * sqrt(2) * se.period) # type your equation and calculate the LSD for period
+
+
+# dietgen x period
+(se.diet.period <- sqrt(MSE.rcbd.F / 
+                         (length(milk.prot$logProt) / 
+                            (length(levels(milk.prot$diet)) * 
+                            length(levels(milk.prot$period))))))
+(LSD.diet.period <- t.critical * se.diet.period) # type your equation and calculate the LSD for diet * period
+
+
+
+
+```
+
+
+Question Read the last lsd table and answer following questions:
+
+
+Question Read the last lsd table and answer following questions:.
+a) Do treatments barleyD and barleyB differ? 
+b) Do treatments barley+lupineD and lupineB differ? 
+c) Do treatments barleyA and lupineA differ? 
 
 
