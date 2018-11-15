@@ -1310,7 +1310,7 @@ var.d <- var(d)
 
 se.d.bar <- sqrt(var.d / length(before))
 
-# since the denominator (r) represents the number of pairs, and the number of individuals in the "before"" population is the sampe as the number of individuals in the "after" population, you could also use the code se.d.bar <- sqrt(var.d / length(after))
+# since the denominator (r) represents the number of pairs, and the number of individuals in the "before"" population is the sample as the number of individuals in the "after" population, you could also use the code se.d.bar <- sqrt(var.d / length(after))
 
 dfs <- length(before) - 1
 
