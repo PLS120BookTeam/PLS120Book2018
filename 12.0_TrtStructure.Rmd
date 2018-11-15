@@ -955,12 +955,12 @@ We analyze these data using the following model (Equation \@ref(eq:NitroMod1)), 
 <br>
 
 \begin{equation}
-\begin{aligned}
+\begin{align}
 Y_{ij} &= \mu_{...} + \tau_i + B_j + \epsilon_{ij} \\[20pt]
 \tau_i &= \text{ effect of nitrogen treatment with level i} \\
 B_j &= \text{ effect of block j} \\
 \epsilon_{ij} &= \text{ random error in treatment i, block j}
-\end{aligned}
+\end{align}
 (\#eq:NitroMod1)
 \end{equation}
 
@@ -1057,7 +1057,7 @@ Data from the factorial experiment are analyzed using the model in Equation \@re
 <br>
 
 \begin{equation}
-\begin{aligned}
+\begin{align}
 Y_{ijh} &= \mu_{...} + \tau_{ij} + B_j + \epsilon_{ij} \\[20pt]
 \tau_{ij} &= \text{ effect of treatment with level i of nitrogen and level j of irrigation} \\
 &= N_i + I_j + NI_{ij} \\
@@ -1066,7 +1066,7 @@ I_j &= \text{ effect of level j of irrigation} \\
 IN_{ij} &= \text{ interaction effect of levels i and j} \\
 B_j &= \text{ effect of block j} \\
 \epsilon_{ij} &= \text{ random error in treatment i, block j}
-\end{aligned}
+\end{align}
 (\#eq:IxnMod1)
 \end{equation}
 
@@ -1376,7 +1376,7 @@ Table \@ref(tab:OrthoContr1) shows that 6 out of the 15 pairs of contrasts are n
 
 <br>
 
-\begin{aligned}
+$$\begin{align}
 2 = (-1)&\times0 \\
 + 1 &\times 2 \\
 + 0 &\times 2 \\
@@ -1385,7 +1385,7 @@ Table \@ref(tab:OrthoContr1) shows that 6 out of the 15 pairs of contrasts are n
 + 0 &\times (-1) \\
 + 0 &\times (-1) \\
 = \vec{c}_{chemA} &. \vec{c}_{ch.nch}
-\end{aligned}
+\end{align}$$
 
 <br>
 
@@ -1487,14 +1487,14 @@ Each contrast has **1 df** and an associated **SS contrast**. The SS associated 
 
 <br>
 
-$$\begin{aligned}
+$$\begin{align}
 &\text{let } C_h \text{ be a row of coefficients for contrast } h \\[15pt]
 &\text{and } \mathbf{C} = \begin{Bmatrix}c_{hi}\end{Bmatrix} \text{be a }(k-1) \times k \text{ matrix of orthogonal contrasts} \\[15pt]
 &\text{for a set of k treatments in a balanced experiment with r replicates;} \\[15pt]
 &\text{the sum of squares associated with each row of } \mathbf{C} \text{ is: } \\[15pt]
 &SSC_h = \frac{r \sum_{i=1}^k \left( c_{hi}\bar{Y}_{i.} \right)^2 }{\sum_{i=1}^kc_{hi}^2}
 (\#eq:SScontr)
-\end{aligned}$$
+\end{align}$$
 
 <br>
 
@@ -1592,13 +1592,14 @@ In the nitrogen by irrigation fertilization experiment (Table \@ref(tab:IxNAnova
 Because the levels of nitrogen are quantitative, we can create contrasts that test for the significance of increasingly complex shapes of the relationship between yield and nitrogen. The fact that N levels are equally spaced greatly facilitates the calculations because we can use the following standard formulas for contrast coefficients (Equation \@ref(eq:orthopoly)):
 <br>
 
-\begin{aligned}
+\begin{align}
 Linear: C_1&=\gamma_1 \left[ \frac{X-\bar{X}}{\Delta}\right] \\[15pt]
 Quadratic: C_2 &= \gamma_2 \left[ \left(\frac{X-\bar{X}}{\Delta}\right)^2-\left( \frac{k_f^2-1}{12} \right)\right] \\[15pt]
 Cubic: C_3 &= \gamma_3 \left[ \left(\frac{X-\bar{X}}{\Delta}\right)^3- \left(\frac{X-\bar{X}}{\Delta}\right)\left( \frac{3k_f^2-7}{20} \right)\right] \\[15pt]
-Quartic: C_4& = \gamma_4 \left[ \left( \frac{X - \bar{X}}{\Delta} \right)^4 - \left( \frac{X - \bar{X}}{\Delta} \right)^2 \left( \frac{3k_f^2 - 13}{14} \right)+ \frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} \right]
+Quartic: C_4 &= \\[10pt] 
+&=\gamma_4 \left[ \left( \frac{X - \bar{X}}{\Delta} \right)^4 - \left( \frac{X - \bar{X}}{\Delta} \right)^2 \left( \frac{3k_f^2 - 13}{14} \right)+ \frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} \right]
 (\#eq:orthopoly)
-\end{aligned}
+\end{align}
 
 <br>
 
@@ -1610,7 +1611,7 @@ There are 5 levels of nitrogen in the experiment: `r levels(IxN$Nitrogen)`. The 
 
 - Linear coefficients for N:
 
-\begin{aligned}
+\begin{align}
 X &= 0\\[15pt]
 \bar{X} &= 160\\[15pt]
 \Delta &= 80\\[15pt]
@@ -1622,13 +1623,13 @@ c_{L,320} &= \gamma_1 \left[ \frac{320-160}{80}\right] = 2 \gamma_1 \\[15pt]
 \text{Choose } \gamma_1 &= 1 \\[15pt]
 C_L &= (-2, -1, 0, 1, 2)
 (\#eq:orthoNL)
-\end{aligned}
+\end{align}
 
 <br>
 
 - Quadratic coefficients for N:
 
-\begin{aligned}
+\begin{align}
 k_f &= 5 \\[15pt] 
 \left(\frac{k_f^2-1}{12} \right) &= \left( \frac{5^2-1}{12} \right) = 2 \\[15pt]
 c_{Q,0} &= \gamma_2 \left[ \left( \frac{0-160}{80} \right) ^2-2 \right] = 2 \gamma_2 \\[15pt]
@@ -1639,13 +1640,13 @@ c_{Q,320} &= \gamma_2 \left[ \left( \frac{320-160}{80} \right) ^2-2 \right] = 2 
 \text{Choose } \gamma_2 &= 1 \\[15pt]
 C_Q &= (2, -1, -2, -1, 2)
 (\#eq:orthoNQ)
-\end{aligned}
+\end{align}
 
 <br>
 
 - Cubic coefficients for N:
 
-\begin{aligned}
+\begin{align}
 k_f &= 5 \\[15pt] 
 \left(\frac{3 \times k_f^2-7}{20} \right) &= \left(\frac{3 \times 5^2-7}{20} \right) = 3.4\\[15pt]
 c_{C,0} &= \gamma_3 \left[ \left(\frac{0-160}{80}\right)^3- \left(\frac{0-160}{80}\right) \times  3.4\right] = -1.2 \gamma_3 \\[15pt]
@@ -1656,25 +1657,25 @@ c_{C,320} &= \gamma_3 \left[ \left(\frac{380-160}{80}\right)^3- \left(\frac{380-
 \text{Choose } \gamma_3 &= 5/6 \\[15pt]
 C_C &= (-1, 2, 0, -2, 1)
 (\#eq:orthoNC)
-\end{aligned}
+\end{align}
 
 <br>
 
 - Quartic coefficients for N:
 
-\begin{aligned}
+$$\begin{align}
 k_f &= 5 \\[15pt] 
-\left( \frac{3k_f^2 - 13}{14} \right) &= \left( \frac{3 \times 5^2 - 13}{14} \right) = 31/7 \\[15pt]
-\frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} &= \frac{3 \left(5^2 - 1\right) \left(5^2 - 9 \right)}{560} = 72/35\\[15pt]
-c_{Qt,0} &= \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] = \frac{12}{35} \gamma_4 \\[15pt]
-c_{Qt,0} &= \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] = \frac{-48}{35} \gamma_4 \\[15pt]
-c_{Qt,0} &= \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] = \frac{70}{35} \gamma_4 \\[15pt]
-c_{Qt,0} &= \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] = \frac{-48}{35} \gamma_4 \\[15pt]
-c_{Qt,0} &= \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] = \frac{12}{35} \gamma_4 \\[15pt]
+\left( \frac{3k_f^2 - 13}{14} \right) = \left( \frac{3 \times 5^2 - 13}{14} \right) &= 31/7 \\[15pt]
+\frac{3 \left(k_f^2 - 1\right) \left(k_f^2 - 9 \right)}{560} = \frac{3 \left(5^2 - 1\right) \left(5^2 - 9 \right)}{560} &= 72/35\\[15pt]
+c_{Qt,0} = \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] &= \frac{12}{35} \gamma_4 \\[15pt]
+c_{Qt,0}= \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] &= \frac{-48}{35} \gamma_4 \\[15pt]
+c_{Qt,0} = \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] &= \frac{70}{35} \gamma_4 \\[15pt]
+c_{Qt,0} = \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] &= \frac{-48}{35} \gamma_4 \\[15pt]
+c_{Qt,0} = \gamma_4 \left[ \left( \frac{X - 160}{80} \right)^4 - \left( \frac{X - 160}{80} \right)^2 \frac{31}{7} + \frac{72}{35} \right] &= \frac{12}{35} \gamma_4 \\[15pt]
 \text{Choose } \gamma_4 &= 35/12 \\[15pt]
-C_Qt &= (1, -4, 6, -4, 1)
+C_Qt = (1, -4, 6, -4, 1)
 (\#eq:orthoNQt)
-\end{aligned}
+\end{align}$$
 
 <br>
 

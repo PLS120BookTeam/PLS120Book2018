@@ -922,6 +922,8 @@ r.pair <- length(bean.paired$variety)
 
 # calculate d_bar
 
+dbar.pair <- mean(bean.paired$d_i)
+
 ```
 
 <br>
