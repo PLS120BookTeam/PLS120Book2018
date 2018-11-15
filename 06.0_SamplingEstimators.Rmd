@@ -60,6 +60,7 @@ In reality, a random variable is a real-valued function defined over the sample 
 
 ```
 
+Do not confuse this function property with the possibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two die we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it gives a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
 Do not confuse this function property with the possibility of having random variables grouped into vectors, where each vector contains more than one value, each value being the realization of a different random variable. For example, in the roll of two dice we can define the random vector {number of dots in the first die, number of dots in the second die}. The importance of thinking of a random variable as a function is that it gives a lot of flexibility to deal with the results of random experiments. Instead of just counting dots on the face of a die we can use complicated functions that allow us to test hypotheses about more complex processes, such as administering medicines to animals, or comparing the yield of multiple varieties of food plants.
 
 A more formal definition and an intuitive physical model of random variable is given in [@286171]. Make sure to also explore the explanations given by W. Huber in [@54894].
@@ -1082,6 +1083,7 @@ par(mfrow = c(1,1))
 <br>
 
 
+The areas under the curve are used to represent proportions of the population with values between the specified extremes. Imagine that the length of  avocados received for sorting and packing at a plant has a normal distribution with mean 9 cm and variance 1.21.cm^2. The following are questions that we can answer using the normal distribution (data and situations described are fictitious).
 The areas under the curve are used to represent proportions of the population with values between the specified extremes. Imagine that the length of avocados received for sorting and packing at a plant has a normal distribution with mean 9 cm and variance 1.21.cm^^2^^. The following are questions that we can answer using the normal distribution (data and situations described are fictitious).
 
 (@) A buyer wants avocados that are longer than 8 cm. What proportion of the avocados received could go to that buyer?

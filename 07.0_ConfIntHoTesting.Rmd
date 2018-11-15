@@ -206,6 +206,7 @@ The **sampling distribution** of a statistics is the distribution of the values 
 
 When the data are normally distributed, or approximately normal given a large sample size (e.g., n >30), tests about population means with **known variance** use the z-score as the statistic. The **z-statistic** is calculated as follows:
 
+<br>
 A hypothesis is stated about a population, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay.
 
 $$z_{calc} = \frac{\bar{Y} - \mu_0}{\sigma / \sqrt{r}}$$
@@ -458,7 +459,6 @@ text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
 ## Confidence Intervals for the Variance
 
 In the section about [$\chi^2$ distribution](#chisqDist) we noted that the $\chi^2$ distribution is the distribution of a random variable created by summing the squares of multiple standard normal random variables. A little of work on the formula for the estimated variance using the sample variance shows that the estimated variance is a random variable with a distribution related to the $\chi^2$.
->>>>>>> EAL11Oct18
 
 <br>
 ````{block,, type='stattip'}
@@ -466,17 +466,20 @@ In the section about [$\chi^2$ distribution](#chisqDist) we noted that the $\chi
 ````
 <br>
 
+\begin{align}
 $$\begin{align}
 &\hat{\sigma}^2 = S^2 = \sum_{i = 1}^r \ \frac{(Y_i - \bar{Y})^2}{r - 1} \implies S^2 \ (r - 1) = \sum_{i = 1}^r \ (Y_i - \bar{Y})^2 \\[25pt]
 &\text{Because } Y_i \sim N(\mu, \sigma^2),\qquad (Y_i - \bar{Y}) \sim N(0, \sigma^2) \ \text{ and} \\[25pt]
 &\frac{(Y_i - \bar{Y})}{\sigma} \sim N(0, 1) \ \text{ is a standard normal random variable, and} \\[25pt]
 &\frac{S^2 \ (r - 1)}{\sigma^2} = \sum_{i = 1}^r \ \frac{(Y_i - \bar{Y})^2}{\sigma^2} \sim \ \chi^2_{r-1}
+\end{align}
 \end{align}$$
 
 <br>
 
 Based on this result, we use the $chi^2_{r-1}$ distribution to make confidence intervals for the true variance based on the sample variance. By definition
 
+<br>
 <!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
 $$P \left (\chi^2_{r-1, \ \alpha/2} \ \lt \frac{S^2 \ (r - 1)}{\sigma^2} \lt \chi^2_{r-1, \ 1 - \alpha/2} \right ) = 0.95$$
@@ -549,6 +552,7 @@ text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
 
 We use the first sample obtained above to illustrate the calculation for a CI.
 
+<br>
 ### Correct and incorrect interpretation of the Confidence Interval
 
 

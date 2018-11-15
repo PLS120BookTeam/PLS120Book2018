@@ -1,0 +1,340 @@
+---
+title: "Homework 05 Fall 2018"
+author: "YourNameHere"
+output: html_document
+editor_options:
+  chunk_output_type: console
+---
+## Homework : ANOVA in CRD and RCBD
+
+Use this homework as an opportunity to make sure you understand the calculations in ANOVA. In this homework you can use R functions or simply do calculations using R as a calculator. For example if you need to calculate the average for th eset of numbers 1, 2, 3, 4, you can use `(1 + 2 + 3 + 4) / 4` or `mean(c(1, 2, 3, 4))`. You will have to store the results in the objects whose names you are given. For example, you maybe given code similar to: `my.avg1 <-  # enter the average here`, in which case you would complete this in any of the following ways:
+
+`my.avg1 <- 2.5 # enter the average here`
+
+`my.avg1 <- (1 + 2 + 3 + 4) / 4 # enter the average here`
+
+`my.avg1 <- mean(c(1, 2, 3, 4)) # enter the average here`
+
+`my.avg1 <- sum(c(1, 2, 3, 4)) / lenght(c(1, 2, 3, 4)))) # enter the average here`
+
+We will grade the value in `my.avg1`
+
+If you type numbers as input, keep inmind that your results will be graded as correct if they are within 2% of the true correct result obtained without rounding. If you want to use R to do all calculations without rounding, look for the code in the textbook. Keep in mind that the computer shows you a properly truncated version of any quantity, because frequently the actual values have many many figures to the right of the decimal point.
+
+Run the following chunk before you proceed to do the rest. If you do not have the packages installed, go to the Packages tab, click Install and follow the instructions therein.
+
+```{r echo=FALSE, message=FALSE}
+library(emmeans)
+library(knitr)
+library(dplyr)
+library(kableExtra)
+library(agricolae)
+```
+
+
+### Completely Randomized Design [50]
+
+A CRD experiment was conducted to study the effect of nitrogen fertilization on sugarbeet yield. There were 6 treatments of increasing fertilization rate (lb/ac): A (0), B (50), C (100), D (150), E (200), F (250) and yields were measured in lb/ac. The data are in the file "BeetRootYield.csv."
+
+#### Read in the data and calculate treatment averages, treatment effects and residuals for all observations. [15]
+
+```{r}
+
+# Download the data from the website and read it into R. Instead of
+# "BeetRootYield.csv" you should enter the complete path to wherever you
+# downloaded the file. To find the complete path you can enter file.choose()
+# and hit Enter in the console. Then follow the file navigation system of your
+# OS and double click on the data file. The complete path will appear in the
+# console. Do the same for any files you need to read into R to avoid problems
+# in the future.
+
+(yield.d <- read.csv("BeetRootYield.csv", header = TRUE)) # read in data
+
+yield.d$rep <- factor(yield.d$rep) # run this line as it is.
+
+## add any code you want to get the averages etc. here. For example:
+
+(averages <- aggregate(yield ~ treat, data = yield.d, FUN = mean))
+
+rownames(averages) <- averages$treat
+
+#### Treatment averages ######## no need to modify this
+
+(YbarA. <- averages["A", "yield"]) # this puts average of treatment A in YbarA.
+(YbarB. <- averages["B", "yield"]) # etc.
+(YbarC. <- averages["C", "yield"]) # etc.
+(YbarD. <- averages["D", "yield"]) # etc.
+(YbarE. <- averages["E", "yield"]) # etc.
+(YbarF. <- averages["F", "yield"]) # etc.
+
+(Ybar.. <- ) # enter code for or value of the overall average here
+
+#### Treatment effects ########
+
+# We use the letter T to represent the greek letter Tau
+
+ThatA. <-   # estimated effect of treat. A goes here; ThatA. = YbarA. - Ybar..
+ThatB. <-   # put estimated effect of treatment B in here
+ThatC. <-   # put estimated effect of treatment C in here
+ThatD. <-   # put estimated effect of treatment D in here
+ThatE. <-   # put estimated effect of treatment E in here
+ThatF. <-   # put estimated effect of treatment F in here
+
+(Thats <- c(ThatA., ThatB., ThatC., ThatD., ThatE., ThatF.)) # leave as it is
+
+(SST <-  ) # enter sum of squares of treatments here, or equation for that
+
+m1 <- lm(yield ~ treat, yield.d) # leave as it is
+
+resdls <- # c() # enter the residuals separated by commas and in the order in
+# which observations appear in the original data. You can use any method to
+# fill in the vector; use the easiest way for you to create the vector resdls.
+# There is one residual for each observation. eij = Yij - Ybari., for example,
+# eA1 = YA1 - YbarA.
+
+
+```
+
+#### Create the complete ANOVA table and interpret the F test for treatments. [15]
+
+```{r}
+
+(SourceOfSS <- c("Treatments", "Residual", "Total")) # leave as it is
+
+(SumOfSquares <- c()) # enter the SS for treatment, residual and total separated
+# by commas and in the order listed.
+
+(degreesOfFreedom <- c()) # enter the df for treatment, residual and total separated
+# by commas and in the order listed.
+
+(MST <-  ) # enter the mean square for treatments here.
+
+(MSE <-  ) # enter the mean square for error or residual here.
+
+(Fcalc <-  ) # enter the calculated F here.
+
+(Fcrit <-  ) # enter the value of the critical F here.
+
+## Leave the following lines as they are and run them ########
+   anovaTable <- data.frame(source = SourceOfSS,
+                            SS = SumOfSquares,
+                            df = degreesOfFreedom,
+                            MS = c(MST, MSE, NA),
+                            Fcalc = c(Fcalc, NA, NA))
+
+kable(anovaTable, digits = c(0, 2, 0, 2, 3)) %>%
+   kable_styling(full_width = FALSE)
+
+# Check your values against the following table.
+# If your values are different, you made a mistake.
+
+anova(m1)
+
+```
+
+Interpret the results and state your null hypothesis and the conclusion.
+
+
+#### Calculate 95% confidence intervals for treatments A and C [10]
+
+```{r}
+
+(tcrit <-  ) # enter the t critical here
+
+(S.Ybari. <-  ) # enter the standard error of the averages here
+
+(CIloA <-  ) # enter the lower boundary of the CI for A
+
+(CIupA <-  ) # enter the upper boundary of the CI for A
+
+(CIloC <-  ) # enter the lower boundary of the CI for C
+
+(CIupC <-  ) # enter the upper boundary of the CI for C
+
+```
+
+
+
+#### Use the LSD to determine if treatments A and C differ in yield. [10]
+
+```{r}
+
+(tcrit.AC <-  ) # enter the t critical here
+
+(Sdbar.AC <-  ) # enter the standard deviation of the difference in averages.
+
+(LSD.AC <-  ) # enter the LSD here.
+
+(dbar.AC <-  ) # enter the difference between treatments here
+
+```
+
+Interpret the results and state your null hypothesis and the conclusion.
+
+
+
+### Randomized Complete Block Design [50]
+
+The following experiment is presented in [@OstleMensing1975]. Ten treatments consisting of different rations were tested in a feeding trial with steers. The 40 steers available were separated into 4 blocks with 10 steers in each block. The blocks were made on the basis of steer initial weight, prior to the start of the feeding trial. The first block had the heaviest steers, the second block had the next heaviest group and so on. Within blocks, steers received the treatments randomly.
+
+#### Read in the data and calculate treatment averages, treatment effects and residuals for all observations. [15]
+
+```{r}
+
+(gain.d <- read.csv("SteerGain.csv", header = TRUE))
+# read the file with the data, named SteerGain.csv. See the first exercise to
+# find out the path for your file.
+
+# The following line make the block variable into a categorical variable.
+(gain.d$block <- factor(gain.d$block)) # run this line as it is.
+
+## add any code you want to get the averages etc. here. For example:
+
+
+#### Treatment averages ########
+
+(Ybara. <-  ) # put average of treatment a in here
+(Ybarb. <-  ) # put average of treatment b in here
+(Ybarc. <-  ) # put average of treatment c in here
+(Ybard. <-  ) # put average of treatment d in here
+(Ybare. <-  ) # put average of treatment e in here
+(Ybarf. <-  ) # put average of treatment f in here
+(Ybarg. <-  ) # put average of treatment g in here
+(Ybarh. <-  ) # put average of treatment h in here
+(Ybari. <-  ) # put average of treatment i in here
+(Ybarj. <-  ) # put average of treatment j in here
+
+(Ybar..rcbd <- )
+
+#### Treatment effects ########
+
+# We use the letter T to represent the greek letter Tau
+
+Thata. <-   # put estimated effect of treatment a in here
+Thatb. <-   # put estimated effect of treatment b in here
+Thatc. <-   # put estimated effect of treatment c in here
+Thatd. <-   # put estimated effect of treatment d in here
+Thate. <-   # put estimated effect of treatment e in here
+Thatf. <-   # put estimated effect of treatment f in here
+Thatg. <-   # put estimated effect of treatment g in here
+Thath. <-   # put estimated effect of treatment h in here
+Thati. <-   # put estimated effect of treatment i in here
+Thatj. <-   # put estimated effect of treatment j in here
+
+# Leave this line as it is
+(Thats2 <- c(Thata., Thatb., Thatc., Thatd., Thate., Thatf., Thatg., Thath., Thati., Thatj.))
+
+#### Block averages ##########
+
+(Ybar.1 <-  ) # put average of block 1 in here
+(Ybar.2 <-  ) # put average of block 1 in here
+(Ybar.3 <-  ) # put average of block 1 in here
+(Ybar.4 <-  ) # put average of block 1 in here
+
+### Block effects ##########
+
+Bhat.1 <-   # put estimated effect of block 1 in here
+Bhat.2 <-   # put estimated effect of block 1 in here
+Bhat.3 <-   # put estimated effect of block 1 in here
+Bhat.4 <-   # put estimated effect of block 1 in here
+
+# Leave this line as it is
+(Bhats <- c(Bhat.1, Bhat.2, Bhat.3, Bhat.4))
+
+m2 <- lm(gain ~ diet + block, gain.d)
+my.res2 <- residuals(m2)
+
+(resdls2 <- c()) # enter the residuals separated by commas and in the order in
+# which observations appear in the original data. You can use any method to
+# fill in the vector; use the easiest way _for you_ to create the vector resdls.
+
+
+```
+
+#### Create the complete ANOVA table and interpret the F test for treatments. [15]
+
+```{r}
+
+SourceOfSS2 <- c("Diets", "Block", "Residual", "Total")
+
+(SumOfSquares2 <- c()) # enter the SS for diets, block, residual and total separated
+# by commas and in the order listed.
+
+(degreesOfFreedom2 <- c()) # enter the df for diets, block, residual and total separated
+# by commas and in the order listed.
+
+(MST2 <-  ) # enter the mean square for diets here.
+
+(MSB <-  ) # enter the mean square for blocks here.
+
+(MSE2 <-  ) # enter the mean square for error or residual here.
+
+(Fcalc.diet <-  ) # enter the calculated F for diet here.
+
+(Fcrit.diet <-  ) # enter the value of the critical F here.
+
+(Fcalc.blk <-  ) # enter the value of the calculated F for blocks here.
+
+(Fcrit.blk <-  ) # enter the value of the critical F here.
+
+
+## Leave the following lines as they are and run them ########
+   anovaTable2 <- data.frame(source = SourceOfSS2,
+                            SS = SumOfSquares2,
+                            df = degreesOfFreedom2,
+                            MS = c(MST2, MSB, MSE2, NA),
+                            Fcalc = c(Fcalc.diet, Fcalc.blk, NA, NA))
+
+kable(anovaTable, digits = c(0, 2, 0, 2, 3)) %>%
+   kable_styling(full_width = FALSE)
+
+# Check your values against the following table.
+# If your values are different, you made a mistake.
+
+anova(m2)
+
+```
+
+Interpret the results and state your null hypothesis and the conclusion.
+
+
+
+#### Calculate 95% confidence intervals for diets a and h [10]
+
+```{r}
+
+(tcrit.a <-  ) # enter the t critical here
+
+(S.Ybara. <-  ) # enter the standard error of the averages here
+
+(CIloa <-  ) # enter the lower boundary of the CI for a
+
+(CIupa <-  ) # enter the upper boundary of the CI for a
+
+(tcrit.h <-  ) # enter the t critical here
+
+(S.Ybarh. <-  ) # enter the standard error of the averages here
+
+(CIloh <-  ) # enter the lower boundary of the CI for h
+
+(CIuph <-  ) # enter the upper boundary of the CI for h
+```
+
+
+
+#### Use the LSD to determine if diets a and h differ in gain [10]
+
+```{r}
+
+(tcrit.ah <-  ) # enter the t critical here
+
+(Sdbar.ah <-  ) # enter the standard deviation of the difference in averages.
+
+(LSD.ah <-  ) # enter the LSD here.
+
+(dbar.ah <-  ) # enter the difference between treatments here
+
+```
+
+Interpret the results and state your null hypothesis and the conclusion.
+

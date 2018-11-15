@@ -12,67 +12,163 @@ output:
 
 ## Learning Objectives for Chapter
 
-1. For a simple linear regression, state the null and alternative hypotheses.
-1. Describe how variance is partitioned in a linear regression.  
-1. Calculate the slope and intercept for a regression model and their CIs, and interpret what the values mean in real, biological terms.  
-1. Calculate the coefficient of determination and state what the value means.
-1. Describe how ANOVA and regression analyses are related in terms of variance partitioning and the F test.  
-1. List examples of uses for simple linear regression (SLR).
+1. State the null and alternative hypotheses for simple linear regression (SLR).
+1. Describe how variance is partitioned in SLR.
+1. Calculate the slope and intercept and their confidence intervals.
+1. Interpret what the slope and intercept mean in real, biological terms.
+1. Calculate and interpret the coefficient of determination.
+1. List examples of uses for simple linear regression.
 1. Write the model and assumptions for simple linear regression.
-1. Make confidence intervals for the SLR parameters.
 1. List strategies to increase the precision of slope estimates.
-1. Determine is a problem requires an estimate for the expected value or for a single observation.
+1. Determine if a problem requires an estimate for the expected value or for a single observation.
 1. Calculate and interpret an ANOVA table for SLR.
 1. Discuss the difference between estimating parameters and making predictions in SLR.
+1. Build confidence intervals for predictions of expected value and individual responses.
 
-##Introduction to Simple Linear Regression
+## Introduction to Simple Linear Regression
 
-In simple linear regression, we are interested in the relationship between two continuous variables. More specifically, we are interested in how one variable (Y, the dependent variable) changes with each unit change in another variable (X, the independent variable). First, we construct a linear mathematical model that describes the change in Y with each unit change in X. This linear model takes the following form: 
-$$\hat{Y}_i = \beta_0 + \beta_1X_i + \epsilon_i \\ \epsilon_{i} \sim N(0, \ \sigma^2)$$
-where $\hat{Y}_i$ is the predicted value of variable Y for a particular (*i*) value of variable X. The variable $\epsilon_i$ represents the random *observed* deviation from the model's theoretical, predicted value of Y, and it is normally distributed with mean 0 and variance $\sigma^2$. Each random deviation from $\hat{Y}$ ($\epsilon_i$) is called a **residual**. 
+### Goals of Simple linear regression
 
-We use observed values of X and Y to estimate the parameters $\beta_0$ and $\beta_1$. These are called the regression coefficients, and they have their own special interpretations. The $\beta_0$ coefficient is also called the **intercept**, and if you examine the regression model closely, you might realize that $\beta_0$ is simply $\hat{Y}_i$ when $X_i$ is equal to 0. The $\beta_1$ coefficient is also referred to as the **slope**, and it is a rate parameter that represents the change in Y for each unit change in X. We use a method called **ordinary least squares** to estimate these values. 
-Once the regression coefficients are estimated, we can use a statistical test to determine if the relationship between X and Y is significant. If it is, we can then use our model to estimate or predict values of Y for a particular value of X.
+Simple linear regression can be used for multiple purposes, the vast majority of which can be classified into two categories:
+
+1. Prediction. Emphasis is on values of Y expected for given levels of X.
+2. Explanation or understanding. Emphasis is on regression coefficients.
+
+In the case of **prediction** the goal of SLR is to provide a means to estimate values of the response variable $Y$ or expected values of the response variable $\mu{Y|X}$ for certain values of the independent variable that may not have been observed. In this application we are not really concerned about why Y is related to X or whether they have a cause-and-effect relationship. For example, we may use the relationship between femur length and age to estimate the age at death of fossilized mammals. Obviously, femur length does not cause animals to be younger or older. Similarly, we may use the thickness of the triceps skin pinch to estimate a person's body fat content. The thickness of the pinch does not cause people to have more or less fat.
+
+In the case of **understanding** the goal is to determine how and how much a causal variable affects another; how strong is their relationship. For example, we determine the relationship between total food consumed and weight gain in a beef steer. The food consumed is the cause of the gain, and the relationship is important because it establishes how much gain there is per unit food consumed. In this case, the slope of the relationship is the food conversion efficiency. In this case we are specifically interested in having good estimates of the slope and its sampling variance. We are also interested in the variance of $\epsilon$ because that is an indicator of the effect of other factors on gain and food conversion efficiency.
+
+### Fixed and Random X cases
+
+There are two types of situations in simple linear regression and in regression in general: fixed X and random X. The main point of this section is that all equations presented in this chapter are strictly valid for the fixed X case, and are approximations in the random X case.
+
+**Fixed X** means that the values of the predictor or independent variable X are known without error and fixed values. X is not a random variable and its values did not result from a random process or experiment. The theory and calculations presented in this chapter are specifically valid for this situation.
+
+According to [@RossetTibshirani2018] the fixed X case is the most commonly used one and it is characterized by the following:
+
+1. The covariate values $X_1, . . . , X_k$ used to estimate parameters are not random but constitute  a set of selected or designed values, and the only randomness the estimates is due to the responses $Y1, . . . , Yk$.
+2. The covariates values used for prediction exactly match $X_1, . . . , X_k$ and the corresponding responses are independent realizations of $Y1, . . . , Yk$, respectively.
+
+Examples of fixed X cases are:
+
+- Application of prescribed quantities of fertilizer to field plots to study yield.
+- Previously selected levels of feeding for animals to study weight gain.
+- Drug dose given to rats to determine effect on metabolic rate.
+- Dose of active principle per acre to study effect on pest density.
 
 
+**Random X** means that the values of the predictor X are not set by the experimenter, but instead are random values resulting from a random process. The random process may be the process of measurement and or the process of sampling the individuals or experimental units where the response and the predictor are to be measured.
+Examples of random X case are:
 
-##Simple Linear Regression Visualized
+- Measure the available P concentration in soil and yield in field plots.
+- Measure triceps pinch thickness and body fat content of several people.
+- Measure total income and food expenses in a set of randomly selected families.
+- Measured concentration of a hormone in blood and milk yield of dairy cows.
 
-As the independent and dependent variables in linear regression are both continuous, the relationship between X and Y can best be visualized with a scatterplot, as shown in Fig. \@ref(fig:slr) 
-```{r slr, echo = F, fig.cap = "A scatterplot of simulated random data, with dots representing observations. The line represents the linear regression model used to generate the data, in combination with residuals drawn from a random normal distribution. An example residual is show in red."}
-########make a figure and label it slr#####
-set.seed(400)
-x <- 1:10
-Y <- x +rnorm(10)
-plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "X", ylab = "Y", xlim = c(0,10), ylim = c(0,10), bty = "l", cex.lab = 1.5)
-text(-1,5, "Y" , cex = 1.75)
-text(5, -1.5,"X", cex = 1.75 )
-lines(0:10, 0:10)
-arrows(x0 = 6, y0 = 6, y1 = Y[6], code = 0, col = "red",lty = 3, lwd = 1.15)
-text(7, 5.5, labels = expression(hat(Y) - Y == epsilon[i]),cex = 1.5, col = "red")
-arrows(4.5, y0 = 4.5, y1 = 6.5, code = 0, lwd = 1.15, lty = 3)
-arrows(4.5, x1 = 6.5, y0 = 6.5, y1 = 6.5, code = 0, lwd = 1.15, lty = 3)
-text(5.5, 7, labels = expression(paste(Delta,"X")), cex = 1.5)
-text(4.1, 5.5, labels = expression(paste(Delta,"Y")), cex = 1.5)
-text(7.5, 1.5, expression(hat(Y)[i] == beta[0] + beta[1]*X[i] + epsilon[i]), cex = 2)
+When there is measurement error in the values of X, one consequence is that the estimate of the slope will be biased downwards. If it is possible, selecting a wide range of X values, relative to the variance of measurements, will ameliorate the problem. Other things being equal, selection of a wide range of X values increases the precision of the estimations, because all the equations for variances include the sum of squares of X in a denominator.
 
+
+### Population Relationship
+
+In simple linear regression, we are interested in the relationship between two continuous variables. More specifically, we are interested in how one variable (Y, the dependent variable) changes with each unit change in another variable (X, the independent variable). The mathematical model that describes how the mean of Y changes as a function of X is that for a straight line. Thus, simple linear regression works for populations where the relationship between expected or mean Y and X a is of the following form: 
+
+<br>
+
+$$Y_i = \beta_0 + \beta_1X_i + \epsilon_i = \mu_{Y|X_i} + \epsilon_i\\[25pt]
+\epsilon_{i} \sim N(0, \ \sigma^2)$$
+
+<br>
+
+where $Y_i$ is the observed value of variable $Y$ for observation $i$, $X_i$ is the corresponding value of the predictor variable for that observation. The variable $\epsilon_i$ represents the random deviation from the observed value of Y to the true line that represents the population relationship between Y and X. The "error" $\epsilon$ is normally distributed with mean 0 and variance $\sigma_{\epsilon}^2$.
+
+Note that the true values of Y for each X are not on the line; they have a normal distribution about the line for any given X. That normal distribution has mean equal to $\beta_0 + \beta_1X_i$ and variance $\sigma_{\epsilon}^2$. Thus, the points on the true line are the means of normal populations, and there is one of these normal populations for each possible level of X, not just those levels sampled. Regardless of the mean and the value of X, all the distributions are independent and identical normal distributions with the same variance $\sigma_{\epsilon}^2$.
+
+If the population were known, we could define a region about the line containing the central 95% of the population values. For any level of X, say $X_h$, that region is centered at $\mu_{Y|X_i} = \beta_0 + \beta_1X_h$ and ranges from $\mu_{Y|X_i} + z_{0.025} \ \sigma_{\epsilon}$ to $\mu_{Y|X_i} + z_{0.025} \ \sigma_{\epsilon}$. The point of this is to emphasize that even when the population values are known, there is variation of individual observations about the line.
+
+$\beta_0$ and $\beta_1$ are called *regression coefficients*, and they have their own special meaning. $\beta_0$ is the **intercept**, and it is simply $\hat{Y}_i$ when $X_i$ is equal to 0. $\beta_1$ the **slope**, and it represents the change in Y for each unit change in X. For example, in Figure \@ref(fig:slrPop) the slope is 0.9, which means that when X increases by 1, $\mu_{Y|X}$ increases by 0.9. It is extremely important to consider the units of Y, X, $\beta_0$ and $\beta_1$, both for prediction and understanding purposes.
+<br>
+
+```{r slrPop, echo = F, fig.cap = "Scatterplot of population values and true regression line. Each dot represents a pair of x and Y from the population. Imagine that the whole population of dots is plotted. The blue line is the true population line, which represents the mean of the response variable Y for each value of X. Each point deviates vertically from the mean for that level of X (the point on the line) by an amount that has a normal distribution and is called epsilon. The epsilon for one point is represented in red. The slope of the line, called beta, is the change in the mean of Y per unit change in X. Usually, only a smaple of points is available, so the blue line and the parameters are not known."}
+
+library(latex2exp)
 library(shape)
-Arrows(5.5,1.55,2.25,1.75)
-text(3.5,8,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+
+set.seed(400)
+
+x <- 1:5000/500
+Y <- 5 + 0.9 * x +rnorm(5000, sd = 1)
+
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n", 
+     xlab = "X", ylab = "Y", 
+     xlim = c(0,10), ylim = c(0,17), 
+     bty = "l", cex.lab = 1.5, cex = 1,
+     main = "Population line and X-Y values")
+
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+
+points(6, 8, pch = 20)
+
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
 ```
 
-As mentioned above, we use ordinary least squares to estimate regression coefficients that represent a line of "best fit". This method finds the $\beta_0$ and $\beta_1$ that minimizes the squared distances of observed values of Y from values of Y that are predicted from the regression equation, $\hat{Y}$. Figure \@ref(fig:leastsquaresline) illustrates a least squares line versus alternative lines we could use to explain the relationship between X and Y. 
+<br>
 
 
-```{r leastsquaresline, echo = F, warning = F, fig.cap = "The solid line is the line of 'best fit' that minimizes the sum of the squared deviations between the line and the observations, which are represented by the points. The dashed lines represent lines with the same $\\overline{Y}$ but with different regression coefficients ($\\beta_0$ and $\\beta_1$). These lines do not minimize the overall error between $\\hat{Y}_i$ and the observed Y$_i$"}
+**Units**
+
+Imagine that leaf expansion rate of a grass species is studied as a function of temperature. If you were told that the slope of the relationship is 50, you would not know if temperature has a strong or weak effect on leaf expansion, because the number given has no units. The number means something only when given with its proper units. Suppose that the units are $mm \cdot month^{-1} degreeC^{-1}$. This means that for each degree C that the temperature is increased, the expansion rate increases by 50 mm per month. This is quite a large effect. IN this case the units are:
+
+<br>
+
+$$Y: \quad mm \cdot mo^{-1} \\[20pt]
+X: \quad degrees \ C \\[20pt]
+\beta_1: \quad mm \cdot mo^{-1} \ degrees \ C^{-1}\\[20pt]
+\beta_0: \quad mm \cdot mo^{-1}$$
+
+<br>
+
+
+
+## Sample relationship and sampling distributions
+
+The problem in simple linear regression is to estimate $\beta_0$, $\beta_1$ and $\sigma_{\epsilon}^2$ using a random sample of $\{X, Y\}$ pairs. With those estimates we can estimate the the position of the line for any $X$ and our uncertainty about that position, as well as the uncertainty about any single population value for that value of $X$.
+
+We use observed values of X and Y to estimate the parameters $\beta_0$ and $\beta_1$ with the method called **ordinary least squares**. This method chooses the values of $\beta_0$ and $\beta_1$ that minimize the sum of squares of the residuals or vertical distances from observation to estimated line. You can think of this as trying many many lines and picking the one that yields the least value for the SSE. Figure \@ref(fig:leastsquaresline) illustrates a least squares line versus alternative lines we could use to explain the relationship between X and Y.
+
+<br>
+
+```{r leastsquaresline, echo = F, warning = F, fig.cap = "The solid line is the line of 'best fit' that minimizes the sum of the squared deviations between the line and the observations, which are represented by the points. The dashed lines represent candidate lines with different regression coefficients ($\\beta_0$ and $\\beta_1$) that do not minimize the SSE."}
 
 set.seed(400)
+
 x <- 0:10
 Y <- x +rnorm(10)
-plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "X", ylab = "Y", xlim = c(0,10), ylim = c(0,10), bty = "l")
+
+plot(x, Y, pch = 20, 
+     xaxt = "n", yaxt = "n", 
+     xlab = "X", ylab = "Y", 
+     xlim = c(0,10), ylim = c(0,10), 
+     bty = "l")
+
 lines(0:10, 0:10, lwd = 2)
+
 slopes <- seq(0, 1, .20)
+
 b0 <- sort(seq(0,5, 1), decreasing = T)
+
 for(i in 1:6){
    y <-  b0[i] + x*slopes[i]
    lines(0:10, y, lty = 3, lwd = 1.5)
@@ -81,24 +177,127 @@ for(i in 1:6){
 
 ```
 
-We can use the following equations to estimate the regression coefficients, with *k* observations: 
+<br>
+
+
+You may recall that the sample average is the least squares estimate of the population mean. The same principle is applied here, except that because the population mean changes with X, a different algorithm is necessary to find the least squares estimates. The solution consists of expressing the SSE as a function of estimated parameter values, calculating the partial derivatives of SSE with respect to each parameter, setting those to zero and solving for parameter values. The values obtained are estimated parameter values that change from sample to sample.
+
+
+The ordinary least squares procedure results in the following equations to estimate the regression coefficients using a sample with *k* observations or X-Y pairs: 
+
+
+<br>
 
 \begin{equation}
-\beta_1 = \frac{\sum_{i=1}^k (X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^k (X_i-\overline{X})^2} 
-(\#eq:b1)
+\hat{\beta_1} = \frac{\sum_{i=1}^k (X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^k (X_i-\bar{X})^2} (\#eq:beta1)
 \end{equation}
 
+<br>
+
+The equation for $\beta_1$ includes $\sum_{i=1}^k (X_i-\bar{X})(Y_i-\bar{Y})$, called the **sum of cross-products**, which is involved in the calculation of the covariance between random variables.
+
+<br>
+
+
 \begin{equation}
-\beta_0 = \overline{Y} - \beta_1\overline{X}
-(\#eq:b0)
+\hat{\beta_0} = \bar{Y} - \hat{\beta_1} \ \bar{X}
+(\#eq:beta0)
 \end{equation}
-##Fitting the least squares line
+
+$$\hat{Y_i} = \hat{\beta_0} + \hat{\beta_1} \ X_i \qquad \quad \text{estimated Y}$$
+
+<br>
+
+The equation to calculate $\hat{\beta_0}$ determines that the estimated line always passes through the point $\{\bar{X},\bar{Y}\}$. Because they are calculated using the sample values, $\hat{\beta_0}$, $\hat{\beta_1}$ and $\hat{Y}$ are random variables that vary from sample to sample. These estimates have the following properties:
+
+**Unbiasedness**
+
+The mean or expectation of the estimated parameters over many, many independent samples equals the true value of the parameter.
+
+<br>
+
+$$E\{\hat{\beta_0}\} = \beta_0 \\[20pt]
+E\{\hat{\beta_1}\} = \beta_1 \\[20pt]
+E\{\hat{Y_i}\} = \mu_{Y|X_i}$$
+
+<br>
+
+**Normality**
+
+Each of the estimates are random variables with normal distributions.
+
+<br>
+
+$$\hat{\beta_0} \sim N \left (\beta_0, \ \sigma^2_{\hat{\beta_0}} \right ) \\[20pt]
+\hat{\beta_1} \sim N \left (\beta_1, \ \sigma^2_{\hat{\beta_1}} \right ) \\[20pt]
+\hat{Y}_{X_h} \sim N \left (\mu_{Y|X_h}, \ \sigma^2_{\hat{Y}} \right ) $$
+
+<br>
+
+**Variance**
+
+<br>
+
+$$V\{\hat{\beta_0}\} = \sigma^2_{\hat{\beta_0}} = \sigma^2_{\epsilon} \ \left [ \frac{1}{k} + \frac{\bar{X}^2}{\sum_1^k \ (X_i - \bar{X})^2}\right ] \\[30pt]
+V\{\hat{\beta_1}\} = \sigma^2_{\hat{\beta_1}} =   \frac{\sigma^2_{\epsilon}}{\sum_1^k \ (X_i - \bar{X})^2} $$
+
+<br>
+
+The variance of $\hat{Y}$ depends on whether the estimated Y is for the expected value of Y given a value of X or for a single value of Y given X. The first case is an **estimation**, because we are guessing the value of a fixed quantity or parameter: $\mu_{Y|X}$. The second case is a **prediction**, because we are guessing the value of a random variable $Y_i|X$.
+
+**Estimation** of $\mu_{Y|X_h}$. The uncertainty comes only from the uncertainty about $\beta_0$ and $\beta_1$, which is represented by the sampling variances of $\hat{\beta_0}$ and $\hat{\beta_1}$.
+
+<br>
+
+$$V\{\hat{\mu}_{Y|X_h}\} = \sigma^2_{\epsilon} \ \left [ \frac{1}{k} + \frac{(X_h - \bar{X})^2}{\sum_1^k \ (X_i - \bar{X})^2}\right ]$$
+
+<br>
+
+**Prediction** of $Y_i|X_i$. In this case there is uncertainty about the unknown $\beta_0$ and $\beta_1$, plus the uncertainty due to the variance of $\epsilon$. Even if $\beta_0$ and $\beta_1$ were known, guessing $Y_i|X_i$ would amount to predicting the value of a random normal number drawn from a population with mean $\mu_{Y|X_i}$ and variance $\sigma^2_{\epsilon}$. Thus, the equation for the variance of $\hat{Y}_i|X_i$ includes an extra $\sigma^2_{\epsilon}$
+
+
+<br>
+
+$$V\{\hat{Y}_i|X_i\} = \sigma^2_{\epsilon} \ \left [ 1 + \frac{1}{k} + \frac{(X_h - \bar{X})^2}{\sum_1^k \ (X_i - \bar{X})^2}\right ]$$
+
+
+<br>
+
+
+Usually, the true variance of population $\sigma^2_{\epsilon}$ is not known, so we estimate it with the mean squared error calculated as follows. Once the estimated line is calculated, there is a vertical distance between each observation and the line, called *residual* or *errors*. These residuals are estimates of the true but unobservable $\epsilon$ for each observation. The sum of squares of residuals, called SSE, divided by the degrees of freedom of the SSE is the best estimate of the variance of $\epsilon$.
+
+<br>
+
+
+$$Y_i = \hat{\beta_0} + \hat{\beta_1} \ X_i + e_i = \hat{Y}_i + e_i \\[25pt]
+SSE = \sum^k_{i=1} \ e_i^2 = \sum^k_{i=1} \ (Y_i - \hat{Y}_i)^2 \\[25pt]
+dfe = k - 2 \\[25pt]
+\hat{\sigma}^2_{\epsilon} = MSE = \frac{SSE}{dfe}$$
+
+
+<br>
+
+Therefore, the variances of the estimated coefficients and response are calculated as:
+
+$$\hat{V}\{\hat{\beta_0}\} = \hat{\sigma}^2_{\hat{\beta_0}} = MSE \ \left [ \frac{1}{k} + \frac{\bar{X}^2}{\sum_1^k \ (X_i - \bar{X})^2}\right ] \\[35pt]
+V\{\hat{\beta_1}\} = \sigma^2_{\hat{\beta_1}} =   \frac{MSE}{\sum_1^k \ (X_i - \bar{X})^2} \\[35pt]
+V\{\hat{\mu}_{Y|X_h}\} = MSE \ \left [ \frac{1}{k} + \frac{(X_h - \bar{X})^2}{\sum_1^k \ (X_i - \bar{X})^2}\right ] \\[35pt]
+V\{\hat{Y}_i|X_i\} = MSE \ \left [ 1 + \frac{1}{k} + \frac{(X_h - \bar{X})^2}{\sum_1^k \ (X_i - \bar{X})^2}\right ]$$
+
+<br>
+
+
+## Fitting the least squares line
 
 An example of a linear relationship between an independent continuous variable (X) and a dependent continuous variable (Y) would be the relationship between annual rainfall and rice crop yield (kg/ha) in India. Figure \@ref(fig:rice) shows observed rice crop yields in India from 1990--2000 against annual rainfall levels.
 
-```{r rice, echo = F, warning = F, fig.cap="Observed rice crop yields in India from 1990–2000 against annual rainfall levels"}
-rice <- read.csv("./Datasets/rainYield.csv")
-plot(rice$AR..raingall., rice$yield..kg.ha., xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+```{r rice, echo = F, warning = F, fig.cap="Rice yields  and rainfall in India from 1990 to 2000."}
+
+rice <- read.csv("Datasets/rainYield.csv")
+
+plot(rice$rain.mm, rice$yield.kg.ha, xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+
+abline(lm(yield.kg.ha ~ rain.mm, rice))
 
 ```
 
@@ -106,8 +305,8 @@ In table \@ref(tab:ricetab), we show the values and calculations necessary to fi
 
 ```{r ricetab, echo = F}
 library(kableExtra)
-X <- rice$AR..raingall.
-Y <- rice$yield..kg.ha.
+X <- rice$rain.mm
+Y <- rice$yield.kg.ha
 meanX <- round(mean(X),1)
 meanY <- round(mean(Y),1)
 deltaX <- round(X-meanX,1)
@@ -132,7 +331,7 @@ knitr::kable(
 
 We can now use equation \@ref(eq:b1) to find the slope of the regression line that minimizes the error in the observations around the line:
 
-\begin{equation}
+$$\begin{equation}
 \begin{aligned}
 \sum_{i=1}^k (X_i-\overline{X})(Y_i-\overline{Y}) & = -60241.5 \\
 \sum_{i=1}^k (X_i-\overline{X})^2 & = 93019.4 \\
@@ -140,7 +339,7 @@ We can now use equation \@ref(eq:b1) to find the slope of the regression line th
 \beta_1 & = -60241.5/93019.4 \\
 \beta_1 & = -0.65
 \end{aligned}
-\end{equation}
+\end{equation}$$
 
 And we can use \@ref(eq:b0) to find the intercept:
 
@@ -166,10 +365,10 @@ And we can plot this line on the original data scatterplot:
 
 ```{r riceline, echo = F, warning = F, fig.cap="Observed rice crop yields in India from 1990–2000 against annual rainfall levels and the least squares regression line ($\\beta_0 = 2799$kg/ha,  $\\beta_1 = -0.65$)"}
 rice <- read.csv("./Datasets/rainYield.csv")
-plot(rice$AR..raingall., rice$yield..kg.ha., xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
-yhat <- 2799 - 0.65*rice$AR..raingall.
+plot(rice$rain.mm, rice$yield.kg.ha, xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+yhat <- 2799 - 0.65*rice$rain.mm
 
-lines(rice$AR..raingall., yhat, lwd = 2)
+lines(rice$rain.mm, yhat, lwd = 2)
 ```
 
 
@@ -177,7 +376,7 @@ We have shown you above how to fit a simple linear regression line to explain th
 
 But how do we know if the relationship that our regression line describes is significant? If you observe the scatter of the observations around the line in figure \@ref(fig:riceline), you can see that the line does not perfectly predict crop yield given the annual rainfall. Those deviations are represented by the residual error symbol, $\epsilon_i$ in equation \@ref(eq:fittedrice). The residual error is the random variation in crop yield (Y) that is not explained by our regression line. In other words, it is the variation in Y that is not explained by X. Is the residual error so large that our model of the relationship between X and Y is useless?  In the next section, we will demonstrate how we test that the relationship between X and Y is significant, given the variation we see in Y. 
 
-##Analysis of variance of regression 
+## Analysis of variance of regression 
 
 In Chapter 9, we introduced you to a method called the analysis of variance. The general idea of analysis of variance is that we can partition the total variance of a Y dependent variable into random variation and variation explained by an X independent variable in order to test if there is a significant effect of X on Y. In simple linear regression, we partition the total sum of squares of Y (SSY) into the sum of squares that can be explained by the regression line (SSR) and the sum of squares that is not explained by the regression line, also called the residual sum of squares (RSS). $SSY = SSR + RSS$. In Figure \@ref(fig:anovaslr), we show you each component of variation in Y. The total variation in Y has to do with the deviation of each $Y_i$ from $\overline{Y}$. The regression line explains some of that variation in the deviations of each $\hat{Y}_i$ from $\overline{Y}$. The remaining, residual variation is in the deviations of each observation $Y_i$ from$\hat{Y}_i$.
 
@@ -195,7 +394,7 @@ text(-1,5, "Y" , cex = 1.75)
 text(5, -1.5,"X", cex = 1.75 )
 lines(0:10, 0:10)
 arrows(x0 = 6, y0 = 6, y1 = Y[6], code = 0,lty = 3, lwd = 1.15)
-text(6.5, 3.75, labels = expression(hat(Y) - Y == epsilon[i]),cex = 1.5)
+text(6.5, 3.75, labels = expression(Y - hat(Y) == epsilon[i]),cex = 1.5)
 arrows(x0 = 8, y0 =mean(Y), y1 = 8, code = 0, lty=3, lwd = 1.15)
 text(9, 7.25, labels = expression(hat(Y) - bar(Y)),cex = 1.5)
 
@@ -232,12 +431,12 @@ First, we must calculate the different sources of variation in Y:
 ```{r SS, warning = F, echo = F}
 
 library(kableExtra)
-X <- rice$AR..raingall.
-Y <- rice$yield..kg.ha.
+X <- rice$rain.mm
+Y <- rice$yield.kg.ha
 meanX <- mean(X)
 meanY <- mean(Y)
 TS <- round((Y-meanY)^2, 1)
-yhat <- 2799 - 0.65*rice$AR..raingall.
+yhat <- 2799 - 0.65*rice$rain.mm
 SR <- round((yhat-meanY)^2, 1)
 RS <- round((Y - yhat)^2)
 sumlabels <- c("","","","SSY", "SSR", "RSS")
@@ -371,7 +570,7 @@ summary(lm(Y ~ X))
   The summary output from the lm() function in R also reports a t value and a p value, [PR(>|t|)], for each of the coefficients. We are generally only interested in the p value for the predictor variable coefficients, and can ignore the t test results for the $\beta_0$ coefficient. The p value that was reported for the "X" coefficient is the same as the p value reported for the F test. This is because there is only one X predictor in a simple linear regression, so all of the explained variance in Y is from the single X variable, annual rainfall. Doing a t test on the $\beta_1$ coefficient for X in this case will therefore yield the same results as doing an F test. 
   
 
-##Confidence Interval for $\hat{\beta_1}$
+## Confidence Interval for $\hat{\beta_1}$
 
 We can construct confidence intervals for an estimate of $\beta_1$ using the calculated MSr as an estimate of the population variance. The standard error of the regression coefficient is:
 
@@ -382,7 +581,7 @@ s_b = \sqrt{\frac{MSr}{\sum (X_i - \overline{X})^2}}
 
 Note the two components of the standard error in our estimate of $\beta_1$: the MSr and the SSX. If we want to increase our certainty in the slope of the regression, then we can either decrease our MSr by increasing sample size or increase the variation in X by increasing the range of X values for which we have measurements of Y.  
 
-In addition to $s_b$, we need a t value to construct as confidence interval around the esimate of $\beta_1$.  We use the degrees of freedom from the residual variance (k-2) and calculate a t value under the null hypothesis that the true population $\beta_1$ = 0. We can use the following formula to obtain the t value: 
+In addition to $s_b$, we need a t value to construct as confidence interval around the estimate of $\beta_1$.  We use the degrees of freedom from the residual variance (k-2) and calculate a t value under the null hypothesis that the true population $\beta_1$ = 0. We can use the following formula to obtain the t value: 
 
 \begin{equation}
 t = \frac{\hat{\beta}_1 - \beta_1}{s_b}, 
@@ -423,9 +622,9 @@ The confidence interval can then be calculated as:
 (\#eq:CIb)
 \end{equation}  
 
-##Confidence Intervals for $\hat{Y}_i$ 
+## Confidence Intervals for $\hat{Y}_i$ 
 
-The predicted value for Y at a given X$_i$ can be considered in two different ways. For X$_i$, $\hat{Y}_i$ can represent the expected mean of Y, or it can represent the expected value of an indivdual Y. The predicted value will be the same for either case, but our certainty in the estimate will be different.   
+The predicted value for Y at a given X$_i$ can be considered in two different ways. For X$_i$, $\hat{Y}_i$ can represent the expected mean of Y, or it can represent the expected value of an individual Y. The predicted value will be the same for either case, but our certainty in the estimate will be different.   
 Predicting for a single Y means incorporating random variation at observation i. Recall that variation is represented by $\epsilon_i$ in the regression formula, and that visually it is represented by the scatter of points around the regression line on a scatterplot. We must account for the individual variance in the Y observations at X$_i$ for an individual $\hat{Y_i}$, so the confidence intervals for an individual $\hat{Y_i}$ will be larger.  
 
 Just as in the calculations for the standard error of $\hat{\beta}_1$ and $\hat{\beta}_0$, we will use the degrees of freedom of the MSr (k-2) in our calculations.
@@ -462,7 +661,7 @@ and the confidence interval for $\hat{Y}$ is
 
 
 
-##Coefficient of Determination, $R^2$
+## Coefficient of Determination, $R^2$
 
 The coefficient of determination ($R^2$) is the proportion of variance that is explained by the regression line. If a large proportion of the variation in Y is not due to the regression line, then even if you obtain significant results, X is not a very good predictor of Y. The formula for $R^2$ is
 
@@ -516,12 +715,12 @@ summary(lm(Y ~ X))
 
 ```
 
-The lm() funtion reports that the "Multiple R-squared" = 0.2043, while the "Adjust R-squared' is 0.12, which are equivalent to our calculations above. The small difference between our calculated $R^2$ and the "Multiple R-squared" from R is again due to rounding error.  
+The lm() function reports that the "Multiple R-squared" = 0.2043, while the "Adjust R-squared' is 0.12, which are equivalent to our calculations above. The small difference between our calculated $R^2$ and the "Multiple R-squared" from R is again due to rounding error.  
 
 Our results were not significant, but if they were, then $R^2 = 20.4\%$ and $R^2_{adj} = 11.6\%$ would indicate that a fairly large proportion of the variance in Y is not explained by X. This is one way of ascertaining lack of fit in the regression model.
 
 
-##Correlation Coefficient, r
+## Correlation Coefficient, r
 
 The correlation coefficient, r, is a measure of the linear correlation between two variables. It does not imply a causal relationship between a fixed X variable and a Y dependent variable as regression does.
 
@@ -537,9 +736,13 @@ The correlation coefficient ranges from -1 to 1. A perfect positive linear relat
 
 
 
-##Fitness of the regression model
+## Fitness of the regression model
 
-Another aspect of using linear regression to test the significance of a relationship between X and Y is whether or not the test is appropriate for the data. There are certain assumptions that must be met to 
+Another aspect of using linear regression to test the significance of a relationship between X and Y is whether or not the model is appropriate for the data.
+
+If there are more than one observation for each level of X, then we can perform a test of lack of fit to determine if there is enough information and deviation to reject the straight line model.
+
+
 ## Exercises and Solutions
 
 ## Homework
@@ -547,7 +750,7 @@ Another aspect of using linear regression to test the significance of a relation
 ## Laboratory Exercises {#LabCh13PLS}
 
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 ```
 ---

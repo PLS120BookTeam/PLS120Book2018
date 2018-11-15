@@ -34,7 +34,7 @@ See RCBD&ExpDesign in ExplainEverything
 
 ### Plant Sciences {#LabRCBD}
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 ```
 ---
@@ -65,7 +65,7 @@ In this exercise we analyze the data resulting from an experiment at the UC Davi
 
 Treatments resulted from combining two levels of nitrogen fertilization (n: no fertilizer added and N: nitrogen added), two levels of watering (w: no water other than rain, W: with water added) and three environments (s: areas without addition of seed representing the typical California Annual Grassland, S: areas where native perennial grasses were seeded, E: edge between seeded and unseeded areas). This resulted in a factorial set of treatments, but we ignore this for now. Factorial treatments is a topic for a later chapter.
 
-This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.
+This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degrees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.
 
 #### Part 1. Read in, inspect and summarize data [15 points]
 
@@ -266,11 +266,11 @@ $$\hat{B}_{.j} = \hat{\mu}_{.j} - \hat{\mu}_{..} = \left(\displaystyle\sum_{i=1}
 
 and the estimated random error $\epsilon$ is calculated by difference
 
-$$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
+$$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \bar{Y}_{..} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
 
 The sums of squares are calculated by creating columns for $\hat{B}_j$, $\hat{\tau}_i$, and $\hat{\epsilon}_{ij}$ and then summing the squares of the values in each column.
 
-Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate()` function creates a column wiht as many values as treatments. Then, the `merge` function puts the correspoding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
+Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate()` function creates a column with as many values as treatments. Then, the `merge` function puts the corresponding treatment average in each of the observations in the complete data table. The all = TRUE argument ensures that each treatment average is repeated over all observations in that treatment.
 
 ```{r}
 
@@ -364,7 +364,7 @@ Report the test statistic, your decision rule and your conclusion.
 
 #### Part 4. ANOVA for RCBD using R functions.[25 points]
 
-In this section we repeat the previosu analysis using the R functions `aov()` and `anova()` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
+In this section we repeat the previous analysis using the R functions `aov()` and `anova()` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
 
 
 ```{r}
@@ -381,7 +381,7 @@ anova(rcbd.mod)
 \
 **ANSWER THE FOLLOWING QUESTIONS:**
 
-How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences amonf treatments.
+How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences among treatments.
 
 
 
@@ -390,7 +390,7 @@ How does the RCBD differ from the CRD analysis? Interpret the results of the RCB
 ### Animal Science {#LabCh11ANS}
 
 
-Prepare an .Rmd document starting with the following text, where you substitute the corresponsing information for author name and date.
+Prepare an .Rmd document starting with the following text, where you substitute the corresponding information for author name and date.
 
 ```
 ---
@@ -421,7 +421,7 @@ In this exercise we analyze the milk protein data modified from the `Milk` R dat
 
 Treatments were combinations of a diet and lactation period. Diets were barley, lupin and a combination of barley and lupin. Lactation periods were weeks (A) 1-5, (B) 6-10, (C) 11-15 and (D) 15-19. This resulted in a factorial set of treatments, but we ignore this for now. Factorial treatments is a topic for a later chapter. Some cows did not have lactation periods that lasted 19 weeks, so the number of cows in period D is smaller than in other periods.
 
-This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degreees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.
+This exercise has 4 parts. First we read in and inspect the data using averages and box plots. Second, data are analyzed as if they came from a Completely Randomized Design, ignoring the blocking. We do this to be able to assess the impact of using a block design by comparison. Third, we compute the ANOVA for the RCBD using basic functions for calculations. Each observation is partitioned into the components indicated by the model and then the corresponding sums of squares (SS) and degrees of freedom (df) are computed. Finally, the RCBD analysis is repeated using the specific R functions. Results are interpreted and compared to the CRD approach.
 
 #### Part 1. Read in, inspect and summarize data [15 points]
 
@@ -484,7 +484,7 @@ lupinsD B3 -0.99810334235182
 
 ```
 
-Now we inspect the structure of the data frame with `str` and create boxplots for the data as a function of treatment and block. Keep in mind that the data are transformed. In order to see the actual protein concentration, values have to be backtransformed by exponentiating and then adding 2.64.
+Now we inspect the structure of the data frame with `str` and create boxplots for the data as a function of treatment and block. Keep in mind that the data are transformed. In order to see the actual protein concentration, values have to be back transformed by exponentiation and then adding 2.64.
 
 ```{r}
 
@@ -506,11 +506,11 @@ The `tabular` function calculates the averages by treatment and block (in these 
 \
 **ANSWER THE FOLLOWING QUESTIONS:**
 
-Based on the boxplots, what trends appear in the treatments? Does it look like any of the diets affects millk composition? Is the effect of diet the same over lactation periods? Look for patterns and describe them.
+Based on the boxplots, what trends appear in the treatments? Does it look like any of the diets affects milk composition? Is the effect of diet the same over lactation periods? Look for patterns and describe them.
 
 Discuss the effects of diet, and the addition of lupin in particular on milk composition temporal patterns.
 
-What combination of diet and period seems to yield milk wiht the greatest concentration of protein in milk?
+What combination of diet and period seems to yield milk with the greatest concentration of protein in milk?
 
 Explain what the `tabular` function did.
 
@@ -623,7 +623,7 @@ $$\hat{\epsilon}_{ij} = e_{ij} = Y_{ij} - \hat{\tau}_{i.} - \hat{B}_{.j}$$
 
 The sums of squares are calculated by creating columns for $\hat{B}_j$, $\hat{\tau}_i$, and $\hat{\epsilon}_{ij}$ and then summing the squares of the values in each column.
 
-Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate` function creates a column with as many values as treatments. Then, the `merge` function puts the correspoding treatment average in each of the observations in the complete data table. The `all = TRUE` argument ensures that each treatment average is repeated over all observations in that treatment.
+Start by creating a column with the treatment averages corresponding to each observation. First, the `aggregate` function creates a column with as many values as treatments. Then, the `merge` function puts the corresponding treatment average in each of the observations in the complete data table. The `all = TRUE` argument ensures that each treatment average is repeated over all observations in that treatment.
 
 ```{r}
 
@@ -717,7 +717,7 @@ Report the test statistic, your decision rule and your conclusion.
 
 #### Part 4. ANOVA for RCBD using R functions.[25 points]
 
-In this section we repeat the previosu analysis using the R functions `aov` and `anova` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
+In this section we repeat the previous analysis using the R functions `aov` and `anova` to obtain the same tests of the null hypothesis that all means are equal. Report the results of using each function and compare to the results from Part 2. Explain what is different and why. Discuss the effect of accounting for block differences.
 
 
 ```{r}
@@ -736,4 +736,4 @@ anova(rcbd.mod)
 \
 **ANSWER THE FOLLOWING QUESTIONS:**
 
-How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences amonf treatments.
+How does the RCBD differ from the CRD analysis? Interpret the results of the RCBD and compare with the results of using a CRD model. Discuss situations when each approach may be better at detecting differences among treatments.

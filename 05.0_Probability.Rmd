@@ -14,10 +14,12 @@ library(kableExtra)
 
 # Probability in Applied Statistics {#chProb}
 
+This chapter introduces the concept of and a semi-formal theory for probability. The rules of probability are applied to random variables defined in the next chapter. We explain the fact that there are at least two ways of thinking about the intepretation of probability in the empirical world, Bayesian and Frequentist, but that in the "mathematical world" probability is just one thing and it follows a single set of rules (at least for the purpose of this course).
 This chapter introduces the concept of and a semi-formal theory for probability. The rules of probability are applied to random variables defined in the next chapter. We explain the fact that there are at least two ways of thinking about the interpretation of probability in the empirical world, Bayesian and Frequentist, but that in the "mathematical world" probability is just one thing and it follows a single set of rules (at least for the purpose of this course).
 
 The main point of this chapter is to show students how probabilities work and how the can be used to solve practical problems that involve uncertainty. Thus, we start by linking simple real world experiments whose results are uncertain with probabilities that can be handled mathematically. Then we show some of the main properties and rules that facilitate the calculations with probability.
 
+A second main concept that is treated in this chapter is "randomness"  and the meaning of random. Briefly, in a deep sense no phenomenon in the macro world (larger than atoms) is random in the sense that exaclty the same conditions could lead to different results. Random means that part of what we observe will be modeled using random variables whose values change from experiment to experiment, and part will be modeled as constants that remain the same across experiments.
 A second main concept that is treated in this chapter is "randomness"  and the meaning of random. Briefly, in a deep sense no phenomenon in the macro world (larger than atoms) is random in the sense that exactly the same conditions could lead to different results. Random means that part of what we observe will be modeled using random variables whose values change from experiment to experiment, and part will be modeled as constants that remain the same across experiments.
 
 For most of this chapter we will do calculations that assume that we know all the values that are supposed to remain constant and focus on calculating probability of events. In later chapters, we kind of reverse the view to address real world questions and try to guess the unknown constant values based on the observed results of experiments.
@@ -44,6 +46,7 @@ For most of this chapter we will do calculations that assume that we know all th
 
 
 
+## Variables and parameters
 ### Variables and parameters
 
 The terms "variable" and "parameter"" should be defined and used carefully. People frequently and incorrectly use the term "parameter" to refer to variables. This makes things more confusing.
@@ -57,6 +60,7 @@ Do not confuse "moments" with parameters. The $\chi^2$, t and F distributions ca
 Consider the following example. We define a random variable $X$ as the sum of the number of dots and the number of heads when we simultaneously roll a die and flip two coins. Assume that for each object (die, coin A, coin B) all outcomes are equally probable. This random experiment generates a probability distribution for $X$. This distribution has a mean, which we still do not know, ...
 
 
+### What does "random" mean?
 #### What does "random" mean?
 
 Processes or experiments that have outcomes can be random or deterministic. When the outcome of a process is not known beforehand, we will say that the process and the resulting outcomes are random. For example, the number that will be selected in a roulette is random. The day of the week tomorrow is deterministic. "A random experiment is an experiment whose outcome is uncertain. Examples include rolling a pair of dice, tossing a coin, counting the number of defectives in a sample from a lot of manufactured items, and observing the time to failure of a tube in a heat exchanger, or a seal in a pump, or a bus section in an electrostatic precipitator." [@PSAES2007].
@@ -69,13 +73,16 @@ We use the term "random" frequently in colloquial terms. However, in statistics 
 - Read the weight of a rat on a scale.
 - Plant ten pots with rose variety A and ten with variety B; grow them for a year; count the number of roses produced in each pot and average it for each variety; subtract the average for 
 
+We will see that in dealing with probabilities, we use real and imaginary random experiments, such as flipping a fair coin, rolling a die, or measuring the height of a plant. The results of all of these experiments are not certain until we do them and check the results. We think of the results of random experiments as member of the population of all possible results. The results obtained are called **realizations** of the random process. For example, suppose that you rolled a die 3 times and then flipped a coin twice, obtaining 423HH. The sequence 423HH is a realization of the random process consisting of rolling a die three times and a coin twice. Likewise, if you put a handful of sand in a bottle and shake it, the resting position of each of the grains of sand is a realization of the random process. We can imagine that because the grains have a variety of shapes, sizes and densities, they do not have equal probability for being in all positions. In more advanced applications of statistics, this idea is extended to systems with many parts, like the grains of sand. For example, we think of the DNA sequence in a chromosome as a realization of many theoretically possible sequences. The specific topograhy of a region is one realization of many possible topographies. Of course, we do not think of all of them as being equally likely.
 We will see that in dealing with probabilities, we use real and imaginary random experiments, such as flipping a fair coin, rolling a die, or measuring the height of a plant. The results of all of these experiments are not certain until we do them and check the results. We think of the results of random experiments as member of the population of all possible results. The results obtained are called **realizations** of the random process. For example, suppose that you rolled a die 3 times and then flipped a coin twice, obtaining 423HH. The sequence 423HH is a realization of the random process consisting of rolling a die three times and a coin twice. Likewise, if you put a handful of sand in a bottle and shake it, the resting position of each of the grains of sand is a realization of the random process. We can imagine that because the grains have a variety of shapes, sizes and densities, they do not have equal probability for being in all positions. In more advanced applications of statistics, this idea is extended to systems with many parts, like the grains of sand. For example, we think of the DNA sequence in a chromosome as a realization of many theoretically possible sequences. The specific topography of a region is one realization of many possible topographies. Of course, we do not think of all of them as being equally likely.
 
 <br>
+```{block, type='mydef'}
 ```{block, type='mydef', message=FALSE}
 **Random** is said of experiments whose outcomes are not known with certainty. By "experiment" we mean any set of actions or processes that will result in an outcome, not just scientific experiments.^[A more restrictive definition of "experiment" is used in [Chapter 10](#chEdesign), where it refers to scientific experiments where treatments are assigned to experimental units using randomization.]
 ```
 
+### "Just due to Chance"
 #### "Just due to Chance"
 
 We frequently encounter explanations of events where a part of the event is said to be caused by certain factors and the rest is *"just due to random chance."* This phrase can lead to misunderstanding and should be considered thoroughly. Randomness does not mean that the process could have resulted in a different outcome if **all conditions were exactly the same**. Randomness or "just chance" is used to refer to the effects of all of the variables that affected the outcome but that we did not measure or consider.
@@ -94,6 +101,7 @@ Statements like the following are common in the literature. These were selected 
 
 It is important to correctly interpret phrases like "due to chance" and we recommend not to use them, because they can be misleading. "Due to chance" may be interpreted as "due to a very specific combination of conditions and causes that we are not interested in at this time." Be careful not to just accept the statement as meaning that many different results could have been possible under the same conditions. The randomness of all results is just due to the fact that we cannot, or choose not to, measure all the relevant variables and processes that lead to a result. In the case of the comment about data dredging above, the phrase "due to chance alone" can be interpreted as meaning that the association detected is not a property of the population about which the scientist wants to make statements.
 
+Specificallly, to say that "The P-value reports the likelihood that the observed difference was due to chance alone." is very misleading. For the record, 
 Specifically, to say that "The P-value reports the likelihood that the observed difference was due to chance alone." is very misleading. For the record, 
 
 >"Informally, a p-value is the probability under a specified statisti- cal model that a statistical summary of the data (e.g., the sample mean difference between two compared groups) would be equal to or more extreme than its observed value." [@WassersteinLazar2016]
@@ -101,17 +109,20 @@ Specifically, to say that "The P-value reports the likelihood that the observed 
 Further, consider the number of tweets so that each student has sent in the last day. For an investigator interested in the population of students, perhaps the variation from student to student can be considered to be random and have some sort of statistical distribution for random errors. However, for each individual student the number of tweets they made is a known quantity and it is not considered to be an error in any way, not even in a statistical way. Presumably, students know exactly why they sent each tweet and the number of tweets for a particular day.
 
 
+## Probability
 ### Probability
 
 Gambling with dice motivated the early development of the concept and theory of probability, with the practical purpose of determining bets. One such problem, addressed by Blaise Pascal and Pierre de Fermat in France in the seventeenth century, was to determine the probability of obtaining at least one six in four rolls of one die, or of obtaining at least one pair of sixes in 24 rolls or two dice. The problem was posed by a gambler, Chevalier de Méré. More generally, the question was how to assign probabilities to the different possible outcomes of experiments whose results were not certain.
 
 We need to use the concept of probability in order to be able to express and quantify uncertainty. Significance and confidence levels used in statistical statements are measures of probability, and they must be assigned or calculated in a manner that is consistent with the theory of probability. The theory of probability is a branch of mathematics that provides all the tools we need to operate with probabilities. By linking a real-world phenomenon with a probability model, we can use probability theory to derive new practical results that help us in the real world. For example, we can calculate the probability of incorrectly rejecting a null hypothesis, or the probability that an investment will yield a return greater than inflation, or the probability that a person will live more than 10 years after retirement.
 
+```{block defProb, type = 'mydef'}
 ```{block defProb, type = 'mydef', message=FALSE}
 Probabilities P are real numbers associated with random experiments that have the following properties:
 
 * $0 \le P \le 1$ \
 * If a random experiment is performed, P of some event is 1. \
+* The probability of either one of two mutually exclusive events occuring is the sum of the individual probabilities.
 * The probability of either one of two mutually exclusive events occurring is the sum of the individual probabilities.
 ```
 
@@ -119,18 +130,22 @@ Although there are several interpretations of probability in terms of what it me
 
 In thinking of probability, it is important to differentiate between using the theory of probability to make calculations that are correct, and the application of the theory to assign probabilities to specific real-world outcomes. For example, the probability of obtaining a particular number by rolling a die can be assigned by rolling the die a very large number of times and calculating the proportion of times the selected number came up. In using the proportion observed in the past to characterize the die in the future, one is implicitly assuming that all conditions will remain the same. This is not always a completely safe assumption, because over time the die may wear out unevenly, and change the probabilities. The example is clearer if you think of the probability of a different event, for example, the probability that your first job after graduation will pay more than \$50,000. It is simpler to imagine the same die being rolled repeatedly, as if the universe remained constant from one roll to the next, than to imagine your life repeating many times. However, the probability model can be applied in both cases. As an exercise, write down at least two difference ways to get an estimate of the probability that you will make more than \$50,000 in your first job. This is an Easter egg. Describe the problem and your proposed solution in class before anybody else and get a reward. Make sure to claim your Easter egg reward, Hint: think of yourself as one of many.
 
+Another way to assign probabilities to experimental outcomes is by using the idea of symmetry. In the case of the die we may reason that all sides are the same and there are six sides, therefore each side gets a probability of $1/6$. In the case of flipping a coin, we assign equal probabilities to each side. We intuitively understand that the sum of the probabilities of all outcomes must be one, because one outcome must take place for each experiment. Do not confuse symmetry with lack of knowledge. The probability of all outcomes is not always the same, even if there are just two outcomes. Some people suffer from a tendency to think that if there are only two outcomes possible then "chances are 50:50." If you are asked about the probabiliy of getting a random card that is black form a deck, you should not bet on 50:50, in spite of the fact that there are only two outcomes, the card is black or it is not.
 Another way to assign probabilities to experimental outcomes is by using the idea of symmetry. In the case of the die we may reason that all sides are the same and there are six sides, therefore each side gets a probability of $1/6$. In the case of flipping a coin, we assign equal probabilities to each side. We intuitively understand that the sum of the probabilities of all outcomes must be one, because one outcome must take place for each experiment. Do not confuse symmetry with lack of knowledge. The probability of all outcomes is not always the same, even if there are just two outcomes. Some people suffer from a tendency to think that if there are only two outcomes possible then "chances are 50:50." If you are asked about the probability of getting a random card that is black form a deck, you should not bet on 50:50, in spite of the fact that there are only two outcomes, the card is black or it is not.
 
 
+### Frequentist and Bayesian probability
 #### Frequentist and Bayesian probability
 
 You may be surprised to learn that there are two different schools of thought about the application of probabilities to real-world problems: Bayesian and Frequentist or classic. Both are useful and give almost identical results in many situations, but they have deep philosophical differences, and yield different interpretation of results in important cases. This course deals almost exclusively with the Frequentist approach, which is the most commonly used. Bayesian probability and thinking is introduced to make sure that students keep an open mind and are not blindsided when they encounter applications of Bayesian statistics in the future.
 
 **Probability as long-run relative frequency**: If we can imagine that an experiment or random process can be repeated under identical conditions a very large number of times, the relative frequency observed for a specific event tends to the probability of the event as the number of repetitions increases. Frequentist probability of an event is the relative frequency of the event approached as the number of experiments or trials conducted in identical conditions increases without bound. The probability of obtaining a head in a coin toss is the number of heads observed divided by the total number of tosses when the number of tosses is very, very large.
 
+**Probability as a degree of belief ** In Bayesian statistics, probability is the metric used to quantify certainty. Probability of different events and randomness refer to the information we have, not to the world. A probability of 1 means that we are certain about an event, and a probability of 0 means we are certain it will not happen. The focus of Bayesian statistics is in updating the measure of certainty by using data. As more data are collected, our uncertainty is updated accordingly. Because the focus is on certainty by people, the Bayesian probability is called "subjective" and in Bayesian statistics it is meaning ful to talk about probability distributions for parameters. Because parameters are not known, people are uncertain about them, and that uncertainty is quantified by probability functions. In Bayesian statistics, parameters are treated as random variables.
 **Probability as a degree of belief ** In Bayesian statistics, probability is the metric used to quantify certainty. Probability of different events and randomness refer to the information we have, not to the world. A probability of 1 means that we are certain about an event, and a probability of 0 means we are certain it will not happen. The focus of Bayesian statistics is in updating the measure of certainty by using data. As more data are collected, our uncertainty is updated accordingly. Because the focus is on certainty by people, the Bayesian probability is called "subjective" and in Bayesian statistics it is meaningful to talk about probability distributions for parameters. Because parameters are not known, people are uncertain about them, and that uncertainty is quantified by probability functions. In Bayesian statistics, parameters are treated as random variables.
 
 
+### Outcomes, sample space and events
 #### Outcomes, sample space and events
 
 In order to have a minimal basis for working with probabilities and to be able to make statistical statements with properly quantified probabilities we need to define the elements of a **Probability Model**. Consider the roll of a die as before. The result can be 1 or 2 or 3 or 4 or 5 or 6. The set of numbers 1 to 6, all possible outcomes of the experiment, is called **sample space** and it is represented with the Greek letter capital omega $\Omega$.
@@ -161,6 +176,7 @@ where $E_1 \cap E_2$ is the *intersection* or set of common elements for events 
 
 **B**. The probability of the experiment resulting in either of two disjoint events is the sum of the individual probabilities. For example, the probability that a die roll will results in 3 or 6 is the sum of the probability of 3 plus the probability of 6.
 
+**C**. The probability that one of the outcomes in th esample space wil take place is 1.
 **C**. The probability that one of the outcomes in the sample space will take place is 1.
 
 Amazingly, all properties of probabilities can be derived from those axioms.
@@ -208,6 +224,7 @@ Based in the model of symmetry that assigns equal probability to all cards we ca
 
 In each case, the probability equals the total number of favorable cases divided by the total number of possible cases, which is 52. P(Ace) = 4/52, P(Even) = 20/52, P(Red or Even) = P(Red) + P(Even) - P(Red and Even) = (26 + 20 - 10)/52. In the last case we subtracted Red and Even to avoid double-counting them as Red and as Even. Two difficulties may arise in trying to calculate the probabilities of these events: calculation of the total number of outcomes, calculation of the total number of favorable events. For these concepts and calculations it is useful to learn about Combinatorics and Set Theory.
 
+### Combinatorics
 #### Combinatorics
 
 This is just the most basic introduction to those aspects of combinatorics that will be used in the course. Combinatorics is the branch of mathematics that deals with counting, ordering and arranging sets of objects of elements. For example, how many different sets of 4 cards can you obtain from a deck if you draw them with and without replacement? The probability of getting any specific ordered set would be the reciprocal of such number. It turns out that the number is $52^4$ with replacement and $52! / (52 - 4)!$ without replacement. The "!" means "**factorial**" and consists of the product of all natural numbers that are equal or smaller than the number to the left of the symbol.
@@ -224,12 +241,14 @@ Thus, $52! / (52 - 4)! = 52\cdot 51 \dots 2 \cdot 1 / (48 \cdot 47 \dots 2 \cdot
 
 Consider that you have 5 objects or options, say A, B, C, D and E. These could be 5 cards, or 5 activities to choose from or anything else. For now, just think of them as 5 letters. We can make sequences of letters containing just those 5 letters. The order of the letters may or may not matter and the sequences can be made with or without replacement. If order matters we are dealing with **permutations** and if order does not matter, we are dealing with **combinations**.
 
+```{block defPermComb, type='mydef'}
 ```{block defPermComb, type='mydef', message=FALSE}
 If the sequence AB is **not** the same as BA use Permutations (order matters).
 
 If the sequence AB is the same as BA use Combinations (order does not matter).
 ```
 
+Therefore, there are four cases for getting sequences of r objects taken from a set of n. The cass and symbols used to represent their sizes are:
 Therefore, there are four cases for getting sequences of r objects taken from a set of n. The case and symbols used to represent their sizes are:
 
 - permutations without replacement $P(n,r) = P^n_r$,
@@ -331,6 +350,7 @@ P(3 aces in 3 cards) = $4/22100 = 1/5525 \approx 0.000181$
 These calculations can be performed in R with the `arrangements` package:
 
 <br>
+```{r 3aces3cards}
 ```{r 3aces3cards, message=FALSE}
 library(arrangements)
 
@@ -353,6 +373,7 @@ Number of favorable outcomes = no. ways to get 3 out of 4 aces x no. ways to get
 P(3 aces in 5 cards) = $4 \cdot 1128 / 2598960 \approx 0.001736$
 
 <br>
+```{r 3aces5cards}
 ```{r 3aces5cards, message=FALSE}
 
 (tot.outcomes <- ncombinations(k = 5, n = 52)) # total number of outcomes
@@ -363,6 +384,7 @@ fav.outcomes / tot.outcomes # probability of 3 aces
 <br>
 
 
+Combinatorics and probabilities are the core of bioinformatics. Genomes are constructed with an alphabet of 4 letters: Adenin, Guanine, Cytosine and Thymine for DNA (A, G, C and T for short). RNA uses Uracyl instead of Thymine. Sequences of bases encode amino acids. How many different amino acids can be encoded with two bases? Order matters, and the choices are with replacement, because bases can be repeated in any sequence. Therefore, $n^r = 4^2 = 16$ different amino acids could be encoded with 2-base sequences. However, life uses 20 encoded amino acids. Each one is encoded by a sequence of three bases. Three taken out of 4 with replacement can encode $4^3 = 64$ different things, which is more than necessary for amino acids. This is convenient because it allows for sequences to code other necessary signals for protein synthesis, such as "start" and "stop."
 Combinatorics and probabilities are the core of bioinformatics. Genomes are constructed with an alphabet of 4 letters: Adenine, Guanine, Cytosine and Thymine for DNA (A, G, C and T for short). RNA uses Uracil instead of Thymine. Sequences of bases encode amino acids. How many different amino acids can be encoded with two bases? Order matters, and the choices are with replacement, because bases can be repeated in any sequence. Therefore, $n^r = 4^2 = 16$ different amino acids could be encoded with 2-base sequences. However, life uses 20 encoded amino acids. Each one is encoded by a sequence of three bases. Three taken out of 4 with replacement can encode $4^3 = 64$ different things, which is more than necessary for amino acids. This is convenient because it allows for sequences to code other necessary signals for protein synthesis, such as "start" and "stop."
 
 How many different sequences of amino acids can be created with 20 different ones? Obviously, this depends on the size of the protein. One of the polypeptides that compose hemoglobin has 141 amino acid residues. With 20 options, how many different polypeptides of length 141 might be made? A lot!!
@@ -370,6 +392,7 @@ How many different sequences of amino acids can be created with 20 different one
 A core activity in bioinformatics is detecting patterns in sequences of bases and comparing those patterns. Sequences can be interpreted as resulting from random processes Markov processes.
 
 
+### Probability of two events {#Pof2Events}
 #### Probability of two events {#Pof2Events}
 
 "If my meeting finishes late OR it is raining I will not go to the game." If it rains, even if my meeting ends early, I will not go. If my meeting finishes late, even if it does not rain, I will not go. If it rains and my meeting finishes late, I will not go. This is the meaning of the inclusive logical OR statement, and it will be assumed anytime we use "or." The "exclusive" OR is rarely used. In terms of events, OR means the union of the events. Let rain be event A and meeting finishing late be event B.
@@ -397,8 +420,10 @@ knitr::include_graphics("images/GoToGame.png")
 
 Disjoint or mutually exclusive events are events that have no elements in common. For example, drawing an ace and drawing an even card. The probability of the union of disjoint events is the sum of the probabilities of each event. To calculate the number of favorable outcomes, simply sum the number of favorable outcomes in each event. There are 4 aces and 20 even cards, and 52 possible outcomes in the sample space. The probability of ace or even is 24/52. In general when we state A or B, it means that either A, B or both are true.
 
+### Conditional probability and independence
 #### Conditional probability and independence
 
+What is the probability that it will rain in Davis in a unspecified day? Given the way the question is stated, one could interpret it as the probability in a randomly chosen day. Although the probability of rain in Davis is not the same for all days of the year, the probability that it rains in a randomly selected day could be thought of as a single number. Suppose that it rained in 1350 our of the past 10,950 days. If you pick one of those days at random, the chances of picking a rainy one is 1350/10,950 = 0.123. Using a model that assumes that the proportion of rainy days remains constant in the future, we could assign a P(rainy = 0.123 to a randomly selected futire day. Obvioulsy, this is not what the weather person reports every day.
 What is the probability that it will rain in Davis in a unspecified day? Given the way the question is stated, one could interpret it as the probability in a randomly chosen day. Although the probability of rain in Davis is not the same for all days of the year, the probability that it rains in a randomly selected day could be thought of as a single number. Suppose that it rained in 1350 our of the past 10,950 days. If you pick one of those days at random, the chances of picking a rainy one is 1350/10,950 = 0.123. Using a model that assumes that the proportion of rainy days remains constant in the future, we could assign a P(rainy = 0.123 to a randomly selected future day. Obviously, this is not what the weather person reports every day.
 
 The probability of rain obviously depends on the day of the year and more importantly, on the recent weather conditions and the current pattern of circulation in the nearby atmosphere. Suppose that it is February, that it is raining today and that a mass of air with low pressure and moisture is moving through Central California. The probability of rain the following day is much greater than 0.123. It may be 0.93. Given the current conditions, the probability is no longer 0.123. We can say more generally, that probability of rain tomorrow, given that it is February, that it is raining now and that a mass mist air is passing through, is 0.93. This is a conditional probability.
@@ -430,8 +455,10 @@ $$P(E_1|E_2) = \frac{\frac{1}{6}}{\frac{2}{6}} = \frac{1}{2}$$
 
 **Independent events**
 
+We say that two events are independent if the probability of observing both events simultaneously is the product of the probabilities of each event separately. More intuitively, if two events are independent, by knowing one of them you gain no information about the other one. In other words, one event does not affect the probability of the other one. ^[Do not confuse independent event with the concepts or terms dependent and independent variables that we will use later to mean response and predictor variables.] When events are not independent the probability of one depends on the other, and thus information about wether one event has happened or "realized" gives information about the likelihood of the other event. An extreme example of lack of independence is when two events are disjoint. In tis case the dependence is perfect because if we know that one event happened, we also know that the other did not happen.
 We say that two events are independent if the probability of observing both events simultaneously is the product of the probabilities of each event separately. More intuitively, if two events are independent, by knowing one of them you gain no information about the other one. In other words, one event does not affect the probability of the other one. ^[Do not confuse independent event with the concepts or terms dependent and independent variables that we will use later to mean response and predictor variables.] When events are not independent the probability of one depends on the other, and thus information about whether one event has happened or "realized" gives information about the likelihood of the other event. An extreme example of lack of independence is when two events are disjoint. In this case the dependence is perfect because if we know that one event happened, we also know that the other did not happen.
 
+```{block indepDef, type = 'mydef'}
 ```{block indepDef, type = 'mydef', message=FALSE}
 - If the probability of observing two events equals the product of the probabilities of each event separately, the events are independent.
 ```
@@ -448,20 +475,24 @@ knitr::include_graphics("images/IndepCardsTbl.png")
 ```
 <br>
 
+The concept of partition will be useful when we consider the laws of conditional and total probability. A partition of a sample space is a set of disjoint events whose union equals the sample space. For example, the sample space of draing a card can be partitioned into red and black suits, or it can be partitioned into 4 different suits. In each case, if the subsets or events are joined the complete sample space is obtained. In Figure \@ref(fig:gameEvents) we see that the events considered are not a partition, because rain and late meeting can happen simultaneously.
 The concept of partition will be useful when we consider the laws of conditional and total probability. A partition of a sample space is a set of disjoint events whose union equals the sample space. For example, the sample space of drawing a card can be partitioned into red and black suits, or it can be partitioned into 4 different suits. In each case, if the subsets or events are joined the complete sample space is obtained. In Figure \@ref(fig:gameEvents) we see that the events considered are not a partition, because rain and late meeting can happen simultaneously.
 
 
 **Marginal probability**
 
+The table in Figure \@ref(fig:IndepEventsTbl) consists of two types of cells and probabilities: marginal and joint probabilities. The marginal probabilities of event A are in the bottom or marginal row. Ignoring event B, or regardless of B, $P(A) = 3/13$ and $P(\widetilde{A}) = 10/13$. The marginal porbabilities of event B, regardless of A, are in the righmost or marginal column: $P(B) = 1/4$ and $P(\widetilde{B}) = 3/4$. Marginal probabilities must add up to 1.
 The table in Figure \@ref(fig:IndepEventsTbl) consists of two types of cells and probabilities: marginal and joint probabilities. The marginal probabilities of event A are in the bottom or marginal row. Ignoring event B, or regardless of B, $P(A) = 3/13$ and $P(\widetilde{A}) = 10/13$. The marginal probabilities of event B, regardless of A, are in the rightmost or marginal column: $P(B) = 1/4$ and $P(\widetilde{B}) = 3/4$. Marginal probabilities must add up to 1.
 
 **Joint probability**
 
+The joint probability of two events is the probability of their intersection, the probability that both event occur simultaneously. Joint probabilities are in the body of Figure \@ref(fig:IndepEventsTbl). For example, the joint probability of A and B (hearts lower than 4) is 3/52. When the joint probability is the product of the marginal probabilities, events are indipendent.
 The joint probability of two events is the probability of their intersection, the probability that both event occur simultaneously. Joint probabilities are in the body of Figure \@ref(fig:IndepEventsTbl). For example, the joint probability of A and B (hearts lower than 4) is 3/52. When the joint probability is the product of the marginal probabilities, events are independent.
 
 
 **Dependent events**
 
+A practical example further represents lack of independence. Annual grasses have roots that are smaller than perennial grasses unless the perennial grasses are in their first year of life. Therefore, it is typically easier to uproot annual than perennial grasses. The problem is that young perennial plants also have small roots. Suppose that 10\% of the perennial grasses in a field are young, and 50\% of all the grass plants in the field are perennial. All annual grasses can be uprooted easily. The experiment we conduct is to uproot a randomly selected plant and determine if it was easy. What is the probability that the plant is annual? We are looking for the conditional probability of the plant being annual given that it was easy to uproot. In order to determine the probability, imagine that there are 1000 plants and that we uproot them all one at a time and the we identify the species to know if they are annual or perennial. We will find that in 550 cases the uprooting was easy: the 500 annual plants and the 50 young perennial plants were easy to uproot. No annual plants were hard to uproot and 450 perennial plants were hard ot uproot. The situation is represented in the following table.
 A practical example further represents lack of independence. Annual grasses have roots that are smaller than perennial grasses unless the perennial grasses are in their first year of life. Therefore, it is typically easier to uproot annual than perennial grasses. The problem is that young perennial plants also have small roots. Suppose that 10\% of the perennial grasses in a field are young, and 50\% of all the grass plants in the field are perennial. All annual grasses can be uprooted easily. The experiment we conduct is to uproot a randomly selected plant and determine if it was easy. What is the probability that the plant is annual? We are looking for the conditional probability of the plant being annual given that it was easy to uproot. In order to determine the probability, imagine that there are 1000 plants and that we uproot them all one at a time and the we identify the species to know if they are annual or perennial. We will find that in 550 cases the uprooting was easy: the 500 annual plants and the 50 young perennial plants were easy to uproot. No annual plants were hard to uproot and 450 perennial plants were hard to uproot. The situation is represented in the following table.
 
 <br>
@@ -586,6 +617,7 @@ $$P(D|+) = \frac{1.0 \cdot 0.001}{1.0 \cdot 0.001 + 0.05005 \cdot 0.999} = 0.019
 <br>
 
 
+The small probability is very counterintuitive, but it can be understood without the detailed math as [@Westbury2010] explains:
 The small probability is very counter-intuitive, but it can be understood without the detailed math as [@Westbury2010] explains:
 
 "Although the test is highly accurate, it in fact gives a correct positive result just 2\% of the time. How can this be? The answer (and the importance of Bayes Rule in diagnostic situations) lies in the highly skewed base rates of the disease. Since so few people actually have the disease, the probability of a true positive test result is very small. It is swamped by the probability of a false positive result, which is fifty times larger than the probability of a true positive result.
@@ -600,8 +632,10 @@ knitr::include_graphics("images/TestDisease.png")
 ```
 <br>
 
+The key phrase in the statement of the problem is "randomly selected person." It is important to understand that a person was randomly selected and then administered the test. Alternatively, as Westbury explains at the end, one can think of the whole population being tested. If the person is not randomly selected from the whole population, then the calculation is not correct. The base rate (prior probability of the diorder) used has to be based on the population from which the person is selected. It is reasonable to think that if the person was selected as a result of a consultation with a doctor, her base rate is probably greater than the base rate for the whole population. The reason for having a test done matters in assessing the probability of having a disease. A Bayesian approach to inference is particularly useful here and it is explained in the next subsection.
 The key phrase in the statement of the problem is "randomly selected person." It is important to understand that a person was randomly selected and then administered the test. Alternatively, as Westbury explains at the end, one can think of the whole population being tested. If the person is not randomly selected from the whole population, then the calculation is not correct. The base rate (prior probability of the disorder) used has to be based on the population from which the person is selected. It is reasonable to think that if the person was selected as a result of a consultation with a doctor, her base rate is probably greater than the base rate for the whole population. The reason for having a test done matters in assessing the probability of having a disease. A Bayesian approach to inference is particularly useful here and it is explained in the next subsection.
 
+### Bayesian data analysis
 #### Bayesian data analysis
 
 In abstract general form and for discrete events, Bayes Rule states:
@@ -629,6 +663,7 @@ P(H_{0i}|data) = \frac{P(H_{0i}) \cdot P(data|H_{0i})}{\sum_i P(data|H_{0i}) \cd
 In doing so, the Bayesian method weighs the merit for a particular hypothesis against all possible hypothesis, because it can provide posterior probabilities for all of them. Usually, hypotheses will be about values of unknown parameters, thus, in Bayesian statistics the results of a test are probabilities of values for unknown parameters, whereas in Frequentist statistics the result of a test is usually the rejection of failure to reject a single value for the unknown parameter. It is considered that the parameters is a fixed quantity that is unknown, thus, the probability of $H_0$ being true is either 1 or 0, but it is completely unknown and it is never calculated. 
 
 <br>
+```{block BayesFreq, type='think'}
 ```{block BayesFreq, type='think', message=FALSE}
 - Bayesians can calculate the probability of a hypothesis being true.
 - Frequentists NEVER calculate the probability of a hypothesis being true.
@@ -651,12 +686,15 @@ The frequentist approach does not consider the relative merit of all possible hy
 
 
 
+## de Méré's dice problem
 ### de Mere's dice problem
 
+With the rules of probability we can solve Chevalier de Méré's problem. The French nobleman and gambler Chevalier de Méré needed to know probabilities to make reasonable bets. He suspected that the probabilities of getting at least one 6 in four rolls of one die were greater than obtaining at least one double-six in 24 rolls of two dice. He also wanted to know if betting on those was "even money," meaning that the chances of winning were as good as the chances of losing.
 With the rules of probability we can solve Chevalier de Mere's problem. The French nobleman and gambler Chevalier de Mere needed to know probabilities to make reasonable bets. He suspected that the probabilities of getting at least one 6 in four rolls of one die were greater than obtaining at least one double-six in 24 rolls of two dice. He also wanted to know if betting on those was "even money," meaning that the chances of winning were as good as the chances of losing.
 
 **Four rolls of one die**
 
+Sample space for each roll is {1, 2, 3, 4, 5, 6}, with symmetry. Thus^[We use a notation that is simple and easy to understrand, but not completely formal where "$P(6)$" means "probability of getting six dots on the upper face of the die when rolling it once."], $P(6) = 1/6$, and $P(\tilde{6}) = 5/6$. There is only one way to not get a 6 in four rolls: no 6 in the first, no 6 in the second, no 6 in the third and no six in the fourth roll. Because the rolls are independendent the probability of no 6 at all is the product of the probability of no six in each roll. Using the axiom that all $P(6) + P(\tilde{6}) = 1$ we get the result.
 Sample space for each roll is {1, 2, 3, 4, 5, 6}, with symmetry. Thus^[We use a notation that is simple and easy to understand, but not completely formal where "$P(6)$" means "probability of getting six dots on the upper face of the die when rolling it once."], $P(6) = 1/6$, and $P(\tilde{6}) = 5/6$. There is only one way to not get a 6 in four rolls: no 6 in the first, no 6 in the second, no 6 in the third and no six in the fourth roll. Because the rolls are independent the probability of no 6 at all is the product of the probability of no six in each roll. Using the axiom that all $P(6) + P(\tilde{6}) = 1$ we get the result.
 
 <br>
@@ -675,10 +713,13 @@ P(\tilde{6}\tilde{6}_1 \ \cap \tilde{6} \tilde{6}_2 \dots \cap \tilde{6} \tilde{
 P(\text{at least one 66}) = 1 - (35/36)^{24} \approx 0.491404$$
 <br>
 
+The Chevalier de Méré was right in suspecting that the first probability was greater than the second, and in seeking a test of his intuition he promoted the development of the theory of probability and statistics. Blame him for having to take stats!
 The Chevalier de Mere was right in suspecting that the first probability was greater than the second, and in seeking a test of his intuition he promoted the development of the theory of probability and statistics. Blame him for having to take stats!
 
+## Next steps
 ### Next steps
 
+In this chapter we presented the concept of probability and formalized it. The rules to operate with probabilities were examined and used in simple examples of random experiments. Probabilities were assigned to outcomes and events, and the probabilities of different combinations of events were calculated. The link we established was between subsets of the sample space (events) and probabilities. Note that we used simple sample spaces and events, all of which were finite and countable. But in the real world we have to use statitics for decisions that involve infinite sets, both countable and uncountable. For example, what is the number of stars in a sector of the universe? The number is countable but can range from 0 to practically infinity. What are all the possible heights of people? Height is a real number, and it is characterized by being "dense:" the number of real numbers between any two numbers is infinite and uncountable. How do we apply probabilities to the results of measuring star density, people's height or any other quantity of interest that can take lots of values?
 In this chapter we presented the concept of probability and formalized it. The rules to operate with probabilities were examined and used in simple examples of random experiments. Probabilities were assigned to outcomes and events, and the probabilities of different combinations of events were calculated. The link we established was between subsets of the sample space (events) and probabilities. Note that we used simple sample spaces and events, all of which were finite and countable. But in the real world we have to use statistics for decisions that involve infinite sets, both countable and uncountable. For example, what is the number of stars in a sector of the universe? The number is countable but can range from 0 to practically infinity. What are all the possible heights of people? Height is a real number, and it is characterized by being "dense:" the number of real numbers between any two numbers is infinite and uncountable. How do we apply probabilities to the results of measuring star density, people's height or any other quantity of interest that can take lots of values?
 
 To complete the transition from probability to statistics, we need to learn about **random variables**, their distributions and the distributions of values obtained from samples of a population. Two things will be different:
@@ -692,6 +733,7 @@ In a way in this chapter we learned to answer the following types of questions:
 What is the probability of obtaining at least 3 heads in three coin tosses?
 What is the probability of getting three of a kind in a 5 card hand?
 
+In the next chapter we set the basis for aswering the following questions:
 In the next chapter we set the basis for answering the following questions:
 
 What is the probability of getting 7 or 11 when rolling two dice known to be loaded?
@@ -729,6 +771,7 @@ In the section [Combinatorics] we calculated the probability of getting 3 aces w
 
 Solution
 
+You get three aces in three cards only if you get ace in the first, AND you get ace in the second after getting an ace first (or GIVEN THAT you got an ace first) AND you get an ace in the third place GIVEN that you got aces in the first two places. This is the same as getting an ace from a full deck AND getting an ace from another deck with a missing ace AND getting an ace from another deck missing two aces. The three events are independent, so the probabilites are multiplied: $(4/52) \cdot (3/51) \cdot (2/50) = 1/5525$
 You get three aces in three cards only if you get ace in the first, AND you get ace in the second after getting an ace first (or GIVEN THAT you got an ace first) AND you get an ace in the third place GIVEN that you got aces in the first two places. This is the same as getting an ace from a full deck AND getting an ace from another deck with a missing ace AND getting an ace from another deck missing two aces. The three events are independent, so the probabilities are multiplied: $(4/52) \cdot (3/51) \cdot (2/50) = 1/5525$
 
 
@@ -764,32 +807,12 @@ We know that the marginal probabilities for gene presence are $P(G) = 0.10$ and 
 
 We know the conditional probabilities for resistance: $P(R|G) = 0.95$ and $P(\tilde{R}|\tilde{G}) = 0.90$.
 
-<<<<<<< HEAD
-=======
-### Exercise
-
-A plant breeder created a population of 10,000 alfalfa seedlings where 10\% of the plants have a desirable gene that gives them resistance to a fungal disease. Plants that have the gene have a 5\% chance of getting the disease when exposed to the pathogen, whereas plants that do not have the gene have a 90% probability of getting the disease.
-
-Solution
-
-To solve this problem, think that in this case the presence of the gene is analogous to the presence of the health disorder in the example presented in section about [Bayes Rule]. The result to being exposed to the disease is equivalent to the test for the disorder.
-
-- Make a table with the expected proportion of plants in each category of presence of gene and resistance to pathogen. This table makes it really easy to read the conditional probabilities directly from the table.
-
-We know that the marginal probabilities for gene presence are $P(G) = 0.10$ and $P(\tilde{G}) = 0.90$.
-
-We know the conditional probabilities for resistance: $P(R|G) = 0.95$ and $P(\tilde{R}|\tilde{G}) = 0.90$.
-
->>>>>>> EAL11Oct18
 Out of the 10\% that have the gene, 95\% is resistant. Thus, a 0.95 * 0.10 of the plants have the gene and are resistant.
 
 - What is the probability that a randomly selected plant will be resistant?
 
 - Plants are randomly selected and exposed to the disease until a collection of 100 resistant plants is obtained. What proportion of these plants is expected to have the resistant gene?
-<<<<<<< HEAD
-=======
 
->>>>>>> EAL11Oct18
 
 
 ## Homework
@@ -904,13 +927,16 @@ Use the table for cattle temperature above.
 
 ### Outcomes and events [Not assigned]
 
+Consider the three-door game described in [Chapter 1](#LearnStats). If the player chooses first the door with the car, the host will open one of the other two doors with equal probability. If the player picks a door with a goat, the host will open the other door with a goat with probability 1. List all possible sequences of outcomes of the whole process. Assume that all outcomes have equal probability at each step and calculate the following probabilites:
 Consider the three-door game described in [Chapter 1](#LearnStats). If the player chooses first the door with the car, the host will open one of the other two doors with equal probability. If the player picks a door with a goat, the host will open the other door with a goat with probability 1. List all possible sequences of outcomes of the whole process. Assume that all outcomes have equal probability at each step and calculate the following probabilities:
 
 - Probability of getting the car when switching doors.
 - Probability of getting the car when not switching door.
 
+To facilitate the representation of outcomes, use the following sequence of letters: door with car - door selected - door shown with goat - final door chosen. The following code generates all possible sequences of outcomes. Keep in mind that the probability of the door selected by the host depends on the door selected by game player and the door behing which the car is. If the player selected door A and the car is in door B, then the host will select door C with probability equal to 1.0. In that case, the sequence of probabilities would be 1/3, 1/3, 1. This is in contrast with a sequence in which the player selects door A, the car is in door A and the host selects door B. In this case the sequence of probabilities is 1/3, 1/3, 1/2
 To facilitate the representation of outcomes, use the following sequence of letters: door with car - door selected - door shown with goat - final door chosen. The following code generates all possible sequences of outcomes. Keep in mind that the probability of the door selected by the host depends on the door selected by game player and the door behind which the car is. If the player selected door A and the car is in door B, then the host will select door C with probability equal to 1.0. In that case, the sequence of probabilities would be 1/3, 1/3, 1. This is in contrast with a sequence in which the player selects door A, the car is in door A and the host selects door B. In this case the sequence of probabilities is 1/3, 1/3, 1/2
 
+```{r}
 ```{r, message=FALSE}
 
 # Create all posible sequences, regardless of feasibility
@@ -945,14 +971,10 @@ xtabs(~ switch + result, carOrGoat)
 carOrGoat[with(carOrGoat, order(carDoor, choice1, goatShown, switch, finalDoor)), ]
 
 ```
-<<<<<<< HEAD
-```{r, echo=FALSE, include=FALSE, message=FALSE}
-=======
 
 
 
 ```{r, echo=FALSE, include=FALSE}
->>>>>>> EAL11Oct18
 
 # Assignment of probabilities
 
@@ -1030,7 +1052,6 @@ library(arrangements)
 
 
 
-<<<<<<< HEAD
 ### Tagged fish recapture [10]^[This is the Hypergrometric distribution]
 
 A manager needs to estimate the population of trout in small Sierra Nevada lake. She catches 10 trout, tags them and releasese them back into the lake. After trout return to normal, the manager returns to the lake and catches 7 trout. She does not release the trout until she is done with the catching and counting. What is the probability of getting 2 tagged out of 7 trout if the lake has a total of 50, including the 10 marked ones?
@@ -1049,10 +1070,7 @@ Based on these results, what should be the manager's guess of the total number o
 
 
 
-### Probability of one-card events [10]
-=======
 ### Probability of one-card events [20]
->>>>>>> EAL11Oct18
 
 Use the `prob` package [@Kerns2018] to perform the following calculations. Corroborate your results using basic calculations instead of the high-level R functions.
 
@@ -1105,11 +1123,7 @@ Calculate P(Odd), P(BetterThan7), P(BetterThan7 & Odd), P(BetterThan7 OR Odd), P
 Are the events Odd and BetterThan7 independent? Why?
 
 
-<<<<<<< HEAD
-### Rolling the dice [10 points]
-=======
 ### Rolling the dice [20 points]
->>>>>>> EAL11Oct18
 
 A random experiment consists of rolling a die three times.
 
@@ -1142,11 +1156,7 @@ Prob(TwoThreeNoOrder) # 30/216
 <br>
 
 
-<<<<<<< HEAD
-### Conditional probability, independence and Bayes' rule. [20]
-=======
 ### Conditional probability, independence and Bayes' rule. [30]
->>>>>>> EAL11Oct18
 
 A very large sample of deer mice were tested for presence of a genetic marker and Hantavirus. The total proportion of mice with Hantavirus (H) is 0.17, whereas 63% of the mice carry the genetic marker (M). Five percent of the mice carried the marker and were positive for Hantavirus (H M). 
 
@@ -1334,8 +1344,6 @@ max(c(guesses)[which(dpois(x = 0, lambda = guesses) >= 0.95)])/s
 ```
 <br>
 
-<<<<<<< HEAD
-=======
 
 ### Optional if you are interested in mark-recapture.
 
@@ -1360,7 +1368,6 @@ Based on these results, what should be the manager's guess of the total number o
 
 
 ## Next Year we will move these sections to Lab 03
->>>>>>> EAL11Oct18
 ### Normal distribution. [10]
 
 Plot three normal distributions on the same axes. One with mean 0 and variance 1, one with mean 0 and variance 2 and one with mean 1 and variance 1. Describe the effects of mean and variance on the shape and location of the curve.
@@ -1442,11 +1449,7 @@ tTable <- matrix(nrow = length(df), ncol = length(p.values))
 
 for (i in 1:36) {
    for (j in 1:6) {
-<<<<<<< HEAD
-      tTable[i, j] <- qt(p = p.values[j], df = df[i])
-=======
       tTable[i, j] <- qt(p = p.values[j], df = df[i], lower.tail = FALSE)
->>>>>>> EAL11Oct18
    }
 }
 

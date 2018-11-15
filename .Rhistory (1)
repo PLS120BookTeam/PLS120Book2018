@@ -1,4 +1,144 @@
-<<<<<<< HEAD
+arrows(x0 = 3.5, x1 = 7.5, y0 = 7.5, y1 = 7.5, code = 0, lwd = 2, lty = 2)
+text(4.5, 8, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(3.2, 5.75, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4, 0.35, expression(Y == beta[0] + beta[1]*X), cex = 2, col = "blue")
+library(shape)
+Arrows(3.5, 1.0, 3.1, 2.8, lwd = 1.5, col = "blue")
+text(2.5, 8,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+points(11.03, 8.674, pch = 20)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,10),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6.03, 6.03), y = c(8.674, 11.03), col = "red", lty = 3, lwd = 2)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,15), ylim = c(0,15),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,15),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6.03, 6.03), y = c(8.674, 11.03), col = "red", lty = 3, lwd = 2)
+lines(x = c(6.03, 6.03), y = c(8.674, 11.03), col = "red", lty = 3, lwd = 2)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 3, lwd = 2)
+points(6, 10.4, pch = 20)
+points(6, 8, pch = 20)
+text(7, 4, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 3.5, y0 = 3.5, y1 = 7.5, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 1, y0 = 5.9, x1 = 3, y1 = 7.7, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 1, y0 = 5.9, x1 = 3, y1 = 3, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 1, y0 = 5.9, x1 = 3, y1 = 5.9, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.5, 7, expression(Y == beta[0] + beta[1]*X), cex = 2, col = "blue")
+text(3.2, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.5, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(2.5, 4.5,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(4.5, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 13, expression(Y == beta[0] + beta[1]*X == 5 + 0.9 * X), cex = 2, col = "blue")
+text(2, 13, expression(Y == beta[0] + beta[1]*X = 5 + 0.9 * X), cex = 2, col = "blue")
+text(2, 13, expression(Y == beta[0] + beta[1]*X), cex = 2, col = "blue")
+text(2, 13, expression(Y == 5 + 0.9*X), cex = 2, col = "blue")
+text(2, 14, expression(Y == beta[0] + beta[1]*X =), cex = 2, col = "blue")
+text(2, 14, expression(Y == beta[0] + beta[1]*X ==), cex = 2, col = "blue")
+text(2, 14, paste(expression(Y == beta[0] + beta[1]*X), " = 5 + 0.9 * X"), cex = 2, col = "blue")
+text(2, 14, paste(expression(Y == beta[0] + beta[1]*X), cex = 2, col = "blue")
+########make a figure and label it slr#####
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 15, expression(Y == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 11, expression(Y == 5 + 0.9*X), cex = 1.7, col = "blue")
+library(shape)
+Arrows(3.5, 1.0, 3.1, 2.8, lwd = 1.5, col = "blue")
+text(2, 14, expression(Y == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 12, expression(Y == 5 + 0.9*X), cex = 1.7, col = "blue")
+########make a figure and label it slr#####
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, expression(Y == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 12.5, expression(Y == 5 + 0.9*X), cex = 1.6, col = "blue")
+text(2, 14, expression(E{Y|X} == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 14, expression(E\{Y|X\} == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 14, expression(mu[Y|X] == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+text(2, 14, expression(mu[Y|X] == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 14, expression(mu[Y,X] == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+text(2, 14, expression(mu[Y,X] == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 14, expression(mu[Y]|[X] == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+text(2, 14, expression(mu[YX] == beta[0] + beta[1]*X), cex = 1.7, col = "blue")
+########make a figure and label it slr#####
 z1 = xyz.tips[, 3],
 xlim = c(0, 10),
 ylim = c(0, 10),
@@ -200,7 +340,6 @@ sumry.by.temp
 pander(sumry.by.temp)
 class(sumry.by.temp)
 str(sumry.by.temp)
->>>>>>> EAL18Sep18
 bookdown:::serve_book()
 servr::daemon_stop("4559906504")
 pander(freq.table) # format the table a little better
@@ -511,7 +650,6 @@ to = 3.5,
 lwd = 2,
 xlab = "Y",
 ylab = "")
-=======
 lwd = 2.5,
 xlab = "",
 ylab = "")
@@ -673,163 +811,378 @@ labels = "Reject equality of variances", col = "red")
 qf(0.95, df1 = df1, df2 = df2)
 lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
 library(latex2exp)
-text(y = 0.20, x = 2.85, pos = 4,
-labels = unname(TeX("$\alpha/2")), col = "blue")
-text(y = 0.20, x = 2.85, pos = 4,
-labels = unname(TeX("$\alpha/2$")), col = "blue")
-text(y = 0.20, x = 2.85, pos = 4,
-labels = unname(TeX("$\alpha/2")), col = "blue")
-# Add the shaded area.
-cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
-seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-qf(0.95, df1 = df1, df2 = df2))
-cord.y <- c(0,
-df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-df1 = df1, df2 = df2), 0)
-polygon(cord.x, cord.y, col = "skyblue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-add = TRUE,
-ylim = c(-0.05, 0.9))
-text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
-labels = "Reject equality of variances", col = "red")
-lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+text(2, 14, TeX(\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}), cex = 1.7, col = "blue")
+text(2, 14, labels =TeX(\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}), cex = 1.7, col = "blue")
+plot(TeX(\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}))
+text(2, 14, labels =TeX("\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}""), cex = 1.7, col = "blue")
+plot(TeX("\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}"))
+text(2, 14, labels =TeX("\mu_{Y|X} = \beta_0 + \beta_1 \times{X}"), cex = 1.7, col = "blue")
+text(2, 14, labels =TeX("\\mu_{Y|X} = \beta_0 + \beta_1 \times{X}"), cex = 1.7, col = "blue")
+text(2, 14, labels =TeX("\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}"), cex = 1.7, col = "blue")
+plot(TeX("\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}"), cex = 1.7, col = "blue"))
+plot(TeX("\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}"))
+plot(TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}$"))
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}$"), cex = 1.7, col = "blue")
+########make a figure and label it slr#####
 library(latex2exp)
-text(y = 0.20, x = 2.85, pos = 4,
-labels = unname(TeX("$\alpha/2")), col = "blue")
-### F()
-df1 <- 15
-df2 <- 15
-# Two tails on the right
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-ylim = c(-0.05, 0.9))
-abline(h = 0)
-# Add the shaded area.
-cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
-seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-qf(0.95, df1 = df1, df2 = df2))
-cord.y <- c(0,
-df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-df1 = df1, df2 = df2), 0)
-polygon(cord.x, cord.y, col = "skyblue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-add = TRUE,
-ylim = c(-0.05, 0.9))
-text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
-labels = "Reject equality of variances", col = "red")
-lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(shape)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times{X}$"), cex = 1.7, col = "blue")
+text(2, 12.5, expression(Y == 5 + 0.9*X), cex = 1.6, col = "blue")
+Arrows(3.5, 1.0, 3.1, 2.8, lwd = 1.5, col = "blue")
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 \\times X$"), cex = 1.7, col = "blue")
+########make a figure and label it slr#####
 library(latex2exp)
-text(y = 0.20, x = 2.85, pos = 4,
-labels = unname(TeX("$\alpha/2")), col = "blue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-ylim = c(-0.05, 0.9))
-abline(h = 0)
-# Add the shaded area.
-cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
-seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-qf(0.95, df1 = df1, df2 = df2))
-cord.y <- c(0,
-df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-df1 = df1, df2 = df2), 0)
-polygon(cord.x, cord.y, col = "skyblue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-add = TRUE,
-ylim = c(-0.05, 0.9))
-text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
-labels = "Reject equality of variances", col = "red")
-lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(shape)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 \\ X$"), cex = 1.7, col = "blue")
+text(2, 12.5, expression(Y == 5 + 0.9*X), cex = 1.6, col = "blue")
+Arrows(3.5, 1.0, 3.1, 2.8, lwd = 1.5, col = "blue")
+Arrows(2, 12, 3, 7.75, lwd = 1.5, col = "blue")
+Arrows(2, 111.7, 3, 7.85, lwd = 1.5, col = "blue")
+Arrows(2, 11.7, 3, 7.85, lwd = 1.5, col = "blue")
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, expression(Y == 5 + 0.9*X), cex = 1.6, col = "blue")
+Arrows(2, 11.7, 3, 7.85, lwd = 1.5, col = "blue")
+Arrows(2, 11.7, 3, 7.95, lwd = 1.5, col = "blue")
+Arrows(2, 11.7, 3, 8, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
 library(latex2exp)
-text(y = 0.20, x = 2.85, pos = 4,
-labels = TeX("$\alpha/2"), col = "blue")
-text(y = 0.20, x = 2.85, pos = 4,
-labels = TeX("\alpha/2"), col = "blue")
-# Two tails on the right
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-ylim = c(-0.05, 0.9))
-abline(h = 0)
-# Add the shaded area.
-cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
-seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-qf(0.95, df1 = df1, df2 = df2))
-cord.y <- c(0,
-df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-df1 = df1, df2 = df2), 0)
-polygon(cord.x, cord.y, col = "skyblue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-add = TRUE,
-ylim = c(-0.05, 0.9))
-text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
-labels = "Reject equality of variances", col = "red")
-lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(shape)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, expression(Y == 5 + 0.9*X), cex = 1.6, col = "blue")
+Arrows(2, 11.7, 3, 8, lwd = 1.5, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
 library(latex2exp)
-text(y = 0.20, x = 2.85, pos = 4,
-labels = TeX("$\\alpha/2"), col = "blue")
-text(y = 0.20, x = 2.85, pos = 4,
-labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
-text(y = 0.19, x = 2.80, pos = 4,
-labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-ylim = c(-0.05, 0.9))
-abline(h = 0)
-# Add the shaded area.
-cord.x <- c(qf(0.95, df1 = df1, df2 = df2),
-seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-qf(0.95, df1 = df1, df2 = df2))
-cord.y <- c(0,
-df(seq(qf(0.95, df1 = df1, df2 = df2), 5, 0.02),
-df1 = df1, df2 = df2), 0)
-polygon(cord.x, cord.y, col = "skyblue")
-curve(df(x, df1 = df1, df2 = df2),
-from = 0,
-to = 5,
-lwd = 2.5,
-xlab = "",
-ylab = "",
-add = TRUE,
-ylim = c(-0.05, 0.9))
-text(y = -0.04, x = qf(0.95, df1 = df1, df2 = df2), pos = 4,
-labels = "Reject equality of variances", col = "red")
-lines(x = c(2.5, 2.8), y = c(0.03, 0.20))
+library(shape)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = expression(Y[i] - Y == epsilon[i]),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, expression(Y == 5 + 0.9*X), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+text(7, 9, labels = TeX("$\\mu_{Y|X} - Y-i = \\epsilon_i$"),cex = 1.5, col = "red")
+########make a figure and label it slr#####
 library(latex2exp)
+<<<<<<< HEAD
+library(shape)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1.75,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7, 9, labels = TeX("$\\mu_{Y|X} - Y-i = \\epsilon_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:1000/100
+Y <- 5 + 0.9 * x +rnorm(1000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:10000/100
+Y <- 5 + 0.9 * x +rnorm(10000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:10000/1000
+Y <- 5 + 0.9 * x +rnorm(10000)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:10000/1000
+Y <- 5 + 0.9 * x +rnorm(10000, sd = 2)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+Y <- 5 + 0.9 * x +rnorm(10000, sd = 0.9)
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:10000/1000
+Y <- 5 + 0.9 * x +rnorm(10000, sd = 0.9)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+Y <- 5 + 0.9 * x +rnorm(5000, sd = 1.4)
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:5000/1000
+Y <- 5 + 0.9 * x +rnorm(5000, sd = 1.4)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:5000/500
+Y <- 5 + 0.9 * x +rnorm(5000, sd = 1.4)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+########make a figure and label it slr#####
+library(latex2exp)
+library(shape)
+set.seed(400)
+x <- 1:5000/500
+Y <- 5 + 0.9 * x +rnorm(5000, sd = 1)
+plot(x, Y, pch = ".", # xaxt = "n", yaxt = "n",
+xlab = "X", ylab = "Y",
+xlim = c(0,10), ylim = c(0,17),
+bty = "l", cex.lab = 1.5, cex = 1,
+main = "Population line and X-Y values")
+lines(x = c(6, 6), y = c(8, 10.4), col = "red", lty = 1, lwd = 2)
+points(6, 8, pch = 20)
+lines(0:10, 5 + 0.9 * 0:10, lwd = 2, col = "blue")
+text(7.5, 9, labels = TeX("$\\epsilon_i = \\mu_{Y|X} - Y_i$"),cex = 1.5, col = "red")
+arrows(x0 = 0.5, y0 = 5.45, x1 = 4, y1 = 5.45, code = 0, lwd = 2, lty = 2)
+arrows(x0 = 4, x1 = 4, y0 = 5.45, y1 = 8.6, code = 0, lwd = 2, lty = 2)
+text(2.5, 4.5, labels = expression(paste(Delta,"X")), cex = 1.5)
+text(4.3, 7, labels = expression(paste(Delta,"Y")), cex = 1.5)
+text(4.2, 4,expression(beta[1] == over(Delta*Y,Delta*X)), cex = 1.5)
+text(2, 14, labels =TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1 X$"), cex = 1.7, col = "blue")
+text(2, 12.5, TeX("$\\mu_{Y|X} = 5 + 9 X$"), cex = 1.6, col = "blue")
+Arrows(2.2, 11.7, 3, 8.1, lwd = 1.5, col = "blue")
+rice <- read.csv("./Datasets/rainYield.csv")
+rice
+rice <- read.csv("./Datasets/rainYield.csv")
+rice
+plot(rice$rain.mm, rice$yield.kg.ha, xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+rice <- read.csv("Datasets/rainYield.csv")
+plot(rice$rain.mm, rice$yield.kg.ha, xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+plot(rice$rain.mm, rice$yield.kg.ha, xlab = "Annual rainfall", ylab = "Rice crop yield (kg/ha)", cex.lab = 1.5, cex = 1.25)
+lines(lm(yield.kg.ha ~ rain.mm, rice))
+abline(lm(yield.kg.ha ~ rain.mm, rice))
+set.seed(400)
+x <- 0:10
+Y <- x +rnorm(10)
+plot(x, Y,  pch = 20, xaxt = "n", yaxt = "n", xlab = "X", ylab = "Y", xlim = c(0,10), ylim = c(0,10), bty = "l")
+lines(0:10, 0:10, lwd = 2)
+slopes <- seq(0, 1, .20)
+b0 <- sort(seq(0,5, 1), decreasing = T)
+for(i in 1:6){
+y <-  b0[i] + x*slopes[i]
+lines(0:10, y, lty = 3, lwd = 1.5)
+}
+?lm
+=======
 text(y = 0.19, x = 2.80, pos = 4,
 labels = TeX("$\\frac{\\alpha}{2}"), col = "blue")
 bean.yield <- data.frame(
@@ -1025,3 +1378,4 @@ transg.aa.m1 <- lm(wgain ~ variety, data = aaAnovaExmpl1.dat)
 summary(transg.aa.m1)
 anova(transg.aa.m1)
 >>>>>>> EAL11Oct18
+>>>>>>> master

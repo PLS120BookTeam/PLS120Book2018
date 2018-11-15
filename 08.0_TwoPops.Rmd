@@ -74,7 +74,6 @@ We have learned in the previous chapters how to determine if the mean of a popul
 
 5. Calculate the standard error of the difference $S_{\bar{d}}$ between the two samples accordingly. 
 
-6. Calculate the t-statistic using the calculated $\bar{d}$ and $s_{\bar{d}}$
 
 7. Compare the calculated t-statistic to the critical t-value, and decide whether to reject or fail to reject the null hypothesis
 ```
@@ -184,8 +183,6 @@ Population variances are estimated with the sample variances, $S^2_i$, for each 
 <br>
 
 $$S^2_i = \frac{\sum (Y_{ij} - \bar{Y}_i)^2}{r_i - 1}$$
-
-<br>
 
 <br>
 
@@ -370,6 +367,7 @@ The decision rule is as before, for a single population when variance was unknow
 ### Bean Drought Example: independent observations, equal variances
 
 Below is data collected on common bean plots that were randomly assigned to two different irrigation treatments: drought and normal irrigation. Yield data was collected from these plots and recorded in the table below. 
+<br>
 
 <br>
 
@@ -509,7 +507,6 @@ The purpose of an F-test is to determine if the population variances are differe
 
 The calculated F-value is simply the ratio of the larger sample variance divided by the smaller sample variance, so the critical F value will always be in the right tail. The test should be performed with $\alpha$ equal to 0.05 or 0.10 to have greater power.
 
-<br> 
 
 <br>
 
@@ -528,9 +525,12 @@ Next, compare the calculated F-value, $F_{calc}$, to the critical F-values, $F_{
 
 <br>
 
+```{r}
 ```{r, message=FALSE}
 
 # calculation of F-critical value using alpha = 0.10 /2 since the F-test is two-tailed
+p <- 0.10/2
+Fcrit.upper <- qf(p, r1-1, r2-1, lower.tail = FALSE)
 p <- 0.10 / 2
 Fcrit.upper <- qf(p, r1 - 1, r2 - 1, lower.tail = FALSE)
 
@@ -598,21 +598,20 @@ $$df = 2(r-1) = 6$$
 
 <br>
 
-$$df = 2(r-1) = 6$$
-<br> 
-
 ```{r}
 
 # since r1 = r2 = 4, we can just use r = 4 for continued calculations
 r <- length(bean.yield$yield)
 
 # the degrees of freedom are calculated as
+df <- 2 * (r -1 )
 df <- 2 * (r - 1 )
 
 ```
 
 **Standard Error of the Difference**
 
+The standard error of the difference is calculated using the pooled variance $S^2$ and our sample size $r$, where $r_1 = r_2 = r$
 The standard error of the difference is calculated using the pooled variance $s^2$ and our sample size $r$, where $r_1 = r_2 = r$
 
 <br> 
@@ -659,6 +658,7 @@ $$t_{calc} = \frac{\bar{d} - \mu_{\bar{d}}}{S_{\bar{d}}} = \frac{2125 - 0}{236.6
 ```{r}
 # calculate the t-statistic by subtracting our hypothesized mean which is 0
 # from the average difference and dividing by the standard error of the difference
+t.calc <- ( dbar - 0 ) / se.dbar
 t.calc <- (dbar - 0 ) / se.dbar
 
 #a quicker method to calculate the t-statistic 
@@ -679,6 +679,7 @@ Since $t_{calc} = 9.33 > t_{crit} = 2.447$, we reject the null hypothesis that t
 
 <br>
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 y <- seq(-6,10, 0.25)
 pfd <- dt(y, df = 6, ncp = 0)
@@ -695,8 +696,10 @@ plot(y, pfd,
 abline(v = criticalt1, 
     col = "chartreuse3", 
     lty = 3)
+abline(v=criticalt2,
 abline(v = criticalt2,
     col = "chartreuse3",
+    lty =3)
     lty = 3)
 points(8.98, 0.0001, pch = 4, col = "cornflowerblue")
 text(8.98, 0.03, "t-calc", col = "cornflowerblue") 
@@ -863,6 +866,7 @@ Table: (\#tab:BeanDrought) Common bean yield (kg/ha) is measured under drought t
 
 <br>
 
+```{r}
 ```{r BeanDroughtPaired, message =FALSE, echo = FALSE}
 bean.paired <- data.frame(
  "variety" = c("var1", "var2", "var3", "var4"), 
@@ -898,6 +902,7 @@ $$\mu_1 \neq \mu_2 \quad \text{or} \quad \mu_{\bar{d}} \neq 0$$
 ### Calculating Sample Averages and the Average of the Difference
 
 
+For paired samples, it is not necessary to calculate sample averages since we will directly calculate the difference of each experimental unit (each variety) between the two treatments as the average of the difference
 For paired samples, we take the difference of each experimental unit (i.e., each variety) between the two treatments, then take the average of the differences.
 
 <br>
@@ -928,6 +933,7 @@ r.pair <- length(bean.paired$variety)
 
 ### Calculating the Variance of the Difference
 
+We do not need to calculate individual sample variances since we will directly calculate the variance of the differences between the treatments for each variety
 We do not need to calculate individual sample variances, since we will directly calculate the variance of the paired differences:
 
 <br>
@@ -951,7 +957,6 @@ var(bean.paired$d_i)
 
 ### Calculating the Standard Error of the Difference
 
-The standard error of the difference is calculated using the variance of the differences $s^2_d$ and our sample size $r$
 
 
 <br>
@@ -1021,6 +1026,10 @@ fd <- dt(z, df = 3, ncp = 0)
 plot(z, fd, 
    type = "l",
    xlab = "", ylab = "")
+criticalt3 <- qt(p = 1 - 0.025, 
+        df = 3)
+criticalt4 <- qt(p = 0.025, 
+        df = 3)
 
 criticalt3 <- qt(p = 1 - 0.025, df = 3)
 
@@ -1033,11 +1042,10 @@ plot(z, fd,
 abline(v = criticalt3, 
     col = "chartreuse3", 
     lty = 3)
+abline(v=criticalt4,
 
 abline(v = criticalt4,
     col = "chartreuse3",
-    lty = 3)
-
 points(18.47, 0.0001, pch = 4, col = "cornflowerblue")
 text(18.47, 0.03, "t-calc", col = "cornflowerblue") 
 text(-6,0.35, "lower t-crit", col = "chartreuse3")
@@ -1051,6 +1059,7 @@ text(10,0.025, "reject H0")
 
 
 
+## Exercises
 ## Exercises {#Ex8}
 
 1. Another three samples have been submitted from the irrigation study on common bean; two samples for the irrigated treatment, and one sample for the drought treatment 
@@ -1113,11 +1122,11 @@ What is the 95% confidence interval of the difference between the sample average
 
 
 
+## Homework : Two Population Means
 ## Homework : Two Population Means {#Hwk8}
 
 ### Walking Spiders
 
-@wilder2004 examined the effect of praying mantis excrement on the behavior of wolf spiders to test whether cues from an introduced predator (the praying mantis) would change the movement rate of the native wolf spider. They put 15 wolf spiders in individual containers; inside each container there were two semicircles of filter paper. One semicircle was smeared with praying mantis excrement and one circle was without excrement. The researchers observed each spider for one hour and calculated spider mean walking speed while it moved across the excrement circle and the non-excrement circle. (Each of the 15 spiders was exposed to both treatments). Data were modified for the purpose of homework and are not the original true data.			
 
 ```{r}
 
@@ -1174,7 +1183,6 @@ Table: (\#tab:WalkingSpiders) The mean walking speed of 15 wolf spiders inside a
 
 ### Rat Life
 
-@carlson1946 looked at the average lifespan of a rats based on gender. Below is lifespan (days) data from 14 male and 14 female rats, you may assume rat lifespan is distributed normally. Data were modified and are not the original true data. Assume variances are the same for males and females.	
 ```{r}
 
 rat.life <- data.frame(
@@ -1232,9 +1240,7 @@ Test the hypothesis that lifespan does not differ between sexes.
 
 
 
-## Laboratory Exercises  
 
-### Plant Sciences {#Lab8PLS}
 
 **Submit BOTH files for your lab report using the appropriate Canvas tool**
 
@@ -1271,24 +1277,18 @@ seedMassP <- c(4.9, 4.17, 4.47, 6.3, 4.52, 4.81,
                4.27, 5.17, 4.93, 3.51, 5.11,
                5.38, 5.1, 3.2, 4.8, 4.17, 5.01,
                3.95, 5.62, 5.44, 3.7, 4.08, 4.36,
-               4.68, 4.24)
 
 (varA <- var(seedMassA))
 
 (varP <- var(seedMassP))
 
-# R function that does the complete test
-var.test(seedMassA, seedMassP) 
 
-(Fcalc <-              )
 
 (r1 <- length(seedMassA))
 
-(r2 <- length(         ))
 
 (df1 <- r1 - 1)
 
-(df2 <-       )
 
 alpha <- 0.05
 
@@ -1314,20 +1314,14 @@ a. Based on the results of the test of equality of variances, determine what cas
 b. Perform a t-test of the null hypothesis that the mass per seed does not differ between plants grown in annual or perennial grass plots. Perform all calculations "by hand" and compare to the results from using the t.test() function.
 
 
-```{r, eval=FALSE}
 
 (varAP <- (df1 * varA + df2 * varP) / (df1 + df2))
 
-varDbar <- varAP / r1 + 
 
-(tcalc <- (mean(seedMassA) - mean(seedMassP)) /              )
 
-(ttable <- qt(alpha / 2, df =          , lower.tail = FALSE)) # test is two-tailed
 
 (CI.lo <- (mean(seedMassA) - mean(seedMassP)) - ttable * sqrt(varDbar))
-(CI.hi <-                                                            )
 
-(t.test.1 <- t.test(seedMassA, seedMassP, alternative = "two.sided", paired =      , var.equal =     )) # complete code
 
 ```
 
@@ -1344,7 +1338,6 @@ ANSWER. State the extremes of the confidence interval and interpret the result o
 Twelve plants were used in an experiment to study the effectiveness of using praying mantises to control aphid populations. Aphid density was measured before and after the addition of a mantis to the plant. Perform a test to determine if the mantis reduces aphid density. (Note that these are fictitious data and that the experimental design is simplified for teaching purposes. A real experiment should include a series of control plants to make sure that the potential change in aphid density is not due to other uncontrolled causes besides the addition of the mantis).
 
 
-```{r, eval=FALSE}
 
 aphids <- read.csv("Datasets/Aphids.txt", header = TRUE)
 
@@ -1352,17 +1345,14 @@ before <- aphids$before
 
 after <- aphids$after
 
-(t.test.2 <- t.test(before, after, alternative = "greater", paired =       )) # complete code
 
 # repeat the test using "hand" calculations as in part 2 above. 
-# Add lines of code below.
 
 d <- after - before
 
-var.d <- 
 
-se.d.bar <- sqrt(var.d /            )
 
+# since the denominator (r) represents the number of pairs, and the number of individuals in the "before"" population is the sample as the number of individuals in the "after" population, you could also use the code se.d.bar <- sqrt(var.d / length(after))
 # since the denominator (r) represents the number of pairs, 
 # and the number of individuals in the "before"" population is the same 
 # as the number of individuals in the "after" population, 
@@ -1431,7 +1421,6 @@ Answer here:
 
 
 
-### Animal Sciences {#Lab8ANS}
 
 **Submit BOTH files for your lab report using the appropriate Canvas tool**
 
@@ -1447,7 +1436,6 @@ Does the variance of milk production differ between the two herds (Herd1 vs. Her
 
 Complete the calculations "by hand", using only basic R functions like var(). Then, use the var.test () R function to test for difference of variances.
 
-```{r,eval=FALSE}
 
 library(readxl)
 MilkData <- read.csv("Datasets/MilkEx5_data.csv")
@@ -1459,32 +1447,24 @@ milkherd2 <- herd2$TOTmilk
 
 ## Test for the difference of variances "by hand"
 
-# calculate the variance for each treatment (Herd1 and Herd2)
 (var1 <- var(milkherd1))
-(var2 <-               ) #complete code
 
-# calculate the F-value for our treatments (the larger variance will always be the numerator)
-(Fcalc <-              ) # complete code
 
-# number of samples in each treatment
 (r1 <- length(milkherd1))
-(r2 <-                  ) #complete code
 
-# degrees of freedom: number of samples - 1
 (df1 <- r1 - 1)
 (df2 <- r2 - 1)
 
 alpha <- 0.05
 
-# calculate the critical F-value (for our given alpha and degrees of freedom)
 (Ftable <- qf(alpha, df1, df2, lower.tail = FALSE))
 
 # Calculate the p-value of our treatment variances being equal 
-# (the probability is multiplied by 2 because the test is two-tailed)
 # complete the code to get the observed significance
 (p.of.Fcalc <- 2 * pf(Fcalc, df1, df2, lower.tail = FALSE)) 
 
 
+##R function that does the complete test
 ## R function that does the complete test
 var.test(milkherd1, milkherd2) 
 ```
@@ -1505,24 +1485,13 @@ a. Based on the results of the test of equality of variances, determine what cas
 b. Perform a t-test of the null hypothesis that milk production does not differ between diary cows from Herd1 and Herd2. Perform all calculations "by hand" and compare to the results from using the t.test() function.
 
 
-```{r,eval=FALSE}
-# Calculate the pooled variance of Herd1 and Herd2
 (var12 <- (df1 * var1 + df2 * var2) / (df1 + df2))
 
-# Calculate the difference in variances between Herd1 and Herd2
 varDbar <- var12 / r1 + var12 / r2
 
-# calculate the t-value for our treatments (Herd1 and Herd2)
-(tcalc <- (mean(milkherd2) - mean(milkherd1)) /               ) #complete code
 
-# calculate the critical t-value (for our given alpha and degrees of freedom) 
-# complete code
-(ttable <- qt(alpha / 2, df =           ,  lower.tail = FALSE)) # test is two-tailed
 
-# calculate the bounds of the critical intervals
-# for the difference between our two treatments
 (CI.lo <- (mean(milkherd1) - mean(milkherd2)) - ttable * sqrt(varDbar))
-(CI.hi <-                                                              ) #complete code
 
 
 (t.test.herd <- t.test(milkherd1, milkherd2, alternative = "two.sided", paired = FALSE, var.equal = TRUE)) # complete code
@@ -1542,24 +1511,20 @@ ANSWER. State the extremes of the confidence interval and interpret the result o
 Milk production was measured in the morning (AM) and again in the evening (PM). Perform a test to determine if there is a difference in milk production between the AM and PM. (Note that this is a paired t-test since the same sample of cows is being milk at two separate times).
 
 
-```{r,eval=FALSE}
 milkAM <- MilkData$AMmilk
 
 milkPM <- MilkData$PMmilk
 
-# repeat the test using "hand" calculations as in part 2 above. 
-# Add lines of code below.
+# repeat the test using "hand" calculations as in part 2 above. Add lines of code below.
 
+#difference between the means of milk treatments (AM vs PM)
 # difference between the means of milk treatments (AM vs PM)
 d <- milkPM - milkAM
 
-# difference between the variances of milk treatments
 var.d <- var(d)
 
-# standard error of the difference between milk treatments 
-se.d.bar <- sqrt(var.d /             ) 
-# complete code
 
+# since the denominator (r) represents the number of pairs, and the number of individuals in the "milkAM"" population is the sampe as the number of individuals in the "milkPM" population, you could also use the code se.d.bar <- sqrt(var.d / length(milkPM))
 # since the denominator (r) represents the number of pairs, and 
 # the number of individuals in the "milkAM"
 # population is the same as the number of
@@ -1571,14 +1536,11 @@ dfs <- length(milkAM) - 1
 
 # calculated t-value for the difference between milk treatments
 t.calc.d <- (mean(d) - 0) /           
-   #complete code
 
 #critical t-value (for a given alpha and degrees of freedom)
 ttable <- qt(alpha / 2, df = dfs , lower.tail = FALSE)
 
 
-# complete missing code for t-test between milking times (AM vs PM)
-(t.test.time <- t.test(milkPM, milkAM, alternative = "greater", paired =      )) 
 ```
 
 ANSWER. Interpret the result of the test of hypothesis here:
