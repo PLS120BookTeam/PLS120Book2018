@@ -207,6 +207,7 @@ The **sampling distribution** of a statistics is the distribution of the values 
 When the data are normally distributed, or approximately normal given a large sample size (e.g., n >30), tests about population means with **known variance** use the z-score as the statistic. The **z-statistic** is calculated as follows:
 
 <br>
+A hypothesis is stated about a population, usually involving a parameter. For example, the mean photosynthetic rate for the non-native eelgrass *Zostera japonica* found on the south side quadrant of Padilla Bay, WA is the same as the mean photosynthetic rate for *Z. japonica* eelgrass found in all quadrants in Padilla Bay.
 
 $$z_{calc} = \frac{\bar{Y} - \mu_0}{\sigma / \sqrt{r}}$$
 
@@ -221,11 +222,12 @@ If the population variance is unknown, it can be estimated with the sample varia
 
 $$t_{calc} = \frac{\bar{Y} - \mu_0}{S / \sqrt{r}}$$
 
-<br>
+The null hypothesis states that the mean photosynthetic rate of the eelgrass population in the south quadrant $(\mu_{south})$ is the *same* as the mean photosynthetic rate of the eelgrass population for all quadrants $(\mu_{all})$ (i.e., no difference in photosynthetic rate between the two populations). Thus, the *null hypothesis**, which is denoted by $H_o$, states that there is no difference between means.
 
 
 where $t_calc$ is the calculated statistic, which under a true null hypothesis should have a Student's t distribution, and S is the sample standard deviation. The t-distribution is necessary because the unknown variance increases the uncertainty in the test. The t distribution accounts for this by having more variance than the normal, and its variance increases as the number of observations used to estimate the mean declines. This is in addition to the effect through the $\sqrt{r}$.
 
+<br>
 
 ## Decision rule
 
@@ -249,13 +251,14 @@ knitr::include_graphics("images/NormalTails.png")
 
 ```
 
-
 <!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
 
 ## Test of hypothesis about a mean when variance is known
 
 Suppose that methane production per unit milk production for US cows in the last 5 decades has a mean of 13 g/kg with variance of 9 g^2^/kg^2^. A new feed additive was tested in 16 randomly selected cows and resulted in emissions of 11.5 g/kg. Assuming that the treated population has the same variance as the untreated one, is there evidence that the treatment reduces emissions relative to the mean of the untreated population?
+
+<br>
 
 $$H_0: \mu \ge \mu_0 = 13 \ g/kg \qquad H_a: \mu < \mu_0 = 13 \ g/kg$$
 
@@ -357,6 +360,7 @@ where *z* is the z-critical value, which for a 95% confidence equals 1.96.
 We simulate a population of horseshoe wear, where the amount of horseshoe wear has a mean of 2 mm with standard deviation equal to 0.4 mm. We pretend that we do not know the mean and take random samples of size 9 from the population using the `rnorm` R function. For each sample we calculate the average and create a 95\% confidence interval. Those intervals are plotted about the true mean to determine the proportion that actually contains the true mean. This proportion is called "coverage" and it is expected to be equal to the confidence. The actual proportion may be different due to the random component in sampling, but it should approach the confidence level as the number of samples increases. In real samples, the difference between expected and real coverage is also affected by deviations from normality and independence assumptions.
 
 <br>
+
 ```{r zCiCoverage, message=FALSE, fig.cap="Location of 100 confidence intervals about the true mean of a population. Population standard deviation is 0.4 and sample size = 9. Each CI is a vertical line. Red CI's do not include the true mean."}
 
 mean <- 2
@@ -391,8 +395,12 @@ segments(x0 = 1:100, y0 = ci.lo, y1 = ci.hi, col = ci.color)
 coverage <-  paste("Coverage = ", as.character(sum(ci.lo < 2 & ci.hi > 2)), "%", sep = "")
 
 text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
-
 ```
+
+
+### Test-statistic
+
+In order to assess the probability of observing the data in the sample or more extreme data under the assumption that the null hypothesis is true, a test-statistic needs to be calculated. The test statistic selected depends on the specific parameter being estimated, because the statistic has to have a *sampling statistical distribution* that is appropriate. When we test hypotheses about population means we use the standard normal distribution when the variance is known or Student's t distribution when the variance is not known. For tests about values of population variances we use the $\chi^2$ distribution, whereas to compare variances we use the F distribution. Those distributions were derived mathematically by looking at what happens when samples are used to estimate means and variances.
 
 
 Given that the population standard deviation of the horseshoe wear is known to be 0.4 mm, and given that it is known that wear follows a normal distribution, then, we know that averages of samples of size r = 9 will have a normal distribution with mean equal to the true wear mean and standard deviation equal to 0.4/3. This means that, in the long run, 95% of the sample averages will fall within $1.96 \times 0.4/3 =$ mm (margin of error) of the true mean. Thus, if we extend "arms" that are 0.63 cm long from each average we calculate, the segment encompassed should contain the mean 95% of the time, in the long, long run. Just like when drawing marbles from a urn with white and blue marbles there is a certain probability that it is blue, when we "draw" confidence intervals, there is a certain probability that they contain the mean. We make the confidence intervals such that the probability is 95% or other desired degree of certainty.
@@ -453,25 +461,33 @@ text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
 In the section about [$\chi^2$ distribution](#chisqDist) we noted that the $\chi^2$ distribution is the distribution of a random variable created by summing the squares of multiple standard normal random variables. A little of work on the formula for the estimated variance using the sample variance shows that the estimated variance is a random variable with a distribution related to the $\chi^2$.
 
 <br>
+````{block,, type='stattip'}
+- Never accept the null hypothesis (unless your power is very large, but that is another story).
+````
+<br>
 
 \begin{align}
+$$\begin{align}
 &\hat{\sigma}^2 = S^2 = \sum_{i = 1}^r \ \frac{(Y_i - \bar{Y})^2}{r - 1} \implies S^2 \ (r - 1) = \sum_{i = 1}^r \ (Y_i - \bar{Y})^2 \\[25pt]
 &\text{Because } Y_i \sim N(\mu, \sigma^2),\qquad (Y_i - \bar{Y}) \sim N(0, \sigma^2) \ \text{ and} \\[25pt]
 &\frac{(Y_i - \bar{Y})}{\sigma} \sim N(0, 1) \ \text{ is a standard normal random variable, and} \\[25pt]
 &\frac{S^2 \ (r - 1)}{\sigma^2} = \sum_{i = 1}^r \ \frac{(Y_i - \bar{Y})^2}{\sigma^2} \sim \ \chi^2_{r-1}
 \end{align}
+\end{align}$$
 
 <br>
 
 Based on this result, we use the $chi^2_{r-1}$ distribution to make confidence intervals for the true variance based on the sample variance. By definition
 
 <br>
+<!-- Figure \@ref(fig:prob_dist) is a visual representation of test-statistic values under a normal distribution.  -->
 
 $$P \left (\chi^2_{r-1, \ \alpha/2} \ \lt \frac{S^2 \ (r - 1)}{\sigma^2} \lt \chi^2_{r-1, \ 1 - \alpha/2} \right ) = 0.95$$
 
 <br>
 
 therefore, after taking the reciprocal of the expression, changing the direction of the inequalities to preserve their validity, and multiplying all parts by $S^2 \ (r - 1)$, we get
+
 
 <br>
 
@@ -537,6 +553,8 @@ text(x = 20, y = 1.05 * max(ci.hi), labels = coverage, cex = 1.2)
 We use the first sample obtained above to illustrate the calculation for a CI.
 
 <br>
+### Correct and incorrect interpretation of the Confidence Interval
+
 
 $$ Y = \{`r round(samples[1, ], 2)`\} \\[30pt]
 S^2 = `r round(var(samples[1, ]), 4)` \\[30pt]
@@ -652,7 +670,6 @@ knitr::include_graphics("images/PowerFigure1.png")
 
 ```
 <br>
-
 
 
 ## Pitfalls to avoid
@@ -1340,6 +1357,7 @@ Y5 <- rnorm(n = 5,
             sd = 1)
 
 # obtain 50 random numbers
+
 Y50 <- rnorm(n = 50,
              mean = 0,
              sd = 1) # obtain 50 random numbers
